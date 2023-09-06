@@ -27,17 +27,18 @@
 
 <div class="h-full w-full object-cover">
     {#if htmlTag === ParentMimeType.Image}
-        <img {src} {alt} />
+        <img {src} {alt} loading="lazy" class="w-full h-full" />
     {:else if htmlTag === ParentMimeType.Video}
         <video
             {...$$props}
-            {controls}
-            {loop}
-            {muted}
+            loop={loop ? true : undefined}
+            muted={muted ? true : undefined}
+            controls={controls ? true : undefined}
             autoplay={autoplay ? true : undefined}
             on:mouseenter={startPlaying}
             on:mouseleave={stopPlaying}
             preload="metadata"
+            class="w-full h-full"
         >
             <source {src} type={expectedType} />
         </video>
