@@ -98,6 +98,10 @@
             })
             $isAwareOfMetricSystemDrop = true
         }
+        // TODO: Display balance overview popup only when relevant
+        openPopup({
+            id: PopupId.BalanceOverview,
+        })
     })
 
     onDestroy(() => {

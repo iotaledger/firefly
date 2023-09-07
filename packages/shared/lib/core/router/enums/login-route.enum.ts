@@ -3,5 +3,4 @@ export enum LoginRoute {
     EnterPin = 'enterPin',
     LoadProfile = 'loadProfile',
     UpdateStronghold = 'updateStronghold',
-    BalanceOverview = 'balanceOverview',
 }

@@ -49,9 +49,6 @@ export class LoginRouter extends Subrouter<LoginRoute> {
                 }
                 break
             case LoginRoute.UpdateStronghold:
-                nextRoute = LoginRoute.BalanceOverview
-                break
-            case LoginRoute.BalanceOverview:
                 nextRoute = LoginRoute.LoadProfile
                 break
             case LoginRoute.LoadProfile:
