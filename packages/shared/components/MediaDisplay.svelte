@@ -35,7 +35,6 @@
         <img {src} {alt} loading="lazy" class="w-full h-full" />
     {:else if htmlTag === ParentMimeType.Video}
         <video
-            {...$$props}
             loop={loop ? true : undefined}
             muted={muted ? true : undefined}
             controls={controls ? true : undefined}
