@@ -8,7 +8,7 @@ import { get } from 'svelte/store'
 import { ActivityAction } from '../enums'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { NftActivity } from '../types'
-import { getDefaultTransactionOptions, preprocessTransaction } from '../utils'
+import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 import { plainToInstance } from 'class-transformer'
 
@@ -35,7 +35,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
             alert: true,
         })
 
-        const processedTransaction = await preprocessTransaction(mintNftTransaction, account)
+        const processedTransaction = await preprocessOutgoingTransaction(mintNftTransaction, account)
         const outputs = processedTransaction.outputs
 
         // Generate Activities

@@ -2,10 +2,10 @@ import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { Output, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
-import { getDirectionFromTransaction } from '../transactions'
+import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IAccountState } from '@core/account'
 
-export async function preprocessTransaction(
+export async function preprocessOutgoingTransaction(
     transaction: Transaction,
     account: IAccountState
 ): Promise<IProcessedTransaction> {
@@ -16,7 +16,7 @@ export async function preprocessTransaction(
         regularTransactionEssence.outputs
     )
 
-    const direction = getDirectionFromTransaction(outputs, transaction.incoming, account.addressesWithOutputs)
+    const direction = getDirectionFromOutgoingTransaction(outputs, account.addressesWithOutputs)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = await Promise.all(
         utxoInputs.map((input) => {
