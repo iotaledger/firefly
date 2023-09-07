@@ -60,7 +60,7 @@
             {/if}
         </nft-media-wrapper>
         <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
-            <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate w-80">{nft.name}</Text>
+            <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
             {#if isLocked}
                 <TooltipIcon
                     icon={Icon.Timelock}

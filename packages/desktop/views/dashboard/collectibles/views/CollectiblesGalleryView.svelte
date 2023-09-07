@@ -32,18 +32,20 @@
 
     $: nftsRows = (() => {
         let cols = 5
-        if (windowHeight < 900) {
+        if (windowHeight < 768) {
             cols = 1
-        } else if (windowHeight < 1600) {
+        } else if (windowHeight < 1024) {
             cols = 2
-        } else if (windowHeight < 2000) {
+        } else if (windowHeight < 1280) {
             cols = 3
-        } else if (windowHeight < 1800) {
+        } else if (windowHeight < 1536) {
             cols = 4
+        } else if (windowHeight < 1792) {
+            cols = 5
         }
 
         const rowsLengh = Math.ceil($queriedNfts.length / cols)
-        const nftsRows = Array.from({ length: rowsLengh }, (e, i) => {
+        const nftsRows = Array.from({ length: rowsLengh }, (_, i) => {
             const start = i * cols
             const end = start + cols
             return $queriedNfts.slice(start, end)
@@ -68,7 +70,9 @@
         </div>
         {#if nftsRows.length}
             <VirtualList items={nftsRows} let:item>
-                <div class="flex mb-3 gap-3 justify-center h-full">
+                <div
+                    class="grid overflow-scroll sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 auto-rows-auto gap-3 2xl:gap-4 pb-1 pr-3 -mr-5"
+                >
                     {#each item as nft}
                         {#if nft !== undefined}
                             <NftGalleryItem {nft} />
