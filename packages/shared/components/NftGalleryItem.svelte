@@ -40,8 +40,8 @@
     }
 </script>
 
-<button type="button" on:click={onClick} class="w-full flex flex-col items-center justify-center">
-    <div class="h-full w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
+<button type="button" on:click={onClick} class="flex flex-col items-center justify-center">
+    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
         <nft-media-wrapper>
             <figure class="w-full bg-gray-200 dark:bg-gray-700 h-full object-cover">
                 <NftMedia {nft} loop muted />
