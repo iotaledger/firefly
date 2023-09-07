@@ -24,9 +24,9 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -42,6 +42,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let isOutputAlreadyPrepared: boolean = false
 
     let {
         recipient,
@@ -104,8 +105,10 @@
     }
 
     function refreshSendConfirmationState(): void {
-        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-        void prepareTransactionOutput()
+        if (!isOutputAlreadyPrepared) {
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
+            void prepareTransactionOutput()
+        }
     }
 
     function getInitialExpirationDate(): TimePeriod {
@@ -172,6 +175,8 @@
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
+
+            updatePopupProps({ isOutputAlreadyPrepared: true })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
