@@ -60,7 +60,7 @@ Where we use the optional channel and build number for pre-releases.
 
 In tags and branches, the versioning will also be prefixed with the platform:
 `desktop-1.4.0` - branch or production release tag
-`mobile-1.0.0-alpha-1` - pre-release tag
+`desktop-1.0.0-alpha-1` - pre-release tag
 
 ---
 

@@ -23,7 +23,7 @@ You should also assign the PR to yourself, add the appropriate labels, link any 
 It is important to keep the formatting of PRs clean and consistent. In addition to generally following the template, we also use the following rules:
 
 - PR titles __must__ be in the format `type: the title of the PR`.
-  - All words __must__ be lowercase _except_ proper nouns (e.g. "Electron", "Stronghold") and acronyms (e.g. "API", "iOS").
+  - All words __must__ be lowercase _except_ proper nouns (e.g. "Electron", "Stronghold") and acronyms (e.g. "API").
   - All code or package names __should__ be formatted as `inline code`. This is best for things like dependencies as specific variable names are subject to change.
 - Instructional text (like [this](https://github.com/iotaledger/firefly/blob/develop/.github/pull_request_template.md?plain=1#L13)) in the template __should__ be removed in PR descriptions.
 

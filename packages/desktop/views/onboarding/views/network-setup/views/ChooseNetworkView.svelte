@@ -7,7 +7,6 @@
         updateOnboardingProfile,
         onboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
     import { profiles } from '@core/profile'
@@ -72,9 +71,7 @@
         {#each Object.values(NetworkId) as networkId}
             <OnboardingButton
                 primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
-                secondaryText={!$mobile
-                    ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)
-                    : ''}
+                secondaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)}
                 icon={NETWORK_ICON[networkId]}
                 iconColor={getIconColor(networkId)}
                 hidden={features?.onboarding?.[networkId]?.hidden}
@@ -83,7 +80,7 @@
             />
         {/each}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.OnboardingNetworkDesktop} />
     </div>
 </OnboardingLayout>

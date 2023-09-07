@@ -20,9 +20,6 @@
     -   [ ] MacOS
     -   [ ] Linux
     -   [ ] Windows
--   **Mobile**
-    -   [ ] iOS
-    -   [ ] Android
 
 ### Instructions
 
