@@ -11,7 +11,9 @@
     export let loop: boolean = false
     export let muted: boolean = false
     export let useCaching: boolean = true
+    export { classes as class }
 
+    let classes: string = ''
     const basePath = process.env.NODE_ENV === 'development' ? DEV_STORAGE_DIRECTORY : storageDirectoryOfProfiles
 
     $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nft.id)
@@ -29,6 +31,7 @@
         {controls}
         {loop}
         {muted}
+        class={classes}
         alt={`Media display for ${nft.name}`}
     />
 {:else}

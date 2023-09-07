@@ -68,7 +68,7 @@
         </div>
         {#if nftsRows.length}
             <VirtualList items={nftsRows} let:item>
-                <div class="flex mb-3 gap-3 justify-center">
+                <div class="flex mb-3 gap-3 justify-center h-full">
                     {#each item as nft}
                         {#if nft !== undefined}
                             <NftGalleryItem {nft} />

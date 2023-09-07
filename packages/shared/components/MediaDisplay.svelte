@@ -11,16 +11,21 @@
 
     const htmlTag: ParentMimeType | undefined = getParentMimeType(expectedType)
     const videoElement: HTMLVideoElement | undefined = undefined
+    let playPromise: Promise<void> | undefined
 
     function startPlaying() {
         if (!autoplay && videoElement) {
-            videoElement.play()
+            playPromise = videoElement.play()
         }
     }
 
     function stopPlaying() {
-        if (!autoplay && videoElement) {
-            videoElement.pause()
+        if (!autoplay && playPromise !== undefined && videoElement) {
+            playPromise
+                .then(() => {
+                    videoElement.pause()
+                })
+                .catch(() => {})
         }
     }
 </script>

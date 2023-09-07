@@ -41,7 +41,7 @@
 </script>
 
 <button type="button" on:click={onClick} class="w-full flex flex-col items-center justify-center">
-    <div class="w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
+    <div class="h-full w-full rounded-2xl overflow-hidden flex flex-col shadow-elevation-1">
         <nft-media-wrapper>
             <figure class="w-full bg-gray-200 dark:bg-gray-700 h-full object-cover">
                 <NftMedia {nft} loop muted />
@@ -60,7 +60,7 @@
             {/if}
         </nft-media-wrapper>
         <div class="w-full flex flex-row align-center justify-between p-3.5 bg-white dark:bg-gray-800">
-            <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate">{nft.name}</Text>
+            <Text fontWeight={FontWeight.semibold} fontSize="12" classes="text-left truncate w-80">{nft.name}</Text>
             {#if isLocked}
                 <TooltipIcon
                     icon={Icon.Timelock}
@@ -79,15 +79,14 @@
         @apply max-w-lg;
     }
 
+    figure {
+        aspect-ratio: 1/1;
+        @apply max-h-[32rem];
+    }
+
     nft-media-wrapper {
         @apply w-full;
-        @apply max-h-[32rem];
         @apply flex;
         @apply relative;
-        aspect-ratio: 1 / 1;
-
-        figure {
-            height: var(--height);
-        }
     }
 </style>
