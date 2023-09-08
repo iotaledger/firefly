@@ -4,20 +4,16 @@ import type {
     AccountId,
     CreateAccountPayload,
     SyncOptions,
-    ClientOptions,
-    EventType,
+    IClientOptions,
     WalletEvent,
     LedgerNanoStatus,
     GenerateAddressOptions,
-    Node,
-} from '@iota/wallet'
+    WalletEventType,
+} from '@iota/sdk/out/types'
 
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { IProfileManager, WalletApiEventHandler } from '@core/profile-manager'
-
-export const MOCK_MNEMONIC =
-    'term aisle loyal cradle talent buddy crater express asthma load antique game better head position master aspect print more wine sword speed joy story'
 
 export class ProfileManagerMock implements IProfileManager {
     id: string
@@ -38,7 +34,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    clearListeners(eventTypes: EventType[]): Promise<void> {
+    clearListeners(eventTypes: WalletEventType[]): Promise<void> {
         throw new Error('Method not implemented.')
     }
 
@@ -58,11 +54,7 @@ export class ProfileManagerMock implements IProfileManager {
         throw new Error('Method not implemented.')
     }
 
-    generateMnemonic(): Promise<string> {
-        return Promise.resolve(MOCK_MNEMONIC)
-    }
-
-    generateAddress(
+    generateEd25519Address(
         accountIndex: number,
         internal: boolean,
         addressIndex: number,
@@ -154,7 +146,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve(true)
     }
 
-    async listen(_eventTypes: EventType[], _callback: WalletApiEventHandler): Promise<void> {
+    async listen(_eventTypes: WalletEventType[], _callback: WalletApiEventHandler): Promise<void> {
         return
     }
 
@@ -175,12 +167,12 @@ export class ProfileManagerMock implements IProfileManager {
         source: string,
         password: string,
         ignoreIfCoinTypeMismatch?: boolean,
-        ignoreIfBech32Mismatch?: strin
+        ignoreIfBech32Mismatch?: string
     ): Promise<void> {
         return Promise.resolve()
     }
 
-    setClientOptions(options: ClientOptions): Promise<void> {
+    setClientOptions(options: IClientOptions): Promise<void> {
         return Promise.resolve()
     }
 
@@ -201,10 +193,6 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     storeMnemonic(mnemonic: string): Promise<void> {
-        return Promise.resolve()
-    }
-
-    verifyMnemonic(mnemonic: string): Promise<void> {
         return Promise.resolve()
     }
 

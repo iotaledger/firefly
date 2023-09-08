@@ -25,7 +25,6 @@ body:
           multiple: true
           options:
             - Desktop
-            - Mobile
       validations:
           required: true      
     
@@ -102,8 +101,6 @@ body:
             - Linux
             - Mac
             - Windows
-            - iOS
-            - Android
       validations:
           required: true
           

@@ -62,7 +62,7 @@
     }
 </script>
 
-<div class="activity-list h-full p-6 flex flex-col flex-auto flex-grow shrink-0">
+<div class="activity-list h-full flex flex-col flex-auto flex-grow shrink-0">
     <div class="mb-4">
         <div class="relative flex flex-1 flex-row justify-between">
             <Text type="h5">{localize('general.activity')}</Text>

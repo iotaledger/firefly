@@ -1,4 +1,4 @@
-import { IClientOptions } from '@core/network'
+import { ClientOptions } from '@core/network'
 import { activeProfile, updateActiveProfile } from '@core/profile'
 import { setClientOptions } from '@core/profile-manager'
 import { get } from 'svelte/store'
@@ -8,12 +8,12 @@ import { get } from 'svelte/store'
  *
  * @method updateClientOptions
  *
- * @param {Partial<IClientOptions>} clientOptions
+ * @param {Partial<ClientOptions>} clientOptions
  *
  * @returns {void}
  */
 
-export function updateClientOptions(clientOptionsToUpdate: Partial<IClientOptions>): Promise<void> {
+export function updateClientOptions(clientOptionsToUpdate: Partial<ClientOptions>): Promise<void> {
     const currentClientOptions = get(activeProfile)?.clientOptions
     const clientOptions = { ...currentClientOptions, ...clientOptionsToUpdate }
     if (clientOptions?.nodes || clientOptions?.primaryNode) {

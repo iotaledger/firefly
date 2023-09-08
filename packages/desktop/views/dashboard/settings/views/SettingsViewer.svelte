@@ -28,8 +28,8 @@
     <settings-viewer class="flex flex-1 flex-row items-start">
         <SettingsNavigator bind:currentCategory={$settingsRoute} onSettingClick={(id) => scrollIntoView(id)} />
         <div class="h-full w-full">
-            <Scroller classes="w-full md:w-3/4 h-full md:pr-100" threshold={100}>
-                <div class="md:w-11/12">
+            <Scroller classes="w-3/4 h-full pr-100" threshold={100}>
+                <div class="w-11/12">
                     <SettingsListForCategory category={$settingsRoute} />
                 </div>
             </Scroller>

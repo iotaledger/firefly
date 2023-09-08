@@ -1,7 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import { OnboardingType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
@@ -55,11 +54,9 @@
                     network: getNetworkNameFromNetworkId(networkId),
                 },
             })}
-            secondaryText={!$mobile
-                ? localize('actions.createWalletDescription', {
-                      values: { network: networkId },
-                  })
-                : ''}
+            secondaryText={localize('actions.createWalletDescription', {
+                values: { network: networkId },
+            })}
             icon={IconEnum.Plus}
             iconHeight="11"
             iconWidth="11"
@@ -69,7 +66,7 @@
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
-            secondaryText={!$mobile ? localize(`actions.restoreWalletDescription.${networkId}`) : ''}
+            secondaryText={localize(`actions.restoreWalletDescription.${networkId}`)}
             icon={IconEnum.Transfer}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
@@ -77,7 +74,7 @@
         />
         <OnboardingButton
             primaryText={localize('actions.claimShimmer')}
-            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
+            secondaryText={localize('actions.claimShimmerDescription')}
             icon={IconEnum.Tokens}
             iconHeight="24"
             iconWidth="24"
@@ -86,7 +83,7 @@
             onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
         <Animation animation={AnimationEnum.SetupDesktop} />
     </div>
 </OnboardingLayout>

@@ -14,7 +14,7 @@ export function getLayer2ActivityInformation(
     try {
         parsedLayer2Metadata = parseLayer2Metadata(metadata)
         destinationNetwork = getDestinationNetworkFromAddress(
-            sendingInfo.subject.type === 'address' ? sendingInfo.subject.address : undefined
+            sendingInfo.subject?.type === 'address' ? sendingInfo.subject.address : undefined
         )
     } catch (_err) {
         parsedLayer2Metadata = null

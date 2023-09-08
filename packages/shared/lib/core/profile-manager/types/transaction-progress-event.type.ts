@@ -1,9 +1,18 @@
-import { IPreparedTransaction, IPreparedTransactionEssenceHash } from '../interfaces'
+import {
+    SelectingInputsProgress,
+    GeneratingRemainderDepositAddressProgress,
+    PreparedTransactionProgress,
+    PreparedTransactionEssenceHashProgress,
+    SigningTransactionProgress,
+    PerformingPowProgress,
+    BroadcastingProgress,
+} from '@iota/sdk/out/types'
 
 export type TransactionProgressEventPayload =
-    | 'SelectingInputs'
-    | 'SigningTransaction'
-    | IPreparedTransaction
-    | IPreparedTransactionEssenceHash
-    | 'PerformingPow'
-    | 'Broadcasting'
+    | SelectingInputsProgress
+    | GeneratingRemainderDepositAddressProgress
+    | PreparedTransactionProgress
+    | PreparedTransactionEssenceHashProgress
+    | SigningTransactionProgress
+    | PerformingPowProgress
+    | BroadcastingProgress

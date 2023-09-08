@@ -1,4 +1,4 @@
-import type { SyncOptions } from '@iota/wallet'
+import type { SyncOptions } from '@iota/sdk/out/types'
 
 export interface RecoverAccountsPayload {
     accountStartIndex: number

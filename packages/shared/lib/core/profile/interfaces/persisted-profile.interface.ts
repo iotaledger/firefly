@@ -1,5 +1,5 @@
 import { IPersistedAccountData } from '@core/account'
-import { IClientOptions, IPersistedNetwork } from '@core/network'
+import { ClientOptions, IPersistedNetwork } from '@core/network'
 import { INft } from '@core/nfts'
 import { StrongholdVersion } from '@core/stronghold/enums'
 import { ProfileType } from '../enums'
@@ -18,8 +18,8 @@ export interface IPersistedProfile {
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedAccountIndex?: number
-    clientOptions: IClientOptions
+    clientOptions: ClientOptions
     forceAssetRefresh: boolean
-    strongholdVersion: StrongholdVersion
+    strongholdVersion?: StrongholdVersion
     pfp?: INft
 }
