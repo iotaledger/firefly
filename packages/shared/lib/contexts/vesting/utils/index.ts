@@ -1,6 +1,5 @@
 export * from './getTotalVestingPayouts'
-export * from './getVestingAmountPerPayout'
-export * from './isSelectedAccountVestingStaker'
+export * from './getVestingType'
 export * from './isVestingOutput'
 export * from './mapBasicOutputToVestingOutput'
 export * from './sortVestingOutputs'
