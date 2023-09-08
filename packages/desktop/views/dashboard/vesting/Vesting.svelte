@@ -5,6 +5,7 @@
         IVestingPayout,
         VestingOutputStatus,
         selectedAccountVestingOverview,
+        selectedAccountVestingUnclaimedFunds,
         selectedAccountVestingPayouts,
     } from '@contexts/vesting'
     import { selectedAccount } from '@core/account/stores'
@@ -105,7 +106,10 @@
                                         </Text>
                                     </Tile>
                                 </div>
-                                <Button onClick={onCollectClick} classes="w-full"
+                                <Button
+                                    onClick={onCollectClick}
+                                    classes="w-full"
+                                    disabled={$selectedAccountVestingUnclaimedFunds === 0}
                                     >{localize('views.vesting.collect')}</Button
                                 >
                             </div>
