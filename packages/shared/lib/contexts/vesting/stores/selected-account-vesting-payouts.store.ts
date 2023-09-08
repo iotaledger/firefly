@@ -33,7 +33,7 @@ export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived
                     // If the payout is in the staking years, include all vesting outputs
                     // If the payout is in the vesting only years, include only investor vesting outputs
                     let addressSetToCompute = selectedAccountVestingWithLastOutput
-                    if (i > VESTING_PAYOUTS_IN_1_YEAR * STAKER_VESTING_DURATION) {
+                    if (i >= VESTING_PAYOUTS_IN_1_YEAR * STAKER_VESTING_DURATION) {
                         addressSetToCompute = selectedAccountVestingWithLastOutput.filter(
                             ({ type }) => type === VestingType.Investor
                         )

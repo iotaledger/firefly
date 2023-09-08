@@ -1,10 +1,9 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { isVestingOutputId, isVestingOutput } from '@contexts/vesting'
+    import { isVestingOutputId, selectedAccountVestingOverview } from '@contexts/vesting'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import { isOutputTimeLocked } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
@@ -117,17 +116,7 @@
     }
 
     function getVestingBreakdown(): BalanceBreakdown {
-        const allOutputs = $selectedAccount.addressesWithOutputs.flatMap(({ outputs }) => outputs)
-
-        const filteredVestingOutputs = allOutputs.filter(
-            (output) => isVestingOutput(output) && isOutputTimeLocked(output)
-        )
-
-        const amount = filteredVestingOutputs
-            .map(({ output }) => parseInt(output.amount, 10))
-            .reduce((total, amount) => total + amount, 0)
-
-        return { amount }
+        return { amount: $selectedAccountVestingOverview?.remainingPayout }
     }
 
     function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
