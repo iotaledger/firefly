@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
@@ -8,6 +9,7 @@
         convertToRawAmount,
         formatTokenAmountBestMatch,
         formatTokenAmountDefault,
+        getMinimumRequiredStorageDeposit,
         getUnitFromTokenMetadata,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
@@ -15,6 +17,7 @@
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { activeProfile } from '@core/profile'
+    import { selectedAccount } from '@core/account'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -51,9 +54,14 @@
         unit = undefined
     }
 
-    export function validate(allowZeroOrNull = false): Promise<void> {
+    export async function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
+        const minRequiredStorageDeposit = await getMinimumRequiredStorageDeposit(
+            get(selectedAccount).depositAddress,
+            rawAmount
+        )
+
         // Zero value transactions can still contain metadata/tags
         error = ''
         if (allowZeroOrNull && isAmountZeroOrNull) {
@@ -73,6 +81,8 @@
             error = localize('error.send.amountZero')
         } else if (!bigAmount.mod(1).eq(Big(0))) {
             error = localize('error.send.amountSmallerThanSubunit')
+        } else if (bigAmount && Number(Big(availableBalance)?.minus(bigAmount)) < minRequiredStorageDeposit) {
+            error = localize('error.send.leavingDust')
         }
 
         if (error) {
