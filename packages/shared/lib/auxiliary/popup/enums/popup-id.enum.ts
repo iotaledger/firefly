@@ -44,7 +44,6 @@ export enum PopupId {
     VerifyLedgerTransaction = 'verifyLedgerTransaction',
     VoteForProposal = 'voteForProposal',
     VotingPowerToZero = 'votingPowerToZero',
-    WalletFinder = 'walletFinder',
     BalanceFinder = 'balanceFinder',
     BalanceOverview = 'balanceOverview',
     VestingCollect = 'vestingCollect',

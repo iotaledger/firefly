@@ -1,4 +1,4 @@
-import { DEFAULT_SYNC_OPTIONS } from '@core/account'
+import { DEFAULT_SYNC_OPTIONS, SearchAlgorithmType } from '@core/account'
 import {
     BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION,
     UnableToFindProfileTypeError,
@@ -16,7 +16,7 @@ let searchAccountStartIndex: number
 let _accountGapLimit: number
 let _addressGapLimit: number
 
-export function initialiseAccountRecoveryConfiguration(): void {
+export function initialiseAccountRecoveryConfiguration(algortihmType: SearchAlgorithmType): void {
     const profileType = get(activeProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()
@@ -28,19 +28,24 @@ export function initialiseAccountRecoveryConfiguration(): void {
     _accountGapLimit = accountGapLimit
     _addressGapLimit = addressGapLimit
 
-    searchAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX
+    searchAddressStartIndex =
+        algortihmType === SearchAlgorithmType.BFS ? _addressGapLimit : INITIAL_SEARCH_ADDRESS_START_INDEX
     searchAccountStartIndex = initialAccountRange
 }
 
-export async function findAccountsAndBalances(init?: boolean): Promise<void> {
+export async function findBalances(algortihmType: SearchAlgorithmType, init?: boolean): Promise<void> {
     if (init) {
-        initialiseAccountRecoveryConfiguration()
+        initialiseAccountRecoveryConfiguration(algortihmType)
     }
-    await breadthSearchAndRecoverAccounts()
-    await depthSearchAndRecoverAccounts()
-    searchAccountStartIndex += _accountGapLimit
-    // TODO: Improve the address start index, checking which is the last address index found in a account and continuing searching from that index
-    searchAddressStartIndex += _addressGapLimit
+    if (algortihmType === SearchAlgorithmType.BFS || algortihmType === SearchAlgorithmType.IDS) {
+        await breadthSearchAndRecoverAccounts()
+        searchAccountStartIndex += _accountGapLimit
+    }
+    if (algortihmType === SearchAlgorithmType.DFS || algortihmType === SearchAlgorithmType.IDS) {
+        await depthSearchAndRecoverAccounts()
+        // TODO: Improve the address start index, checking which is the last address index found in a account and continuing searching from that index
+        searchAddressStartIndex += _addressGapLimit
+    }
 }
 
 // Perform an in-depth search, looking for outputs in all searched accounts starting from the previous address index

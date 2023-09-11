@@ -2,9 +2,10 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findAccountsAndBalances, sumBalanceForAccounts } from '@core/account'
+    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
+    import { NetworkId } from '@core/network'
     import { loadNftsForActiveProfile } from '@core/nfts'
     import {
         activeProfile,
@@ -19,14 +20,18 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
+    import VirtualList from '@sveltejs/svelte-virtual-list'
 
     export let searchForBalancesOnLoad = false
     export let hasUsedBalanceFinder = false
+    export let title: string
 
-    const { isStrongholdLocked } = $activeProfile
+    const { isStrongholdLocked, network } = $activeProfile
+    const searchAlgorithm: SearchAlgorithmType =
+        network.id === NetworkId.Iota || NetworkId.IotaAlphanet ? SearchAlgorithmType.IDS : SearchAlgorithmType.BFS
 
     let error = ''
     let isBusy = false
@@ -42,12 +47,13 @@
                     onSuccess: function () {
                         openPopup({
                             id: PopupId.BalanceFinder,
-                            props: { searchForBalancesOnLoad: true, hasUsedBalanceFinder },
+                            props: { searchForBalancesOnLoad: true, hasUsedBalanceFinder, title },
                         })
                     },
                     onCancelled: function () {
                         openPopup({
                             id: PopupId.BalanceFinder,
+                            props: { title },
                         })
                     },
                 },
@@ -62,7 +68,7 @@
                     displayNotificationForLedgerProfile('warning')
                     return
                 }
-                await findAccountsAndBalances(!hasUsedBalanceFinder)
+                await findBalances(searchAlgorithm, !hasUsedBalanceFinder)
                 await loadAccounts()
                 hasUsedBalanceFinder = true
             } catch (err) {
@@ -96,12 +102,25 @@
 </script>
 
 <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold} classes="mb-6">
-    {localize('popups.balanceFinder.title')}
+    {title}
 </Text>
 <div class="space-y-4">
     <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{localize('popups.balanceFinder.body')}</Text>
 
-    <div class="w-full flex-col space-y-2">
+    <div class="w-full flex-col space-y-2 balance-overview-wrapper">
+        <VirtualList items={$visibleActiveAccounts} let:item>
+            <div class="mb-2">
+                <Tile classes="flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-1000">
+                    <div class="flex items-center space-x-2">
+                        <Icon icon={IconEnum.Wallet} width={28} height={28} classes="text-blue-500" />
+                        <Text classes="text-right">{item.name}</Text>
+                    </div>
+                    <Text classes="text-right">
+                        {formatTokenAmountBestMatch(Number(item.balances.baseCoin.total), getBaseToken())}
+                    </Text>
+                </Tile>
+            </div>
+        </VirtualList>
         <KeyValueBox
             keyText={localize('popups.balanceFinder.totalAddressBalance')}
             valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
@@ -134,3 +153,17 @@
         {/if}
     </Button>
 </div>
+
+<style lang="scss">
+    .balance-overview-wrapper :global(svelte-virtual-list-viewport) {
+        margin-right: -1rem !important;
+        flex: auto;
+        overflow-y: scroll;
+        padding-right: 1.5rem !important;
+        min-height: 100px;
+        max-height: 300px;
+    }
+    .balance-overview-wrapper :global(svelte-virtual-list-contents) {
+        margin-right: -1rem !important;
+    }
+</style>

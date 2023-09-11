@@ -4,7 +4,12 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     function onBalanceFinderClick(): void {
-        openPopup({ id: PopupId.BalanceFinder })
+        openPopup({
+            id: PopupId.BalanceFinder,
+            props: {
+                title: localize('popups.balanceFinder.title'),
+            },
+        })
     }
 </script>
 

@@ -341,10 +341,6 @@
                 "title": "Balance finder",
                 "description": "Perform an extended search of your balance"
             },
-            "walletFinder": {
-                "title": "Wallet finder",
-                "description": "Perform an extended search of your previously used wallets"
-            },
             "hiddenAccounts": {
                 "title": "Hidden wallets",
                 "description": "Selecting this options will show wallets that were previously hidden"
@@ -910,14 +906,6 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of addresses incorrect? Search again until your full balance is shown."
-        },
-        "walletFinder": {
-            "title": "Wallet finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
-            "accountsSearched": "Wallets searched",
-            "accountsFound": "Wallets found",
-            "totalWalletBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
         },
         "balanceOverview": {

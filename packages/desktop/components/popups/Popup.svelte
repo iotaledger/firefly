@@ -51,7 +51,6 @@
     import CheckForUpdatesPopup from './CheckForUpdatesPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
     import MetricSystemInfoPopup from './metricSystemInfoPopup.svelte'
     import BalanceFinderPopup from './BalanceFinderPopup.svelte'
     import BalanceOverviewPopup from './BalanceOverviewPopup.svelte'
@@ -139,7 +138,6 @@
         [PopupId.CheckForUpdates]: CheckForUpdatesPopup,
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
-        [PopupId.WalletFinder]: WalletFinderPopup,
         [PopupId.BalanceFinder]: BalanceFinderPopup,
         [PopupId.BalanceOverview]: BalanceOverviewPopup,
         [PopupId.VestingCollect]: VestingCollectPopup,
