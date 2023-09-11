@@ -10,7 +10,7 @@ export async function consolidateOutputs(): Promise<void> {
     if (!account) return Promise.reject('No account selected')
 
     try {
-        updateSelectedAccount({ isTransferring: true })
+        updateSelectedAccount({ hasConsolidatingOutputsTransactionInProgress: true, isTransferring: true })
 
         const preparedConsolidateOutputsTransaction = await account.prepareConsolidateOutputs({
             force: false,
@@ -23,7 +23,6 @@ export async function consolidateOutputs(): Promise<void> {
         await processAndAddToActivities(transaction, account)
     } catch (err) {
         handleError(err)
-    } finally {
-        updateSelectedAccount({ isTransferring: false })
+        updateSelectedAccount({ hasConsolidatingOutputsTransactionInProgress: false, isTransferring: false })
     }
 }

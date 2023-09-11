@@ -47,6 +47,7 @@ export async function buildAccountState(
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
+        hasConsolidatingOutputsTransactionInProgress: false,
         isTransferring: false,
         votingPower,
         addressesWithOutputs,

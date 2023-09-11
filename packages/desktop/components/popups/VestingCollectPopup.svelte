@@ -20,14 +20,15 @@
         : DEFAULT_EMPTY_VALUE_STRING
 
     async function onConfirmClick(): Promise<void> {
+        async function _onSuccess(): Promise<void> {
+            await consolidateOutputs()
+            closePopup()
+        }
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openPopup({
                 id: PopupId.UnlockStronghold,
                 props: {
-                    onSuccess: async function () {
-                        await consolidateOutputs()
-                        closePopup()
-                    },
+                    onSuccess: _onSuccess,
                     onCancelled: function () {
                         openPopup({
                             id: PopupId.VestingCollect,
@@ -38,8 +39,7 @@
         } else {
             isBusy = true
             try {
-                await consolidateOutputs()
-                closePopup()
+                await _onSuccess()
             } catch (err) {
                 handleError(err)
             } finally {

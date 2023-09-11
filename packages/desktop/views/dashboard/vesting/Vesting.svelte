@@ -19,6 +19,8 @@
     import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
+    $: hasTransactionInProgress =
+        $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
 
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
     $: vestingOverview = [
@@ -114,9 +116,11 @@
                                 <Button
                                     onClick={onCollectClick}
                                     classes="w-full"
-                                    disabled={$selectedAccountVestingUnclaimedFunds === 0}
-                                    >{localize('views.vesting.collect')}</Button
+                                    disabled={$selectedAccountVestingUnclaimedFunds === 0 || hasTransactionInProgress}
+                                    isBusy={hasTransactionInProgress}
                                 >
+                                    {localize('views.vesting.collect')}
+                                </Button>
                             </div>
                         </left-pane-content>
                     </Pane>
