@@ -1,12 +1,14 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import { VestingSchedule } from '@components'
     import {
         IVestingPayout,
         VestingOutputStatus,
+        calculateAsmbEquivalence,
         selectedAccountVestingOverview,
-        selectedAccountVestingUnclaimedFunds,
         selectedAccountVestingPayouts,
+        selectedAccountVestingUnclaimedFunds,
     } from '@contexts/vesting'
     import { selectedAccount } from '@core/account/stores'
     import { formatCurrency, localize } from '@core/i18n'
@@ -15,7 +17,6 @@
     import { getBestTimeDuration } from '@core/utils'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
     import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
-    import { openPopup, PopupId } from '@auxiliary/popup'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
 
@@ -32,7 +33,9 @@
         {
             title: localize('views.vesting.overview.totalRewards'),
             iotaAmount: $selectedAccountVestingOverview?.totalRewards || 0,
-            asmbAmount: DEFAULT_EMPTY_VALUE_STRING,
+            asmbAmount:
+                calculateAsmbEquivalence($selectedAccountVestingOverview?.totalRewards, baseCoin.metadata) ??
+                DEFAULT_EMPTY_VALUE_STRING,
         },
     ]
 
@@ -88,7 +91,9 @@
                                                 {getFiatAmount(iotaAmount) ?? DEFAULT_EMPTY_VALUE_STRING}
                                             </Text>
                                             {#if asmbAmount}
-                                                <Text darkColor="gray-100" fontSize="12">{asmbAmount}</Text>
+                                                <Text darkColor="gray-100" fontSize="12">
+                                                    {asmbAmount}
+                                                </Text>
                                             {/if}
                                         </div>
                                     {/each}

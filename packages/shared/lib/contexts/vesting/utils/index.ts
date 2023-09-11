@@ -1,3 +1,4 @@
+export * from './calculateAsmbEquivalence'
 export * from './getTotalVestingPayouts'
 export * from './getVestingType'
 export * from './isVestingOutput'
