@@ -30,11 +30,11 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                 isDeveloperProfile:
                     chrysalisProfile.isDeveloperProfile ?? DEFAULT_PERSISTED_PROFILE_OBJECT.isDeveloperProfile,
                 hasVisitedDashboard: chrysalisProfile.hasVisitedDashboard ?? undefined,
-                lastUsedAccountIndex: Number(chrysalisProfile.lastUsedAccountId) ?? undefined,
                 clientOptions: DEFAULT_PERSISTED_PROFILE_OBJECT.clientOptions, // migration needed
                 forceAssetRefresh: DEFAULT_PERSISTED_PROFILE_OBJECT.forceAssetRefresh,
                 strongholdVersion:
                     chrysalisProfile.strongholdVersion ?? DEFAULT_PERSISTED_PROFILE_OBJECT.strongholdVersion,
+                needsChrysalisToStardustDbMigration: true,
             }
 
             // accountPersistedData
@@ -48,6 +48,10 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                         color: account.color,
                         hidden: chrysalisProfile.hiddenAccounts?.includes(account.id) ?? false,
                         shouldRevote: false,
+                    }
+
+                    if (chrysalisProfile.lastUsedAccountId === account.id) {
+                        migratedProfile.lastUsedAccountIndex = index
                     }
                 })
                 migratedProfile.accountPersistedData = accountPersistedData

@@ -8,7 +8,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType, activeProfile, login, resetActiveProfile } from '@core/profile'
+    import { ProfileType, activeProfile, login, migrateDbChrysalisToStardust, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
     import features from '@features/features'
@@ -44,6 +44,7 @@
         $activeProfile?.type === ProfileType.Software &&
         !isLatestStrongholdVersion($activeProfile?.strongholdVersion) &&
         features.onboarding.strongholdVersionCheck.enabled
+
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
@@ -93,12 +94,25 @@
     async function onSubmit(): Promise<void> {
         if (!hasReachedMaxAttempts) {
             isBusy = true
-            const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
-            if (isVerified) {
-                if (!updateRequired) {
-                    void login()
+
+            const isPinCorrect = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
+            if (isPinCorrect) {
+                const _onSuccess = (): void => {
+                    if (!updateRequired) {
+                        void login()
+                    }
+                    $loginRouter.next()
                 }
-                $loginRouter.next()
+                if ($activeProfile?.needsChrysalisToStardustDbMigration) {
+                    const dbMigrationSuccess = await migrateDbChrysalisToStardust($activeProfile?.id, pinCode)
+                    if (dbMigrationSuccess) {
+                        _onSuccess()
+                    } else {
+                        isBusy = false
+                    }
+                } else {
+                    _onSuccess()
+                }
             } else {
                 shake = true
                 setShakeTimeout()
