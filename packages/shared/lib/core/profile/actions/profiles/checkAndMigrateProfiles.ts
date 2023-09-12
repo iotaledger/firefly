@@ -303,7 +303,7 @@ function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): void {
-    if (!existingProfile.clientOptions.maxParallelApiRequests) {
+    if (existingProfile.clientOptions && !existingProfile.clientOptions.maxParallelApiRequests) {
         existingProfile.clientOptions.maxParallelApiRequests = DEFAULT_MAX_PARALLEL_API_REQUESTS
         saveProfile(existingProfile)
     }
