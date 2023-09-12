@@ -24,9 +24,9 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -42,6 +42,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let isOutputAlreadyPrepared: boolean = false
 
     let {
         recipient,
@@ -104,8 +105,10 @@
     }
 
     function refreshSendConfirmationState(): void {
-        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-        void prepareTransactionOutput()
+        if (!isOutputAlreadyPrepared) {
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
+            void prepareTransactionOutput()
+        }
     }
 
     function getInitialExpirationDate(): TimePeriod {
@@ -119,24 +122,28 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
-        const outputParams = await getOutputParameters(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+        try {
+            const transactionDetails = get(newTransactionDetails)
+            const outputParams = await getOutputParameters(transactionDetails)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        await updateStorageDeposit()
+            await updateStorageDeposit()
 
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                // Note: we have to hide it because currently, in the sdk,
-                // the storage deposit return strategy is only looked at
-                // if the provided amount is < the minimum required storage deposit
-                hideGiftToggle = true
+            // Note: we need to adjust the surplus
+            // so we make sure that the surplus is always added on top of the minimum storage deposit
+            if (Number(surplus) > 0) {
+                if (minimumStorageDeposit >= Number(surplus)) {
+                    visibleSurplus = surplus = undefined
+                } else {
+                    visibleSurplus = Number(surplus) - minimumStorageDeposit
+                    // Note: we have to hide it because currently, in the sdk,
+                    // the storage deposit return strategy is only looked at
+                    // if the provided amount is < the minimum required storage deposit
+                    hideGiftToggle = true
+                }
             }
+        } catch (err) {
+            handleError(err)
         }
 
         if (transactionDetails.expirationDate === undefined) {
@@ -167,11 +174,13 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
+            validateSendConfirmation(preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
+
+            updatePopupProps({ isOutputAlreadyPrepared: true })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)

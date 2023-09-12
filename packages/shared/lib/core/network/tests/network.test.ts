@@ -1,5 +1,6 @@
+import { DEFAULT_MAX_PARALLEL_API_REQUESTS } from '../constants'
 import { NetworkId } from '../enums'
-import { IClientOptions, INode } from '../interfaces'
+import { ClientOptions, INode } from '../interfaces'
 import { checkNodeUrlValidity, getDefaultClientOptions, getOfficialNodes, isOfficialNetwork } from '../utils'
 
 describe('File: network.ts', () => {
@@ -39,12 +40,13 @@ describe('File: network.ts', () => {
     describe('Function: getClientOptions', () => {
         it('should return the client options of the active profile if present', () => {
             const clientOptions = getDefaultClientOptions(NetworkId.Iota)
-            expect(clientOptions).toEqual(<IClientOptions>{
+            expect(clientOptions).toEqual(<ClientOptions>{
                 nodes: [
                     _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0]),
                     _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1]),
                     _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[2]),
                 ],
+                maxParallelApiRequests: DEFAULT_MAX_PARALLEL_API_REQUESTS,
             })
         })
     })
