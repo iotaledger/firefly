@@ -100,7 +100,11 @@
         }
         // TODO: Display balance overview popup only when relevant
         openPopup({
-            id: PopupId.BalanceOverview,
+            id: PopupId.BalanceFinder,
+            props: {
+                title: localize('popups.balanceOverview.title'),
+                body: localize('popups.balanceOverview.body'),
+            },
         })
     })
 

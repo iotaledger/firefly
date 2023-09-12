@@ -28,6 +28,7 @@
     export let searchForBalancesOnLoad = false
     export let hasUsedBalanceFinder = false
     export let title: string
+    export let body: string
 
     const { isStrongholdLocked, network } = $activeProfile
     const searchAlgorithm: SearchAlgorithmType =
@@ -47,13 +48,13 @@
                     onSuccess: function () {
                         openPopup({
                             id: PopupId.BalanceFinder,
-                            props: { searchForBalancesOnLoad: true, hasUsedBalanceFinder, title },
+                            props: { searchForBalancesOnLoad: true, hasUsedBalanceFinder, title, body },
                         })
                     },
                     onCancelled: function () {
                         openPopup({
                             id: PopupId.BalanceFinder,
-                            props: { title },
+                            props: { title, body },
                         })
                     },
                 },
@@ -105,7 +106,7 @@
     {title}
 </Text>
 <div class="space-y-4">
-    <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{localize('popups.balanceFinder.body')}</Text>
+    <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{body}</Text>
 
     <div class="w-full flex-col space-y-2 balance-overview-wrapper">
         <VirtualList items={$visibleActiveAccounts} let:item>

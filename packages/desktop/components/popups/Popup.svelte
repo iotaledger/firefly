@@ -53,7 +53,6 @@
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
     import MetricSystemInfoPopup from './metricSystemInfoPopup.svelte'
     import BalanceFinderPopup from './BalanceFinderPopup.svelte'
-    import BalanceOverviewPopup from './BalanceOverviewPopup.svelte'
     import VestingCollectPopup from './VestingCollectPopup.svelte'
 
     export let id: PopupId
@@ -82,7 +81,6 @@
             break
         case PopupId.LedgerAppGuide:
         case PopupId.LedgerConnection:
-        case PopupId.BalanceOverview:
             size = PopupSize.Large
             break
         default:
@@ -139,7 +137,6 @@
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
         [PopupId.BalanceFinder]: BalanceFinderPopup,
-        [PopupId.BalanceOverview]: BalanceOverviewPopup,
         [PopupId.VestingCollect]: VestingCollectPopup,
     }
 

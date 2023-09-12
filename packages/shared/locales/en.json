@@ -910,9 +910,7 @@
         },
         "balanceOverview": {
             "title": "Balance overview",
-            "body": "Find information about all your wallets and the balance of each.",
-            "total": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "body": "Find information about all your wallets and the balance of each."
         },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",

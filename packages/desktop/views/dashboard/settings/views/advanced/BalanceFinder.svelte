@@ -8,6 +8,7 @@
             id: PopupId.BalanceFinder,
             props: {
                 title: localize('popups.balanceFinder.title'),
+                body: localize('popups.balanceFinder.body'),
             },
         })
     }
