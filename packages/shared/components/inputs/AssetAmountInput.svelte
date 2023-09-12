@@ -8,7 +8,7 @@
         convertToRawAmount,
         formatTokenAmountBestMatch,
         formatTokenAmountDefault,
-        getRequiredStorageDepositForMinimialBasicOutput,
+        getRequiredStorageDepositForMinimalBasicOutput,
         getUnitFromTokenMetadata,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
@@ -55,7 +55,7 @@
     export async function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
-        const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimialBasicOutput()
+        const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
 
         // Zero value transactions can still contain metadata/tags
         error = ''

@@ -11,7 +11,7 @@ import { plainToInstance } from 'class-transformer'
 
 const MOCK_BASIC_OUTPUT_AMOUNT = '10'
 
-export async function getRequiredStorageDepositForMinimialBasicOutput(): Promise<number> {
+export async function getRequiredStorageDepositForMinimalBasicOutput(): Promise<number> {
     const address = {
         type: AddressType.Ed25519,
         pubKeyHash: EMPTY_HEX_ID,
