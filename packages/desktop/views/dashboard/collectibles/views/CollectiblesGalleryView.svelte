@@ -5,21 +5,14 @@
     import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
     import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from 'shared/components'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { onMount } from 'svelte'
 
-    let windowHeight = document.body.clientWidth
+    let windowWidth = window.innerWidth
 
-    onMount(() => {
-        function resizeListener() {
-            if (windowHeight !== document.body.clientWidth) {
-                windowHeight = document.body.clientWidth
-            }
+    function onResize() {
+        if (windowWidth !== window.innerWidth) {
+            windowWidth = window.innerWidth
         }
-
-        addEventListener('resize', resizeListener)
-
-        return () => removeEventListener('resize', resizeListener)
-    })
+    }
 
     function onDepositNftClick(): void {
         openPopup({
@@ -32,15 +25,15 @@
 
     $: nftsRows = (() => {
         let cols = 5
-        if (windowHeight < 768) {
+        if (windowWidth < 768) {
             cols = 1
-        } else if (windowHeight < 1024) {
+        } else if (windowWidth < 1024) {
             cols = 2
-        } else if (windowHeight < 1280) {
+        } else if (windowWidth < 1280) {
             cols = 3
-        } else if (windowHeight < 1536) {
+        } else if (windowWidth < 1536) {
             cols = 4
-        } else if (windowHeight < 1792) {
+        } else if (windowWidth < 1792) {
             cols = 5
         }
 
@@ -54,6 +47,7 @@
     })()
 </script>
 
+<svelte:window on:resize={onResize} />
 <div class="flex flex-col w-full h-full space-y-4">
     {#if $ownedNfts.length}
         <div class="flex flex-row justify-between">
