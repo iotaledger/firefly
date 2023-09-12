@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { get } from 'svelte/store'
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
@@ -9,7 +8,7 @@
         convertToRawAmount,
         formatTokenAmountBestMatch,
         formatTokenAmountDefault,
-        getMinimumRequiredStorageDeposit,
+        getRequiredStorageDepositForMinimialBasicOutput,
         getUnitFromTokenMetadata,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
@@ -17,7 +16,6 @@
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
     import { activeProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -57,10 +55,7 @@
     export async function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
-        const minRequiredStorageDeposit = await getMinimumRequiredStorageDeposit(
-            get(selectedAccount).depositAddress,
-            rawAmount
-        )
+        const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimialBasicOutput()
 
         // Zero value transactions can still contain metadata/tags
         error = ''

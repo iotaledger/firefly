@@ -1,5 +1,5 @@
 import { getClient } from '@core/profile-manager/api/getClient'
-import { convertBech32AddressToEd25519Address } from '@core/utils'
+import { EMPTY_HEX_ID } from '@core/wallet'
 import {
     AddressType,
     BasicOutputBuilderParams,
@@ -9,10 +9,12 @@ import {
 } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 
-export async function getMinimumRequiredStorageDeposit(bach32Address: string, amount: string): Promise<number> {
+const MOCK_BASIC_OUTPUT_AMOUNT = '10'
+
+export async function getRequiredStorageDepositForMinimialBasicOutput(): Promise<number> {
     const address = {
         type: AddressType.Ed25519,
-        pubKeyHash: convertBech32AddressToEd25519Address(bach32Address),
+        pubKeyHash: EMPTY_HEX_ID,
     }
     const ed25519Address = plainToInstance(Ed25519Address, address)
 
@@ -23,7 +25,7 @@ export async function getMinimumRequiredStorageDeposit(bach32Address: string, am
     const addressUnlockCondition = plainToInstance(AddressUnlockCondition, unlockCondition)
 
     const params: BasicOutputBuilderParams = {
-        amount,
+        amount: MOCK_BASIC_OUTPUT_AMOUNT,
         unlockConditions: [addressUnlockCondition],
     }
 
