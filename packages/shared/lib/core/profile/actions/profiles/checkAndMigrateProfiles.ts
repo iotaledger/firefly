@@ -2,6 +2,7 @@ import { IPersistedAccountData } from '@core/account/interfaces'
 import {
     COIN_TYPE,
     DEFAULT_CHAIN_CONFIGURATIONS,
+    DEFAULT_MAX_PARALLEL_API_REQUESTS,
     getDefaultPersistedNetwork,
     IIscpChainMetadata,
     NetworkId,
@@ -62,6 +63,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     11: persistedProfileMigrationToV12,
     12: persistedProfileMigrationToV13,
     13: persistedProfileMigrationToV14,
+    14: persistedProfileMigrationToV15,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -296,6 +298,13 @@ function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): voi
     const isLedgerProfile = existingProfile?.type === ProfileType.Ledger
     if (isLedgerProfile) {
         delete existingProfile.strongholdVersion
+        saveProfile(existingProfile)
+    }
+}
+
+function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): void {
+    if (!existingProfile.clientOptions.maxParallelApiRequests) {
+        existingProfile.clientOptions.maxParallelApiRequests = DEFAULT_MAX_PARALLEL_API_REQUESTS
         saveProfile(existingProfile)
     }
 }
