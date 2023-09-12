@@ -106,6 +106,14 @@
 
     function refreshSendConfirmationState(): void {
         if (!isOutputAlreadyPrepared) {
+            if (
+                transactionDetails.type === NewTransactionType.NftTransfer &&
+                Number($selectedAccount.balances.baseCoin.available) === 0
+            ) {
+                giftStorageDeposit = true
+                disableChangeExpiration = true
+                disableToggleGift = true
+            }
             updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             void prepareTransactionOutput()
         }
