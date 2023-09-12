@@ -55,6 +55,8 @@
     export async function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
+        // Calculate the minimum required storage deposit for a minimal basic output
+        // This is used to check if the user is leaving dust behind that cant cover the storage deposit
         const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
 
         // Zero value transactions can still contain metadata/tags

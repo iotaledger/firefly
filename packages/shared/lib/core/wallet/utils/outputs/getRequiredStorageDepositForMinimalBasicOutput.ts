@@ -2,15 +2,19 @@ import { getClient } from '@core/profile-manager/api/getClient'
 import { EMPTY_HEX_ID } from '@core/wallet'
 import {
     AddressType,
-    BasicOutputBuilderParams,
-    UnlockConditionType,
     AddressUnlockCondition,
+    BasicOutputBuilderParams,
     Ed25519Address,
+    UnlockConditionType,
 } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 
 const MOCK_BASIC_OUTPUT_AMOUNT = '10'
 
+/**
+ * Calculate minimum storage deposit required for the most minimal basic output with a single address unlock condition.
+ * @returns The minimum storage deposit.
+ */
 export async function getRequiredStorageDepositForMinimalBasicOutput(): Promise<number> {
     const address = {
         type: AddressType.Ed25519,
