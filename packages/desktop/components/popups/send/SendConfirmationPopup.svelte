@@ -130,24 +130,28 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
-        const outputParams = await getOutputParameters(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+        try {
+            const transactionDetails = get(newTransactionDetails)
+            const outputParams = await getOutputParameters(transactionDetails)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        await updateStorageDeposit()
+            await updateStorageDeposit()
 
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                // Note: we have to hide it because currently, in the sdk,
-                // the storage deposit return strategy is only looked at
-                // if the provided amount is < the minimum required storage deposit
-                hideGiftToggle = true
+            // Note: we need to adjust the surplus
+            // so we make sure that the surplus is always added on top of the minimum storage deposit
+            if (Number(surplus) > 0) {
+                if (minimumStorageDeposit >= Number(surplus)) {
+                    visibleSurplus = surplus = undefined
+                } else {
+                    visibleSurplus = Number(surplus) - minimumStorageDeposit
+                    // Note: we have to hide it because currently, in the sdk,
+                    // the storage deposit return strategy is only looked at
+                    // if the provided amount is < the minimum required storage deposit
+                    hideGiftToggle = true
+                }
             }
+        } catch (err) {
+            handleError(err)
         }
 
         if (transactionDetails.expirationDate === undefined) {
@@ -178,7 +182,7 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
+            validateSendConfirmation(preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
