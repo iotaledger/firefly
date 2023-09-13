@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Kérjük várja meg a szinkronizáció befejeződését mielőtt másik tárcára vált.",
-        "transferring": "Kérjük, várja meg az összes tranzakció befejeződését, mielőtt másik tárcára vált.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "A tárcák közti váltás előtt kérjük várja meg az összes lekötés-/szavazás-tranzakció befejeződését.",
         "claimed": {
             "success": "Igénylési tranzakció sikeres",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "A jutalmat már korábban igényelte",
             "noToAccount": "Nem választotta ki melyik tárcájába szeretne küldeni.",
             "sendingDust": "1 Mi-nél kevesebbet nem lehet elküldeni.",
-            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
+            "leavingDust": "Nem hagyhat kevesebbet a címhez tartozó tárcájában, mint a minimálisan szükséges tárolás letét ({minRequiredStorageDeposit}).",
             "cancelled": "A tranzakció megszakítva.",
             "transaction": "Hiba történt a tranzakció küldésekor. Kérem próbálja újra.",
             "invalidExpirationDateTime": "A kiválasztott lejárati dátum/idő érvénytelen.",

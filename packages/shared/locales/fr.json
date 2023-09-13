@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Veuillez patienter jusqu'à ce que la synchronisation soit terminée pour changer de portefeuille.",
-        "transferring": "Veuillez patienter jusqu'à ce que toutes les transactions soient terminées pour changer de portefeuille.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Veuillez patienter jusqu'à ce que toutes les transactions de staking/vote soient terminées pour changer de portefeuille.",
         "claimed": {
             "success": "Transaction réclamée",

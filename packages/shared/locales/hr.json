@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Molimo pričekajte da sinkronizacija završi prije nego promijenite novčanik.",
-        "transferring": "Molimo pričekajte da sve transakcije završe prije nego promijenite novčanik.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Molimo pričekajte da sve staking/glasačke transakcije završe prije nego promijenite novčanik.",
         "claimed": {
             "success": "Transakcija preuzeta",

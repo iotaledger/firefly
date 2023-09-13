@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθεί ο συγχρονισμός για να αλλάξετε τα πορτοφόλια.",
-        "transferring": "Παρακαλώ περιμένετε μέχρι να ολοκληρωθούν όλες οι συναλλαγές για να αλλάξετε πορτοφόλια.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",

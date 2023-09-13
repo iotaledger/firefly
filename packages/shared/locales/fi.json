@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
-        "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Ole hyvä ja odota, kunnes kaikki staking- ja äänestystransaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
         "claimed": {
             "success": "Transaktio lunastettu",

@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Por favor, espere hasta que la sincronización termine para cambiar entre billeteras.",
-        "transferring": "Por favor, espere hasta que todas las transacciones se completen para cambiar entre billeteras.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Por favor, espere hasta que todas las transacciones de staking/votación se completen para cambiar las carteras.",
         "claimed": {
             "success": "Transacción reclamada",

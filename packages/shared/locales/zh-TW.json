@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "請等待同步完成才更換錢包。",
-        "transferring": "請等待所有交易完成才更換錢包。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "請等待所有質押/投票交易完成才更換錢包。",
         "claimed": {
             "success": "交易認領",
