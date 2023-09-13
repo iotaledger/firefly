@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "输出已被认领。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
-            "leavingDust": "您的地址余额不能少于1Mi。",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "您的交易已被取消。",
             "transaction": "发送交易错误。请再次尝试。",
             "invalidExpirationDateTime": "选择的过期日期/时间无效。",
