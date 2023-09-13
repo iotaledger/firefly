@@ -222,7 +222,7 @@
         <Button classes="w-full" outline onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onContinueClick} disabled={isTransferring}>
+        <Button classes="w-full" onClick={onContinueClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.next')}
         </Button>
     </popup-buttons>
