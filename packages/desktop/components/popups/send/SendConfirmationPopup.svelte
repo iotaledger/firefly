@@ -60,7 +60,7 @@
     let expirationTimePicker: ExpirationTimePicker
     let visibleSurplus: number | undefined = undefined
 
-    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -116,6 +116,8 @@
             }
             updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             void prepareTransactionOutput()
+        } else {
+            initialExpirationDate = getInitialExpirationDate()
         }
     }
 
@@ -150,12 +152,12 @@
                     hideGiftToggle = true
                 }
             }
+
+            if (transactionDetails.expirationDate === undefined) {
+                initialExpirationDate = getInitialExpirationDate()
+            }
         } catch (err) {
             handleError(err)
-        }
-
-        if (transactionDetails.expirationDate === undefined) {
-            initialExpirationDate = getInitialExpirationDate()
         }
     }
 
