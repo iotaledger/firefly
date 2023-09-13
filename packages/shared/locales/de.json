@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
-        "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind, um die Wallets zu ändern.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Bitte warte mit dem Wechseln der Wallet, bis alle Staking/Voting Transaktionen abgeschlossen sind.",
         "claimed": {
             "success": "Transaktion beansprucht",

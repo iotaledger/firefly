@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Vänta tills synkroniseringen är klar för att ändra plånbok.",
-        "transferring": "Vänta tills alla transaktioner är slutförda för att ändra plånbok.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Vänta tills alla staking-/röstningstransaktioner har slutförts för att ändra plånbok.",
         "claimed": {
             "success": "Transaktion anspråkstagen",

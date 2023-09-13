@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "පසුම්බි වෙනස් කිරීමට සමමුහුර්තකරණය අවසන් වන තෙක් රැඳී සිටින්න.",
-        "transferring": "මුදල් පසුම්බි වෙනස් කිරීමට සියලු ගනුදෙනු අවසන් වන තෙක් රැඳී සිටින්න.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",

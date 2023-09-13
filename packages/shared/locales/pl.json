@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
-        "transferring": "Poczekaj, aż wszystkie transakcje zostaną zakończone, aby zmienić portfele.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Poczekaj, aż wszystkie transakcje stakingu/głosowania zostaną zakończone, aby zmienić portfele.",
         "claimed": {
             "success": "Transakcja odebrana",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Ta nagroda została już odebrana",
             "noToAccount": "Nie wybrano portfela docelowego na który chcesz wysłać środki.",
             "sendingDust": "Nie możesz wysłać mniej niż 1 Mi.",
-            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
+            "leavingDust": "Nie możesz pozostawić na swoim adresie mniej niż ({minRequiredStorageDeposit}). Jest to minimalny wymagany depozyt magazynowy.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
             "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",

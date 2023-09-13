@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Espereu fins que finalitzi la sincronització per canviar les bitlleteres.",
-        "transferring": "Espereu fins que es completin totes les transaccions per canviar les bitlleteres.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
