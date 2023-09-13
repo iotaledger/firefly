@@ -56,7 +56,7 @@
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
         const standard = asset?.metadata?.standard
-        const balanceDifference = Number(Big(availableBalance)?.minus(bigAmount))
+        const remainderBalance = Number(Big(availableBalance)?.minus(bigAmount))
         // Calculate the minimum required storage deposit for a minimal basic output
         // This is used to check if the user is leaving dust behind that cant cover the storage deposit
         const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
@@ -81,11 +81,15 @@
             error = localize('error.send.amountSmallerThanSubunit')
         } else if (
             standard === TokenStandard.BaseToken &&
-            balanceDifference !== 0 &&
-            balanceDifference < minRequiredStorageDeposit
+            remainderBalance !== 0 &&
+            remainderBalance < minRequiredStorageDeposit
         ) {
             // don't allow leaving dust(amount less than minimum required storage deposit) for base token
-            error = localize('error.send.leavingDust')
+            error = localize('error.send.leavingDust', {
+                values: {
+                    minRequiredStorageDeposit: formatTokenAmountBestMatch(minRequiredStorageDeposit, asset?.metadata),
+                },
+            })
         }
 
         if (error) {
