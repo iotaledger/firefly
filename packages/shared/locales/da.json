@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output er allerede indløst",
             "noToAccount": "Du har ikke valgt en wallet at sende midlerne til.",
             "sendingDust": "Du kan ikke sende mindre end 1 Mi.",
-            "leavingDust": "Du kan ikke forlade mindre end 1 Mi på din adresse.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

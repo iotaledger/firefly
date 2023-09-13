@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "資金を送金するウォレットが選択されていません。",
             "sendingDust": "1 Mi未満の送金はできません。",
-            "leavingDust": "アドレスに1Mi 未満を残すことはできません。",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "取引はキャンセルされました。",
             "transaction": "取引の送信中にエラーが発生しました。もう一度やり直してください。",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

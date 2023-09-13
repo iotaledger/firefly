@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Vi ne elektis monujon por sendi la fondusojn.",
             "sendingDust": "Vi ne povas sendi malpli ol 1 Mi.",
-            "leavingDust": "Vi ne povas lasi malpli ol 1 Mi sur via adreso.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "La transakcio estis nuligita.",
             "transaction": "Estis eraro dum sendado de via transakcio. Bonvolu reprovi.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

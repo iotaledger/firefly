@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Jy het nie 'n beursie gekies om die fondse na te stuur nie.",
             "sendingDust": "Jy kan nie minder as 1 Mi. stuur nie.",
-            "leavingDust": "Jy kan nie minder as 1 Mi op jou adres los nie.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Die transaksie is gekanselleer.",
             "transaction": "Daar was 'n fout tydens die transaksie. Probeer asseblief weer.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
