@@ -42,7 +42,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
-    export let isOutputAlreadyPrepared: boolean = false
+    export let isCallbackFromUnlockStronghold: boolean = false
 
     let {
         recipient,
@@ -60,7 +60,7 @@
     let expirationTimePicker: ExpirationTimePicker
     let visibleSurplus: number | undefined = undefined
 
-    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -105,7 +105,7 @@
     }
 
     function refreshSendConfirmationState(): void {
-        if (!isOutputAlreadyPrepared) {
+        if (!isCallbackFromUnlockStronghold) {
             if (
                 transactionDetails.type === NewTransactionType.NftTransfer &&
                 Number($selectedAccount.balances.baseCoin.available) === 0
@@ -116,6 +116,8 @@
             }
             updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
             void prepareTransactionOutput()
+        } else {
+            initialExpirationDate = getInitialExpirationDate()
         }
     }
 
@@ -150,12 +152,12 @@
                     hideGiftToggle = true
                 }
             }
+
+            if (transactionDetails.expirationDate === undefined) {
+                initialExpirationDate = getInitialExpirationDate()
+            }
         } catch (err) {
             handleError(err)
-        }
-
-        if (transactionDetails.expirationDate === undefined) {
-            initialExpirationDate = getInitialExpirationDate()
         }
     }
 
@@ -188,7 +190,7 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isOutputAlreadyPrepared: true })
+            updatePopupProps({ isCallbackFromUnlockStronghold: true })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
