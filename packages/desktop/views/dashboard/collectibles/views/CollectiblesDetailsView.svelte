@@ -49,8 +49,8 @@
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
-    const issuerAddress = getBech32AddressFromAddressTypes(issuer)
-    const collectionId = getHexAddressFromAddressTypes(issuer)
+    const issuerAddress = issuer ? getBech32AddressFromAddressTypes(issuer) : undefined
+    const collectionId = issuer ? getHexAddressFromAddressTypes(issuer) : undefined
 
     let detailsList: {
         [key in string]: {
