@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "لم تقم باختيار محفظة لإرسال الأموال إليها.",
             "sendingDust": "لا يمكنك إرسال أقل من 1 مَايُوتاَ.",
-            "leavingDust": "لا يمكنك ترك أقل من 1 مَايُوتاَ في حسابك.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "تم إلغاء المعاملة.",
             "transaction": "حدث خطأ قي عملية الارسال التي قمت بها. الرجاء المحاولة مرة أخرى.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

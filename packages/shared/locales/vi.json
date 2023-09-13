@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Bạn chưa chọn ví để gửi tài sản tới.",
             "sendingDust": "Bạn không thể gửi ít hơn 1 Mi.",
-            "leavingDust": "Bạn không thể để lại ít hơn 1 Mi trên địa chỉ của bạn.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Giao dịch đã bị hủy.",
             "transaction": "Đã xảy ra lỗi khi gửi giao dịch của bạn. Vui lòng thử lại.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

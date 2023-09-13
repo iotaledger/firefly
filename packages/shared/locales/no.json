@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Du har ikke valgt en lommebok for å sende pengene til.",
             "sendingDust": "Du kan ikke sende mindre enn 1 Mi.",
-            "leavingDust": "Du kan ikke forlate mindre enn 1 Mi på adressen din.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaksjonen ble avbrutt.",
             "transaction": "Det oppstod en feil ved sending av transaksjonen. Prøv på nytt.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

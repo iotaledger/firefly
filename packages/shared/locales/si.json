@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "ඔබ අරමුදල් යැවීමට පසුම්බියක් තෝරාගෙන නැත.",
             "sendingDust": "ඔබට 1 Mi ට වඩා අඩුවෙන් යැවිය නොහැක.",
-            "leavingDust": "ඔබට ඔබගේ ලිපිනයෙහි 1 Mi ට වඩා අඩුවෙන් තැබිය නොහැක.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "ගනුදෙනුව අවලංගු විය.",
             "transaction": "ඔබේ ගනුදෙනුව යැවීමේ දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

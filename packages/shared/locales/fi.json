@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Tuloste on jo lunastettu",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
-            "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaktio peruutettiin.",
             "transaction": "Transaktiosi lähettämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen.",
             "invalidExpirationDateTime": "Valittu erääntymispäivä/-aika on virheellinen.",

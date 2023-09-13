@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "보낼 지갑을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
-            "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "거래가 취소되었습니다.",
             "transaction": "거래를 보내는 중 에러가 발생했습니다. 다시 시도하세요.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

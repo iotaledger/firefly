@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Выход уже востребован",
             "noToAccount": "Вы не выбрали кошелек для отправки средств.",
             "sendingDust": "Вы не можете отправить менее 1 Mi.",
-            "leavingDust": "Вы не можете оставить менее 1 Mi на вашем адресе.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Транзакция была отменена.",
             "transaction": "Произошла ошибка при отправке вашей транзакции. Пожалуйста, попробуйте еще раз.",
             "invalidExpirationDateTime": "Выбранная дата/время истечения срока действия недопустима.",

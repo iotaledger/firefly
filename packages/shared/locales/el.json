@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Δεν έχετε επιλέξει ένα πορτοφόλι για να στείλετε τα κεφάλαια.",
             "sendingDust": "Δεν μπορείτε να στείλετε λιγότερο από 1 Mi.",
-            "leavingDust": "Δεν μπορείτε να αφήσετε λιγότερο από 1 Mi στη διεύθυνσή σας.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Η συναλλαγή ακυρώθηκε.",
             "transaction": "Παρουσιάστηκε σφάλμα κατά την αποστολή της συναλλαγής σας. Παρακαλώ δοκιμάστε ξανά.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

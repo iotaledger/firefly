@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "לא בחרת ארנק נמען להעברת הכספים.",
             "sendingDust": "לא תוכל לשלוח פחות מ1 Mi.",
-            "leavingDust": "לא תוכל להשאיר פחות מ1Mi בכתובת שלך.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

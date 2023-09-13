@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Utdatan har redan blivit anspråkstagen",
             "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
-            "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaktionen avbröts.",
             "transaction": "Det uppstod ett fel. Vänligen försök igen.",
             "invalidExpirationDateTime": "Det valda utgångsdatumet/tiden är ogiltig.",

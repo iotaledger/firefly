@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Nevybrali jste peněženku, na kterou chcete poslat prostředky.",
             "sendingDust": "Nelze odeslat méně než 1 Mi.",
-            "leavingDust": "Nelze ponechat méně než 1 Mi na adrese.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transakce byla zrušena.",
             "transaction": "Při odesílání transakce došlo k chybě. Zkuste to prosím znovu.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
