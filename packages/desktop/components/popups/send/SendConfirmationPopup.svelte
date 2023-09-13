@@ -42,7 +42,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
-    export let isOutputAlreadyPrepared: boolean = false
+    export let isCallbackFromUnlockStronghold: boolean = false
 
     let {
         recipient,
@@ -105,7 +105,7 @@
     }
 
     function refreshSendConfirmationState(): void {
-        if (!isOutputAlreadyPrepared) {
+        if (!isCallbackFromUnlockStronghold) {
             if (
                 transactionDetails.type === NewTransactionType.NftTransfer &&
                 Number($selectedAccount.balances.baseCoin.available) === 0
@@ -190,7 +190,7 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isOutputAlreadyPrepared: true })
+            updatePopupProps({ isCallbackFromUnlockStronghold: true })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
