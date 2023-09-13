@@ -16,13 +16,26 @@
     import { handleTransactionEventData, transferState } from 'shared/lib/wallet'
     import { onDestroy, onMount } from 'svelte'
     import { StakingAirdrop, StakingInfo, StakingSummary } from './views'
+    import {
+        ASSEMBLY_EVENT_ID,
+        ASSEMBLY_EVENT_START_DATE,
+        LAST_ASSEMBLY_STAKING_PERIOD,
+        CURRENT_ASSEMBLY_STAKING_PERIOD,
+    } from 'shared/lib/participation/constants'
 
     const handleNewStakingEvent = (): void => {
-        openPopup({
-            type: 'newStakingPeriodNotification',
-            hideClose: true,
-            preventClose: false,
-        })
+        if (
+            ASSEMBLY_EVENT_ID &&
+            ASSEMBLY_EVENT_START_DATE &&
+            CURRENT_ASSEMBLY_STAKING_PERIOD > 0 &&
+            LAST_ASSEMBLY_STAKING_PERIOD < CURRENT_ASSEMBLY_STAKING_PERIOD
+        ) {
+            openPopup({
+                type: 'newStakingPeriodNotification',
+                hideClose: true,
+                preventClose: false,
+            })
+        }
 
         updateProfile('hasVisitedStaking', true)
     }
