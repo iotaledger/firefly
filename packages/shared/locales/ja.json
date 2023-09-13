@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "ウォレットを変更するには、同期が完了するまでお待ちください。",
-        "transferring": "ウォレットを変更するには、すべての取引が完了するまでお待ちください。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",

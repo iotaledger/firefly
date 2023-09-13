@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
-        "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "请稍候，直到所有质押/投票的交易完成后才能变更钱包。",
         "claimed": {
             "success": "已认领的交易",

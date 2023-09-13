@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "الرجاء الانتظار حتى انتهاء المزامنة لتغيير المحافظ.",
-        "transferring": "الرجاء الانتظار حتى يتم إكمال جميع المعاملات لتغيير المحافظ.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
