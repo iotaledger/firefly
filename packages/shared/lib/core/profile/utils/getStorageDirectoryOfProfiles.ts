@@ -9,7 +9,7 @@ export const getStorageDirectoryOfProfiles = async (): Promise<string> => {
 
 export let storageDirectoryOfProfiles = ''
 
-document.addEventListener('load', () => {
+window.addEventListener('load', () => {
     getStorageDirectoryOfProfiles().then((path) => {
         storageDirectoryOfProfiles = path
     })
