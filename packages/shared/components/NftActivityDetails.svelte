@@ -31,6 +31,9 @@
         closePopup()
         $selectedNftId = activity.nftId
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
+        // ugly hack to make sure router routes correctly
+        await tick()
+        // ugly hack to avoid a crash when navigating very fast between gallery and details
         await tick()
         $collectiblesRouter.goTo(CollectiblesRoute.Details)
     }
