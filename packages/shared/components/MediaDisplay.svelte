@@ -32,7 +32,7 @@
 
 <div class="h-full w-full object-cover">
     {#if htmlTag === ParentMimeType.Image}
-        <img {src} {alt} loading="lazy" class="w-full h-full" />
+        <img {src} {alt} loading="lazy" class="w-full h-full object-cover" />
     {:else if htmlTag === ParentMimeType.Video}
         <video
             loop={loop ? true : undefined}
@@ -42,7 +42,7 @@
             on:mouseenter={startPlaying}
             on:mouseleave={stopPlaying}
             preload="metadata"
-            class="w-full h-full"
+            class="w-full h-full object-cover"
         >
             <source {src} type={expectedType} />
         </video>
