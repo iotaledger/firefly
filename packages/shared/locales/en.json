@@ -205,7 +205,7 @@
             "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed.",
             "connect": "Connect your Ledger device",
             "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Tips if your Ledger isn’t connecting"
         },
         "restoreFromFireflyLedger": {
@@ -663,7 +663,7 @@
             "title": "Enable Blind Signing",
             "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
             "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
+            "step_2": "Open {network} Application",
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
@@ -933,7 +933,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -954,7 +954,7 @@
             "steps": {
                 "0": "Make sure Ledger Live is not open on your computer",
                 "1": "Ensure you have unlocked your Ledger device with your PIN",
-                "2": "Open the new IOTA app on your Ledger device",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "Still no luck?",
                     "link": "Try the official Ledger support page"
@@ -1976,7 +1976,7 @@
             "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
-            "appNotOpen": "You must open the IOTA app on your Ledger device.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "There was an error connecting to your Ledger device.",
             "legacyConnected": "The wrong app is open on your Ledger device.",
             "locked": "Please unlock your Ledger device by entering the PIN.",
