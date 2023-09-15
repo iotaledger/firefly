@@ -30,7 +30,7 @@ const stage = process.env.STAGE || 'alpha'
 const appName = stage === 'prod' ? 'Firefly' : `Firefly - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 const appId = stage === 'prod' ? 'org.iota.firefly' : `org.iota.firefly.${stage}`
 
-const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
+const appProtocol = stage === 'prod' ? 'iota' : `iota-${stage.toLowerCase()}`
 
 // / ------------------------ Resolve ------------------------
 

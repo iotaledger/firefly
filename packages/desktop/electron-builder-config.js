@@ -19,7 +19,7 @@ function getAppName() {
 }
 
 function getAppProtocol() {
-    return STAGE === 'prod' ? 'firefly' : `firefly-${STAGE.toLowerCase()}`
+    return STAGE === 'prod' ? 'iota' : `iota-${STAGE.toLowerCase()}`
 }
 
 function getAppId() {
@@ -33,11 +33,11 @@ function getAppId() {
 function getChannelName() {
     switch (STAGE) {
         case 'alpha':
-            return 'shimmer-alpha'
+            return 'iota-alpha'
         case 'beta':
-            return 'shimmer-beta'
+            return 'iota-beta'
         default:
-            return 'shimmer'
+            return 'iota'
     }
 }
 

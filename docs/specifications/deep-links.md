@@ -25,7 +25,7 @@ confirmation on behalf of the user.
 The Firefly deep link scheme can be broken down to the following (simple) syntax:
 
 ```
-firefly[-<stage>]://<context>/<operation>[?param=<param>]
+iota[-<stage>]://<context>/<operation>[?param=<param>]
 ```
 
 The parameters are as follows:
