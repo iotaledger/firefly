@@ -16,69 +16,102 @@ let searchAccountStartIndex: number
 let _accountGapLimit: number
 let _addressGapLimit: number
 
-export function initialiseAccountRecoveryConfiguration(algortihmType: SearchAlgorithmType): void {
+export function initialiseAccountRecoveryConfiguration(
+    algortihmType: SearchAlgorithmType,
+    config?: RecoverAccountsPayload
+): void {
     const profileType = get(activeProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()
     }
-
     const { initialAccountRange, accountGapLimit, addressGapLimit } =
         BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION[profileType]
 
-    _accountGapLimit = accountGapLimit
-    _addressGapLimit = addressGapLimit
+    _accountGapLimit = config ? config.accountGapLimit : accountGapLimit
+    _addressGapLimit = config ? config.addressGapLimit : addressGapLimit
+    searchAccountStartIndex = config ? config.accountStartIndex : initialAccountRange
 
     searchAddressStartIndex =
         algortihmType === SearchAlgorithmType.BFS ? _addressGapLimit : INITIAL_SEARCH_ADDRESS_START_INDEX
-    searchAccountStartIndex = initialAccountRange
 }
 
-export async function findBalances(algortihmType: SearchAlgorithmType, init?: boolean): Promise<void> {
+export async function findBalances(
+    algortihmType: SearchAlgorithmType,
+    init?: boolean,
+    config?: RecoverAccountsPayload
+): Promise<void> {
     if (init) {
-        initialiseAccountRecoveryConfiguration(algortihmType)
+        initialiseAccountRecoveryConfiguration(algortihmType, config)
     }
     if (algortihmType === SearchAlgorithmType.BFS || algortihmType === SearchAlgorithmType.IDS) {
-        await breadthSearchAndRecoverAccounts()
+        await breadthSearchAndRecoverAccounts(config)
         searchAccountStartIndex += _accountGapLimit
     }
     if (algortihmType === SearchAlgorithmType.DFS || algortihmType === SearchAlgorithmType.IDS) {
-        await depthSearchAndRecoverAccounts()
+        await depthSearchAndRecoverAccounts(config)
         // TODO: Improve the address start index, checking which is the last address index found in a account and continuing searching from that index
         searchAddressStartIndex += _addressGapLimit
     }
 }
 
 // Perform an in-depth search, looking for outputs in all searched accounts starting from the previous address index
-async function depthSearchAndRecoverAccounts(): Promise<void> {
-    const recoverAccountsPayload: RecoverAccountsPayload = {
-        accountStartIndex: INITIAL_SEARCH_ACCOUNT_START_INDEX,
-        accountGapLimit: searchAccountStartIndex,
-        addressGapLimit: _addressGapLimit,
-        syncOptions: {
-            ...DEFAULT_SYNC_OPTIONS,
-            addressStartIndex: searchAddressStartIndex,
-            addressStartIndexInternal: searchAddressStartIndex,
-        },
+async function depthSearchAndRecoverAccounts(config?: RecoverAccountsPayload): Promise<void> {
+    let recoverAccountsPayload: RecoverAccountsPayload
+    if (config) {
+        recoverAccountsPayload = {
+            ...config,
+            accountStartIndex: INITIAL_SEARCH_ACCOUNT_START_INDEX,
+            accountGapLimit: searchAccountStartIndex,
+            syncOptions: {
+                ...(config.syncOptions || DEFAULT_SYNC_OPTIONS),
+                addressStartIndex: searchAddressStartIndex,
+                addressStartIndexInternal: searchAddressStartIndex,
+            },
+        }
+    } else {
+        recoverAccountsPayload = {
+            accountStartIndex: INITIAL_SEARCH_ACCOUNT_START_INDEX,
+            accountGapLimit: searchAccountStartIndex,
+            addressGapLimit: _addressGapLimit,
+            syncOptions: {
+                ...DEFAULT_SYNC_OPTIONS,
+                addressStartIndex: searchAddressStartIndex,
+                addressStartIndexInternal: searchAddressStartIndex,
+            },
+        }
     }
     await recoverAccounts(recoverAccountsPayload)
 }
 
 // Perform a breadth search, looking for outputs in all previous addresses of a new account index
-async function breadthSearchAndRecoverAccounts(): Promise<void> {
+async function breadthSearchAndRecoverAccounts(config?: RecoverAccountsPayload): Promise<void> {
     for (
         let chunkAddressStartIndex = INITIAL_SEARCH_ADDRESS_START_INDEX;
         chunkAddressStartIndex < searchAddressStartIndex;
         chunkAddressStartIndex += _addressGapLimit
     ) {
-        const recoverAccountsPayload: RecoverAccountsPayload = {
-            accountStartIndex: searchAccountStartIndex,
-            accountGapLimit: _accountGapLimit,
-            addressGapLimit: _addressGapLimit,
-            syncOptions: {
-                ...DEFAULT_SYNC_OPTIONS,
-                addressStartIndex: chunkAddressStartIndex,
-                addressStartIndexInternal: chunkAddressStartIndex,
-            },
+        let recoverAccountsPayload: RecoverAccountsPayload
+        if (config) {
+            recoverAccountsPayload = {
+                ...config,
+                accountStartIndex: searchAccountStartIndex,
+                syncOptions: {
+                    ...(config.syncOptions || DEFAULT_SYNC_OPTIONS),
+                    addressStartIndex: chunkAddressStartIndex,
+                    addressStartIndexInternal: chunkAddressStartIndex,
+                },
+            }
+        } else {
+            recoverAccountsPayload = {
+                accountStartIndex: searchAccountStartIndex,
+                accountGapLimit: _accountGapLimit,
+                addressGapLimit: _addressGapLimit,
+                syncOptions: {
+                    ...DEFAULT_SYNC_OPTIONS,
+                    addressStartIndex: chunkAddressStartIndex,
+                    addressStartIndexInternal: chunkAddressStartIndex,
+                },
+            }
         }
         await recoverAccounts(recoverAccountsPayload)
     }
