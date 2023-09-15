@@ -33,6 +33,7 @@
     import features from '@features/features'
     import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
     import { openPopup, PopupId } from '@auxiliary/popup'
+    import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 
     const tabs = {
         wallet: Wallet,
@@ -65,6 +66,19 @@
         }
     }
 
+    function handleShouldShowBalanceOverview(): void {
+        if ($showBalanceOverviewPopup) {
+            openPopup({
+                id: PopupId.BalanceFinder,
+                props: {
+                    title: localize('popups.balanceOverview.title'),
+                    body: localize('popups.balanceOverview.body'),
+                },
+            })
+            $showBalanceOverviewPopup = false
+        }
+    }
+
     onMount(() => {
         Platform.onEvent('menu-logout', () => {
             void logout()
@@ -92,20 +106,20 @@
                 }),
             })
         }
-        if ($isAwareOfMetricSystemDrop !== true) {
+
+        if (!$isAwareOfMetricSystemDrop) {
             openPopup({
                 id: PopupId.MetricSystemInfo,
+                props: {
+                    onCancelled: () => {
+                        handleShouldShowBalanceOverview()
+                    },
+                },
             })
             $isAwareOfMetricSystemDrop = true
+        } else {
+            handleShouldShowBalanceOverview()
         }
-        // TODO: Display balance overview popup only when relevant
-        openPopup({
-            id: PopupId.BalanceFinder,
-            props: {
-                title: localize('popups.balanceOverview.title'),
-                body: localize('popups.balanceOverview.body'),
-            },
-        })
     })
 
     onDestroy(() => {

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { PopupId, openPopup, popupState } from '@auxiliary/popup'
+    import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
     import {
         Platform,
         isLatestStrongholdVersion,
@@ -106,6 +107,7 @@
                 if ($activeProfile?.needsChrysalisToStardustDbMigration) {
                     const dbMigrationSuccess = await migrateDbChrysalisToStardust($activeProfile?.id, pinCode)
                     if (dbMigrationSuccess) {
+                        showBalanceOverviewPopup.set(true)
                         _onSuccess()
                     } else {
                         isBusy = false

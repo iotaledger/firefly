@@ -148,10 +148,10 @@
 
     function tryClosePopup(): void {
         if (!preventClose) {
+            closePopup()
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup()
         }
     }
 
