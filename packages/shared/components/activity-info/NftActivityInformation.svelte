@@ -15,9 +15,9 @@
 
     export let activity: NftActivity
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
-    $: issuerAddress = getBech32AddressFromAddressTypes(nft?.issuer)
-    $: collectionId = getHexAddressFromAddressTypes(nft?.issuer)
+    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+    $: issuerAddress = nft?.issuer && getBech32AddressFromAddressTypes(nft.issuer)
+    $: collectionId = nft?.issuer && getHexAddressFromAddressTypes(nft.issuer)
 
     let detailsList: IKeyValueBoxList
     $: detailsList = {

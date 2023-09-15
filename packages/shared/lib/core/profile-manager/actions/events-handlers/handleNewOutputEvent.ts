@@ -37,7 +37,7 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
 
     const output = outputData.output as AliasOutput
 
-    const address = getBech32AddressFromAddressTypes(outputData?.address)
+    const address = getBech32AddressFromAddressTypes(outputData.address)
     const isNewAliasOutput =
         output.type === OutputType.Alias &&
         output.stateIndex === 0 &&

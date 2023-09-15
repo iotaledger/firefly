@@ -36,7 +36,7 @@
 >
     {#if profile?.pfp}
         <nft-wrapper>
-            <NftMedia nft={profile.pfp} classes="w-full h-full rounded-full object-cover" />
+            <NftMedia nft={profile.pfp} class="w-full h-full rounded-full object-cover" />
         </nft-wrapper>
     {:else if profile?.name}
         <Text {fontSize} {lineHeight} fontWeight={FontWeight.bold} classes="text-white">

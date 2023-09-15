@@ -205,7 +205,7 @@
             "body": "請確定官方Ledger Live軟體已關閉，使Firefly能找到您的Ledger裝置。",
             "connect": "連接您的 Ledger 裝置",
             "unlock": "使用 Pin 碼解鎖你的 Ledger",
-            "openApp": "在你的 Ledger 上啟動 Shimmer app",
+            "openApp": "在你的 Ledger 上打開 Shimmer app",
             "tips": "Ledger無法連結時的處理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "請等待同步完成才更換錢包。",
-        "transferring": "請等待所有交易完成才更換錢包。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "請等待所有質押/投票交易完成才更換錢包。",
         "claimed": {
             "success": "交易認領",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "輸出已被認領",
             "noToAccount": "您尚未選擇匯款的目標錢包。",
             "sendingDust": "您無法發送少於1 Mi。",
-            "leavingDust": "您的地址不能少於1Mi。",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "交易取消。",
             "transaction": "交易發生錯誤，請重試。",
             "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的",
