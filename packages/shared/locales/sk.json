@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Nezvolili ste peňaženku na ktoré majú byť zaslané prostriedky.",
             "sendingDust": "Nemôžete odoslať menej ako 1 Mi.",
-            "leavingDust": "Zostatok vašej adresy nemôže byť nižší ako 1 Mi.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transakcia bola zrušená.",
             "transaction": "Pri posielaní vašej transakcie sa vyskytla chyba. Skúste to znova.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

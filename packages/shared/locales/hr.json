@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Molimo pričekajte da sinkronizacija završi prije nego promijenite novčanik.",
-        "transferring": "Molimo pričekajte da sve transakcije završe prije nego promijenite novčanik.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Molimo pričekajte da sve staking/glasačke transakcije završe prije nego promijenite novčanik.",
         "claimed": {
             "success": "Transakcija preuzeta",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output je već preuzet",
             "noToAccount": "Niste odabrali novčanik na koji želite poslati sredstva.",
             "sendingDust": "Ne možete slati manje od 1 Mi.",
-            "leavingDust": "Ne možet ostaviti manje od 1 Mi na svojoj adresi.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transakcija je otkazana.",
             "transaction": "Došlo je do greške prilikom slanja vaše transakcije. Molimo pokušajte ponovno.",
             "invalidExpirationDateTime": "Odabrani datum/vrijeme isteka nije važeći.",

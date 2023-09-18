@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Por favor, espere hasta que la sincronización termine para cambiar las carteras.",
-        "transferring": "Por favor, espere hasta que todas las transacciones se completen para cambiar las carteras.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Por favor, espere hasta que todas las transacciones de staking/votación se completen para cambiar las carteras.",
         "claimed": {
             "success": "Transacción reclamada",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "La salida ya ha sido reclamada",
             "noToAccount": "No has seleccionado una cartera a la que enviar los fondos.",
             "sendingDust": "No puedes enviar menos de 1 Mi.",
-            "leavingDust": "No puedes dejar menos de 1 Mi en tu dirección.",
+            "leavingDust": "No puedes dejar un depósito de almacenamiento inferior al mínimo requerido ({minRequiredStorageDeposit}) en tu dirección.",
             "cancelled": "La transacción fue cancelada.",
             "transaction": "Hubo un error al enviar su transacción. Por favor, inténtelo de nuevo.",
             "invalidExpirationDateTime": "La fecha/hora de vencimiento elegida no es válida.",

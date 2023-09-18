@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Ви не вибрали гаманець для надсилання коштів.",
             "sendingDust": "Ви не можете надіслати менш 1 Mi.",
-            "leavingDust": "Ви не можете залишити менше 1 Mi на вашій адресі.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Транзакцію було скасовано.",
             "transaction": "Під час відправлення транзакції сталася помилка. Будь ласка, спробуйте ще раз.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

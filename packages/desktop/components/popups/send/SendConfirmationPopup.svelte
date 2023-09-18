@@ -24,9 +24,9 @@
     import { sendOutput } from '@core/wallet/actions'
     import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
     import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
@@ -42,6 +42,7 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let isCallbackFromUnlockStronghold: boolean = false
 
     let {
         recipient,
@@ -59,7 +60,7 @@
     let expirationTimePicker: ExpirationTimePicker
     let visibleSurplus: number | undefined = undefined
 
-    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -104,8 +105,20 @@
     }
 
     function refreshSendConfirmationState(): void {
-        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-        void prepareTransactionOutput()
+        if (!isCallbackFromUnlockStronghold) {
+            if (
+                transactionDetails.type === NewTransactionType.NftTransfer &&
+                Number($selectedAccount.balances.baseCoin.available) === 0
+            ) {
+                giftStorageDeposit = true
+                disableChangeExpiration = true
+                disableToggleGift = true
+            }
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
+            void prepareTransactionOutput()
+        } else {
+            initialExpirationDate = getInitialExpirationDate()
+        }
     }
 
     function getInitialExpirationDate(): TimePeriod {
@@ -119,28 +132,32 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
-        const outputParams = await getOutputParameters(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+        try {
+            const transactionDetails = get(newTransactionDetails)
+            const outputParams = await getOutputParameters(transactionDetails)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
 
-        await updateStorageDeposit()
+            await updateStorageDeposit()
 
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                // Note: we have to hide it because currently, in the sdk,
-                // the storage deposit return strategy is only looked at
-                // if the provided amount is < the minimum required storage deposit
-                hideGiftToggle = true
+            // Note: we need to adjust the surplus
+            // so we make sure that the surplus is always added on top of the minimum storage deposit
+            if (Number(surplus) > 0) {
+                if (minimumStorageDeposit >= Number(surplus)) {
+                    visibleSurplus = surplus = undefined
+                } else {
+                    visibleSurplus = Number(surplus) - minimumStorageDeposit
+                    // Note: we have to hide it because currently, in the sdk,
+                    // the storage deposit return strategy is only looked at
+                    // if the provided amount is < the minimum required storage deposit
+                    hideGiftToggle = true
+                }
             }
-        }
 
-        if (transactionDetails.expirationDate === undefined) {
-            initialExpirationDate = getInitialExpirationDate()
+            if (transactionDetails.expirationDate === undefined) {
+                initialExpirationDate = getInitialExpirationDate()
+            }
+        } catch (err) {
+            handleError(err)
         }
     }
 
@@ -167,11 +184,13 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput as CommonOutput)
+            validateSendConfirmation(preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
+
+            updatePopupProps({ isCallbackFromUnlockStronghold: true })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)

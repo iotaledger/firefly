@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
-        "transferring": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Bakiyeyi göndermek için bir cüzdan seçmediniz.",
             "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
-            "leavingDust": "Adresinizde 1 Mi'den az bırakamazsınız.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "İşlem iptal edildi.",
             "transaction": "İşleminiz gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
