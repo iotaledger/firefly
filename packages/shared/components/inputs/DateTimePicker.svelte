@@ -7,19 +7,19 @@
     import { localize } from '@core/i18n'
     import { appSettings } from '@core/app'
 
-    export let value: Date | undefined = undefined
-    export let startDate: Date | null = null
+    export let value: Date | null | undefined = undefined
+    export let startDate: Date | null | undefined = undefined
     export let mode: 'auto' | 'datetime' | 'date' | 'time' = 'auto'
 
     const dispatch = createEventDispatcher()
     const sveltyPickerStartDate = convertDateToSveltyPickerFormat(startDate)
     const translations = getSveltyPickerTranslations()
 
-    let sveltyPickerDate = value ? convertDateToSveltyPickerFormat(value) : sveltyPickerStartDate
+    let sveltyPickerDate = convertDateToSveltyPickerFormat(value) ?? sveltyPickerStartDate
     let tooltip: Tooltip
 
-    function convertDateToSveltyPickerFormat(date: Date | null): string | undefined {
-        return date ? date?.toLocaleString('sv') : undefined
+    function convertDateToSveltyPickerFormat(date: Date | null | undefined): string | undefined {
+        return date?.toLocaleString('sv')
     }
 
     function onCancelClick(): void {
@@ -27,10 +27,8 @@
     }
 
     function onConfirmClick(): void {
-        if (sveltyPickerDate) {
-            value = new Date(sveltyPickerDate)
-            dispatch('confirm')
-        }
+        if (sveltyPickerDate) value = new Date(sveltyPickerDate)
+        dispatch('confirm')
     }
 
     function getSveltyPickerTranslations(): ComponentProps<SveltyPicker>['i18n'] {
