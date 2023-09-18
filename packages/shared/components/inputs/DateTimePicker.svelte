@@ -96,6 +96,8 @@
     @media (prefers-color-scheme: dark) {
         :global(datetime-picker-wrapper) {
             :global(.std-calendar-wrap) {
+                --sdt-color: theme('colors.white');
+                --sdt-bg-main: theme('colors.gray.900');
                 --sdt-bg-main: theme('colors.gray.900');
                 --sdt-primary: theme('colors.blue.500');
                 --sdt-header-color: theme('colors.white');
@@ -114,11 +116,13 @@
                 --sdt-primary: theme('colors.blue.500');
                 --sdt-color: theme('colors.gray.600');
                 --sdt-color-selected: theme('colors.white');
+                --sdt-header-color: theme('colors.gray.600');
                 --sdt-bg-main: none;
                 --sdt-today-color: theme('colors.white');
                 --sdt-btn-bg-hover: theme('colors.gray.200');
                 --sdt-btn-header-bg-hover: theme('colors.gray.200');
                 --sdt-clock-bg: theme('colors.gray.200');
+                --sdt-disabled-date: theme('colors.gray.500');
                 --sdt-wrap-shadow: none;
             }
         }
