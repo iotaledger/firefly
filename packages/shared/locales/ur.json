@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "فنڈز بھیجنے کے لئے آپ نے والیٹ کا انتخاب نہیں کیا ہے.",
             "sendingDust": "آپ 1Mi سے کم نہیں بھیج سکتے ہیں.",
-            "leavingDust": "آپ اپنے ایڈریس پر 1Mi سے کم نہیں چھوڑ سکتے ہیں.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "The transaction was cancelled.",
             "transaction": "There was an error sending your transaction. Please try again.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

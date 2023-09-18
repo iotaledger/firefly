@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Veuillez patienter jusqu'à ce que la synchronisation soit terminée pour changer de portefeuille.",
-        "transferring": "Veuillez patienter jusqu'à ce que toutes les transactions soient terminées pour changer de portefeuille.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Veuillez patienter jusqu'à ce que toutes les transactions de staking/vote soient terminées pour changer de portefeuille.",
         "claimed": {
             "success": "Transaction réclamée",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
-            "leavingDust": "Vous ne pouvez pas laisser moins de 1 Mi sur votre adresse.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "La transaction a été annulée.",
             "transaction": "Une erreur s'est produite lors de l'envoi de votre transaction. Veuillez réessayer.",
             "invalidExpirationDateTime": "La date/heure d'expiration choisie n'est pas valide.",

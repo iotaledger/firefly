@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
-        "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Ole hyvä ja odota, kunnes kaikki staking- ja äänestystransaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
         "claimed": {
             "success": "Transaktio lunastettu",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Tuloste on jo lunastettu",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
-            "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaktio peruutettiin.",
             "transaction": "Transaktiosi lähettämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen.",
             "invalidExpirationDateTime": "Valittu erääntymispäivä/-aika on virheellinen.",

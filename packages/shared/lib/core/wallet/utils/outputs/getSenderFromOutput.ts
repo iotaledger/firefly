@@ -17,7 +17,7 @@ export function getSenderFromOutput(output: CommonOutput): Subject | undefined {
             const storageOrExpirationUnlockCondition = unlockCondition as
                 | StorageDepositReturnUnlockCondition
                 | ExpirationUnlockCondition
-            const address = getBech32AddressFromAddressTypes(storageOrExpirationUnlockCondition?.returnAddress)
+            const address = getBech32AddressFromAddressTypes(storageOrExpirationUnlockCondition.returnAddress)
             if (address) {
                 return getSubjectFromAddress(address)
             }

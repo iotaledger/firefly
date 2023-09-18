@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Моля изчакайте докато синхронизацията е завършена, за да превключите портфейлите.",
-        "transferring": "Моля изчакайте докато всички транзакции са завършени, за да превключите портфейлите.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Не сте избрали портфейл, където да се изпрати сумата.",
             "sendingDust": "Не може да изпращате по-малко от 1 Mi.",
-            "leavingDust": "Не може да оставяте по-малко от 1Mi във Вашият адрес.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Транзакцията е отменена.",
             "transaction": "Възникна грешка при изпращането на транзакцията. Моля опитайте отново.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

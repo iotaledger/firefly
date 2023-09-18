@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
-        "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind, um die Wallets zu ändern.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Bitte warte mit dem Wechseln der Wallet, bis alle Staking/Voting Transaktionen abgeschlossen sind.",
         "claimed": {
             "success": "Transaktion beansprucht",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "UTXO Output wurde bereits beansprucht",
             "noToAccount": "Du hast keine Wallet ausgewählt, auf welche das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
-            "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Die Transaktion wurde abgebrochen.",
             "transaction": "Beim Senden deiner Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
             "invalidExpirationDateTime": "Das gewählte Ablaufdatum bzw. die gewählte Ablaufzeit ist ungültig.",

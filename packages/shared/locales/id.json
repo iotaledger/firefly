@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Anda belum memilih akun untuk mengirim dana.",
             "sendingDust": "Anda tidak dapat mengirim kurang dari 1 Mi.",
-            "leavingDust": "Anda tidak dapat meninggalkan kurang dari 1 Mi di alamat Anda.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaksi Anda dibatalkan.",
             "transaction": "Terjadi kesalahan saat mengirimkan transaksi Anda. Silakan coba lagi nanti.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",

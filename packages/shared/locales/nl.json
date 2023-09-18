@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Wacht tot de synchronisatie is voltooid om portemonnees te wijzigen.",
-        "transferring": "Wacht tot alle transacties zijn voltooid om portemonnees te veranderen.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "U heeft geen portemonnee geselecteerd om het saldo naar te verzenden.",
             "sendingDust": "U kunt niet minder dan 1 Mi verzenden.",
-            "leavingDust": "U kunt niet minder dan 1 Mi op uw rekening achterlaten.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "De transactie is geannuleerd.",
             "transaction": "Er is een fout opgetreden bij het verzenden van uw transactie. Probeer het opnieuw.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
