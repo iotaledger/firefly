@@ -6,7 +6,7 @@ const Keychain = {
     /**
      * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: `${APP_NAME}${app.isPackaged ? '' : '— Dev'}`,
+    SERVICE_NAME: `${PRODUCT_NAME}${app.isPackaged ? '' : ' — Dev'}`,
     /**
      * Gets all credentials from keychain
      *

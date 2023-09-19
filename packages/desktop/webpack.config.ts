@@ -10,7 +10,7 @@ import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
 import dotenv from 'dotenv'
-import { APP_NAME, APP_ID, APP_PROTOCOL, STAGE } from './product'
+import { APP_NAME, APP_ID, APP_PROTOCOL, STAGE, PRODUCT_NAME } from './product'
 
 dotenv.config() // used to read env vars from an .env file
 
@@ -132,6 +132,7 @@ const mainPlugins = [
         SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(false),
         APP_NAME: JSON.stringify(APP_NAME),
+        PRODUCT_NAME: JSON.stringify(PRODUCT_NAME),
         APP_ID: JSON.stringify(APP_ID),
         'process.env.STAGE': JSON.stringify(STAGE),
         'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),

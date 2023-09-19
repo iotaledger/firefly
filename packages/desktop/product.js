@@ -1,3 +1,5 @@
+const PRODUCT_NAME = 'Firefly'
+
 const STAGE = process.env.STAGE || 'alpha'
 const APP_NAME = getAppName()
 const APP_ID = getAppId()
@@ -14,7 +16,7 @@ function getAppArtifact() {
  * If stage = 'alpha' -> 'Firefly Alpha'
  */
 function getAppName() {
-    return STAGE === 'prod' ? 'Firefly' : `Firefly - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+    return STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 }
 
 /**
@@ -55,4 +57,5 @@ module.exports = {
     APP_PROTOCOL,
     CHANNEL_NAME,
     APP_ARTIFACT,
+    PRODUCT_NAME,
 }
