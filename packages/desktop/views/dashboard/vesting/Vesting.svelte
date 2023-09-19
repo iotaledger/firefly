@@ -5,7 +5,9 @@
     import {
         IVestingPayout,
         VestingOutputStatus,
+        VestingType,
         calculateAsmbEquivalence,
+        selectedAccountVestingOutputs,
         selectedAccountVestingOverview,
         selectedAccountVestingPayouts,
         selectedAccountVestingUnclaimedFunds,
@@ -36,8 +38,10 @@
             title: localize('views.vesting.overview.totalRewards'),
             iotaAmount: $selectedAccountVestingOverview?.totalRewards || 0,
             asmbAmount:
-                calculateAsmbEquivalence($selectedAccountVestingOverview?.totalRewards, baseCoin.metadata) ??
-                DEFAULT_EMPTY_VALUE_STRING,
+                $selectedAccountVestingOverview?.totalRewards &&
+                $selectedAccountVestingOutputs.every((payout) => payout.type === VestingType.Staker)
+                    ? calculateAsmbEquivalence($selectedAccountVestingOverview?.totalRewards, baseCoin.metadata)
+                    : undefined,
         },
     ]
 

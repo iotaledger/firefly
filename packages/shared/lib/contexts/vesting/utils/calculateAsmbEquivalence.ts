@@ -9,13 +9,7 @@ export function calculateAsmbEquivalence(rawAmount: number, tokenMetadata: Token
     if (tokenMetadata.name === 'IOTA') {
         calculateAsmbEquivalence = unitAmount.mul(ASSEMBLY_IOTA_EQUIVALENCE_FACTOR)
     }
-    return `${formatNumber(
-        calculateAsmbEquivalence.toNumber(),
-        undefined,
-        tokenMetadata.decimals,
-        undefined,
-        true
-    )} ASMB`
+    return `~ ${formatNumber(calculateAsmbEquivalence.toNumber(), 0, 0, undefined, true)} ASMB`
 }
 
 export function convertAmountToMatchUnit(amount: number, decimalsInUnit: number): Big {
