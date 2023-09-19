@@ -5,4 +5,5 @@ export interface AddressWithVestingOutputs {
     address: string
     outputs: IVestingOutput[]
     type: VestingType | undefined
+    lastOutput: IVestingOutput | undefined
 }

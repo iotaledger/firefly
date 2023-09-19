@@ -13,18 +13,11 @@ export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived
         if ($selectedAccountVestingOutputs?.length) {
             // Calculate the total number of vesting payouts
             const numberOfPayouts = getTotalVestingPayouts()
-            // Map selected account vesting outputs to include the last output
-            const selectedAccountVestingWithLastOutput = $selectedAccountVestingOutputs.map((accountWithOutputs) => ({
-                ...accountWithOutputs,
-                lastOutput: accountWithOutputs.outputs[accountWithOutputs.outputs.length - 1],
-            }))
             // Find the latest unlock time among the selected account vesting outputs
             // This is used to calculate the unlock time for each payout
             const lastUnlockTime = new Date(
                 Math.max(
-                    ...selectedAccountVestingWithLastOutput.map(
-                        ({ lastOutput }) => lastOutput?.unlockTime?.getTime() ?? 0
-                    )
+                    ...$selectedAccountVestingOutputs.map(({ lastOutput }) => lastOutput?.unlockTime?.getTime() ?? 0)
                 )
             )
             if (numberOfPayouts && lastUnlockTime) {
@@ -32,14 +25,20 @@ export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived
                 for (let i = 0; i < numberOfPayouts; i++) {
                     // If the payout is in the staking years, include all vesting outputs
                     // If the payout is in the vesting only years, include only investor vesting outputs
-                    let addressSetToCompute = selectedAccountVestingWithLastOutput
+                    let addressSetToCompute = $selectedAccountVestingOutputs
                     if (i >= VESTING_PAYOUTS_IN_1_YEAR * STAKER_VESTING_DURATION) {
-                        addressSetToCompute = selectedAccountVestingWithLastOutput.filter(
+                        addressSetToCompute = $selectedAccountVestingOutputs.filter(
                             ({ type }) => type === VestingType.Investor
                         )
                     }
+
+                    // Map each address with its amount
+                    const amounts = addressSetToCompute.map((vestingOutputsWithAddress) => ({
+                        amount: vestingOutputsWithAddress.lastOutput?.amount || 0,
+                        address: vestingOutputsWithAddress.address,
+                    }))
                     // Calculate the total amount to be paid out in this iteration
-                    const amount = addressSetToCompute.reduce((acc, vestingOutputsWithAddress) => {
+                    const totalAmount = addressSetToCompute.reduce((acc, vestingOutputsWithAddress) => {
                         const outputAmount = vestingOutputsWithAddress.lastOutput?.amount ?? 0
                         return acc + outputAmount
                     }, 0)
@@ -52,7 +51,8 @@ export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived
                         unlockTime.getTime() > now.getTime() ? VestingOutputStatus.Locked : VestingOutputStatus.Unlocked
                     // Add the calculated payout to the payouts array
                     payouts.push({
-                        amount,
+                        amounts,
+                        totalAmount,
                         unlockTime,
                         status,
                     })

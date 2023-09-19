@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import { IVestingPayout, VestingOutputStatus } from '@contexts/vesting'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
@@ -26,6 +27,15 @@
 
     function formatCoinAmount(amount: number): string {
         return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
+    }
+
+    function onPayoutClick(payout: IVestingPayout): void {
+        openPopup({
+            id: PopupId.PayoutDetails,
+            props: {
+                payout,
+            },
+        })
     }
 
     function handleHoverEvent(payout?: IVestingPayout): (e: MouseEvent) => void {
@@ -61,6 +71,7 @@
             <vesting-output
                 on:mouseleave={onMouseLeaveOutput}
                 on:mouseenter={onMouseEnterOutput}
+                on:click={() => onPayoutClick(payout)}
                 class:unlocked={payout.status === VestingOutputStatus.Unlocked}
             />
         {/each}
@@ -71,14 +82,14 @@
     <Tooltip {anchor}>
         <div class="flex flex-row justify-between space-x-24">
             <Text type={TextType.h4}>{localize('views.vesting.payouts.tooltip.title')}</Text>
-            <Pill backgroundColor="gray-300" textColor="gray-600"
-                >{localize(`pills.vesting.${hoveredPayout.status}`)}</Pill
-            >
+            <Pill backgroundColor="gray-300" textColor="gray-600">
+                {localize(`pills.vesting.${hoveredPayout.status}`)}
+            </Pill>
         </div>
         <div class="w-full flex flex-col justify-between space-y-1 mt-2">
             <div class="text-left">
                 <Text color="gray-600" darkColor="gray-500">{localize('views.vesting.payouts.tooltip.amount')}</Text>
-                <Text bold>{formatCoinAmount(hoveredPayout.amount)}</Text>
+                <Text bold>{formatCoinAmount(hoveredPayout.totalAmount)}</Text>
             </div>
             <div class="text-left">
                 <Text color="gray-600" darkColor="gray-500">

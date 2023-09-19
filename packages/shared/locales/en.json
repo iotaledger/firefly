@@ -646,6 +646,12 @@
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
         "vestingCollect": {
             "title": "Collect",
             "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat sapien ac venenatis fermentum. Duis eget eleifend arcu, ut maximus dui. Suspendisse elementum dictum sem non egestas. ",

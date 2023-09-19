@@ -54,6 +54,7 @@
     import MetricSystemInfoPopup from './metricSystemInfoPopup.svelte'
     import BalanceFinderPopup from './BalanceFinderPopup.svelte'
     import VestingCollectPopup from './VestingCollectPopup.svelte'
+    import PayoutDetailsPopup from './PayoutDetailsPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -138,6 +139,7 @@
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
         [PopupId.BalanceFinder]: BalanceFinderPopup,
         [PopupId.VestingCollect]: VestingCollectPopup,
+        [PopupId.PayoutDetails]: PayoutDetailsPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

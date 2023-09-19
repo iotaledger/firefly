@@ -16,10 +16,12 @@ export const selectedAccountVestingOutputs: Readable<AddressWithVestingOutputs[]
                 .map(mapBasicOutputToVestingOutput)
                 .sort(sortVestingOutputs)
             const type = getVestingType(outputs)
+            const lastOutput = outputs[outputs.length - 1]
             return {
                 address: addressWithOutputs.address,
                 outputs,
                 type,
+                lastOutput,
             }
         })
     }

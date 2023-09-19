@@ -9,7 +9,7 @@ export const selectedAccountVestingOverview: Readable<IVestingOverview> = derive
     ([$selectedAccountVestingPayouts, $selectedAccountVestingOutputs]) => {
         const remainingPayout =
             $selectedAccountVestingPayouts?.reduce(
-                (acc, { amount, status }) => (status === VestingOutputStatus.Locked ? acc + amount : acc),
+                (acc, { totalAmount, status }) => (status === VestingOutputStatus.Locked ? acc + totalAmount : acc),
                 0
             ) ?? 0
         // get the total rewards from the snapshot file
@@ -23,7 +23,8 @@ export const selectedAccountVestingOverview: Readable<IVestingOverview> = derive
             // this is a dev only solution that affects addresses that are not in the new supply snapshot
             const accumulatedScheduledPayout =
                 $selectedAccountVestingPayouts?.reduce(
-                    (acc, { amount, status }) => (status === VestingOutputStatus.Unlocked ? acc + amount : acc),
+                    (acc, { totalAmount, status }) =>
+                        status === VestingOutputStatus.Unlocked ? acc + totalAmount : acc,
                     0
                 ) ?? 0
             // note: we add the initial payout to the total rewards, 10% of the total rewards are paid out immediately
