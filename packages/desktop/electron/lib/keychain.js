@@ -1,4 +1,5 @@
 const keytar = require('keytar')
+const { app } = require('electron')
 
 /** Keychain object */
 const Keychain = {
