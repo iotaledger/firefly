@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Poczekaj na zakończenie synchronizacji, aby zmienić portfele.",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "Poczekaj, aż wszystkie transakcje zostaną zakończone.",
         "participating": "Poczekaj, aż wszystkie transakcje stakingu/głosowania zostaną zakończone, aby zmienić portfele.",
         "claimed": {
             "success": "Transakcja odebrana",

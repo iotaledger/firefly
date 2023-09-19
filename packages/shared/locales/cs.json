@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "Počkejte prosím na dokončení všech transakcí.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
