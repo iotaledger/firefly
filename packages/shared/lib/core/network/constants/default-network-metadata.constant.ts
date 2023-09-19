@@ -34,7 +34,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
-                vByteCost: 100,
+                vByteCost: 250,
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
@@ -53,7 +53,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
-                vByteCost: 100,
+                vByteCost: 250,
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
