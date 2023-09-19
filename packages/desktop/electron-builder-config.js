@@ -1,49 +1,10 @@
 const notarize = require('./scripts/notarize.macos.js')
 const merge = require('lodash.merge')
-
-const STAGE = process.env.STAGE || 'alpha'
-
-const APP_NAME = getAppName()
-const APP_ID = getAppId()
-const APP_PROTOCOL = getAppProtocol()
-const CHANNEL_NAME = getChannelName()
-
-/**
- * If stage = 'prod' -> 'Firefly'
- * If stage = 'alpha' -> 'Firefly Alpha'
- * @param {string} stage
- * @returns
- */
-function getAppName() {
-    return STAGE === 'prod' ? 'Firefly' : `Firefly - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
-}
-
-function getAppProtocol() {
-    return STAGE === 'prod' ? 'iota' : `iota-${STAGE.toLowerCase()}`
-}
-
-function getAppId() {
-    const defaultAppId = 'org.iota.firefly'
-    if (STAGE === 'prod') {
-        return defaultAppId
-    }
-    return `${defaultAppId}.${STAGE}`
-}
-
-function getChannelName() {
-    switch (STAGE) {
-        case 'alpha':
-            return 'iota-alpha'
-        case 'beta':
-            return 'iota-beta'
-        default:
-            return 'iota'
-    }
-}
+const { STAGE, APP_NAME, APP_ID, APP_PROTOCOL, CHANNEL_NAME, APP_ARTIFACT } = require('./product.js')
 
 const prodConfig = () => ({
     productName: APP_NAME,
-    artifactName: 'firefly-desktop-${version}.${ext}',
+    artifactName: APP_ARTIFACT,
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/sdk/target/*'],
@@ -58,7 +19,7 @@ const prodConfig = () => ({
         }
     },
     asar: true,
-    protocols: [{ name: 'Firefly URL Scheme', schemes: [APP_PROTOCOL] }],
+    protocols: [{ name: `${APP_NAME} URL Scheme`, schemes: [APP_PROTOCOL] }],
     dmg: {
         iconSize: 120,
         title: '${productName}',
