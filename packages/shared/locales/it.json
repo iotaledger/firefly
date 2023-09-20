@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Attendere che la sincronizzazione sia terminata per cambiare wallet.",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "Attendere fino al completamento di tutte le transazioni.",
         "participating": "Si prega di attendere che tutte le transazioni in stake/voting siano completate per cambiare portafogli.",
         "claimed": {
             "success": "Transazione rivendicata",

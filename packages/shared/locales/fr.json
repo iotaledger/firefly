@@ -1874,7 +1874,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Vous n'avez pas sélectionné de portefeuille vers lequel envoyer les fonds.",
             "sendingDust": "Vous ne pouvez pas envoyer moins de 1 Mi.",
-            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
+            "leavingDust": "Vous ne pouvez pas laisser moins que le dépôt de stockage minimum requis ({minRequiredStorageDeposit}) sur votre adresse.",
             "cancelled": "La transaction a été annulée.",
             "transaction": "Une erreur s'est produite lors de l'envoi de votre transaction. Veuillez réessayer.",
             "invalidExpirationDateTime": "La date/heure d'expiration choisie n'est pas valide.",

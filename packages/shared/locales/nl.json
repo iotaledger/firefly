@@ -1751,7 +1751,7 @@
             }
         },
         "syncing": "Wacht tot de synchronisatie is voltooid om portemonnees te wijzigen.",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "Wacht a.u.b. tot alle transacties zijn voltooid.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
