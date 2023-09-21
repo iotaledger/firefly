@@ -3431,10 +3431,10 @@ electron-updater@5.3.0:
     semver "^7.3.5"
     typed-emitter "^2.1.0"
 
-electron@22.3.16:
-  version "22.3.16"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.16.tgz#da7ef2ff79d05e8d3f4e01cfb9f47e7bf1d15ec3"
-  integrity sha512-8dHTKetzhfF6Ez7ggLznNtZ8gUPuBUiLVlhd0iGxASn483m2GcOGLB5HmRVEcw/FSNd2nLfWdsbzA6HlMf/UbA==
+electron@22.3.24:
+  version "22.3.24"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.24.tgz#14479cf11cf4709f78d324015429fa82492c2150"
+  integrity sha512-wnGsShoRVk1Jmgr7h/jZK9bI5UwMF88sdQ5c8z2j2N8B9elhF/jKDFjwDXUrY1Y0xzAskOP0tYIDE+UbUM4byQ==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"
@@ -6204,9 +6204,9 @@ nice-try@^1.0.4:
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
 node-abi@^3.0.0, node-abi@^3.3.0, node-abi@^3.8.0:
-  version "3.45.0"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.45.0.tgz#f568f163a3bfca5aacfce1fbeee1fa2cc98441f5"
-  integrity sha512-iwXuFrMAcFVi/ZoZiqq8BzAdsLw9kxDfTC0HMyjXfSL/6CSDAGD5UmR7azrAgWV1zKYq7dUUMj4owusBWKLsiQ==
+  version "3.47.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-3.47.0.tgz#6cbfa2916805ae25c2b7156ca640131632eb05e8"
+  integrity sha512-2s6B2CWZM//kPgwnuI0KrYwNjfdByE25zvAaEpq9IH4zcNsarH8Ihu/UuX6XMPEogDAxkuUFeZn60pXNHAqn3A==
   dependencies:
     semver "^7.3.5"
 
