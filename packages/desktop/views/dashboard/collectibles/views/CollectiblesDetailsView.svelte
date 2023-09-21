@@ -164,8 +164,10 @@
     <div class="max-w-lg">
         <Pane height={Height.Full}>
             <collectibles-details class="flex flex-col space-y-3 w-full max-w-lg h-full">
-                <nft-title class="flex justify-between items-center">
-                    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="break-words">{name}</Text>
+                <nft-title class="w-full flex flex-row justify-between items-center space-x-2">
+                    <div class="break-words w-5/6">
+                        <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
+                    </div>
                     <MeatballMenuButton onClick={modal?.toggle} />
                     <CollectibleActionsModal bind:modal {nft} />
                 </nft-title>
