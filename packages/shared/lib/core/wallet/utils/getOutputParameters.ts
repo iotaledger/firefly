@@ -8,8 +8,47 @@ import { ReturnStrategy } from '../enums'
 import { getCoinType } from '@core/profile'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
+    const { layer2Parameters } = transactionDetails ?? {}
+    const isLayer2Transaction = !!layer2Parameters
+
+    return isLayer2Transaction
+        ? buildOutputParametersForLayer2(transactionDetails)
+        : buildOutputParameters(transactionDetails)
+}
+
+function buildOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
+    const { recipient, expirationDate, timelockDate, giftStorageDeposit } = transactionDetails ?? {}
+
+    const recipientAddress = getAddressFromSubject(recipient)
+    const amount = getAmountFromTransactionDetails(transactionDetails)
+    const assets = getAssetFromTransactionDetails(transactionDetails)
+    const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
+    const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
+    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
+    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+
+    return <OutputParams>{
+        recipientAddress,
+        amount,
+        ...(assets && { assets }),
+        features: {
+            ...(tag && { tag }),
+            ...(metadata && { metadata }),
+        },
+        unlocks: {
+            ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
+        },
+        storageDeposit: {
+            returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
+        },
+    }
+}
+
+async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
+    // TODO Update this logic for layer2 gas estimation
     const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
 
     const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails()
@@ -21,7 +60,7 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
 
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
 
-    const metadata = await getMetadata(transactionDetails)
+    const metadata = await getLayer2MetadataForTransfer(transactionDetails)
 
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
@@ -95,12 +134,4 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     }
 
     return assets
-}
-
-function getMetadata(transactionDetails: NewTransactionDetails): Promise<string> {
-    if (transactionDetails.layer2Parameters) {
-        return getLayer2MetadataForTransfer(transactionDetails)
-    } else {
-        return Promise.resolve(Converter.utf8ToHex(transactionDetails?.metadata))
-    }
 }
