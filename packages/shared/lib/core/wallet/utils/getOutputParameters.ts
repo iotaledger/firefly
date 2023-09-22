@@ -1,13 +1,25 @@
 import { OutputParams, Assets } from '@iota/sdk/out/types'
-import { convertBech32AddressToEd25519Address, convertDateToUnixTimestamp, Converter, IAddressUnlockCondition, IBasicOutput, IExpirationUnlockCondition, IMetadataFeature, INftOutput, ISenderFeature, ITagFeature, ITimelockUnlockCondition, serializeOutput } from '@core/utils'
+import {
+    convertBech32AddressToEd25519Address,
+    convertDateToUnixTimestamp,
+    Converter,
+    IAddressUnlockCondition,
+    IBasicOutput,
+    IExpirationUnlockCondition,
+    IMetadataFeature,
+    INftOutput,
+    ISenderFeature,
+    ITagFeature,
+    ITimelockUnlockCondition,
+    serializeOutput,
+} from '@core/utils'
 import { NewTransactionType } from '../stores'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 import { getCoinType } from '@core/profile'
-import { get } from 'svelte/store'
-import { getSelectedAccount, selectedAccount } from '@core/account'
+import { getSelectedAccount } from '@core/account'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -66,14 +78,15 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const unlockConditions = []
     const addressUC: IAddressUnlockCondition = {
         type: 0,
-        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(recipientAddress) }
+        // TODO unhardcode this (convert bech32 to aliasId)
+        address: { type: 8, aliasId: '0x676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e3109020' },
     }
     unlockConditions.push(addressUC)
     if (expirationUnixTime) {
         const expUC: IExpirationUnlockCondition = {
             type: 3,
             returnAddress: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
-            unixTime: expirationUnixTime
+            unixTime: expirationUnixTime,
         }
         unlockConditions.push(expUC)
     }
@@ -93,7 +106,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     }
     const senderFeature: ISenderFeature = {
         type: 0,
-        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(layer2Parameters.senderAddress) }
+        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(layer2Parameters.senderAddress) },
     }
     features.push(senderFeature)
 
@@ -101,9 +114,9 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         output = {
             type: 3,
             amount,
-            nativeTokens: assets?.nativeTokens ? [ ...assets.nativeTokens ] : undefined,
+            nativeTokens: assets?.nativeTokens ? [...assets.nativeTokens] : undefined,
             unlockConditions,
-            features
+            features,
         } as IBasicOutput
     } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
         output = {
@@ -111,7 +124,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
             amount,
             nftId: assets?.nftId,
             unlockConditions,
-            features
+            features,
         } as INftOutput
     } else {
         throw new Error('Unsupported NewTransactionType')
@@ -123,7 +136,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
 
     // Now that we have the gasEstimation, update the values for the actual output
     if (estimatedGas) {
-        amount = amount + estimatedGas
+        amount = (parseInt(amount, 10) + estimatedGas).toString()
         metadata = getLayer2MetadataForTransfer(transactionDetails, estimatedGas)
     }
 
