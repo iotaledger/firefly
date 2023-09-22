@@ -6,9 +6,6 @@ import { ACCOUNTS_CONTRACT, EXTERNALLY_OWNED_ACCOUNT, GAS_BUDGET, TRANSFER_ALLOW
 import { encodeAddress, encodeAssetAllowance, encodeSmartContractParameters } from '../helpers'
 import { getEstimatedGasForTransferFromTransactionDetails } from './getEstimatedGasForTransferFromTransactionDetails'
 import { evmAddressToAgentID } from './'
-// import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
-// import { NetworkId } from '@core/network'
-// import { Converter } from '@iota/util.js'
 
 export async function getLayer2MetadataForTransfer(transactionDetails: NewTransactionDetails): Promise<string> {
     const metadataStream = new SpecialStream()
@@ -23,7 +20,8 @@ export async function getLayer2MetadataForTransfer(transactionDetails: NewTransa
     metadataStream.writeUInt32('contractFunction', TRANSFER_ALLOWANCE)
     metadataStream.writeUInt64SpecialEncoding('gasBudget', BigInteger(estimatedGas) ?? GAS_BUDGET)
 
-    const aliasAddress = 'rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp'
+    // transactionDetails.layer2Parameters should never be undefined at this point
+    const aliasAddress = transactionDetails.layer2Parameters?.networkAddress ?? ''
     const evmAddressToAgentIdBuffer = evmAddressToAgentID(encodedAddress, aliasAddress)
 
     const smartContractParameters = Object.entries({ a: evmAddressToAgentIdBuffer })

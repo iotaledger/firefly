@@ -8,14 +8,16 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
         type: ChainType.Iscp,
         name: DestinationNetwork.ShimmerEvm,
         chainId: ChainId.ShimmerEVM,
-        aliasAddress: 'rms1pr75wa5xuepg2hew44vnr28wz5h6n6x99zptk2g68sp2wuu2karywgrztx3', // TODO: pending modification
-        iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network', // TODO: pending modification
+        aliasAddress: 'rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp', // TODO: pending modification
+        iscpEndpoint:
+            'https://7-teamnet.chrysalis2.com/wasp/api/v1/chains/rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp', // TODO: pending modification
     },
     [NetworkId.Testnet]: {
         type: ChainType.Iscp,
         name: DestinationNetwork.ShimmerEvmTestnet,
         chainId: ChainId.ShimmerEVMTesnet,
-        aliasAddress: 'rms1pr75wa5xuepg2hew44vnr28wz5h6n6x99zptk2g68sp2wuu2karywgrztx3',
-        iscpEndpoint: 'https://json-rpc.evm.testnet.shimmer.network',
+        aliasAddress: 'rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp', // TODO: pending modification
+        iscpEndpoint:
+            'https://7-teamnet.chrysalis2.com/wasp/api/v1/chains/rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp', // TODO: pending modification
     },
 }

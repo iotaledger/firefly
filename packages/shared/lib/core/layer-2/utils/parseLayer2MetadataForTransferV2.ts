@@ -3,17 +3,11 @@ import { ILayer2AssetAllowance, ILayer2TransferAllowanceMetadata } from '../inte
 import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 import { Allowance } from '../enums'
 import { ReadSpecialStream } from '../classes'
-import { NetworkId, getActiveNetworkId } from '@core/network'
 
 // Function to parse data from the current metadata, using the new encoding where the shimmer chainId is 1072
 export function parseLayer2MetadataForTransferV2(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadSpecialStream(metadata)
-    let senderContract: number
-    if (getActiveNetworkId() === NetworkId.Shimmer) {
-        senderContract = Number(readStream.readUInt32SpecialEncoding('senderContract'))
-    } else {
-        senderContract = readStream.readUInt32('senderContract')
-    }
+    const senderContract = readStream.readUInt32('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
     // TODO: This is a temporary fix since now the gas is always 500000, when it varies, the length of the gas will change
