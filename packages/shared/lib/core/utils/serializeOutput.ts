@@ -12,7 +12,7 @@ export function serializeOutput(object: IBasicOutput | INftOutput): string {
     }
 
     const finalBytes = writeStream.finalBytes()
-    return Converter.bytesToHex(finalBytes)
+    return Converter.bytesToHex(finalBytes, true)
 }
 
 function serializeBasicOutput(writeStream: WriteStream, object: IBasicOutput): void {
@@ -249,11 +249,11 @@ type UnlockConditionTypes =
     | IGovernorAddressUnlockCondition
     | IImmutableAliasUnlockCondition
 
-interface IAddressUnlockCondition extends ITypeBase<0> {
+export interface IAddressUnlockCondition extends ITypeBase<0> {
     address: AddressTypes
 }
 
-interface IExpirationUnlockCondition extends ITypeBase<3> {
+export interface IExpirationUnlockCondition extends ITypeBase<3> {
     returnAddress: AddressTypes
     unixTime: number
 }
@@ -275,13 +275,13 @@ interface IStorageDepositReturnUnlockCondition extends ITypeBase<1> {
     amount: string
 }
 
-interface ITimelockUnlockCondition extends ITypeBase<2> {
+export interface ITimelockUnlockCondition extends ITypeBase<2> {
     unixTime: number
 }
 
 type FeatureTypes = ISenderFeature | IIssuerFeature | IMetadataFeature | ITagFeature
 
-interface ISenderFeature extends ITypeBase<0> {
+export interface ISenderFeature extends ITypeBase<0> {
     address: AddressTypes
 }
 
@@ -289,11 +289,11 @@ interface IIssuerFeature extends ITypeBase<1> {
     address: AddressTypes
 }
 
-interface IMetadataFeature extends ITypeBase<2> {
+export interface IMetadataFeature extends ITypeBase<2> {
     data: HexEncodedString
 }
 
-interface ITagFeature extends ITypeBase<3> {
+export interface ITagFeature extends ITypeBase<3> {
     tag: HexEncodedString
 }
 
