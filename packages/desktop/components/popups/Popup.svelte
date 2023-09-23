@@ -55,6 +55,7 @@
     import BalanceFinderPopup from './BalanceFinderPopup.svelte'
     import VestingCollectPopup from './VestingCollectPopup.svelte'
     import PayoutDetailsPopup from './PayoutDetailsPopup.svelte'
+    import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -140,6 +141,7 @@
         [PopupId.BalanceFinder]: BalanceFinderPopup,
         [PopupId.VestingCollect]: VestingCollectPopup,
         [PopupId.PayoutDetails]: PayoutDetailsPopup,
+        [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

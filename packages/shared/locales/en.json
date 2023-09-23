@@ -634,6 +634,7 @@
            },
            "timeUntilNextPayout": "Time Until Next Payout",
            "collect": "Collect",
+           "search": "Find vesting rewards",
             "payouts": {
                 "title": "Biweekly Payout Schedule",
                 "information": "Payout Information",
@@ -917,6 +918,12 @@
         "balanceOverview": {
             "title": "Balance overview",
             "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Warning: funds at risk during migration",
@@ -1375,7 +1382,8 @@
         "stopVoting": "Stop voting",
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Recipient",

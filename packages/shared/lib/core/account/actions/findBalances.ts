@@ -60,8 +60,6 @@ async function depthSearchAndRecoverAccounts(config?: RecoverAccountsPayload): P
     if (config) {
         recoverAccountsPayload = {
             ...config,
-            accountStartIndex: INITIAL_SEARCH_ACCOUNT_START_INDEX,
-            accountGapLimit: searchAccountStartIndex,
             syncOptions: {
                 ...(config.syncOptions || DEFAULT_SYNC_OPTIONS),
                 addressStartIndex: searchAddressStartIndex,

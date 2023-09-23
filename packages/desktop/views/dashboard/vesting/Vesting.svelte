@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { VestingSchedule } from '@components'
+    import { VestingSchedule, VestingModal } from '@components'
     import {
         IVestingPayout,
         VestingOutputStatus,
@@ -18,7 +18,7 @@
     import { activeProfile } from '@core/profile'
     import { getBestTimeDuration } from '@core/utils'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
-    import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile } from '@ui'
+    import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile, Modal, MeatballMenuButton } from '@ui'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
     $: hasTransactionInProgress =
@@ -45,6 +45,7 @@
         },
     ]
 
+    let modal: Modal
     let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
 
@@ -80,7 +81,14 @@
                     <Pane height={Height.Full}>
                         <left-pane-content class="flex flex-col justify-between h-full">
                             <div class="flex flex-col space-y-4">
-                                <Text type={TextType.h5} classes="text-left">{localize('views.vesting.title')}</Text>
+                                <div class="flex items-center justify-between">
+                                    <Text type={TextType.h5} classes="text-left">{localize('views.vesting.title')}</Text
+                                    >
+                                    <div class="block relative">
+                                        <MeatballMenuButton onClick={modal?.toggle} />
+                                        <VestingModal bind:modal position={{ right: '0' }} classes="mt-1.5" />
+                                    </div>
+                                </div>
                                 <div class="flex flex-col space-y-4">
                                     {#each vestingOverview as { title, iotaAmount, asmbAmount }}
                                         <div class="flex flex-col space-y-2">

@@ -47,4 +47,5 @@ export enum PopupId {
     BalanceFinder = 'balanceFinder',
     VestingCollect = 'vestingCollect',
     PayoutDetails = 'payoutDetails',
+    VestingRewardsFinder = 'vestingRewardsFinder',
 }
