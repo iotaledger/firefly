@@ -1418,6 +1418,8 @@
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Sturdust Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "burned": "Burned",
@@ -1719,7 +1721,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Direction",

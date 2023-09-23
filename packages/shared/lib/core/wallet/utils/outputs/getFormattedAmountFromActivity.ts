@@ -1,10 +1,10 @@
 import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { FoundryActivity, TransactionActivity } from '@core/wallet/types'
+import { FoundryActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
 import { formatTokenAmountBestMatch } from '../formatTokenAmountBestMatch'
 import { getAssetFromPersistedAssets } from '../getAssetFromPersistedAssets'
 
 export function getFormattedAmountFromActivity(
-    activity: TransactionActivity | FoundryActivity,
+    activity: TransactionActivity | FoundryActivity | VestingActivity,
     signed: boolean = true
 ): string {
     if (!activity) return ''
