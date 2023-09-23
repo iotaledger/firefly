@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
@@ -20,13 +21,15 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile, Spinner } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
     import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
 
     export let searchForBalancesOnLoad = false
     export let hasUsedBalanceFinder = false
+    export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
 
@@ -37,60 +40,102 @@
     let error = ''
     let isBusy = false
 
+    $: isTransferring = $visibleActiveAccounts.some(
+        (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
+    )
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
+    $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
 
+    // Button click handlers
     async function onFindBalancesClick(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
-            openPopup({
-                id: PopupId.UnlockStronghold,
-                props: {
-                    onSuccess: function () {
-                        openPopup({
-                            id: PopupId.BalanceFinder,
-                            props: { searchForBalancesOnLoad: true, hasUsedBalanceFinder, title, body },
-                        })
-                    },
-                    onCancelled: function () {
-                        openPopup({
-                            id: PopupId.BalanceFinder,
-                            props: { title, body },
-                        })
-                    },
-                },
-            })
+            openUnlockStrongholdPopup(true, false)
         } else {
-            try {
-                error = ''
-                isBusy = true
+            isBusy = true
+            await handleAction(findProfileBalances)
+            isBusy = false
+        }
+    }
 
-                if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
-                    isBusy = false
-                    displayNotificationForLedgerProfile('warning')
-                    return
-                }
-                await findBalances(searchAlgorithm, !hasUsedBalanceFinder)
-                await loadAccounts()
-                hasUsedBalanceFinder = true
-            } catch (err) {
-                error = localize(err.error)
-
-                if ($isActiveLedgerProfile) {
-                    displayNotificationForLedgerProfile('error', true, true, err)
-                } else {
-                    showAppNotification({
-                        type: 'error',
-                        message: localize(err.error),
-                    })
-                }
-            } finally {
-                isBusy = false
-            }
+    async function onConsolidateAccountsClick(): Promise<void> {
+        if ($isSoftwareProfile && $isStrongholdLocked) {
+            openUnlockStrongholdPopup(false, true)
+        } else {
+            await handleAction(consolidateProfileAccounts)
         }
     }
 
     function onCancelClick(): void {
         closePopup()
+    }
+
+    // Actions
+    async function findProfileBalances(): Promise<void> {
+        await findBalances(searchAlgorithm, !hasUsedBalanceFinder)
+        await loadAccounts()
+        hasUsedBalanceFinder = true
+    }
+
+    async function consolidateProfileAccounts(): Promise<void> {
+        const consolidationPromises: Promise<void>[] = []
+
+        for (const account of get(visibleActiveAccounts)) {
+            consolidationPromises.push(consolidateOutputs(account))
+        }
+
+        await Promise.all(consolidationPromises)
+    }
+
+    async function handleAction(callback: () => Promise<void>): Promise<void> {
+        try {
+            error = ''
+
+            if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
+                isBusy = false
+                displayNotificationForLedgerProfile('warning')
+                return
+            }
+
+            await callback()
+        } catch (err) {
+            error = localize(err.error)
+
+            if ($isActiveLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, err)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+            }
+        }
+    }
+
+    function openUnlockStrongholdPopup(searchForBalancesOnLoad: boolean, consolidateAccountsOnLoad: boolean) {
+        openPopup({
+            id: PopupId.UnlockStronghold,
+            props: {
+                onSuccess: function () {
+                    openPopup({
+                        id: PopupId.BalanceFinder,
+                        props: {
+                            searchForBalancesOnLoad,
+                            consolidateAccountsOnLoad,
+                            hasUsedBalanceFinder,
+                            title,
+                            body,
+                        },
+                    })
+                },
+                onCancelled: function () {
+                    openPopup({
+                        id: PopupId.BalanceFinder,
+                        props: { hasUsedBalanceFinder, title, body },
+                    })
+                },
+            },
+        })
     }
 
     onDestroy(async () => {
@@ -115,6 +160,9 @@
                     <div class="flex items-center space-x-2">
                         <Icon icon={IconEnum.Wallet} width={28} height={28} classes="text-blue-500" />
                         <Text classes="text-right">{item.name}</Text>
+                        {#if item.hasConsolidatingOutputsTransactionInProgress}
+                            <Spinner />
+                        {/if}
                     </div>
                     <Text classes="text-right">
                         {formatTokenAmountBestMatch(Number(item.balances.baseCoin.total), getBaseToken())}
@@ -143,7 +191,7 @@
     <Button
         classes="w-full"
         onClick={onFindBalancesClick}
-        disabled={isBusy}
+        disabled={isBusy || isTransferring}
         {isBusy}
         busyMessage={localize('actions.searching')}
     >
@@ -152,6 +200,22 @@
         {:else}
             {localize('actions.search')}
         {/if}
+    </Button>
+</div>
+<div class="flex flex-col flex-nowrap w-full space-y-4 mt-6">
+    <TextHint
+        variant={TextHintVariant.Info}
+        icon={IconEnum.Exclamation}
+        text={localize('popups.minimizeStorageDeposit.description')}
+    />
+    <Button
+        classes="w-full"
+        onClick={onConsolidateAccountsClick}
+        disabled={isBusy || isTransferring}
+        isBusy={isTransferring}
+        busyMessage={localize('popups.minimizeStorageDeposit.title')}
+    >
+        {localize('popups.minimizeStorageDeposit.title')}
     </Button>
 </div>
 
