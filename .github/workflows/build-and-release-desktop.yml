@@ -1,9 +1,12 @@
 name: Build and Release Desktop
 
+env:
+    NETWORK: IOTA
+
 on:
     push:
         tags:
-            - desktop-*
+            - desktop-iota-*
     workflow_dispatch:
         inputs:
             debugElectronBuilder:
@@ -194,7 +197,7 @@ jobs:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-desktop*
-                      packages/desktop/out/shimmer*
+                      packages/desktop/out/${{ env.NETWORK }}*
 
     release:
         runs-on: ubuntu-latest
@@ -240,7 +243,7 @@ jobs:
                   echo '### Changelog' >> CHANGELOG.md
                   echo '------' >> CHANGELOG.md
                   echo '### File Hashes' >> CHANGELOG.md
-                  echo '[How to verify the authenticity of your Firefly Desktop download](https://wiki.iota.org/shimmer/introduction/how_tos/verify_download/#verify-your-firefly-desktop-download)' >> CHANGELOG.md
+                  echo '[How to verify the authenticity of your Firefly ${{ env.NETWORK }} Desktop download](https://wiki.iota.org/shimmer/introduction/how_tos/verify_download/#verify-your-firefly-desktop-download)' >> CHANGELOG.md
                   echo '| File | Platform | SHA256 Hash |' >> CHANGELOG.md
                   echo '| --- | --- | --- |' >> CHANGELOG.md
                   echo '| firefly-desktop-${{ env.VERSION }}.exe | Windows |' $WIN_SHA256 '|' >> CHANGELOG.md
@@ -256,7 +259,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                   tag_name: ${{ github.ref }}
-                  release_name: Firefly Desktop ${{ env.RELEASE_NAME }}
+                  release_name: Firefly ${{ env.NETWORK }} Desktop ${{ env.RELEASE_NAME }}
                   body_path: packages/desktop/CHANGELOG.md
                   draft: true
                   prerelease: true
@@ -306,16 +309,15 @@ jobs:
 
             - name: Upload to S3
               run: |
-                  aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
-                  aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
+                 aws s3 cp assets/ s3://firefly-private/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   AWS_DEFAULT_REGION: eu-central-1
 
-            - name: Invalidate CloudFront cache for auto-update files
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/shimmer*"
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  AWS_DEFAULT_REGION: eu-central-1
+           #- name: Invalidate CloudFront cache for auto-update files
+             #run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/$NETWORK*"
+             #env:
+                 #AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                 #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                 #AWS_DEFAULT_REGION: eu-central-1

@@ -40,14 +40,7 @@ function getAppId() {
 }
 
 function getChannelName() {
-    switch (STAGE) {
-        case 'alpha':
-            return 'iota-alpha'
-        case 'beta':
-            return 'iota-beta'
-        default:
-            return 'iota'
-    }
+    return 'latest'
 }
 
 module.exports = {
