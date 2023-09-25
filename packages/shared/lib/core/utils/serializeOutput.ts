@@ -1,9 +1,9 @@
 /* eslint-disable quotes */
 import { Converter, HexHelper, WriteStream } from '@iota/util.js'
 import bigInt from 'big-integer'
-import { convertBech32AddressToEd25519Address } from './crypto'
 import { Assets } from '@iota/sdk/out/types'
 import { NewTransactionType } from '@core/wallet'
+import { api } from '@core/profile-manager/api'
 
 // Entrypoint for (iota.js) Output serialization
 export function serializeOutput(object: IBasicOutput | INftOutput): string {
@@ -349,6 +349,7 @@ const TAG_FEATURE_TYPE = 3
 export function buildIotajsOutputFromIotasdkParts(
     transactionType: NewTransactionType,
     senderAddress: string,
+    recipientAddress: string,
     amount: string,
     metadata: string,
     assets?: Assets,
@@ -358,19 +359,21 @@ export function buildIotajsOutputFromIotasdkParts(
 ): IBasicOutput | INftOutput {
     let output: IBasicOutput | INftOutput
 
+    const recipientAliasId = api.bech32ToHex(recipientAddress)
+    const senderAddressHex = api.bech32ToHex(senderAddress)
+
     const unlockConditions = []
 
     const addressUC: IAddressUnlockCondition = {
         type: 0,
-        // TODO unhardcode this (convert bech32 to aliasId)
-        address: { type: 8, aliasId: '0x676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e3109020' },
+        address: { type: 8, aliasId: recipientAliasId },
     }
     unlockConditions.push(addressUC)
 
     if (expirationUnixTime) {
         const expUC: IExpirationUnlockCondition = {
             type: 3,
-            returnAddress: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
+            returnAddress: { type: 0, pubKeyHash: senderAddressHex },
             unixTime: expirationUnixTime,
         }
         unlockConditions.push(expUC)
@@ -385,7 +388,7 @@ export function buildIotajsOutputFromIotasdkParts(
 
     const senderFeature: ISenderFeature = {
         type: 0,
-        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
+        address: { type: 0, pubKeyHash: senderAddressHex },
     }
     features.push(senderFeature)
 

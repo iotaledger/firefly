@@ -66,6 +66,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const output = buildIotajsOutputFromIotasdkParts(
         transactionDetails.type,
         senderAddress,
+        recipientAddress,
         amount,
         metadata,
         assets,
