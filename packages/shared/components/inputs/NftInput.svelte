@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
-    import { ownedNfts } from '@core/nfts'
+    import { INft, ownedNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
@@ -8,18 +8,18 @@
 
     export let nftId: string = ''
     export let error: string = ''
-    export let readonly: boolean = null
+    export let readonly: boolean | null = null
 
-    let inputElement: HTMLInputElement = undefined
+    let selectedNftById: INft | undefined
     let modal: Modal = undefined
-    let selected: IOption = nftId
-        ? { key: getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId).name, value: nftId }
-        : {}
+    let inputElement: HTMLInputElement | undefined = undefined
+    let selected: IOption = selectedNftById ? { key: selectedNftById.name, value: selectedNftById.id } : {}
 
     const nftOptions: IOption[] = $ownedNfts
         .filter((nft) => nft.isSpendable && (!nft.timelockTime || nft.timelockTime < $time.getTime()))
         .map((_nft) => ({ key: _nft.name, value: _nft.id }))
 
+    $: selectedNftById = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
     $: nftId = selected?.value
 
     export async function validate(): Promise<void> {
