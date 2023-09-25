@@ -1,7 +1,11 @@
 /* eslint-disable quotes */
 import { Converter, HexHelper, WriteStream } from '@iota/util.js'
 import bigInt from 'big-integer'
+import { convertBech32AddressToEd25519Address } from './crypto'
+import { Assets } from '@iota/sdk/out/types'
+import { NewTransactionType } from '@core/wallet'
 
+// Entrypoint for (iota.js) Output serialization
 export function serializeOutput(object: IBasicOutput | INftOutput): string {
     const writeStream = new WriteStream()
 
@@ -249,11 +253,11 @@ type UnlockConditionTypes =
     | IGovernorAddressUnlockCondition
     | IImmutableAliasUnlockCondition
 
-export interface IAddressUnlockCondition extends ITypeBase<0> {
+interface IAddressUnlockCondition extends ITypeBase<0> {
     address: AddressTypes
 }
 
-export interface IExpirationUnlockCondition extends ITypeBase<3> {
+interface IExpirationUnlockCondition extends ITypeBase<3> {
     returnAddress: AddressTypes
     unixTime: number
 }
@@ -275,13 +279,13 @@ interface IStorageDepositReturnUnlockCondition extends ITypeBase<1> {
     amount: string
 }
 
-export interface ITimelockUnlockCondition extends ITypeBase<2> {
+interface ITimelockUnlockCondition extends ITypeBase<2> {
     unixTime: number
 }
 
 type FeatureTypes = ISenderFeature | IIssuerFeature | IMetadataFeature | ITagFeature
 
-export interface ISenderFeature extends ITypeBase<0> {
+interface ISenderFeature extends ITypeBase<0> {
     address: AddressTypes
 }
 
@@ -289,11 +293,11 @@ interface IIssuerFeature extends ITypeBase<1> {
     address: AddressTypes
 }
 
-export interface IMetadataFeature extends ITypeBase<2> {
+interface IMetadataFeature extends ITypeBase<2> {
     data: HexEncodedString
 }
 
-export interface ITagFeature extends ITypeBase<3> {
+interface ITagFeature extends ITypeBase<3> {
     tag: HexEncodedString
 }
 
@@ -340,3 +344,89 @@ const ISSUER_FEATURE_TYPE = 1
 const METADATA_FEATURE_TYPE = 2
 const SENDER_FEATURE_TYPE = 0
 const TAG_FEATURE_TYPE = 3
+
+// Utils method to build iota.js Output model
+export function buildIotajsOutputFromIotasdkParts(
+    transactionType: NewTransactionType,
+    senderAddress: string,
+    amount: string,
+    metadata: string,
+    assets?: Assets,
+    tag?: string,
+    expirationUnixTime?: number,
+    timelockUnixTime?: number
+): IBasicOutput | INftOutput {
+    let output: IBasicOutput | INftOutput
+
+    const unlockConditions = []
+
+    const addressUC: IAddressUnlockCondition = {
+        type: 0,
+        // TODO unhardcode this (convert bech32 to aliasId)
+        address: { type: 8, aliasId: '0x676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e3109020' },
+    }
+    unlockConditions.push(addressUC)
+
+    if (expirationUnixTime) {
+        const expUC: IExpirationUnlockCondition = {
+            type: 3,
+            returnAddress: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
+            unixTime: expirationUnixTime,
+        }
+        unlockConditions.push(expUC)
+    }
+
+    if (timelockUnixTime) {
+        const timelockUC: ITimelockUnlockCondition = { type: 2, unixTime: timelockUnixTime }
+        unlockConditions.push(timelockUC)
+    }
+
+    const features = []
+
+    const senderFeature: ISenderFeature = {
+        type: 0,
+        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
+    }
+    features.push(senderFeature)
+
+    if (tag) {
+        const tagFeature: ITagFeature = { type: 3, tag }
+        features.push(tagFeature)
+    }
+
+    if (metadata) {
+        const metadataFeature: IMetadataFeature = { type: 2, data: metadata }
+        features.push(metadataFeature)
+    }
+
+    const nativeTokens = assets?.nativeTokens
+        ? [
+              ...assets.nativeTokens.map((nativeToken) => ({
+                  id: nativeToken.id,
+                  amount: nativeToken.amount.toString(),
+              })),
+          ]
+        : undefined
+
+    if (transactionType === NewTransactionType.TokenTransfer) {
+        output = {
+            type: 3,
+            amount,
+            nativeTokens,
+            unlockConditions,
+            features,
+        } as IBasicOutput
+    } else if (transactionType === NewTransactionType.NftTransfer) {
+        output = {
+            type: 6,
+            amount,
+            nftId: assets?.nftId,
+            unlockConditions,
+            features,
+        } as INftOutput
+    } else {
+        throw new Error('Unsupported NewTransactionType')
+    }
+
+    return output
+}

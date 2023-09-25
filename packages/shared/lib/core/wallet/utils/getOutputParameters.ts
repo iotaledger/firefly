@@ -1,31 +1,16 @@
 import { OutputParams, Assets } from '@iota/sdk/out/types'
-import {
-    convertBech32AddressToEd25519Address,
-    convertDateToUnixTimestamp,
-    Converter,
-    IAddressUnlockCondition,
-    IBasicOutput,
-    IExpirationUnlockCondition,
-    IMetadataFeature,
-    INftOutput,
-    ISenderFeature,
-    ITagFeature,
-    ITimelockUnlockCondition,
-    serializeOutput,
-} from '@core/utils'
+import { buildIotajsOutputFromIotasdkParts, convertDateToUnixTimestamp, Converter, serializeOutput } from '@core/utils'
 import { NewTransactionType } from '../stores'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 import { getCoinType } from '@core/profile'
-import { getSelectedAccount } from '@core/account'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
-    const isLayer2Transaction = !!layer2Parameters
 
-    return isLayer2Transaction
+    return layer2Parameters
         ? buildOutputParametersForLayer2(transactionDetails)
         : buildOutputParameters(transactionDetails)
 }
@@ -62,9 +47,12 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
 async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
 
-    // Prepare a dummy output for gas estimation (using serialization and models copied from iota.js)
-    // This should be replaced with serialization from iots-sdk once it becomes available
-    const senderAddress = getSelectedAccount().depositAddress
+    if (!layer2Parameters) {
+        // This should never happen as it's checked right before calling this function
+        throw new Error('Missing L2 parameters')
+    }
+
+    const senderAddress = layer2Parameters.senderAddress
     const recipientAddress = layer2Parameters?.networkAddress
     let amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
@@ -73,65 +61,19 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
-    let output: IBasicOutput | INftOutput
-
-    const unlockConditions = []
-    const addressUC: IAddressUnlockCondition = {
-        type: 0,
-        // TODO unhardcode this (convert bech32 to aliasId)
-        address: { type: 8, aliasId: '0x676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e3109020' },
-    }
-    unlockConditions.push(addressUC)
-    if (expirationUnixTime) {
-        const expUC: IExpirationUnlockCondition = {
-            type: 3,
-            returnAddress: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(senderAddress) },
-            unixTime: expirationUnixTime,
-        }
-        unlockConditions.push(expUC)
-    }
-    if (timelockUnixTime) {
-        const timelockUC: ITimelockUnlockCondition = { type: 2, unixTime: timelockUnixTime }
-        unlockConditions.push(timelockUC)
-    }
-
-    const features = []
-    if (tag) {
-        const tagFeature: ITagFeature = { type: 3, tag }
-        features.push(tagFeature)
-    }
-    if (metadata) {
-        const metadataFeature: IMetadataFeature = { type: 2, data: metadata }
-        features.push(metadataFeature)
-    }
-    const senderFeature: ISenderFeature = {
-        type: 0,
-        address: { type: 0, pubKeyHash: convertBech32AddressToEd25519Address(layer2Parameters.senderAddress) },
-    }
-    features.push(senderFeature)
-
-    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        output = {
-            type: 3,
-            amount,
-            nativeTokens: assets?.nativeTokens ? [...assets.nativeTokens] : undefined,
-            unlockConditions,
-            features,
-        } as IBasicOutput
-    } else if (transactionDetails.type === NewTransactionType.NftTransfer) {
-        output = {
-            type: 6,
-            amount,
-            nftId: assets?.nftId,
-            unlockConditions,
-            features,
-        } as INftOutput
-    } else {
-        throw new Error('Unsupported NewTransactionType')
-    }
-
+    // Prepare a dummy output for gas estimation (using serialization and models copied from iota.js)
+    // This should be replaced with serialization from iots-sdk once it becomes available
+    const output = buildIotajsOutputFromIotasdkParts(
+        transactionDetails.type,
+        senderAddress,
+        amount,
+        metadata,
+        assets,
+        tag,
+        expirationUnixTime,
+        timelockUnixTime
+    )
     const serializedOutput = serializeOutput(output)
-
     const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
     // Now that we have the gasEstimation, update the values for the actual output
@@ -147,7 +89,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
-            ...(layer2Parameters && { sender: layer2Parameters.senderAddress }),
+            ...(layer2Parameters && { sender: senderAddress }),
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),
