@@ -139,7 +139,7 @@ export class ProfileManagerMock implements IProfileManager {
     }
 
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string> {
-        throw new Error('Method not implemented.')
+        return Promise.resolve('')
     }
 
     isStrongholdPasswordAvailable(): Promise<boolean> {

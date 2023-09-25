@@ -20,8 +20,8 @@ export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionD
         estimatedGas ? BigInteger(estimatedGas) : BigInteger(Number.MAX_SAFE_INTEGER)
     )
 
-    // TODO fix hardcoded
-    const aliasAddress = 'rms1ppnkvsjctdg53v2x89uzhuxg89s073jmn2nuzcw44tggjy8rzzgzq2rg0qp'
+    // transactionDetails.layer2Parameters should never be undefined at this point
+    const aliasAddress = transactionDetails.layer2Parameters?.networkAddress ?? ''
     const evmAddressToAgentIdBuffer = evmAddressToAgentID(encodedAddress, aliasAddress)
 
     const smartContractParameters = Object.entries({ a: evmAddressToAgentIdBuffer })
