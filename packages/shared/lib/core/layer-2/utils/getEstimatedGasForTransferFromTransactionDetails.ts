@@ -1,3 +1,4 @@
+import BigInteger from 'big-integer'
 import { GAS_BUDGET } from '../constants'
 import { getActiveProfile } from '@core/profile'
 
@@ -6,10 +7,8 @@ export async function getEstimatedGasForTransferFromTransactionDetails(serialize
     const chainMetadata = profile.network?.chains?.[0] ?? null
 
     if (chainMetadata) {
-        const endpoint = chainMetadata.iscpEndpoint
-        // const endpoint = '7-teamnet.chrysalis2.com'
+        const URL = `${chainMetadata.iscpEndpoint}/estimategas-onledger`
 
-        const URL = `${endpoint}/estimategas-onledger`
         const body = JSON.stringify({ outputBytes: serializedOutputHex })
 
         const requestInit: RequestInit = {
@@ -25,8 +24,7 @@ export async function getEstimatedGasForTransferFromTransactionDetails(serialize
 
         if (response.status === 200) {
             const data = await response.json()
-
-            return data.gasBudget
+            return BigInteger(data.gasBurned as string).toJSNumber()
         }
     }
 
