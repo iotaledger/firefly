@@ -269,7 +269,14 @@
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            onClick={onConfirmClick}
+            disabled={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+            isBusy={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+        >
             {localize('actions.send')}
         </Button>
     </popup-buttons>
