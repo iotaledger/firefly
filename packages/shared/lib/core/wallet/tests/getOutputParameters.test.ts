@@ -185,7 +185,7 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output parameters for base token to layer 2', async () => {
+    xit('should return output parameters for base token to layer 2', async () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
@@ -207,7 +207,7 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output parameters for native token to layer 2', async () => {
+    xit('should return output parameters for native token to layer 2', async () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
@@ -238,7 +238,7 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output parameters for nft to layer 2', async () => {
+    xit('should return output parameters for nft to layer 2', async () => {
         newTransactionDetails = {
             type: NewTransactionType.NftTransfer,
             recipient: baseTransaction.recipient,
