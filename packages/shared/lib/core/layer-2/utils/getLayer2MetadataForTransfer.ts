@@ -1,9 +1,9 @@
-import { encodeAddress, encodeAssetAllowance, encodeSmartContractParameters } from '../helpers'
-import BigInteger from 'big-integer'
 import type { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
+import BigInteger from 'big-integer'
 import { SpecialStream } from '../classes'
 import { ACCOUNTS_CONTRACT, EXTERNALLY_OWNED_ACCOUNT, TRANSFER_ALLOWANCE } from '../constants'
+import { encodeAddress, encodeAssetAllowance, encodeSmartContractParameters } from '../helpers'
 import { evmAddressToAgentID } from './'
 
 export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionDetails, estimatedGas?: number): string {
