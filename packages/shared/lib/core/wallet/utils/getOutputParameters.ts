@@ -1,28 +1,31 @@
-import { OutputParams, Assets } from '@iota/sdk/out/types'
-import { convertDateToUnixTimestamp, Converter } from '@core/utils'
-import { NewTransactionType } from '../stores'
+import { getSelectedAccount, prepareOutput } from '@core/account'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { getCoinType } from '@core/profile'
+import { Converter, IBasicOutput, INftOutput, convertDateToUnixTimestamp, serializeOutput } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
+import { Assets, OutputParams } from '@iota/sdk/out/types'
+import BigInteger from 'big-integer'
+import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { ReturnStrategy } from '../enums'
-import { getCoinType } from '@core/profile'
+import { NewTransactionType, newTransactionDetails } from '../stores'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
-    const { recipient, expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
+    const { layer2Parameters } = transactionDetails ?? {}
 
-    const recipientAddress = layer2Parameters ? layer2Parameters.networkAddress : getAddressFromSubject(recipient)
+    return layer2Parameters
+        ? buildOutputParametersForLayer2(transactionDetails)
+        : buildOutputParameters(transactionDetails)
+}
 
-    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails()
+function buildOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
+    const { recipient, expirationDate, timelockDate, giftStorageDeposit } = transactionDetails ?? {}
 
-    let amount = getAmountFromTransactionDetails(transactionDetails)
-    amount = layer2Parameters ? (estimatedGas + parseInt(amount, 10)).toString() : amount
-
+    const recipientAddress = getAddressFromSubject(recipient)
+    const amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
-
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
-
-    const metadata = await getMetadata(transactionDetails)
-
+    const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
@@ -33,7 +36,6 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
-            ...(layer2Parameters && { sender: layer2Parameters.senderAddress }),
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),
@@ -41,6 +43,80 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
         },
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
+        },
+    }
+}
+
+async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
+    const { expirationDate, timelockDate, layer2Parameters } = transactionDetails ?? {}
+    const selectedAccount = getSelectedAccount()
+
+    if (!layer2Parameters) {
+        // This should never happen as it's checked right before calling this function
+        throw new Error('Missing L2 parameters')
+    }
+
+    const senderAddress = layer2Parameters.senderAddress
+    const recipientAddress = layer2Parameters?.networkAddress
+    let amount = getAmountFromTransactionDetails(transactionDetails)
+    const assets = getAssetFromTransactionDetails(transactionDetails)
+    const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
+    const metadata = getLayer2MetadataForTransfer(transactionDetails)
+    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
+    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+
+    const outputParams = <OutputParams>{
+        recipientAddress,
+        amount,
+        ...(assets && { assets }),
+        features: {
+            ...(tag && { tag }),
+            ...(metadata && { metadata }),
+            ...(layer2Parameters && { sender: senderAddress }),
+        },
+        unlocks: {
+            ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
+        },
+        storageDeposit: {
+            returnStrategy: ReturnStrategy.Gift,
+        },
+    }
+
+    const outputForEstimate = (await prepareOutput(
+        selectedAccount.index,
+        outputParams,
+        DEFAULT_TRANSACTION_OPTIONS
+    )) as unknown as IBasicOutput | INftOutput
+    const serializedOutput = serializeOutput(outputForEstimate)
+    const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
+
+    // Now that we have the gasFeeCharged, update the amount & the tx details
+    if (gasEstimatePayload.gasFeeCharged) {
+        newTransactionDetails.update((state) => {
+            if (state?.layer2Parameters) {
+                state.layer2Parameters.gasBudget = BigInteger(gasEstimatePayload.gasFeeCharged as number)
+            }
+            return state
+        })
+        amount = (parseInt(outputForEstimate.amount, 10) + gasEstimatePayload.gasFeeCharged).toString()
+    }
+
+    return <OutputParams>{
+        recipientAddress,
+        amount,
+        ...(assets && { assets }),
+        features: {
+            ...(tag && { tag }),
+            ...(metadata && { metadata }),
+            ...(layer2Parameters && { sender: senderAddress }),
+        },
+        unlocks: {
+            ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
+        },
+        storageDeposit: {
+            returnStrategy: ReturnStrategy.Gift,
         },
     }
 }
@@ -95,12 +171,4 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     }
 
     return assets
-}
-
-function getMetadata(transactionDetails: NewTransactionDetails): Promise<string> {
-    if (transactionDetails.layer2Parameters) {
-        return getLayer2MetadataForTransfer(transactionDetails)
-    } else {
-        return Promise.resolve(Converter.utf8ToHex(transactionDetails?.metadata))
-    }
 }
