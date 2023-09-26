@@ -1,11 +1,13 @@
 import { OutputParams, Assets } from '@iota/sdk/out/types'
-import { buildIotajsOutputFromIotasdkParts, convertDateToUnixTimestamp, Converter, serializeOutput } from '@core/utils'
+import { convertDateToUnixTimestamp, Converter, IBasicOutput, INftOutput, serializeOutput } from '@core/utils'
 import { NewTransactionType } from '../stores'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { ReturnStrategy } from '../enums'
 import { getCoinType } from '@core/profile'
+import { getSelectedAccount, prepareOutput } from '@core/account'
+import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -45,7 +47,8 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
 }
 
 async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
-    const { expirationDate, timelockDate, giftStorageDeposit, layer2Parameters } = transactionDetails ?? {}
+    const { expirationDate, timelockDate, layer2Parameters } = transactionDetails ?? {}
+    const selectedAccount = getSelectedAccount()
 
     if (!layer2Parameters) {
         // This should never happen as it's checked right before calling this function
@@ -61,20 +64,30 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
-    // Prepare a dummy output for gas estimation (using serialization and models copied from iota.js)
-    // This should be replaced with serialization from iots-sdk once it becomes available
-    const output = buildIotajsOutputFromIotasdkParts(
-        transactionDetails.type,
-        senderAddress,
+    const outputParams = <OutputParams>{
         recipientAddress,
         amount,
-        metadata,
-        assets,
-        tag,
-        expirationUnixTime,
-        timelockUnixTime
-    )
-    const serializedOutput = serializeOutput(output)
+        ...(assets && { assets }),
+        features: {
+            ...(tag && { tag }),
+            ...(metadata && { metadata }),
+            ...(layer2Parameters && { sender: senderAddress }),
+        },
+        unlocks: {
+            ...(expirationUnixTime && { expirationUnixTime }),
+            ...(timelockUnixTime && { timelockUnixTime }),
+        },
+        storageDeposit: {
+            returnStrategy: ReturnStrategy.Gift,
+        },
+    }
+
+    const outputForEstimate = (await prepareOutput(
+        selectedAccount.index,
+        outputParams,
+        DEFAULT_TRANSACTION_OPTIONS
+    )) as unknown as IBasicOutput | INftOutput
+    const serializedOutput = serializeOutput(outputForEstimate)
     const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
     // Now that we have the gasEstimation, update the values for the actual output
@@ -97,7 +110,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
             ...(timelockUnixTime && { timelockUnixTime }),
         },
         storageDeposit: {
-            returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
+            returnStrategy: ReturnStrategy.Gift,
         },
     }
 }

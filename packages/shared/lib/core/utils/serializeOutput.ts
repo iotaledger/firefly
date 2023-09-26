@@ -1,9 +1,6 @@
 /* eslint-disable quotes */
 import { Converter, HexHelper, WriteStream } from '@iota/util.js'
 import bigInt from 'big-integer'
-import { Assets } from '@iota/sdk/out/types'
-import { NewTransactionType } from '@core/wallet'
-import { api } from '@core/profile-manager/api'
 
 // Entrypoint for (iota.js) Output serialization
 export function serializeOutput(object: IBasicOutput | INftOutput): string {
@@ -344,92 +341,3 @@ const ISSUER_FEATURE_TYPE = 1
 const METADATA_FEATURE_TYPE = 2
 const SENDER_FEATURE_TYPE = 0
 const TAG_FEATURE_TYPE = 3
-
-// Utils method to build iota.js Output model
-export function buildIotajsOutputFromIotasdkParts(
-    transactionType: NewTransactionType,
-    senderAddress: string,
-    recipientAddress: string,
-    amount: string,
-    metadata: string,
-    assets?: Assets,
-    tag?: string,
-    expirationUnixTime?: number,
-    timelockUnixTime?: number
-): IBasicOutput | INftOutput {
-    let output: IBasicOutput | INftOutput
-
-    const recipientAliasId = api.bech32ToHex(recipientAddress)
-    const senderAddressHex = api.bech32ToHex(senderAddress)
-
-    const unlockConditions = []
-
-    const addressUC: IAddressUnlockCondition = {
-        type: 0,
-        address: { type: 8, aliasId: recipientAliasId },
-    }
-    unlockConditions.push(addressUC)
-
-    if (expirationUnixTime) {
-        const expUC: IExpirationUnlockCondition = {
-            type: 3,
-            returnAddress: { type: 0, pubKeyHash: senderAddressHex },
-            unixTime: expirationUnixTime,
-        }
-        unlockConditions.push(expUC)
-    }
-
-    if (timelockUnixTime) {
-        const timelockUC: ITimelockUnlockCondition = { type: 2, unixTime: timelockUnixTime }
-        unlockConditions.push(timelockUC)
-    }
-
-    const features = []
-
-    const senderFeature: ISenderFeature = {
-        type: 0,
-        address: { type: 0, pubKeyHash: senderAddressHex },
-    }
-    features.push(senderFeature)
-
-    if (tag) {
-        const tagFeature: ITagFeature = { type: 3, tag }
-        features.push(tagFeature)
-    }
-
-    if (metadata) {
-        const metadataFeature: IMetadataFeature = { type: 2, data: metadata }
-        features.push(metadataFeature)
-    }
-
-    const nativeTokens = assets?.nativeTokens
-        ? [
-              ...assets.nativeTokens.map((nativeToken) => ({
-                  id: nativeToken.id,
-                  amount: nativeToken.amount.toString(),
-              })),
-          ]
-        : undefined
-
-    if (transactionType === NewTransactionType.TokenTransfer) {
-        output = {
-            type: 3,
-            amount,
-            nativeTokens,
-            unlockConditions,
-            features,
-        } as IBasicOutput
-    } else if (transactionType === NewTransactionType.NftTransfer) {
-        output = {
-            type: 6,
-            amount,
-            nftId: assets?.nftId,
-            unlockConditions,
-            features,
-        } as INftOutput
-    } else {
-        throw new Error('Unsupported NewTransactionType')
-    }
-
-    return output
-}
