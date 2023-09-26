@@ -1,13 +1,14 @@
-import { OutputParams, Assets } from '@iota/sdk/out/types'
-import { convertDateToUnixTimestamp, Converter, IBasicOutput, INftOutput, serializeOutput } from '@core/utils'
-import { NewTransactionType } from '../stores'
+import { getSelectedAccount, prepareOutput } from '@core/account'
 import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { getCoinType } from '@core/profile'
+import { Converter, IBasicOutput, INftOutput, convertDateToUnixTimestamp, serializeOutput } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { ReturnStrategy } from '../enums'
-import { getCoinType } from '@core/profile'
-import { getSelectedAccount, prepareOutput } from '@core/account'
+import { Assets, OutputParams } from '@iota/sdk/out/types'
+import BigInteger from 'big-integer'
 import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
+import { ReturnStrategy } from '../enums'
+import { NewTransactionType, newTransactionDetails } from '../stores'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -90,8 +91,14 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const serializedOutput = serializeOutput(outputForEstimate)
     const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
-    // Now that we have the gasEstimation, update the values for the actual output
-    if (gasEstimatePayload.gasBurned && gasEstimatePayload.gasFeeCharged) {
+    // Now that we have the gasFeeCharged, update the amount & the tx details
+    if (gasEstimatePayload.gasFeeCharged) {
+        newTransactionDetails.update((state) => {
+            if (state?.layer2Parameters) {
+                state.layer2Parameters.gasBudget = BigInteger(gasEstimatePayload.gasFeeCharged as number)
+            }
+            return state
+        })
         amount = (parseInt(outputForEstimate.amount, 10) + gasEstimatePayload.gasFeeCharged).toString()
     }
 

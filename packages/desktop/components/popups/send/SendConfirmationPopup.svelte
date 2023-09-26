@@ -33,7 +33,6 @@
     import {
         ACCOUNTS_CONTRACT,
         CONTRACT_FUNCTIONS,
-        GAS_BUDGET,
         getDestinationNetworkFromAddress,
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
@@ -99,7 +98,7 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: String(GAS_BUDGET),
+                gasBudget: layer2Parameters?.gasBudget ?? 0,
             },
         }),
     }
