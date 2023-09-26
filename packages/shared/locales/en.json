@@ -626,23 +626,27 @@
             }
         },
         "vesting": {
-           "title": "Vesting",
-           "overview": {
-            "payout": "Payout",
-            "remaining": "Remaining",
-            "totalRewards": "Total Rewards"
-           },
-           "timeUntilNextPayout": "Time Until Next Payout",
-           "collect": "Collect",
-           "search": "Find vesting rewards",
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
             "payouts": {
-                "title": "Biweekly Payout Schedule",
+                "title": "Biweekly Unlock Schedule",
                 "information": "Payout Information",
-                "tooltip" : {
+                "tooltip": {
                     "title": "Payout",
                     "amount": "Amount",
                     "unlockDate": "Unlock Date"
                 }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
             }
         }
     },
@@ -660,11 +664,11 @@
             "button": "Collect"
         },
         "metricSystemInfo": {
-            "title": "Metric System Information",
-            "body1": "We want to update you on a significant change approaching within the IOTA network - a shift in our metric system.",
-            "body2": "Previously, we employed prefixes like miota based on measurement units. However, to ensure clarity and uniformity, we have opted to simplify by exclusively using micro and iota units.",
-            "body3": "What does this mean for you?",
-            "body4": "From now on, IOTA will stand as the fundamental unit, streamlining transactions and communication. Please be assured, this alteration won't affect your assets or transactions - it's a linguistic refinement, not a functional change."
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
         },
         "enableLedgerBlindSigning": {
             "title": "Enable Blind Signing",

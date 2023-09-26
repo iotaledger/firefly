@@ -62,7 +62,7 @@
     <vesting-outputs-grid style:--columns={columnsAmount}>
         {#if remainingSpaces > 0}
             {#each Array.from({ length: remainingSpaces }) as _}
-                <output-placeholder />
+                <payout-filler />
             {/each}
         {/if}
         {#each payouts as payout}
@@ -82,7 +82,10 @@
     <Tooltip {anchor}>
         <div class="flex flex-row justify-between space-x-24">
             <Text type={TextType.h4}>{localize('views.vesting.payouts.tooltip.title')}</Text>
-            <Pill backgroundColor="gray-300" textColor="gray-600">
+            <Pill
+                backgroundColor={hoveredPayout.status === VestingOutputStatus.Unlocked ? 'green-400' : 'gray-300'}
+                textColor={hoveredPayout.status === VestingOutputStatus.Unlocked ? 'gray-800' : 'gray-600'}
+            >
                 {localize(`pills.vesting.${hoveredPayout.status}`)}
             </Pill>
         </div>
@@ -110,24 +113,44 @@
         @apply max-h-[90%];
         grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
 
-        output-placeholder {
-            @apply h-3 w-3;
-            @apply rounded-4;
-            @apply bg-gray-200 dark:bg-opacity-20;
+        payout-filler {
+            @apply h-8 w-8;
+            @apply flex items-center justify-center;
+            &:after {
+                content: '';
+                @apply h-3 w-3;
+                @apply rounded-4;
+                @apply bg-gray-400 dark:bg-gray-700 opacity-20;
+            }
         }
 
         vesting-output {
             @apply h-8 w-8;
-            @apply bg-blue-500;
-            @apply rounded-4;
+            @apply flex items-center justify-center;
             @apply cursor-pointer;
+            &:after {
+                content: '';
+                @apply h-8 w-8;
+                @apply bg-blue-500;
+                @apply rounded-4;
+            }
 
             &.unlocked {
-                @apply bg-gray-300;
+                &:after {
+                    @apply h-3 w-3;
+                    @apply bg-gray-500;
+                }
             }
 
             &:hover {
-                @apply bg-blue-600;
+                &:after {
+                    @apply bg-blue-600;
+                }
+                &.unlocked {
+                    &:after {
+                        @apply bg-gray-600 dark:bg-gray-400;
+                    }
+                }
             }
         }
     }

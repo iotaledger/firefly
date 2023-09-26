@@ -18,7 +18,19 @@
     import { activeProfile } from '@core/profile'
     import { getBestTimeDuration } from '@core/utils'
     import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
-    import { Button, FontWeight, Height, Icon, Pane, Text, TextType, Tile, Modal, MeatballMenuButton } from '@ui'
+    import {
+        Button,
+        FontWeight,
+        Height,
+        Icon,
+        Pane,
+        Text,
+        TextType,
+        Tile,
+        Modal,
+        MeatballMenuButton,
+        TooltipIcon,
+    } from '@ui'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
     $: hasTransactionInProgress =
@@ -27,15 +39,15 @@
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
     $: vestingOverview = [
         {
-            title: localize('views.vesting.overview.payout'),
+            title: localize('views.vesting.overview.unlocked'),
             iotaAmount: $selectedAccountVestingOverview?.accumulatedPayout || 0,
         },
         {
-            title: localize('views.vesting.overview.remaining'),
+            title: localize('views.vesting.overview.locked'),
             iotaAmount: $selectedAccountVestingOverview?.remainingPayout || 0,
         },
         {
-            title: localize('views.vesting.overview.totalRewards'),
+            title: localize('views.vesting.overview.total'),
             iotaAmount: $selectedAccountVestingOverview?.totalRewards || 0,
             asmbAmount:
                 $selectedAccountVestingOverview?.totalRewards &&
@@ -82,17 +94,27 @@
                         <left-pane-content class="flex flex-col justify-between h-full">
                             <div class="flex flex-col space-y-4">
                                 <div class="flex items-center justify-between">
-                                    <Text type={TextType.h5} classes="text-left">{localize('views.vesting.title')}</Text
-                                    >
+                                    <div class="flex flex-row space-x-1 items-center">
+                                        <Text type={TextType.h5} classes="text-left">
+                                            {localize('views.vesting.title')}
+                                        </Text>
+                                        <TooltipIcon
+                                            title={localize('views.vesting.infoTooltip.title')}
+                                            text={localize('views.vesting.infoTooltip.body')}
+                                            width={15}
+                                            height={15}
+                                            classes="ml-1"
+                                        />
+                                    </div>
                                     <div class="block relative">
                                         <MeatballMenuButton onClick={modal?.toggle} />
                                         <VestingModal bind:modal position={{ right: '0' }} classes="mt-1.5" />
                                     </div>
                                 </div>
-                                <div class="flex flex-col space-y-4">
+                                <div class="flex flex-col space-y-6">
                                     {#each vestingOverview as { title, iotaAmount, asmbAmount }}
-                                        <div class="flex flex-col space-y-2">
-                                            <Text color="gray-600" darkColor="gray-400" fontSize="12">{title}</Text>
+                                        <div class="flex flex-col space-y-1">
+                                            <Text fontWeight={FontWeight.medium} fontSize="12">{title}</Text>
                                             <Text type={TextType.h1} classes="mt-4 mb-2">
                                                 {baseCoin
                                                     ? formatTokenAmountBestMatch(
@@ -101,11 +123,17 @@
                                                       )
                                                     : DEFAULT_EMPTY_VALUE_STRING}
                                             </Text>
-                                            <Text darkColor="gray-100" fontSize="12">
+                                            <Text type={TextType.p} color="gray-600" darkColor="gray-500" fontSize="12">
                                                 {getFiatAmount(iotaAmount) ?? DEFAULT_EMPTY_VALUE_STRING}
                                             </Text>
                                             {#if asmbAmount}
-                                                <Text darkColor="gray-100" fontSize="12">
+                                                <Text
+                                                    type={TextType.p}
+                                                    fontWeight={FontWeight.medium}
+                                                    color="gray-600"
+                                                    darkColor="gray-500"
+                                                    fontSize="12"
+                                                >
                                                     {asmbAmount}
                                                 </Text>
                                             {/if}
@@ -115,8 +143,8 @@
                             </div>
                             <div class="flex flex-col space-y-4">
                                 <div class="flex flex-col space-y-2">
-                                    <Text color="gray-600" darkColor="gray-400" fontSize="12">
-                                        {localize('views.vesting.timeUntilNextPayout')}
+                                    <Text fontWeight={FontWeight.medium} fontSize="12">
+                                        {localize('views.vesting.timeUntilNextUnlock')}
                                     </Text>
                                     <Tile classes="flex flex-row items-center space-x-2 py-3">
                                         <Icon icon={IconEnum.Timelock} classes="text-gray-800 dark:text-gray-100" />
