@@ -60,7 +60,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     let amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
-    let metadata = getLayer2MetadataForTransfer(transactionDetails)
+    const metadata = getLayer2MetadataForTransfer(transactionDetails)
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
@@ -88,12 +88,11 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         DEFAULT_TRANSACTION_OPTIONS
     )) as unknown as IBasicOutput | INftOutput
     const serializedOutput = serializeOutput(outputForEstimate)
-    const estimatedGas = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
+    const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
     // Now that we have the gasEstimation, update the values for the actual output
-    if (estimatedGas) {
-        amount = (parseInt(amount, 10) + estimatedGas).toString()
-        metadata = getLayer2MetadataForTransfer(transactionDetails, estimatedGas)
+    if (gasEstimatePayload.gasBurned && gasEstimatePayload.gasFeeCharged) {
+        amount = (parseInt(outputForEstimate.amount, 10) + gasEstimatePayload.gasFeeCharged).toString()
     }
 
     return <OutputParams>{
