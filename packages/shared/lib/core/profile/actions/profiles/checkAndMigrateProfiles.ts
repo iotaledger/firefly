@@ -71,6 +71,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     12: persistedProfileMigrationToV13,
     13: persistedProfileMigrationToV14,
     14: persistedProfileMigrationToV15,
+    15: persistedProfileMigrationToV16,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -314,4 +315,11 @@ function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): voi
         existingProfile.clientOptions.maxParallelApiRequests = DEFAULT_MAX_PARALLEL_API_REQUESTS
         saveProfile(existingProfile)
     }
+}
+
+function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): void {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+    const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
+    existingProfile.network.chains = newChains
+    saveProfile(existingProfile)
 }

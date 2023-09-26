@@ -12,6 +12,12 @@ export class SpecialStream extends WriteStream {
         const encodedValue = size64Encode(BigInt(value))
         this.writeBytes(name, encodedValue.length, encodedValue)
     }
+
+    writeUint8Array(name: string, bytes: Uint8Array): void {
+        for (let i = 0; i < bytes.length; i++) {
+            this.writeUInt8(name + i, bytes[i])
+        }
+    }
 }
 
 export class ReadSpecialStream extends ReadStream {

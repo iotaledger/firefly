@@ -37,7 +37,6 @@
     import {
         ACCOUNTS_CONTRACT,
         CONTRACT_FUNCTIONS,
-        GAS_BUDGET,
         getDestinationNetworkFromAddress,
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
@@ -103,7 +102,7 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: String(GAS_BUDGET),
+                gasBudget: layer2Parameters?.gasBudget ?? 0,
             },
         }),
     }
@@ -274,7 +273,14 @@
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            onClick={onConfirmClick}
+            disabled={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+            isBusy={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+        >
             {localize('actions.send')}
         </Button>
     </popup-buttons>
