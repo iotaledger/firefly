@@ -73,6 +73,7 @@
                 props: {
                     title: localize('popups.balanceOverview.title'),
                     body: localize('popups.balanceOverview.body'),
+                    showConsolidation: true,
                 },
             })
             $showBalanceOverviewPopup = false

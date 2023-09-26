@@ -29,6 +29,7 @@
 
     export let searchForBalancesOnLoad = false
     export let hasUsedBalanceFinder = false
+    export let showConsolidation = false
     export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
@@ -122,6 +123,7 @@
                         props: {
                             searchForBalancesOnLoad,
                             consolidateAccountsOnLoad,
+                            showConsolidation,
                             hasUsedBalanceFinder,
                             title,
                             body,
@@ -131,7 +133,7 @@
                 onCancelled: function () {
                     openPopup({
                         id: PopupId.BalanceFinder,
-                        props: { hasUsedBalanceFinder, title, body },
+                        props: { hasUsedBalanceFinder, title, body, showConsolidation },
                     })
                 },
             },
@@ -202,22 +204,25 @@
         {/if}
     </Button>
 </div>
-<div class="flex flex-col flex-nowrap w-full space-y-4 mt-6">
-    <TextHint
-        variant={TextHintVariant.Info}
-        icon={IconEnum.Exclamation}
-        text={localize('popups.minimizeStorageDeposit.description')}
-    />
-    <Button
-        classes="w-full"
-        onClick={onConsolidateAccountsClick}
-        disabled={isBusy || isTransferring}
-        isBusy={isTransferring}
-        busyMessage={localize('popups.minimizeStorageDeposit.title')}
-    >
-        {localize('popups.minimizeStorageDeposit.title')}
-    </Button>
-</div>
+
+{#if showConsolidation}
+    <div class="flex flex-col flex-nowrap w-full space-y-4 mt-6">
+        <TextHint
+            variant={TextHintVariant.Info}
+            icon={IconEnum.Exclamation}
+            text={localize('popups.minimizeStorageDeposit.description')}
+        />
+        <Button
+            classes="w-full"
+            onClick={onConsolidateAccountsClick}
+            disabled={isBusy || isTransferring}
+            isBusy={isTransferring}
+            busyMessage={localize('popups.minimizeStorageDeposit.title')}
+        >
+            {localize('popups.minimizeStorageDeposit.title')}
+        </Button>
+    </div>
+{/if}
 
 <style lang="scss">
     .balance-overview-wrapper :global(svelte-virtual-list-viewport) {
