@@ -27,7 +27,7 @@
         if ($activeProfile && $loggedIn) {
             appVars.push({
                 label: 'views.settings.currency.title',
-                value: $activeProfile?.settings?.currency,
+                value: $activeProfile?.settings?.marketCurrency,
             })
             appVars.push({
                 label: 'general.nodeList',
