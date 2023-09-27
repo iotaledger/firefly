@@ -34,7 +34,7 @@
     let busy = false
 
     let profileName = $newProfile?.name ?? ''
-    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? get(stage) !== Stage.PROD
+    let isDeveloperProfile = $newProfile?.isDeveloperProfile ?? false
 
     $: isProfileNameValid = profileName && profileName.trim()
     $: profileName, (error = '') // Error clears when profileName changes
@@ -119,19 +119,17 @@
             disabled={busy}
             submitHandler={handleContinueClick}
         />
-        {#if get(stage) === Stage.PROD}
-            <CollapsibleBlock
-                label={locale('views.profile.advancedOptions')}
-                showBlock={get(newProfile)?.isDeveloperProfile ?? false}
-            >
-                <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
-                    <div class="text-left">
-                        <Text type="p">{locale('views.profile.developer.label')}</Text>
-                        <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
-                    </div>
-                </ButtonCheckbox>
-            </CollapsibleBlock>
-        {/if}
+        <CollapsibleBlock
+            label={locale('views.profile.advancedOptions')}
+            showBlock={get(newProfile)?.isDeveloperProfile ?? false}
+        >
+            <ButtonCheckbox icon="dev" bind:value={isDeveloperProfile}>
+                <div class="text-left">
+                    <Text type="p">{locale('views.profile.developer.label')}</Text>
+                    <Text type="p" secondary>{locale('views.profile.developer.info')}</Text>
+                </div>
+            </ButtonCheckbox>
+        </CollapsibleBlock>
     </div>
     <div slot="leftpane__action" class="flex flex-col">
         <Button classes="w-full" disabled={!isProfileNameValid || busy} onClick={handleContinueClick}>
