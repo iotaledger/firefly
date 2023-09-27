@@ -7,7 +7,7 @@ const baseConfig = () => ({
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/firefly-actor-system-nodejs-bindings/native/*'],
-    appId: 'org.iota.firefly',
+    appId: getAppId(process.env.STAGE || 'alpha'),
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
