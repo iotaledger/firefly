@@ -197,7 +197,7 @@ jobs:
               with:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
-                      packages/desktop/out/firefly-desktop*
+                      packages/desktop/out/firefly-*
                       packages/desktop/out/${{ env.NETWORK }}*
 
     release:

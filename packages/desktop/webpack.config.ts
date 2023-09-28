@@ -10,7 +10,7 @@ import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
 import dotenv from 'dotenv'
-import { APP_NAME, APP_ID, APP_PROTOCOL, STAGE, PRODUCT_NAME } from './product'
+import { getAppName, APP_PROTOCOL, STAGE, PRODUCT_NAME, APP_ID } from './product'
 
 dotenv.config() // used to read env vars from an .env file
 
@@ -131,7 +131,7 @@ const mainPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
         SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(false),
-        APP_NAME: JSON.stringify(APP_NAME),
+        APP_NAME: JSON.stringify(getAppName(prod)),
         PRODUCT_NAME: JSON.stringify(PRODUCT_NAME),
         APP_ID: JSON.stringify(APP_ID),
         'process.env.STAGE': JSON.stringify(STAGE),
@@ -182,7 +182,7 @@ const preloadPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(true),
-        APP_NAME: JSON.stringify(APP_NAME),
+        APP_NAME: JSON.stringify(getAppName(prod)),
         'process.env.STAGE': JSON.stringify(STAGE),
         'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
     }),
@@ -192,7 +192,7 @@ const sentryPlugins = [
     new SentryWebpackPlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
-        release: `${APP_NAME}@${version}`,
+        release: `${getAppName(prod)}@${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
         project: 'firefly-desktop',

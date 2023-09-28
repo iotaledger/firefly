@@ -1,5 +1,5 @@
 /** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Webpack at compile-time. */
-const { APP_NAME } = require('./product.js')
+const { getAppName } = require('./product.js')
 
 /* eslint-disable-next-line no-undef */
 const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
@@ -29,7 +29,7 @@ if (SENTRY_MAIN_PROCESS || PRELOAD_SCRIPT) {
 
 module.exports = function (initialize) {
     if (initialize) {
-        Sentry.init({ appName: APP_NAME, debug, dsn, environment })
+        Sentry.init({ appName: getAppName(), debug, dsn, environment })
         Sentry.setUser({ id: machineId })
     }
 

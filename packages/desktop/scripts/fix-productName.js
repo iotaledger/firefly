@@ -6,7 +6,7 @@
 
 const { readFileSync, writeFileSync } = require('fs')
 const path = require('path')
-const { APP_NAME } = require('../product.js')
+const { getAppName } = require('../product.js')
 
 if (!process.env.CI) {
     console.warn('Warning: These changes should not be checked into Git!')
@@ -15,7 +15,7 @@ if (!process.env.CI) {
 const packageJsonPath = path.resolve(__dirname, '../package.json')
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, { encoding: 'utf-8' }))
-packageJson.productName = APP_NAME
+packageJson.productName = getAppName()
 
 // Write out package.json with 4 spaces indentation and a trailing newline
 writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4).concat('\n'))

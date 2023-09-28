@@ -1,23 +1,42 @@
+/* eslint-disable */
 const PRODUCT_NAME = 'Firefly'
 const NETWORK = 'iota'
 
 const STAGE = process.env.STAGE || 'alpha'
-const APP_NAME = getAppName()
 const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
 const CHANNEL_NAME = getChannelName()
 const APP_ARTIFACT = getAppArtifact()
+const appNameBase = STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 
 function getAppArtifact() {
     return `firefly-${NETWORK}-desktop-\${version}.\${ext}`
 }
 
 /**
- * If stage = 'prod' -> 'Firefly'
- * If stage = 'alpha' -> 'Firefly Alpha'
+ * If stage = 'prod' & packaged -> 'Firefly'
+ * If stage = 'alpha' & packaged -> 'Firefly Alpha'
+ * If stage = 'alpha' & dev -> 'Firefly — Dev'
  */
-function getAppName() {
-    return STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+function getKeychainServiceName(isPackaged) {
+    if (isPackaged) {
+        return appNameBase
+    } else {
+        return `${PRODUCT_NAME} — Dev`
+    }
+}
+
+/**
+ * If stage = 'prod' & packaged -> 'Firefly'
+ * If stage = 'alpha' & packaged -> 'Firefly Alpha'
+ * If stage = 'alpha' & dev -> 'Firefly'
+ */
+function getAppName(isPackaged = true) {
+    if (isPackaged) {
+        return appNameBase
+    } else {
+        return PRODUCT_NAME
+    }
 }
 
 /**
@@ -46,10 +65,11 @@ function getChannelName() {
 
 module.exports = {
     STAGE,
-    APP_NAME,
     APP_ID,
     APP_PROTOCOL,
     CHANNEL_NAME,
     APP_ARTIFACT,
     PRODUCT_NAME,
+    getAppName,
+    getKeychainServiceName,
 }

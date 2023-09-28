@@ -1,9 +1,9 @@
 const notarize = require('./scripts/notarize.macos.js')
 const merge = require('lodash.merge')
-const { STAGE, APP_NAME, APP_ID, APP_PROTOCOL, CHANNEL_NAME, APP_ARTIFACT } = require('./product.js')
+const { STAGE, getAppName, APP_ID, APP_PROTOCOL, CHANNEL_NAME, APP_ARTIFACT } = require('./product.js')
 
 const prodConfig = () => ({
-    productName: APP_NAME,
+    productName: getAppName(),
     artifactName: APP_ARTIFACT,
     copyright: 'IOTA Foundation',
     directories: { buildResources: './public', output: './out' },
@@ -12,14 +12,14 @@ const prodConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(APP_ID, APP_NAME)
+            await notarize(APP_ID, getAppName())
         } catch (err) {
             // This catch is necessary or the promise rejection is swallowed
             throw err
         }
     },
     asar: true,
-    protocols: [{ name: `${APP_NAME} URL Scheme`, schemes: [APP_PROTOCOL] }],
+    protocols: [{ name: `${getAppName()} URL Scheme`, schemes: [APP_PROTOCOL] }],
     dmg: {
         iconSize: 120,
         title: '${productName}',
@@ -46,7 +46,7 @@ const prodConfig = () => ({
     linux: {
         target: ['AppImage'],
         desktop: {
-            Name: APP_NAME,
+            Name: getAppName(),
             Comment: 'Desktop wallet for IOTA',
             Categories: 'Office;Network;Finance',
             MimeType: `x-scheme-handler/${APP_PROTOCOL}`,
