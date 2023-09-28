@@ -72,4 +72,5 @@ module.exports = {
     PRODUCT_NAME,
     getAppName,
     getKeychainServiceName,
+    NETWORK,
 }
