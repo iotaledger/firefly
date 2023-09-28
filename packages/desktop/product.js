@@ -1,4 +1,5 @@
 const PRODUCT_NAME = 'Firefly'
+const NETWORK = 'iota'
 
 const STAGE = process.env.STAGE || 'alpha'
 const APP_NAME = getAppName()
@@ -8,7 +9,7 @@ const CHANNEL_NAME = getChannelName()
 const APP_ARTIFACT = getAppArtifact()
 
 function getAppArtifact() {
-    return 'firefly-desktop-${version}.${ext}'
+    return `firefly-${NETWORK}-desktop-\${version}.\${ext}`
 }
 
 /**
