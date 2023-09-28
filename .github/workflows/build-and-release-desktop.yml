@@ -199,7 +199,7 @@ jobs:
                   path: |
                       packages/desktop/out/firefly-*
                       packages/desktop/out/${{ env.NETWORK }}*
-                      packages/desktop/out/latest-*
+                      packages/desktop/out/latest*
 
     release:
         runs-on: ubuntu-latest
