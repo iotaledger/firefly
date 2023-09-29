@@ -5,6 +5,7 @@
     import { Button, Text } from 'shared/components'
     import { setClipboard } from '@core/utils'
     import { onMount } from 'svelte'
+    import { appNameBase } from '../../product'
 
     const { loggedIn } = $activeProfile ?? {}
 
@@ -22,6 +23,10 @@
             {
                 label: 'views.settings.language.title',
                 value: $appSettings?.language,
+            },
+            {
+                label: 'views.settings.appName.title',
+                value: appNameBase,
             },
         ]
         if ($activeProfile && $loggedIn) {

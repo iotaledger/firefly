@@ -288,6 +288,9 @@
                 "title": "Language",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Currency",
                 "description": "Adjusts balance conversion and updates chart options"
