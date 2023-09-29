@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly Shimmer",
-    "version": "2.1.8",
+    "version": "2.1.9-alpha-1",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
