@@ -71,12 +71,14 @@
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
                     }
-                }
 
-                if (!subBreakdown[type]) {
-                    subBreakdown[type] = amount
-                } else {
-                    subBreakdown[type] += amount
+                    if (type) {
+                        if (!subBreakdown[type]) {
+                            subBreakdown[type] = amount
+                        } else {
+                            subBreakdown[type] += amount
+                        }
+                    }
                 }
                 pendingOutputsStorageDeposit += amount
             }
