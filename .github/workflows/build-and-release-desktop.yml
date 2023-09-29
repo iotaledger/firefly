@@ -1,13 +1,13 @@
 name: Build and Release Desktop
 
 env:
-    NETWORK: IOTA
-    NETWORK_CODE: iota
+    NETWORK: Shimmer
+    NETWORK_CODE: shimmer
 
 on:
     push:
         tags:
-            - desktop-iota-*
+            - desktop-shimmer-*
     workflow_dispatch:
         inputs:
             debugElectronBuilder:
@@ -39,7 +39,7 @@ jobs:
             - id: set_outputs
               name: Set outputs for version, release name, and stage
               run: |
-                  VERSION=${GITHUB_REF#refs/*/desktop-iota-}
+                  VERSION=${GITHUB_REF#refs/*/desktop-shimmer-}
                   RELEASE_NAME=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$1 \u$2 $3/')
                   STAGE=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-([0-9]\d*(\.[0-9]\d*)*))?$/$2/')
 
@@ -198,7 +198,7 @@ jobs:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-*
-                      packages/desktop/out/latest*
+                      packages/desktop/out/shimmer*
 
     release:
         runs-on: ubuntu-latest
@@ -307,15 +307,16 @@ jobs:
 
             - name: Upload to S3
               run: |
-                 aws s3 cp assets/ s3://firefly-private/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
+                  aws s3 cp assets/ s3://iotaledger-files/4a1ddea1-10c1-4f1d-83f0-e14903931a46/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
+                  aws s3 cp assets/ s3://iotaledger-files/firefly/releases/ --recursive --include "*" --exclude "*.sha256" --exclude "*.blockmap" --exclude "*.asc" --acl public-read
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                   AWS_DEFAULT_REGION: eu-central-1
 
-           #- name: Invalidate CloudFront cache for auto-update files
-             #run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
-             #env:
-                 #AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                 #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                 #AWS_DEFAULT_REGION: eu-central-1
+            - name: Invalidate CloudFront cache for auto-update files
+              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
+              env:
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  AWS_DEFAULT_REGION: eu-central-1

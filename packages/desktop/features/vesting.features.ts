@@ -1,7 +1,7 @@
 import { IVestingFeatures } from '@lib/features/interfaces'
 
 const vestingFeatures: IVestingFeatures = {
-    enabled: true,
+    enabled: false,
 }
 
 export default vestingFeatures
