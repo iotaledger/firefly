@@ -5,6 +5,7 @@ import { INetworkFeatures } from './network-features.interface'
 import { OnboardingFeatures } from '../types/onboarding-features.type'
 import { ISettingsFeatures } from './settings-features.interface'
 import { IWalletFeatures } from './wallet-features.interface'
+import { IVestingFeatures } from './vesting-features.interface'
 
 export interface IFeatures {
     collectibles: ICollectiblesFeatures
@@ -14,4 +15,5 @@ export interface IFeatures {
     onboarding: OnboardingFeatures
     settings: ISettingsFeatures
     wallet: IWalletFeatures
+    vesting: IVestingFeatures
 }

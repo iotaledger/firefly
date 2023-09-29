@@ -25,6 +25,8 @@ export function getSubjectLocaleFromActivity(activity: Activity): string {
 
     if (activity.type === ActivityType.Basic && activity?.isShimmerClaiming) {
         return localize('general.shimmerGenesis')
+    } else if (activity.type === ActivityType.Vesting) {
+        return localize('general.stardustGenesis')
     } else if (subject?.type === 'account') {
         return truncateString(subject?.account?.name, 13, 0)
     } else if (subject?.type === 'address') {

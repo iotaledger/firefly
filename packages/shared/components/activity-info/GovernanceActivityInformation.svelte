@@ -16,7 +16,7 @@
         }),
         ...(activity.votingPower !== undefined && {
             votingPower: {
-                data: formatTokenAmountBestMatch(activity.votingPower, getBaseToken(), 2),
+                data: formatTokenAmountBestMatch(activity.votingPower, getBaseToken()),
                 alternateKey:
                     activity.governanceAction === GovernanceAction.DecreaseVotingPower ||
                     activity.governanceAction === GovernanceAction.IncreaseVotingPower

@@ -1,7 +1,86 @@
-import { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
-import { OnboardingFeatures } from '@lib/features/types'
+import type { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
+import type { OnboardingFeatures } from '@lib/features/types'
 
 const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
+    enabled: true,
+    hidden: false,
+    newProfile: {
+        enabled: true,
+        softwareProfile: {
+            enabled: true,
+        },
+        ledgerProfile: {
+            enabled: true,
+        },
+    },
+    restoreProfile: {
+        enabled: true,
+        recoveryPhrase: {
+            enabled: true,
+        },
+        strongholdBackup: {
+            enabled: true,
+        },
+        ledgerBackup: {
+            enabled: true,
+        },
+    },
+    claimRewards: {
+        enabled: false,
+        hidden: true,
+        recoveryPhrase: {
+            enabled: false,
+        },
+        strongholdBackup: {
+            enabled: false,
+        },
+        ledgerBackup: {
+            enabled: false,
+        },
+    },
+}
+
+const IS_ALPHANET_ENABLED = process.env.STAGE !== 'prod'
+const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
+    enabled: IS_ALPHANET_ENABLED,
+    hidden: !IS_ALPHANET_ENABLED,
+    newProfile: {
+        enabled: true,
+        softwareProfile: {
+            enabled: true,
+        },
+        ledgerProfile: {
+            enabled: true,
+        },
+    },
+    restoreProfile: {
+        enabled: true,
+        recoveryPhrase: {
+            enabled: true,
+        },
+        strongholdBackup: {
+            enabled: true,
+        },
+        ledgerBackup: {
+            enabled: true,
+        },
+    },
+    claimRewards: {
+        enabled: false,
+        hidden: true,
+        recoveryPhrase: {
+            enabled: false,
+        },
+        strongholdBackup: {
+            enabled: false,
+        },
+        ledgerBackup: {
+            enabled: false,
+        },
+    },
+}
+
+const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
     enabled: false,
     hidden: true,
     newProfile: {
@@ -27,91 +106,54 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     },
     claimRewards: {
         enabled: false,
-        hidden: true,
-        recoveryPhrase: {
-            enabled: false,
-        },
-        strongholdBackup: {
-            enabled: false,
-        },
-        ledgerBackup: {
-            enabled: false,
-        },
-    },
-}
-
-const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
-    enabled: true,
-    newProfile: {
-        enabled: true,
-        softwareProfile: {
-            enabled: true,
-        },
-        ledgerProfile: {
-            enabled: true,
-        },
-    },
-    restoreProfile: {
-        enabled: true,
-        recoveryPhrase: {
-            enabled: true,
-        },
-        strongholdBackup: {
-            enabled: true,
-        },
-        ledgerBackup: {
-            enabled: true,
-        },
-    },
-    claimRewards: {
-        enabled: true,
         hidden: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
 
 const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: false,
+    hidden: true,
     newProfile: {
-        enabled: true,
+        enabled: false,
         softwareProfile: {
-            enabled: true,
+            enabled: false,
         },
         ledgerProfile: {
-            enabled: true,
+            enabled: false,
         },
     },
     restoreProfile: {
-        enabled: true,
+        enabled: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
     claimRewards: {
-        enabled: true,
+        enabled: false,
         hidden: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
@@ -156,13 +198,14 @@ const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
 
 const onboardingFeatures: OnboardingFeatures = {
     enabled: true,
-    iota: onboardingFeaturesForIota,
-    shimmer: onboardingFeaturesForShimmer,
-    testnet: onboardingFeaturesForTestnet,
-    custom: onboardingFeaturesForCustom,
     strongholdVersionCheck: {
         enabled: true,
     },
+    iota: onboardingFeaturesForIota,
+    iotaAlphanet: onboardingFeaturesForIotaAlphanet,
+    shimmer: onboardingFeaturesForShimmer,
+    testnet: onboardingFeaturesForTestnet,
+    custom: onboardingFeaturesForCustom,
 }
 
 export default onboardingFeatures

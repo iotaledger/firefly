@@ -12,11 +12,12 @@
         getAssetFromPersistedAssets,
         ActivityAsyncStatus,
         getUnitFromTokenMetadata,
+        VestingActivity,
     } from '@core/wallet'
     import { time } from '@core/app'
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
 
-    export let activity: TransactionActivity
+    export let activity: TransactionActivity | VestingActivity
     export let unit: string | undefined = undefined
 
     $: asset = getAssetFromPersistedAssets(activity.assetId)

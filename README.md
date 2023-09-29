@@ -3,7 +3,7 @@
   <a href=""><img src="header.png"></a>
 </h1>
 
-<h2 align="center">Firefly Shimmer</h2>
+<h2 align="center">Firefly</h2>
 
 <p align="center">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?logo=discord" alt="Discord"></a>
@@ -27,13 +27,13 @@
 
 ## About
 
-Firefly Shimmer is the official wallet for managing your tokens and assets on the Shimmer network.
+Firefly is the official wallet for managing your tokens and assets on the Shimmer network.
 
 ## Installation
 
-There are a few options to install Firefly Shimmer:
+There are a few options to install Firefly:
 
--   Download from [official Firefly Shimmer website](https://firefly.iota.org)
+-   Download from [official Firefly website](https://firefly.iota.org)
 -   Download from the latest [GitHub release](https://github.com/iotaledger/firefly/releases/tag/desktop-2.0.0)
 -   Build from source code (see our handbook guide for ["Environment Setup"](https://iotaledger.github.io/firefly/guides/environment-setup/))
 

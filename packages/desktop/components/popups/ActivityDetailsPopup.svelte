@@ -117,7 +117,7 @@
         {/if}
     </div>
     <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-        {#if activity.type === ActivityType.Basic}
+        {#if activity.type === ActivityType.Basic || activity.type === ActivityType.Vesting}
             <BasicActivityDetails {activity} />
         {:else if activity.type === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />

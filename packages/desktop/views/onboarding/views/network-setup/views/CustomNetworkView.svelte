@@ -11,23 +11,17 @@
         INode,
         NetworkId,
         buildPersistedNetworkFromNodeInfoResponse,
+        getEnabledNetworkFromFeatureFlags,
         getNetworkIdFromNetworkName,
     } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
-    import features from '@features/features'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { networkSetupRouter } from '../network-setup-router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     let nodeConfigurationForm: NodeConfigurationForm
-    let networkId: NetworkId = features?.onboarding?.iota?.enabled
-        ? NetworkId.Iota
-        : features?.onboarding?.shimmer?.enabled
-        ? NetworkId.Shimmer
-        : features?.onboarding?.testnet?.enabled
-        ? NetworkId.Testnet
-        : NetworkId.Custom
+    let networkId: NetworkId = getEnabledNetworkFromFeatureFlags()
     let coinType: string
     let node: INode
     let isBusy = false

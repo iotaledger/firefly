@@ -14,12 +14,8 @@
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'
-    import { Developer } from './developer'
-    import { Settings } from './settings'
-    import { Wallet } from './wallet'
+    import { Developer, Settings, Vesting, Collectibles, Governance, Wallet } from './'
     import { onDestroy, onMount } from 'svelte'
-    import Collectibles from './collectibles/Collectibles.svelte'
-    import { Governance } from './governance'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
 
@@ -35,6 +31,9 @@
     import { selectedAccountIndex } from '@core/account'
     import { get } from 'svelte/store'
     import features from '@features/features'
+    import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
+    import { openPopup, PopupId } from '@auxiliary/popup'
+    import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 
     const tabs = {
         wallet: Wallet,
@@ -42,6 +41,7 @@
         collectibles: Collectibles,
         governance: Governance,
         developer: Developer,
+        vesting: Vesting,
     }
 
     let fundsSoonNotificationId
@@ -63,6 +63,20 @@
     function handleDeepLinkRequest(data: string): void {
         if ($activeProfile?.hasLoadedAccounts) {
             handleDeepLink(data)
+        }
+    }
+
+    function handleShouldShowBalanceOverview(): void {
+        if ($showBalanceOverviewPopup) {
+            openPopup({
+                id: PopupId.BalanceFinder,
+                props: {
+                    title: localize('popups.balanceOverview.title'),
+                    body: localize('popups.balanceOverview.body'),
+                    showConsolidation: true,
+                },
+            })
+            $showBalanceOverviewPopup = false
         }
     }
 
@@ -92,6 +106,20 @@
                     values: { networkName: $nodeInfo.protocol.networkName },
                 }),
             })
+        }
+
+        if (!$isAwareOfMetricSystemDrop) {
+            openPopup({
+                id: PopupId.MetricSystemInfo,
+                props: {
+                    onCancelled: () => {
+                        handleShouldShowBalanceOverview()
+                    },
+                },
+            })
+            $isAwareOfMetricSystemDrop = true
+        } else {
+            handleShouldShowBalanceOverview()
         }
     })
 

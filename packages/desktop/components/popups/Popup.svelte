@@ -51,7 +51,11 @@
     import CheckForUpdatesPopup from './CheckForUpdatesPopup.svelte'
     import VoteForProposal from './VoteForProposalPopup.svelte'
     import VotingPowerToZeroPopup from './VotingPowerToZeroPopup.svelte'
-    import WalletFinderPopup from './WalletFinderPopup.svelte'
+    import MetricSystemInfoPopup from './metricSystemInfoPopup.svelte'
+    import BalanceFinderPopup from './BalanceFinderPopup.svelte'
+    import VestingCollectPopup from './VestingCollectPopup.svelte'
+    import PayoutDetailsPopup from './PayoutDetailsPopup.svelte'
+    import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -112,6 +116,7 @@
         [PopupId.LegalUpdate]: LegalUpdatePopup,
         [PopupId.ManageAccount]: ManageAccountPopup,
         [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
+        [PopupId.MetricSystemInfo]: MetricSystemInfoPopup,
         [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,
         [PopupId.MintNativeTokenForm]: MintNativeTokenFormPopup,
         [PopupId.MintNftConfirmation]: MintNftConfirmationPopup,
@@ -133,7 +138,10 @@
         [PopupId.CheckForUpdates]: CheckForUpdatesPopup,
         [PopupId.VoteForProposal]: VoteForProposal,
         [PopupId.VotingPowerToZero]: VotingPowerToZeroPopup,
-        [PopupId.WalletFinder]: WalletFinderPopup,
+        [PopupId.BalanceFinder]: BalanceFinderPopup,
+        [PopupId.VestingCollect]: VestingCollectPopup,
+        [PopupId.PayoutDetails]: PayoutDetailsPopup,
+        [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
     }
 
     function onKey(event: KeyboardEvent): void {
@@ -144,10 +152,10 @@
 
     function tryClosePopup(): void {
         if (!preventClose) {
+            closePopup()
             if ('function' === typeof props?.onCancelled) {
                 props?.onCancelled()
             }
-            closePopup()
         }
     }
 

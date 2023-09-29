@@ -175,6 +175,9 @@ try {
                 newPassword
             )
         },
+        async migrateDbChrysalisToStardust(path, pinCode) {
+            return IotaSdk.migrateDbChrysalisToStardust(path, pinCode)
+        },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (err) {
