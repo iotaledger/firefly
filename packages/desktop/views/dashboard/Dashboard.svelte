@@ -1,7 +1,7 @@
 <script lang="ts">
     import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
-    import { nodeInfo } from '@core/network'
+    import { nodeInfo, NetworkId } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
@@ -108,7 +108,7 @@
             })
         }
 
-        if (!$isAwareOfMetricSystemDrop) {
+        if (!$isAwareOfMetricSystemDrop && $activeProfile?.network?.id === NetworkId.Iota) {
             openPopup({
                 id: PopupId.MetricSystemInfo,
                 props: {

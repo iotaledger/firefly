@@ -9,6 +9,7 @@
     import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
+    import features from '@features/features'
 
     interface BalanceBreakdown {
         amount: number
@@ -38,7 +39,7 @@
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
-            vesting: vestingBreakdown,
+            ...(features.vesting.enabled && { vesting: vestingBreakdown }),
         }
     }
 
