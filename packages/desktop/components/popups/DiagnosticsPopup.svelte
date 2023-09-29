@@ -15,6 +15,10 @@
     onMount(() => {
         const appVars = [
             {
+                label: 'views.settings.appName.title',
+                value: appNameBase,
+            },
+            {
                 label: '',
                 value: localize('general.version', {
                     values: { version: $appVersionDetails?.currentVersion },
@@ -23,10 +27,6 @@
             {
                 label: 'views.settings.language.title',
                 value: $appSettings?.language,
-            },
-            {
-                label: 'views.settings.appName.title',
-                value: appNameBase,
             },
         ]
         if ($activeProfile && $loggedIn) {
