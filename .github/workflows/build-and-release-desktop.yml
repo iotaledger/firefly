@@ -315,7 +315,7 @@ jobs:
                   AWS_DEFAULT_REGION: eu-central-1
 
             - name: Invalidate CloudFront cache for auto-update files
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/latest*"
+              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/shimmer*"
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
