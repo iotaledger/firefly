@@ -27,24 +27,12 @@
     export let onSubmit: () => void = () => {}
     export let showNetworkFields: boolean = false
 
-    const networkItems: IDropdownItem<NetworkId>[] = [
-        {
-            label: getNetworkNameFromNetworkId(NetworkId.Iota),
-            value: NetworkId.Iota,
-        },
-        {
-            label: getNetworkNameFromNetworkId(NetworkId.Shimmer),
-            value: NetworkId.Shimmer,
-        },
-        {
-            label: getNetworkNameFromNetworkId(NetworkId.Testnet),
-            value: NetworkId.Testnet,
-        },
-        {
-            label: localize('general.custom'),
-            value: NetworkId.Custom,
-        },
-    ].filter((item) => features.onboarding?.[item.value]?.enabled)
+    const networkItems: IDropdownItem<NetworkId>[] = Object.values(NetworkId)
+        .filter((networkId) => features.onboarding[networkId]?.enabled)
+        .map((networkId) => ({
+            label: networkId === NetworkId.Custom ? localize('general.custom') : getNetworkNameFromNetworkId(networkId),
+            value: networkId,
+        }))
 
     let [username, password] = node.auth?.basicAuthNamePwd ?? ['', '']
     let jwt = node?.auth?.jwt ?? ''

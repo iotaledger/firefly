@@ -1,13 +1,15 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { isVestingOutputId, selectedAccountVestingOverview } from '@contexts/vesting'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
-    import { TextHintVariant } from 'shared/components/enums'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
+    import { TextHintVariant } from 'shared/components/enums'
+    import features from '@features/features'
 
     interface BalanceBreakdown {
         amount: number
@@ -21,20 +23,23 @@
     }
 
     $: accountBalance = $selectedAccount?.balances
+    $: accountBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
-    $: accountBalance, void setBreakdown()
+
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
+        const vestingBreakdown = getVestingBreakdown()
 
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
+            ...(features.vesting.enabled && { vesting: vestingBreakdown }),
         }
     }
 
@@ -52,7 +57,7 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OutputType.Treasury) {
+                if (output.type !== OutputType.Treasury && !isVestingOutputId(outputId)) {
                     const commonOutput = output as CommonOutput
                     if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
@@ -67,12 +72,14 @@
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
                     }
-                }
 
-                if (!subBreakdown[type]) {
-                    subBreakdown[type] = amount
-                } else {
-                    subBreakdown[type] += amount
+                    if (type) {
+                        if (!subBreakdown[type]) {
+                            subBreakdown[type] = amount
+                        } else {
+                            subBreakdown[type] += amount
+                        }
+                    }
                 }
                 pendingOutputsStorageDeposit += amount
             }
@@ -109,6 +116,10 @@
         }
 
         return { amount: totalStorageDeposit, subBreakdown }
+    }
+
+    function getVestingBreakdown(): BalanceBreakdown {
+        return { amount: $selectedAccountVestingOverview?.remainingPayout }
     }
 
     function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {

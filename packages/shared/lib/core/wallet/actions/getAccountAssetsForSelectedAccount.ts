@@ -8,6 +8,7 @@ import { IAsset } from '../interfaces'
 import { AccountAssets, IAccountAssetsPerNetwork } from '../interfaces/account-assets.interface'
 import { getAssetFromPersistedAssets } from '../utils'
 import { sortAssets } from '../utils/sortAssets'
+import { getMarketCoinIdByNetworkId } from '@core/market/utils'
 
 export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinPrices): AccountAssets {
     const accountAssets = {} as AccountAssets
@@ -24,7 +25,8 @@ export function getAccountAssetsForSelectedAccount(marketCoinPrices: MarketCoinP
 function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId: NetworkId): IAccountAssetsPerNetwork {
     const account = getSelectedAccount()
 
-    const shouldCalculateFiatPrice = networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet
+    const marketCoinId = getMarketCoinIdByNetworkId(networkId)
+    const shouldCalculateFiatPrice = networkId !== NetworkId.Custom && marketCoinId
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
@@ -32,7 +34,7 @@ function getAccountAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId
             total: Number(account?.balances?.baseCoin?.total),
             available: Number(account?.balances?.baseCoin?.available),
         },
-        ...(shouldCalculateFiatPrice && { marketPrices: marketCoinPrices?.shimmer }),
+        ...(shouldCalculateFiatPrice && { marketPrices: marketCoinPrices?.[marketCoinId] }),
     }
 
     const nativeTokens: IAsset[] = []

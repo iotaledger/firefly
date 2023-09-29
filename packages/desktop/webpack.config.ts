@@ -10,6 +10,7 @@ import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 import assert from 'assert'
 import dotenv from 'dotenv'
+import { getAppName, APP_PROTOCOL, STAGE, PRODUCT_NAME, APP_ID, NETWORK } from './product'
 
 dotenv.config() // used to read env vars from an .env file
 
@@ -22,16 +23,6 @@ const mode: Mode = (process.env.NODE_ENV as Mode) || 'development'
 const prod = mode === 'production'
 const hardcodeNodeEnv = typeof process.env.HARDCODE_NODE_ENV !== 'undefined'
 const SENTRY = process.env.SENTRY === 'true'
-const stage = process.env.STAGE || 'alpha'
-/**
- * If stage = 'prod' -> 'Firefly'
- * If stage = 'alpha' -> 'Firefly Alpha'
- */
-const appName =
-    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
-const appId = stage === 'prod' ? 'org.iota.firefly-shimmer' : `org.iota.firefly-shimmer.${stage}`
-
-const appProtocol = stage === 'prod' ? 'firefly' : `firefly-${stage.toLowerCase()}`
 
 // / ------------------------ Resolve ------------------------
 
@@ -138,12 +129,13 @@ const mainPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(true),
-        SENTRY_ENVIRONMENT: JSON.stringify(stage),
+        SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(false),
-        APP_NAME: JSON.stringify(appName),
-        APP_ID: JSON.stringify(appId),
-        'process.env.STAGE': JSON.stringify(stage),
-        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+        APP_NAME: JSON.stringify(getAppName(prod)),
+        PRODUCT_NAME: JSON.stringify(PRODUCT_NAME),
+        APP_ID: JSON.stringify(APP_ID),
+        'process.env.STAGE': JSON.stringify(STAGE),
+        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
         'process.env.AMPLITUDE_API_KEY': JSON.stringify(process.env.AMPLITUDE_API_KEY),
     }),
 ]
@@ -173,13 +165,13 @@ const rendererPlugins = [
     }),
     new DefinePlugin({
         'process.env.PLATFORM': JSON.stringify(process.env.PLATFORM || 'desktop'),
-        'process.env.STAGE': JSON.stringify(stage),
+        'process.env.STAGE': JSON.stringify(STAGE),
         features: JSON.stringify(features),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
-        SENTRY_ENVIRONMENT: JSON.stringify(stage),
+        SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(false),
-        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
     }),
 ]
 
@@ -188,11 +180,11 @@ const preloadPlugins = [
         PLATFORM_LINUX: JSON.stringify(process.platform === 'linux'),
         SENTRY_DSN: JSON.stringify(process.env.SENTRY_DSN || ''),
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
-        SENTRY_ENVIRONMENT: JSON.stringify(stage),
+        SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(true),
-        APP_NAME: JSON.stringify(appName),
-        'process.env.STAGE': JSON.stringify(stage),
-        'process.env.APP_PROTOCOL': JSON.stringify(appProtocol),
+        APP_NAME: JSON.stringify(getAppName(prod)),
+        'process.env.STAGE': JSON.stringify(STAGE),
+        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
     }),
 ]
 
@@ -200,13 +192,13 @@ const sentryPlugins = [
     new SentryWebpackPlugin({
         authToken: process.env.SENTRY_AUTH_TOKEN,
         include: '.',
-        release: `Firefly@${version}`,
+        release: `${getAppName(prod)}@${NETWORK}-${version}`,
         ignoreFile: '.sentrycliignore',
         org: 'iota-foundation-h4',
         project: 'firefly-desktop',
         finalize: false,
         deploy: {
-            env: stage,
+            env: STAGE,
         },
     }),
 ]

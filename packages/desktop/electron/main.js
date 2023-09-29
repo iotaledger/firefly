@@ -486,8 +486,8 @@ app.on('second-instance', (_e, args) => {
 })
 
 /**
- * Register firefly:// protocol for deep links
- * Set Firefly as the default handler for firefly:// protocol
+ * Register iota:// protocol for deep links
+ * Set Firefly as the default handler for iota:// protocol
  */
 protocol.registerSchemesAsPrivileged([
     { scheme: process.env.APP_PROTOCOL, privileges: { secure: true, standard: true } },

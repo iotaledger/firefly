@@ -6,9 +6,9 @@ import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { Assets, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
-import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails } from '../stores'
+import { getDefaultTransactionOptions } from '../utils'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -86,7 +86,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
     const outputForEstimate = (await prepareOutput(
         selectedAccount.index,
         outputParams,
-        DEFAULT_TRANSACTION_OPTIONS
+        getDefaultTransactionOptions()
     )) as unknown as IBasicOutput | INftOutput
     const serializedOutput = serializeOutput(outputForEstimate)
     const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)

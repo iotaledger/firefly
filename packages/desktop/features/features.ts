@@ -7,6 +7,7 @@ import onboardingFeatures from './onboarding.features'
 import settingsFeatures from './settings.features'
 import walletFeatures from './wallet.features'
 import analyticsFeatures from './analytics.features'
+import vestingFeatures from './vesting.features'
 import { IDesktopFeatures } from './interfaces'
 
 const features: IDesktopFeatures = {
@@ -19,6 +20,7 @@ const features: IDesktopFeatures = {
     settings: settingsFeatures,
     wallet: walletFeatures,
     analytics: analyticsFeatures,
+    vesting: vestingFeatures,
 }
 
 export default features

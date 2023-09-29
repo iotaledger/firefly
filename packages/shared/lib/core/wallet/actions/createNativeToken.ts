@@ -4,14 +4,13 @@ import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
 import { CreateNativeTokenParams, PreparedTransaction } from '@iota/sdk/out/types'
-import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { resetMintTokenDetails } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { plainToInstance } from 'class-transformer'
-import { processAndAddToActivities } from '../utils'
+import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
 
 export async function createNativeToken(
     maximumSupply: number,
@@ -21,7 +20,6 @@ export async function createNativeToken(
     try {
         updateSelectedAccount({ isTransferring: true })
         const account = get(selectedAccount)
-
         const params: CreateNativeTokenParams = {
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),
@@ -30,7 +28,7 @@ export async function createNativeToken(
 
         const preparedNativeTokenTransaction = await account?.prepareCreateNativeToken(
             params,
-            DEFAULT_TRANSACTION_OPTIONS
+            getDefaultTransactionOptions()
         )
         const preparedTransaction = plainToInstance(PreparedTransaction, preparedNativeTokenTransaction)
         const transaction = await preparedTransaction?.send()

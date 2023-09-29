@@ -8,4 +8,5 @@ export interface ISidebarTab {
     route: DashboardRoute
     onClick: () => void
     notificationType?: NotificationType
+    showNotificationBadge?: boolean
 }
