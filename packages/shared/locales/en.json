@@ -659,7 +659,7 @@
         },
         "vestingCollect": {
             "title": "Collect",
-            "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat sapien ac venenatis fermentum. Duis eget eleifend arcu, ut maximus dui. Suspendisse elementum dictum sem non egestas. ",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
             "unclaimedFunds": "Unclaimed funds",
             "button": "Collect"
         },
