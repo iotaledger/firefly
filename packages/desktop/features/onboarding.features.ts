@@ -2,32 +2,32 @@ import type { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
 import type { OnboardingFeatures } from '@lib/features/types'
 
 const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
-    enabled: false,
-    hidden: true,
+    enabled: true,
+    hidden: false,
     newProfile: {
-        enabled: false,
+        enabled: true,
         softwareProfile: {
-            enabled: false,
+            enabled: true,
         },
         ledgerProfile: {
-            enabled: false,
+            enabled: true,
         },
     },
     restoreProfile: {
-        enabled: false,
+        enabled: true,
         recoveryPhrase: {
-            enabled: false,
+            enabled: true,
         },
         strongholdBackup: {
-            enabled: false,
+            enabled: true,
         },
         ledgerBackup: {
-            enabled: false,
+            enabled: true,
         },
     },
     claimRewards: {
         enabled: false,
-        hidden: false,
+        hidden: true,
         recoveryPhrase: {
             enabled: false,
         },
@@ -40,9 +40,10 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     },
 }
 
+const IS_ALPHANET_ENABLED = process.env.STAGE !== 'prod'
 const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
-    enabled: false,
-    hidden: true,
+    enabled: IS_ALPHANET_ENABLED,
+    hidden: !IS_ALPHANET_ENABLED,
     newProfile: {
         enabled: true,
         softwareProfile: {
@@ -80,77 +81,79 @@ const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
 }
 
 const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: false,
+    hidden: true,
     newProfile: {
-        enabled: true,
+        enabled: false,
         softwareProfile: {
-            enabled: true,
+            enabled: false,
         },
         ledgerProfile: {
-            enabled: true,
+            enabled: false,
         },
     },
     restoreProfile: {
-        enabled: true,
+        enabled: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
     claimRewards: {
-        enabled: true,
+        enabled: false,
         hidden: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
 
 const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: false,
+    hidden: true,
     newProfile: {
-        enabled: true,
+        enabled: false,
         softwareProfile: {
-            enabled: true,
+            enabled: false,
         },
         ledgerProfile: {
-            enabled: true,
+            enabled: false,
         },
     },
     restoreProfile: {
-        enabled: true,
+        enabled: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
     claimRewards: {
-        enabled: true,
+        enabled: false,
         hidden: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
