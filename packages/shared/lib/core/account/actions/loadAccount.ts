@@ -7,7 +7,8 @@ import { buildAccountStateAndPersistedData } from './buildAccountStateAndPersist
 export async function loadAccount(account: IAccount): Promise<IAccountState> {
     // Temporary sync on load until we enable background sync and event listeners
     const accountIndex = account.getMetadata().index
-    await account.sync(DEFAULT_SYNC_OPTIONS)
+    const addresses = await account.addresses()
+    await account.sync({ ...DEFAULT_SYNC_OPTIONS, addresses: addresses.map((a) => a.address) })
     const accountPersistedData = getActiveProfilePersistedAccountData(accountIndex)
     let accountState: IAccountState
     if (accountPersistedData) {

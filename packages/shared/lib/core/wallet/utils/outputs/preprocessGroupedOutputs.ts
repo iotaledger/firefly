@@ -1,6 +1,6 @@
 import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
-import { IAccountState } from '@core/account/interfaces'
+import { AddressWithOutputs, IAccountState } from '@core/account/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
@@ -18,7 +18,7 @@ export function preprocessGroupedOutputs(
         transactionInputs
     )
     const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
-    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.depositAddress)
+    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.addressesWithOutputs)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         remainder: outputData.remainder,
@@ -39,7 +39,7 @@ export function preprocessGroupedOutputs(
 function getDirectionForOutputs(
     outputs: OutputData[],
     wrappedInputs: IWrappedOutput[],
-    accountAddress: string
+    accountAddressesWithOutputs: AddressWithOutputs[]
 ): ActivityDirection {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
@@ -47,13 +47,17 @@ function getDirectionForOutputs(
     }
     const output =
         nonRemainderOutputs[0].output.type !== OutputType.Treasury ? nonRemainderOutputs[0].output : undefined
+    const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
     const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
+    const isRecipientOneOfAccountAddresses = accountAddresses.includes(recipientAddress)
+    const isSenderOneOfAccountAddresses = accountAddresses.includes(senderAddress)
+    const isSelfTransaction = isRecipientOneOfAccountAddresses && isSenderOneOfAccountAddresses
 
-    if (recipientAddress === accountAddress && recipientAddress === senderAddress) {
+    if (isSelfTransaction) {
         return ActivityDirection.SelfTransaction
     }
-    if (recipientAddress === accountAddress && recipientAddress !== senderAddress) {
+    if (isRecipientOneOfAccountAddresses && recipientAddress !== senderAddress) {
         return ActivityDirection.Incoming
     } else {
         return ActivityDirection.Outgoing

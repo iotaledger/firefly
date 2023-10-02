@@ -707,10 +707,10 @@
   resolved "https://registry.yarnpkg.com/@iota/pad/-/pad-1.0.0-beta.30.tgz#de19728f8f1b09c20e2365d0da34945006760082"
   integrity sha512-fnhPMPul18WunLq9Ni4rxzBFmhna6eaG8WroDg6GdQqSK/eN62uFHV8tpspJHXuCqwgCUVp6NpuUna7+B2OV9g==
 
-"@iota/sdk@1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.0.11.tgz#5c63939c51cffdf94f4d220de8cd3811fb7749eb"
-  integrity sha512-Do3JQVvvUaCPUaOG97sRPlhNPVvuUmNr6Mgq+iWVPiMQBiDBEypZUmlKnBPVOGCShAm0sBxEw6C2gN8drMaYdA==
+"@iota/sdk@1.1.0-rc.2":
+  version "1.1.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-1.1.0-rc.2.tgz#8599f27c44712396b88e2a36a1fb767fb44cf9de"
+  integrity sha512-wQ/fEr+QA34KGhXyu3E2hAY4QJxyf4qO2/7EL9KK8QkvhLlWeAf+/+DYUQucx3ALA07DUBq22v/tm5oRStyWGw==
   dependencies:
     "@types/node" "^18.15.12"
     cargo-cp-artifact "^0.1.6"

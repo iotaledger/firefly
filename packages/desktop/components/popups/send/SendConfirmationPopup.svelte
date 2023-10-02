@@ -22,8 +22,12 @@
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction, TokenStandard } from '@core/wallet/enums'
     import { newTransactionDetails, updateNewTransactionDetails, NewTransactionType } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
-    import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
+    import {
+        getOutputParameters,
+        validateSendConfirmation,
+        getAddressFromSubject,
+        getDefaultTransactionOptions,
+    } from '@core/wallet/utils'
     import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
@@ -33,7 +37,6 @@
     import {
         ACCOUNTS_CONTRACT,
         CONTRACT_FUNCTIONS,
-        GAS_BUDGET,
         getDestinationNetworkFromAddress,
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
@@ -43,6 +46,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
     export let isCallbackFromUnlockStronghold: boolean = false
+    export let calculatedStorageDeposit: number = 0
 
     let {
         recipient,
@@ -54,7 +58,7 @@
         layer2Parameters,
     } = get(newTransactionDetails)
 
-    let storageDeposit = 0
+    let storageDeposit = calculatedStorageDeposit
     let minimumStorageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
@@ -99,7 +103,7 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: String(GAS_BUDGET),
+                gasBudget: layer2Parameters?.gasBudget ?? 0,
             },
         }),
     }
@@ -135,7 +139,7 @@
         try {
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
-            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
 
             await updateStorageDeposit()
 
@@ -190,7 +194,7 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isCallbackFromUnlockStronghold: true })
+            updatePopupProps({ isCallbackFromUnlockStronghold: true, calculatedStorageDeposit: storageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
@@ -270,7 +274,14 @@
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            onClick={onConfirmClick}
+            disabled={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+            isBusy={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+        >
             {localize('actions.send')}
         </Button>
     </popup-buttons>

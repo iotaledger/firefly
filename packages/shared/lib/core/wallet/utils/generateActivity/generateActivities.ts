@@ -13,6 +13,7 @@ import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAlia
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 import { OutputType } from '@iota/sdk/out/types'
+import { generateVestingActivity } from './generateVestingActivity'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
@@ -100,6 +101,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateSingleAliasActivity(account, params)
                 case ActivityType.Nft:
                     return generateSingleNftActivity(account, params)
+                case ActivityType.Vesting:
+                    return generateVestingActivity(account, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }

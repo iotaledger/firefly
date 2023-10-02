@@ -9,13 +9,15 @@
     import { hasCompletedAppSetup, lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
-    import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
-    import features from '@features/features'
+    import { getEnabledNetworkFromFeatureFlags, getNetworkNameFromNetworkId } from '@core/network'
     import { Animation, Button, Checkbox, Link, Text, TextType } from '@ui'
     import { onboardingRouter } from '../onboarding-router'
     import { initialiseOnboardingProfile } from '@contexts/onboarding/actions'
     import { shouldBeDeveloperProfile } from '@contexts/onboarding/utils'
     import { AnimationEnum } from '@auxiliary/animation'
+
+    const NETWORK_ID = getEnabledNetworkFromFeatureFlags()
+    const NETWORK = getNetworkNameFromNetworkId(NETWORK_ID)
 
     let termsAccepted: boolean = false
 
@@ -41,9 +43,7 @@
         <Text type={TextType.h1}
             >{localize('views.onboarding.appSetup.welcome.title', {
                 values: {
-                    network: features?.onboarding?.iota?.enabled
-                        ? getNetworkNameFromNetworkId(NetworkId.Iota)
-                        : getNetworkNameFromNetworkId(NetworkId.Shimmer),
+                    network: NETWORK,
                 },
             })}
         </Text>
