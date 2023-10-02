@@ -46,6 +46,7 @@
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
     export let isCallbackFromUnlockStronghold: boolean = false
+    export let calculatedStorageDeposit: number = 0
 
     let {
         recipient,
@@ -57,7 +58,7 @@
         layer2Parameters,
     } = get(newTransactionDetails)
 
-    let storageDeposit = 0
+    let storageDeposit = calculatedStorageDeposit
     let minimumStorageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
@@ -193,7 +194,7 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isCallbackFromUnlockStronghold: true })
+            updatePopupProps({ isCallbackFromUnlockStronghold: true, calculatedStorageDeposit: storageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
