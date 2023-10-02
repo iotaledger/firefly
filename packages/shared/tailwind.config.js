@@ -1,12 +1,11 @@
 /* Utilities */
 const pxToRem = (px, base = 16) => `${px / base}rem`
 
-const IS_DESKOP = process.env.PLATFORM === 'desktop'
 const SHARED_CONTENT_ROUTES = ['../shared/**/*.svelte', '../shared/**/*.scss']
 const DESKTOP_CONTENT_ROUTES = ['../desktop/**/*.svelte']
 
-module.exports = {
-    content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : [])],
+export default {
+    content: [...SHARED_CONTENT_ROUTES, ...DESKTOP_CONTENT_ROUTES],
     safelist: [
         {
             pattern: /^from-/,

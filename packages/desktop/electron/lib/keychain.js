@@ -1,13 +1,12 @@
 const keytar = require('keytar')
 import { app } from'electron'
-import { getKeychainServiceName } from '../../product'
 
 /** Keychain object */
 export default {
     /**
      * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: getKeychainServiceName(app.isPackaged),
+    SERVICE_NAME: app.isPackaged ? KEYCHAIN_SERVICE_NAME_PACKAGED : KEYCHAIN_SERVICE_NAME_NOT_PACKAGED,
     /**
      * Gets all credentials from keychain
      *

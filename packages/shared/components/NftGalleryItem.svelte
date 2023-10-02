@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { Text, FontWeight, NftMedia, TooltipIcon, Position, TooltipType } from 'shared/components'
 
     import { time } from '@core/app'

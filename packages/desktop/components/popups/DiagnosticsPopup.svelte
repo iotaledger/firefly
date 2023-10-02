@@ -5,7 +5,7 @@
     import { Button, Text } from 'shared/components'
     import { setClipboard } from '@core/utils'
     import { onMount } from 'svelte'
-    import { appNameBase } from '../../product'
+
 
     const { loggedIn } = $activeProfile ?? {}
 
@@ -16,7 +16,7 @@
         const appVars = [
             {
                 label: 'views.settings.appName.title',
-                value: appNameBase,
+                value: APP_NAME_BASE,
             },
             {
                 label: '',

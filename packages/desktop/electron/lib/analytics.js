@@ -4,7 +4,6 @@ import { app, ipcMain } from 'electron'
 import { getMachineId } from './machineId.js'
 import { getPlatformVersion } from './diagnostics.js'
 import os from 'os'
-import { NETWORK } from '../../product'
 
 export async function initialiseAnalytics() {
     if (features.analytics.enabled && AMPLITUDE_API_KEY) {

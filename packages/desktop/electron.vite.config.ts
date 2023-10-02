@@ -1,7 +1,10 @@
 import { defineConfig } from 'electron-vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import path from 'node:path'
-import { getAppName, APP_PROTOCOL, STAGE, PRODUCT_NAME, APP_ID } from './product'
+import { getAppName, APP_PROTOCOL, STAGE, PRODUCT_NAME, APP_ID, KEYCHAIN_SERVICE_NAME_PACKAGED, KEYCHAIN_SERVICE_NAME_NOT_PACKAGED, appNameBase } from './product'
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import sveltePreprocess from 'svelte-preprocess'
+import tailwindcss from 'tailwindcss'
 
 type Mode = 'none' | 'development' | 'production'
 const mode: Mode = (process.env.NODE_ENV as Mode) || 'development'
@@ -31,6 +34,9 @@ const define = {
   STAGE: JSON.stringify(STAGE),
   APP_PROTOCOL: JSON.stringify(APP_PROTOCOL),
   AMPLITUDE_API_KEY: JSON.stringify(process.env.AMPLITUDE_API_KEY),
+  KEYCHAIN_SERVICE_NAME_PACKAGED: JSON.stringify(KEYCHAIN_SERVICE_NAME_PACKAGED),
+  KEYCHAIN_SERVICE_NAME_NOT_PACKAGED: JSON.stringify(KEYCHAIN_SERVICE_NAME_NOT_PACKAGED),
+  APP_NAME_BASE: JSON.stringify(appNameBase)
 }
 
 export default defineConfig({
@@ -63,17 +69,24 @@ export default defineConfig({
     ]
   },
   renderer: {
+    base: './',
     resolve: {
+      extensions: [".svelte", ".ts", ".js"],
       alias
-    },
-    build: {
-      rollupOptions: {
-        input: "./index.html"
-      }
     },
     define,
     plugins: [
-      tsconfigPaths()
+      tsconfigPaths(),
+      svelte({
+        preprocess: sveltePreprocess({
+          sourceMap: false,
+          postcss: {
+            plugins: [
+              tailwindcss('./../shared/tailwind.config.js'),
+            ]
+          }
+        })
+      })
     ]
   }
 })

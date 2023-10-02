@@ -9,6 +9,8 @@ export const CHANNEL_NAME = getChannelName()
 export const APP_ARTIFACT = getAppArtifact()
 export const appNameBase =
     STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+export const KEYCHAIN_SERVICE_NAME_PACKAGED = getKeychainServiceName(true);
+export const KEYCHAIN_SERVICE_NAME_NOT_PACKAGED = getKeychainServiceName(true);
 
 export function getAppArtifact() {
     return `firefly-${NETWORK}-desktop-\${version}.\${ext}`
