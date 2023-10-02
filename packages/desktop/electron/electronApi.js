@@ -1,16 +1,16 @@
-const { ipcRenderer } = require('electron')
+import { ipcRenderer } from 'electron'
 
-const fs = require('fs')
-const PincodeManager = require('./lib/pincodeManager')
-const DeepLinkManager = require('./lib/deepLinkManager')
-const NotificationManager = require('./lib/notificationManager')
-const { menuState } = require('./lib/menuState')
-const features = require('../features/features').default
+import fs from 'fs'
+import PincodeManager from './lib/pincodeManager'
+import DeepLinkManager from './lib/deepLinkManager'
+import NotificationManager from './lib/notificationManager'
+import { menuState } from './lib/menuState'
+import features  from '../features/features'
 
 let activeProfileId = null
 const eventListeners = {}
 
-const ElectronApi = {
+export default {
     updateAppSettings(settings) {
         return ipcRenderer.invoke('update-app-settings', settings)
     },
@@ -344,5 +344,3 @@ const ElectronApi = {
         return ipcRenderer.send('kill-ledger-process')
     },
 }
-
-module.exports = ElectronApi

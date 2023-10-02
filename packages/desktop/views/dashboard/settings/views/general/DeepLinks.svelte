@@ -12,6 +12,6 @@
 
 <Text type="h4" classes="mb-3">{localize('views.settings.deepLinks.title')}</Text>
 <Text type="p" secondary classes="mb-5"
-    >{localize('views.settings.deepLinks.description', { values: { appProtocol: process.env.APP_PROTOCOL } })}</Text
+    >{localize('views.settings.deepLinks.description', { values: { appProtocol: APP_PROTOCOL } })}</Text
 >
 <Checkbox label={localize('actions.enableDeepLinks')} bind:checked={deepLinkingChecked} />

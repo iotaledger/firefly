@@ -1,16 +1,16 @@
 /* eslint-disable */
-const PRODUCT_NAME = 'Firefly Shimmer'
-const NETWORK = 'shimmer'
+export const PRODUCT_NAME = 'Firefly Shimmer'
+export const NETWORK = 'shimmer'
 
-const STAGE = process.env.STAGE || 'alpha'
-const APP_ID = getAppId()
-const APP_PROTOCOL = getAppProtocol()
-const CHANNEL_NAME = getChannelName()
-const APP_ARTIFACT = getAppArtifact()
-const appNameBase =
+export const STAGE = process.env.STAGE || 'alpha'
+export const APP_ID = getAppId()
+export const APP_PROTOCOL = getAppProtocol()
+export const CHANNEL_NAME = getChannelName()
+export const APP_ARTIFACT = getAppArtifact()
+export const appNameBase =
     STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
 
-function getAppArtifact() {
+export function getAppArtifact() {
     return `firefly-${NETWORK}-desktop-\${version}.\${ext}`
 }
 
@@ -19,7 +19,7 @@ function getAppArtifact() {
  * If stage = 'alpha' & packaged -> 'Firefly Alpha'
  * If stage = 'alpha' & dev -> 'Firefly — Dev'
  */
-function getKeychainServiceName(isPackaged) {
+export function getKeychainServiceName(isPackaged) {
     if (isPackaged) {
         return appNameBase
     } else {
@@ -32,7 +32,7 @@ function getKeychainServiceName(isPackaged) {
  * If stage = 'alpha' & packaged -> 'Firefly Alpha'
  * If stage = 'alpha' & dev -> 'Firefly'
  */
-function getAppName(isPackaged = true) {
+export function getAppName(isPackaged = true) {
     if (isPackaged) {
         return appNameBase
     } else {
@@ -46,7 +46,7 @@ function getAppName(isPackaged = true) {
  * If network = 'iota' -> 'iota',
  * If network = 'shimmer' -> 'firefly'
  */
-function getAppProtocol() {
+export function getAppProtocol() {
     return STAGE === 'prod' ? 'firefly' : `firefly-${STAGE.toLowerCase()}`
 }
 
@@ -54,7 +54,7 @@ function getAppProtocol() {
  * If stage = 'prod' -> 'org.iota.firefly-shimmer'
  * If stage = 'alpha' -> 'org.iota.firefly-shimmer.alpha'
  */
-function getAppId() {
+export function getAppId() {
     const defaultAppId = 'org.iota.firefly-shimmer'
     if (STAGE === 'prod') {
         return defaultAppId
@@ -62,7 +62,7 @@ function getAppId() {
     return `${defaultAppId}.${STAGE}`
 }
 
-function getChannelName() {
+export function getChannelName() {
     switch (STAGE) {
         case 'alpha':
             return 'shimmer-alpha'
@@ -73,15 +73,3 @@ function getChannelName() {
     }
 }
 
-module.exports = {
-    STAGE,
-    APP_ID,
-    APP_PROTOCOL,
-    CHANNEL_NAME,
-    APP_ARTIFACT,
-    PRODUCT_NAME,
-    getAppName,
-    getKeychainServiceName,
-    NETWORK,
-    appNameBase,
-}

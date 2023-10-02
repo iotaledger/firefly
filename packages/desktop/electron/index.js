@@ -1,12 +1,12 @@
 // Modules to control application life and create native browser window
 import features from '@features/features'
-import { initAutoUpdate } from './lib/appUpdater'
-import { initNftDownloadHandlers } from './lib/nftDownloadHandlers'
-import { shouldReportError } from './lib/errorHandling'
+import { initAutoUpdate } from './lib/appUpdater.js'
+import { initNftDownloadHandlers } from './lib/nftDownloadHandlers.js'
+import { shouldReportError } from './lib/errorHandling.js'
 import { initialiseAnalytics } from './lib/analytics'
-import { getMachineId } from './lib/machineId'
-import { getDiagnostics } from './lib/diagnostics'
-const {
+import { getMachineId } from './lib/machineId.js'
+import { getDiagnostics } from './lib/diagnostics.js'
+import {
     app,
     dialog,
     ipcMain,
@@ -14,14 +14,14 @@ const {
     shell,
     BrowserWindow,
     session,
-    utilityProcess,
     nativeTheme,
     powerMonitor,
-} = require('electron')
-const path = require('path')
-const fs = require('fs')
-const Keychain = require('./lib/keychain')
-const { initMenu, contextMenu } = require('./lib/menu')
+} from 'electron'
+import path from 'node:path'
+import fs from 'node:fs'
+import Keychain from './lib/keychain.js'
+import { initMenu, contextMenu } from './lib/menu.js'
+import { initializeSentry } from '../sentry'
 
 initialiseAnalytics()
 
@@ -37,10 +37,6 @@ const canSendCrashReports = () => {
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 
-let captureException = (..._) => {}
-if (SEND_CRASH_REPORTS) {
-    captureException = require('../sentry')(true).captureException
-}
 
 /**
  * Set AppUserModelID for Windows notifications functionality
@@ -73,7 +69,7 @@ let lastError = {}
 /**
  * Setup the error handlers early so they catch any issues
  */
-const handleError = (errorType, error, isRenderProcessError) => {
+const handleError = async (errorType, error, isRenderProcessError) => {
     if (app.isPackaged) {
         const errorMessage = error.message || error.reason || error
         if (!shouldReportError(errorMessage)) {
@@ -92,6 +88,7 @@ const handleError = (errorType, error, isRenderProcessError) => {
          * the main process.
          */
         if (SEND_CRASH_REPORTS) {
+            const { captureException } = initializeSentry(true)
             const sentryError = new Error(`${errorType} - ${errorMessage}`)
             if (error.stack) {
                 sentryError.stack = error.stack
@@ -166,8 +163,7 @@ if (app.isPackaged) {
     paths.errorHtml = path.join(app.getAppPath(), '/public/error.html')
 } else {
     // __dirname is desktop/public/build
-    paths.preload = path.join(__dirname, 'preload.js')
-    paths.html = path.join(__dirname, '../index.html')
+    paths.preload = path.join(__dirname, '../preload/preload.js')
     paths.aboutPreload = path.join(__dirname, 'lib/aboutPreload.js')
     paths.aboutHtml = path.join(__dirname, '../about.html')
     paths.errorPreload = path.join(__dirname, 'lib/errorPreload.js')
@@ -178,7 +174,7 @@ if (app.isPackaged) {
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
-    if (url === 'http://localhost:8080/') {
+    if (url === 'http://localhost:5173') {
         // if localhost would be opened on the build versions, we need to block it to prevent errors
         if (app.isPackaged) {
             e.preventDefault()
@@ -204,8 +200,8 @@ function createWindow() {
      * Register firefly file protocol
      */
     try {
-        protocol.registerFileProtocol(process.env.APP_PROTOCOL, (request, callback) => {
-            callback(request.url.replace(`${process.env.APP_PROTOCOL}:/`, app.getAppPath()).split('?')[0].split('#')[0])
+        protocol.registerFileProtocol(APP_PROTOCOL, (request, callback) => {
+            callback(request.url.replace(`${APP_PROTOCOL}:/`, app.getAppPath()).split('?')[0].split('#')[0])
         })
     } catch (err) {
         console.error(err)
@@ -224,7 +220,7 @@ function createWindow() {
         frame: process.platform === 'linux',
         icon:
             process.platform === 'linux'
-                ? path.join(__dirname, `../assets/icons/${process.env.STAGE}/icon1024x1024.png`)
+                ? path.join(__dirname, `../assets/icons/${STAGE}/icon1024x1024.png`)
                 : undefined,
         webPreferences: {
             ...defaultWebPreferences,
@@ -244,7 +240,7 @@ function createWindow() {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
 
-        windows.main.loadURL('http://localhost:8080')
+        windows.main.loadURL('http://localhost:5173')
     } else {
         initAutoUpdate()
 
@@ -472,7 +468,7 @@ if (!isFirstInstance) {
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`))
+            const params = args.find((arg) => arg.startsWith(`${APP_PROTOCOL}://`))
 
             if (params) {
                 windows.main.webContents.send('deep-link-params', params)
@@ -490,14 +486,14 @@ app.on('second-instance', (_e, args) => {
  * Set Firefly as the default handler for iota:// protocol
  */
 protocol.registerSchemesAsPrivileged([
-    { scheme: process.env.APP_PROTOCOL, privileges: { secure: true, standard: true } },
+    { scheme: APP_PROTOCOL, privileges: { secure: true, standard: true } },
 ])
 if (process.defaultApp) {
     if (process.argv.length >= 2) {
-        app.setAsDefaultProtocolClient(process.env.APP_PROTOCOL, process.execPath, [path.resolve(process.argv[1])])
+        app.setAsDefaultProtocolClient(APP_PROTOCOL, process.execPath, [path.resolve(process.argv[1])])
     }
 } else {
-    app.setAsDefaultProtocolClient(process.env.APP_PROTOCOL)
+    app.setAsDefaultProtocolClient(APP_PROTOCOL)
 }
 
 /**

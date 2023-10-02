@@ -6,22 +6,20 @@
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
 
-const { ipcRenderer, contextBridge } = require('electron')
-const ElectronApi = require('./electronApi')
+import { ipcRenderer, contextBridge } from 'electron'
+import ElectronApi from './electronApi'
 const IotaSdk = require('@iota/sdk')
-const fs = require('fs')
+import fs from 'fs'
+import { initializeSentry } from '../sentry'
 
 const SEND_CRASH_REPORTS = window.process.argv.includes('--send-crash-reports=true')
-let captureException = (..._) => {}
-
-if (SEND_CRASH_REPORTS) {
-    captureException = require('../sentry')(true).captureException
-}
 
 const profileManagers = {}
 
 // Hook the error handlers as early as possible
-window.addEventListener('error', (event) => {
+window.addEventListener('error', async (event) => {
+    const { captureException } = initializeSentry(true)
+
     if (event.error && event.error.message) {
         ipcRenderer.invoke('handle-error', '[Preload Context] Error', {
             message: event.error.message,
@@ -49,7 +47,7 @@ window.addEventListener('unhandledrejection', (event) => {
 })
 
 try {
-    if (process.env.STAGE === 'prod') {
+    if (STAGE === 'prod') {
         // empty
     } else {
         ipcRenderer.invoke('get-path', 'userData').then(async (baseDir) => {

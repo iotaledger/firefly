@@ -1,11 +1,11 @@
-const { ipcRenderer } = require('electron')
+import { ipcRenderer } from 'electron'
 
 /**
  * Create and show a native notification
  * @param {string} message - the notification message
  * @param {any} metadata - data to associate with the notification
  */
-const NotificationManager = {
+export default {
     notify(message, contextData) {
         // APP_NAME is replaced by Webpack
         // eslint-disable-next-line no-undef
@@ -19,5 +19,3 @@ const NotificationManager = {
         }
     },
 }
-
-module.exports = NotificationManager

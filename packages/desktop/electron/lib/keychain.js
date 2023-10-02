@@ -1,9 +1,9 @@
 const keytar = require('keytar')
-const { app } = require('electron')
-const { getKeychainServiceName } = require('./../../product')
+import { app } from'electron'
+import { getKeychainServiceName } from '../../product'
 
 /** Keychain object */
-const Keychain = {
+export default {
     /**
      * Service name — Key under which credentials will be stored.
      */
@@ -56,5 +56,3 @@ const Keychain = {
         return keytar.deletePassword(this.SERVICE_NAME, key)
     },
 }
-
-module.exports = Keychain

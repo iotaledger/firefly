@@ -1,14 +1,13 @@
-const { contextBridge, ipcRenderer } = require('electron')
-const { version, productName } = require('../../package.json')
+import { contextBridge, ipcRenderer } from 'electron'
+import { version, productName } from '../../package.json'
 
 contextBridge.exposeInMainWorld('about', {
     getData: () =>
         ipcRenderer.invoke('menu-data').then((data) => {
-            const stage = process.env.STAGE
             const aboutData = {
                 appName: productName,
                 version: data.strings.version.replace('{version}', version),
-                iconPath: `./assets/logos/darkmode/${stage}_firefly_logo.svg`,
+                iconPath: `./assets/logos/darkmode/${STAGE}_firefly_logo.svg`,
             }
 
             return aboutData

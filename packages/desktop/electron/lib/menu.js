@@ -1,8 +1,8 @@
 import { app, ipcMain, Menu, shell } from 'electron'
 import { DISCORD_URL, DOCUMENTATION_URL, FAQ_URL, ISSUE_REPORT_URL } from '@contexts/settings/constants'
 import features from '@features/features'
-import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../main'
-import { menuState } from './menuState'
+import { closeAboutWindow, getOrInitWindow, openAboutWindow } from '../index.js'
+import { menuState } from './menuState.js'
 
 let state = menuState
 

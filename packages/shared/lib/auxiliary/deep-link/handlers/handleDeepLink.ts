@@ -29,8 +29,8 @@ export function handleDeepLink(input: string): void {
 
     try {
         const url = new URL(input)
-        if (url.protocol !== `${process.env.APP_PROTOCOL}:`) {
-            throw new Error(`Does not start with ${process.env.APP_PROTOCOL}://`)
+        if (url.protocol !== `${APP_PROTOCOL}:`) {
+            throw new Error(`Does not start with ${APP_PROTOCOL}://`)
         }
 
         if (get(visibleActiveAccounts).length > 1) {
@@ -57,7 +57,7 @@ export function handleDeepLink(input: string): void {
 function handleDeepLinkForHostname(url: URL): void {
     // Convert to a stardust deeplink if it's following the crysalis schema
     try {
-        url = convertChrysalisDeepLinkToStardust(url, process.env.APP_PROTOCOL)
+        url = convertChrysalisDeepLinkToStardust(url, APP_PROTOCOL)
     } catch (_) {
         // We assume the URL is actually just not following chrysalis schema
     }

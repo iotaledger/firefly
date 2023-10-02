@@ -1,7 +1,7 @@
-import { getOrInitWindow, updateAppVersionDetails } from '../main'
-const { ipcMain } = require('electron')
-const { autoUpdater, CancellationToken } = require('electron-updater')
-const electronLog = require('electron-log')
+import { getOrInitWindow, updateAppVersionDetails } from '../index.js'
+import { ipcMain } from 'electron'
+import { autoUpdater, CancellationToken } from 'electron-updater'
+import electronLog from 'electron-log'
 
 let downloadCancellation
 let ipcHandlersRegistered = false

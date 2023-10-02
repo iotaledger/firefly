@@ -43,7 +43,7 @@
     import features from '@features/features'
     import { OnboardingRouterView } from '@views/onboarding'
 
-    appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
+    appStage.set(AppStage[STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
     const { loggedIn, hasLoadedAccounts } = $activeProfile
 

@@ -1,8 +1,7 @@
-import { getOrInitWindow } from '../main'
+import { getOrInitWindow } from '../index.js'
 
-const { app, ipcMain } = require('electron')
-const { download } = require('electron-dl')
-const fs = require('fs')
+import { app, ipcMain } from 'electron'
+import { download } from 'electron-dl'
 
 const downloadItems = {}
 

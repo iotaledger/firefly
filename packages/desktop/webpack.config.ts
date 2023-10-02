@@ -135,8 +135,8 @@ const mainPlugins = [
         PRODUCT_NAME: JSON.stringify(PRODUCT_NAME),
         APP_ID: JSON.stringify(APP_ID),
         'process.env.STAGE': JSON.stringify(STAGE),
-        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
-        'process.env.AMPLITUDE_API_KEY': JSON.stringify(process.env.AMPLITUDE_API_KEY),
+        'APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
+        'AMPLITUDE_API_KEY': JSON.stringify(AMPLITUDE_API_KEY),
     }),
 ]
 
@@ -171,7 +171,7 @@ const rendererPlugins = [
         SENTRY_MAIN_PROCESS: JSON.stringify(false),
         SENTRY_ENVIRONMENT: JSON.stringify(STAGE),
         PRELOAD_SCRIPT: JSON.stringify(false),
-        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
+        'APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
     }),
 ]
 
@@ -184,7 +184,7 @@ const preloadPlugins = [
         PRELOAD_SCRIPT: JSON.stringify(true),
         APP_NAME: JSON.stringify(getAppName(prod)),
         'process.env.STAGE': JSON.stringify(STAGE),
-        'process.env.APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
+        'APP_PROTOCOL': JSON.stringify(APP_PROTOCOL),
     }),
 ]
 

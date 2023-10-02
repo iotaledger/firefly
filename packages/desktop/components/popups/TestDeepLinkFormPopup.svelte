@@ -5,7 +5,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
 
-    const PREFIX = process.env.APP_PROTOCOL + '://'
+    const PREFIX = APP_PROTOCOL + '://'
     let url: string = PREFIX
 
     function onCancelClick(): void {
