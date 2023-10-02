@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, openPopup, popupState } from '@auxiliary/popup'
     import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
     import {
@@ -9,6 +10,7 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
+    import { NetworkId } from '@core/network/enums'
     import { ProfileType, activeProfile, login, migrateDbChrysalisToStardust, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
@@ -105,12 +107,22 @@
                     $loginRouter.next()
                 }
                 if ($activeProfile?.needsChrysalisToStardustDbMigration) {
-                    const dbMigrationSuccess = await migrateDbChrysalisToStardust($activeProfile?.id, pinCode)
-                    if (dbMigrationSuccess) {
-                        showBalanceOverviewPopup.set(true)
-                        _onSuccess()
-                    } else {
+                    if ($activeProfile?.network?.id === NetworkId.IotaAlphanet) {
+                        // if a profile needs DB migration and it on Alphanet it means it was created on Chrysalis Devnet
+                        // and Devnet will not be upgraded to Stardust
+                        showAppNotification({
+                            type: 'error',
+                            message: localize('error.profile.chrysalisDevnetStardustError'),
+                        })
                         isBusy = false
+                    } else {
+                        const dbMigrationSuccess = await migrateDbChrysalisToStardust($activeProfile?.id, pinCode)
+                        if (dbMigrationSuccess) {
+                            showBalanceOverviewPopup.set(true)
+                            _onSuccess()
+                        } else {
+                            isBusy = false
+                        }
                     }
                 } else {
                     _onSuccess()
