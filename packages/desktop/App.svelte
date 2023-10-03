@@ -207,7 +207,7 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-    @import '../style/style.scss';
+    @import './src/renderer/fonts.scss';
     html,
     body {
         @apply bg-white dark:bg-gray-900;

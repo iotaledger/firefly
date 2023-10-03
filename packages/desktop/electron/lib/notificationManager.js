@@ -7,7 +7,7 @@ import { ipcRenderer } from 'electron'
  */
 export default {
     notify(message, contextData) {
-        // APP_NAME is replaced by Webpack
+        // APP_NAME is replaced by Vite
         // eslint-disable-next-line no-undef
         const notification = new Notification(APP_NAME, {
             body: message,

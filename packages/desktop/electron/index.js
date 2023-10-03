@@ -41,7 +41,7 @@ const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
 /**
  * Set AppUserModelID for Windows notifications functionality
  */
-// APP_ID is replaced by Webpack
+// APP_ID is replaced by Vite
 // eslint-disable-next-line no-undef
 app.setAppUserModelId(APP_ID)
 

@@ -1,7 +1,7 @@
 export const menuState = {
     enabled: true,
     strings: {
-        // APP_NAME is replaced by Webpack
+        // APP_NAME is replaced by Vite
         // eslint-disable-next-line no-undef
         about: `About ${APP_NAME}`,
         checkForUpdates: 'Check for Updates',

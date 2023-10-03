@@ -8,11 +8,7 @@
     "author": "IOTA Foundation <contact@iota.org>",
     "license": "Apache-2.0",
     "scripts": {
-        "dev": "electron-vite dev",
-        "start": "npm-run-all -p start:dev start:electron",
-        "start:dev": "cross-env NODE_ENV=development PLATFORM=desktop vite",
-        "start:electron": "cross-env NODE_ENV=development PLATFORM=desktop electron --no-sandbox public/build/main.js",
-        "start:electron-prod": "cross-env NODE_ENV=production PLATFORM=desktop electron public/build/main.js",
+        "start": "cross-env NODE_ENV=development PLATFORM=desktop electron-vite dev",
         "build": "yarn build:alpha",
         "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
         "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=alpha webpack",
