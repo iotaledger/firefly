@@ -1,6 +1,7 @@
 import { parseLayer2Metadata, getDestinationNetworkFromAddress } from '@core/layer-2/utils'
 import { Layer2Metadata } from '@core/layer-2/types'
 import { SenderInfo } from '../../../types'
+import { SubjectType } from '@core/wallet/enums'
 
 export function getLayer2ActivityInformation(
     metadata: string,
@@ -14,7 +15,7 @@ export function getLayer2ActivityInformation(
     try {
         parsedLayer2Metadata = parseLayer2Metadata(metadata)
         destinationNetwork = getDestinationNetworkFromAddress(
-            sendingInfo.subject?.type === 'address' ? sendingInfo.subject.address : undefined
+            sendingInfo.subject?.type === SubjectType.Address ? sendingInfo.subject.address : undefined
         )
     } catch (_err) {
         parsedLayer2Metadata = null
