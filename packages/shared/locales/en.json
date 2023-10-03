@@ -1338,6 +1338,7 @@
         "viewDownloads" : "View downloads",
         "viewStatus": "View status",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyAddress": "Verify address",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
