@@ -31,7 +31,7 @@
 
     $: darkModeEnabled = $appSettings.darkMode
     $: selected = logos[logo]?.[$appStage]
-    $: logoSrc = darkModeEnabled ? `assets/logos/darkmode/${selected}` : `assets/logos/lightmode/${selected}`
+    $: logoSrc = darkModeEnabled ? `/logos/darkmode/${selected}` : `/logos/lightmode/${selected}`
 </script>
 
 {#if selected}

@@ -69,10 +69,16 @@ export default defineConfig({
     ]
   },
   renderer: {
+    server: {
+      open: false,
+    },
     base: './',
     resolve: {
       extensions: [".svelte", ".ts", ".js"],
       alias
+    },
+    build: {
+      target: "esnext"
     },
     define,
     plugins: [

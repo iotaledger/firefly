@@ -10,6 +10,7 @@
     export let autoplay: boolean = true
     export let segments: AnimationSegment | AnimationSegment[] | undefined = undefined
     export let renderer: AnimationRenderer = AnimationRenderer.Svg
+    const animations = import.meta.glob('../../../assets/animations/**/*.json')
 
     let container: HTMLElement
     let lottieAnimation: AnimationItem
@@ -18,15 +19,19 @@
     $: selected = animation ? ANIMATIONS[animation]?.[darkModeEnabled ? 'darkmode' : 'lightmode'] : null
 
     $: if (selected && container) {
-        const options = {
-            container,
-            renderer,
-            path: `assets/animations/${selected}`,
-            loop,
-            autoplay,
-        }
-        destroyAnimation()
-        lottieAnimation = lottie.loadAnimation(options)
+        const animationPath = `../assets/animations/${selected}`
+        import(animationPath)
+            .then((animationData) => {
+                const options = {
+                    container,
+                    renderer,
+                    animationData: {...animationData},
+                    loop,
+                    autoplay,
+                }
+                destroyAnimation()
+                lottieAnimation = lottie.loadAnimation(options)
+            })
     }
 
     $: if (lottieAnimation && segments) {

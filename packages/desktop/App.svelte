@@ -207,7 +207,7 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
-    @import '../shared/style/style.scss';
+    @import '../style/style.scss';
     html,
     body {
         @apply bg-white dark:bg-gray-900;

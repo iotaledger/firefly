@@ -1,7 +1,7 @@
 /** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Webpack at compile-time. */
 
 let alreadyInitialized = false;
-const Sentry = undefined;
+let Sentry = undefined;
 
 export const initializeSentry = async (initialize) => {
 

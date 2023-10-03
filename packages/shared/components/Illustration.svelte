@@ -18,7 +18,7 @@
         width={width || '100%'}
         height={height || '100%'}
         style={`z-index: ${zIndex}`}
-        src={`assets/illustrations/${selected}`}
+        src={`illustrations/${selected}`}
         alt=""
     />
 {:else}

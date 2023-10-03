@@ -7,7 +7,8 @@
             http-equiv="Content-Security-Policy"
             content="
             default-src 'self';
-            connect-src 'self' https://*.iota.org https://*.iota.works https://*.iota.cafe https://raw.githubusercontent.com/iotaledger/firefly/main/packages/shared/lib/chrysalis.json https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/ https://d36tzso9lqxl3c.cloudfront.net/results/staking/ https://iotatreasury.org/how-voting-works.html;
+            img-src 'self' data:;
+            connect-src 'self' https://api.coingecko.com https://*.iota.org https://*.iota.works https://*.iota.cafe https://raw.githubusercontent.com/iotaledger/firefly/main/packages/shared/lib/chrysalis.json https://raw.githubusercontent.com/iotaledger/participation-events/master/results/staking/ https://d36tzso9lqxl3c.cloudfront.net/results/staking/ https://iotatreasury.org/how-voting-works.html;
             object-src 'none';
             style-src 'self' 'unsafe-inline';
             media-src 'self' https://d17lo1ro77zjnd.cloudfront.net/firefly/videos/ledger_integration_v12.mp4"

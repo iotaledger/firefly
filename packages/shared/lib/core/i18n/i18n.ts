@@ -5,6 +5,7 @@ import { appSettings } from '@core/app/stores'
 
 import { DEFAULT_LOCALE_OPTIONS, SUPPORTED_LOCALES } from './constants'
 import { LocaleOptions } from './types'
+const locales = import.meta.glob('../../../locales/*.json')
 
 /*
  * Code following https://phrase.com/blog/posts/a-step-by-step-guide-to-svelte-localization-with-svelte-i18n-v3/
@@ -24,18 +25,14 @@ function hasLoadedLocale(locale: string): boolean {
     return locale in get(dictionary)
 }
 
-function loadJson(url: string): Promise<LocaleDictionary> {
-    return fetch(url).then((response) => response.json())
-}
-
 async function loadLocaleMessages(locale: string): Promise<void> {
     const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace('{locale}', locale)
-    const localeDictionary = await loadJson(messagesFileUrl)
+    const localeDictionary = await locales[messagesFileUrl]()
 
     addMessages(locale, localeDictionary)
 }
 
-const MESSAGE_FILE_URL_TEMPLATE = 'locales/{locale}.json'
+const MESSAGE_FILE_URL_TEMPLATE = '../../../locales/{locale}.json'
 
 /**
  * Initializes and loads the appropriate i18n dictionary given
