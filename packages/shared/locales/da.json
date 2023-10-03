@@ -1438,7 +1438,7 @@
         "shimmerClaiming": "Modtager",
         "shimmerGenesis": "Shimmer Genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Mintet",
         "minting": "Mintning",
         "burned": "Brændt",
@@ -1878,7 +1878,7 @@
             },
             "type": "Profiltypen kan ikke bestemmes",
             "setupType": "Profilopsætningstypen kan ikke bestemmes",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Denne profil kan ikke tilgås, da Chrysalis Devnet er uunderstøttet i denne Firefly-version. Benyt i stedet en Chrysalis-kompatibel Firefly-version."
         },
         "password": {
             "doNotMatch": "Adgangskoderne er ikke ens.",
