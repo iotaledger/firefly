@@ -6,7 +6,7 @@ const prodConfig = () => ({
     productName: getAppName(),
     artifactName: APP_ARTIFACT,
     copyright: 'IOTA Foundation',
-    directories: { buildResources: './public', output: './out' },
+    directories: { buildResources: './src/renderer/public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/sdk/target/*'],
     appId: APP_ID,
     afterSign: async () => {
@@ -34,10 +34,10 @@ const prodConfig = () => ({
         oneClick: true,
         deleteAppDataOnUninstall: false,
         perMachine: true,
-        include: 'public/installer.nsh',
+        include: './src/renderer/public/installer.nsh',
     },
     win: {
-        icon: './public/assets/icons/prod/icon1024x1024.png',
+        icon: './src/renderer/public/assets/icons/prod/icon1024x1024.png',
         publisherName: 'IOTA Stiftung',
         target: 'nsis',
         timeStampServer: 'http://timestamp.sectigo.com',
@@ -51,11 +51,11 @@ const prodConfig = () => ({
             Categories: 'Office;Network;Finance',
             MimeType: `x-scheme-handler/${APP_PROTOCOL}`,
         },
-        icon: './public/assets/icons/prod/icon1024x1024.png',
+        icon: './src/renderer/public/assets/icons/prod/icon1024x1024.png',
         mimeTypes: [`x-scheme-handler/${APP_PROTOCOL}`],
     },
     mac: {
-        icon: './public/assets/icons/prod/icon1024x1024.png',
+        icon: './src/renderer/public/assets/icons/prod/icon1024x1024.png',
         category: 'public.app-category.finance',
         target: ['dmg', 'zip'],
         entitlements: './entitlements.mac.plist',
@@ -73,7 +73,7 @@ const prodConfig = () => ({
 })
 
 function getIconPaths() {
-    const PATH = './public/assets/icons'
+    const PATH = './src/renderer/public/assets/icons'
     const NAME = 'icon1024x1024'
     const EXTENSION = 'png'
 

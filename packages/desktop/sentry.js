@@ -41,6 +41,6 @@ export const initializeSentry = async (initialize) => {
     }
 
     return {
-        captureException: Sentry.captureException,
+        captureException: Sentry?.captureException || function (..._) {},
     }
 }

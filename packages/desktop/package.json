@@ -10,10 +10,9 @@
     "scripts": {
         "start": "cross-env NODE_ENV=development PLATFORM=desktop electron-vite dev",
         "build": "yarn build:alpha",
-        "build:dev": "cross-env NODE_ENV=development PLATFORM=desktop webpack",
-        "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=alpha webpack",
-        "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=beta webpack",
-        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=prod webpack",
+        "build:alpha": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=alpha electron-vite build",
+        "build:beta": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=beta  electron-vite build",
+        "build:prod": "cross-env NODE_ENV=production PLATFORM=desktop STAGE=prod  electron-vite build",
         "compile:alpha:linux": "cross-env STAGE=alpha electron-builder --linux --x64 --config electron-builder-config.js",
         "compile:alpha:mac": "cross-env STAGE=alpha electron-builder --mac --x64 --config electron-builder-config.js",
         "compile:alpha:win": "cross-env STAGE=alpha electron-builder --win --x64 --config electron-builder-config.js",

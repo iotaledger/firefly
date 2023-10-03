@@ -5,7 +5,7 @@ import { Electron } from '../../lib/electron'
 import { shouldReportError } from '../../electron/lib/errorHandling'
 import { initializeSentry } from '../../sentry'
 
-const captureException = initializeSentry(false).captureException || function (..._) {}
+const { captureException } = initializeSentry(false)
 
 window.addEventListener('error', (event) => {
     const errorType = '[Render Context] Error'

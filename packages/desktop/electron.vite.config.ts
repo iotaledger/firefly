@@ -50,6 +50,9 @@ const define = {
 
 export default defineConfig({
     main: {
+        server: {
+            open: false,
+        },
         resolve: {
             alias,
         },
@@ -62,6 +65,9 @@ export default defineConfig({
         plugins: [tsconfigPaths()],
     },
     preload: {
+        server: {
+            open: false,
+        },
         resolve: {
             alias,
         },
@@ -74,6 +80,9 @@ export default defineConfig({
         plugins: [tsconfigPaths()],
     },
     renderer: {
+        optimizeDeps: {
+            exclude: ["@sentry/electron"]
+        },
         server: {
             open: false,
         },
@@ -84,6 +93,7 @@ export default defineConfig({
         },
         build: {
             target: 'esnext',
+            minify: false
         },
         define,
         plugins: [
