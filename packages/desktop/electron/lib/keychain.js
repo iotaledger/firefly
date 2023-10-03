@@ -1,5 +1,5 @@
 const keytar = require('keytar')
-import { app } from'electron'
+import { app } from 'electron'
 
 /** Keychain object */
 export default {

@@ -5,7 +5,7 @@ import PincodeManager from './lib/pincodeManager'
 import DeepLinkManager from './lib/deepLinkManager'
 import NotificationManager from './lib/notificationManager'
 import { menuState } from './lib/menuState'
-import features  from '../features/features'
+import features from '../features/features'
 
 let activeProfileId = null
 const eventListeners = {}

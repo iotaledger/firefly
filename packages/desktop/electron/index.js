@@ -6,17 +6,7 @@ import { shouldReportError } from './lib/errorHandling.js'
 import { initialiseAnalytics } from './lib/analytics'
 import { getMachineId } from './lib/machineId.js'
 import { getDiagnostics } from './lib/diagnostics.js'
-import {
-    app,
-    dialog,
-    ipcMain,
-    protocol,
-    shell,
-    BrowserWindow,
-    session,
-    nativeTheme,
-    powerMonitor,
-} from 'electron'
+import { app, dialog, ipcMain, protocol, shell, BrowserWindow, session, nativeTheme, powerMonitor } from 'electron'
 import path from 'node:path'
 import fs from 'node:fs'
 import Keychain from './lib/keychain.js'
@@ -36,7 +26,6 @@ const canSendCrashReports = () => {
 }
 const CAN_LOAD_SENTRY = app.isPackaged
 const SEND_CRASH_REPORTS = CAN_LOAD_SENTRY && canSendCrashReports()
-
 
 /**
  * Set AppUserModelID for Windows notifications functionality
@@ -485,9 +474,7 @@ app.on('second-instance', (_e, args) => {
  * Register iota:// protocol for deep links
  * Set Firefly as the default handler for iota:// protocol
  */
-protocol.registerSchemesAsPrivileged([
-    { scheme: APP_PROTOCOL, privileges: { secure: true, standard: true } },
-])
+protocol.registerSchemesAsPrivileged([{ scheme: APP_PROTOCOL, privileges: { secure: true, standard: true } }])
 if (process.defaultApp) {
     if (process.argv.length >= 2) {
         app.setAsDefaultProtocolClient(APP_PROTOCOL, process.execPath, [path.resolve(process.argv[1])])

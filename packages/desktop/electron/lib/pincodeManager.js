@@ -1,4 +1,4 @@
-import { ipcRenderer } from  'electron'
+import { ipcRenderer } from 'electron'
 
 /** Pincode Manager  */
 // Runs in renderer process
@@ -43,4 +43,3 @@ export default {
         return ipcRenderer.invoke('keychain-remove', key)
     },
 }
-

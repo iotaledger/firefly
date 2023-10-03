@@ -1,15 +1,15 @@
 /** NOTE: SENTRY_MAIN_PROCESS, SENTRY_DSN, SENTRY_ENVIRONMENT, and PRELOAD_SCRIPT are replaced by Vite at compile-time. */
 
-let alreadyInitialized = false;
-let Sentry = undefined;
+let alreadyInitialized = false
+let Sentry = undefined
 
 export const initializeSentry = async (initialize) => {
-
     if (alreadyInitialized == false) {
-        Sentry = SENTRY_MAIN_PROCESS ? await import('@sentry/electron/dist/main') : await import('@sentry/electron/dist/renderer')
+        Sentry = SENTRY_MAIN_PROCESS
+            ? await import('@sentry/electron/dist/main')
+            : await import('@sentry/electron/dist/renderer')
 
         /* eslint-disable-next-line no-undef */
-
 
         const debug = true
         /* eslint-disable no-undef */
@@ -39,8 +39,6 @@ export const initializeSentry = async (initialize) => {
             Sentry.setUser({ id: machineId })
         }
     }
-
-
 
     return {
         captureException: Sentry.captureException,

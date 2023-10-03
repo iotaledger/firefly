@@ -6,7 +6,6 @@
     import { setClipboard } from '@core/utils'
     import { onMount } from 'svelte'
 
-
     const { loggedIn } = $activeProfile ?? {}
 
     let contentApp = ''

@@ -20,18 +20,17 @@
 
     $: if (selected && container) {
         const animationPath = `../assets/animations/${selected}`
-        import(animationPath)
-            .then((animationData) => {
-                const options = {
-                    container,
-                    renderer,
-                    animationData: {...animationData},
-                    loop,
-                    autoplay,
-                }
-                destroyAnimation()
-                lottieAnimation = lottie.loadAnimation(options)
-            })
+        import(animationPath).then((animationData) => {
+            const options = {
+                container,
+                renderer,
+                animationData: { ...animationData },
+                loop,
+                autoplay,
+            }
+            destroyAnimation()
+            lottieAnimation = lottie.loadAnimation(options)
+        })
     }
 
     $: if (lottieAnimation && segments) {
