@@ -80,9 +80,6 @@ export default defineConfig({
         plugins: [tsconfigPaths()],
     },
     renderer: {
-        optimizeDeps: {
-            exclude: ["@sentry/electron"]
-        },
         server: {
             open: false,
         },
