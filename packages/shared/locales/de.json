@@ -1878,7 +1878,7 @@
             },
             "type": "Profiltyp konnte nicht ermittelt werden",
             "setupType": "Profil-Setup-Typ kann nicht ermittelt werden",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Du kannst nicht auf dieses Profil zugreifen, da das Chrysalis Devnet in dieser Version von Firefly nicht unterstützt wird. Bitte verwende eine Chrysalis kompatible Firefly Version."
         },
         "password": {
             "doNotMatch": "Die Passwörter stimmen nicht überein.",
