@@ -9,12 +9,11 @@
     import { Icon } from '@auxiliary/icon/enums'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { profileManager } from '@core/profile-manager'
-    import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
+    import { checkOrConnectLedger } from '@core/ledger'
     import { showAppNotification } from '@auxiliary/notification'
+    import { handleError } from '@core/error/handlers'
 
     export let modal: Modal = undefined
-
-    let error = ''
 
     const showDeleteAccount =
         $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
@@ -31,36 +30,25 @@
 
     function onVerifyAddressClick(): void {
         const ADDRESS_INDEX = 0
-        try {
-            error = ''
-            if ($profileManager && $selectedAccount) {
-                if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
-                    displayNotificationForLedgerProfile('warning')
-                    return
+        checkOrConnectLedger(() => {
+            try {
+                if ($profileManager && $selectedAccount && $isActiveLedgerProfile) {
+                    $profileManager.generateEd25519Address($selectedAccount.index, ADDRESS_INDEX, {
+                        internal: false,
+                        ledgerNanoPrompt: true,
+                    })
+                    showAppNotification({
+                        type: 'info',
+                        message: localize('views.generateNewLedgerAddress.confirmedBody'),
+                    })
                 }
-                $profileManager.generateEd25519Address($selectedAccount.index, ADDRESS_INDEX, {
-                    internal: false,
-                    ledgerNanoPrompt: true,
-                })
-                showAppNotification({
-                    type: 'info',
-                    message: localize('views.generateNewLedgerAddress.confirmedBody'),
-                })
+            } catch (err) {
+                handleError(err)
+            } finally {
+                modal?.close()
             }
-        } catch (err) {
-            error = localize(err.error)
-
-            if ($isActiveLedgerProfile) {
-                displayNotificationForLedgerProfile('error', true, true, err)
-            } else {
-                showAppNotification({
-                    type: 'error',
-                    message: localize(err.error),
-                })
-            }
-        } finally {
-            modal?.close()
-        }
+            return Promise.resolve()
+        })
     }
 
     function onDeleteAccountClick(): void {
@@ -78,7 +66,9 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
-        <MenuItem icon={Icon.Ledger} title={localize('actions.verifyAddress')} onClick={onVerifyAddressClick} />
+        {#if $isActiveLedgerProfile}
+            <MenuItem icon={Icon.Ledger} title={localize('actions.verifyAddress')} onClick={onVerifyAddressClick} />
+        {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={modal?.close} />
         <hr />
