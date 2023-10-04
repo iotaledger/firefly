@@ -51,11 +51,11 @@ function getAppProtocol() {
 }
 
 /**
- * If stage = 'prod' -> 'org.iota.iota'
- * If stage = 'alpha' -> 'org.iota.iota.alpha'
+ * If stage = 'prod' -> 'org.iota.firefly'
+ * If stage = 'alpha' -> 'org.iota.firefly.alpha'
  */
 function getAppId() {
-    const defaultAppId = 'org.iota.iota'
+    const defaultAppId = 'org.iota.firefly'
     if (STAGE === 'prod') {
         return defaultAppId
     }
