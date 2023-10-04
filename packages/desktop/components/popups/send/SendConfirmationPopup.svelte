@@ -178,8 +178,13 @@
     }
 
     async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
-        closePopup()
+        try {
+            await sendOutput(preparedOutput)
+        } catch (err) {
+            handleError(err)
+        } finally {
+            closePopup()
+        }
     }
 
     function toggleGiftStorageDeposit(): void {
