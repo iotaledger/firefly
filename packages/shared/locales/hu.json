@@ -1438,7 +1438,7 @@
         "shimmerClaiming": "Igénylés folyamatban",
         "shimmerGenesis": "Shimmer genezis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Kibocsátás elkészült",
         "minting": "Kibocsátás folyamatban",
         "burned": "Elégetve",
@@ -1878,7 +1878,7 @@
             },
             "type": "Nem sikerült a profil típusát meghatározni",
             "setupType": "Nem sikerült a profilbeállítás típusát meghatározni",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Ezt a profil nem elérhető, mert a Firefly jelenlegi verziója nem támogatja a Chrysalis Devnetet. Kérjük, használja a Firefly egy Chrysalis-kompatibilis verzióját."
         },
         "password": {
             "doNotMatch": "A jelszavak nem egyeznek.",
