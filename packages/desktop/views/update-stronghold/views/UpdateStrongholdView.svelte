@@ -33,36 +33,27 @@
         try {
             isBusy = true
             if (isRecovery) {
-                try {
-                    await migrateStrongholdFromOnboardingProfile(password)
-                } catch {
-
-                }
+                await migrateStrongholdFromOnboardingProfile(password)
                 emitStrongholdMigrationEvent({ success: true, onboardingType })
             } else {
-                try {
-                    await migrateStrongholdFromActiveProfile(password)
-                } catch {
-                    
-                }
+                await migrateStrongholdFromActiveProfile(password)
                 emitStrongholdMigrationEvent({ success: true })
             }
             isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
-            handleError(err)
             isBusy = false
             const message = err?.message ?? ''
-            parsedError = isValidJson(message) ? JSON.parse(message) : ''
-            const error = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
-            if(true){
+            if(message.includes("input snapshot")){
                 $onboardingProfile.strongholdVersion = StrongholdVersion.V3;
                 emitStrongholdMigrationEvent({ success: true, onboardingType })
                 $updateStrongholdRouter.next()
                 return
             } else {
-                passwordError = error
+                parsedError = isValidJson(message) ? JSON.parse(message) : ''
+                passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             }
+            handleError(err)
             emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
         }
