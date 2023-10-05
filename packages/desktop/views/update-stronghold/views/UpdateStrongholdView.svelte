@@ -48,6 +48,7 @@
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             if(passwordError.trim() == "stronghold migration error: input snapshot has incorrect/unexpected version"){
                 $onboardingProfile.strongholdVersion = StrongholdVersion.V3;
+                return
             }
             emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
