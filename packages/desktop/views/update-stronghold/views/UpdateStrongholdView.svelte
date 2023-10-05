@@ -11,14 +11,12 @@
     import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
     import features from '@features/features'
-    import { handleError } from '@core/error/handlers'
     import { StrongholdVersion } from '@core/stronghold'
     import { updateActiveProfile } from '@core/profile'
 
     export let password: string = ''
     export let isRecovery: boolean = false
 
-    let parsedError = null
     let passwordError: string = ''
     let isBusy = false
 
@@ -53,17 +51,8 @@
             $updateStrongholdRouter.next()
         } catch (err) {
             isBusy = false
-            const message = err?.message ?? ''
-            if (message.includes('input snapshot')) {
-                $onboardingProfile.strongholdVersion = StrongholdVersion.V3
-                emitStrongholdMigrationEvent({ success: true, onboardingType })
-                $updateStrongholdRouter.next()
-                return
-            } else {
-                parsedError = isValidJson(message) ? JSON.parse(message) : ''
-                passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
-            }
-            handleError(err)
+            const parsedError = isValidJson(message) ? JSON.parse(message) : ''
+            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
         }
@@ -89,7 +78,6 @@
         </form>
     </div>
     <div slot="leftpane__action">
-        <p>{JSON.stringify(parsedError)}</p>
         <Button
             type={HTMLButtonType.Submit}
             form="update-stronghold-form"

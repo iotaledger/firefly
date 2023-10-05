@@ -18,7 +18,6 @@
     import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
-    import { get } from 'svelte/store'
 
     let attempts: number = 0
     let pinCode: string = ''
@@ -175,7 +174,6 @@
                         disabled={hasReachedMaxAttempts || isBusy}
                         autofocus
                     />
-                    <p style="font-size: 10px;">{JSON.stringify(get(activeProfile))}</p>
                 </div>
             </div>
             <Text bold classes="mt-4 text-center">
