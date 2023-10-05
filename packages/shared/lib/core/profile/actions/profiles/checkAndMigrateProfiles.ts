@@ -7,6 +7,8 @@ import {
     IIscpChainMetadata,
     NetworkId,
 } from '@core/network'
+import { DEFAULT_NETWORK_METADATA } from '../../../../core/network/constants/default-network-metadata.constant'
+import { NetworkMetadata } from '../../../../core/network/types/network-metadata.type'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
 import { ProfileType } from '@core/profile/enums'
@@ -29,13 +31,18 @@ import { checkAndMigrateChrysalisProfiles } from './'
 export function checkAndMigrateProfiles(): void {
     const _currentProfileVersion = get(currentProfileVersion)
     const CHRYSALIS_TO_STARDUST_PROFILE_VERSION = 13
+    if (_currentProfileVersion === -1) currentProfileVersion.set(CHRYSALIS_TO_STARDUST_PROFILE_VERSION)
     const shouldMigratePersistedProfiles = (_currentProfileVersion ?? 3) < PROFILE_VERSION
+
+    console.log("_currentProfileVersion", _currentProfileVersion);
 
     // patch chrysalis unmigrated profiles
     if (
         shouldMigratePersistedProfiles ||
         (_currentProfileVersion >= CHRYSALIS_TO_STARDUST_PROFILE_VERSION && _currentProfileVersion <= 16)
     ) {
+        console.log("_currentProfileVersion", _currentProfileVersion);
+        
         if (checkAndMigrateChrysalisProfiles()) {
             // If there was a migration, we need to update the currentProfileVersion
             // to the latest compatible with the chrysalis migration, which is 13
@@ -47,8 +54,12 @@ export function checkAndMigrateProfiles(): void {
 
 function migrateEachVersion(): void {
     let migrationVersion = get(currentProfileVersion)
+    console.log("migrationVersion", migrationVersion);
+    
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
         migratePersistedProfile(migrationVersion)
+        console.log("--------------- post migrationVersion", migrationVersion);
+        
         currentProfileVersion.set(migrationVersion + 1)
     }
 }
@@ -168,13 +179,20 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
                 auth: {
                     jwt: node.auth?.jwt,
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
+                    // @ts-ignorep
                     basicAuthNamePwd: [node.auth?.username, node.auth?.password],
                 },
             }
         } else {
             return undefined
         }
+    }
+
+    console.log("persistedProfileMigrationToV9 existingProfile.clientOptions", existingProfile.clientOptions);
+
+
+    if (!existingProfile.clientOptions) {
+        existingProfile.clientOptions = {}
     }
 
     existingProfile.clientOptions.nodes = existingProfile?.clientOptions?.nodes?.map(migrateNode)
@@ -324,6 +342,14 @@ function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): void {
+    console.log("persistedProfileMigrationToV16 existingProfile.network", existingProfile.network);
+    
+    if (!existingProfile.network) {
+        existingProfile.network = {
+            chains: [],
+            ...DEFAULT_NETWORK_METADATA[NetworkId.Iota] as NetworkMetadata
+        }
+    }
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
     const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
     existingProfile.network.chains = newChains

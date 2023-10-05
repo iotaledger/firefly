@@ -9,6 +9,7 @@ import { StrongholdVersion } from '@core/stronghold/enums'
 import { copyStrongholdFileToProfileDirectory } from '../helpers'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { initialiseProfileManagerFromOnboardingProfile } from './initialiseProfileManagerFromOnboardingProfile'
+import { handleError } from '@core/error/handlers'
 
 export async function migrateStrongholdFromOnboardingProfile(password: string): Promise<void> {
     const profile = get(onboardingProfile)
@@ -19,8 +20,13 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
     updateOnboardingProfile({ strongholdPassword: password, importFilePath: secretManagerPath, importFile: null })
 
     if (profile?.strongholdVersion === StrongholdVersion.V2) {
-        await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
-        updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
+        try {
+            await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
+        } catch (err) {
+            console.log("error", err)
+            handleError(err as any)
+        }
+        // updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 
     await destroyProfileManager()
