@@ -140,24 +140,24 @@ jobs:
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Sign AppImage (Linux)
-              run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
+              run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-*.AppImage
               working-directory: packages/desktop/out
               env:
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (Linux)
-              run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
+              run: for i in `ls | grep 'firefly-*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (macOS)
-              run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
+              run: for i in `ls | grep 'firefly-*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
               if: matrix.os == 'macos-11'
 
             - name: Compute checksums (Windows)
-              run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
+              run: Get-ChildItem "." -Filter firefly-* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
               working-directory: packages/desktop/out
               if: matrix.os == 'windows-2019'
 
