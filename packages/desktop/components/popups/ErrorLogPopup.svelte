@@ -23,11 +23,14 @@
     }
 
     function renderErrorMessage(message: string): string {
-        try {
-            return JSON.stringify(message)
-        } catch {
-            return message
+        if (message !== null && typeof message === 'object') {
+            try {
+                return JSON.stringify(message)
+            } catch {
+                return message
+            }
         }
+        return message
     }
 </script>
 
