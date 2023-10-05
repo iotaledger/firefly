@@ -145,13 +145,5 @@ const isOfficalChrysalisNode = (nodeUrl: string): boolean => {
 }
 
 function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProfile): boolean {
-    if ('settings' in profile && 'networkConfig' in profile.settings) {
-        const chrysalisProfile = profile as IChrysalisPersistedProfile
-        const chrysalisNetworkIdsArray: string[] = Object.values(ChrysalisNetworkId)
-        const chrysalisProfileNetworkId = chrysalisProfile?.settings?.networkConfig?.network?.id
-        if (chrysalisProfileNetworkId) {
-            return chrysalisNetworkIdsArray.includes(chrysalisProfileNetworkId)
-        }
-    }
     return false
 }
