@@ -24,9 +24,8 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
             await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
         } catch (err) {
             console.log("error", err)
-            handleError(err as any)
         }
-        // updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
+        updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 
     await destroyProfileManager()
