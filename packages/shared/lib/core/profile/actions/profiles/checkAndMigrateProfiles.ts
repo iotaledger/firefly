@@ -27,13 +27,19 @@ import { checkAndMigrateChrysalisProfiles } from './'
  */
 
 export function checkAndMigrateProfiles(): void {
-    const shouldMigratePersistedProfiles = (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
+    const _currentProfileVersion = get(currentProfileVersion)
+    const CHRYSALIS_TO_STARDUST_PROFILE_VERSION = 13
+    const shouldMigratePersistedProfiles = (_currentProfileVersion ?? 3) < PROFILE_VERSION
 
-    if (shouldMigratePersistedProfiles) {
+    // patch chrysalis unmigrated profiles
+    if (
+        shouldMigratePersistedProfiles ||
+        (_currentProfileVersion >= CHRYSALIS_TO_STARDUST_PROFILE_VERSION && _currentProfileVersion <= 16)
+    ) {
         if (checkAndMigrateChrysalisProfiles()) {
             // If there was a migration, we need to update the currentProfileVersion
             // to the latest compatible with the chrysalis migration, which is 13
-            currentProfileVersion.set(13)
+            currentProfileVersion.set(CHRYSALIS_TO_STARDUST_PROFILE_VERSION)
         }
         migrateEachVersion()
     }
