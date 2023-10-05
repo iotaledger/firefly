@@ -11,6 +11,7 @@
     import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
     import features from '@features/features'
+    import { handleError } from '@core/error/handlers'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -39,6 +40,7 @@
             isBusy = false
             $updateStrongholdRouter.next()
         } catch (err) {
+            handleError(err)
             isBusy = false
             const message = err?.message ?? ''
             const parsedError = isValidJson(message) ? JSON.parse(message) : ''
