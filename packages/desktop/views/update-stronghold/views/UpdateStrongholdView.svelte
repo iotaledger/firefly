@@ -17,6 +17,7 @@
     export let password: string = ''
     export let isRecovery: boolean = false
 
+    let parsedError = null
     let passwordError: string = ''
     let isBusy = false
 
@@ -44,12 +45,15 @@
             handleError(err)
             isBusy = false
             const message = err?.message ?? ''
-            const parsedError = isValidJson(message) ? JSON.parse(message) : ''
-            passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
-            if(passwordError.trim() == "stronghold migration error: input snapshot has incorrect/unexpected version"){
+            parsedError = isValidJson(message) ? JSON.parse(message) : ''
+            const error = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
+            if(error.includes("input unexpected")){
                 $onboardingProfile.strongholdVersion = StrongholdVersion.V3;
+                emitStrongholdMigrationEvent({ success: true })
                 $updateStrongholdRouter.next()
                 return
+            } else {
+                passwordError = error
             }
             emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
@@ -76,6 +80,7 @@
         </form>
     </div>
     <div slot="leftpane__action">
+        <p>{JSON.stringify(parsedError)}</p>
         <Button
             type={HTMLButtonType.Submit}
             form="update-stronghold-form"
