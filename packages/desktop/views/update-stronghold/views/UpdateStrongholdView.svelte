@@ -12,6 +12,7 @@
     import { onboardingProfile } from '@contexts/onboarding'
     import features from '@features/features'
     import { handleError } from '@core/error/handlers'
+    import { StrongholdVersion } from '@core/stronghold'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -45,6 +46,9 @@
             const message = err?.message ?? ''
             const parsedError = isValidJson(message) ? JSON.parse(message) : ''
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
+            if(passwordError.trim() == "stronghold migration error: input snapshot has incorrect/unexpected version"){
+                $onboardingProfile.strongholdVersion = StrongholdVersion.V3;
+            }
             emitStrongholdMigrationEvent({ success: false, onboardingType })
             return
         }

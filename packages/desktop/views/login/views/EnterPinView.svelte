@@ -175,7 +175,7 @@
                         disabled={hasReachedMaxAttempts || isBusy}
                         autofocus
                     />
-                    <p>{JSON.stringify(get(activeProfile))}</p>
+                    <p style="font-size: 10px;">{JSON.stringify(get(activeProfile))}</p>
                 </div>
             </div>
             <Text bold classes="mt-4 text-center">
