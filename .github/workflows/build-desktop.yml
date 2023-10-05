@@ -166,5 +166,5 @@ jobs:
               with:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
-                      packages/desktop/out/firefly-desktop*
-                      packages/desktop/out/shimmer*
+                      packages/desktop/out/firefly-*
+                      packages/desktop/out/latest*
