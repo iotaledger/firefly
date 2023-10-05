@@ -33,20 +33,20 @@
         try {
             isBusy = true
             if (isRecovery) {
+                await migrateStrongholdFromOnboardingProfile(password)
+                emitStrongholdMigrationEvent({ success: true, onboardingType })
+            } else {
                 try {
-                    await migrateStrongholdFromOnboardingProfile(password)
-                    emitStrongholdMigrationEvent({ success: true, onboardingType })
+                    await migrateStrongholdFromActiveProfile(password)
+                    emitStrongholdMigrationEvent({ success: true })
                 } catch (err) {
                     const message = err?.message ?? ''
                     if (message.includes('input snapshot')) {
                         $onboardingProfile.strongholdVersion = StrongholdVersion.V3
-                        emitStrongholdMigrationEvent({ success: true, onboardingType })
+                        emitStrongholdMigrationEvent({ success: true })
                         $updateStrongholdRouter.next()
                     }
                 }
-            } else {
-                await migrateStrongholdFromActiveProfile(password)
-                emitStrongholdMigrationEvent({ success: true })
             }
             isBusy = false
             $updateStrongholdRouter.next()
