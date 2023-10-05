@@ -20,11 +20,7 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
     updateOnboardingProfile({ strongholdPassword: password, importFilePath: secretManagerPath, importFile: null })
 
     if (profile?.strongholdVersion === StrongholdVersion.V2) {
-        try {
-            await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
-        } catch (err) {
-            console.log("error", err)
-        }
+        await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
         updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 

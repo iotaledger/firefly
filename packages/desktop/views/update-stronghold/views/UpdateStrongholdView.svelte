@@ -13,6 +13,7 @@
     import features from '@features/features'
     import { handleError } from '@core/error/handlers'
     import { StrongholdVersion } from '@core/stronghold'
+    import { updateActiveProfile } from '@core/profile'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -42,7 +43,7 @@
                 } catch (err) {
                     const message = err?.message ?? ''
                     if (message.includes('input snapshot')) {
-                        $onboardingProfile.strongholdVersion = StrongholdVersion.V3
+                        updateActiveProfile({ strongholdVersion: StrongholdVersion.V3 })
                         emitStrongholdMigrationEvent({ success: true })
                         $updateStrongholdRouter.next()
                     }

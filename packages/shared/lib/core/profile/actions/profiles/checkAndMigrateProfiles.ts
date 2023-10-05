@@ -34,15 +34,11 @@ export function checkAndMigrateProfiles(): void {
     if (_currentProfileVersion === -1) currentProfileVersion.set(CHRYSALIS_TO_STARDUST_PROFILE_VERSION)
     const shouldMigratePersistedProfiles = (_currentProfileVersion ?? 3) < PROFILE_VERSION
 
-    console.log("_currentProfileVersion", _currentProfileVersion);
-
     // patch chrysalis unmigrated profiles
     if (
         shouldMigratePersistedProfiles ||
         (_currentProfileVersion >= CHRYSALIS_TO_STARDUST_PROFILE_VERSION && _currentProfileVersion <= 16)
-    ) {
-        console.log("_currentProfileVersion", _currentProfileVersion);
-        
+    ) {        
         if (checkAndMigrateChrysalisProfiles()) {
             // If there was a migration, we need to update the currentProfileVersion
             // to the latest compatible with the chrysalis migration, which is 13
@@ -54,11 +50,9 @@ export function checkAndMigrateProfiles(): void {
 
 function migrateEachVersion(): void {
     let migrationVersion = get(currentProfileVersion)
-    console.log("migrationVersion", migrationVersion);
     
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
         migratePersistedProfile(migrationVersion)
-        console.log("--------------- post migrationVersion", migrationVersion);
         
         currentProfileVersion.set(migrationVersion + 1)
     }
@@ -187,9 +181,6 @@ function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void
             return undefined
         }
     }
-
-    console.log("persistedProfileMigrationToV9 existingProfile.clientOptions", existingProfile.clientOptions);
-
 
     if (!existingProfile.clientOptions) {
         existingProfile.clientOptions = {}
@@ -342,8 +333,6 @@ function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): void {
-    console.log("persistedProfileMigrationToV16 existingProfile.network", existingProfile.network);
-    
     if (!existingProfile.network) {
         existingProfile.network = {
             chains: [],

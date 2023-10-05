@@ -13,9 +13,7 @@ import { profiles, saveProfile } from '../../stores'
 export function checkAndMigrateChrysalisProfiles(): boolean {
     let migrated = false
     const _profiles = get(profiles)
-    for (const profile of _profiles) {
-        console.log("isChrysalisProfile(profile)", isChrysalisProfile(profile), profile);
-        
+    for (const profile of _profiles) {        
         if (isChrysalisProfile(profile)) {
             const chrysalisProfile = profile as IChrysalisPersistedProfile
 
@@ -149,15 +147,12 @@ const isOfficalChrysalisNode = (nodeUrl: string): boolean => {
 function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProfile): boolean {
     const chrysalisProfile = profile as IChrysalisPersistedProfile
     if ('settings' in profile && 'networkConfig' in profile.settings) {
-        console.log("settings");
         const chrysalisNetworkIdsArray: string[] = Object.values(ChrysalisNetworkId)
         const chrysalisProfileNetworkId = chrysalisProfile?.settings?.networkConfig?.network?.id
-        console.log("chrysalisProfileNetworkId", chrysalisProfileNetworkId);
         if (chrysalisProfileNetworkId) {
             return chrysalisNetworkIdsArray.includes(chrysalisProfileNetworkId)
         }
         const hasChrysalisNode =  chrysalisProfile.settings?.networkConfig?.nodes?.some((value) => isOfficalChrysalisNode(value.url)) || false
-        console.log("hasChrysalisNode", hasChrysalisNode);
         return hasChrysalisNode
         
     } else if ('accounts' in profile && !('accountPersistedData' in profile)) {
