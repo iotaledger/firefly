@@ -47,7 +47,7 @@
             const message = err?.message ?? ''
             parsedError = isValidJson(message) ? JSON.parse(message) : ''
             const error = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
-            if(error.includes("input unexpected")){
+            if(true){
                 $onboardingProfile.strongholdVersion = StrongholdVersion.V3;
                 emitStrongholdMigrationEvent({ success: true })
                 $updateStrongholdRouter.next()
