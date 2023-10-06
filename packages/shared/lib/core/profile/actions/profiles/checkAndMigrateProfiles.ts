@@ -50,10 +50,8 @@ export function checkAndMigrateProfiles(): void {
 
 function migrateEachVersion(): void {
     let migrationVersion = get(currentProfileVersion)
-
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
         migratePersistedProfile(migrationVersion)
-
         currentProfileVersion.set(migrationVersion + 1)
     }
 }
