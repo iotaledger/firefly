@@ -51,6 +51,7 @@
             $updateStrongholdRouter.next()
         } catch (err) {
             isBusy = false
+            const message = err?.message ?? ''
             const parsedError = isValidJson(message) ? JSON.parse(message) : ''
             passwordError = parsedError?.payload?.error.replaceAll('`', '') ?? localize(message)
             emitStrongholdMigrationEvent({ success: false, onboardingType })

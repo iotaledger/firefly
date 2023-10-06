@@ -9,7 +9,6 @@ import { StrongholdVersion } from '@core/stronghold/enums'
 import { copyStrongholdFileToProfileDirectory } from '../helpers'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 import { initialiseProfileManagerFromOnboardingProfile } from './initialiseProfileManagerFromOnboardingProfile'
-import { handleError } from '@core/error/handlers'
 
 export async function migrateStrongholdFromOnboardingProfile(password: string): Promise<void> {
     const profile = get(onboardingProfile)

@@ -166,14 +166,14 @@ function persistedProfileMigrationToV8(existingProfile: IPersistedProfile): void
 }
 
 function persistedProfileMigrationToV9(existingProfile: IPersistedProfile): void {
-    function migrateNode(node: INode): INode {
+    function migrateNode(node: INode | undefined): INode {
         if (node) {
             return {
                 url: node.url as string,
                 auth: {
                     jwt: node.auth?.jwt,
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignorep
+                    // @ts-ignore
                     basicAuthNamePwd: [node.auth?.username, node.auth?.password],
                 },
             }
