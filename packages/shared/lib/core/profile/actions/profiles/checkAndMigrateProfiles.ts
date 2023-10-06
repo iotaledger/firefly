@@ -219,10 +219,13 @@ function persistedProfileMigrationToV11(
         const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
         if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
             network = getDefaultPersistedNetwork(networkId)
+            network.coinType = COIN_TYPE[NetworkId.Shimmer]
         } else {
-            network.id = NetworkId.Custom
+            network = {
+                chains: [],
+                ...(DEFAULT_NETWORK_METADATA[NetworkId.Iota] as NetworkMetadata),
+            }
         }
-        network.coinType = COIN_TYPE[NetworkId.Shimmer]
         existingProfile.network = structuredClone(network)
     }
 
