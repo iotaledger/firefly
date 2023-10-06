@@ -13,7 +13,7 @@ import { profiles, saveProfile } from '../../stores'
 export function checkAndMigrateChrysalisProfiles(): boolean {
     let migrated = false
     const _profiles = get(profiles)
-    for (const profile of _profiles) {        
+    for (const profile of _profiles) {
         if (isChrysalisProfile(profile)) {
             const chrysalisProfile = profile as IChrysalisPersistedProfile
 
@@ -152,9 +152,9 @@ function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProf
         if (chrysalisProfileNetworkId) {
             return chrysalisNetworkIdsArray.includes(chrysalisProfileNetworkId)
         }
-        const hasChrysalisNode =  chrysalisProfile.settings?.networkConfig?.nodes?.some((value) => isOfficalChrysalisNode(value.url)) || false
+        const hasChrysalisNode =
+            chrysalisProfile.settings?.networkConfig?.nodes?.some((value) => isOfficalChrysalisNode(value.url)) || false
         return hasChrysalisNode
-        
     } else if ('accounts' in profile && !('accountPersistedData' in profile)) {
         const chrysalisProfileAccounts = chrysalisProfile?.accounts ?? []
         if (chrysalisProfileAccounts.find((account) => account.id.startsWith('wallet-account://'))) {

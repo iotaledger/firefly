@@ -38,7 +38,7 @@ export function checkAndMigrateProfiles(): void {
     if (
         shouldMigratePersistedProfiles ||
         (_currentProfileVersion >= CHRYSALIS_TO_STARDUST_PROFILE_VERSION && _currentProfileVersion <= 16)
-    ) {        
+    ) {
         if (checkAndMigrateChrysalisProfiles()) {
             // If there was a migration, we need to update the currentProfileVersion
             // to the latest compatible with the chrysalis migration, which is 13
@@ -50,10 +50,10 @@ export function checkAndMigrateProfiles(): void {
 
 function migrateEachVersion(): void {
     let migrationVersion = get(currentProfileVersion)
-    
+
     for (migrationVersion; migrationVersion < PROFILE_VERSION; migrationVersion++) {
         migratePersistedProfile(migrationVersion)
-        
+
         currentProfileVersion.set(migrationVersion + 1)
     }
 }
@@ -336,7 +336,7 @@ function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): voi
     if (!existingProfile.network) {
         existingProfile.network = {
             chains: [],
-            ...DEFAULT_NETWORK_METADATA[NetworkId.Iota] as NetworkMetadata
+            ...(DEFAULT_NETWORK_METADATA[NetworkId.Iota] as NetworkMetadata),
         }
     }
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
