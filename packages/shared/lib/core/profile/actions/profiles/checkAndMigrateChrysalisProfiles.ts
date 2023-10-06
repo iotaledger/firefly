@@ -3,6 +3,7 @@ import { MarketCurrency } from '@core/market'
 import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
 import { INode } from '@core/network/interfaces'
 import { ChrysalisNetworkId } from '@core/profile/enums'
+import { StrongholdVersion } from '@core/stronghold'
 import { get } from 'svelte/store'
 import { DEFAULT_PERSISTED_PROFILE_OBJECT } from '../../constants'
 import { IChrysalisNode, IChrysalisPersistedProfile, IPersistedProfile } from '../../interfaces'
@@ -32,8 +33,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                 hasVisitedDashboard: chrysalisProfile.hasVisitedDashboard ?? undefined,
                 clientOptions: DEFAULT_PERSISTED_PROFILE_OBJECT.clientOptions, // migration needed
                 forceAssetRefresh: DEFAULT_PERSISTED_PROFILE_OBJECT.forceAssetRefresh,
-                strongholdVersion:
-                    chrysalisProfile.strongholdVersion ?? DEFAULT_PERSISTED_PROFILE_OBJECT.strongholdVersion,
+                strongholdVersion: chrysalisProfile.strongholdVersion ?? StrongholdVersion.V2,
                 needsChrysalisToStardustDbMigration: true,
             }
 

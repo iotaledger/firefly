@@ -22,6 +22,6 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     accountPersistedData: {},
     isDeveloperProfile: false,
     forceAssetRefresh: false,
-    strongholdVersion: StrongholdVersion.V2,
+    strongholdVersion: StrongholdVersion.V3,
     clientOptions: {},
 }
