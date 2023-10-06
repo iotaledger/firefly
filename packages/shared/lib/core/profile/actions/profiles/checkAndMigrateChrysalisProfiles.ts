@@ -152,8 +152,7 @@ function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProf
         if (chrysalisProfileNetworkId) {
             return chrysalisNetworkIdsArray.includes(chrysalisProfileNetworkId)
         }
-        const hasChrysalisNode =
-            chrysalisProfile.settings?.networkConfig?.nodes?.some((value) => isOfficalChrysalisNode(value.url)) || false
+        const hasChrysalisNode = (chrysalisProfile.settings?.networkConfig?.nodes?.length || 0) > 0 || false
         return hasChrysalisNode
     } else if ('accounts' in profile && !('accountPersistedData' in profile)) {
         const chrysalisProfileAccounts = chrysalisProfile?.accounts ?? []

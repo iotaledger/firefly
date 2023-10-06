@@ -11,8 +11,6 @@
     import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'
     import features from '@features/features'
-    import { StrongholdVersion } from '@core/stronghold'
-    import { updateActiveProfile } from '@core/profile'
 
     export let password: string = ''
     export let isRecovery: boolean = false
@@ -35,17 +33,8 @@
                 await migrateStrongholdFromOnboardingProfile(password)
                 emitStrongholdMigrationEvent({ success: true, onboardingType })
             } else {
-                try {
-                    await migrateStrongholdFromActiveProfile(password)
-                    emitStrongholdMigrationEvent({ success: true })
-                } catch (err) {
-                    const message = err?.message ?? ''
-                    if (message.includes('input snapshot')) {
-                        updateActiveProfile({ strongholdVersion: StrongholdVersion.V3 })
-                        emitStrongholdMigrationEvent({ success: true })
-                        $updateStrongholdRouter.next()
-                    }
-                }
+                await migrateStrongholdFromActiveProfile(password)
+                emitStrongholdMigrationEvent({ success: true })
             }
             isBusy = false
             $updateStrongholdRouter.next()
