@@ -34,11 +34,8 @@ export function checkAndMigrateProfiles(): void {
     if (_currentProfileVersion === -1) currentProfileVersion.set(CHRYSALIS_TO_STARDUST_PROFILE_VERSION)
     const shouldMigratePersistedProfiles = (_currentProfileVersion ?? 3) < PROFILE_VERSION
 
-    // patch chrysalis unmigrated profiles
-    if (
-        shouldMigratePersistedProfiles ||
-        (_currentProfileVersion >= CHRYSALIS_TO_STARDUST_PROFILE_VERSION && _currentProfileVersion <= 16)
-    ) {
+    // patch chrysalis unmigrated profiles to re-check profiles until v16
+    if (shouldMigratePersistedProfiles || _currentProfileVersion <= 16) {
         if (checkAndMigrateChrysalisProfiles()) {
             // If there was a migration, we need to update the currentProfileVersion
             // to the latest compatible with the chrysalis migration, which is 13

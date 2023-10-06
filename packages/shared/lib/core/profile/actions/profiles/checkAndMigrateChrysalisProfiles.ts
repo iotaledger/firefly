@@ -114,7 +114,7 @@ function getMigratedNetworkId(chrysalisNetworkId: ChrysalisNetworkId): NetworkId
         case ChrysalisNetworkId.PrivateNet:
             return NetworkId.Custom
         default:
-            throw new Error(`Unable to migrate network: ${chrysalisNetworkId}`)
+            return NetworkId.Iota
     }
 }
 
@@ -157,6 +157,11 @@ function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProf
     } else if ('accounts' in profile && !('accountPersistedData' in profile)) {
         const chrysalisProfileAccounts = chrysalisProfile?.accounts ?? []
         if (chrysalisProfileAccounts.find((account) => account.id.startsWith('wallet-account://'))) {
+            return true
+        }
+    } else {
+        const partiallyStardustProfile = profile as IPersistedProfile
+        if (!partiallyStardustProfile.network || !partiallyStardustProfile.accountPersistedData) {
             return true
         }
     }
