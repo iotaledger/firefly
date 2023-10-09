@@ -33,7 +33,9 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
                 success = true
             }
         } finally {
-            if (!success) {
+            if (success) {
+                _onSuccess()
+            } else {
                 logAndNotifyError({
                     type: 'wallet',
                     message: `Chrysalis database migration failed: ${reason}`,
@@ -43,7 +45,6 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
                 })
             }
         }
-        _onSuccess()
         return success
     } else {
         _onSuccess()
