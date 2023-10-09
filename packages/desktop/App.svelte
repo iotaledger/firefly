@@ -1,7 +1,13 @@
 <script lang="ts">
     import { onDestroy, onMount } from 'svelte'
     import { _, isLocaleLoaded, Locale, localeDirection, setupI18n } from '@core/i18n'
-    import { activeProfile, checkAndMigrateProfiles, cleanupEmptyProfiles, saveActiveProfile } from '@core/profile'
+    import {
+        activeProfile,
+        checkAndMigrateProfiles,
+        cleanupEmptyProfiles,
+        renameOldProfileFoldersToId,
+        saveActiveProfile,
+    } from '@core/profile'
     import {
         AppRoute,
         appRoute,
@@ -82,6 +88,10 @@
 
     onMount(async () => {
         features.analytics.appStart.enabled && Platform.trackEvent('app-start')
+
+        // needed for profiles that come from very old firefly chrysalis
+        await renameOldProfileFoldersToId()
+
         await cleanupEmptyProfiles()
         checkAndMigrateProfiles()
 
