@@ -18,7 +18,7 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
     if (response instanceof Error) {
         updateProfile(profileId, { needsChrysalisToStardustDbMigration: true })
         let reason = ''
-        let migrate = false
+        let success = false
 
         try {
             reason = JSON.parse(response.message).payload?.error
@@ -26,10 +26,10 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
             // The 'no chrysalis data to migrate' error only happens when entering a Stardust profile
             // that the wallet got migrated (hence the error) but the profile didn't, we can safely skip this error.
             if (reason === ATTEMPT_MIGRATION_CHRYSALIS_TO_STARUDST_ERROR) {
-                migrate = true
+                success = true
             }
         } finally {
-            if (!migrate) {
+            if (!success) {
                 logAndNotifyError({
                     type: 'wallet',
                     message: `Chrysalis database migration failed: ${reason}`,
@@ -40,7 +40,7 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
             }
         }
 
-        return migrate
+        return success
     } else {
         updateProfile(profileId, { needsChrysalisToStardustDbMigration: undefined })
         return true
