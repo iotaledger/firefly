@@ -15,6 +15,10 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
     const profileDirectory = await getStorageDirectoryOfProfile(profileId)
     const response = await api.migrateDbChrysalisToStardust(profileDirectory, pinCode)
 
+    const _onSuccess = (): void => {
+        updateProfile(profileId, { needsChrysalisToStardustDbMigration: undefined })
+    }
+
     if (response instanceof Error) {
         updateProfile(profileId, { needsChrysalisToStardustDbMigration: true })
         let reason = ''
@@ -39,10 +43,10 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
                 })
             }
         }
-
+        _onSuccess()
         return success
     } else {
-        updateProfile(profileId, { needsChrysalisToStardustDbMigration: undefined })
+        _onSuccess()
         return true
     }
 }
