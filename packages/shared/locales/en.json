@@ -1438,7 +1438,7 @@
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "burned": "Burned",
@@ -1877,7 +1877,8 @@
                 "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
             },
             "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "setupType": "Unable to determine the profile setup type",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "Passwords do not match.",
