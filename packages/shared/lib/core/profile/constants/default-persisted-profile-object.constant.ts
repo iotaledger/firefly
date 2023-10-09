@@ -3,6 +3,7 @@ import { ProfileType } from '../enums'
 import { IPersistedProfile } from '../interfaces'
 import { DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES } from './default_stronghold_password_timeout_in_minutes.constant'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts/constants'
+import { StrongholdVersion } from '../../../core/stronghold/enums/stronghold-version.enum'
 
 export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     id: '',
@@ -21,6 +22,6 @@ export const DEFAULT_PERSISTED_PROFILE_OBJECT: IPersistedProfile = {
     accountPersistedData: {},
     isDeveloperProfile: false,
     forceAssetRefresh: false,
-    strongholdVersion: undefined,
+    strongholdVersion: StrongholdVersion.V3,
     clientOptions: {},
 }

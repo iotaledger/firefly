@@ -3,6 +3,7 @@ import { MarketCurrency } from '@core/market'
 import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
 import { INode } from '@core/network/interfaces'
 import { ChrysalisNetworkId } from '@core/profile/enums'
+import { StrongholdVersion } from '@core/stronghold'
 import { get } from 'svelte/store'
 import { DEFAULT_PERSISTED_PROFILE_OBJECT } from '../../constants'
 import { IChrysalisNode, IChrysalisPersistedProfile, IPersistedProfile } from '../../interfaces'
@@ -32,8 +33,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                 hasVisitedDashboard: chrysalisProfile.hasVisitedDashboard ?? undefined,
                 clientOptions: DEFAULT_PERSISTED_PROFILE_OBJECT.clientOptions, // migration needed
                 forceAssetRefresh: DEFAULT_PERSISTED_PROFILE_OBJECT.forceAssetRefresh,
-                strongholdVersion:
-                    chrysalisProfile.strongholdVersion ?? DEFAULT_PERSISTED_PROFILE_OBJECT.strongholdVersion,
+                strongholdVersion: chrysalisProfile.strongholdVersion ?? StrongholdVersion.V2,
                 needsChrysalisToStardustDbMigration: true,
             }
 
@@ -114,7 +114,7 @@ function getMigratedNetworkId(chrysalisNetworkId: ChrysalisNetworkId): NetworkId
         case ChrysalisNetworkId.PrivateNet:
             return NetworkId.Custom
         default:
-            throw new Error(`Unable to migrate network: ${chrysalisNetworkId}`)
+            return NetworkId.Iota
     }
 }
 
@@ -152,9 +152,16 @@ function isChrysalisProfile(profile: IPersistedProfile | IChrysalisPersistedProf
         if (chrysalisProfileNetworkId) {
             return chrysalisNetworkIdsArray.includes(chrysalisProfileNetworkId)
         }
+        const hasChrysalisNode = (chrysalisProfile.settings?.networkConfig?.nodes?.length || 0) > 0 || false
+        return hasChrysalisNode
     } else if ('accounts' in profile && !('accountPersistedData' in profile)) {
         const chrysalisProfileAccounts = chrysalisProfile?.accounts ?? []
         if (chrysalisProfileAccounts.find((account) => account.id.startsWith('wallet-account://'))) {
+            return true
+        }
+    } else {
+        const partiallyStardustProfile = profile as IPersistedProfile
+        if (!partiallyStardustProfile.network || !partiallyStardustProfile.accountPersistedData) {
             return true
         }
     }

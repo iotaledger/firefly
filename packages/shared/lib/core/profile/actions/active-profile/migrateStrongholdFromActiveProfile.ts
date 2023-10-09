@@ -6,6 +6,7 @@ import { StrongholdVersion } from '@core/stronghold/enums'
 
 import { getStorageDirectoryOfProfile } from '../../utils'
 import { activeProfile, updateActiveProfile } from '../../stores'
+import { IError } from '@core/error'
 
 export async function migrateStrongholdFromActiveProfile(password: string): Promise<void> {
     const profile = get(activeProfile)
@@ -13,7 +14,14 @@ export async function migrateStrongholdFromActiveProfile(password: string): Prom
     const secretManagerPath = getSecretManagerPath(profileDirectory)
 
     if (!profile.strongholdVersion || profile.strongholdVersion === StrongholdVersion.V2) {
-        await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
+        try {
+            await api.migrateStrongholdSnapshotV2ToV3(secretManagerPath, password, secretManagerPath, password)
+        } catch (err) {
+            const message = (err as IError)?.message ?? ''
+            if (!message.includes('input snapshot has incorrect/unexpected version')) {
+                throw err
+            }
+        }
         updateActiveProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 }
