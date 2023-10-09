@@ -23,7 +23,8 @@ export async function migrateDbChrysalisToStardust(profileId: string, pinCode: s
         try {
             reason = JSON.parse(response.message).payload?.error
 
-            // If there is no chrysalis data to migrate only happens when we are in Stardust, so we can safely skip this error.
+            // The 'no chrysalis data to migrate' error only happens when entering a Stardust profile
+            // that the wallet got migrated (hence the error) but the profile didn't, we can safely skip this error.
             if (reason === ATTEMPT_MIGRATION_CHRYSALIS_TO_STARUDST_ERROR) {
                 migrate = true
             }
