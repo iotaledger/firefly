@@ -1,6 +1,6 @@
 import { Platform } from '@core/app'
 import { profiles } from '@core/profile/stores'
-import { getStorageDirectoryOfProfiles } from '@core/profile/utils'
+import { getStorageDirectoryOfProfile, getStorageDirectoryOfProfiles } from '@core/profile/utils'
 import { get } from 'svelte/store'
 
 export async function renameOldProfileFoldersToId(): Promise<void> {
@@ -12,8 +12,14 @@ export async function renameOldProfileFoldersToId(): Promise<void> {
     if (oldProfiles.length > 0) {
         await Promise.all(
             oldProfiles.map(async (profile) => {
-                await Platform.renameProfileFolder(profile.name, profile.id)
+                await renameProfileFolder(profile.name, profile.id)
             })
         )
     }
+}
+
+async function renameProfileFolder(oldName: string, newName: string): Promise<void> {
+    const oldPath = await getStorageDirectoryOfProfile(oldName)
+    const newPath = await getStorageDirectoryOfProfile(newName)
+    await Platform.renameProfileFolder(oldPath, newPath)
 }
