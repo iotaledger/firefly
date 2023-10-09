@@ -39,7 +39,6 @@
         "keytar": "^7.9.0",
         "node-machine-id": "^1.1.12",
         "stream-http": "^3.2.0",
-        "svelty-picker": "^5.0.0",
         "url": "^0.11.0"
     },
     "devDependencies": {
@@ -49,7 +48,7 @@
         "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.2",
         "css-loader": "^6.7.3",
-        "electron": "22.3.16",
+        "electron": "22.3.24",
         "electron-builder": "^24.0.0",
         "electron-notarize": "^1.0.0",
         "esbuild-loader": "^3.0.0",

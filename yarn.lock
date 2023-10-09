@@ -7996,13 +7996,6 @@ svelte@^3.49.0:
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.59.2.tgz#a137b28e025a181292b2ae2e3dca90bf8ec73aec"
   integrity sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==
 
-svelty-picker@^4.1.4:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/svelty-picker/-/svelty-picker-4.1.4.tgz#92eb866602c37bf56bbb3fad55692c05d7acd524"
-  integrity sha512-ViF6lS6+SRpDOiA8BiIGdVzB+WmZ4CFOnaGS+8K3aRhZectG0B20zab/l4uE/wyr5ThnBx2rnRk0VWQSx7n0Ww==
-  dependencies:
-    "@floating-ui/dom" "^1.4.5"
-
 svelty-picker@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/svelty-picker/-/svelty-picker-5.0.0.tgz#538af006f2ea75fa6844bc2a210207376ff48d98"
