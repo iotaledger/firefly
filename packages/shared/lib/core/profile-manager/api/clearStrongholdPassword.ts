@@ -3,5 +3,6 @@ import { profileManager } from '../stores'
 
 export async function clearStrongholdPassword(): Promise<void> {
     const manager = get(profileManager)
-    await manager.clearStrongholdPassword()
+    // TODO: Find the root cause that makes the profileManager be `null` https://github.com/iotaledger/firefly/issues/7456
+    await manager?.clearStrongholdPassword()
 }

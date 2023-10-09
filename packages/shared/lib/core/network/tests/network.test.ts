@@ -21,17 +21,15 @@ describe('File: network.ts', () => {
     }
 
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
-        [NetworkId.Iota]: [
-            'https://chrysalis-nodes.iota.org',
-            'https://chrysalis-nodes.iota.cafe',
-            'https://iota-node.tanglebay.com',
-        ],
+        [NetworkId.Iota]: ['https://api.stardust-mainnet.iotaledger.net'],
+        [NetworkId.IotaAlphanet]: ['https://api.iota-alphanet.iotaledger.net'],
         [NetworkId.Shimmer]: ['https://api.shimmer.network', 'https://shimmer-node.tanglebay.com'],
         [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
     }
 
     const EXPECTED_NODES: Readonly<{ [key in NetworkId]: (INode | undefined)[] }> = {
         [NetworkId.Iota]: _buildNodes(NetworkId.Iota),
+        [NetworkId.IotaAlphanet]: _buildNodes(NetworkId.IotaAlphanet),
         [NetworkId.Shimmer]: _buildNodes(NetworkId.Shimmer),
         [NetworkId.Testnet]: _buildNodes(NetworkId.Testnet),
         [NetworkId.Custom]: _buildNodes(NetworkId.Custom),
@@ -44,7 +42,6 @@ describe('File: network.ts', () => {
                 nodes: [
                     _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0]),
                     _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1]),
-                    _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[2]),
                 ],
                 maxParallelApiRequests: DEFAULT_MAX_PARALLEL_API_REQUESTS,
             })
@@ -103,8 +100,6 @@ describe('File: network.ts', () => {
         })
         it('should catch duplicate node URLs', () => {
             expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0])).toEqual(UrlError.Duplicate)
-            expect(_check(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1])).toEqual(UrlError.Duplicate)
-
             expect(_check(EXPECTED_NODE_URLS[NetworkId.Shimmer]?.[0])).toBeUndefined()
         })
         it('may or may NOT catch insecure URLs', () => {

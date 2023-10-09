@@ -1,7 +1,6 @@
 import { get } from 'svelte/store'
 
 import {
-    DEFAULT_TRANSACTION_OPTIONS,
     getOutputParameters,
     resetNewTokenTransactionDetails,
     setNewTransactionDetails,
@@ -20,6 +19,7 @@ import {
 } from '../stores'
 import { handleLedgerError } from '@core/ledger/utils'
 import { getDepositAddress } from '@core/account/utils'
+import { SHIMMER_CLAIM_DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
@@ -76,7 +76,10 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
     setNewTransactionDetails(newTransactionDetails)
 
     const outputParams = await getOutputParameters(newTransactionDetails)
-    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(outputParams, DEFAULT_TRANSACTION_OPTIONS)
+    const preparedOutput = await shimmerClaimingAccount?.prepareOutput(
+        outputParams,
+        SHIMMER_CLAIM_DEFAULT_TRANSACTION_OPTIONS
+    )
 
     const claimingTransaction = await shimmerClaimingAccount?.sendOutputs([preparedOutput])
     resetNewTokenTransactionDetails()
