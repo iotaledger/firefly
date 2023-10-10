@@ -21,9 +21,9 @@ describe('File: network.ts', () => {
     }
 
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
-        [NetworkId.Iota]: ['https://api.stardust-mainnet.iotaledger.net:8443'],
+        [NetworkId.Iota]: ['https://api.stardust-mainnet.iotaledger.net'],
         [NetworkId.IotaAlphanet]: ['https://api.iota-alphanet.iotaledger.net'],
-        [NetworkId.Shimmer]: ['https://api.shimmer.network'],
+        [NetworkId.Shimmer]: ['https://api.shimmer.network', 'https://shimmer-node.tanglebay.com'],
         [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
     }
 
@@ -39,7 +39,10 @@ describe('File: network.ts', () => {
         it('should return the client options of the active profile if present', () => {
             const clientOptions = getDefaultClientOptions(NetworkId.Iota)
             expect(clientOptions).toEqual(<ClientOptions>{
-                nodes: [_buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0])],
+                nodes: [
+                    _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[0]),
+                    _buildNode(EXPECTED_NODE_URLS?.[NetworkId.Iota]?.[1]),
+                ],
                 maxParallelApiRequests: DEFAULT_MAX_PARALLEL_API_REQUESTS,
             })
         })
