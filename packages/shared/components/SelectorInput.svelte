@@ -103,7 +103,7 @@
                                 color="gray-800"
                                 classes="truncate"
                             >
-                                {truncateString(option.key, 20, 0) ?? option.value}
+                                {truncateString(option.key, 10, 0) ?? option.value}
                             </Text>
                         </div>
                         {#if option.value && option.key}
