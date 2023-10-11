@@ -1338,6 +1338,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Visa status",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
         "hideNetworkStatistics": "Dölj nätverksstatistik",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON webb-token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",
