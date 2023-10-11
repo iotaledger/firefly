@@ -39,7 +39,7 @@
                     })
                     showAppNotification({
                         type: 'info',
-                        message: localize('views.generateNewLedgerAddress.confirmedBody'),
+                        message: localize('general.verifyLedgerDepositAddress'),
                     })
                 }
             } catch (err) {
@@ -67,7 +67,11 @@
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
         {#if $isActiveLedgerProfile}
-            <MenuItem icon={Icon.Ledger} title={localize('actions.verifyAddress')} onClick={onVerifyAddressClick} />
+            <MenuItem
+                icon={Icon.Ledger}
+                title={localize('actions.verifyDepositAddress')}
+                onClick={onVerifyAddressClick}
+            />
         {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={modal?.close} />

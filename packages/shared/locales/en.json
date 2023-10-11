@@ -1338,7 +1338,7 @@
         "viewDownloads" : "View downloads",
         "viewStatus": "View status",
         "viewBalanceBreakdown": "View balance breakdown",
-        "verifyAddress": "Verify address",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Show hidden wallets",
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
@@ -1665,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters":{
         "title": "Filters",
