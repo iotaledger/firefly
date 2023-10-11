@@ -92,7 +92,7 @@
                         on:click={() => onClick(option)}
                         class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
-                        <div class="flex flex-row gap-3 justify-start items-center flex-1">
+                        <div class="flex flex-row gap-3 justify-start items-center flex-1 max-w-[50%] overflow-hidden">
                             <slot {option} {index}>
                                 <!-- Contains Custom Selector -->
                             </slot>
@@ -103,7 +103,7 @@
                                 color="gray-800"
                                 classes="truncate"
                             >
-                                {truncateString(option.key, 10, 0) ?? option.value}
+                                {option.key ?? option.value}
                             </Text>
                         </div>
                         {#if option.value && option.key}
