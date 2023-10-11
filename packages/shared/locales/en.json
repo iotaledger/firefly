@@ -346,7 +346,8 @@
             },
             "balanceFinder": {
                 "title": "Balance finder",
-                "description": "Perform an extended search of your balance"
+                "description": "Perform an extended search of your balance",
+                "currentWallet": "Search only in the current wallet"
             },
             "hiddenAccounts": {
                 "title": "Hidden wallets",

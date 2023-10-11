@@ -33,10 +33,14 @@
     export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
+    export let searchInCurrentWallet: boolean
 
     const { isStrongholdLocked, network } = $activeProfile
-    const searchAlgorithm: SearchAlgorithmType =
-        network.id === NetworkId.Iota || NetworkId.IotaAlphanet ? SearchAlgorithmType.IDS : SearchAlgorithmType.BFS
+    const searchAlgorithm: SearchAlgorithmType = searchInCurrentWallet
+        ? SearchAlgorithmType.DFS
+        : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
+        ? SearchAlgorithmType.IDS
+        : SearchAlgorithmType.BFS
 
     let error = ''
     let isBusy = false
