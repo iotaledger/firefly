@@ -1338,6 +1338,7 @@
         "viewDownloads": "Se downloads",
         "viewStatus": "Vis Status",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",
         "hideNetworkStatistics": "Skjul netværksstatistik",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Intern transaktion",
         "coinType": "Mønttyper",
-        "custom": "Tilpasset"
+        "custom": "Tilpasset",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filtre",

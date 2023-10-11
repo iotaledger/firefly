@@ -6,6 +6,7 @@ import {
     getAssetById,
     NewTransactionType,
     getUnitFromTokenMetadata,
+    SubjectType,
 } from '@core/wallet'
 import { openPopup, PopupId } from '@auxiliary/popup'
 import { get } from 'svelte/store'
@@ -51,7 +52,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
     const rawAmount = getRawAmountFromSearchParam(searchParams)
     const metadata = searchParams.get(SendOperationParameter.Metadata)
     const tag = searchParams.get(SendOperationParameter.Tag)
-    const recipient: Subject = address ? { type: 'address', address } : undefined
+    const recipient: Subject = address ? { type: SubjectType.Address, address } : undefined
 
     return {
         type: NewTransactionType.TokenTransfer,

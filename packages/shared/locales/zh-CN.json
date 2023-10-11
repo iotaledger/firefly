@@ -1338,6 +1338,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "查看状态",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
         "hideNetworkStatistics": "隐藏网络统计信息",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON web 代币",
         "internalTransaction": "内部交易",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "过滤",
