@@ -12,6 +12,6 @@ export const BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION: AccountRecoveryConfi
         initialAccountRange: 3,
         accountGapLimit: 1,
         numberOfRoundsBetweenBreadthSearch: 1,
-        addressGapLimit: 20,
+        addressGapLimit: 30,
     },
 }
