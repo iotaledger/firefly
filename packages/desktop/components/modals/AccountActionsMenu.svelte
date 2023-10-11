@@ -66,6 +66,7 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
+        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         {#if $isActiveLedgerProfile}
             <MenuItem
                 icon={Icon.Ledger}
@@ -73,7 +74,6 @@
                 onClick={onVerifyAddressClick}
             />
         {/if}
-        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         <ToggleHiddenAccountMenuItem onClick={modal?.close} />
         <hr />
         {#if showDeleteAccount}
