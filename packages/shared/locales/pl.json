@@ -1338,6 +1338,7 @@
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1664,7 +1665,8 @@
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
-        "custom": "Niestandardowe"
+        "custom": "Niestandardowe",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filtry",
