@@ -1338,7 +1338,7 @@
         "viewDownloads": "Afficher les téléchargements",
         "viewStatus": "Voir le statut",
         "viewBalanceBreakdown": "Voir la répartition du solde",
-        "verifyDepositAddress": "Verify deposit address",
+        "verifyDepositAddress": "Vérifier l'adresse du dépôt",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
         "hideNetworkStatistics": "Masquer les statistiques du réseau",
@@ -1666,7 +1666,7 @@
         "internalTransaction": "Transaction interne",
         "coinType": "Type de token",
         "custom": "Personnalisé",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Veuillez vérifier que l'adresse de dépôt correspond à celle affichée sur la clé ledger"
     },
     "filters": {
         "title": "Filters",
