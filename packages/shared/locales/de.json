@@ -1338,6 +1338,7 @@
         "viewDownloads": "Downloads anzeigen",
         "viewStatus": "Status ansehen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON-Web-Token",
         "internalTransaction": "Interne Transaktion",
         "coinType": "Cointyp",
-        "custom": "Benutzerdefiniert"
+        "custom": "Benutzerdefiniert",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",
