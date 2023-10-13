@@ -1338,6 +1338,7 @@
         "viewDownloads": "Letöltések megtekintése",
         "viewStatus": "Állapot megtekintése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
         "hideNetworkStatistics": "Hálózati statisztika elrejtése",
@@ -1438,7 +1439,7 @@
         "shimmerClaiming": "Igénylés folyamatban",
         "shimmerGenesis": "Shimmer genezis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Stardust Genesis",
+        "stardustGenesis": "Stardust Genezis",
         "minted": "Kibocsátás elkészült",
         "minting": "Kibocsátás folyamatban",
         "burned": "Elégetve",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Tárcán belüli tranzakció",
         "coinType": "Érme típusa",
-        "custom": "Egyéni"
+        "custom": "Egyéni",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Szűrők",
