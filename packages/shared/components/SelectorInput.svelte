@@ -92,12 +92,7 @@
                         on:click={() => onClick(option)}
                         class="w-full flex flex-row flex-1 justify-between items-center px-2 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 dark:hover:bg-opacity-20"
                     >
-                        <div
-                            class="flex flex-row gap-3 justify-start items-center flex-1 overflow-hidden {option.value &&
-                            option.key
-                                ? 'max-w-[50%]'
-                                : ''}"
-                        >
+                        <div class="flex flex-row gap-3 justify-start items-center flex-1 overflow-hidden">
                             <slot {option} {index}>
                                 <!-- Contains Custom Selector -->
                             </slot>
