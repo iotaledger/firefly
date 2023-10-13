@@ -4,7 +4,6 @@
     import {
         AppContext,
         isLatestStrongholdVersion,
-        mobile,
         needsToAcceptLatestPrivacyPolicy,
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
@@ -54,10 +53,7 @@
     <logo-wrapper class="absolute top-20">
         <Logo width="64px" logo={LogoEnum.Firefly} />
     </logo-wrapper>
-    <div
-        class="profiles-wrapper h-auto items-start justify-center w-full {!$mobile &&
-            'overlay-scrollbar'} flex flex-row flex-wrap"
-    >
+    <div class="profiles-wrapper h-auto items-start justify-center w-full overlay-scrollbar flex flex-row flex-wrap">
         {#each $profiles as profile}
             <div class="mx-7 mb-8">
                 <Profile

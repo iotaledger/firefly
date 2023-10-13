@@ -7,7 +7,9 @@ const { ipcRenderer } = require('electron')
  */
 const NotificationManager = {
     notify(message, contextData) {
-        const notification = new Notification('Firefly', {
+        // APP_NAME is replaced by Webpack
+        // eslint-disable-next-line no-undef
+        const notification = new Notification(APP_NAME, {
             body: message,
             data: contextData,
         })

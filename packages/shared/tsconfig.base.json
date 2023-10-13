@@ -14,7 +14,8 @@
             "@lib/*": ["./lib/*"]
         },
         "types": ["node"],
-        "verbatimModuleSyntax": false
+        "verbatimModuleSyntax": false,
+        "resolveJsonModule": true
     },
     "include": ["./lib"],
     "exclude": ["**/node_modules", "**/tests"]

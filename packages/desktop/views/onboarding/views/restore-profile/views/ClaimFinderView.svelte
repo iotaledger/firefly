@@ -31,7 +31,7 @@
         pollLedgerNanoStatus,
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
-    import { unsubscribeFromWalletApiEvents } from '@core/profile-manager'
+    import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { Animation, Button, ShimmerClaimingAccountTile, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
@@ -138,6 +138,7 @@
                         shimmerClaimingProfileDirectory,
                         $onboardingProfile?.importFilePath
                     )
+                    await setStrongholdPassword($onboardingProfile?.strongholdPassword)
                 }
 
                 await createShimmerClaimingProfileManager()
@@ -233,7 +234,7 @@
             </Button>
         {/if}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {true && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
 </OnboardingLayout>

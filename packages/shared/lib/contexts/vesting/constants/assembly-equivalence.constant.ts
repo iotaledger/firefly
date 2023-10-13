@@ -1,0 +1,6 @@
+import Big from 'big.js'
+
+const IOTA_TOKENS_TO_DISTRIBUTE = Big('161000000')
+const ASMB_TOKENS_TOTAL = Big('12380515719.16')
+
+export const ASSEMBLY_IOTA_EQUIVALENCE_FACTOR = parseFloat(ASMB_TOKENS_TOTAL.div(IOTA_TOKENS_TO_DISTRIBUTE).toString())

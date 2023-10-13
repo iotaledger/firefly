@@ -6,29 +6,22 @@
         initialiseProfileManagerFromOnboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import {
         INode,
         NetworkId,
         buildPersistedNetworkFromNodeInfoResponse,
+        getEnabledNetworkFromFeatureFlags,
         getNetworkIdFromNetworkName,
     } from '@core/network'
     import { getNodeInfo } from '@core/profile-manager'
-    import features from '@features/features'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { networkSetupRouter } from '../network-setup-router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     let nodeConfigurationForm: NodeConfigurationForm
-    let networkId: NetworkId = features?.onboarding?.iota?.enabled
-        ? NetworkId.Iota
-        : features?.onboarding?.shimmer?.enabled
-        ? NetworkId.Shimmer
-        : features?.onboarding?.testnet?.enabled
-        ? NetworkId.Testnet
-        : NetworkId.Custom
+    let networkId: NetworkId = getEnabledNetworkFromFeatureFlags()
     let coinType: string
     let node: INode
     let isBusy = false
@@ -120,7 +113,7 @@
             {localize('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.OnboardingCustomNetworkDesktop} />
     </div>
 </OnboardingLayout>

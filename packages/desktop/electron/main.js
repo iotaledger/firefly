@@ -359,12 +359,12 @@ app.on('window-all-closed', () => {
 
 powerMonitor.on('suspend', () => {
     // MacOS, Windows and Linux
-    windows.main.webContents.send('power-monitor-suspend')
+    windows.main?.webContents?.send('power-monitor-suspend')
 })
 
 powerMonitor.on('lock-screen', () => {
     // MacOS and Windows
-    windows.main.webContents.send('power-monitor-lock-screen')
+    windows.main?.webContents?.send('power-monitor-lock-screen')
 })
 
 app.once('ready', () => {
@@ -486,8 +486,8 @@ app.on('second-instance', (_e, args) => {
 })
 
 /**
- * Register firefly:// protocol for deep links
- * Set Firefly as the default handler for firefly:// protocol
+ * Register iota:// protocol for deep links
+ * Set Firefly as the default handler for iota:// protocol
  */
 protocol.registerSchemesAsPrivileged([
     { scheme: process.env.APP_PROTOCOL, privileges: { secure: true, standard: true } },

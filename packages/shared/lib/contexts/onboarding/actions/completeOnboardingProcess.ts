@@ -3,6 +3,7 @@ import { get } from 'svelte/store'
 import { OnboardingType } from '../enums'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
+import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 
 export function completeOnboardingProcess(): void {
     // if we already have an active profile
@@ -15,6 +16,7 @@ export function completeOnboardingProcess(): void {
     const onboardingType = get(onboardingProfile)?.onboardingType
     const shouldCreateAccount = onboardingType === OnboardingType.Create
     const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
+    showBalanceOverviewPopup.set(shouldRecoverAccounts)
     void login({ isFromOnboardingFlow: true, shouldCreateAccount, shouldRecoverAccounts })
 
     onboardingProfile.set(undefined)

@@ -1,7 +1,7 @@
 import { Converter } from '@core/utils'
 import { SpecialStream } from '../classes'
 
-export function encodeSmartContractParameters(parameters: [string, string][]): Uint8Array {
+export function encodeSmartContractParameters(parameters: [string, Uint8Array][]): Uint8Array {
     const encodedParameters = new SpecialStream()
     encodedParameters.writeUInt32SpecialEncoding('parametersLength', parameters.length)
 
@@ -12,9 +12,8 @@ export function encodeSmartContractParameters(parameters: [string, string][]): U
         encodedParameters.writeUInt32SpecialEncoding('keyLength', key.length)
         encodedParameters.writeBytes('keyBytes', keyBytes.length, keyBytes)
 
-        const valueBytes = Converter.hexToBytes(value)
-        encodedParameters.writeUInt32SpecialEncoding('valueLength', valueBytes.length)
-        encodedParameters.writeBytes('valueBytes', valueBytes.length, valueBytes)
+        encodedParameters.writeUInt32SpecialEncoding('valueLength', value.length)
+        encodedParameters.writeBytes('valueBytes', value.length, value)
     }
     return encodedParameters.finalBytes()
 }
