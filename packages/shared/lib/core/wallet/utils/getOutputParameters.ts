@@ -5,10 +5,10 @@ import {
     outputHexBytes,
 } from '@core/layer-2/utils'
 import { getCoinType } from '@core/profile'
-import { Converter, IBasicOutput, INftOutput, convertDateToUnixTimestamp } from '@core/utils'
+import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, OutputParams } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails } from '../stores'
@@ -91,7 +91,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         selectedAccount.index,
         outputParams,
         getDefaultTransactionOptions()
-    )) as unknown as IBasicOutput | INftOutput
+    )) as unknown as BasicOutput | NftOutput
     const serializedOutput = await outputHexBytes(outputForEstimate)
     const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
