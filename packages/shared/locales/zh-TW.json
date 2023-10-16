@@ -1338,6 +1338,7 @@
         "viewDownloads": "查看下載",
         "viewStatus": "查看狀態",
         "viewBalanceBreakdown": "檢視餘額明細",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
         "hideNetworkStatistics": "隱藏網路統計數據",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON 網路代幣",
         "internalTransaction": "內部交易",
         "coinType": "代幣類型",
-        "custom": "自訂"
+        "custom": "自訂",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "篩選",
