@@ -21,7 +21,18 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile, Spinner } from 'shared/components'
+    import {
+        Button,
+        FontWeight,
+        KeyValueBox,
+        Text,
+        TextHint,
+        TextType,
+        Icon,
+        Tile,
+        Spinner,
+        Checkbox,
+    } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
     import VirtualList from '@sveltejs/svelte-virtual-list'
@@ -33,17 +44,12 @@
     export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
-    export let searchInCurrentWallet: boolean
-
-    const { isStrongholdLocked, network } = $activeProfile
-    const searchAlgorithm: SearchAlgorithmType = searchInCurrentWallet
-        ? SearchAlgorithmType.DFS
-        : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
-        ? SearchAlgorithmType.IDS
-        : SearchAlgorithmType.BFS
 
     let error = ''
     let isBusy = false
+    let searchInCurrentWallet: boolean = false
+
+    const { isStrongholdLocked, network } = $activeProfile
 
     $: isTransferring = $visibleActiveAccounts.some(
         (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
@@ -51,6 +57,12 @@
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
+    $: searchInCurrentWallet, (hasUsedBalanceFinder = false)
+    $: searchAlgorithm = searchInCurrentWallet
+        ? SearchAlgorithmType.DFS
+        : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
+        ? SearchAlgorithmType.IDS
+        : SearchAlgorithmType.BFS
 
     // Button click handlers
     async function onFindBalancesClick(): Promise<void> {
@@ -181,6 +193,12 @@
             valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
         />
     </div>
+    <Checkbox
+        label={localize('popups.balanceFinder.currentWallet')}
+        checked={searchInCurrentWallet}
+        onClick={() => (searchInCurrentWallet = !searchInCurrentWallet)}
+        disabled={isBusy}
+    />
 
     {#if hasUsedBalanceFinder}
         <TextHint
