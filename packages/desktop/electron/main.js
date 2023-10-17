@@ -458,7 +458,7 @@ ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 /**
  * Define deep link state
  */
-let deepLinkUrl = null
+let deepLinkUrl = process.argv[1]
 
 /**
  * Create a single instance only
