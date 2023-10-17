@@ -1338,6 +1338,7 @@
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "verifyDepositAddress": "Zweryfikuj adres depozytu",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1664,7 +1665,8 @@
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
-        "custom": "Niestandardowe"
+        "custom": "Niestandardowe",
+        "verifyLedgerDepositAddress": "Sprawdź czy adres depozytu jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
     },
     "filters": {
         "title": "Filtry",

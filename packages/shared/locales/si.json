@@ -1338,6 +1338,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "තත්ත්වය බලන්න",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "සැඟවුණු පසුම්බි පෙන්වන්න",
         "confirm": "තහවුරු කරන්න",
         "hideNetworkStatistics": "ජාල සංඛ්‍යාලේඛන සඟවන්න",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filters",
