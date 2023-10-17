@@ -1,9 +1,7 @@
-import { OutputData } from '@iota/wallet'
-import { IOutputResponse, IUTXOInput } from '@iota/types'
+import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
-import { IAccountState } from '@core/account/interfaces'
+import { AddressWithOutputs, IAccountState } from '@core/account/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
-import { OUTPUT_TYPE_TREASURY } from '../../constants'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
@@ -11,7 +9,7 @@ import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransacti
 
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
-    transactionInputs: IOutputResponse[],
+    transactionInputs: OutputResponse[],
     account: IAccountState
 ): IProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
@@ -20,11 +18,11 @@ export function preprocessGroupedOutputs(
         transactionInputs
     )
     const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
-    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.depositAddress)
+    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.addressesWithOutputs)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         remainder: outputData.remainder,
-        output: outputData.output.type !== OUTPUT_TYPE_TREASURY ? outputData.output : undefined,
+        output: outputData.output.type !== OutputType.Treasury ? outputData.output : undefined,
     }))
 
     return {
@@ -41,21 +39,25 @@ export function preprocessGroupedOutputs(
 function getDirectionForOutputs(
     outputs: OutputData[],
     wrappedInputs: IWrappedOutput[],
-    accountAddress: string
+    accountAddressesWithOutputs: AddressWithOutputs[]
 ): ActivityDirection {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
         return ActivityDirection.Outgoing
     }
     const output =
-        nonRemainderOutputs[0].output.type !== OUTPUT_TYPE_TREASURY ? nonRemainderOutputs[0].output : undefined
-    const recipientAddress = getRecipientAddressFromOutput(output)
+        nonRemainderOutputs[0].output.type !== OutputType.Treasury ? nonRemainderOutputs[0].output : undefined
+    const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
+    const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
+    const isRecipientOneOfAccountAddresses = accountAddresses.includes(recipientAddress)
+    const isSenderOneOfAccountAddresses = accountAddresses.includes(senderAddress)
+    const isSelfTransaction = isRecipientOneOfAccountAddresses && isSenderOneOfAccountAddresses
 
-    if (recipientAddress === accountAddress && recipientAddress === senderAddress) {
+    if (isSelfTransaction) {
         return ActivityDirection.SelfTransaction
     }
-    if (recipientAddress === accountAddress && recipientAddress !== senderAddress) {
+    if (isRecipientOneOfAccountAddresses && recipientAddress !== senderAddress) {
         return ActivityDirection.Incoming
     } else {
         return ActivityDirection.Outgoing
@@ -64,7 +66,7 @@ function getDirectionForOutputs(
 
 function convertTransactionOutputResponsesToWrappedOutputs(
     transactionId: string,
-    outputResponses: IOutputResponse[]
+    outputResponses: OutputResponse[]
 ): IWrappedOutput[] {
     return outputResponses.map((outputResponse) =>
         convertTransactionOutputResponseToWrappedOutput(transactionId, outputResponse)
@@ -73,9 +75,9 @@ function convertTransactionOutputResponsesToWrappedOutputs(
 
 function convertTransactionOutputResponseToWrappedOutput(
     transactionId: string,
-    outputResponse: IOutputResponse
+    outputResponse: OutputResponse
 ): IWrappedOutput {
-    if (outputResponse.output.type === OUTPUT_TYPE_TREASURY) {
+    if (outputResponse.output.type === OutputType.Treasury) {
         return undefined
     } else {
         const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, outputResponse.metadata.outputIndex)
@@ -83,15 +85,8 @@ function convertTransactionOutputResponseToWrappedOutput(
     }
 }
 
-function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): IUTXOInput[] {
+function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): UTXOInput[] {
     return (
-        wrappedInputs?.map(
-            (input) =>
-                ({
-                    type: 0,
-                    transactionId: input.metadata?.transactionId,
-                    transactionOutputIndex: input.metadata.outputIndex,
-                } as IUTXOInput)
-        ) ?? []
+        wrappedInputs?.map((input) => new UTXOInput(input.metadata?.transactionId, input.metadata?.outputIndex)) ?? []
     )
 }

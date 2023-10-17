@@ -1,16 +1,15 @@
 <script lang="ts">
     import { Text, FontWeight } from 'shared/components'
 
-    export let data = ''
-    export let textColor = 'gray-800'
-    export let darkTextColor = ''
-    export let backgroundColor = ''
-    export let darkBackgroundColor = ''
-    export let classes = ''
+    export let data: string = ''
+    export let textColor: string = 'gray-800'
+    export let darkTextColor: string = ''
+    export let backgroundColor: string = ''
+    export let darkBackgroundColor: string = ''
+    export let classes: string = ''
 </script>
 
 <Text
-    type="p"
     smaller
     fontWeight={FontWeight.semibold}
     color={textColor}

@@ -4,6 +4,7 @@ import { app, ipcMain } from 'electron'
 import { getMachineId } from './machineId'
 import { getPlatformVersion } from './diagnostics'
 import os from 'os'
+import { NETWORK } from '../../product'
 
 export async function initialiseAnalytics() {
     if (features.analytics.enabled && process.env.AMPLITUDE_API_KEY) {
@@ -30,7 +31,7 @@ function setInitialIdentify() {
 
     // Application Information
     identifyObj.set('app_name', app.getName())
-    identifyObj.set('app_version', app.getVersion())
+    identifyObj.set('app_version', `${NETWORK}-${app.getVersion()}`)
 
     // Platform Information
     identifyObj.setOnce('platform', os.platform())

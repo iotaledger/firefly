@@ -3,7 +3,7 @@ import { handleError } from '@core/error/handlers'
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { NftActivity } from '@core/wallet/types'
-import type { INftOutput } from '@iota/types'
+import { getClient } from '@core/profile-manager'
 import { getNftId } from '../outputs/getNftId'
 import {
     getAsyncDataFromOutput,
@@ -13,6 +13,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { NftOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleNftActivity(
     account: IAccountState,
@@ -21,7 +22,7 @@ export async function generateSingleNftActivity(
 ): Promise<NftActivity> {
     const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
-    const output = wrappedOutput.output as INftOutput
+    const output = wrappedOutput.output as NftOutput
     const id = outputId || transactionId
 
     const isHidden = false
@@ -38,13 +39,16 @@ export async function generateSingleNftActivity(
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
 
-    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
+    const storageDepositData = await getStorageDepositFromOutput(account, output)
+    const { storageDeposit } = storageDepositData
+    let { giftedStorageDeposit } = storageDepositData
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
     let surplus: number | undefined = undefined
     try {
-        const minimumRequiredStorageDeposit = await account.minimumRequiredStorageDeposit(output)
+        const client = await getClient()
+        const minimumRequiredStorageDeposit = await client.minimumRequiredStorageDeposit(output)
         surplus = Number(output.amount) - Number(minimumRequiredStorageDeposit)
         if (surplus && !storageDeposit) {
             giftedStorageDeposit = Number(minimumRequiredStorageDeposit)

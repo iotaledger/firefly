@@ -7,14 +7,12 @@ import {
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
-    OUTPUT_TYPE_BASIC,
-    OUTPUT_TYPE_NFT,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
-import { INftOutput } from '@iota/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
+import { CommonOutput, NftOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
@@ -24,7 +22,7 @@ export async function generateActivitiesFromBasicOutputs(
 
     const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
         processedTransaction.outputs,
-        account.depositAddress,
+        account.addressesWithOutputs,
         processedTransaction.direction
     )
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)
@@ -40,7 +38,7 @@ export async function generateActivitiesFromBasicOutputs(
 
         if (isSelfTransaction && burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
-            const nftInput = wrappedInput.output as INftOutput
+            const nftInput = wrappedInput.output as NftOutput
             activity = await generateSingleNftActivity(
                 account,
                 {
@@ -86,12 +84,14 @@ export async function generateActivitiesFromBasicOutputs(
 function getBurnedNftInputs(processedTransaction: IProcessedTransaction): IWrappedOutput[] {
     return processedTransaction.wrappedInputs.filter((wrappedInput) => {
         const input = wrappedInput.output
-        if (input.type === OUTPUT_TYPE_NFT) {
-            const nftId = getNftId(input.nftId, wrappedInput.outputId)
+        if (input.type === OutputType.Nft) {
+            const nftInput = input as NftOutput
+            const nftId = getNftId(nftInput.nftId, wrappedInput.outputId)
 
             const isIncludedInOutputs = processedTransaction.outputs.some((output) => {
-                if (output.output.type === OUTPUT_TYPE_NFT) {
-                    return getNftId(output.output.nftId, output.outputId) === nftId
+                if (output.output.type === OutputType.Nft) {
+                    const nftOutput = output.output as NftOutput
+                    return getNftId(nftOutput.nftId, output.outputId) === nftId
                 } else {
                     return false
                 }
@@ -131,18 +131,21 @@ function getBurnedNativeTokens(
 function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
     const nativeTokens: { [key: string]: number } = {}
     for (const output of outputs) {
-        for (const nativeToken of output.output.nativeTokens ?? []) {
-            if (!nativeTokens[nativeToken.id]) {
-                nativeTokens[nativeToken.id] = 0
+        if (output.output.type !== OutputType.Treasury) {
+            const commonOutput = output.output as CommonOutput
+            for (const nativeToken of commonOutput.nativeTokens ?? []) {
+                if (!nativeTokens[nativeToken.id]) {
+                    nativeTokens[nativeToken.id] = 0
+                }
+                nativeTokens[nativeToken.id] += Number(nativeToken.amount)
             }
-            nativeTokens[nativeToken.id] += Number(nativeToken.amount)
         }
     }
     return nativeTokens
 }
 
 function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
-    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OUTPUT_TYPE_BASIC)
+    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OutputType.Basic)
     const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
     const isSameAmount =
         processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===

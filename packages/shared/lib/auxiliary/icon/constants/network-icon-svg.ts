@@ -4,6 +4,7 @@ import { Icon } from '../enums'
 
 export const NETWORK_ICON_SVG: { [key in string]: Icon } = {
     [NetworkId.Iota]: Icon.Iota,
+    [NetworkId.IotaAlphanet]: Icon.Iota,
     [NetworkId.Shimmer]: Icon.Shimmer,
     [NetworkId.Testnet]: Icon.Shimmer,
     [ChainId.ShimmerEVM]: Icon.ShimmerEvm,

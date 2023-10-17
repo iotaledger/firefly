@@ -1,22 +1,25 @@
-import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
-import type { IFoundryOutput } from '@iota/types'
-import { HexHelper, WriteStream } from '@iota/util.js'
+import { api } from '@core/profile-manager'
+import {
+    AddressType,
+    AliasAddress,
+    FoundryId,
+    FoundryOutput,
+    ImmutableAliasAddressUnlockCondition,
+    UnlockConditionType,
+} from '@iota/sdk/out/types'
 
-export function buildFoundryId(foundry: IFoundryOutput): string {
-    const immutableAliasUnlockCondition = foundry.unlockConditions[0]
-    const aliasId =
-        immutableAliasUnlockCondition.type === 6 && immutableAliasUnlockCondition.address.type === ADDRESS_TYPE_ALIAS
-            ? immutableAliasUnlockCondition.address.aliasId
-            : ''
-    const typeWS = new WriteStream()
-    typeWS.writeUInt8('alias address type', ADDRESS_TYPE_ALIAS)
-    const aliasAddress = HexHelper.addPrefix(`${typeWS.finalHex()}${HexHelper.stripPrefix(aliasId)}`)
-    const serialNumberWS = new WriteStream()
-    serialNumberWS.writeUInt32('serialNumber', foundry.serialNumber)
-    const serialNumberHex = serialNumberWS.finalHex()
-    const tokenSchemeTypeWS = new WriteStream()
-    tokenSchemeTypeWS.writeUInt8('tokenSchemeType', foundry.tokenScheme.type)
-    const tokenSchemeTypeHex = tokenSchemeTypeWS.finalHex()
+export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
+    const unlockCondition = foundry.unlockConditions[0] as ImmutableAliasAddressUnlockCondition
+    const isImmutableAliasAddress = unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
 
-    return `${aliasAddress}${serialNumberHex}${tokenSchemeTypeHex}`
+    let aliasId = ''
+
+    if (isImmutableAliasAddress) {
+        const hasAliasAddress = unlockCondition.address.type === AddressType.Alias
+        if (hasAliasAddress) {
+            aliasId = (unlockCondition.address as AliasAddress).aliasId
+        }
+    }
+
+    return api.computeFoundryId(aliasId, foundry.serialNumber, foundry.tokenScheme.type)
 }

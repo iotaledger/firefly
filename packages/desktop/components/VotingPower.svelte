@@ -17,6 +17,7 @@
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||
         $selectedAccount?.hasVotingTransactionInProgress ||
+        $selectedAccount?.hasConsolidatingOutputsTransactionInProgress ||
         $selectedAccount?.isTransferring
 
     function onManageVotingPowerClick(): void {

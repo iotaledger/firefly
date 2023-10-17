@@ -21,7 +21,7 @@
     on:click={onReceiveClick}
 >
     <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
-    <inner-box class="flex flex-col space-y-6 pt-7 pb-6 w-full">
+    <inner-box class="w-full flex flex-col items-center space-y-6 py-4">
         <QR data={receiveAddress} />
         <AddressBox
             bind:this={addressBoxElement}

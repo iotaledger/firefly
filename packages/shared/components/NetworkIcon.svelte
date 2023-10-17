@@ -24,6 +24,10 @@
             backgroundColor: 'bg-gray-400',
             iconColor: 'text-black',
         },
+        [NetworkId.IotaAlphanet]: {
+            backgroundColor: 'bg-gray-400',
+            iconColor: 'text-black',
+        },
     }
 </script>
 

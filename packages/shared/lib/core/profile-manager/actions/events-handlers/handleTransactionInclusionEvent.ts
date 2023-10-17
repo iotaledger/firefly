@@ -1,6 +1,5 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { Event, TransactionInclusionWalletEvent } from '@iota/wallet'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
@@ -46,6 +45,10 @@ export function handleTransactionInclusionEventInternal(
         handleGovernanceTransactionInclusionEvent(accountIndex, inclusionState, activity)
     }
 
+    if (activity?.type === ActivityType.Consolidation) {
+        handleConsolidationTransactionInclusionEvent(accountIndex, inclusionState)
+    }
+
     updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
 }
 
@@ -79,4 +82,20 @@ function handleGovernanceTransactionInclusionEvent(
         void updateParticipationOverview(accountIndex)
     }
     syncVotingPower(accountIndex)
+}
+
+function handleConsolidationTransactionInclusionEvent(accountIndex: number, inclusionState: InclusionState): void {
+    if (inclusionState === InclusionState.Confirmed) {
+        // TODO: Normally we update active account after a the sdk returns a transaction
+        // With output consolidation we wait for the transaction confirmation to improve the UX of the vesting tab
+        // we should think about making this consistent in the future
+        updateActiveAccount(accountIndex, { isTransferring: false })
+        const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
+        if (!account) {
+            return
+        }
+        if (account?.hasConsolidatingOutputsTransactionInProgress) {
+            updateActiveAccount(accountIndex, { hasConsolidatingOutputsTransactionInProgress: false })
+        }
+    }
 }

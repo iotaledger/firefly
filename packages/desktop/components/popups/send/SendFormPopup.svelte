@@ -1,14 +1,17 @@
 <script lang="ts">
     import { get } from 'svelte/store'
+    import { Error } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { ownedNfts } from '@core/nfts'
     import { getByteLengthOfString, MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import {
         IAsset,
+        InclusionState,
         isReservedTagKeyword,
         newTransactionDetails,
         NewTransactionType,
+        selectedAccountActivities,
         setNewTransactionDetails,
         TokenStandard,
     } from '@core/wallet'
@@ -68,6 +71,9 @@
     let activeTab: SendForm =
         transactionDetails.type === NewTransactionType.TokenTransfer ? SendForm.SendToken : SendForm.SendNft
 
+    $: isTransferring =
+        $selectedAccountActivities.some((_activity) => _activity.inclusionState === InclusionState.Pending) ||
+        $selectedAccount.isTransferring
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isLayer2 = !!iscpChainAddress
     $: isSendTokenTab = activeTab === SendForm.SendToken
@@ -209,11 +215,14 @@
             {/if}
         </optional-inputs>
     </send-form-inputs>
+    {#if isTransferring}
+        <Error error={localize('notifications.transferring')} />
+    {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>
             {localize('actions.cancel')}
         </Button>
-        <Button classes="w-full" onClick={onContinueClick}>
+        <Button classes="w-full" onClick={onContinueClick} disabled={isTransferring} isBusy={isTransferring}>
             {localize('actions.next')}
         </Button>
     </popup-buttons>

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
@@ -36,7 +35,7 @@
     </div>
     <div slot="leftpane__content">
         <Text type="p" secondary classes="mb-4">{localize('views.onboarding.profileSetup.enterName.body1')}</Text>
-        <Text type="p" secondary classes={$mobile ? 'mb-4' : 'mb-10'}>
+        <Text type="p" secondary classes="mb-10">
             {localize(
                 `views.onboarding.profileSetup.enterName.body2.${$profiles?.length === 0 ? 'first' : 'nonFirst'}`
             )}
@@ -56,7 +55,7 @@
             {localize('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
         <Animation animation={AnimationEnum.ProfileDesktop} />
     </div>
 </OnboardingLayout>

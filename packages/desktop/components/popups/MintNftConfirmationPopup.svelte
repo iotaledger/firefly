@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { getClient } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
@@ -51,7 +52,8 @@
 
     async function prepareNftOutput(): Promise<void> {
         const outputData = buildNftOutputData(irc27Metadata, $selectedAccount.depositAddress)
-        const preparedOutput = await $selectedAccount.buildNftOutput(outputData)
+        const client = await getClient()
+        const preparedOutput = await client.buildNftOutput(outputData)
         storageDeposit = Number(preparedOutput.amount) ?? 0
         totalStorageDeposit = storageDeposit * quantity
     }
@@ -129,7 +131,7 @@
                     <KeyValueBox
                         keyText={localize('general.metadata')}
                         valueText={JSON.stringify(irc27Metadata, null, '\t')}
-                        classes="whitespace-pre-wrap"
+                        isPreText
                     />
                 {/if}
             </activity-details>

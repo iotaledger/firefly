@@ -3,9 +3,9 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
-    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
+    import { LedgerConnectionState, ledgerAppName, ledgerConnectionState } from '@core/ledger'
     import { Subrouter } from '@core/router'
-    import { Button, Icon, LedgerAnimation, Link, Text } from '@ui'
+    import { Button, Icon, LedgerAnimation, Link, Text, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let router: Subrouter<unknown>
@@ -49,29 +49,35 @@
 
 <OnboardingLayout {onBackClick}>
     <div slot="leftpane__content">
-        <Text type="h2" classes="mb-5">{localize('views.connectLedger.title')}</Text>
-        <Text type="p" secondary classes="mb-5">{localize('views.connectLedger.body')}</Text>
+        <Text type={TextType.h2} classes="mb-5">{localize('views.connectLedger.title')}</Text>
+        <Text type={TextType.p} secondary classes="mb-5">{localize('views.connectLedger.body')}</Text>
         <div class="flex flex-col flex-nowrap space-y-2">
             <div class="flex flex-row items-center space-x-2">
                 <Icon
                     icon={isNotConnected ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isNotConnected ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.connect')}</Text>
+                <Text type={TextType.p} secondary>{localize('views.connectLedger.connect')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
                     icon={isLocked ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isLocked ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.unlock')}</Text>
+                <Text type={TextType.p} secondary>{localize('views.connectLedger.unlock')}</Text>
             </div>
             <div class="flex flex-row items-center space-x-2">
                 <Icon
                     icon={isAppNotOpen ? IconEnum.StatusError : IconEnum.StatusSuccess}
                     classes={`text-white bg-${isAppNotOpen ? 'red' : 'green'}-600 rounded-full`}
                 />
-                <Text type="p" secondary>{localize('views.connectLedger.openApp')}</Text>
+                <Text type={TextType.p} secondary
+                    >{localize('views.connectLedger.openApp', {
+                        values: {
+                            network: $ledgerAppName,
+                        },
+                    })}</Text
+                >
             </div>
         </div>
     </div>

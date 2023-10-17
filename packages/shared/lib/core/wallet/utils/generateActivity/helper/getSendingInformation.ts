@@ -1,15 +1,16 @@
 import { IAccountState } from '@core/account'
 import { ActivityDirection } from '@core/wallet/enums'
 import { IProcessedTransaction } from '@core/wallet/interfaces'
-import { Output, SenderInfo } from '@core/wallet/types'
+import { SenderInfo } from '@core/wallet/types'
 import { getSubjectFromAddress } from '../../getSubjectFromAddress'
 import { isSubjectInternal } from '../../isSubjectInternal'
 import { getRecipientFromOutput } from '../../outputs'
 import { getSenderAddressFromInputs, getSenderFromTransaction } from '../../transactions'
+import { CommonOutput } from '@iota/sdk/out/types'
 
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
-    output: Output,
+    output: CommonOutput,
     account: IAccountState
 ): SenderInfo {
     const { direction, wrappedInputs } = processedTransaction

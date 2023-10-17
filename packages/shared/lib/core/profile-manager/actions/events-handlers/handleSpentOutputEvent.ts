@@ -1,13 +1,13 @@
-import { Event, SpentOutputWalletEvent } from '@iota/wallet'
-import { WalletEventType } from '@iota/wallet/out/types'
+import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
-import { activeAccounts } from '@core/profile/stores'
+import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
 import { validateWalletApiEvent } from '../../utils'
+import { getAddressesWithOutputs } from '@core/account'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
@@ -24,6 +24,10 @@ export async function handleSpentOutputEventInternal(
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
     const output = payload.output
     await syncBalance(accountIndex)
+    if (account) {
+        const addressesWithOutputs = await getAddressesWithOutputs(account)
+        updateActiveAccount(account.index, { addressesWithOutputs })
+    }
     const outputId = output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)
 

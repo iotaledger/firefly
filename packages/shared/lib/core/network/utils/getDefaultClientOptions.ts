@@ -1,8 +1,12 @@
+import { DEFAULT_MAX_PARALLEL_API_REQUESTS } from '../constants'
 import { NetworkId } from '../enums'
-import { IClientOptions } from '../interfaces'
+import { ClientOptions } from '../interfaces'
 import { getOfficialNodes } from './getOfficialNodes'
 
-export function getDefaultClientOptions(networkId: NetworkId): IClientOptions {
+export function getDefaultClientOptions(networkId: NetworkId): ClientOptions {
     const nodes = getOfficialNodes(networkId)
-    return { nodes }
+    return {
+        nodes,
+        maxParallelApiRequests: DEFAULT_MAX_PARALLEL_API_REQUESTS,
+    }
 }

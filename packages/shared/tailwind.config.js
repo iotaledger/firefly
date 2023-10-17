@@ -1,16 +1,12 @@
-const plugin = require('tailwindcss/plugin')
-const selectorParser = require('postcss-selector-parser')
-
 /* Utilities */
 const pxToRem = (px, base = 16) => `${px / base}rem`
 
 const IS_DESKOP = process.env.PLATFORM === 'desktop'
 const SHARED_CONTENT_ROUTES = ['../shared/**/*.svelte', '../shared/**/*.scss']
 const DESKTOP_CONTENT_ROUTES = ['../desktop/**/*.svelte']
-const MOBILE_CONTENT_ROUTES = ['../mobile/**/*.svelte']
 
 module.exports = {
-    content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : MOBILE_CONTENT_ROUTES)],
+    content: [...SHARED_CONTENT_ROUTES, ...(IS_DESKOP ? DESKTOP_CONTENT_ROUTES : [])],
     safelist: [
         {
             pattern: /^from-/,

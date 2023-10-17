@@ -1,88 +1,96 @@
-import { FeatureTypes, UnlockConditionTypes } from '@iota/types'
+import { plainToInstance } from 'class-transformer'
 import { IWrappedOutput } from '../../wallet/interfaces'
 import { buildNftFromNftOutput } from '../utils/buildNftFromNftOutput'
-import { Converter } from '../../utils/convert'
-import { Bech32Helper } from '../../utils/crypto'
+import {
+    AddressUnlockCondition,
+    Ed25519Address,
+    IssuerFeature,
+    MetadataFeature,
+    NftOutputBuilderParams,
+    TimelockUnlockCondition,
+} from '@iota/sdk/out/types'
+import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
 
 const accountAddress = 'rms1qr47ee0fhahukrzec088v9lngv7w5k2sn3jjtwvkcpjfgxhhsazlsurxrx9'
 
 const outputId = '0x16cc2007c1f0120b4832f89950ac5099f804c9730f54c4c1865f485b7b12a7870000'
-const type = 6
 const amount = '68900'
 const nftId = '0xd17971b9baf1b80356bcc42715447acd01fb6aadb7ebfa8d0af2b07f911325a0'
 
-const immutableFeatures: FeatureTypes[] = [
-    {
-        type: 1,
-        address: {
-            type: 0,
-            pubKeyHash: '0x20dceb927cfdc2cea642fbf77aed81f42400145b5a4fd906f1aa40af1c31afb1',
-        },
-    },
-    {
-        type: 2,
-        data: '0x7b227374616e64617264223a224952433237222c2276657273696f6e223a2276312e30222c226e616d65223a227364617364222c2274797065223a22696d6167652f706e67222c22757269223a2268747470733a2f2f697066732e696f2f697066732f516d51717a4d546176516754346634543576365057427037584e4b746f506d43396a766e313257505433676b5345227d',
-    },
-]
+function buildImmutableFeatures() {
+    return [
+        new IssuerFeature(new Ed25519Address('0x20dceb927cfdc2cea642fbf77aed81f42400145b5a4fd906f1aa40af1c31afb1')),
+        new MetadataFeature(
+            '0x7b227374616e64617264223a224952433237222c2276657273696f6e223a2276312e30222c226e616d65223a227364617364222c2274797065223a22696d6167652f706e67222c22757269223a2268747470733a2f2f697066732e696f2f697066732f516d51717a4d546176516754346634543576365057427037584e4b746f506d43396a766e313257505433676b5345227d'
+        ),
+    ]
+}
 
-const incomingUnlockConditions: UnlockConditionTypes[] = [
-    {
-        type: 0,
-        address: {
-            type: 0,
-            pubKeyHash: '0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8',
-        },
-    },
-]
+function buildIncomingUnlockConditions() {
+    return [
+        new AddressUnlockCondition(
+            new Ed25519Address('0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8')
+        ),
+    ]
+}
 
-const incomingTimelockedCondition: UnlockConditionTypes[] = [
-    {
-        type: 0,
-        address: {
-            type: 0,
-            pubKeyHash: '0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8',
-        },
-    },
-    {
-        type: 2,
-        unixTime: 2876367917,
-    },
-]
+function buildIncomingTimelockedCondition() {
+    return [
+        new AddressUnlockCondition(
+            new Ed25519Address('0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8')
+        ),
+        new TimelockUnlockCondition(2876367917),
+    ]
+}
 
-const incomingExpiredTimelockedCondition: UnlockConditionTypes[] = [
-    {
-        type: 0,
-        address: {
-            type: 0,
-            pubKeyHash: '0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8',
-        },
-    },
-    {
-        type: 2,
-        unixTime: 136367917,
-    },
-]
+function buildIncomingExpiredTimelockedCondition() {
+    return [
+        new AddressUnlockCondition(
+            new Ed25519Address('0xebece5e9bf6fcb0c59c3ce7617f3433cea59509c6525b996c064941af78745f8')
+        ),
+        new TimelockUnlockCondition(136367917),
+    ]
+}
 
-jest.mock('../../wallet/utils/convertHexAddressToBech32.ts', () => ({
-    convertHexAddressToBech32: jest.fn((addressType: number, hexAddress: string) => {
-        return hexAddress ? Bech32Helper.toBech32(addressType, Converter.hexToBytes(hexAddress), 'rms') : undefined
+function buildNftOutput(params: NftOutputBuilderParams) {
+    return plainToInstance(NftOutput, {
+        nftId: params.nftId,
+        amount: params.amount,
+        nativeTokens: params.nativeTokens,
+        unlockConditions: params.unlockConditions,
+        features: params.features,
+        immutableFeatures: params.immutableFeatures,
+    })
+}
+
+// we can't use api (preload) or Utils, so we hardcode the function mock test specific
+jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts', () => ({
+    getBech32AddressFromAddressTypes: jest.fn((address: Address) => {
+        switch (address.type) {
+            case AddressType.Ed25519:
+                return accountAddress
+            case AddressType.Alias:
+                return undefined
+            case AddressType.Nft:
+                return undefined
+        }
     }),
 }))
 
-describe('File: buildNFtFromOutput.ts', () => {
+describe('File: buildNftFromOutput.ts', () => {
     let outputData: IWrappedOutput
 
     it('should classify default nft as spendable', () => {
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingUnlockConditions,
-                immutableFeatures,
-            },
+                nftId,
+                unlockConditions: buildIncomingUnlockConditions(),
+                immutableFeatures: buildImmutableFeatures(),
+            }),
         }
+
         let nft = buildNftFromNftOutput(outputData, accountAddress, true)
         expect(nft.isSpendable).toBe(true)
     })
@@ -90,13 +98,12 @@ describe('File: buildNFtFromOutput.ts', () => {
     it('should correctly classify nft as timelocked', () => {
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingTimelockedCondition,
-                immutableFeatures,
-            },
+                nftId,
+                unlockConditions: buildIncomingTimelockedCondition(),
+                immutableFeatures: buildImmutableFeatures(),
+            }),
         }
         const nft = buildNftFromNftOutput(outputData, accountAddress)
         expect(nft.isSpendable).toBe(true)
@@ -106,13 +113,12 @@ describe('File: buildNFtFromOutput.ts', () => {
     it('should correctly classify expired timelocked nft', () => {
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingExpiredTimelockedCondition,
-                immutableFeatures,
-            },
+                nftId,
+                unlockConditions: buildIncomingExpiredTimelockedCondition(),
+                immutableFeatures: buildImmutableFeatures(),
+            }),
         }
         const nft = buildNftFromNftOutput(outputData, accountAddress)
         expect(nft.isSpendable).toBe(true)
@@ -120,27 +126,26 @@ describe('File: buildNFtFromOutput.ts', () => {
     })
 
     it('should ignore parsing spendable state and timelock', () => {
-        outputData = {
+        let outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingUnlockConditions,
-            },
+                nftId,
+                unlockConditions: buildIncomingUnlockConditions(),
+            }),
         }
+
         let nft = buildNftFromNftOutput(outputData, accountAddress, false)
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
 
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingTimelockedCondition,
-            },
+                nftId,
+                unlockConditions: buildIncomingTimelockedCondition(),
+            }),
         }
         nft = buildNftFromNftOutput(outputData, accountAddress, false)
         expect(nft.isSpendable).toBe(false)
@@ -148,14 +153,14 @@ describe('File: buildNFtFromOutput.ts', () => {
 
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingExpiredTimelockedCondition,
-                immutableFeatures,
-            },
+                nftId,
+                unlockConditions: buildIncomingExpiredTimelockedCondition(),
+                immutableFeatures: buildImmutableFeatures(),
+            }),
         }
+
         nft = buildNftFromNftOutput(outputData, accountAddress, false)
         expect(nft.isSpendable).toBe(false)
         expect(nft.timelockTime).toBe(undefined)
@@ -164,15 +169,15 @@ describe('File: buildNFtFromOutput.ts', () => {
     it('should parse the metadata correctly', () => {
         outputData = {
             outputId,
-            output: {
-                type,
-                nftId,
+            output: buildNftOutput({
                 amount,
-                unlockConditions: incomingUnlockConditions,
-                immutableFeatures,
-            },
+                nftId,
+                unlockConditions: buildIncomingUnlockConditions(),
+                immutableFeatures: buildImmutableFeatures(),
+            }),
         }
-        let nft = buildNftFromNftOutput(outputData, accountAddress)
+
+        const nft = buildNftFromNftOutput(outputData, accountAddress)
 
         let expectedParsedMetadata = {
             standard: 'IRC27',
@@ -185,6 +190,7 @@ describe('File: buildNFtFromOutput.ts', () => {
             issuerName: undefined,
             royalties: undefined,
         }
+
         expect(nft.parsedMetadata).toStrictEqual(expectedParsedMetadata)
     })
 })

@@ -1,12 +1,13 @@
 const keytar = require('keytar')
 const { app } = require('electron')
+const { getKeychainServiceName } = require('./../../product')
 
 /** Keychain object */
 const Keychain = {
     /**
      * Service name — Key under which credentials will be stored.
      */
-    SERVICE_NAME: app.isPackaged ? APP_NAME : 'Firefly — Dev',
+    SERVICE_NAME: getKeychainServiceName(app.isPackaged),
     /**
      * Gets all credentials from keychain
      *

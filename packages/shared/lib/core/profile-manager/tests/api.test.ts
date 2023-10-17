@@ -1,17 +1,20 @@
 import '@mocks/crypto.mock'
-import { MOCK_MNEMONIC, ProfileManagerMock } from '@mocks/profile-manager.mock'
+import { ProfileManagerMock } from '@mocks/profile-manager.mock'
+import { MOCK_MNEMONIC } from '@mocks/api.mock'
 
 import { get } from 'svelte/store'
 
-import { generateRandomId } from '@core/utils'
+import { generateRandomId } from '../../../core/utils/'
 
 import { destroyProfileManager } from '../actions'
 import { generateMnemonic, setStrongholdPassword, storeMnemonic, verifyMnemonic, backup, restoreBackup } from '../api'
 import { profileManager } from '../stores'
+import { IApi } from '../interfaces'
 
 describe('File: api.test.ts', () => {
     let profileManagerMock: ProfileManagerMock
     let spy: jest.SpyInstance
+    const api: IApi = window['__WALLET__API__']
 
     const password = 'password'
 
@@ -32,7 +35,7 @@ describe('File: api.test.ts', () => {
 
     describe('Function: generateMnemonic', () => {
         it('should execute generateMnemonic correctly', async () => {
-            spy = jest.spyOn(profileManagerMock, 'generateMnemonic')
+            spy = jest.spyOn(api, 'generateMnemonic')
             const actual = await generateMnemonic()
             expect(actual).toEqual(MOCK_MNEMONIC)
             expect(spy).toHaveBeenCalledTimes(1)
@@ -62,7 +65,7 @@ describe('File: api.test.ts', () => {
 
     describe('Function: verifyMnemonic', () => {
         it('should call verifyMnemonic', async () => {
-            spy = jest.spyOn(profileManagerMock, 'verifyMnemonic')
+            spy = jest.spyOn(api, 'verifyMnemonic')
             await verifyMnemonic(MOCK_MNEMONIC)
             expect(spy).toBeCalledWith(MOCK_MNEMONIC)
             expect(spy).toBeCalledTimes(1)

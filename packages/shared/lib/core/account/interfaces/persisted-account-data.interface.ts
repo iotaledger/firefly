@@ -1,4 +1,4 @@
-import { ParticipationEventId } from '@iota/wallet/types'
+import { ParticipationEventId } from '@iota/sdk/out/types'
 
 export interface IPersistedAccountData {
     name: string

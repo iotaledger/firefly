@@ -22,17 +22,21 @@
     import { ActivityDirection, ActivityType, InclusionState, ActivityAction, TokenStandard } from '@core/wallet/enums'
     import { newTransactionDetails, updateNewTransactionDetails, NewTransactionType } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
-    import { DEFAULT_TRANSACTION_OPTIONS } from '@core/wallet/constants'
-    import { getOutputParameters, validateSendConfirmation, getAddressFromSubject } from '@core/wallet/utils'
-    import { Activity, NewTokenTransactionDetails, Output } from '@core/wallet/types'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import {
+        getOutputParameters,
+        validateSendConfirmation,
+        getAddressFromSubject,
+        getDefaultTransactionOptions,
+    } from '@core/wallet/utils'
+    import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
+    import { Activity, NewTokenTransactionDetails } from '@core/wallet/types'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { handleError } from '@core/error/handlers/handleError'
     import {
         ACCOUNTS_CONTRACT,
         CONTRACT_FUNCTIONS,
-        GAS_BUDGET,
         getDestinationNetworkFromAddress,
         TARGET_CONTRACTS,
         TRANSFER_ALLOWANCE,
@@ -41,6 +45,8 @@
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
+    export let isCallbackFromUnlockStronghold: boolean = false
+    export let calculatedStorageDeposit: number = 0
 
     let {
         recipient,
@@ -52,13 +58,13 @@
         layer2Parameters,
     } = get(newTransactionDetails)
 
-    let storageDeposit = 0
+    let storageDeposit = calculatedStorageDeposit
     let minimumStorageDeposit = 0
     let preparedOutput: Output
     let expirationTimePicker: ExpirationTimePicker
     let visibleSurplus: number | undefined = undefined
 
-    let initialExpirationDate: TimePeriod = getInitialExpirationDate()
+    let initialExpirationDate: TimePeriod
     let activeTab: Tab
 
     $: transactionDetails = get(newTransactionDetails)
@@ -97,14 +103,26 @@
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: String(GAS_BUDGET),
+                gasBudget: layer2Parameters?.gasBudget ?? 0,
             },
         }),
     }
 
     function refreshSendConfirmationState(): void {
-        updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
-        void prepareTransactionOutput()
+        if (!isCallbackFromUnlockStronghold) {
+            if (
+                transactionDetails.type === NewTransactionType.NftTransfer &&
+                Number($selectedAccount.balances.baseCoin.available) === 0
+            ) {
+                giftStorageDeposit = true
+                disableChangeExpiration = true
+                disableToggleGift = true
+            }
+            updateNewTransactionDetails({ type: transactionDetails.type, expirationDate, giftStorageDeposit, surplus })
+            void prepareTransactionOutput()
+        } else {
+            initialExpirationDate = getInitialExpirationDate()
+        }
     }
 
     function getInitialExpirationDate(): TimePeriod {
@@ -118,34 +136,38 @@
     }
 
     async function prepareTransactionOutput(): Promise<void> {
-        const transactionDetails = get(newTransactionDetails)
-        const outputParams = await getOutputParameters(transactionDetails)
-        preparedOutput = await prepareOutput($selectedAccount.index, outputParams, DEFAULT_TRANSACTION_OPTIONS)
+        try {
+            const transactionDetails = get(newTransactionDetails)
+            const outputParams = await getOutputParameters(transactionDetails)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
 
-        await updateStorageDeposit()
+            await updateStorageDeposit()
 
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                // Note: we have to hide it because currently, in the sdk,
-                // the storage deposit return strategy is only looked at
-                // if the provided amount is < the minimum required storage deposit
-                hideGiftToggle = true
+            // Note: we need to adjust the surplus
+            // so we make sure that the surplus is always added on top of the minimum storage deposit
+            if (Number(surplus) > 0) {
+                if (minimumStorageDeposit >= Number(surplus)) {
+                    visibleSurplus = surplus = undefined
+                } else {
+                    visibleSurplus = Number(surplus) - minimumStorageDeposit
+                    // Note: we have to hide it because currently, in the sdk,
+                    // the storage deposit return strategy is only looked at
+                    // if the provided amount is < the minimum required storage deposit
+                    hideGiftToggle = true
+                }
             }
-        }
 
-        if (!initialExpirationDate) {
-            initialExpirationDate = getInitialExpirationDate()
+            if (transactionDetails.expirationDate === undefined) {
+                initialExpirationDate = getInitialExpirationDate()
+            }
+        } catch (err) {
+            handleError(err)
         }
     }
 
     async function updateStorageDeposit(): Promise<void> {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            await getStorageDepositFromOutput($selectedAccount, preparedOutput)
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
         storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
         if (isBaseTokenTransfer) {
             const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
@@ -166,11 +188,13 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await validateSendConfirmation($selectedAccount, preparedOutput)
+            validateSendConfirmation(preparedOutput as CommonOutput)
 
             if ($isActiveLedgerProfile) {
                 ledgerPreparedOutput.set(preparedOutput)
             }
+
+            updatePopupProps({ isCallbackFromUnlockStronghold: true, calculatedStorageDeposit: storageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
@@ -250,7 +274,14 @@
             </Button>
         {/if}
 
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isTransferring} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            onClick={onConfirmClick}
+            disabled={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+            isBusy={isTransferring ||
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+        >
             {localize('actions.send')}
         </Button>
     </popup-buttons>

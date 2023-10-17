@@ -1,4 +1,4 @@
-import { Balance, SyncOptions } from '@iota/wallet'
+import { Balance, SyncOptions } from '@iota/sdk/out/types'
 
 import { IAccount } from '../interfaces'
 
