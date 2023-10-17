@@ -12,9 +12,9 @@
 
     let inputElement: HTMLInputElement | undefined = undefined
     let modal: Modal = undefined
-    const selectedNftFromAccount = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
-    let selected: IOption | undefined = selectedNftFromAccount
-        ? { key: selectedNftFromAccount.name, value: selectedNftFromAccount.id }
+    const selectedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
+    let selected: IOption | undefined = selectedNft
+        ? { key: selectedNft.name, value: selectedNft.id }
         : { value: nftId }
 
     const nftOptions: IOption[] = $ownedNfts
