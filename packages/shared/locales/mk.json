@@ -1338,6 +1338,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Погледни го статусот",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Прикажи скриени паричници",
         "confirm": "Потврди",
         "hideNetworkStatistics": "Скриј ја статистиката на мрежата",
@@ -1664,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filters",
