@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnet",
                         "body": "Public beta network for Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -205,7 +209,7 @@
             "body": "Para que tu dispositivo Ledger pueda ser encontrado por Firefly, por favor asegúrate de que la aplicación Ledger Live oficial se encuentre cerrada.",
             "connect": "Connect your Ledger device",
             "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Sugerencias en caso de que tu Ledger no se conecte"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Idioma",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Moneda",
                 "description": "Ajusta las opciones de conversión de balance y actualización del gráfico"
@@ -337,9 +344,9 @@
                 "description": "Cambia tu nombre de perfil de Firefly",
                 "success": "Has cambiado tu nombre de perfil"
             },
-            "walletFinder": {
-                "title": "Buscador de billetera",
-                "description": "Realizar una búsqueda extendida de sus billeteras previamente usadas"
+            "balanceFinder": {
+                "title": "Buscador de balances",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "Billeteras ocultas",
@@ -624,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "Enable Blind Signing",
             "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
             "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
+            "step_2": "Open {network} Application",
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
@@ -643,7 +693,7 @@
             },
             "pending": {
                 "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Locked",
@@ -688,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -864,13 +918,23 @@
             "sendingFromStakedAccount": "Estás enviando una transferencia desde una cartera que está haciendo Staking. Esto puede desvincular tus tokens. Puedes enviar la transferencia sin problemas, pero puede que necesites reiniciar el Staking de los tokens restantes después.",
             "sendingFromStakedAccountBelowMinReward": "Estás enviando una transferencia desde una cartera que aún no ha alcanzado las recompensas mínimas. Esto puede liberar tus fichas y puedes perder tus recompensas en esta cartera."
         },
-        "walletFinder": {
-            "title": "Buscador de billetera",
-            "body": "Realizar una búsqueda más exhaustiva de direcciones para encontrar saldos y billeteras que faltan.",
-            "accountsSearched": "Billeteras buscadas",
-            "accountsFound": "Billeteras encontradas",
-            "totalWalletBalance": "Balance total",
-            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo."
+        "balanceFinder": {
+            "title": "Buscador de balances",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Advertencia: fondos en riesgo durante la migración",
@@ -893,7 +957,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -914,7 +978,7 @@
             "steps": {
                 "0": "Asegúrate de que Ledger Live no esté abierto en tu computadora",
                 "1": "Asegúrate de que has desbloqueado tu dispositivo Ledger con tu PIN",
-                "2": "Abra la nueva aplicación IOTA en tu dispositivo Ledger",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "¿Aún no tienes suerte?",
                     "link": "Prueba la página oficial de soporte Ledger"
@@ -1170,12 +1234,14 @@
         "importSeed": "Importar una semilla existente",
         "restoreWallet": {
             "iota": "Migrar o restaurar una billetera",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restaurar perfil de Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Migrar a Chrysalis o restaurar una billetera existente",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restaurar un perfil de Shimmer existente",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
@@ -1272,10 +1338,12 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Ver estado",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostrar billeteras ocultas",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Ocultar estadísticas de red",
         "findWallets": "Encontrar billeteras",
+        "findBalances": "Encontrar balances",
         "useBalanceFinder": "Usar buscador de saldo",
         "search": "Buscar",
         "searching": "Buscando",
@@ -1326,7 +1394,8 @@
         "stopVoting": "Stop voting",
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Destinatario",
@@ -1369,6 +1438,8 @@
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "burned": "Burned",
@@ -1594,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filters",
@@ -1670,7 +1742,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Direction",
@@ -1806,7 +1879,8 @@
                 "nonEmptyAccounts": "Debes transferir todos los fondos antes de poder borrar tu perfil."
             },
             "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "setupType": "Unable to determine the profile setup type",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "Las contraseñas no coinciden.",
@@ -1933,7 +2007,7 @@
             "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
-            "appNotOpen": "Debes abrir la aplicación IOTA en tu dispositivo Ledger.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Se ha producido un error al conectar a tu dispositivo Ledger.",
             "legacyConnected": "Está abierta la aplicación incorrecta en tu dispositivo Ledger.",
             "locked": "Por favor, desbloquea tu dispositivo Ledger ingresando el PIN.",
@@ -2162,7 +2236,8 @@
         "governance": "Gobernanza",
         "developer": "Developer",
         "tokens": "Tokens",
-        "activity": "Actividad"
+        "activity": "Actividad",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2278,7 +2353,11 @@
             "disconnected": "Disconnected"
         },
         "locked": "locked",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

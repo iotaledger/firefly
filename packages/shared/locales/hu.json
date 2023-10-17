@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Válasszon hálózatot",
                     "body": "Állítsa be a hálózatot a profiljához.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA éles hálózat"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Átmeneti hálózat az IOTA számára"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Teszt hálózat",
                         "body": "Publikus béta hálózat a Shimmer számára"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA éles hálózat"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Egyéni hálózat",
@@ -205,7 +209,7 @@
             "body": "Ahhoz, hogy Ledger-eszközét a Firefly megtalálja, kérjük, győződjön meg arról, hogy a hivatalos Ledger Live alkalmazás be van-e zárva.",
             "connect": "Csatlakoztassa hardver tárcáját",
             "unlock": "Nyissa ki hardver tárcáját a PIN-kód megadásával",
-            "openApp": "Nyissa meg a Shimmer applikációt a hardver tárcáján",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Javaslatok, ha a Ledger-eszköz nem csatlakozik"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Nyelv",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Pénznem",
                 "description": "Egyenleg megjelenítése adott pénznemben és a választható árfolyam diagramok frissítése"
@@ -337,9 +344,9 @@
                 "description": "A Firefly profil nevének megváltoztatása",
                 "success": "A profilnév megváltoztatása sikeres"
             },
-            "walletFinder": {
-                "title": "Tárcakereső",
-                "description": "Hajtson végre kiterjesztett keresést a korábban használt tárcák megtalálása érdekében"
+            "balanceFinder": {
+                "title": "Egyenlegkereső",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "Rejtett tárcák",
@@ -624,14 +631,57 @@
             "changePassword": {
                 "hint": "Az ön Stronghold verziója elavult volt, és frissítettük. Javasoljuk, hogy változtassa meg Stronghold-jelszavát."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "Vak aláírás engedélyezése",
             "info": "A tranzakció jóváhagyásához engédelyeznie kell a vak aláírást hardver tárcáján.",
             "step_1": "Csatlakoztassa majd nyissa ki hardver tárcáját",
-            "step_2": "Nyissa meg a Shimmer applikációt",
+            "step_2": "Open {network} Application",
             "step_3": "Nyomja meg a jobb gombot a Beállítások kiválasztásához, majd nyomja meg mindkét gombot egyszerre a jóváhagyáshoz. A hardver eszközén ekkor megjelenik a vak aláírás.",
             "step_4": "Nyomja meg mindkét gombot a tranzakciók vak aláírásának engedélyezéséhez. A hardver tárcán ekkor megjelenik: Engedélyezve."
         },
@@ -643,7 +693,7 @@
             },
             "pending": {
                 "title": "Függőben lévő",
-                "subtitle": "Ideiglenesen tranzakciókon belül zárolva"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Zárolva",
@@ -688,6 +738,10 @@
             "governance": {
                 "title": "Kormányzás",
                 "subtitle": "Szavazati jogra fenntartva"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Letéti díj minimalizálása"
         },
@@ -864,13 +918,23 @@
             "sendingFromStakedAccount": "Olyan tárcából kíván átutalást kezdeményezni, amely jelenleg le van kötve. Ez a művelet feloldhatja tokenjei lekötését. A tranzakciót nyugodtan végrehajthatja, de a fennmaradó tokeneket valószínűleg újból le kell kötnie.",
             "sendingFromStakedAccountBelowMinReward": "Egy olyan tárcából készül átutalást kezdeményezni, amely még nem érte el a jóváírható jutalom minimális értékét. Ez a művelet feloldhatja tokenjei lekötését és lehetséges, hogy ezzel a tárcával egyáltalán nem fog kapni jutalmat."
         },
-        "walletFinder": {
-            "title": "Tárcakereső",
-            "body": "Alapos címkeresés a hiányzó egyenlegek és tárcák megtalálása érdekében.",
-            "accountsSearched": "Átkutatott tárcák",
-            "accountsFound": "Talált tárcák",
-            "totalWalletBalance": "Összesített egyenleg",
-            "searchAgainHint": "Helytelen az egyenlege vagy tárcáinak száma? Keressen újból, amíg a helyes egyenlege meg nem jelenik."
+        "balanceFinder": {
+            "title": "Egyenlegkereső",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Figyelem: Pénzeszközei veszélyben vannak az átvezetés során",
@@ -893,7 +957,7 @@
             "title": "Hardver tárca csatlakoztatása",
             "notConnected": "A folytatáshoz csatlakoztassa hardver tárcáját.",
             "locked": "A folytatáshoz nyissa ki hardver tárcáját.",
-            "appNotOpen": "A folytatáshoz nyissa meg a Shimmer appot a Ledger-eszközén.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Hardver tárca csatlakoztatva, kérjük folytassa."
         },
         "ledgerConfirmation": {
@@ -914,7 +978,7 @@
             "steps": {
                 "0": "Győződjön meg, hogy a Ledger Live nincs megnyitva a számítógépén",
                 "1": "Győződjön meg, hogy feloldotta a Ledger eszközét a PIN-kódjával",
-                "2": "Nyissa meg az új IOTA appot a Ledger-eszközén",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "A probléma még mindig fennáll?",
                     "link": "Próbáljon megoldást keresni a hivatalos Ledger támogatás weboldalán"
@@ -1170,12 +1234,14 @@
         "importSeed": "Meglévő seed importálása",
         "restoreWallet": {
             "iota": "Tárca átköltöztetése vagy helyreállítása",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Shimmer-profil helyreállítása",
             "testnet": "Teszt hálózati profil helyreállítása",
             "custom": "Egyéni hálózati profil helyreállítása"
         },
         "restoreWalletDescription": {
             "iota": "Költöztetés a Chrysalis-hálózatra vagy egy meglévő tárca helyreállítása",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Egy meglévő Shimmer-profil helyreállítása",
             "testnet": "Meglévő teszt hálózati profil helyreállítása",
             "custom": "Meglévő egyéni hálózati profil helyreállítása"
@@ -1272,10 +1338,12 @@
         "viewDownloads": "Letöltések megtekintése",
         "viewStatus": "Állapot megtekintése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
+        "verifyDepositAddress": "Letéti cím megerősítése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
         "hideNetworkStatistics": "Hálózati statisztika elrejtése",
         "findWallets": "Tárcák keresése",
+        "findBalances": "Egyenleg keresése",
         "useBalanceFinder": "Egyenleg keresése",
         "search": "Keresés",
         "searching": "Keresés folyamatban",
@@ -1326,7 +1394,8 @@
         "stopVoting": "Szavazás felfüggesztése",
         "revote": "Újraszavazás",
         "skipAndKeep": "Kihagyás és a reégi jelszó használata",
-        "addChain": "Lánc hozzáadása"
+        "addChain": "Lánc hozzáadása",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Címzett",
@@ -1369,6 +1438,8 @@
         "shimmerClaimed": "Igényelve",
         "shimmerClaiming": "Igénylés folyamatban",
         "shimmerGenesis": "Shimmer genezis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genezis",
         "minted": "Kibocsátás elkészült",
         "minting": "Kibocsátás folyamatban",
         "burned": "Elégetve",
@@ -1594,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Tárcán belüli tranzakció",
         "coinType": "Érme típusa",
-        "custom": "Egyéni"
+        "custom": "Egyéni",
+        "verifyLedgerDepositAddress": "Kérjük, ellenőrizze a Ledger-eszközt, és győződjön meg arról, hogy a letéti cím megegyezik-e a Ledger-eszközön megjelenített címmel"
     },
     "filters": {
         "title": "Szűrők",
@@ -1670,7 +1742,8 @@
             "alias": "Álnév",
             "foundry": "Öntöde",
             "governance": "Kormányzás",
-            "consolidation": "Konszolidáció"
+            "consolidation": "Konszolidáció",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Irány",
@@ -1806,7 +1879,8 @@
                 "nonEmptyAccounts": "A profilt csak akkor tudja törölni, ha a teljes egyenlegét átutalta egy másik tárcába."
             },
             "type": "Nem sikerült a profil típusát meghatározni",
-            "setupType": "Nem sikerült a profilbeállítás típusát meghatározni"
+            "setupType": "Nem sikerült a profilbeállítás típusát meghatározni",
+            "chrysalisDevnetStardustError": "Ezt a profil nem elérhető, mert a Firefly jelenlegi verziója nem támogatja a Chrysalis Devnetet. Kérjük, használja a Firefly egy Chrysalis-kompatibilis verzióját."
         },
         "password": {
             "doNotMatch": "A jelszavak nem egyeznek.",
@@ -1933,7 +2007,7 @@
             "unableToRestoreForProfileManager": "Nem sikerült a Stronghold biztonsági mentést helyreállítani a profil menedzserhez"
         },
         "ledger": {
-            "appNotOpen": "Nyissa meg az új IOTA alkalmazást Ledger eszközén.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Hiba történt a Ledger eszközéhez való csatlakozáskor.",
             "legacyConnected": "Nem a megfelelő app van megnyitva a Ledger-eszközén.",
             "locked": "Kérem oldja fel Ledger eszközét a PIN-kóddal.",
@@ -2162,7 +2236,8 @@
         "governance": "Kormányzás",
         "developer": "Fejlesztő",
         "tokens": "Tokenek",
-        "activity": "Előzmények"
+        "activity": "Előzmények",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2278,7 +2353,11 @@
             "disconnected": "Kapcsolat bontva"
         },
         "locked": "lezárva",
-        "smartContract": "okosszerződés"
+        "smartContract": "okosszerződés",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Réseau de pré-production pour IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "réseau de test",
                         "body": "Réseau bêta public pour Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "Alphanet IOTA",
+                        "body": "Alphanet IOTA"
                     },
                     "custom": {
                         "title": "Réseau personnalisé",
@@ -205,7 +209,7 @@
             "body": "Pour que votre Ledger soit trouvé par Firefly, assurez-vous que l'application officielle de Ledger Live est fermée.",
             "connect": "Connectez votre clé Ledger",
             "unlock": "Débloquez votre clé Ledger avec son code",
-            "openApp": "Ouvrez l'application Shimmer sur votre clé Ledger",
+            "openApp": "Ouvrez l'application {network} sur votre Ledger",
             "tips": "Conseils si votre Ledger ne se connecte pas"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Langue",
                 "description": ""
             },
+            "appName": {
+                "title": "Nom de l'application"
+            },
             "currency": {
                 "title": "Devise",
                 "description": "Ajuste la conversion du solde et met à jour les options du graphique"
@@ -337,9 +344,9 @@
                 "description": "Modifier le nom de votre profil Firefly",
                 "success": "Vous avez modifié le nom de votre profil"
             },
-            "walletFinder": {
-                "title": "Recherche de portefeuille",
-                "description": "Effectuez une recherche étendue de vos portefeuilles précédemment utilisés"
+            "balanceFinder": {
+                "title": "Retrouvez vos fonds",
+                "description": "Effectuez une recherche étendue de votre solde"
             },
             "hiddenAccounts": {
                 "title": "Portefeuilles cachés",
@@ -624,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Acquisition",
+            "overview": {
+                "unlocked": "Déverrouillé",
+                "locked": "Verrouillé",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Temps avant le prochain déverrouillage",
+            "collect": "Collecter",
+            "search": "Trouver des récompenses d'acquisition",
+            "payouts": {
+                "title": "Horaire de déverrouillage bihebdomadaire",
+                "information": "Informations sur le paiement",
+                "tooltip": {
+                    "title": "Paiement",
+                    "amount": "Montant",
+                    "unlockDate": "Date de déblocage"
+                }
+            },
+            "infoTooltip": {
+                "title": "Acquisition de jetons",
+                "body": "Parmi les jetons reçus lors de l'ardrop de jeton IOTA, 10% sont disponibles pour les utilisateurs immédiatement au lancement du réseau IOTA Stardust. Le reste est progressivement déverrouillé au cours de deux ans en proportion égale toutes les deux semaines."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Détails du paiement",
+            "amount": "Montant total",
+            "unlockDate": "Date de déverrouillage",
+            "status": "Etat"
+        },
+        "vestingCollect": {
+            "title": "Collecter",
+            "body": "Ne manquez pas vos fonds non réclamés ! Cliquez sur le bouton ci-dessous pour vérifier et réclamer vos fonds maintenant.",
+            "unclaimedFunds": "Fonds non réclamés",
+            "button": "Collecter"
+        },
+        "metricSystemInfo": {
+            "title": "Transition depuis les préfixes métriques",
+            "body1": "Au début de IOTA, nous avions l'intention de nous conformer aux normes en utilisant les préfixes du système métrique. Cependant, indiquer un multiple ou un sous-multiple de l'unité ne s'est pas avéré pratique.",
+            "body2": "Au lieu de kilo (KIOTA), méga (MIOTA), etc, la nouvelle unité la plus petite de l'IOTA est appelée 'micro', ou 'micros' pour plusieurs unités. Ce qui était auparavant 1 MIOTA sera maintenant simplement appelé un IOTA, 1 000 000 micros est égal à 1 IOTA.",
+            "body3": "Soyez assurés que cette modification n'affectera pas la valeur de vos actifs - il s'agit d'un raffinement cosmétique, et non d'un changement fonctionnel. Vous pouvez trouver plus d'informations dans le blog annonçant le changement.",
+            "link": "Nouvelle dénomination de jeton IOTA : abandon des préfixes d'unités métriques"
+        },
         "enableLedgerBlindSigning": {
             "title": "Autoriser la signature à l'aveugle",
             "info": "Pour confirmer cette transaction, vous devez autoriser la signature à l'aveugle sur votre clé ledger.",
             "step_1": "Connectez et déverrouillez votre appareil Ledger",
-            "step_2": "Ouvrir l'Application Shimmer",
+            "step_2": "Ouvrir l'application {network}",
             "step_3": "Appuyer sur le bouton droit pour ouvrir les paramètres. Appuyez ensuite sur les deux boutons pour valider. Votre clé Ledger affiche Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
@@ -643,7 +693,7 @@
             },
             "pending": {
                 "title": "En cours",
-                "subtitle": "Temporairement verrouillé dans les transactions"
+                "subtitle": "Temporairement verrouillé dans les transactions (hors acquisition)"
             },
             "locked": {
                 "title": "Verrouillé",
@@ -688,6 +738,10 @@
             "governance": {
                 "title": "Gouvernance",
                 "subtitle": "Réservé au pouvoir de vote"
+            },
+            "vesting": {
+                "title": "Acquisition",
+                "subtitle": "Fonds verrouillés en attente de déverrouillage en fonction du calendrier d'acquisition"
             },
             "minimizeStorageDepositButton": "Réduire le dépôt de stockage"
         },
@@ -864,13 +918,23 @@
             "sendingFromStakedAccount": "Vous effectuez un transfert depuis un portefeuille où des fonds sont placés. Cela peut entrainer l'annulation du Staking. Vous pouvez effectuer le transfert mais il est possible que vous deviez recommencer l'opération de Staking sur les jetons restant dans votre portefeuille.",
             "sendingFromStakedAccountBelowMinReward": "Vous envoyez un transfert depuis un portefeuille qui n'a pas encore atteint les récompenses de staking minimales. Cela peut libérer vos jetons et vous pouvez perdre vos récompenses de staking sur ce portefeuille."
         },
-        "walletFinder": {
-            "title": "Recherche de portefeuille",
-            "body": "Effectuez une recherche plus exhaustive des adresses pour trouver les soldes manquants.",
-            "accountsSearched": "Portefeuilles recherchés",
-            "accountsFound": "Portefeuilles trouvés",
-            "totalWalletBalance": "Solde total",
+        "balanceFinder": {
+            "title": "Retrouvez vos fonds",
+            "body": "Effectuez une recherche plus exhaustive des soldes.",
+            "addressesSearched": "Adresses recherchées",
+            "addressesFound": "Adresses trouvées",
+            "totalAddressBalance": "Balance totale",
             "searchAgainHint": "Votre solde ou le nombre de portefeuilles sont incorrects ? Appuyez à nouveau sur la recherche jusqu'à ce que votre solde complet soit affiché."
+        },
+        "balanceOverview": {
+            "title": "Aperçu du solde",
+            "body": "Trouvez des informations sur tous vos portefeuilles et le solde de chacun."
+        },
+        "vestingRewards": {
+            "title": "Trouver des récompenses d'acquisition",
+            "body": "Effectuez une recherche plus exhaustive de vos récompenses.",
+            "totalAddressBalance": "Récompenses totales",
+            "searchAgainHint": "Vos récompenses d'acquisition sont-elles incorrectes ? Recherchez à nouveau jusqu'à ce que toutes vos récompenses soient affichées."
         },
         "riskFunds": {
             "title": "Avertissement: risque de perte de fonds lors du transfert",
@@ -893,7 +957,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Ouvrez l'application Shimmer sur votre appareil Ledger pour continuer.",
+            "appNotOpen": "Ouvrez l'application {legacy} sur votre appareil Ledger pour continuer.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -914,7 +978,7 @@
             "steps": {
                 "0": "Assurez-vous que Ledger Live n'est pas ouvert sur votre ordinateur",
                 "1": "Assurez-vous d'avoir déverrouillé votre appareil Ledger avec votre code PIN",
-                "2": "Ouvrez la nouvelle application IOTA sur votre appareil Ledger",
+                "2": "Ouvrez l'application {network} sur votre Ledger",
                 "3": {
                     "text": "Toujours pas de chance?",
                     "link": "Essayez la page de support officielle de Ledger"
@@ -1170,12 +1234,14 @@
         "importSeed": "Importer une seed existante",
         "restoreWallet": {
             "iota": "Transférer ou restaurer un portefeuille",
+            "iotaAlphanet": "Restaurer le profil IOTA Alphanet",
             "shimmer": "Récupérer le profil Shimmer",
             "testnet": "Restaurer le profil Testnet",
             "custom": "Restaurer le profil réseau personnalisé"
         },
         "restoreWalletDescription": {
             "iota": "Migrer vers Chrysalis ou restaurer un portefeuille existant",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restaurer un profil Shimmer existant",
             "testnet": "Restaurer un profil Testnet existant",
             "custom": "Restaurer un profil de réseau personnalisé existant"
@@ -1272,10 +1338,12 @@
         "viewDownloads": "Afficher les téléchargements",
         "viewStatus": "Voir le statut",
         "viewBalanceBreakdown": "Voir la répartition du solde",
+        "verifyDepositAddress": "Vérifier l'adresse du dépôt",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
         "hideNetworkStatistics": "Masquer les statistiques du réseau",
         "findWallets": "Trouver des portefeuilles",
+        "findBalances": "Trouvez vos fonds",
         "useBalanceFinder": "Utiliser le chercheur de solde",
         "search": "Rechercher",
         "searching": "Recherche en cours",
@@ -1326,7 +1394,8 @@
         "stopVoting": "Stop voting",
         "revote": "Voter à nouveau",
         "skipAndKeep": "Ignorer et conserver l'ancien mot de passe",
-        "addChain": "Ajouter une chaîne"
+        "addChain": "Ajouter une chaîne",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Destinataire",
@@ -1369,6 +1438,8 @@
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "burned": "Brûlé",
@@ -1594,7 +1665,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Transaction interne",
         "coinType": "Type de token",
-        "custom": "Personnalisé"
+        "custom": "Personnalisé",
+        "verifyLedgerDepositAddress": "Veuillez vérifier que l'adresse de dépôt correspond à celle affichée sur la clé ledger"
     },
     "filters": {
         "title": "Filters",
@@ -1670,7 +1742,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Gouvernance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Direction",
@@ -1806,7 +1879,8 @@
                 "nonEmptyAccounts": "Vous devez transférer tous les soldes avant de pouvoir supprimer votre profil."
             },
             "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "setupType": "Unable to determine the profile setup type",
+            "chrysalisDevnetStardustError": "Vous ne pouvez pas accéder à ce profil car Chrysalis Devnet n'est pas pris en charge dans cette version de Firefly. Veuillez utiliser une version de Firefly compatible avec Chrysalis."
         },
         "password": {
             "doNotMatch": "Les mots de passe ne correspondent pas.",
@@ -1933,7 +2007,7 @@
             "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
-            "appNotOpen": "Vous devez ouvrir l'application sur votre Ledger.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Une erreur s'est produite lors de la connexion à votre Ledger.",
             "legacyConnected": "La mauvaise application est ouverte sur votre Ledger.",
             "locked": "Veuillez déverrouiller votre Ledger.",
@@ -2162,7 +2236,8 @@
         "governance": "Gouvernance",
         "developer": "Developer",
         "tokens": "Jetons",
-        "activity": "Activité"
+        "activity": "Activité",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2278,7 +2353,11 @@
             "disconnected": "Déconnecté"
         },
         "locked": "locked",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {
