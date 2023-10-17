@@ -455,10 +455,6 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
 ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
-function argWithAppProtocol(arg) {
-    return arg.startsWith(`${process.env.APP_PROTOCOL}://`)
-}
-
 /**
  * Define deep link state
  */
