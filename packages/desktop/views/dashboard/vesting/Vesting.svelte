@@ -17,7 +17,11 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile } from '@core/profile'
     import { getBestTimeDuration } from '@core/utils'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        getRequiredStorageDepositForMinimalBasicOutput,
+        selectedAccountAssets,
+    } from '@core/wallet'
     import {
         Button,
         FontWeight,
@@ -31,8 +35,14 @@
         MeatballMenuButton,
         TooltipIcon,
     } from '@ui'
+    import { onMount } from 'svelte'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
+    let modal: Modal
+    let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
+    let minRequiredStorageDeposit: number
+    const availableOuputs = undefined
+
     $: hasTransactionInProgress =
         $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
 
@@ -56,10 +66,27 @@
                     : undefined,
         },
     ]
-
-    let modal: Modal
-    let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
+
+    onMount(() => {
+        getMinStorage()
+        areOutputsReadyForConsolidation()
+    })
+
+    async function areOutputsReadyForConsolidation(): Promise<boolean> {
+        let hasOutputsToConsolidate = false
+        try {
+            await $selectedAccount.prepareConsolidateOutputs({ force: false, outputThreshold: 2 })
+            hasOutputsToConsolidate = true
+        } catch (error) {
+            console.error('error ', error)
+        }
+        return hasOutputsToConsolidate
+    }
+
+    async function getMinStorage() {
+        minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
+    }
 
     function getFiatAmount(amount: number): string {
         return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
@@ -156,7 +183,10 @@
                                 <Button
                                     onClick={onCollectClick}
                                     classes="w-full"
-                                    disabled={$selectedAccountVestingUnclaimedFunds === 0 || hasTransactionInProgress}
+                                    disabled={$selectedAccountVestingUnclaimedFunds === 0 ||
+                                        hasTransactionInProgress ||
+                                        $selectedAccount?.balances?.baseCoin?.available < minRequiredStorageDeposit ||
+                                        availableOuputs === undefined}
                                     isBusy={hasTransactionInProgress}
                                 >
                                     {localize('views.vesting.collect')}
