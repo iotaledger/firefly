@@ -462,7 +462,7 @@ function argWithAppProtocol(arg) {
 /**
  * Define deep link state
  */
-let deepLinkUrl = process.args.find(argWithAppProtocol)
+let deepLinkUrl = process.args[1]
 
 /**
  * Create a single instance only
@@ -476,7 +476,7 @@ if (!isFirstInstance) {
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find(argWithAppProtocol)
+            const params = args.find((arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`))
 
             if (params) {
                 windows.main.webContents.send('deep-link-params', params)
