@@ -41,7 +41,8 @@
     import RemoveNode from './RemoveNode.svelte'
     import RemoveProposalPopup from './RemoveProposalPopup.svelte'
     import RevotePopup from './RevotePopup.svelte'
-    import { SendConfirmationPopup, SendFormPopup } from './send'
+    // import { SendConfirmationPopup, SendFormPopup } from './send'
+    import { SendConfirmationPopup2, SendFormPopup2 } from './send'
     import StopVotingPopup from './StopVotingPopup.svelte'
     import BalanceBreakdownPopup from './BalanceBreakdownPopup.svelte'
     import TestDeepLinkFormPopup from './TestDeepLinkFormPopup.svelte'
@@ -127,8 +128,9 @@
         [PopupId.RemoveNode]: RemoveNode,
         [PopupId.RemoveProposal]: RemoveProposalPopup,
         [PopupId.Revote]: RevotePopup,
-        [PopupId.SendConfirmation]: SendConfirmationPopup,
-        [PopupId.SendForm]: SendFormPopup,
+        [PopupId.SendConfirmation]: SendConfirmationPopup2,
+        // [PopupId.SendForm]: SendFormPopup,
+        [PopupId.SendForm]: SendFormPopup2,
         [PopupId.StopVoting]: StopVotingPopup,
         [PopupId.BalanceBreakdown]: BalanceBreakdownPopup,
         [PopupId.TestDeepLinkForm]: TestDeepLinkFormPopup,
