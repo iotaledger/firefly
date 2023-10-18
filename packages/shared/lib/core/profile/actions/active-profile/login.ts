@@ -48,6 +48,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
+import { checkActiveProfileAuth } from '@core/profile'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -92,7 +93,18 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
              * create one for the new profile.
              */
             if (accounts?.length === 0) {
-                await createNewAccount()
+                const onUnlocked = new Promise<boolean>((resolve) => {
+                    const onSuccess = () => resolve(true)
+                    const onCancel = () => resolve(false)
+                    const config = { stronghold: true, ledger: true }
+                    checkActiveProfileAuth(onSuccess, config, onCancel)
+                })
+                const success = await onUnlocked
+                if (success) {
+                    await createNewAccount()
+                } else {
+                    return loginRouter.previous()
+                }
             }
 
             // Step 4: load accounts
