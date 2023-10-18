@@ -48,6 +48,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
+import { addError } from '@core/error'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -87,6 +88,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             } else {
                 accounts = await getAccounts()
             }
+
+            addError({
+                message: `User has >${accounts.length}< accounts\nLogin options >${JSON.stringify(loginOptions)}<`,
+            })
+
             /**
              * NOTE: In the case no accounts with funds were recovered, we must
              * create one for the new profile.
