@@ -4,7 +4,7 @@ import { LedgerNanoStatus } from '@iota/sdk/out/types'
 
 export function determineLedgerConnectionState(
     status: LedgerNanoStatus,
-    appName = LedgerAppName.Shimmer
+    appName: LedgerAppName
 ): LedgerConnectionState {
     const { connected, app } = status
     if (connected) {

@@ -6,4 +6,5 @@ export enum ActivityType {
     Governance = 'governance',
     Migrate = 'migrate',
     Nft = 'nft',
+    Vesting = 'vesting',
 }

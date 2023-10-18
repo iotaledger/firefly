@@ -3,6 +3,7 @@ import { Balance } from '@iota/sdk/out/types'
 import { getDepositAddress } from '@core/account/utils'
 
 import { IAccount, IAccountState, IPersistedAccountData } from '../interfaces'
+import { getAddressesWithOutputs } from './getAddressesWithOutputs'
 
 export async function buildAccountState(
     account: IAccount,
@@ -36,6 +37,7 @@ export async function buildAccountState(
     } catch (err) {
         console.error(err)
     }
+    const addressesWithOutputs = await getAddressesWithOutputs(account)
 
     return {
         index: accountIndex,
@@ -45,7 +47,9 @@ export async function buildAccountState(
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
+        hasConsolidatingOutputsTransactionInProgress: false,
         isTransferring: false,
         votingPower,
-    }
+        addressesWithOutputs,
+    } as IAccountState
 }

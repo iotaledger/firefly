@@ -1,18 +1,18 @@
 import { localize } from '@core/i18n'
 import { getLayer2NetworkFromAddress } from '@core/layer-2/utils'
 import { truncateString } from '@core/utils'
-import { ActivityType } from '@core/wallet/enums'
+import { ActivityType, SubjectType } from '@core/wallet/enums'
 import type { Activity, Subject } from '@core/wallet/types'
 
 export function getSubjectFromActivity(activity: Activity): Subject {
     if (activity.parsedLayer2Metadata) {
         return {
             ...activity.subject,
-            ...(activity.subject?.type === 'address' && {
+            ...(activity.subject?.type === SubjectType.Address && {
                 address: activity.parsedLayer2Metadata?.ethereumAddress,
             }),
         }
-    } else if (activity.subject?.type === 'address') {
+    } else if (activity.subject?.type === SubjectType.Address) {
         const network = getLayer2NetworkFromAddress(activity.subject.address)
         return { ...activity.subject, address: network ?? activity.subject.address }
     } else {
@@ -25,9 +25,11 @@ export function getSubjectLocaleFromActivity(activity: Activity): string {
 
     if (activity.type === ActivityType.Basic && activity?.isShimmerClaiming) {
         return localize('general.shimmerGenesis')
-    } else if (subject?.type === 'account') {
+    } else if (activity.type === ActivityType.Vesting) {
+        return localize('general.stardustGenesis')
+    } else if (subject?.type === SubjectType.Account) {
         return truncateString(subject?.account?.name, 13, 0)
-    } else if (subject?.type === 'address') {
+    } else if (subject?.type === SubjectType.Address) {
         const address = activity?.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
         const network = getLayer2NetworkFromAddress(address)
 

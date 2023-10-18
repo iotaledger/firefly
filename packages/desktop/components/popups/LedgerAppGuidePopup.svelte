@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { LedgerAnimation, Button, Text } from 'shared/components'
+    import { LedgerAnimation, Button, Text, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { LedgerAppName } from '@core/ledger'
+    import { ledgerAppName } from '@core/ledger'
     import { localize } from '@core/i18n'
     import { IllustrationEnum } from '@auxiliary/illustration'
 
@@ -23,14 +23,14 @@
     }
 </script>
 
-<Text type="h4" classes="mb-6"
-    >{localize('popups.ledgerAppGuide.title', { values: { legacy: LedgerAppName.Shimmer } })}</Text
+<Text type={TextType.h4} classes="mb-6"
+    >{localize('popups.ledgerAppGuide.title', { values: { legacy: $ledgerAppName } })}</Text
 >
 <div class="w-full flex flex-row flex-wrap">
     <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
-            {localize(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: LedgerAppName.Shimmer } })}
+            {localize(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: $ledgerAppName } })}
         </Text>
     </div>
     <div class="w-full flex flex-row flex-nowrap space-x-4">

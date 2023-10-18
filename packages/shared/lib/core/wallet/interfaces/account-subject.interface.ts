@@ -1,6 +1,7 @@
 import { IAccountState } from '@core/account'
+import { SubjectType } from '../enums'
 
 export interface IAccountSubject {
-    type: 'account'
+    type: SubjectType.Account
     account: IAccountState
 }
