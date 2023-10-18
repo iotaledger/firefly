@@ -19,7 +19,10 @@
     let tooltip: Tooltip
 
     function convertDateToSveltyPickerFormat(date: Date | null | undefined): string | undefined {
-        return date?.toLocaleString('sv')
+        return date?.toLocaleString('sv', {
+            dateStyle: 'short',
+            timeStyle: 'short',
+        })
     }
 
     function onCancelClick(): void {
@@ -67,6 +70,10 @@
                 return 'en'
         }
     }
+
+    function onInput(e: CustomEvent) {
+        if (e.detail) value = new Date(e.detail)
+    }
 </script>
 
 <Tooltip {...$$restProps} classes="flex justify-center items-center flex-col" bind:this={tooltip}>
@@ -82,14 +89,27 @@
             format="yyyy-mm-dd hh:ii"
             bind:value={sveltyPickerDate}
             on:change={tooltip?.refreshPosition}
-        />
-    </datetime-picker-wrapper>
-    <div class="flex flex-row justify-center items-center space-x-4 w-full">
-        <Button size={ButtonSize.Small} outline onClick={onCancelClick} classes="w-full"
-            >{localize('actions.cancel')}</Button
+            on:input={onInput}
         >
-        <Button size={ButtonSize.Small} onClick={onConfirmClick} classes="w-full">{localize('actions.confirm')}</Button>
-    </div>
+            <div
+                slot="action-row"
+                let:onConfirm
+                class="flex flex-row justify-center items-center space-x-4 mt-2 w-full"
+            >
+                <Button size={ButtonSize.Small} outline onClick={onCancelClick} classes="w-full"
+                    >{localize('actions.cancel')}</Button
+                >
+                <Button
+                    size={ButtonSize.Small}
+                    onClick={() => {
+                        onConfirm()
+                        onConfirmClick()
+                    }}
+                    classes="w-full">{localize('actions.confirm')}</Button
+                >
+            </div>
+        </SveltyPicker>
+    </datetime-picker-wrapper>
 </Tooltip>
 
 <style lang="scss">
