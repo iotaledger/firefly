@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/sdk/out/types'
+import { Output, OutputType, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
@@ -57,6 +57,6 @@ function convertTransactionOutputTypeToWrappedOutput(
     return {
         outputId,
         output: outputType,
-        remainder: false,
+        remainder: index === 0 || outputType.type !== OutputType.Basic ? false : true, // when sending prepared output in the resulting transactions outputs array it will always be first output(index = 0)
     }
 }
