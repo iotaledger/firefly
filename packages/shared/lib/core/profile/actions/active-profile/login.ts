@@ -94,7 +94,10 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
              */
             if (accounts?.length === 0) {
                 const onUnlocked = new Promise<boolean>((resolve) => {
-                    const onSuccess = () => resolve(true)
+                    const onSuccess = () => {
+                        resolve(true)
+                        return Promise.resolve()
+                    }
                     const onCancel = () => resolve(false)
                     const config = { stronghold: false, ledger: false }
                     checkActiveProfileAuth(onSuccess, config, onCancel)
