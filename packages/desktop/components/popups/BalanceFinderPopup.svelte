@@ -48,6 +48,7 @@
     let error = ''
     let isBusy = false
     let searchInCurrentWallet: boolean = false
+    let shouldInitSearch: boolean = false
 
     const { isStrongholdLocked, network } = $activeProfile
 
@@ -57,7 +58,7 @@
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
-    $: searchInCurrentWallet, (hasUsedBalanceFinder = false)
+    $: searchInCurrentWallet, (shouldInitSearch = true)
     $: searchAlgorithm = searchInCurrentWallet
         ? SearchAlgorithmType.DFS
         : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
@@ -89,9 +90,10 @@
 
     // Actions
     async function findProfileBalances(): Promise<void> {
-        await findBalances(searchAlgorithm, !hasUsedBalanceFinder)
+        await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
         await loadAccounts()
         hasUsedBalanceFinder = true
+        shouldInitSearch = false
     }
 
     async function consolidateProfileAccounts(): Promise<void> {
