@@ -79,13 +79,13 @@ function getIconPaths() {
 
     return {
         linux: {
-            icon: `${PATH}/${STAGE}/${NAME}.${EXTENSION}`,
+            icon: `${PATH}/prod/${NAME}.${EXTENSION}`,
         },
         mac: {
-            icon: `${PATH}/${STAGE}/${NAME}.${EXTENSION}`,
+            icon: `${PATH}/prod/${NAME}.${EXTENSION}`,
         },
         win: {
-            icon: `${PATH}/${STAGE}/${NAME}.${EXTENSION}`,
+            icon: `${PATH}/prod/${NAME}.${EXTENSION}`,
         },
     }
 }
