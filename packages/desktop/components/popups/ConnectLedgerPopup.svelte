@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
+    import { LedgerConnectionState, ledgerAppName, ledgerConnectionState } from '@core/ledger'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
@@ -59,7 +59,14 @@
     {:else if isLocked}
         <TextHint variant={TextHintVariant.Warning} text={localize('popups.ledgerNotConnected.locked')} />
     {:else if isAppNotOpen}
-        <TextHint variant={TextHintVariant.Info} text={localize('popups.ledgerNotConnected.appNotOpen')} />
+        <TextHint
+            variant={TextHintVariant.Info}
+            text={localize('popups.ledgerNotConnected.appNotOpen', {
+                values: {
+                    legacy: $ledgerAppName,
+                },
+            })}
+        />
     {:else if isCorrectAppOpen}
         <TextHint variant={TextHintVariant.Success} text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}

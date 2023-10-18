@@ -1,7 +1,9 @@
 export const menuState = {
     enabled: true,
     strings: {
-        about: 'About Firefly',
+        // APP_NAME is replaced by Webpack
+        // eslint-disable-next-line no-undef
+        about: `About ${APP_NAME}`,
         checkForUpdates: 'Check for Updates',
         settings: 'Settings',
         general: 'General',

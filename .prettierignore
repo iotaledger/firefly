@@ -9,11 +9,6 @@ packages/desktop/public/assets/
 packages/desktop/public/build/
 packages/desktop/public/locales/
 
-# Mobile (packages/mobile)
-packages/mobile/android/
-packages/mobile/ios/
-packages/mobile/public/
-
 # Shared (packages/shared)
 packages/shared/assets/
 packages/shared/locales/

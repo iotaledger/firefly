@@ -7,7 +7,6 @@
         updateOnboardingProfile,
         onboardingProfile,
     } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
     import { profiles } from '@core/profile'
@@ -17,12 +16,12 @@
     import { networkSetupRouter } from '../network-setup-router'
     import { AnimationEnum } from '@auxiliary/animation'
 
-    let networkIcon: { [key in NetworkId]: string }
-    $: networkIcon = {
+    const NETWORK_ICON: Record<NetworkId, Icon> = {
         [NetworkId.Iota]: Icon.Iota,
+        [NetworkId.Testnet]: Icon.Settings,
         [NetworkId.Shimmer]: Icon.Shimmer,
-        [NetworkId.Testnet]: 'settings',
-        [NetworkId.Custom]: 'settings',
+        [NetworkId.IotaAlphanet]: Icon.Settings,
+        [NetworkId.Custom]: Icon.Settings,
     }
 
     function getIconColor(networkId: NetworkId): string {
@@ -32,8 +31,8 @@
             case NetworkId.Shimmer:
                 return 'shimmer-highlight'
             case NetworkId.Testnet:
-                return 'blue-500'
             case NetworkId.Custom:
+            case NetworkId.IotaAlphanet:
                 return 'blue-500'
         }
     }
@@ -72,10 +71,8 @@
         {#each Object.values(NetworkId) as networkId}
             <OnboardingButton
                 primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
-                secondaryText={!$mobile
-                    ? localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)
-                    : ''}
-                icon={networkIcon[networkId]}
+                secondaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)}
+                icon={NETWORK_ICON[networkId]}
                 iconColor={getIconColor(networkId)}
                 hidden={features?.onboarding?.[networkId]?.hidden}
                 disabled={!features?.onboarding?.[networkId]?.enabled}
@@ -83,7 +80,7 @@
             />
         {/each}
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-yellow dark:bg-gray-900'}">
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.OnboardingNetworkDesktop} />
     </div>
 </OnboardingLayout>

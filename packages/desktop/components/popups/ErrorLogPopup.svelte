@@ -21,6 +21,17 @@
 
         setClipboard(str.join('\r\n'))
     }
+
+    function renderErrorMessage(message: string): string {
+        if (message !== null && typeof message === 'object') {
+            try {
+                return JSON.stringify(message)
+            } catch {
+                return message
+            }
+        }
+        return message
+    }
 </script>
 
 <div class="mb-5">
@@ -33,7 +44,7 @@
                 <Text type="p" secondary>{new Date(error.time).toUTCString()}</Text>
                 <Text type="p">
                     {error.type}:
-                    {error.message}
+                    {renderErrorMessage(error.message)}
                 </Text>
             </div>
         {/each}

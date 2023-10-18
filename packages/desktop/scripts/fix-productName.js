@@ -6,18 +6,16 @@
 
 const { readFileSync, writeFileSync } = require('fs')
 const path = require('path')
+const { getAppName } = require('../product.js')
 
 if (!process.env.CI) {
     console.warn('Warning: These changes should not be checked into Git!')
 }
 
-const stage = process.env.STAGE || 'alpha'
-const appName =
-    stage === 'prod' ? 'Firefly Shimmer' : `Firefly Shimmer - ${stage.replace(/^\w/, (c) => c.toUpperCase())}`
 const packageJsonPath = path.resolve(__dirname, '../package.json')
 
 const packageJson = JSON.parse(readFileSync(packageJsonPath, { encoding: 'utf-8' }))
-packageJson.productName = appName
+packageJson.productName = getAppName()
 
 // Write out package.json with 4 spaces indentation and a trailing newline
 writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 4).concat('\n'))

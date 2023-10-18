@@ -4,7 +4,7 @@ import { localize } from '@core/i18n'
 import { NotificationType } from '@auxiliary/notification'
 import { isNewNotification, showAppNotification } from '@auxiliary/notification'
 
-import { ledgerConnectionState } from '../stores'
+import { ledgerAppName, ledgerConnectionState } from '../stores'
 import { getLedgerDeviceStatus } from './getLedgerDeviceStatus'
 
 export function displayNotificationForLedgerProfile(
@@ -22,7 +22,11 @@ export function displayNotificationForLedgerProfile(
 
         const shouldNotify = allowedToNotify
         if (shouldNotify) {
-            const stateErrorMessage = localize(`error.ledger.${_ledgerConnectionState}`)
+            const stateErrorMessage = localize(`error.ledger.${_ledgerConnectionState}`, {
+                values: {
+                    network: get(ledgerAppName),
+                },
+            })
             const errorMessage = error?.error ? localize(error.error) : error
             const message = error ? errorMessage : stateErrorMessage
             notificationId = showAppNotification({

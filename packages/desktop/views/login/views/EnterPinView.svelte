@@ -1,6 +1,8 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, openPopup, popupState } from '@auxiliary/popup'
+    import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
     import {
         Platform,
         isLatestStrongholdVersion,
@@ -8,7 +10,8 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType, activeProfile, login, resetActiveProfile } from '@core/profile'
+    import { NetworkId } from '@core/network/enums'
+    import { ProfileType, activeProfile, login, migrateDbChrysalisToStardust, resetActiveProfile } from '@core/profile'
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
     import features from '@features/features'
@@ -44,6 +47,7 @@
         $activeProfile?.type === ProfileType.Software &&
         !isLatestStrongholdVersion($activeProfile?.strongholdVersion) &&
         features.onboarding.strongholdVersionCheck.enabled
+
     $: hasReachedMaxAttempts = attempts >= MAX_PINCODE_INCORRECT_ATTEMPTS
     $: {
         if (isValidPin(pinCode)) {
@@ -93,12 +97,36 @@
     async function onSubmit(): Promise<void> {
         if (!hasReachedMaxAttempts) {
             isBusy = true
-            const isVerified = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
-            if (isVerified) {
-                if (!updateRequired) {
-                    void login()
+
+            const isPinCorrect = await Platform.PincodeManager.verify($activeProfile?.id, pinCode)
+            if (isPinCorrect) {
+                const _onSuccess = (): void => {
+                    if (!updateRequired) {
+                        void login()
+                    }
+                    $loginRouter.next()
                 }
-                $loginRouter.next()
+                if ($activeProfile?.needsChrysalisToStardustDbMigration) {
+                    if ($activeProfile?.network?.id === NetworkId.IotaAlphanet) {
+                        // if a profile needs DB migration and it on Alphanet it means it was created on Chrysalis Devnet
+                        // and Devnet will not be upgraded to Stardust
+                        showAppNotification({
+                            type: 'error',
+                            message: localize('error.profile.chrysalisDevnetStardustError'),
+                        })
+                        isBusy = false
+                    } else {
+                        const dbMigrationSuccess = await migrateDbChrysalisToStardust($activeProfile?.id, pinCode)
+                        if (dbMigrationSuccess) {
+                            showBalanceOverviewPopup.set(true)
+                            _onSuccess()
+                        } else {
+                            isBusy = false
+                        }
+                    }
+                } else {
+                    _onSuccess()
+                }
             } else {
                 shake = true
                 setShakeTimeout()

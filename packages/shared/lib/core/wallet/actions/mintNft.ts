@@ -5,11 +5,10 @@ import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata }
 import { Converter } from '@core/utils'
 import { MintNftParams, OutputType, PreparedTransaction } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
-import { DEFAULT_TRANSACTION_OPTIONS } from '../constants'
 import { ActivityAction } from '../enums'
 import { addActivityToAccountActivitiesInAllAccountActivities, resetMintNftDetails } from '../stores'
 import { NftActivity } from '../types'
-import { preprocessTransaction } from '../utils'
+import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 import { plainToInstance } from 'class-transformer'
 
@@ -18,6 +17,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         const account = get(selectedAccount)
         updateSelectedAccount({ isTransferring: true })
 
+        if (!account) return
         const mintNftParams: MintNftParams = {
             issuer: account.depositAddress,
             immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
@@ -26,7 +26,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
 
         // Mint NFT
         const mintNftTransaction = await account
-            .prepareMintNfts(allNftParams, DEFAULT_TRANSACTION_OPTIONS)
+            .prepareMintNfts(allNftParams, getDefaultTransactionOptions())
             .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
         resetMintNftDetails()
         showAppNotification({
@@ -35,7 +35,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
             alert: true,
         })
 
-        const processedTransaction = await preprocessTransaction(mintNftTransaction, account)
+        const processedTransaction = await preprocessOutgoingTransaction(mintNftTransaction, account)
         const outputs = processedTransaction.outputs
 
         // Generate Activities
