@@ -1338,7 +1338,7 @@
         "viewDownloads": "Se downloads",
         "viewStatus": "Vis Status",
         "viewBalanceBreakdown": "View balance breakdown",
-        "verifyDepositAddress": "Verify deposit address",
+        "verifyDepositAddress": "Bekræft indbetalingsadresse",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",
         "hideNetworkStatistics": "Skjul netværksstatistik",
@@ -1666,7 +1666,7 @@
         "internalTransaction": "Intern transaktion",
         "coinType": "Mønttyper",
         "custom": "Tilpasset",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Tjek ledger-enheden og bekræft, at indbetalingsadressen matcher den, der vises på ledger-enheden"
     },
     "filters": {
         "title": "Filtre",

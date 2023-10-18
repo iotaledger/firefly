@@ -1338,7 +1338,7 @@
         "viewDownloads": "Letöltések megtekintése",
         "viewStatus": "Állapot megtekintése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
-        "verifyDepositAddress": "Verify deposit address",
+        "verifyDepositAddress": "Letéti cím megerősítése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
         "hideNetworkStatistics": "Hálózati statisztika elrejtése",
@@ -1666,7 +1666,7 @@
         "internalTransaction": "Tárcán belüli tranzakció",
         "coinType": "Érme típusa",
         "custom": "Egyéni",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Kérjük, ellenőrizze a Ledger-eszközt, és győződjön meg arról, hogy a letéti cím megegyezik-e a Ledger-eszközön megjelenített címmel"
     },
     "filters": {
         "title": "Szűrők",
