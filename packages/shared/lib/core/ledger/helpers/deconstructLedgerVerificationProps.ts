@@ -17,8 +17,7 @@ export function deconstructLedgerVerificationProps(): PopupProps {
     if (transactionDetails?.type === NewTransactionType.TokenTransfer) {
         toAmount = `${formatTokenAmountBestMatch(
             Number(transactionDetails?.rawAmount),
-            transactionDetails?.asset?.metadata,
-            transactionDetails?.unit
+            transactionDetails?.asset?.metadata
         )}`
     }
 
