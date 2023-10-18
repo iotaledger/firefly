@@ -7,8 +7,7 @@ const APP_ID = getAppId()
 const APP_PROTOCOL = getAppProtocol()
 const CHANNEL_NAME = getChannelName()
 const APP_ARTIFACT = getAppArtifact()
-const appNameBase =
-    STAGE === 'prod' ? PRODUCT_NAME : `${PRODUCT_NAME} - ${STAGE.replace(/^\w/, (c) => c.toUpperCase())}`
+const appNameBase = PRODUCT_NAME
 
 function getAppArtifact() {
     return `firefly-${NETWORK}-desktop-\${version}.\${ext}`
