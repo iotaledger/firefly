@@ -2,7 +2,7 @@ import { api } from '@core/profile-manager'
 import { Address, AddressType, AliasAddress, Ed25519Address, NftAddress } from '@iota/sdk/out/types'
 import { getNetworkHrp } from '@core/profile'
 
-export function getBech32AddressFromAddressTypes(address: Address): string | undefined {
+export function getBech32AddressFromAddressTypes(address: Address): string {
     const hrp = getNetworkHrp()
     switch (address.type) {
         case AddressType.Ed25519:

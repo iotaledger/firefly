@@ -25,6 +25,7 @@
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||
         $selectedAccount?.hasVotingTransactionInProgress ||
+        $selectedAccount?.hasConsolidatingOutputsTransactionInProgress ||
         $selectedAccount?.isTransferring
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 

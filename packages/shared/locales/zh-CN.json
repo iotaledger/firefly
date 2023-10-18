@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "选择网络",
                     "body": "为您的个人资料设置网络。",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnet",
                         "body": "Public beta network for Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -205,7 +209,7 @@
             "body": "为了让Firefly找到的您的Ledger设备，请确保官方的Ledger Live应用程序已关闭。",
             "connect": "连接您的 Ledger 设备",
             "unlock": "用密码解锁你的 Ledger",
-            "openApp": "在您的Ledger上打开 Shimmer 应用",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Ledger无法连接时的处理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "语言",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "货币",
                 "description": "调整余额换算和变更图表选项"
@@ -337,9 +344,9 @@
                 "description": "更改您的 Firefly 配置文件名称",
                 "success": "您更改了您的配置文件名称"
             },
-            "walletFinder": {
-                "title": "钱包查找器",
-                "description": "对您以前使用过的钱包进行扩展搜索"
+            "balanceFinder": {
+                "title": "余额搜索器",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "隐藏钱包列表",
@@ -624,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "启用 Blind 签名",
             "info": "为了确认此交易，您需要在您的ledger设备上启用 Blind 签名。",
             "step_1": "连接并解锁您的 Ledger 设备",
-            "step_2": "打开 Shimmer 应用程序",
+            "step_2": "Open {network} Application",
             "step_3": "按右键导航到设置。然后按两个按钮进行验证。您的Ledger设备显示Blind签名。",
             "step_4": "按两个按钮以启用交易盲签。设备显示已启用。您已完成。"
         },
@@ -643,7 +693,7 @@
             },
             "pending": {
                 "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Locked",
@@ -688,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -864,13 +918,23 @@
             "sendingFromStakedAccount": "您正在从目前正在质押的钱包中发送转账。这可能会取消质押您的令牌。 您可以随时发送传输，但您可能需要稍后重新质押您剩余的代币。",
             "sendingFromStakedAccountBelowMinReward": "你正在从一个尚未达到最低质押奖励的钱包发送转账。这可能会解除你在这个钱包的代币质押而失去你的抵押奖励。"
         },
-        "walletFinder": {
-            "title": "钱包查找器",
-            "body": "对地址进行更详尽的搜索，以找到丢失的余额和钱包。",
-            "accountsSearched": "已搜索钱包",
-            "accountsFound": "找到钱包",
-            "totalWalletBalance": "总余额",
-            "searchAgainHint": "你的余额或钱包数量不正确吗？再次搜索，直到显示你的全部余额。"
+        "balanceFinder": {
+            "title": "寻找余额",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "警告：迁移过程面临风险的资金",
@@ -893,7 +957,7 @@
             "title": "连接您的Ledger",
             "notConnected": "连接您的Ledger设备以继续。",
             "locked": "解锁您的Ledger设备以继续。",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger连接成功，请继续。"
         },
         "ledgerConfirmation": {
@@ -914,7 +978,7 @@
             "steps": {
                 "0": "请确保Ledger Live没有在您的计算机上打开运行",
                 "1": "请确保您已经用PIN码解锁了Ledger设备",
-                "2": "在您的Ledger设备上打开新的 IOTA应用",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "仍然无法连接？",
                     "link": "尝试查看Ledger的官方网站支持"
@@ -1170,12 +1234,14 @@
         "importSeed": "导入已有的私钥种子",
         "restoreWallet": {
             "iota": "迁移或恢复钱包",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "恢复 Shimmer 配置文件",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "恢复一个Shimmer 配置文件",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
@@ -1272,10 +1338,12 @@
         "viewDownloads": "View downloads",
         "viewStatus": "查看状态",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
         "hideNetworkStatistics": "隐藏网络统计信息",
         "findWallets": "查找钱包",
+        "findBalances": "寻找余额",
         "useBalanceFinder": "使用余额查找器",
         "search": "搜索",
         "searching": "正在搜索...",
@@ -1326,7 +1394,8 @@
         "stopVoting": "停止投票",
         "revote": "重新投票",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "接收人",
@@ -1369,6 +1438,8 @@
         "shimmerClaimed": "已认领",
         "shimmerClaiming": "认领中...",
         "shimmerGenesis": "Shimmer 创世块",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "已锻造",
         "minting": "锻造中",
         "burned": "烧毁的",
@@ -1594,7 +1665,8 @@
         "jwt": "JSON web 代币",
         "internalTransaction": "内部交易",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "过滤",
@@ -1670,7 +1742,8 @@
             "alias": "别名",
             "foundry": "铸造厂",
             "governance": "治理",
-            "consolidation": "合并"
+            "consolidation": "合并",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "方向",
@@ -1751,7 +1824,7 @@
             }
         },
         "syncing": "请稍候，直到同步完成后才能变更钱包。",
-        "transferring": "请稍候，直到所有交易完成后才能变更钱包。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "请稍候，直到所有质押/投票的交易完成后才能变更钱包。",
         "claimed": {
             "success": "已认领的交易",
@@ -1806,7 +1879,8 @@
                 "nonEmptyAccounts": "您必须先转移所有余额才能删除您的账户。"
             },
             "type": "无法确定配置文件类型",
-            "setupType": "无法确定配置文件设置类型"
+            "setupType": "无法确定配置文件设置类型",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "密码不匹配。",
@@ -1874,7 +1948,7 @@
             "cannotClaimTwice": "输出已被认领。",
             "noToAccount": "您尚未选择一个收款账户来发送资金。",
             "sendingDust": "您的发送不能小于 1 Mi。",
-            "leavingDust": "您的地址余额不能少于1Mi。",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "您的交易已被取消。",
             "transaction": "发送交易错误。请再次尝试。",
             "invalidExpirationDateTime": "选择的过期日期/时间无效。",
@@ -1933,7 +2007,7 @@
             "unableToRestoreForProfileManager": "无法还原配置文件管理器的 Stronghold 备份"
         },
         "ledger": {
-            "appNotOpen": "您必须在您的Ledger设备上打开 IOTA应用程序。",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "连接到您的Ledger设备时出错。",
             "legacyConnected": "Ledger设备上打开的应用程序不正确。",
             "locked": "请输入 PIN 码来解锁您的Ledger设备。",
@@ -2162,7 +2236,8 @@
         "governance": "治理",
         "developer": "开发者",
         "tokens": "代币",
-        "activity": "活动"
+        "activity": "活动",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2278,7 +2353,11 @@
             "disconnected": "Disconnected"
         },
         "locked": "已锁定",
-        "smartContract": "智能合约"
+        "smartContract": "智能合约",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

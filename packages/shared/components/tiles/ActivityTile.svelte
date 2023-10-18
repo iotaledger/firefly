@@ -20,6 +20,7 @@
         NftActivityTileContent,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
+        VestingActivityTileContent,
     } from 'shared/components'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
@@ -69,6 +70,8 @@
                 <GovernanceActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Consolidation}
                 <ConsolidationActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Vesting}
+                <VestingActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}

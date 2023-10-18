@@ -23,6 +23,7 @@ export interface IApi {
         newPath: string,
         newPassword: string
     ): Promise<void>
+    migrateDbChrysalisToStardust(path: string, pinCode: string): Promise<Record<string, unknown>>
     // Mapped from sdk#Utils
     generateMnemonic(): Promise<string>
     verifyMnemonic(mnemonic: string): Promise<void>

@@ -49,8 +49,8 @@
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
-    const issuerAddress = getBech32AddressFromAddressTypes(issuer)
-    const collectionId = getHexAddressFromAddressTypes(issuer)
+    const issuerAddress = issuer ? getBech32AddressFromAddressTypes(issuer) : undefined
+    const collectionId = issuer ? getHexAddressFromAddressTypes(issuer) : undefined
 
     let detailsList: {
         [key in string]: {
@@ -144,9 +144,16 @@
 </script>
 
 <collectibles-details-view class="flex flex-row w-full h-full space-x-4">
-    <div class="flex w-full h-auto items-center justify-center overflow-hidden">
-        <div class="nft-wrapper relative w-full h-full flex rounded-2xl overflow-hidden">
-            <NftMedia {nft} autoplay controls loop muted />
+    <div class="flex w-full h-full items-center justify-center">
+        <div class="relative w-full h-full flex rounded-2xl overflow-hidden">
+            <NftMedia
+                {nft}
+                class="rounded-2xl overflow-hidden flex-1 w-auto h-auto max-w-full max-h-full object-contain absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                autoplay
+                controls
+                loop
+                muted
+            />
             <div class="absolute right-6 bottom-6 w-auto">
                 {#if alertText}
                     <Alert type={downloadMetadata?.error ? 'error' : 'warning'} message={alertText} />
@@ -157,8 +164,10 @@
     <div class="max-w-lg">
         <Pane height={Height.Full}>
             <collectibles-details class="flex flex-col space-y-3 w-full max-w-lg h-full">
-                <nft-title class="flex justify-between items-center">
-                    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="break-words">{name}</Text>
+                <nft-title class="w-full flex flex-row justify-between items-center space-x-2">
+                    <div class="break-words w-5/6">
+                        <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{name}</Text>
+                    </div>
                     <MeatballMenuButton onClick={modal?.toggle} />
                     <CollectibleActionsModal bind:modal {nft} />
                 </nft-title>
@@ -245,18 +254,3 @@
         </Pane>
     </div>
 </collectibles-details-view>
-
-<style lang="scss">
-    .nft-wrapper {
-        :global(> img) {
-            @apply absolute;
-            @apply -translate-x-1/2 -translate-y-1/2;
-            @apply top-1/2 left-1/2;
-            @apply rounded-2xl;
-            @apply overflow-hidden;
-            @apply flex-1;
-            @apply w-auto h-auto max-w-full max-h-full;
-            @apply object-contain;
-        }
-    }
-</style>

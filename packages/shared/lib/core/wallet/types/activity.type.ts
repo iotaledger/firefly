@@ -5,6 +5,7 @@ import {
     GovernanceActivity,
     NftActivity,
     TransactionActivity,
+    VestingActivity,
 } from './activities'
 
 export type Activity =
@@ -14,3 +15,4 @@ export type Activity =
     | NftActivity
     | GovernanceActivity
     | ConsolidationActivity
+    | VestingActivity
