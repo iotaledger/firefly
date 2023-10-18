@@ -47,7 +47,7 @@ function getAppName(isPackaged = true) {
  * If network = 'shimmer' -> 'firefly'
  */
 function getAppProtocol() {
-    return STAGE === 'prod' ? 'iota' : `iota-${STAGE.toLowerCase()}`
+    return 'iota'
 }
 
 /**
@@ -56,10 +56,7 @@ function getAppProtocol() {
  */
 function getAppId() {
     const defaultAppId = 'org.iota.firefly'
-    if (STAGE === 'prod') {
-        return defaultAppId
-    }
-    return `${defaultAppId}.${STAGE}`
+    return defaultAppId
 }
 
 function getChannelName() {
