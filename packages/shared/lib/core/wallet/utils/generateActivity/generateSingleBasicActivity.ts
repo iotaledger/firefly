@@ -3,7 +3,6 @@ import { IAccountState } from '@core/account'
 import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
-import { IBasicOutput } from '@iota/types'
 import { get } from 'svelte/store'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
 import { ActivityAction, ActivityType } from '../../enums'
@@ -16,6 +15,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
+import { BasicOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleBasicActivity(
     account: IAccountState,
@@ -32,7 +32,7 @@ export async function generateSingleBasicActivity(
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const output = wrappedOutput.output as IBasicOutput
+    const output = wrappedOutput.output as BasicOutput
 
     const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 
@@ -52,7 +52,7 @@ export async function generateSingleBasicActivity(
 
     const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
 
-    const nativeToken = getNativeTokenFromOutput(output)
+    const nativeToken = await getNativeTokenFromOutput(output)
     const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
 
     let surplus: number | undefined = undefined

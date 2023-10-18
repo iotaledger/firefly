@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Valitse verkko",
                     "body": "Aseta profiilisi verkko.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnet",
                         "body": "Public beta network for Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -205,7 +209,7 @@
             "body": "Jotta Ledger-laitteesi tunnistuu Fireflyssä, varmista, että virallinen Ledger Live -sovellus on suljettu.",
             "connect": "Yhdistä Ledger-laitteesi",
             "unlock": "Avaa Ledger-laitteesi sen PIN-koodilla",
-            "openApp": "Avaa Shimmer-sovellus Ledger-laitteessasi",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Vinkkejä, jos Ledger ei yhdistä"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Kieli",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Valuutta",
                 "description": "Säätää saldon muuntamista ja päivittää kaavion valinnat"
@@ -337,9 +344,9 @@
                 "description": "Muuta Firefly-profiilisi nimeä",
                 "success": "Olet muuttanut profiilisi nimeä"
             },
-            "walletFinder": {
-                "title": "Lompakon etsijä",
-                "description": "Suorita laajennettu haku aiemmin käytetyistä lompakoista"
+            "balanceFinder": {
+                "title": "Saldon etsijä",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "Piilotetut lompakot",
@@ -483,55 +490,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Päivitä"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -673,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "Aktivoi sokea allekirjoittaminen",
             "info": "Jotta voit vahvistaa tämän transaktion, sinun täytyy aktivoida sokea allekirjoittaminen Ledger-laitteellasi.",
             "step_1": "Yhdistä ja avaa Ledger-laitteesi",
-            "step_2": "Avaa Shimmer-sovellus",
+            "step_2": "Open {network} Application",
             "step_3": "Paina oikeaa painiketta navigoidaksesi asetuksiin. Paina sitten molempia painikkeita vahvistaaksesi. Ledger-laitteesi näyttää sokean allekirjoittamisen.",
             "step_4": "Paina molempia painikkeita aktivoidaksesi transaktion sokean allekirjoittamisen. Laite näyttää Käytössä. Olet valmis."
         },
@@ -692,7 +693,7 @@
             },
             "pending": {
                 "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Locked",
@@ -737,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -913,13 +918,23 @@
             "sendingFromStakedAccount": "Olet lähettämässä siirtoa lompakosta, jota käytetään parhaillaan stakingiin. Tämä saattaa lopettaa stakingin tokeneiltasi. Voit lähettää siirron vapaasti, mutta sinun on ehkä aloitettava staking uudelleen jäljelle jääville tokeneille siirron jälkeen.",
             "sendingFromStakedAccountBelowMinReward": "Olet lähettämässä siirtoa lompakosta, joka ei ole vielä saavuttanut staking-palkkioiden vähimmäismäärää. Tämä voi lopettaa staken tokeneillesi ja voit menettää staking-palkkiosi tästä lompakosta."
         },
-        "walletFinder": {
-            "title": "Lompakon etsijä",
-            "body": "Suorita kattavampi haku osoitteistasi etsimään puuttuvia saldoja ja lompakkoja.",
-            "accountsSearched": "Etsityt lompakot",
-            "accountsFound": "Löydetyt lompakot",
-            "totalWalletBalance": "Kokonaissaldo",
-            "searchAgainHint": "Onko saldosi tai lompakkojesi lukumäärä väärin? Hae uudelleen, kunnes koko saldosi näkyy."
+        "balanceFinder": {
+            "title": "Saldon etsijä",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Varoitus: varoja riskialttiina migraation aikana",
@@ -942,7 +957,7 @@
             "title": "Yhdistä Ledger-laitteesi",
             "notConnected": "Yhdistä Ledger-laitteesi jatkaaksesi.",
             "locked": "Avaa Ledger-laitteesi jatkaaksesi.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger yhdistetty onnistuneesti, ole hyvä ja jatka."
         },
         "ledgerConfirmation": {
@@ -963,7 +978,7 @@
             "steps": {
                 "0": "Varmista, että Ledger Live ei ole auki tietokoneellasi",
                 "1": "Varmista, että olet avannut Ledger-laitteesi PIN-koodillasi",
-                "2": "Avaa uusi IOTA-sovellus Ledger-laitteellasi",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "Vieläkin ongelmia?",
                     "link": "Kokeile Ledgerin virallista tukisivustoa"
@@ -1104,15 +1119,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
@@ -1228,12 +1234,14 @@
         "importSeed": "Tuo olemassaoleva seed-merkkijono",
         "restoreWallet": {
             "iota": "Siirrä tai palauta lompakko",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Palauta Shimmer-profiili",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Palauta olemassaoleva Shimmer-profiili",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
@@ -1330,10 +1338,12 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Näytä tila",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
         "confirm": "Vahvista",
         "hideNetworkStatistics": "Piilota verkkotilastot",
         "findWallets": "Löydä lompakot",
+        "findBalances": "Etsi saldoja",
         "useBalanceFinder": "Käytä saldon etsijää",
         "search": "Etsi",
         "searching": "Etsitään",
@@ -1384,7 +1394,8 @@
         "stopVoting": "Stop voting",
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Vastaanottaja",
@@ -1427,6 +1438,8 @@
         "shimmerClaimed": "Lunastettu",
         "shimmerClaiming": "Lunastetaan",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Lyöty",
         "minting": "Lyönti",
         "burned": "Burned",
@@ -1653,10 +1666,7 @@
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
         "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Suodattimet",
@@ -1732,7 +1742,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Direction",
@@ -1757,9 +1768,6 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -1816,7 +1824,7 @@
             }
         },
         "syncing": "Ole hyvä ja odota, kunnes synkronointi on valmistunut vaihtaaksesi lompakkoa.",
-        "transferring": "Ole hyvä ja odota, kunnes kaikki transaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Ole hyvä ja odota, kunnes kaikki staking- ja äänestystransaktiot ovat valmistuneet vaihtaaksesi lompakkoa.",
         "claimed": {
             "success": "Transaktio lunastettu",
@@ -1871,7 +1879,8 @@
                 "nonEmptyAccounts": "Sinun täytyy siirtää kaikki saldot ennen kuin voit poistaa profiilisi."
             },
             "type": "Profiilin tyypin määrittäminen ei onnistu",
-            "setupType": "Profiilin luonnin tyypin määrittäminen ei onnistu"
+            "setupType": "Profiilin luonnin tyypin määrittäminen ei onnistu",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "Salasanat eivät täsmää.",
@@ -1939,7 +1948,7 @@
             "cannotClaimTwice": "Tuloste on jo lunastettu",
             "noToAccount": "Et ole valinnut lompakkoa, johon varat lähetetään.",
             "sendingDust": "Et voi lähettää alle 1 Mi.",
-            "leavingDust": "Et voi jättää alle 1 Mi osoitteeseesi.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaktio peruutettiin.",
             "transaction": "Transaktiosi lähettämisessä tapahtui virhe. Ole hyvä ja yritä uudelleen.",
             "invalidExpirationDateTime": "Valittu erääntymispäivä/-aika on virheellinen.",
@@ -1998,7 +2007,7 @@
             "unableToRestoreForProfileManager": "Ei voitu palauttaa Stronghold-varmuuskopiota profiilin hallintaan"
         },
         "ledger": {
-            "appNotOpen": "Sinun täytyy avata IOTA-sovellus Ledger-laitteellasi.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Ledger-laitteeen yhdistämisessä tapahtui virhe.",
             "legacyConnected": "Väärä sovellus on auki Ledger-laitteellasi.",
             "locked": "Ole hyvä ja avaa Ledger-laitteesi lukitus syöttämällä PIN-koodisi.",
@@ -2090,10 +2099,6 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
@@ -2231,7 +2236,8 @@
         "governance": "Hallinnointi",
         "developer": "Kehittäjä",
         "tokens": "Tokenit",
-        "activity": "Aktiviteetti"
+        "activity": "Aktiviteetti",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2347,7 +2353,11 @@
             "disconnected": "Disconnected"
         },
         "locked": "lukittu",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

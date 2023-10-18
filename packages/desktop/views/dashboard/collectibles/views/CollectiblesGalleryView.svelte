@@ -1,9 +1,53 @@
 <script lang="ts">
+    import { IllustrationEnum } from '@auxiliary/illustration'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
-    import { FontWeight, Illustration, NftGallery, Text, ReceiveButton, SearchInput } from 'shared/components'
+    import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from 'shared/components'
+    import VirtualList from '@sveltejs/svelte-virtual-list'
+
+    let windowWidth = window.innerWidth
+
+    function onResize() {
+        if (windowWidth !== window.innerWidth) {
+            windowWidth = window.innerWidth
+        }
+    }
+
+    function onDepositNftClick(): void {
+        openPopup({
+            id: PopupId.ReceiveAddress,
+            props: {
+                title: localize('actions.depositNft'),
+            },
+        })
+    }
+
+    $: nftsRows = (() => {
+        let cols = 5
+        if (windowWidth < 768) {
+            cols = 1
+        } else if (windowWidth < 1024) {
+            cols = 2
+        } else if (windowWidth < 1280) {
+            cols = 3
+        } else if (windowWidth < 1536) {
+            cols = 4
+        } else if (windowWidth < 1792) {
+            cols = 5
+        }
+
+        const rowsLengh = Math.ceil($queriedNfts.length / cols)
+        const nftsRows = Array.from({ length: rowsLengh }, (_, i) => {
+            const start = i * cols
+            const end = start + cols
+            return $queriedNfts.slice(start, end)
+        })
+        return nftsRows
+    })()
 </script>
 
+<svelte:window on:resize={onResize} />
 <div class="flex flex-col w-full h-full space-y-4">
     {#if $ownedNfts.length}
         <div class="flex flex-row justify-between">
@@ -18,12 +62,21 @@
                 <SearchInput bind:value={$nftSearchTerm} />
             </div>
         </div>
-
-        {#if $queriedNfts.length}
-            <NftGallery nfts={$queriedNfts} />
+        {#if nftsRows.length}
+            <VirtualList items={nftsRows} let:item>
+                <div
+                    class="grid overflow-scroll sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 auto-rows-auto gap-3 2xl:gap-4 pb-1 pr-3 -mr-5"
+                >
+                    {#each item as nft}
+                        {#if nft !== undefined}
+                            <NftGalleryItem {nft} />
+                        {/if}
+                    {/each}
+                </div>
+            </VirtualList>
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
-                <Illustration illustration="empty-collectibles" width="134" height="134" />
+                <Illustration illustration={IllustrationEnum.EmptyCollectibles} width="134" height="134" />
                 <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500"
                     >{localize('views.collectibles.gallery.noResults')}</Text
                 >
@@ -32,7 +85,7 @@
     {:else}
         <div class="w-full h-full flex items-center justify-center grow-1">
             <div class="flex flex-col items-center space-y-8">
-                <Illustration illustration="empty-collectibles" width="134" height="134" />
+                <Illustration illustration={IllustrationEnum.EmptyCollectibles} width="134" height="134" />
                 <div class="flex flex-col items-center">
                     <Text fontSize="text-14" fontWeight={FontWeight.semibold} color="gray-500"
                         >{localize('views.collectibles.gallery.emptyTitle')}</Text
@@ -41,7 +94,9 @@
                         >{localize('views.collectibles.gallery.emptyDescription')}</Text
                     >
                 </div>
-                <ReceiveButton text={localize('actions.depositNft')} title={localize('actions.depositNft')} />
+                <Button size={ButtonSize.Large} onClick={onDepositNftClick}>
+                    {localize('actions.depositNft')}
+                </Button>
             </div>
         </div>
     {/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption, NftImageOrIconBox } from 'shared/components'
+    import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
     import { ownedNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { selectedAccountIndex } from '@core/account'
@@ -8,13 +8,14 @@
 
     export let nftId: string = ''
     export let error: string = ''
-    export let readonly: boolean = null
+    export let readonly: boolean | null = null
 
-    let inputElement: HTMLInputElement = undefined
+    let inputElement: HTMLInputElement | undefined = undefined
     let modal: Modal = undefined
-    let selected: IOption = nftId
-        ? { key: getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId).name, value: nftId }
-        : {}
+    const selectedNft = getNftByIdFromAllAccountNfts($selectedAccountIndex, nftId)
+    let selected: IOption | undefined = selectedNft
+        ? { key: selectedNft.name, value: selectedNft.id }
+        : { value: nftId }
 
     const nftOptions: IOption[] = $ownedNfts
         .filter((nft) => nft.isSpendable && (!nft.timelockTime || nft.timelockTime < $time.getTime()))
@@ -52,5 +53,8 @@
     options={nftOptions}
     let:option
 >
-    <NftImageOrIconBox nftId={option.value} size="small" />
+    <NftImageOrIconBox
+        nft={getNftByIdFromAllAccountNfts($selectedAccountIndex, String(option?.value))}
+        size={NftSize.Small}
+    />
 </SelectorInput>

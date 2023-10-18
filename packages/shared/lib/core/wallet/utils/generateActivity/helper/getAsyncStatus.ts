@@ -2,8 +2,8 @@ import { ActivityAsyncStatus } from '@core/wallet/enums'
 
 export function getAsyncStatus(
     isClaimed: boolean,
-    expirationDate: Date,
-    timelockDate: Date,
+    expirationDate: Date | undefined,
+    timelockDate: Date | undefined,
     hasStorageDeposit: boolean,
     currentTimeStamp: number
 ): ActivityAsyncStatus {

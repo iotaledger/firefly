@@ -1,18 +1,15 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { isVestingOutputId, selectedAccountVestingOverview } from '@contexts/vesting'
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
-    import {
-        OUTPUT_TYPE_TREASURY,
-        UNLOCK_CONDITION_EXPIRATION,
-        UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN,
-        UNLOCK_CONDITION_TIMELOCK,
-    } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import type { UnlockConditionTypes } from '@iota/types'
+    import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
+    import { TextHintVariant } from 'shared/components/enums'
+    import features from '@features/features'
 
     interface BalanceBreakdown {
         amount: number
@@ -26,20 +23,23 @@
     }
 
     $: accountBalance = $selectedAccount?.balances
+    $: accountBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
-    $: accountBalance, void setBreakdown()
+
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
+        const vestingBreakdown = getVestingBreakdown()
 
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
+            ...(features.vesting.enabled && { vesting: vestingBreakdown }),
         }
     }
 
@@ -57,25 +57,29 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OUTPUT_TYPE_TREASURY) {
-                    if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_EXPIRATION)) {
+                if (output.type !== OutputType.Treasury && !isVestingOutputId(outputId)) {
+                    const commonOutput = output as CommonOutput
+                    if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
                         amount = Number(output.amount)
                     } else if (
-                        containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_STORAGE_DEPOSIT_RETURN)
+                        containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedAccount, output))?.storageDeposit
-                    } else if (containsUnlockCondition(output.unlockConditions, UNLOCK_CONDITION_TIMELOCK)) {
+                        amount = (await getStorageDepositFromOutput($selectedAccount, output as CommonOutput))
+                            ?.storageDeposit
+                    } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
                     }
-                }
 
-                if (!subBreakdown[type]) {
-                    subBreakdown[type] = amount
-                } else {
-                    subBreakdown[type] += amount
+                    if (type) {
+                        if (!subBreakdown[type]) {
+                            subBreakdown[type] = amount
+                        } else {
+                            subBreakdown[type] += amount
+                        }
+                    }
                 }
                 pendingOutputsStorageDeposit += amount
             }
@@ -114,7 +118,11 @@
         return { amount: totalStorageDeposit, subBreakdown }
     }
 
-    function containsUnlockCondition(unlockConditions: UnlockConditionTypes[], unlockConditionId: number) {
+    function getVestingBreakdown(): BalanceBreakdown {
+        return { amount: $selectedAccountVestingOverview?.remainingPayout }
+    }
+
+    function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {
         return unlockConditions.some((unlockCondition) => unlockCondition.type === unlockConditionId)
     }
 
@@ -125,7 +133,7 @@
                 title: localize('popups.minimizeStorageDeposit.title'),
                 description: localize('popups.minimizeStorageDeposit.description'),
                 confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
-                info: true,
+                variant: TextHintVariant.Info,
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {

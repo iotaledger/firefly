@@ -1,16 +1,17 @@
-import type { IFoundryOutput } from '@iota/types'
+import { FeatureType, FoundryOutput, MetadataFeature } from '@iota/sdk/out/types'
 
-export function getMetadataFromFoundryOutput(foundry: IFoundryOutput): string {
+export function getMetadataFromFoundryOutput(foundry: FoundryOutput): string {
     for (const feature of foundry?.immutableFeatures ?? []) {
-        if (feature?.type === 2) {
-            return feature.data
+        if (feature?.type === FeatureType.Metadata) {
+            return (feature as MetadataFeature).data
         }
     }
 
     for (const feature of foundry?.features ?? []) {
-        if (feature.type === 2) {
-            return feature.data
+        if (feature?.type === FeatureType.Metadata) {
+            return (feature as MetadataFeature).data
         }
     }
+
     return undefined
 }

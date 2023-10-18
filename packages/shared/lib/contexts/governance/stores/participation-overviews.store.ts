@@ -1,5 +1,5 @@
 import { derived, get, Readable, writable } from 'svelte/store'
-import type { ParticipationOverview } from '@iota/wallet/out/types'
+import type { ParticipationOverview } from '@iota/sdk/out/types'
 import { selectedAccountIndex } from '@core/account/stores'
 import { getParticipationOverview } from '@core/account/api/getParticipationOverview'
 import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'

@@ -8,6 +8,9 @@ export function getActivityTileTitle(activity: Activity): string {
     if (activity.type === ActivityType.Basic && activity.isShimmerClaiming) {
         return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
     }
+    if (activity.type === ActivityType.Vesting) {
+        return 'general.vestingReward'
+    }
     if (activity.type === ActivityType.Governance) {
         if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
             return isConfirmed ? 'general.increased' : 'general.increasing'

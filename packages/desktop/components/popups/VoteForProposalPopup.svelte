@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
-    import { HTMLButtonType } from 'shared/components/enums'
+    import { HTMLButtonType, TextHintVariant } from 'shared/components/enums'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
@@ -51,10 +51,10 @@
     <div class="space-y-4">
         <KeyValueBox keyText={localize('popups.voteForProposal.key')} valueText={formattedVotingPower} />
         {#if !hasVotingPower}
-            <TextHint danger text={localize('popups.voteForProposal.noVotingPower')} />
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.voteForProposal.noVotingPower')} />
         {:else if numberOfAbstainedQuestions > 0}
             <TextHint
-                warning
+                variant={TextHintVariant.Warning}
                 text={localize('popups.voteForProposal.hasAbstained', {
                     values: { numberOfQuestions: numberOfAbstainedQuestions },
                 })}

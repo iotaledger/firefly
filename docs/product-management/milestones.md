@@ -13,7 +13,5 @@
 |E12.M4|[Advanced Collectibles features](https://github.com/iotaledger/firefly/milestone/78)                     |[!badge variant="success" text="in development"]|             |E12 - Collectibles               |
 |E12.M5|[Collectible collections and UX enhancements](https://github.com/iotaledger/firefly/milestone/79)        |[!badge variant="success" text="in development"]|             |E12 - Collectibles               |
 |E14.M1|[Desktop v1 maintenance mode](https://github.com/iotaledger/firefly/milestone/74)                        |[!badge variant="dark" text="continuous"]       |Begoña       |E14 - Maintenance                |
-|E14.M2|[Mobile v1 maintenance mode](https://github.com/iotaledger/firefly/milestone/75)                         |[!badge variant="dark" text="continuous"]       |Begoña       |E14 - v1 Backlog                 |
 |E15.M1|[Update stronghold on Firefly Shimmer (desktop v2.x)](https://github.com/iotaledger/firefly/milestone/65)|[!badge variant="success" text="in development"]|             |E15 - Update stronghold to latest|
 |E15.M2|[Update stronghold on Firefly (desktop v1.x)](https://github.com/iotaledger/firefly/milestone/66)        |[!badge variant="success" text="in development"]|             |E15 - Update stronghold to latest|
-|E15.M3|[Update stronghold on Firefly (mobile v1.x)](https://github.com/iotaledger/firefly/milestone/67)         |[!badge variant="success" text="in development"]|Begoña       |E15 - Update stronghold to latest|

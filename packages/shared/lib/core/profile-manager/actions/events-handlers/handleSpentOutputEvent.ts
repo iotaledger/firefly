@@ -1,26 +1,33 @@
+import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+
 import { syncBalance } from '@core/account/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
-import { activeAccounts } from '@core/profile/stores'
+import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
-import { WalletApiEvent } from '../../enums'
-import { ISpentOutputEventPayload } from '../../interfaces'
 import { validateWalletApiEvent } from '../../utils'
+import { getAddressesWithOutputs } from '@core/account'
 
-export async function handleSpentOutputEvent(error: Error, rawEvent: string): Promise<void> {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletApiEvent.SpentOutput)
-    /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-    await handleSpentOutputEventInternal(accountIndex, payload as ISpentOutputEventPayload)
+export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
+    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
+    const type = payload.type
+    if (type === WalletEventType.SpentOutput) {
+        await handleSpentOutputEventInternal(accountIndex, payload as SpentOutputWalletEvent)
+    }
 }
 
 export async function handleSpentOutputEventInternal(
     accountIndex: number,
-    payload: ISpentOutputEventPayload
+    payload: SpentOutputWalletEvent
 ): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
-    const output = payload?.output
+    const output = payload.output
     await syncBalance(accountIndex)
+    if (account) {
+        const addressesWithOutputs = await getAddressesWithOutputs(account)
+        updateActiveAccount(account.index, { addressesWithOutputs })
+    }
     const outputId = output?.outputId
     const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)
 

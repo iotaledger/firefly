@@ -23,6 +23,7 @@ export enum PopupId {
     LegalUpdate = 'legalUpdate',
     ManageAccount = 'manageAccount',
     ManageVotingPower = 'manageVotingPower',
+    MetricSystemInfo = 'metricSystemInfo',
     MintNativeTokenConfirmation = 'mintNativeTokenConfirmation',
     MintNativeTokenForm = 'mintNativeTokenForm',
     MintNftConfirmation = 'mintNftConfirmation',
@@ -43,5 +44,8 @@ export enum PopupId {
     VerifyLedgerTransaction = 'verifyLedgerTransaction',
     VoteForProposal = 'voteForProposal',
     VotingPowerToZero = 'votingPowerToZero',
-    WalletFinder = 'walletFinder',
+    BalanceFinder = 'balanceFinder',
+    VestingCollect = 'vestingCollect',
+    PayoutDetails = 'payoutDetails',
+    VestingRewardsFinder = 'vestingRewardsFinder',
 }

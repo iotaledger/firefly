@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import {
-        mintNativeToken,
+        createNativeToken,
         mintTokenDetails,
         TokenStandard,
         buildFoundryOutputData,
@@ -13,6 +13,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
+    import { getClient } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
 
@@ -27,8 +28,14 @@
     async function prepareFoundryOutput(): Promise<void> {
         if ($mintTokenDetails && $selectedAccount && metadata) {
             const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
-            const outputData = buildFoundryOutputData(Number(totalSupply), Number(circulatingSupply), metadata, aliasId)
-            const preparedOutput = await $selectedAccount.buildFoundryOutput(outputData)
+            const outputData = await buildFoundryOutputData(
+                Number(totalSupply),
+                Number(circulatingSupply),
+                metadata,
+                aliasId
+            )
+            const client = await getClient()
+            const preparedOutput = await client.buildFoundryOutput(outputData)
             storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
         }
     }
@@ -89,7 +96,7 @@
     async function mintAction(): Promise<void> {
         try {
             if ($mintTokenDetails && metadata) {
-                await mintNativeToken(
+                await createNativeToken(
                     Number($mintTokenDetails.totalSupply),
                     Number($mintTokenDetails.circulatingSupply),
                     metadata

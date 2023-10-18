@@ -1,5 +1,5 @@
-import { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
-import { OnboardingFeatures } from '@lib/features/types'
+import type { IOnboardingFeaturesForNetwork } from '@lib/features/interfaces'
+import type { OnboardingFeatures } from '@lib/features/types'
 
 const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     enabled: false,
@@ -23,6 +23,45 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
         },
         ledgerBackup: {
             enabled: false,
+        },
+    },
+    claimRewards: {
+        enabled: false,
+        hidden: false,
+        recoveryPhrase: {
+            enabled: false,
+        },
+        strongholdBackup: {
+            enabled: false,
+        },
+        ledgerBackup: {
+            enabled: false,
+        },
+    },
+}
+
+const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
+    enabled: false,
+    hidden: true,
+    newProfile: {
+        enabled: true,
+        softwareProfile: {
+            enabled: true,
+        },
+        ledgerProfile: {
+            enabled: true,
+        },
+    },
+    restoreProfile: {
+        enabled: true,
+        recoveryPhrase: {
+            enabled: true,
+        },
+        strongholdBackup: {
+            enabled: true,
+        },
+        ledgerBackup: {
+            enabled: true,
         },
     },
     claimRewards: {
@@ -156,13 +195,14 @@ const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
 
 const onboardingFeatures: OnboardingFeatures = {
     enabled: true,
+    strongholdVersionCheck: {
+        enabled: true,
+    },
     iota: onboardingFeaturesForIota,
+    iotaAlphanet: onboardingFeaturesForIotaAlphanet,
     shimmer: onboardingFeaturesForShimmer,
     testnet: onboardingFeaturesForTestnet,
     custom: onboardingFeaturesForCustom,
-    strongholdVersionCheck: {
-        enabled: false,
-    },
 }
 
 export default onboardingFeatures

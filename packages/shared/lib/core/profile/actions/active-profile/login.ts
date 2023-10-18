@@ -140,7 +140,14 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 pollLedgerNanoStatus()
             }
 
-            setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
+            let initialSelectedAccountindex = get(activeAccounts)?.[0]?.index
+            if (
+                lastUsedAccountIndex &&
+                get(activeAccounts)?.find((_account) => _account.index === lastUsedAccountIndex)
+            ) {
+                initialSelectedAccountindex = lastUsedAccountIndex
+            }
+            setSelectedAccount(initialSelectedAccountindex)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
@@ -160,7 +167,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     } catch (err) {
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
-            logout(false)
+            void logout(false)
         }
         loginRouter?.previous()
         resetLoginProgress()

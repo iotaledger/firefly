@@ -1,9 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { LedgerConnectionState, ledgerConnectionState } from '@core/ledger'
+    import { LedgerConnectionState, ledgerAppName, ledgerConnectionState } from '@core/ledger'
     import { isFunction } from '@core/utils'
     import { Button, LedgerAnimation, Text, TextHint, FontWeight, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
+    import { TextHintVariant } from 'shared/components/enums'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let onCancel: () => void
     export let onContinue: () => void
@@ -13,18 +15,18 @@
     $: isAppNotOpen = $ledgerConnectionState === LedgerConnectionState.AppNotOpen
     $: isCorrectAppOpen = $ledgerConnectionState === LedgerConnectionState.CorrectAppOpen
 
-    let animation: string
+    let animation: AnimationEnum | undefined = undefined
     $: $ledgerConnectionState, setAnimation()
     function setAnimation(): void {
         if (isNotConnected) {
-            animation = 'ledger-disconnected-desktop'
+            animation = AnimationEnum.LedgerDisconnectedDesktop
         } else if (isLocked) {
             // TODO: get animation for locked state
             animation = undefined
         } else if (isAppNotOpen) {
-            animation = 'ledger-app-closed-desktop'
+            animation = AnimationEnum.LedgerAppClosedDesktop
         } else if (isCorrectAppOpen) {
-            animation = 'ledger-connected-desktop'
+            animation = AnimationEnum.LedgerConnectedDesktop
         }
     }
 
@@ -53,13 +55,20 @@
     </Text>
     <LedgerAnimation {animation} />
     {#if isNotConnected}
-        <TextHint danger text={localize('popups.ledgerNotConnected.notConnected')} />
+        <TextHint variant={TextHintVariant.Danger} text={localize('popups.ledgerNotConnected.notConnected')} />
     {:else if isLocked}
-        <TextHint warning text={localize('popups.ledgerNotConnected.locked')} />
+        <TextHint variant={TextHintVariant.Warning} text={localize('popups.ledgerNotConnected.locked')} />
     {:else if isAppNotOpen}
-        <TextHint info text={localize('popups.ledgerNotConnected.appNotOpen')} />
+        <TextHint
+            variant={TextHintVariant.Info}
+            text={localize('popups.ledgerNotConnected.appNotOpen', {
+                values: {
+                    legacy: $ledgerAppName,
+                },
+            })}
+        />
     {:else if isCorrectAppOpen}
-        <TextHint success text={localize('popups.ledgerNotConnected.correctAppOpen')} />
+        <TextHint variant={TextHintVariant.Success} text={localize('popups.ledgerNotConnected.correctAppOpen')} />
     {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>
