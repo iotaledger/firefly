@@ -7,11 +7,11 @@ import { ReadSpecialStream } from '../classes'
 // Function to parse data from the current metadata, using the new encoding where the shimmer chainId is 1072
 export function parseLayer2MetadataForTransferV2(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadSpecialStream(metadata)
-    const senderContract = readStream.readUInt32('senderContract')
+    const senderContract = readStream.readUInt8('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
     // TODO: This is a temporary fix since now the gas is always 500000, when it varies, the length of the gas will change
-    const gasBudget = readStream.readUIntNSpecialEncoding('gasBudget', 3)
+    const gasBudget = readStream.readUIntNSpecialEncoding('gasBudget', 8)
 
     const smartContractParameters = parseSmartContractParameters(readStream)
     const ethereumAddress = '0x' + smartContractParameters['a'].substring(4)
