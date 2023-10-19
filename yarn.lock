@@ -644,6 +644,26 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.44.0.tgz#961a5903c74139390478bdc808bcde3fc45ab7af"
   integrity sha512-Ag+9YM4ocKQx9AarydN0KY2j0ErMHNIocPDrVo8zAE44xLTjEtz81OdR68/cydGtk6m6jDb5Za3r2useMzYmSw==
 
+"@floating-ui/core@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.4.1.tgz#0d633f4b76052668afb932492ac452f7ebe97f17"
+  integrity sha512-jk3WqquEJRlcyu7997NtR5PibI+y5bi+LS3hPmguVClypenMsCY3CBa3LAQnozRCtCrYWSEtAdiskpamuJRFOQ==
+  dependencies:
+    "@floating-ui/utils" "^0.1.1"
+
+"@floating-ui/dom@^1.4.5":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.5.1.tgz#88b70defd002fe851f17b4a25efb2d3c04d7a8d7"
+  integrity sha512-KwvVcPSXg6mQygvA1TjbN/gh///36kKtllIF8SUm0qpFj8+rvYrpvlYdL1JoA71SHpDqgSSdGOSoQ0Mp3uY5aw==
+  dependencies:
+    "@floating-ui/core" "^1.4.1"
+    "@floating-ui/utils" "^0.1.1"
+
+"@floating-ui/utils@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.1.1.tgz#1a5b1959a528e374e8037c4396c3e825d6cf4a83"
+  integrity sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==
+
 "@formatjs/ecma402-abstract@1.11.4":
   version "1.11.4"
   resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.11.4.tgz#b962dfc4ae84361f9f08fbce411b4e4340930eda"
@@ -8041,10 +8061,12 @@ svelte@^3.49.0:
   resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.59.2.tgz#a137b28e025a181292b2ae2e3dca90bf8ec73aec"
   integrity sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==
 
-svelty-picker@^3.5.0:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/svelty-picker/-/svelty-picker-3.5.2.tgz#076535d55238da21a4477266763f6f818b29a9f2"
-  integrity sha512-323YrzvOoly8DnCuAmbFUeCXaIenL1AR89BaTrNVH9gilW5V/3viqyJlcRdd1zZ9Co1rsZ1ohlHw2+Z0iDZZ+Q==
+svelty-picker@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/svelty-picker/-/svelty-picker-5.0.0.tgz#538af006f2ea75fa6844bc2a210207376ff48d98"
+  integrity sha512-WWPZK3ruDdxwhMf3pkYRAaxWThV4ZwqyXm4qk26aPCu/lq3ty1bkhCeh3E+t28vf1Udn9WPJHcihM8L/jJ6AiA==
+  dependencies:
+    "@floating-ui/dom" "^1.4.5"
 
 symbol-tree@^3.2.4:
   version "3.2.4"

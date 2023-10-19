@@ -1,7 +1,7 @@
 <script lang="ts">
     import { LedgerAnimation, Button, Text, TextType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { ledgerAppName } from '@core/ledger'
+    import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { localize } from '@core/i18n'
     import { IllustrationEnum } from '@auxiliary/illustration'
 
@@ -9,7 +9,9 @@
     const stepAnimations = [
         IllustrationEnum.LedgerLiveUpdatedDesktop,
         IllustrationEnum.LedgerConnected2Desktop,
-        IllustrationEnum.LedgerSearchAppsDesktop,
+        $ledgerAppName === LedgerAppName.Shimmer
+            ? IllustrationEnum.LedgerSearchShimmerAppsDesktop
+            : IllustrationEnum.LedgerSearchIotaAppsDesktop,
         IllustrationEnum.LedgerInstallAppsDesktop,
         IllustrationEnum.LedgerCloseLiveDesktop,
     ]
@@ -23,9 +25,9 @@
     }
 </script>
 
-<Text type={TextType.h4} classes="mb-6"
-    >{localize('popups.ledgerAppGuide.title', { values: { legacy: $ledgerAppName } })}</Text
->
+<Text type={TextType.h4} classes="mb-6">
+    {localize('popups.ledgerAppGuide.title', { values: { legacy: $ledgerAppName } })}
+</Text>
 <div class="w-full flex flex-row flex-wrap">
     <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
     <div class="w-full text-center my-9 px-10">
