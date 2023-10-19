@@ -2,7 +2,7 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import { localize } from '@core/i18n'
-    import { ledgerAppName, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
+    import { LedgerAppName, ledgerAppName, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { Button, Icon, LedgerAnimation, Link, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { createFromLedgerRouter } from '../create-from-ledger-router'
@@ -41,7 +41,12 @@
         <div class="flex flex-row flex-nowrap items-center justify-center space-x-4 text-center mt-28">
             <div class="flex flex-col flex-wrap space-y-2">
                 <div class="bg-blue-400 rounded-2xl w-20 h-20 flex justify-center items-center">
-                    <Icon icon={IconEnum.Iota} width="32" height="32" classes="text-white" />
+                    <Icon
+                        icon={$ledgerAppName === LedgerAppName.Iota ? IconEnum.Iota : IconEnum.Shimmer}
+                        width="32"
+                        height="32"
+                        classes="text-white"
+                    />
                 </div>
                 <Text type={TextType.p} secondary>{$ledgerAppName}</Text>
             </div>
