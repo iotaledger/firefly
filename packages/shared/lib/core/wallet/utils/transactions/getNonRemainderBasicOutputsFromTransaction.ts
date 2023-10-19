@@ -9,12 +9,13 @@ export function getNonRemainderBasicOutputsFromTransaction(
     accountAddressesWithOutputs: AddressWithOutputs[],
     direction: ActivityDirection
 ): IWrappedOutput[] {
+    const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
+
     return wrappedOutputs.filter((outputData) => {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output as CommonOutput)
-        const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
 
         if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return accountAddresses.includes(recipientAddress)
+            return !outputData.remainder && accountAddresses.includes(recipientAddress)
         } else {
             return !accountAddresses.includes(recipientAddress)
         }
