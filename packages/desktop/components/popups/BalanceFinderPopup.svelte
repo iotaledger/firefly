@@ -3,7 +3,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType } from '@core/account'
+    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType, selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { NetworkId } from '@core/network'
@@ -21,7 +21,18 @@
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
     } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile, Spinner } from 'shared/components'
+    import {
+        Button,
+        FontWeight,
+        KeyValueBox,
+        Text,
+        TextHint,
+        TextType,
+        Icon,
+        Tile,
+        Spinner,
+        Checkbox,
+    } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
     import VirtualList from '@sveltejs/svelte-virtual-list'
@@ -33,20 +44,29 @@
     export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
-
-    const { isStrongholdLocked, network } = $activeProfile
-    const searchAlgorithm: SearchAlgorithmType =
-        network.id === NetworkId.Iota || NetworkId.IotaAlphanet ? SearchAlgorithmType.IDS : SearchAlgorithmType.BFS
+    export let searchInCurrentWallet: boolean = false
+    export let shouldInitSearch: boolean = false
 
     let error = ''
     let isBusy = false
 
+    const { isStrongholdLocked, network } = $activeProfile
+
     $: isTransferring = $visibleActiveAccounts.some(
         (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
     )
+    $: visibleWalletList = searchInCurrentWallet
+        ? $visibleActiveAccounts?.filter((account) => account.index === $selectedAccountIndex)
+        : $visibleActiveAccounts
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
+    $: searchInCurrentWallet, (shouldInitSearch = true)
+    $: searchAlgorithm = searchInCurrentWallet
+        ? SearchAlgorithmType.DFS
+        : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
+        ? SearchAlgorithmType.IDS
+        : SearchAlgorithmType.BFS
 
     // Button click handlers
     async function onFindBalancesClick(): Promise<void> {
@@ -73,9 +93,10 @@
 
     // Actions
     async function findProfileBalances(): Promise<void> {
-        await findBalances(searchAlgorithm, !hasUsedBalanceFinder)
+        await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
         await loadAccounts()
         hasUsedBalanceFinder = true
+        shouldInitSearch = false
     }
 
     async function consolidateProfileAccounts(): Promise<void> {
@@ -127,13 +148,22 @@
                             hasUsedBalanceFinder,
                             title,
                             body,
+                            searchInCurrentWallet,
+                            shouldInitSearch,
                         },
                     })
                 },
                 onCancelled: function () {
                     openPopup({
                         id: PopupId.BalanceFinder,
-                        props: { hasUsedBalanceFinder, title, body, showConsolidation },
+                        props: {
+                            hasUsedBalanceFinder,
+                            title,
+                            body,
+                            showConsolidation,
+                            searchInCurrentWallet,
+                            shouldInitSearch,
+                        },
                     })
                 },
             },
@@ -156,7 +186,7 @@
     <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{body}</Text>
 
     <div class="w-full flex-col space-y-2 balance-overview-wrapper">
-        <VirtualList items={$visibleActiveAccounts} let:item>
+        <VirtualList items={visibleWalletList} let:item>
             <div class="mb-2">
                 <Tile classes="flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-1000">
                     <div class="flex items-center space-x-2">
@@ -172,11 +202,19 @@
                 </Tile>
             </div>
         </VirtualList>
-        <KeyValueBox
-            keyText={localize('popups.balanceFinder.totalAddressBalance')}
-            valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
-        />
+        {#if !searchInCurrentWallet}
+            <KeyValueBox
+                keyText={localize('popups.balanceFinder.totalAddressBalance')}
+                valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
+            />
+        {/if}
     </div>
+    <Checkbox
+        label={localize('popups.balanceFinder.currentWallet')}
+        checked={searchInCurrentWallet}
+        onClick={() => (searchInCurrentWallet = !searchInCurrentWallet)}
+        disabled={isBusy}
+    />
 
     {#if hasUsedBalanceFinder}
         <TextHint
@@ -231,7 +269,7 @@
         overflow-y: scroll;
         padding-right: 1.5rem !important;
         min-height: 100px;
-        max-height: 300px;
+        max-height: 250px;
     }
     .balance-overview-wrapper :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;
