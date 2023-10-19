@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Crea un profilo hardware",
-                        "description": "Ledger Nano S o Nano X necessario"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Usa il backup di Stronghold",
                     "importFileDescription": "Importa il tuo file di backup di Stronghold",
                     "importLedger": "Usa dispositivo Ledger",
-                    "importLedgerDescription": "Ripristina dal tuo dispositivo Ledger Nano S o X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Rivendica le ricompense di staking di Shimmer",
@@ -924,7 +924,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
