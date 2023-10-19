@@ -44,11 +44,11 @@
     export let consolidateAccountsOnLoad = false
     export let title: string
     export let body: string
+    export let searchInCurrentWallet: boolean = false
+    export let shouldInitSearch: boolean = false
 
     let error = ''
     let isBusy = false
-    let searchInCurrentWallet: boolean = false
-    let shouldInitSearch: boolean = false
 
     const { isStrongholdLocked, network } = $activeProfile
 
@@ -145,13 +145,22 @@
                             hasUsedBalanceFinder,
                             title,
                             body,
+                            searchInCurrentWallet,
+                            shouldInitSearch,
                         },
                     })
                 },
                 onCancelled: function () {
                     openPopup({
                         id: PopupId.BalanceFinder,
-                        props: { hasUsedBalanceFinder, title, body, showConsolidation },
+                        props: {
+                            hasUsedBalanceFinder,
+                            title,
+                            body,
+                            showConsolidation,
+                            searchInCurrentWallet,
+                            shouldInitSearch,
+                        },
                     })
                 },
             },
