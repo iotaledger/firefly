@@ -41,7 +41,7 @@
     let modal: Modal
     let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
     let minRequiredStorageDeposit: number
-    const availableOuputs = undefined
+    let hasOutputsToConsolidate = false
 
     $: hasTransactionInProgress =
         $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
@@ -69,22 +69,18 @@
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
 
     onMount(() => {
-        getMinStorage()
+        getMinRequiredStorageDeposit()
         areOutputsReadyForConsolidation()
     })
 
-    async function areOutputsReadyForConsolidation(): Promise<boolean> {
-        let hasOutputsToConsolidate = false
-        try {
-            await $selectedAccount.prepareConsolidateOutputs({ force: false, outputThreshold: 2 })
-            hasOutputsToConsolidate = true
-        } catch (error) {
-            console.error('error ', error)
-        }
-        return hasOutputsToConsolidate
+    function areOutputsReadyForConsolidation(): void {
+        $selectedAccount
+            .prepareConsolidateOutputs({ force: false, outputThreshold: 2 })
+            .then(() => (hasOutputsToConsolidate = true))
+            .catch(() => (hasOutputsToConsolidate = false))
     }
 
-    async function getMinStorage() {
+    async function getMinRequiredStorageDeposit() {
         minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
     }
 
@@ -186,7 +182,7 @@
                                     disabled={$selectedAccountVestingUnclaimedFunds === 0 ||
                                         hasTransactionInProgress ||
                                         $selectedAccount?.balances?.baseCoin?.available < minRequiredStorageDeposit ||
-                                        availableOuputs === undefined}
+                                        hasOutputsToConsolidate === false}
                                     isBusy={hasTransactionInProgress}
                                 >
                                     {localize('views.vesting.collect')}
