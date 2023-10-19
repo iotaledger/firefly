@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "v2"
+      - "stardust"
       - "scope:dependencies"
     milestone: 5
     
@@ -19,7 +19,7 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "v2"
+      - "stardust"
       - "scope:dependencies"
       - "platform:desktop"
     milestone: 5
@@ -29,6 +29,6 @@ updates:
     schedule:
       interval: "weekly"
     labels:
-      - "v2"
+      - "stardust"
       - "scope:dependencies"
     milestone: 5

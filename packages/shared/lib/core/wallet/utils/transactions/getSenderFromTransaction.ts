@@ -1,6 +1,7 @@
 import { Subject } from '@core/wallet/types'
 import { CommonOutput } from '@iota/sdk/out/types'
 import { getSenderFromOutput } from '../outputs/getSenderFromOutput'
+import { SubjectType } from '@core/wallet/enums'
 
 export function getSenderFromTransaction(
     isIncoming: boolean,
@@ -10,6 +11,6 @@ export function getSenderFromTransaction(
     if (isIncoming) {
         return getSenderFromOutput(output)
     } else {
-        return { type: 'address', address: accountAddress }
+        return { type: SubjectType.Address, address: accountAddress }
     }
 }

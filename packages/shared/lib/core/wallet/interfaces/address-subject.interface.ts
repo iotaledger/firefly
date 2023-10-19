@@ -1,4 +1,6 @@
+import { SubjectType } from '../enums'
+
 export interface IAddressSubject {
-    type: 'address'
+    type: SubjectType.Address
     address: string
 }

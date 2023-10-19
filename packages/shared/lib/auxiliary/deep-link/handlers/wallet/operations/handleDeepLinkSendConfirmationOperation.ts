@@ -4,6 +4,7 @@ import {
     NewTransactionDetails,
     NewTransactionType,
     Subject,
+    SubjectType,
     getAssetById,
     getUnitFromTokenMetadata,
     selectedAccountAssets,
@@ -58,7 +59,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new InvalidAddressError()
     }
 
-    const recipient: Subject = { type: 'address', address }
+    const recipient: Subject = { type: SubjectType.Address, address }
 
     const assetId = searchParams.get(SendOperationParameter.AssetId)
     assetId && validateAssetId(assetId)
