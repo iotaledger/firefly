@@ -3,7 +3,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType } from '@core/account'
+    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType, selectedAccountIndex } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { NetworkId } from '@core/network'
@@ -55,6 +55,9 @@
     $: isTransferring = $visibleActiveAccounts.some(
         (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
     )
+    $: visibleWalletList = searchInCurrentWallet
+        ? $visibleActiveAccounts?.filter((account) => account.index === $selectedAccountIndex)
+        : $visibleActiveAccounts
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
@@ -183,7 +186,7 @@
     <Text type={TextType.p} color="gray-600" fontSize="15" lineHeight="5">{body}</Text>
 
     <div class="w-full flex-col space-y-2 balance-overview-wrapper">
-        <VirtualList items={$visibleActiveAccounts} let:item>
+        <VirtualList items={visibleWalletList} let:item>
             <div class="mb-2">
                 <Tile classes="flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-1000">
                     <div class="flex items-center space-x-2">
@@ -199,10 +202,12 @@
                 </Tile>
             </div>
         </VirtualList>
-        <KeyValueBox
-            keyText={localize('popups.balanceFinder.totalAddressBalance')}
-            valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
-        />
+        {#if !searchInCurrentWallet}
+            <KeyValueBox
+                keyText={localize('popups.balanceFinder.totalAddressBalance')}
+                valueText={formatTokenAmountBestMatch(totalBalance, getBaseToken())}
+            />
+        {/if}
     </div>
     <Checkbox
         label={localize('popups.balanceFinder.currentWallet')}
@@ -264,7 +269,7 @@
         overflow-y: scroll;
         padding-right: 1.5rem !important;
         min-height: 100px;
-        max-height: 300px;
+        max-height: 250px;
     }
     .balance-overview-wrapper :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;
