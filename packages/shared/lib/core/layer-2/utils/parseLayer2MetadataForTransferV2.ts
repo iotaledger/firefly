@@ -57,6 +57,7 @@ function parseAssetAllowance(readStream: ReadSpecialStream): ILayer2AssetAllowan
 
     switch (allowance) {
         case Allowance.HasBaseTokens: {
+            // TODO: This is a temporary fix since now the base token is sent alone in the transfer (without native token and/or nfts)
             const baseTokenLength = readStream.length() - readStream.getReadIndex()
             result.baseTokens = readStream.readUIntNSpecialEncoding('baseTokenAmount', baseTokenLength).toString()
             break
