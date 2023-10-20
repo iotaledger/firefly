@@ -82,6 +82,6 @@
     {#if activeTab === SendFormTab.SendToken}
         <SendTokenForm validateInputs={validate} isTransferring={isTransferInProgress} />
     {:else}
-        <SendNftForm validateInputs={validate} />
+        <SendNftForm validateInputs={validate} isTransferring={isTransferInProgress} />
     {/if}
 </send-form-popup>
