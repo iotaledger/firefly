@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Utwórz profil sprzętowy",
-                        "description": "Wymagany Ledger Nano S lub Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Użyj kopii zapasowej Stronghold",
                     "importFileDescription": "Importuj plik kopii zapasowej Stronghold",
                     "importLedger": "Użyj urządzenia Ledger",
-                    "importLedgerDescription": "Przywróć profil ze swojego urządzenia Ledger Nano S lub X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Odbierz nagrody Shimmer ze stakingu",
@@ -924,7 +924,8 @@
             "addressesSearched": "Przeszukane adresy",
             "addressesFound": "Znalezione adresy",
             "totalAddressBalance": "Wszystkie środki",
-            "searchAgainHint": "Czy Twoje saldo lub liczba portfeli są nieprawidłowe? Wykonaj ponowne szukanie, aż Twoje pełne saldo zostanie wyświetlone."
+            "searchAgainHint": "Czy Twoje saldo lub liczba portfeli są nieprawidłowe? Wykonaj ponowne szukanie, aż Twoje pełne saldo zostanie wyświetlone.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Przegląd salda",
@@ -1338,6 +1339,7 @@
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "verifyDepositAddress": "Zweryfikuj adres depozytu",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1664,7 +1666,8 @@
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
-        "custom": "Niestandardowe"
+        "custom": "Niestandardowe",
+        "verifyLedgerDepositAddress": "Sprawdź czy adres depozytu jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
     },
     "filters": {
         "title": "Filtry",

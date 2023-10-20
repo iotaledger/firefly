@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Crear un perfil de hardware",
-                        "description": "Se necesita un Ledger Nano S o Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Usar copia de seguridad de Stronghold",
                     "importFileDescription": "Importa tu copia de seguridad de Stronghold",
                     "importLedger": "Usar dispositivo Ledger",
-                    "importLedgerDescription": "Restaurar desde tu dispositivo Ledger Nano S o X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Reclamar recompensas de staking de Shimmer",
@@ -924,7 +924,8 @@
             "addressesSearched": "Direcciones buscadas",
             "addressesFound": "Direcciones encontradas",
             "totalAddressBalance": "Balance total",
-            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo."
+            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Resumen del balance",
@@ -1338,6 +1339,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Ver estado",
         "viewBalanceBreakdown": "Ver desglose de saldo",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostrar carteras ocultas",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Ocultar estadísticas de la red",
@@ -1664,7 +1666,8 @@
         "jwt": "Token web JSON",
         "internalTransaction": "Transacción interna",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filtros",

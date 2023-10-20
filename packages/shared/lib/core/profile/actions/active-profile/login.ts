@@ -48,6 +48,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
+import { checkActiveProfileAuth } from '@core/profile'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -92,7 +93,22 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
              * create one for the new profile.
              */
             if (accounts?.length === 0) {
-                await createNewAccount()
+                const onUnlocked = new Promise<boolean>((resolve) => {
+                    const onSuccess = () => {
+                        resolve(true)
+                        return Promise.resolve()
+                    }
+                    const onCancel = () => resolve(false)
+                    const config = { stronghold: false, ledger: false }
+                    checkActiveProfileAuth(onSuccess, config, onCancel)
+                })
+                const success = await onUnlocked
+                if (success) {
+                    await createNewAccount()
+                } else {
+                    resetLoginProgress()
+                    return loginRouter.previous()
+                }
             }
 
             // Step 4: load accounts
@@ -140,7 +156,14 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 pollLedgerNanoStatus()
             }
 
-            setSelectedAccount(lastUsedAccountIndex ?? get(activeAccounts)?.[0]?.index ?? null)
+            let initialSelectedAccountindex = get(activeAccounts)?.[0]?.index
+            if (
+                lastUsedAccountIndex &&
+                get(activeAccounts)?.find((_account) => _account.index === lastUsedAccountIndex)
+            ) {
+                initialSelectedAccountindex = lastUsedAccountIndex
+            }
+            setSelectedAccount(initialSelectedAccountindex)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
