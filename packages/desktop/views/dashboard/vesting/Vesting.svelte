@@ -80,8 +80,10 @@
             .catch(() => (hasOutputsToConsolidate = false))
     }
 
-    async function getMinRequiredStorageDeposit() {
-        minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
+    function getMinRequiredStorageDeposit() {
+        getRequiredStorageDepositForMinimalBasicOutput()
+            .then((deposit) => (minRequiredStorageDeposit = deposit))
+            .catch(() => (minRequiredStorageDeposit = 0))
     }
 
     function getFiatAmount(amount: number): string {
