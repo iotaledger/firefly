@@ -23,7 +23,7 @@ export function getMetadataFromOutput(output: Output): string | undefined {
             const readStream = new ReadSpecialStream(metadataBytes)
             const startValue = readStream.readUInt8('startValue')
 
-            // For smart contract calls the first 8 biits of the metadata
+            // For smart contract calls the first 8 bits of the metadata
             // correspond to 0 if an an end-user initiates the transaction
             // instead of a smart contract. A stop voting output could
             // also start with a 0 metadata, so we check that as well.
