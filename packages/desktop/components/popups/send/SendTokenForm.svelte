@@ -61,7 +61,9 @@
             unit,
             tag,
             metadata,
-            layer2Parameters,
+            layer2Parameters: isLayer2Transfer
+                ? { networkAddress: iscpChainAddress, senderAddress: $selectedAccount.depositAddress }
+                : null,
             disableAssetSelection,
         })
 
