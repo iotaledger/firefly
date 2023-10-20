@@ -4,16 +4,15 @@ import { CONTRACT_FUNCTIONS, TARGET_CONTRACTS } from '../constants'
 import { Allowance } from '../enums'
 import { ReadSpecialStream } from '../classes'
 
-// Function to parse data from the current metadata, using the new encoding where the shimmer chainId is 1072
+// Function to parse data from the current metadata, using the new encoding where the shimmer chainId is 1073
 export function parseLayer2MetadataForTransferV2(metadata: Uint8Array): ILayer2TransferAllowanceMetadata {
     const readStream = new ReadSpecialStream(metadata)
     const senderContract = readStream.readUInt8('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
-    const gasBudget = readStream.readUIntNSpecialEncoding('gasBudget', 2)
+    const gasBudget = readStream.readUInt64SpecialEncoding('gasBudget')
     const smartContractParameters = parseSmartContractParameters(readStream)
     const ethereumAddress = '0x' + smartContractParameters['a'].substring(4)
-
     const allowance = parseAssetAllowance(readStream)
 
     return {
@@ -58,7 +57,6 @@ function parseAssetAllowance(readStream: ReadSpecialStream): ILayer2AssetAllowan
 
     switch (allowance) {
         case Allowance.HasBaseTokens: {
-            // TODO: This is a temporary fix since now the base token is sent alone in the transfer (without native token and/or nfts)
             const baseTokenLength = readStream.length() - readStream.getReadIndex()
             result.baseTokens = readStream.readUIntNSpecialEncoding('baseTokenAmount', baseTokenLength).toString()
             break
