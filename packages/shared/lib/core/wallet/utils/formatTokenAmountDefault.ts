@@ -11,7 +11,7 @@ export function formatTokenAmountDefault(
     if (amount < 0) {
         throw new Error('Amount is negative')
     } else if (isDecimal(amount)) {
-        throw new Error('Amount is a decimal number')
+        // throw new Error('Amount is a decimal number')
     } else if (unit && tokenMetadata?.standard === TokenStandard.BaseToken && unit === tokenMetadata?.subunit) {
         return formatNumber(amount, 0, 0, 0, useGrouping)
     } else {

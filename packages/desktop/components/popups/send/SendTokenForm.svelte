@@ -4,36 +4,37 @@
     import { Error } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
-    import { Output, CommonOutput } from '@iota/sdk/out/types'
+    import { Output } from '@iota/sdk/out/types'
     import {
         getDefaultTransactionOptions,
         getOutputParameters,
-        getStorageDepositFromOutput,
         NewTokenTransactionDetails,
         newTransactionDetails,
         NewTransactionType,
+        setNewTransactionDetails,
         TokenStandard,
-        updateNewTransactionDetails,
     } from '@core/wallet'
-    import {
-        AssetAmountInput,
-        Button,
-        ExpirationTimePicker,
-        KeyValueBox,
-        NetworkInput,
-        OptionalInput,
-        RecipientInput,
-        Spinner,
-        Text,
-        Toggle,
-    } from 'shared/components'
-    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
+    import { AssetAmountInput, Button, NetworkInput, OptionalInput, RecipientInput } from 'shared/components'
     import features from '@features/features'
     import { activeProfile } from '@core/profile'
-    import { TimePeriod, debounce } from '@core/utils'
     import { handleError } from '@core/error/handlers'
+    import { MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
+    import { OptionalInputType } from '../send'
 
-    export let preparedOutput: Output
+    export let validateInputs: (
+        inputValidations?: any,
+        optionalInputValidations?: {
+            validate?: (promise: Promise<unknown>) => Promise<void>
+            value: string
+            optionalInputType: OptionalInputType
+            byteLimit: number
+            errorMessage: string
+        }[]
+    ) => Promise<boolean> = () => Promise.resolve(true)
+    export let isTransferring: boolean = false
+
+    let preparedOutput: Output
+    let isPreparingOutput = false
 
     // Inputs
     let assetAmountInput: AssetAmountInput
@@ -41,85 +42,43 @@
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
-    let expirationTimePicker: ExpirationTimePicker
-
-    const isLayer2 = false
 
     const transactionDetails = get(newTransactionDetails)
-    $: ({
-        rawAmount,
+    const { layer2Parameters, disableAssetSelection } = transactionDetails as NewTokenTransactionDetails
+    let { rawAmount, asset, unit, recipient, tag, metadata } = transactionDetails as NewTokenTransactionDetails
+
+    $: rawAmount,
         asset,
-        unit,
         recipient,
+        unit,
         tag,
         metadata,
-        expirationDate,
-        surplus,
-        giftStorageDeposit,
-        layer2Parameters,
-        disableToggleGift,
-        disableChangeExpiration,
-        disableAssetSelection,
-    } = transactionDetails as NewTokenTransactionDetails)
-
-    $: rawAmount, asset, recipient, unit, tag, metadata, expirationDate, giftStorageDeposit, void updateDetailsAndPrepareOutput()
-
-    console.log('REINITTT!!!!!!!!!!')
-    let tagInternal = tag
-    let metadataInternal = metadata
-    $: debounce(() => { tag = tagInternal }, 750)()
-    $: debounce(() => { metadata = metadataInternal }, 750)()
-
-    let iscpChainAddress = layer2Parameters?.networkAddress
-    let storageDeposit = 0
-    const initialExpirationDate: TimePeriod = getInitialExpirationDate()
-    let minimumStorageDeposit = 0
-    let visibleSurplus: number | undefined = undefined
-
-    $: isBaseTokenTransfer =
-    transactionDetails.type === NewTransactionType.TokenTransfer &&
-    transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
-    $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseTokenTransfer)
-    $: hideGiftToggle = !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
-    $: isTransferring = $selectedAccount.isTransferring
-
-    let isPreparingOutput = false
-
-    $: console.log('tx details:', transactionDetails)
-    $: console.log('preparedOutput:', preparedOutput)
-    $: console.log('exp date:', expirationDate)
-    $: console.log('tag', tag)
-    $: console.log('tagInternal', tagInternal)
-
-    async function updateDetailsAndPrepareOutput(): Promise<void> {
-        updateNewTransactionDetails({
+        setNewTransactionDetails({
             type: NewTransactionType.TokenTransfer,
             rawAmount,
             asset,
             recipient,
             unit,
-            expirationDate,
-            giftStorageDeposit,
             tag,
             metadata,
             layer2Parameters,
             disableAssetSelection,
         })
 
-        // TODO Need a better way to check recipient is ready
-        if (rawAmount && (recipient?.address || recipient?.account)) {
-            await updatePreparedOutputAndStorageDeposit()
-        }
-    }
+    $: isBaseTokenTransfer = asset?.metadata?.standard === TokenStandard.BaseToken
 
-    async function updatePreparedOutputAndStorageDeposit(): Promise<void> {
-        const details = get(newTransactionDetails)
+    let iscpChainAddress = layer2Parameters?.networkAddress
+    $: isLayer2Transfer = !!iscpChainAddress
+    $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseTokenTransfer)
+    $: asset, !showLayer2 && networkInput?.reset()
+
+    async function buildPreparedOutput(): Promise<void> {
         try {
+            const details = get(newTransactionDetails)
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
             preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
-            await updateStorageDeposit()
 
             return Promise.resolve()
         } catch (err) {
@@ -130,60 +89,38 @@
         }
     }
 
-    async function updateStorageDeposit(): Promise<void> {
-        const {
-            storageDeposit: _storageDeposit,
-            giftedStorageDeposit: _giftedStorageDeposit
-        } = await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
+    async function onContinueClick(): Promise<void> {
+        const valid = await validateInputs(
+            [(): Promise<void> => assetAmountInput?.validate(false), recipientInput?.validate, networkInput?.validate],
+            [
+                {
+                    validate: metadataInput?.validate,
+                    value: metadata,
+                    optionalInputType: OptionalInputType.Metadata,
+                    byteLimit: MAX_METADATA_BYTES,
+                    errorMessage: localize('error.send.metadataTooLong'),
+                },
+                {
+                    validate: tagInput?.validate,
+                    value: tag,
+                    optionalInputType: OptionalInputType.Tag,
+                    byteLimit: MAX_TAG_BYTES,
+                    errorMessage: localize('error.send.tagTooLong'),
+                },
+            ]
+        )
 
-        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+        if (valid) {
+            await buildPreparedOutput()
 
-        if (isBaseTokenTransfer) {
-            const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
-            if (rawAmount >= storageDeposit) {
-                storageDeposit = 0
-            }
+            openPopup({
+                id: PopupId.SendConfirmation,
+                overflow: true,
+                props: {
+                    preparedOutput,
+                },
+            })
         }
-
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                    // Note: we have to hide it because currently, in the sdk,
-                    // the storage deposit return strategy is only looked at
-                    // if the provided amount is < the minimum required storage deposit
-                    hideGiftToggle = true
-            }
-        }
-    }
-
-    function getInitialExpirationDate(): TimePeriod {
-        if (expirationDate) {
-            return TimePeriod.Custom
-        } else if (storageDeposit && !giftStorageDeposit) {
-            return TimePeriod.OneDay
-        } else {
-            return TimePeriod.None
-        }
-    }
-
-    function toggleGiftStorageDeposit(): void {
-        giftStorageDeposit = !giftStorageDeposit
-    }
-
-    function onContinueClick():void {
-        openPopup({
-            id: PopupId.SendConfirmation,
-            overflow: true,
-            props: {
-                preparedOutput,
-                storageDeposit,
-                visibleSurplus
-            }
-        })
     }
 
     function onCancelClick(): void {
@@ -191,64 +128,28 @@
     }
 </script>
 
-<send-form-inputs class="flex flex-col space-y-4">
-    <AssetAmountInput
-        bind:this={assetAmountInput}
-        bind:asset
-        bind:rawAmount
-        bind:unit
-        {disableAssetSelection}
-    />
-    <NetworkInput bind:this={networkInput} bind:iscpChainAddress {showLayer2} />
-    <RecipientInput bind:this={recipientInput} bind:recipient {isLayer2} />
-    <optional-inputs class="flex flex-row flex-wrap gap-4">
-        <OptionalInput
-            bind:this={tagInput}
-            bind:value={tagInternal}
-            label={localize('general.tag')}
-            description={localize('tooltips.optionalInput')}
-        />
-        {#if !isLayer2}
+<send-token-form class="flex flex-col space-y-4">
+    <send-form-inputs class="flex flex-col space-y-4">
+        <AssetAmountInput bind:this={assetAmountInput} bind:asset bind:rawAmount bind:unit {disableAssetSelection} />
+        <NetworkInput bind:this={networkInput} bind:iscpChainAddress {showLayer2} />
+        <RecipientInput bind:this={recipientInput} bind:recipient isLayer2={isLayer2Transfer} />
+        <optional-inputs class="flex flex-row flex-wrap gap-4">
             <OptionalInput
-                bind:this={metadataInput}
-                bind:value={metadataInternal}
-                label={localize('general.metadata')}
+                bind:this={tagInput}
+                bind:value={tag}
+                label={localize('general.tag')}
                 description={localize('tooltips.optionalInput')}
             />
-        {/if}
-    </optional-inputs>
-    {#if !hideGiftToggle}
-        <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
-            <Toggle
-                slot="value"
-                color={ToggleColor.Green}
-                disabled={disableToggleGift}
-                active={giftStorageDeposit}
-                onClick={toggleGiftStorageDeposit}
-            />
-        </KeyValueBox>
-    {/if}
-    {#if initialExpirationDate !== undefined}
-        <KeyValueBox keyText={localize('general.expirationTime')}>
-            <ExpirationTimePicker
-                slot="value"
-                bind:this={expirationTimePicker}
-                bind:value={expirationDate}
-                initialSelected={initialExpirationDate}
-                disabled={disableChangeExpiration || isTransferring}
-            />
-        </KeyValueBox>
-    {/if}
-    <KeyValueBox
-        keyText={localize('general.storageDeposit')}
-        valueText={storageDeposit.toString()}
-        tooltipText={localize('tooltips.transactionDetails.outgoing.storageDeposit')}
-    />
-    {#if isPreparingOutput}
-        <Spinner message={'Output is being prepared'} />
-    {:else}
-        <Text fontSize={'base'}>Output is ready!</Text>
-    {/if}
+            {#if !isLayer2Transfer}
+                <OptionalInput
+                    bind:this={metadataInput}
+                    bind:value={metadata}
+                    label={localize('general.metadata')}
+                    description={localize('tooltips.optionalInput')}
+                />
+            {/if}
+        </optional-inputs>
+    </send-form-inputs>
     {#if isTransferring}
         <Error error={localize('notifications.transferring')} />
     {/if}
@@ -260,9 +161,10 @@
             classes="w-full"
             onClick={onContinueClick}
             disabled={isTransferring || isPreparingOutput}
-            isBusy={isTransferring}
+            isBusy={isTransferring || isPreparingOutput}
+            busyMessage={isPreparingOutput ? 'Preparing' : ''}
         >
             {localize('actions.next')}
         </Button>
     </popup-buttons>
-</send-form-inputs>
+</send-token-form>

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import {
         Button,
@@ -12,87 +11,130 @@
         NftActivityDetails,
         BasicActivityDetails,
         ActivityInformation,
+        Toggle,
     } from 'shared/components'
     import { Tab, TextHintVariant } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account'
+    import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
-    import { ActivityDirection, ActivityType, InclusionState, ActivityAction } from '@core/wallet/enums'
-    import { newTransactionDetails, NewTransactionType } from '@core/wallet/stores'
+    import { TokenStandard } from '@core/wallet/enums'
+    import { newTransactionDetails, NewTransactionType, updateNewTransactionDetails } from '@core/wallet/stores'
     import { sendOutput } from '@core/wallet/actions'
     import {
         validateSendConfirmation,
-        getAddressFromSubject,
+        getStorageDepositFromOutput,
+        getOutputParameters,
+        getDefaultTransactionOptions,
     } from '@core/wallet/utils'
     import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
-    import { Activity } from '@core/wallet/types'
+    import { NewTokenTransactionDetails, NftActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
     import { ledgerPreparedOutput } from '@core/ledger'
     import { handleError } from '@core/error/handlers/handleError'
-    import {
-        ACCOUNTS_CONTRACT,
-        CONTRACT_FUNCTIONS,
-        getDestinationNetworkFromAddress,
-        TARGET_CONTRACTS,
-        TRANSFER_ALLOWANCE,
-    } from '@core/layer-2'
+    import { ToggleColor } from '@ui/inputs/Toggle.svelte'
+    import { getInitialExpirationDate, rebuildActivity } from './sendFormUtils'
 
-    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let disableBack = false
-    export let storageDeposit: number
-    export let visibleSurplus: number
+    export let isSendAndClosePopup: boolean = false
     export let preparedOutput: Output
+    export let calculatedStorageDeposit: number = 0
 
+    let activeTab: Tab
+    let activity: TransactionActivity | VestingActivity | NftActivity | undefined = undefined
+    let expirationTimePicker: ExpirationTimePicker
+    let initialExpirationDate: TimePeriod
+
+    const transactionDetails = get(newTransactionDetails)
     const {
+        type: transactionType,
         recipient,
-        expirationDate,
-        giftStorageDeposit,
-        surplus,
         layer2Parameters,
+        disableToggleGift,
+        disableChangeExpiration,
     } = get(newTransactionDetails)
 
-    $: console.log('prepared:', preparedOutput)
+    let { surplus, expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
-    let expirationTimePicker: ExpirationTimePicker
+    let storageDeposit = calculatedStorageDeposit
+    let minimumStorageDeposit = 0
+    let visibleSurplus: number | undefined = undefined
 
-    let initialExpirationDate: TimePeriod
-    let activeTab: Tab
+    void updateStorageDeposit()
 
-    $: transactionDetails = get(newTransactionDetails)
-    $: isInternal = recipient.type === 'account'
     $: expirationTimePicker?.setNull(giftStorageDeposit)
-    $: isTransferring = $selectedAccount.isTransferring
 
-    let activity: Activity | undefined = undefined
-    $: activity = {
-        ...transactionDetails,
-        assetId: transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset.id : undefined,
+    $: isBaseTokenTransfer =
+        transactionDetails.type === NewTransactionType.TokenTransfer &&
+        transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
+    $: isInternal = recipient.type === 'account'
+    $: isTransferring = $selectedAccount.isTransferring
+    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
+
+    $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
+
+    $: activity = rebuildActivity(
+        transactionDetails,
+        recipient,
         storageDeposit,
-        subject: recipient,
+        giftStorageDeposit,
+        visibleSurplus,
         isInternal,
-        id: undefined,
-        outputId: undefined,
-        transactionId: undefined,
-        time: undefined,
-        containsValue: true,
-        isAssetHidden: false,
-        asyncData: undefined,
-        giftedStorageDeposit: giftStorageDeposit ? storageDeposit : 0,
-        surplus: visibleSurplus,
-        type: ActivityType.Basic,
-        direction: ActivityDirection.Outgoing,
-        inclusionState: InclusionState.Pending,
-        action: ActivityAction.Send,
-        destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
-        ...(layer2Parameters?.networkAddress && {
-            parsedLayer2Metadata: {
-                ethereumAddress: getAddressFromSubject(recipient),
-                targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
-                contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: layer2Parameters?.gasBudget ?? 0,
-            },
-        }),
+        layer2Parameters
+    )
+
+    async function rebuildTransactionOutput(): Promise<void> {
+        updateNewTransactionDetails({
+            type: transactionType,
+            expirationDate,
+            giftStorageDeposit,
+        })
+
+        try {
+            const transactionDetails = get(newTransactionDetails)
+            const outputParams = await getOutputParameters(transactionDetails)
+            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
+
+            await updateStorageDeposit()
+
+            if (transactionDetails.expirationDate === undefined) {
+                initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+            }
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
+    async function updateStorageDeposit(): Promise<void> {
+        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
+
+        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+
+        if (isBaseTokenTransfer) {
+            const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
+            if (rawAmount >= storageDeposit) {
+                storageDeposit = 0
+            }
+        }
+
+        // Note: we need to adjust the surplus
+        // so we make sure that the surplus is always added on top of the minimum storage deposit
+        if (Number(surplus) > 0) {
+            if (minimumStorageDeposit >= Number(surplus)) {
+                visibleSurplus = surplus = undefined
+            } else {
+                visibleSurplus = Number(surplus) - minimumStorageDeposit
+                // Note: we have to hide it because currently, in the sdk,
+                // the storage deposit return strategy is only looked at
+                // if the provided amount is < the minimum required storage deposit
+                hideGiftToggle = true
+            }
+        }
+    }
+
+    function toggleGiftStorageDeposit(): void {
+        giftStorageDeposit = !giftStorageDeposit
     }
 
     async function sendOutputAndClosePopup(): Promise<void> {
@@ -108,13 +150,12 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isCallbackFromUnlockStronghold: true, calculatedStorageDeposit: storageDeposit })
+            updatePopupProps({ isSendAndClosePopup: true, preparedOutput, calculatedStorageDeposit: storageDeposit })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
         }
     }
-
     function onBackClick(): void {
         closePopup()
         openPopup({
@@ -126,14 +167,6 @@
     function onCancelClick(): void {
         closePopup()
     }
-
-    onMount(async () => {
-        try {
-            await _onMount()
-        } catch (err) {
-            handleError(err)
-        }
-    })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
@@ -150,14 +183,25 @@
             <ActivityInformation {activity} bind:activeTab />
         </div>
         {#if activeTab === Tab.Transaction}
+            {#if !hideGiftToggle}
+                <KeyValueBox keyText={localize('general.giftStorageDeposit')}>
+                    <Toggle
+                        slot="value"
+                        color={ToggleColor.Green}
+                        disabled={disableToggleGift}
+                        active={giftStorageDeposit}
+                        onClick={toggleGiftStorageDeposit}
+                    />
+                </KeyValueBox>
+            {/if}
             {#if initialExpirationDate !== undefined}
                 <KeyValueBox keyText={localize('general.expirationTime')}>
                     <ExpirationTimePicker
                         slot="value"
                         bind:this={expirationTimePicker}
-                        value={expirationDate}
+                        bind:value={expirationDate}
                         initialSelected={initialExpirationDate}
-                        disabled={true}
+                        disabled={disableChangeExpiration || isTransferring}
                     />
                 </KeyValueBox>
             {/if}

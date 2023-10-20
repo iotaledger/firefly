@@ -128,6 +128,7 @@
         [PopupId.RemoveNode]: RemoveNode,
         [PopupId.RemoveProposal]: RemoveProposalPopup,
         [PopupId.Revote]: RevotePopup,
+        // [PopupId.SendConfirmation]: SendConfirmationPopup,
         [PopupId.SendConfirmation]: SendConfirmationPopup2,
         // [PopupId.SendForm]: SendFormPopup,
         [PopupId.SendForm]: SendFormPopup2,
