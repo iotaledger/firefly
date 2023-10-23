@@ -1,10 +1,14 @@
 import { getSelectedAccount, prepareOutput } from '@core/account'
-import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import {
+    getEstimatedGasForTransferFromTransactionDetails,
+    getLayer2MetadataForTransfer,
+    outputHexBytes,
+} from '@core/layer-2/utils'
 import { getCoinType } from '@core/profile'
-import { Converter, IBasicOutput, INftOutput, convertDateToUnixTimestamp, serializeOutput } from '@core/utils'
+import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, OutputParams } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails } from '../stores'
@@ -87,8 +91,8 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         selectedAccount.index,
         outputParams,
         getDefaultTransactionOptions()
-    )) as unknown as IBasicOutput | INftOutput
-    const serializedOutput = serializeOutput(outputForEstimate)
+    )) as unknown as BasicOutput | NftOutput
+    const serializedOutput = await outputHexBytes(outputForEstimate)
     const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
 
     // Now that we have the gasFeeCharged, update the amount & the tx details
