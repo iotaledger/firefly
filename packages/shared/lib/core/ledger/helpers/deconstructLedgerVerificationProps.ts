@@ -1,7 +1,12 @@
 import { get } from 'svelte/store'
 
 import { PopupProps } from '@auxiliary/popup'
-import { formatTokenAmountBestMatch, newTransactionDetails, NewTransactionType } from '@core/wallet'
+import {
+    formatTokenAmountDefault,
+    getUnitFromTokenMetadata,
+    newTransactionDetails,
+    NewTransactionType,
+} from '@core/wallet'
 
 export function deconstructLedgerVerificationProps(): PopupProps {
     const transactionDetails = get(newTransactionDetails)
@@ -15,10 +20,16 @@ export function deconstructLedgerVerificationProps(): PopupProps {
             : transactionDetails?.recipient?.address
     let toAmount = '0'
     if (transactionDetails?.type === NewTransactionType.TokenTransfer) {
-        toAmount = `${formatTokenAmountBestMatch(
-            Number(transactionDetails?.rawAmount),
-            transactionDetails?.asset?.metadata
-        )}`
+        const tokenMetadata = transactionDetails?.asset?.metadata
+        if (tokenMetadata) {
+            const tokenUnit = getUnitFromTokenMetadata(tokenMetadata)
+            const tokenAmount = formatTokenAmountDefault(
+                Number(transactionDetails?.rawAmount),
+                tokenMetadata,
+                tokenUnit
+            )
+            toAmount = `${tokenAmount} ${tokenUnit}`
+        }
     }
 
     return {
