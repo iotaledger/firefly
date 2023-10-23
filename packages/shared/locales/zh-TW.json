@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "建立硬體設定檔",
-                        "description": "需要Ledger Nano S或是Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "使用Sronghold備份",
                     "importFileDescription": "匯入你的 Stronghold 備份檔",
                     "importLedger": "使用冷錢包",
-                    "importLedgerDescription": "還原自您的Ledger Nano S 或 X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "領取 Shimmer 質押獎勵",
@@ -924,7 +924,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
