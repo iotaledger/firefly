@@ -21,9 +21,13 @@ export const ILLUSTRATIONS = {
         lightmode: 'onboarding/ledger-connected-2-desktop.svg',
         darkmode: 'onboarding/ledger-connected-2-desktop.svg',
     },
-    [IllustrationEnum.LedgerSearchAppsDesktop]: {
-        lightmode: 'onboarding/ledger-search-apps-desktop.svg',
-        darkmode: 'onboarding/ledger-search-apps-desktop.svg',
+    [IllustrationEnum.LedgerSearchIotaAppsDesktop]: {
+        lightmode: 'onboarding/ledger-search-iota-apps-desktop.svg',
+        darkmode: 'onboarding/ledger-search-iota-apps-desktop.svg',
+    },
+    [IllustrationEnum.LedgerSearchShimmerAppsDesktop]: {
+        lightmode: 'onboarding/ledger-search-shimmer-apps-desktop.svg',
+        darkmode: 'onboarding/ledger-search-shimmer-apps-desktop.svg',
     },
     [IllustrationEnum.LedgerInstallAppsDesktop]: {
         lightmode: 'onboarding/ledger-install-apps-desktop.svg',
