@@ -1,7 +1,7 @@
 import { Converter } from '@iota/util.js'
-import { parseLayer2MetadataForTransferV2 } from '../utils/parseLayer2MetadataForTransferV2'
+import { parseLayer2MetadataForTransfer } from '../utils/parseLayer2MetadataForTransfer'
 
-describe('Function: parseLayer2MetadataForTransferV2.ts', () => {
+describe('Function: parseLayer2MetadataForTransfer.ts', () => {
     it('should correctly parse metadata with base token', () => {
         const metadata =
             '0x00025e4b3ca1e3f423914e010161350342f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f8080d293ad03'
@@ -17,7 +17,7 @@ describe('Function: parseLayer2MetadataForTransferV2.ts', () => {
             nativeTokens: [],
             nfts: [],
         }
-        const parsedMetadata = parseLayer2MetadataForTransferV2(metadataByteArray)
+        const parsedMetadata = parseLayer2MetadataForTransfer(metadataByteArray)
         expect(parsedMetadata).toEqual(expected)
     })
 
@@ -41,7 +41,7 @@ describe('Function: parseLayer2MetadataForTransferV2.ts', () => {
             ],
             nfts: [],
         }
-        const parsedMetadata = parseLayer2MetadataForTransferV2(metadataByteArray)
+        const parsedMetadata = parseLayer2MetadataForTransfer(metadataByteArray)
         expect(parsedMetadata).toEqual(expected)
     })
 
@@ -60,7 +60,7 @@ describe('Function: parseLayer2MetadataForTransferV2.ts', () => {
             nativeTokens: [],
             nfts: ['0xbf5b7cd4e8ac582e246c25b6a89b4ab4ef0646d3291aa03d9a5313154b714a06'],
         }
-        const parsedMetadata = parseLayer2MetadataForTransferV2(metadataByteArray)
+        const parsedMetadata = parseLayer2MetadataForTransfer(metadataByteArray)
         expect(parsedMetadata).toEqual(expected)
     })
 })
