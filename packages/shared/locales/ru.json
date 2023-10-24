@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Создать аппаратный профиль",
-                        "description": "Требуется Ledger Nano S или Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Использовать резервную копию Stronghold",
                     "importFileDescription": "Импортировать файл резервной копии Stronghold",
                     "importLedger": "Используйте устройство Ledger",
-                    "importLedgerDescription": "Восстановление с устройства Ledger Nano S или X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Запросить вознаграждение за ставки в Shimmer",
@@ -924,7 +924,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",

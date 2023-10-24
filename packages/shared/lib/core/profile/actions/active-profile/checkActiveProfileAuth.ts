@@ -5,11 +5,14 @@ import { get } from 'svelte/store'
 
 export function checkActiveProfileAuth(
     callback: () => Promise<unknown> = async () => {},
-    reopenPopup?: { stronghold?: boolean; ledger?: boolean }
+    reopenPopup?: { stronghold?: boolean; ledger?: boolean },
+    cancelledCallback?: () => unknown
 ): Promise<unknown> {
     if (get(isSoftwareProfile)) {
-        return checkOrUnlockStronghold(callback, reopenPopup?.stronghold)
+        return checkOrUnlockStronghold(callback, reopenPopup?.stronghold, cancelledCallback)
     } else if (get(isActiveLedgerProfile)) {
-        return checkOrConnectLedger(callback, reopenPopup?.ledger)
+        return checkOrConnectLedger(callback, reopenPopup?.ledger, cancelledCallback)
+    } else {
+        return Promise.resolve()
     }
 }
