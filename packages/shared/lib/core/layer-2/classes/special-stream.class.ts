@@ -22,24 +22,27 @@ export class SpecialStream extends WriteStream {
 
 export class ReadSpecialStream extends ReadStream {
     readUInt64SpecialEncoding(name: string): number | bigint {
-        const readValue = this.readBytes(name, 1)
-        const [value] = size64Decode(readValue)
+        const [value] = size64Decode(() => this.readUInt8(name))
         return value
     }
 
     readUInt32SpecialEncoding(name: string): number | bigint {
-        const readValue = this.readBytes(name, 1)
-        const [value] = size64Decode(readValue)
+        const [value] = size64Decode(() => this.readUInt8(name))
         return value
     }
     readUInt16SpecialEncoding(name: string): number | bigint {
-        const readValue = this.readBytes(name, 1)
-        const [value] = size64Decode(readValue)
+        const [value] = size64Decode(() => this.readUInt8(name))
         return value
     }
+
     readUIntNSpecialEncoding(name: string, length: number): number | bigint {
         const readValue = this.readBytes(name, length)
-        const [value] = size64Decode(readValue)
+        let index = 0
+        const [value] = size64Decode(() => {
+            const val = readValue[index]
+            index += 1
+            return val
+        })
         return value
     }
 }
@@ -133,19 +136,34 @@ function size64Encode(n: bigint): Buffer {
     }
 }
 
-function size64Decode(buffer: Uint8Array): [bigint, Error] | [number, null] {
-    let value = BigInt(0)
-    let shift = BigInt(0)
-    let index = 0
+// Adapted from WASP golang implementation https://github.com/iotaledger/wasp/blob/7f880a7983d24d0dcd225e994d67b29741b318bc/packages/util/rwutil/convert.go#L76
+function size64Decode(readByte: () => number): [number, null | Error] {
+    let byte = readByte()
 
-    while (index < buffer.length) {
-        const byte = buffer[index++]
-        if (byte < 0x80) {
-            return [Number(value | (BigInt(byte) << shift)), null]
-        }
-        value |= BigInt(byte & 0x7f) << shift
-        shift += BigInt(7)
+    if (byte < 0x80) {
+        return [byte, null]
     }
 
-    return [value, new Error('Unexpected end of data')]
+    let value = byte & 0x7f
+
+    for (let shift = 7; shift < 63; shift += 7) {
+        byte = readByte()
+        if (!byte) {
+            return [0, null]
+        }
+        if (byte < 0x80) {
+            return [Number(value | (byte << shift)), null]
+        }
+        value |= (byte & 0x7f) << shift
+    }
+
+    byte = readByte()
+    if (!byte) {
+        return [0, null]
+    }
+    if (byte > 0x01) {
+        return [0, new Error('size64 overflow')]
+    }
+
+    return [value | (byte << 63), new Error('Unexpected end of data')]
 }
