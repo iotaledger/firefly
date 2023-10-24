@@ -68,13 +68,11 @@
     ]
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
     $: canCollect =
-        $selectedAccountVestingUnclaimedFunds === 0 ||
-        hasTransactionInProgress ||
-        (minRequiredStorageDeposit !== null &&
-            $selectedAccount?.balances?.baseCoin?.available < minRequiredStorageDeposit) ||
-        hasOutputsToConsolidate === false
-            ? false
-            : true
+        $selectedAccountVestingUnclaimedFunds > 0 &&
+        !hasTransactionInProgress &&
+        minRequiredStorageDeposit !== null &&
+        $selectedAccount?.balances?.baseCoin?.available > minRequiredStorageDeposit &&
+        hasOutputsToConsolidate
 
     onMount(() => {
         getMinRequiredStorageDeposit()
