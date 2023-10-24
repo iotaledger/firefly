@@ -40,7 +40,7 @@
     const DEFAULT_EMPTY_VALUE_STRING = '----'
     let modal: Modal
     let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
-    let minRequiredStorageDeposit: number
+    let minRequiredStorageDeposit: number | null
     let hasOutputsToConsolidate = false
 
     $: hasTransactionInProgress =
@@ -67,11 +67,19 @@
         },
     ]
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
+    $: canCollect =
+        $selectedAccountVestingUnclaimedFunds === 0 ||
+        hasTransactionInProgress ||
+        (minRequiredStorageDeposit !== null &&
+            $selectedAccount?.balances?.baseCoin?.available < minRequiredStorageDeposit) ||
+        hasOutputsToConsolidate === false
+            ? false
+            : true
 
     onMount(() => {
         getMinRequiredStorageDeposit()
-        areOutputsReadyForConsolidation()
     })
+    $: areOutputsReadyForConsolidation()
 
     function areOutputsReadyForConsolidation(): void {
         $selectedAccount
@@ -83,7 +91,7 @@
     function getMinRequiredStorageDeposit() {
         getRequiredStorageDepositForMinimalBasicOutput()
             .then((deposit) => (minRequiredStorageDeposit = deposit))
-            .catch(() => (minRequiredStorageDeposit = 0))
+            .catch(() => (minRequiredStorageDeposit = null))
     }
 
     function getFiatAmount(amount: number): string {
@@ -181,10 +189,7 @@
                                 <Button
                                     onClick={onCollectClick}
                                     classes="w-full"
-                                    disabled={$selectedAccountVestingUnclaimedFunds === 0 ||
-                                        hasTransactionInProgress ||
-                                        $selectedAccount?.balances?.baseCoin?.available < minRequiredStorageDeposit ||
-                                        hasOutputsToConsolidate === false}
+                                    disabled={!canCollect}
                                     isBusy={hasTransactionInProgress}
                                 >
                                     {localize('views.vesting.collect')}
