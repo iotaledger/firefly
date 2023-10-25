@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { Error } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
@@ -50,12 +51,6 @@
 
     let iscpChainAddress = layer2Parameters?.networkAddress
 
-    if (Number($selectedAccount.balances.baseCoin.available) === 0) {
-        giftStorageDeposit = true
-        disableChangeExpiration = true
-        disableToggleGift = true
-    }
-
     $: nftId,
         recipient,
         tag,
@@ -77,6 +72,14 @@
     $: isLayer2Transfer = !!iscpChainAddress
     $: showLayer2 = features?.network?.layer2?.enabled && $activeProfile.isDeveloperProfile
     $: nftId, !showLayer2 && networkInput?.reset()
+
+    onMount(() => {
+        if (Number($selectedAccount.balances.baseCoin.available) === 0) {
+            giftStorageDeposit = true
+            disableChangeExpiration = true
+            disableToggleGift = true
+        }
+    })
 
     async function buildPreparedOutput(): Promise<void> {
         try {

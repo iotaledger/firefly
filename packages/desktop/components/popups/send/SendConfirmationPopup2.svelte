@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import {
         Button,
@@ -60,8 +61,6 @@
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
-    void updateStorageDeposit()
-
     $: expirationTimePicker?.setNull(giftStorageDeposit)
 
     $: isBaseTokenTransfer =
@@ -82,6 +81,10 @@
         isInternal,
         layer2Parameters
     )
+
+    onMount(() => {
+        void updateStorageDeposit()
+    })
 
     async function rebuildTransactionOutput(): Promise<void> {
         updateNewTransactionDetails({
