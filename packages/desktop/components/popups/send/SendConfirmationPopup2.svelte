@@ -1,20 +1,18 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { FontWeight, Tab, TextHintVariant, TextType } from 'shared/components/enums'
     import {
+        ActivityInformation,
+        BasicActivityDetails,
         Button,
         ExpirationTimePicker,
         KeyValueBox,
+        NftActivityDetails,
         Text,
         TextHint,
-        FontWeight,
-        TextType,
-        NftActivityDetails,
-        BasicActivityDetails,
-        ActivityInformation,
         Toggle,
-    } from 'shared/components'
-    import { Tab, TextHintVariant } from 'shared/components/enums'
+    } from '@ui'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
@@ -34,7 +32,7 @@
     import { ledgerPreparedOutput } from '@core/ledger'
     import { handleError } from '@core/error/handlers/handleError'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
-    import { getInitialExpirationDate, rebuildActivity } from './sendFormUtils'
+    import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
 
     export let disableBack = false
     export let isSendAndClosePopup: boolean = false

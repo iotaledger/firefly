@@ -1,7 +1,7 @@
 <script lang="ts">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { Error } from '@ui'
+    import { AssetAmountInput, Button, Error, NetworkInput, OptionalInput, RecipientInput } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { prepareOutput, selectedAccount } from '@core/account'
     import { Output } from '@iota/sdk/out/types'
@@ -14,12 +14,11 @@
         setNewTransactionDetails,
         TokenStandard,
     } from '@core/wallet'
-    import { AssetAmountInput, Button, NetworkInput, OptionalInput, RecipientInput } from 'shared/components'
     import features from '@features/features'
     import { activeProfile } from '@core/profile'
     import { handleError } from '@core/error/handlers'
     import { MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
-    import { OptionalInputType } from '../send'
+    import { OptionalInputType } from '@core/wallet/utils/send/sendUtils'
 
     export let validateInputs: (
         inputValidations?: any,

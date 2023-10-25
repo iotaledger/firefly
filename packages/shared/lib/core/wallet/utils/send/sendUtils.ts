@@ -1,27 +1,16 @@
-import {
-    TransactionActivity,
-    NftActivity,
-    NewTransactionDetails,
-    Subject,
-    VestingActivity,
-} from '../../../../shared/lib/core/wallet'
-import {
-    ActivityDirection,
-    ActivityType,
-    InclusionState,
-    ActivityAction,
-} from '../../../../shared/lib/core/wallet/enums'
-import { NewTransactionType } from '../../../../shared/lib/core/wallet/stores'
+import { NewTransactionDetails, NftActivity, Subject, TransactionActivity, VestingActivity } from '@core/wallet/types'
+import { NewTransactionType } from '@core/wallet/stores'
+import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
+import { TimePeriod } from '@core/utils'
+import { getAddressFromSubject } from '../getAddressFromSubject'
 import {
     ACCOUNTS_CONTRACT,
     CONTRACT_FUNCTIONS,
-    getDestinationNetworkFromAddress,
     ILayer2Parameters,
     TARGET_CONTRACTS,
     TRANSFER_ALLOWANCE,
-} from '../../../../shared/lib/core/layer-2'
-import { getAddressFromSubject } from '../../../../shared/lib/core/wallet/utils'
-import { TimePeriod } from '../../../../shared/lib/core/utils'
+    getDestinationNetworkFromAddress,
+} from '@core/layer-2'
 
 export enum SendFormTab {
     SendToken = 'general.sendToken',

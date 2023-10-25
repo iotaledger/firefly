@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Error } from '@ui'
+    import { Button, Error, NetworkInput, NftInput, OptionalInput, RecipientInput } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account/stores'
@@ -14,13 +14,12 @@
         NewTransactionType,
         setNewTransactionDetails,
     } from '@core/wallet'
-    import { Button, NetworkInput, NftInput, OptionalInput, RecipientInput } from 'shared/components'
     import features from '@features/features'
     import { activeProfile } from '@core/profile'
     import { prepareOutput } from '@core/account'
     import { handleError } from '@core/error/handlers'
-    import { OptionalInputType } from '../send'
     import { MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
+    import { OptionalInputType } from '@core/wallet/utils/send/sendUtils'
 
     export let validateInputs: (
         inputValidations?: any,

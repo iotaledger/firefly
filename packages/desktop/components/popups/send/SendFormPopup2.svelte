@@ -4,10 +4,10 @@
     import { isReservedTagKeyword, InclusionState, selectedAccountActivities } from '@core/wallet'
     import { getByteLengthOfString } from '@core/utils'
     import { ownedNfts } from '@core/nfts'
-    import { FontWeight, Tabs, Text, TextType } from 'shared/components'
     import SendTokenForm from './SendTokenForm.svelte'
     import SendNftForm from './SendNftForm.svelte'
-    import { SendFormTab, OptionalInputType } from './sendFormUtils'
+    import { OptionalInputType, SendFormTab } from '@core/wallet/utils/send/sendUtils'
+    import { FontWeight, Tabs, Text, TextType } from '@ui'
 
     const tabs: SendFormTab[] = [SendFormTab.SendToken, SendFormTab.SendNft]
     let activeTab: SendFormTab = SendFormTab.SendToken
