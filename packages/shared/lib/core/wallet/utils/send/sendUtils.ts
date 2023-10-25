@@ -1,4 +1,11 @@
-import { NewTransactionDetails, NftActivity, Subject, TransactionActivity, VestingActivity } from '@core/wallet/types'
+import {
+    Activity,
+    NewTransactionDetails,
+    NftActivity,
+    Subject,
+    TransactionActivity,
+    VestingActivity,
+} from '@core/wallet/types'
 import { NewTransactionType } from '@core/wallet/stores'
 import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
 import { TimePeriod } from '@core/utils'
@@ -44,15 +51,16 @@ export function rebuildActivity(
     visibleSurplus: number,
     isInternal: boolean,
     layer2Parameters: ILayer2Parameters
-): TransactionActivity | VestingActivity | NftActivity {
+): Partial<Activity> {
     return {
-        ...transactionDetails,
+        ...(transactionDetails as unknown as TransactionActivity | VestingActivity | NftActivity),
         id: undefined,
         outputId: undefined,
         transactionId: undefined,
         time: undefined,
         asyncData: undefined,
-        assetId: transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails.asset.id : undefined,
+        assetId:
+            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails?.asset?.id : undefined,
         storageDeposit,
         subject: recipient,
         isInternal,
@@ -70,7 +78,7 @@ export function rebuildActivity(
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: layer2Parameters?.gasBudget ?? 0,
+                gasBudget: (layer2Parameters?.gasBudget ?? 0).toString(),
             },
         }),
     }
