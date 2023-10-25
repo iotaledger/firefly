@@ -37,7 +37,6 @@
     export let disableBack = false
     export let isSendAndClosePopup: boolean = false
     export let preparedOutput: Output
-    export let calculatedStorageDeposit: number = 0
 
     const transactionDetails = get(newTransactionDetails)
     const {
@@ -55,7 +54,7 @@
     let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: TimePeriod
 
-    let storageDeposit = calculatedStorageDeposit
+    let storageDeposit: number = 0
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
@@ -151,7 +150,7 @@
                 ledgerPreparedOutput.set(preparedOutput)
             }
 
-            updatePopupProps({ isSendAndClosePopup: true, preparedOutput, calculatedStorageDeposit: storageDeposit })
+            updatePopupProps({ isSendAndClosePopup: true, preparedOutput })
             await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
