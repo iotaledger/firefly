@@ -50,7 +50,7 @@
     let { surplus, expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
     let activeTab: Tab
-    let activity: TransactionActivity | VestingActivity | NftActivity | undefined = undefined
+    let activity: Partial<TransactionActivity | VestingActivity | NftActivity> | undefined = undefined
     let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: TimePeriod
 
