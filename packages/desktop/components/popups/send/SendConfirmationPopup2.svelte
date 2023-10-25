@@ -34,8 +34,9 @@
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
     import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
 
-    export let disableBack = false
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let isSendAndClosePopup: boolean = false
+    export let disableBack = false
     export let preparedOutput: Output
 
     const transactionDetails = get(newTransactionDetails)
@@ -84,6 +85,12 @@
 
         if (transactionDetails.expirationDate === undefined) {
             initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+        }
+
+        try {
+            await _onMount()
+        } catch (err) {
+            handleError(err)
         }
     })
 
@@ -151,7 +158,7 @@
             }
 
             updatePopupProps({ isSendAndClosePopup: true, preparedOutput })
-            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: false, ledger: false })
+            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
         }
