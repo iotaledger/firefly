@@ -40,11 +40,6 @@
     export let preparedOutput: Output
     export let calculatedStorageDeposit: number = 0
 
-    let activeTab: Tab
-    let activity: TransactionActivity | VestingActivity | NftActivity | undefined = undefined
-    let expirationTimePicker: ExpirationTimePicker
-    let initialExpirationDate: TimePeriod
-
     const transactionDetails = get(newTransactionDetails)
     const {
         type: transactionType,
@@ -55,6 +50,11 @@
     } = get(newTransactionDetails)
 
     let { surplus, expirationDate, giftStorageDeposit } = get(newTransactionDetails)
+
+    let activeTab: Tab
+    let activity: TransactionActivity | VestingActivity | NftActivity | undefined = undefined
+    let expirationTimePicker: ExpirationTimePicker
+    let initialExpirationDate: TimePeriod
 
     let storageDeposit = calculatedStorageDeposit
     let minimumStorageDeposit = 0
@@ -156,6 +156,7 @@
             handleError(err)
         }
     }
+
     function onBackClick(): void {
         closePopup()
         openPopup({

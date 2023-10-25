@@ -33,19 +33,18 @@
     ) => Promise<boolean> = () => Promise.resolve(true)
     export let isTransferring: boolean = false
 
+    const transactionDetails = get(newTransactionDetails)
+    const { layer2Parameters, disableAssetSelection } = transactionDetails as NewTokenTransactionDetails
+
+    let { rawAmount, asset, unit, recipient, tag, metadata } = transactionDetails as NewTokenTransactionDetails
+    let iscpChainAddress = layer2Parameters?.networkAddress
     let preparedOutput: Output
     let isPreparingOutput = false
-
-    // Inputs
     let assetAmountInput: AssetAmountInput
     let networkInput: NetworkInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
-
-    const transactionDetails = get(newTransactionDetails)
-    const { layer2Parameters, disableAssetSelection } = transactionDetails as NewTokenTransactionDetails
-    let { rawAmount, asset, unit, recipient, tag, metadata } = transactionDetails as NewTokenTransactionDetails
 
     $: rawAmount,
         asset,
@@ -68,8 +67,6 @@
         })
 
     $: isBaseTokenTransfer = asset?.metadata?.standard === TokenStandard.BaseToken
-
-    let iscpChainAddress = layer2Parameters?.networkAddress
     $: isLayer2Transfer = !!iscpChainAddress
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseTokenTransfer)
     $: asset, !showLayer2 && networkInput?.reset()

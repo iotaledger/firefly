@@ -33,20 +33,22 @@
     ) => Promise<boolean> = () => Promise.resolve(true)
     export let isTransferring: boolean = false
 
+    const transactionDetails = get(newTransactionDetails)
+    const { expirationDate, layer2Parameters, disableAssetSelection } = transactionDetails as NewNftTransactionDetails
+
+    let { nftId, recipient, tag, metadata, giftStorageDeposit, disableChangeExpiration, disableToggleGift } =
+        transactionDetails as NewNftTransactionDetails
+
     let preparedOutput: Output
     let isPreparingOutput = false
 
-    // Inputs
     let nftInput: NftInput
     let networkInput: NetworkInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
 
-    const transactionDetails = get(newTransactionDetails)
-    const { expirationDate, layer2Parameters, disableAssetSelection } = transactionDetails as NewNftTransactionDetails
-    let { nftId, recipient, tag, metadata, giftStorageDeposit, disableChangeExpiration, disableToggleGift } =
-        transactionDetails as NewNftTransactionDetails
+    let iscpChainAddress = layer2Parameters?.networkAddress
 
     if (Number($selectedAccount.balances.baseCoin.available) === 0) {
         giftStorageDeposit = true
@@ -72,7 +74,6 @@
             disableAssetSelection,
         })
 
-    let iscpChainAddress = layer2Parameters?.networkAddress
     $: isLayer2Transfer = !!iscpChainAddress
     $: showLayer2 = features?.network?.layer2?.enabled && $activeProfile.isDeveloperProfile
     $: nftId, !showLayer2 && networkInput?.reset()
