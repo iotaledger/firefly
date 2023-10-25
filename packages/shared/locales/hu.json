@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Hardverprofil létrehozása",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus vagy Nano X eszköz szükséges"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Stonghold biztonsági mentés használata",
                     "importFileDescription": "Importálja a Stronghold biztonsági mentés fájlját",
                     "importLedger": "Ledger eszköz használata",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Profil helyreállítása Ledger Nano S, Nano S Plus vagy X eszközről"
                 },
                 "setupClaimed": {
                     "title": "Shimmer jutalom igénylése",
@@ -925,7 +925,7 @@
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Keresés kizárólag a jelenlegi tárcában"
         },
         "balanceOverview": {
             "title": "Balance overview",

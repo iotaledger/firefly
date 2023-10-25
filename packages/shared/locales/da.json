@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Opret en hardwareprofil",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus eller Nano X kræves"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Benyt Stronghold-sikkerhedskopi",
                     "importFileDescription": "Importér Stronghold-sikkerhedskopien",
                     "importLedger": "Benyt Ledger-enhed",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Gendan fra Ledger Nano S-, Nano S Plus- eller X-enhed"
                 },
                 "setupClaimed": {
                     "title": "Gør krav på Shimmer-staking belønninger",
@@ -925,7 +925,7 @@
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Søg kun i den aktuelle wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
