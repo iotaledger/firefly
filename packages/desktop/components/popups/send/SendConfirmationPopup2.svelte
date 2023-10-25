@@ -79,8 +79,12 @@
         layer2Parameters
     )
 
-    onMount(() => {
-        void updateStorageDeposit()
+    onMount(async () => {
+        await updateStorageDeposit()
+
+        if (transactionDetails.expirationDate === undefined) {
+            initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+        }
     })
 
     async function rebuildTransactionOutput(): Promise<void> {
@@ -96,10 +100,6 @@
             preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
 
             await updateStorageDeposit()
-
-            if (transactionDetails.expirationDate === undefined) {
-                initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
-            }
         } catch (err) {
             handleError(err)
         }
