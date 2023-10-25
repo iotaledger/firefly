@@ -36,9 +36,8 @@
     const transactionDetails = get(newTransactionDetails)
     const { expirationDate, layer2Parameters, disableAssetSelection } = transactionDetails as NewNftTransactionDetails
 
-    let {
-        nftId, recipient, tag, metadata, giftStorageDeposit, disableChangeExpiration, disableToggleGift
-    } = transactionDetails as NewNftTransactionDetails
+    let { nftId, recipient, tag, metadata, giftStorageDeposit, disableChangeExpiration, disableToggleGift } =
+        transactionDetails as NewNftTransactionDetails
 
     let preparedOutput: Output
     let isPreparingOutput = false
