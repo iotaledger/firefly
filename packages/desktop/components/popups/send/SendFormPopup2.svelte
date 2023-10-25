@@ -1,7 +1,14 @@
 <script lang="ts">
+    import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
     import { selectedAccount } from '@core/account'
-    import { isReservedTagKeyword, InclusionState, selectedAccountActivities } from '@core/wallet'
+    import {
+        isReservedTagKeyword,
+        InclusionState,
+        selectedAccountActivities,
+        newTransactionDetails,
+        NewTransactionType,
+    } from '@core/wallet'
     import { getByteLengthOfString } from '@core/utils'
     import { ownedNfts } from '@core/nfts'
     import SendTokenForm from './SendTokenForm.svelte'
@@ -10,7 +17,10 @@
     import { FontWeight, Tabs, Text, TextType } from '@ui'
 
     const tabs: SendFormTab[] = [SendFormTab.SendToken, SendFormTab.SendNft]
-    let activeTab: SendFormTab = SendFormTab.SendToken
+    const { type: transactionType } = get(newTransactionDetails)
+    let activeTab: SendFormTab =
+        transactionType === NewTransactionType.NftTransfer ? SendFormTab.SendNft : SendFormTab.SendToken
+
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isTransferInProgress =
         $selectedAccountActivities.some((_activity) => _activity.inclusionState === InclusionState.Pending) ||
