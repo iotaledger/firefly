@@ -151,7 +151,7 @@
             }
 
             updatePopupProps({ isSendAndClosePopup: true, preparedOutput })
-            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: true, ledger: false })
+            await checkActiveProfileAuth(sendOutputAndClosePopup, { stronghold: false, ledger: false })
         } catch (err) {
             handleError(err)
         }
