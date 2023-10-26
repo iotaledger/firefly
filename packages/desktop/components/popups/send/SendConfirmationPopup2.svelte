@@ -82,10 +82,7 @@
 
     onMount(async () => {
         await updateStorageDeposit()
-
-        if (transactionDetails.expirationDate === undefined) {
-            initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
-        }
+        initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
 
         try {
             await _onMount()
