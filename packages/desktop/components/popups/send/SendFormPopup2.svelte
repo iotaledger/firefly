@@ -17,7 +17,7 @@
     import { FontWeight, Tabs, Text, TextType } from '@ui'
 
     const tabs: SendFormTab[] = [SendFormTab.SendToken, SendFormTab.SendNft]
-    const { type: transactionType } = get(newTransactionDetails)
+    const { type: transactionType, disableAssetSelection } = get(newTransactionDetails)
     let activeTab: SendFormTab =
         transactionType === NewTransactionType.NftTransfer ? SendFormTab.SendNft : SendFormTab.SendToken
 
@@ -86,7 +86,7 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.transaction.title')}
     </Text>
-    {#if hasSpendableNfts}
+    {#if hasSpendableNfts && !disableAssetSelection}
         <Tabs bind:activeTab {tabs} />
     {/if}
     {#if activeTab === SendFormTab.SendToken}
