@@ -43,10 +43,10 @@
     let minRequiredStorageDeposit: number | null
     let hasOutputsToConsolidate = false
 
+    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
     $: hasTransactionInProgress =
         $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
-
-    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+    $: $selectedAccount, areOutputsReadyForConsolidation()
     $: vestingOverview = [
         {
             title: localize('views.vesting.overview.unlocked'),
@@ -77,7 +77,6 @@
     onMount(() => {
         getMinRequiredStorageDeposit()
     })
-    $: areOutputsReadyForConsolidation()
 
     function areOutputsReadyForConsolidation(): void {
         $selectedAccount
