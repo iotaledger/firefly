@@ -4,11 +4,17 @@ import { isLedgerProfile } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
 import { IBaseToken } from '@core/wallet/interfaces'
+import { IPersistedNetwork } from '@core/network'
 
 export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
 
 export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>
     isLedgerProfile($onboardingProfile?.type)
+)
+
+export const onboardingProfileNetwork: Readable<IPersistedNetwork | undefined> = derived(
+    onboardingProfile,
+    ($onboardingProfile) => $onboardingProfile?.network
 )
 
 export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): void {

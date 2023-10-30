@@ -1,4 +1,5 @@
 import { isParticipationOutput } from '@contexts/governance/utils'
+import { ReadSpecialStream } from '@core/layer-2'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
@@ -19,9 +20,10 @@ export function getMetadataFromOutput(output: Output): string | undefined {
         if (data) {
             const isVotingOutput = isParticipationOutput(output)
             const metadataBytes = Converter.hexToBytes(data)
-            const startValue = Number(data.substring(0, 10))
+            const readStream = new ReadSpecialStream(metadataBytes)
+            const startValue = readStream.readUInt8('startValue')
 
-            // For smart contract calls the first 32 bits of the metadata
+            // For smart contract calls the first 8 bits of the metadata
             // correspond to 0 if an an end-user initiates the transaction
             // instead of a smart contract. A stop voting output could
             // also start with a 0 metadata, so we check that as well.

@@ -12,9 +12,10 @@ import { isDeepLinkRequestActive } from '../stores'
 import { handleDeepLinkGovernanceContext } from './governance/handleDeepLinkGovernanceContext'
 import { handleDeepLinkWalletContext } from './wallet/handleDeepLinkWalletContext'
 import { handleError } from '@core/error/handlers'
+import { convertChrysalisDeepLinkToStardust } from './chrysalisDeepLink'
 
 /**
- * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "firefly://".
+ * Parses an IOTA deep link, i.e. a URL that begins with the app protocol i.e "iota://".
  * @method parseDeepLinkRequest
  * @param {string} input The URL that was opened by the user.
  * @returns {void}
@@ -54,6 +55,13 @@ export function handleDeepLink(input: string): void {
 }
 
 function handleDeepLinkForHostname(url: URL): void {
+    // Convert to a stardust deeplink if it's following the crysalis schema
+    try {
+        url = convertChrysalisDeepLinkToStardust(url, process.env.APP_PROTOCOL)
+    } catch (_) {
+        // We assume the URL is actually just not following chrysalis schema
+    }
+
     switch (url.hostname) {
         case DeepLinkContext.Wallet:
             get(dashboardRouter).goTo(DashboardRoute.Wallet)

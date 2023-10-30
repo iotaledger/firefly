@@ -21,5 +21,6 @@ export interface IPersistedProfile {
     clientOptions: ClientOptions
     forceAssetRefresh: boolean
     strongholdVersion?: StrongholdVersion
+    needsChrysalisToStardustDbMigration?: boolean
     pfp?: INft
 }

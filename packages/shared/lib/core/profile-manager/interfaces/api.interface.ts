@@ -1,5 +1,5 @@
 import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/sdk/out/types'
-import { AliasId, Client, FoundryId, NftId } from '@iota/sdk'
+import { AliasId, Client, FoundryId, HexEncodedString, NftId, Output } from '@iota/sdk'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -23,6 +23,7 @@ export interface IApi {
         newPath: string,
         newPassword: string
     ): Promise<void>
+    migrateDbChrysalisToStardust(path: string, pinCode: string): Promise<Record<string, unknown>>
     // Mapped from sdk#Utils
     generateMnemonic(): Promise<string>
     verifyMnemonic(mnemonic: string): Promise<void>
@@ -35,4 +36,5 @@ export interface IApi {
     aliasIdToBech32(aliasId: string, bech32Hrp: string): string
     nftIdToBech32(nftId: string, bech32Hrp: string): string
     computeOutputId(id: TransactionId, index: number): Promise<OutputId>
+    outputHexBytes(output: Output): Promise<HexEncodedString>
 }

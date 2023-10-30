@@ -50,6 +50,7 @@ export const DEFAULT_ACTIVITY_FILTER: ActivityFilter = {
             ActivityType.Governance,
             ActivityType.Foundry,
             ActivityType.Consolidation,
+            ActivityType.Vesting,
         ],
     },
     direction: {
