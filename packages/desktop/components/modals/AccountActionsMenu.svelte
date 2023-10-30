@@ -28,6 +28,11 @@
         modal?.close()
     }
 
+    function onViewAddressHistoryClick(): void {
+        openPopup({ id: PopupId.AddressHistory })
+        modal?.close()
+    }
+
     function onVerifyAddressClick(): void {
         const ADDRESS_INDEX = 0
         checkOrConnectLedger(() => {
@@ -66,6 +71,8 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
+        <!-- TODO Finalize Icon and string -->
+        <MenuItem icon={Icon.Info} title={localize('View Address history')} onClick={onViewAddressHistoryClick} />
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         {#if $isActiveLedgerProfile}
             <MenuItem
