@@ -1,1 +1,1 @@
-export const FAQ_URL = 'https://wiki.iota.org/use/wallets/firefly/faq-and-troubleshooting'
+export const FAQ_URL = 'https://firefly.iota.org/faq/'
