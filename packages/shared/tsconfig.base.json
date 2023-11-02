@@ -7,6 +7,10 @@
         "moduleResolution": "node",
         "outDir": "out",
         "paths": {
+            "shared": ["./"],
+            "@ui": ["./components"],
+            "shared/*": ["./*"],
+            "@ui/*": ["./components/*"],
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
