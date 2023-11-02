@@ -3,6 +3,7 @@ export enum PopupId {
     ActivityDetails = 'activityDetails',
     AddNode = 'addNode',
     AddProposal = 'addProposal',
+    AddressHistory = 'addressHistory',
     AliasConfirmation = 'aliasConfirmation',
     BackupStronghold = 'backupStronghold',
     BurnNativeTokens = 'burnNativeTokens',
