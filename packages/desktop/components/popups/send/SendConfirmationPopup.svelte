@@ -109,29 +109,31 @@
     }
 
     async function updateStorageDeposit(): Promise<void> {
-        const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-            await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
+        if (preparedOutput) {
+            const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
+                await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
 
-        storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
+            storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
 
-        if (isBaseTokenTransfer) {
-            const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
-            if (rawAmount >= storageDeposit) {
-                storageDeposit = 0
+            if (isBaseTokenTransfer) {
+                const rawAmount = Number((transactionDetails as NewTokenTransactionDetails).rawAmount)
+                if (rawAmount >= storageDeposit) {
+                    storageDeposit = 0
+                }
             }
-        }
 
-        // Note: we need to adjust the surplus
-        // so we make sure that the surplus is always added on top of the minimum storage deposit
-        if (Number(surplus) > 0) {
-            if (minimumStorageDeposit >= Number(surplus)) {
-                visibleSurplus = surplus = undefined
-            } else {
-                visibleSurplus = Number(surplus) - minimumStorageDeposit
-                // Note: we have to hide it because currently, in the sdk,
-                // the storage deposit return strategy is only looked at
-                // if the provided amount is < the minimum required storage deposit
-                hideGiftToggle = true
+            // Note: we need to adjust the surplus
+            // so we make sure that the surplus is always added on top of the minimum storage deposit
+            if (Number(surplus) > 0) {
+                if (minimumStorageDeposit >= Number(surplus)) {
+                    visibleSurplus = surplus = undefined
+                } else {
+                    visibleSurplus = Number(surplus) - minimumStorageDeposit
+                    // Note: we have to hide it because currently, in the sdk,
+                    // the storage deposit return strategy is only looked at
+                    // if the provided amount is < the minimum required storage deposit
+                    hideGiftToggle = true
+                }
             }
         }
     }
