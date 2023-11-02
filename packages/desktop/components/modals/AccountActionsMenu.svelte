@@ -3,7 +3,7 @@
 
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { activeAccounts, isActiveLedgerProfile, visibleActiveAccounts } from '@core/profile/stores'
+    import { activeAccounts, activeProfile, isActiveLedgerProfile, visibleActiveAccounts } from '@core/profile/stores'
     import { deleteAccount } from '@core/profile-manager/actions'
 
     import { Icon } from '@auxiliary/icon/enums'
@@ -12,6 +12,7 @@
     import { checkOrConnectLedger } from '@core/ledger'
     import { showAppNotification } from '@auxiliary/notification'
     import { handleError } from '@core/error/handlers'
+    import { NetworkId } from '@core/network/enums'
 
     export let modal: Modal = undefined
 
@@ -71,8 +72,13 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
-        <!-- TODO Finalize Icon and string -->
-        <MenuItem icon={Icon.Info} title={localize('View Address history')} onClick={onViewAddressHistoryClick} />
+        {#if $activeProfile?.network?.id === NetworkId.Iota}
+            <MenuItem
+                icon={Icon.Timer}
+                title={localize('actions.viewAddressHistory')}
+                onClick={onViewAddressHistoryClick}
+            />
+        {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         {#if $isActiveLedgerProfile}
             <MenuItem

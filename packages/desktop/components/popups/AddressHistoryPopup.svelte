@@ -1,30 +1,47 @@
 <script lang="ts">
-    import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { localize } from '@core/i18n'
-    import { FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { getSelectedAccount } from '@core/account'
+    import { localize } from '@core/i18n'
     import { truncateString } from '@core/utils'
+    import { AccountAddress } from '@iota/sdk/out/types'
+    import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { onMount } from 'svelte'
+
+    let addressList: AccountAddress[] | undefined = undefined
+
+    onMount(() => {
+        getSelectedAccount()
+            ?.addresses()
+            .then((_addressList) => {
+                addressList = _addressList?.sort((a, b) => a.keyIndex - b.keyIndex) ?? []
+            })
+            .catch((err) => {
+                console.error(err)
+                addressList = []
+            })
+    })
 </script>
 
 <div class="flex flex-col space-y-6">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
-        {localize('Address History')}
+        {localize('popups.addressHistory.title')}
     </Text>
-
-    {#await getSelectedAccount()?.addresses()}
-        <div class="flex">
-            <Spinner message="Loading addresses..." />
-        </div>
-    {:then accountAddresses}
-        {#if accountAddresses && accountAddresses?.length > 0}
+    <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.addressHistory.disclaimer')}</Text>
+    {#if addressList}
+        {#if addressList.length > 0}
             <div class="w-full flex-col space-y-2 virtual-list-wrapper">
-                <VirtualList items={accountAddresses} let:item>
+                <VirtualList items={addressList} let:item>
                     <div class="mb-1">
                         <KeyValueBox
                             isCopyable
                             classes="flex items-center w-full py-4"
-                            keyText={item.keyIndex.toString()}
-                            valueText={truncateString(item?.address, 16, 16)}
+                            keyText={truncateString(item?.address, 15, 15)}
+                            valueText={localize('popups.addressHistory.indexAndType', {
+                                values: {
+                                    index: item.keyIndex,
+                                    internal: item.internal,
+                                },
+                            })}
                             copyValue={item.address}
                             backgroundColor="gray-50"
                             darkBackgroundColor="gray-900"
@@ -33,9 +50,13 @@
                 </VirtualList>
             </div>
         {:else}
-            <div class="flex justify-center">Empty</div>
+            <Text secondary classes="text-center">-</Text>
         {/if}
-    {/await}
+    {:else}
+        <div class="flex items-center justify-center">
+            <Spinner />
+        </div>
+    {/if}
 </div>
 
 <style lang="scss">
