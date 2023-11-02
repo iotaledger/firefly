@@ -1,6 +1,7 @@
 <script lang="ts">
+    import VirtualList from '@sveltejs/svelte-virtual-list'
     import { localize } from '@core/i18n'
-    import { CopyableBox, FontWeight, Spinner, Text, TextType } from 'shared/components'
+    import { FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { getSelectedAccount } from '@core/account'
     import { truncateString } from '@core/utils'
 </script>
@@ -14,24 +15,40 @@
         <div class="flex">
             <Spinner message="Loading addresses..." />
         </div>
-    {:then addresses}
-        {#if addresses && addresses?.length > 0}
-            <div class="flex flex-col">
-                {#each addresses as address}
-                    <CopyableBox col value={address.address} classes="mb-2">
-                        <div class="flex items-center justify-center">
-                            <Text type={TextType.h4} secondary classes="mr-3">
-                                {address.keyIndex}:
-                            </Text>
-                            <Text type={TextType.h5} smaller>
-                                {truncateString(address.address, 16, 16)}
-                            </Text>
-                        </div>
-                    </CopyableBox>
-                {/each}
+    {:then accountAddresses}
+        {#if accountAddresses && accountAddresses?.length > 0}
+            <div class="w-full flex-col space-y-2 virtual-list-wrapper">
+                <VirtualList items={accountAddresses} let:item>
+                    <div class="mb-1">
+                        <KeyValueBox
+                            isCopyable
+                            classes="flex items-center w-full py-4"
+                            keyText={item.keyIndex.toString()}
+                            valueText={truncateString(item?.address, 16, 16)}
+                            copyValue={item.address}
+                            backgroundColor="gray-50"
+                            darkBackgroundColor="gray-900"
+                        />
+                    </div>
+                </VirtualList>
             </div>
         {:else}
-            <div>No addresses</div>
+            <div class="flex justify-center">Empty</div>
         {/if}
     {/await}
 </div>
+
+<style lang="scss">
+    .virtual-list-wrapper :global(svelte-virtual-list-viewport) {
+        margin-right: -1rem !important;
+        flex: auto;
+        overflow-y: scroll;
+        padding-right: 1.5rem !important;
+        min-height: 52px;
+        max-height: 300px;
+    }
+
+    .virtual-list-wrapper :global(svelte-virtual-list-contents) {
+        margin-right: -1rem !important;
+    }
+</style>
