@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Create a hardware profile",
-                        "description": "Ledger Nano S or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus 또는 Nano X가 필요합니다."
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Use Stronghold backup",
                     "importFileDescription": "Import your Stronghold backup file",
                     "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                    "importLedgerDescription": "Ledger Nano S, Nano S Plus or Nano X 기기에서 복원"
                 },
                 "setupClaimed": {
                     "title": "Claim Shimmer staking rewards",
@@ -509,19 +509,19 @@
                 "headers": {
                     "upcoming": "나중에 다시 확인",
                     "commencing": "Pre-staking 시작",
-                    "holding": "{duration} of staking left",
+                    "holding": "{duration} 남은 스테이킹 기간",
                     "ended": "스테이킹이 이제 종료되었습니다",
-                    "inactive": "No staking events detected"
+                    "inactive": "스테이킹 이벤트가 감지되지 않았습니다."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "{date} 에 스테이킹이 시작되면, 10초마다 자동으로 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "commencing": "{date} 에 스테이킹이 시작되면 10초마다 자동으로 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "holdingAndStaking": "10초마다 자동으로 보상을 받습니다.",
+                    "holdingAndNotStaking": "10초마다 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "endedAndDidStake": "네트워크가 출시되면 {token} 보상이 지갑에 배포됩니다.",
+                    "endedAndDidNotStake": "이번 에어드랍에 참여하지 않았습니다.",
+                    "endedAndDidNotReachMinRewards": "최소 에어드롭 보상에 도달할 만큼 충분한 {token} 토큰을 스테이킹하지 않았습니다.",
+                    "inactive": "고급 설정에서 네트워크 구성을 열고 \"정보 보기\"를 클릭하여 현재 노드에 \"참여\" 기능이 있는지 확인하세요."
                 }
             },
             "airdrops": {
@@ -535,12 +535,12 @@
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "IOTA의 주요 혁신을 발전시키기 위한 인센티브화된 스테이징 네트워크입니다. 무슨 일이든 일어날 수 있습니다. Shimmer가 어떻게 진화하는지는 당신에게 달려 있습니다."
                 }
             },
             "banners": {
                 "new": "새 이벤트",
-                "complete": "Complete"
+                "complete": "완료"
             }
         },
         "picker": {
@@ -805,7 +805,7 @@
         "hideAccount": {
             "title": "{name} 계정을 숨길까요?",
             "body": "숨겨진 지갑은 고급설정의 \"숨긴 지갑 표시\"를 활성화하면 다시 찾을 수 있습니다.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "확인을 위해 지갑 비밀번호를 입력하세요.",
             "hideAccount": "지갑 숨기기",
             "errorTitle": "{name} 계정을 숨길 수 없습니다",
             "errorBody1": "지갑을 숨기기 위해서는 잔액이 0이어야 합니다.",
@@ -916,15 +916,16 @@
             "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
             "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "아직 최소 스테이킹 보상에 도달하지 않은 지갑에서 이체를 보내고 있습니다. 이로 인해 토큰의 스테이킹이 해제될 수 있으며 이 지갑에 대한 스테이킹 보상을 잃을 수 있습니다."
         },
         "balanceFinder": {
-            "title": "Balance finder",
+            "title": "잔액 검색기",
             "body": "Perform a more exhaustive search of balances.",
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "현재 지갑에서만 검색"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1013,26 +1014,26 @@
             "title": "Staking 관리",
             "description": "지갑을 staking 하면 해당 자금에 staking 표시를 하여 여러분께 보내게됩니다. 자금은 언제든 이체 가능하지만 staking 보상 수령을 계속 받지는 못하게 됩니다.",
             "totalFundsStaked": "Staking 총 자금",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
+            "stakedSuccessfully": "귀하의 자금은 {account} 에 스테이킹되었습니다.",
             "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
             "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "참여 확인",
             "subtitleStake": "Staking이 이제 시작됩니다.",
             "subtitleMerge": "Merge를 곧 시작합니다.",
             "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "mergeStakeWarning": "자금은 {airdrop} 에 스테이킹됩니다. 참여하고 싶은 에어드랍을 변경하려면, 이 지갑을 언스테이킹하고 다시 스테이킹하세요.",
             "estimatedAirdrop": "예상 보상"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
+            "title": "{date} 부터 스테이킹 단계 {periodNumber}",
             "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
             "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
         },
         "shimmer-info": {
             "title": "Shimmer에 대하여",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body1": "스테이킹 보상으로 SMR 토큰을 획득하신 것을 축하합니다. Shimmer는 IOTA의 주요 업그레이드를 테스트하기 위한 인센티브화된 네트워크입니다.",
             "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
         },
         "assembly-info": {
@@ -1060,9 +1061,9 @@
             "privPolicyCheckbox": "변경된 개인정보 보호 정책을 읽었으며 이에 동의합니다"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Firefly 사용 방식이 변경되었습니다.",
+            "body": "각 탭의 콘텐츠는 이제 단일 지갑의 맥락에 있습니다. 제목 표시줄의 전환기를 사용하여 어디에서나 선택한 지갑을 변경할 수 있습니다.",
+            "hint": "지갑을 찾을 수 없나요? 이전에 사용한 지갑을 찾으려면 설정에서 잔액 찾기를 사용하세요."
         },
         "transactionDetails": {
             "title": "Transaction details",
@@ -1290,7 +1291,7 @@
         "enableDeepLinks": "Enable deep links",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "거래 내역 내보내기",
         "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
@@ -1418,13 +1419,13 @@
         "decreased": "Voting power decreased",
         "decreasing": "Decreasing voting power",
         "voted": "Voted",
-        "voting": "Voting",
+        "voting": "투표",
         "changedVote": "Changed vote",
         "changingVote": "Changing vote",
         "revoted": "Revoted",
         "revoting": "Revoting",
-        "unvoted": "Unvoted",
-        "unvoting": "Unvoting",
+        "unvoted": "투표취소",
+        "unvoting": "투표 안함",
         "sentNft": "NFT sent",
         "sendingNft": "Sending NFT",
         "receivedNft": "NFT received",
@@ -1574,21 +1575,21 @@
         "votedFor": "Voted for {account}",
         "unvotedFor": "Unvoted for {account}",
         "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "unstakingTransaction": "스테이킹 해제 거래",
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "지갑",
         "unknown": "알 수 없음",
         "unknownAddress": "Unknown address",
         "none": "없음",
         "staked": "Staked",
         "unstaked": "Unstaked",
         "staking": "스테이킹",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds",
+        "unstaking": "스테이킹 해제",
+        "notStaked": "스태이킹 되지않음",
+        "stakedFunds": "스테이킹된 자금",
+        "unstakedFunds": "스테이킹되지 않은 자금",
         "accountColor": "지갑 색상",
         "transactionTime": "Transaction time",
         "surplus": "Surplus",
@@ -1823,7 +1824,7 @@
                 "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "syncing": "지갑을 변경하려면 동기화가 완료될 때까지 기다려주세요.",
         "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
@@ -1912,7 +1913,7 @@
         "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "프로필 이름에는 적어도 문자 1자 이상이 포함되어야 합니다.",
             "notEmpty": "이 지갑을 삭제하려면 지갑에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 지갑이 이미 있습니다.",
             "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
@@ -1978,7 +1979,7 @@
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
             "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
             "forbidden": "이 노드 연결은 금지되었습니다.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
+            "pluginNotAvailable": "현재 노드에서는 \"{nodePlugin}\" 플러그인을 사용할 수 없습니다.",
             "unabledToConnect": "Unable to connect to the node",
             "differentNetwork": "The node is located on a different network",
             "duplicateNodes": "Unable to add duplicate node",
@@ -2018,7 +2019,7 @@
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
             "timeout": "Ledger 장치가 시간을 초과하였습니다.",
             "disconnected": "Ledger 장치의 연결이 끊어졌습니다.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Ledger 프로필로는 Stronghold를 사용할 수 없습니다."
         },
         "popup": {
             "preventClose": "이 팝업창을 닫을 수 없습니다."
@@ -2030,13 +2031,13 @@
             "cannotDecodeBech32": "문자열을 Bech32 주소로 디코드할 수 없습니다."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "지정된 계정을 사용할 수 없습니다.",
+            "cannotFindStakingEvent": "스테이킹 이벤트를 찾을 수 없습니다.",
+            "cannotVisitAirdropWebsite": "{airdrop} 웹사이트를 열 수 없습니다.",
+            "invalidStakingEventId": "잘못된 스테이킹 이벤트 ID입니다."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME",
+        "invalidDate": "잘못된 날짜",
+        "invalidTime": "잘못된 시간",
         "shimmerClaiming": {
             "missingProfileManager": "Unable to find Shimmer claiming profile manager",
             "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
@@ -2109,7 +2110,7 @@
             "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "IOTA가 없습니다."
         }
     },
     "tooltips": {
@@ -2122,21 +2123,21 @@
             "veryLow": "매우 낮음"
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens that are not staked.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "새로운 스테이킹되지않은 자금: {amount}",
+            "titleNoFunds": "새로운 스테이킹되지않은 자금",
+            "preBody": "스테이킹되지 않은 토큰을 받았습니다.",
+            "body": "에어드랍 보상을 받으려면 이러한 새 자금을 수동으로 스테이킹해야 합니다."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "title": "최소 보상 가치 미만",
+            "titleMinBalance": "{amount} 최소 잔액 필요",
+            "bodyMinBalance": "이 지갑에는 최소 에어드랍 보상에 도달할 만큼 충분한 IOTA 토큰이 없으므로 스테이킹할 수 없습니다.",
+            "continue": "또 다른 {duration} 동안 스테이킹을 계속하세요.",
+            "bodyBelowMin": "이 지갑은 {airdrop}({airdropRewardMin}) 에 대한 최소 보상 값에 도달하지 않았습니다.",
+            "bodyWillReachMin": "최소 금액에 도달하려면 또 다른 {duration} 동안 스테이킹해야 합니다.",
+            "bodyWillNotReachMin": "IOTA를 더 추가하지 않으면 남은 스테이킹 기간 동안 최소 보상 값에 도달하지 못할 것입니다.",
+            "bodyDidNotReachMin": "{airdrop}({airdropRewardMin}) 의 최소 보상값에 도달할 만큼 충분한 IOTA를 스테이킹하지 않았습니다.",
+            "bodyMinBalanceAirdrop": "이 지갑에는 {airdrop} 에 대한 최소 에어드롭 보상에 도달할 만큼 충분한 IOTA 토큰이 없습니다."
         },
         "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
         "transactionDetails": {
@@ -2208,8 +2209,8 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
-            "internal": "Internal",
+            "messageId": "메시지 ID",
+            "internal": "내부",
             "rawValue": "Raw Value",
             "formattedValue": "Formatted Value",
             "date": "Date",

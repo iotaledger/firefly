@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Crear un perfil de hardware",
-                        "description": "Se necesita un Ledger Nano S o Nano X"
+                        "description": "Se requiere Ledger Nano S, Nano S Plus o Nano X"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Usar copia de seguridad de Stronghold",
                     "importFileDescription": "Importa tu copia de seguridad de Stronghold",
                     "importLedger": "Usar dispositivo Ledger",
-                    "importLedgerDescription": "Restaurar desde tu dispositivo Ledger Nano S o X"
+                    "importLedgerDescription": "Restaurar desde tu dispositivo Ledger Nano S, Nano S Plus o X"
                 },
                 "setupClaimed": {
                     "title": "Reclamar recompensas de staking de Shimmer",
@@ -924,7 +924,8 @@
             "addressesSearched": "Direcciones buscadas",
             "addressesFound": "Direcciones encontradas",
             "totalAddressBalance": "Balance total",
-            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo."
+            "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo.",
+            "currentWallet": "Buscar sólo en la cartera actual"
         },
         "balanceOverview": {
             "title": "Resumen del balance",
