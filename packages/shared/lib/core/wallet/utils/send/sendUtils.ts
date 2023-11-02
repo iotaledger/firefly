@@ -40,7 +40,6 @@ export function rebuildActivity(
     transactionDetails: NewTransactionDetails,
     recipient: Subject,
     storageDeposit: number,
-    giftStorageDeposit: boolean,
     visibleSurplus: number,
     isInternal: boolean,
     layer2Parameters: ILayer2Parameters
@@ -59,7 +58,7 @@ export function rebuildActivity(
         isInternal,
         containsValue: true,
         isAssetHidden: false,
-        giftedStorageDeposit: giftStorageDeposit ? storageDeposit : 0,
+        giftedStorageDeposit: 0,
         surplus: visibleSurplus,
         type: ActivityType.Basic,
         direction: ActivityDirection.Outgoing,

@@ -74,7 +74,6 @@
         transactionDetails,
         recipient,
         storageDeposit,
-        giftStorageDeposit,
         visibleSurplus,
         isInternal,
         layer2Parameters
