@@ -958,7 +958,7 @@
             "title": "Verbinde deinen Ledger",
             "notConnected": "Verbinde dein Ledger-Gerät, um fortzufahren.",
             "locked": "Entsperre dein Ledger-Gerät, um fortzufahren.",
-            "appNotOpen": "Öffne die IOTA Legacy App auf deinem Ledger-Gerät, um fortzufahren.",
+            "appNotOpen": "Öffne die {legacy} App auf deinem Ledger-Gerät, um fortzufahren.",
             "correctAppOpen": "Ledger erfolgreich verbunden, bitte fortfahren."
         },
         "ledgerConfirmation": {
