@@ -4,9 +4,10 @@
     import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { localize } from '@core/i18n'
     import { IllustrationEnum } from '@auxiliary/illustration'
+    import { Icon } from '@auxiliary/icon'
 
     let stepIndex = 0
-    const stepAnimations = [
+    const stepIlustrations = [
         IllustrationEnum.LedgerLiveUpdatedDesktop,
         IllustrationEnum.LedgerConnected2Desktop,
         $ledgerAppName === LedgerAppName.Shimmer
@@ -14,6 +15,14 @@
             : IllustrationEnum.LedgerSearchIotaAppsDesktop,
         IllustrationEnum.LedgerInstallAppsDesktop,
         IllustrationEnum.LedgerCloseLiveDesktop,
+    ]
+
+    const stepIconWithIlustrations = [
+        undefined,
+        undefined,
+        undefined,
+        $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota,
+        undefined,
     ]
 
     function changeIndex(increment: number): void {
@@ -29,7 +38,12 @@
     {localize('popups.ledgerAppGuide.title', { values: { legacy: $ledgerAppName } })}
 </Text>
 <div class="w-full flex flex-row flex-wrap">
-    <LedgerAnimation illustration={stepAnimations[stepIndex]} classes="illustration-wrapper" bgClasses="top-6" />
+    <LedgerAnimation
+        illustration={stepIlustrations[stepIndex]}
+        iconNetwork={stepIconWithIlustrations[stepIndex]}
+        classes="illustration-wrapper"
+        bgClasses="top-6"
+    />
     <div class="w-full text-center my-9 px-10">
         <Text secondary>
             {localize(`popups.ledgerAppGuide.steps.${stepIndex}`, { values: { legacy: $ledgerAppName } })}
