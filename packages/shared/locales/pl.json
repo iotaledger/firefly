@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Utwórz profil sprzętowy",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Wymagany Ledger Nano S, Nano S Plus lub Nano X"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Użyj kopii zapasowej Stronghold",
                     "importFileDescription": "Importuj plik kopii zapasowej Stronghold",
                     "importLedger": "Użyj urządzenia Ledger",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Przywróć profil ze swojego urządzenia Ledger Nano S, Nano S Plus lub Nano X"
                 },
                 "setupClaimed": {
                     "title": "Odbierz nagrody Shimmer ze stakingu",
@@ -925,7 +925,7 @@
             "addressesFound": "Znalezione adresy",
             "totalAddressBalance": "Wszystkie środki",
             "searchAgainHint": "Czy Twoje saldo lub liczba portfeli są nieprawidłowe? Wykonaj ponowne szukanie, aż Twoje pełne saldo zostanie wyświetlone.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Szukaj tylko w bieżącym portfelu"
         },
         "balanceOverview": {
             "title": "Przegląd salda",

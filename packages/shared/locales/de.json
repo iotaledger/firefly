@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Erstelle ein (Ledger-) Hardware Profil",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus oder Nano X erforderlich"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Stronghold-Backup verwenden",
                     "importFileDescription": "Importiere deine Stronghold-Backup Datei",
                     "importLedger": "Ledger-Gerät verwenden",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Von deinem Ledger Nano S, Nano S Plus oder X wiederherstellen"
                 },
                 "setupClaimed": {
                     "title": "Shimmer Staking-Rewards beanspruchen",
@@ -925,7 +925,7 @@
             "addressesFound": "Gefundene Adressen",
             "totalAddressBalance": "Gesamtguthaben",
             "searchAgainHint": "Ist das angezeigte Guthaben oder die Anzahl der Wallets nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Nur im aktuellen Wallet suchen"
         },
         "balanceOverview": {
             "title": "Guthabenübersicht",
@@ -958,7 +958,7 @@
             "title": "Verbinde deinen Ledger",
             "notConnected": "Verbinde dein Ledger-Gerät, um fortzufahren.",
             "locked": "Entsperre dein Ledger-Gerät, um fortzufahren.",
-            "appNotOpen": "Öffne die IOTA Legacy App auf deinem Ledger-Gerät, um fortzufahren.",
+            "appNotOpen": "Öffne die {legacy} App auf deinem Ledger-Gerät, um fortzufahren.",
             "correctAppOpen": "Ledger erfolgreich verbunden, bitte fortfahren."
         },
         "ledgerConfirmation": {
