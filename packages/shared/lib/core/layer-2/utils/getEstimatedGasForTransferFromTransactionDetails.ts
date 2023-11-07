@@ -1,14 +1,11 @@
-import BigInteger from 'big-integer'
+import { localize } from '@core/i18n'
 import { getActiveProfile } from '@core/profile'
-
-interface GasEstimatePayload {
-    gasBurned?: number
-    gasFeeCharged?: number
-}
+import BigInteger from 'big-integer'
+import { ILayer2GasEstimatePayload } from '../interfaces'
 
 export async function getEstimatedGasForTransferFromTransactionDetails(
     serializedOutputHex: string
-): Promise<GasEstimatePayload> {
+): Promise<ILayer2GasEstimatePayload> {
     const profile = getActiveProfile()
     const chainMetadata = profile.network?.chains?.[0] ?? null
 
@@ -32,8 +29,12 @@ export async function getEstimatedGasForTransferFromTransactionDetails(
             const gasBurned = BigInteger(data.gasBurned as string).toJSNumber()
             const gasFeeCharged = BigInteger(data.gasFeeCharged as string).toJSNumber()
 
-            return { gasBurned, gasFeeCharged }
+            if (gasBurned && gasFeeCharged) {
+                return { gasBurned, gasFeeCharged }
+            }
         }
+
+        throw new Error(localize('error.layer2.estimatedGas'))
     }
 
     return {}
