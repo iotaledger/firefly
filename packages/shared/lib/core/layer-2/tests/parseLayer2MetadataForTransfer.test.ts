@@ -21,6 +21,25 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
         expect(parsedMetadata).toEqual(expected)
     })
 
+    it('should correctly parse metadata with long base token', () => {
+        const metadata =
+            '0x00025e4b3ca1e3f423f855010161350342f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538ac0611dabb31ea69bc4983566005f277611eee1ec980bfcceca025'
+        const metadataByteArray = Converter.hexToBytes(metadata)
+        const expected = {
+            senderContract: '0x0',
+            targetContract: 'Accounts',
+            contractFunction: 'transferAllowanceTo',
+            gasBudget: '11000',
+            ethereumAddress:
+                '0x42f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538ac0611dabb31ea69bc4983566005f277611eee1ec9',
+            baseTokens: '10000999999',
+            nativeTokens: [],
+            nfts: [],
+        }
+        const parsedMetadata = parseLayer2MetadataForTransfer(metadataByteArray)
+        expect(parsedMetadata).toEqual(expected)
+    })
+
     it('should correctly parse metadata with native tokens', () => {
         const metadata =
             '0x00025e4b3ca1e3f423914e010161350342f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f4001086ac702fcfdc37b437e7ebb7a87d8acfb875be6b1ae3823bc61aa7896b852a6d5010000000001fa'
