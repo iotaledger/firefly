@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Create a hardware profile",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Es requereix un Ledger Nano S, Nano S Plus o Nano X"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Use Stronghold backup",
                     "importFileDescription": "Import your Stronghold backup file",
                     "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Restablir des d'un dispositiu Ledger Nano S, Nano S Plus o Nano X"
                 },
                 "setupClaimed": {
                     "title": "Claim Shimmer staking rewards",
@@ -925,7 +925,7 @@
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Cercar només en aquest moneder"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1339,7 +1339,7 @@
         "viewDownloads": "View downloads",
         "viewStatus": "Mostra l'estat",
         "viewBalanceBreakdown": "View balance breakdown",
-        "verifyDepositAddress": "Verify deposit address",
+        "verifyDepositAddress": "Verifiqueu l'adreça de destí",
         "showHiddenAccounts": "Mostra els moneders amagats",
         "confirm": "Confirmar",
         "hideNetworkStatistics": "Amaga les estadístiques de la xarxa",
@@ -1667,7 +1667,7 @@
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
         "custom": "Custom",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Si us plau, comproveu el dispositiu Ledger i verifiqueu que l'adreça de destí coincideix amb la que apareix al dispositiu"
     },
     "filters": {
         "title": "Filters",
