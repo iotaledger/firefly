@@ -11,7 +11,6 @@ import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
-import { showAppNotification } from 'shared/lib/auxiliary/notification'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
@@ -108,46 +107,36 @@ async function buildOutputParametersForLayer2(
         }
     }
 
-    try {
-        let estimatedData = await getEstimateData()
+    let estimatedData = await getEstimateData()
 
-        if (estimatedData?.gasEstimatePayload?.gasBurned) {
-            //  The "+1" is due to an optimization in WASP nodes.
-            const metadata = getLayer2MetadataForTransfer(
-                transactionDetails,
-                (estimatedData.gasEstimatePayload.gasBurned as number) + 1
-            )
-            if (!outputParams.features) {
-                outputParams.features = {}
-            }
-            outputParams.features.metadata = metadata
-
-            estimatedData = await getEstimateData()
-
-            if (estimatedData?.gasEstimatePayload?.gasFeeCharged) {
-                // Now that we have the gasFeeCharged, update the amount & the tx details
-                newTransactionDetails.update((state) => {
-                    if (state?.layer2Parameters) {
-                        state.layer2Parameters.gasBudget = BigInteger(
-                            estimatedData.gasEstimatePayload.gasFeeCharged as number
-                        )
-                    }
-                    return state
-                })
-                outputParams.amount = (
-                    parseInt(estimatedData.outputForEstimate.amount, 10) +
-                    estimatedData.gasEstimatePayload.gasFeeCharged
-                ).toString()
-
-                return outputParams
-            }
+    if (estimatedData?.gasEstimatePayload?.gasBurned) {
+        //  The "+1" is due to an optimization in WASP nodes.
+        const metadata = getLayer2MetadataForTransfer(
+            transactionDetails,
+            (estimatedData.gasEstimatePayload.gasBurned as number) + 1
+        )
+        if (!outputParams.features) {
+            outputParams.features = {}
         }
-    } catch (error) {
-        if (error?.message) {
-            showAppNotification({
-                type: 'error',
-                message: error?.message,
+        outputParams.features.metadata = metadata
+
+        estimatedData = await getEstimateData()
+
+        if (estimatedData?.gasEstimatePayload?.gasFeeCharged) {
+            // Now that we have the gasFeeCharged, update the amount & the tx details
+            newTransactionDetails.update((state) => {
+                if (state?.layer2Parameters) {
+                    state.layer2Parameters.gasBudget = BigInteger(
+                        estimatedData.gasEstimatePayload.gasFeeCharged as number
+                    )
+                }
+                return state
             })
+            outputParams.amount = (
+                parseInt(estimatedData.outputForEstimate.amount, 10) + estimatedData.gasEstimatePayload.gasFeeCharged
+            ).toString()
+
+            return outputParams
         }
     }
 }
