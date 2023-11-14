@@ -84,7 +84,12 @@
 
         if (isSendAndClosePopup) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
-            initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+            initialExpirationDate = getInitialExpirationDate(
+                expirationDate,
+                storageDeposit,
+                giftStorageDeposit,
+                !!layer2Parameters
+            )
 
             try {
                 await _onMount()
@@ -111,7 +116,12 @@
             // as it updates expiration date through the ExpirationTimePicker bind
             // Could be avoided with a rework of ExpirationTimePicker
             if (transactionDetails.expirationDate === undefined) {
-                initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+                initialExpirationDate = getInitialExpirationDate(
+                    expirationDate,
+                    storageDeposit,
+                    giftStorageDeposit,
+                    !!layer2Parameters
+                )
             }
         } catch (err) {
             handleError(err)
