@@ -149,7 +149,7 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
     }
 
     if (byte < 0x80) {
-        return [BigInt(byte), null]
+        return [byte, null]
     }
 
     let value = byte & BigInt(0x7f)
@@ -160,7 +160,7 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
             return [BigInt(0), new Error('no more byes')]
         }
         if (byte < 0x80) {
-            return [BigInt(value) | shiftLeft(BigInt(byte), BigInt(shift)), null]
+            return [value | shiftLeft(byte, BigInt(shift)), null]
         }
         value |= shiftLeft(byte & BigInt(0x7f), BigInt(shift))
     }
