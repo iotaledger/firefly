@@ -145,7 +145,7 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
     let byte = BigInt(readByte())
 
     if (!byte) {
-        return [BigInt(0), new Error('no more byes')]
+        return [BigInt(0), new Error('no more bytes')]
     }
 
     if (byte < 0x80) {
@@ -157,7 +157,7 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
     for (let shift = 7; shift < 63; shift += 7) {
         byte = BigInt(readByte())
         if (!byte) {
-            return [BigInt(0), new Error('no more byes')]
+            return [BigInt(0), new Error('no more bytes')]
         }
         if (byte < 0x80) {
             return [value | shiftLeft(byte, BigInt(shift)), null]
@@ -167,7 +167,7 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
 
     byte = BigInt(readByte())
     if (!byte) {
-        return [BigInt(0), null]
+        return [BigInt(0), new Error('no more bytes')]
     }
     if (byte > 0x01) {
         return [BigInt(0), new Error('size64 overflow')]
