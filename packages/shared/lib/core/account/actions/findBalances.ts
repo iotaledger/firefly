@@ -18,13 +18,11 @@ let searchAccountStartIndex: number
 let _accountGapLimit: number
 let _addressGapLimit: number
 
-let profileType: ProfileType
-
 export function initialiseAccountRecoveryConfiguration(
     algortihmType: SearchAlgorithmType,
     config?: RecoverAccountsPayload
 ): void {
-    profileType = get(activeProfile)?.type
+    const profileType = get(activeProfile)?.type
     if (!profileType) {
         throw new UnableToFindProfileTypeError()
     }
@@ -44,6 +42,7 @@ export async function findBalances(
     init?: boolean,
     config?: RecoverAccountsPayload
 ): Promise<void> {
+    const profileType = get(activeProfile)?.type
     try {
         if (init) {
             initialiseAccountRecoveryConfiguration(algortihmType, config)
