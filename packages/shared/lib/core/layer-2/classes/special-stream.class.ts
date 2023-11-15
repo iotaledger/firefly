@@ -46,11 +46,6 @@ export class ReadSpecialStream extends ReadStream {
     }
 }
 
-function shiftLeft(s: bigint, n: bigint): bigint {
-    const result = BigInteger(s).multiply(BigInteger(2).pow(BigInteger(n)))
-    return BigInt(result.toString())
-}
-
 function shiftRight(s: bigint, n: bigint): bigint {
     const result = BigInteger(s).divide(BigInteger(2).pow(BigInteger(n)))
     return BigInt(result.toString())
@@ -142,30 +137,30 @@ function size64Encode(n: bigint): Buffer {
 
 // Adapted from WASP golang implementation https://github.com/iotaledger/wasp/blob/7f880a7983d24d0dcd225e994d67b29741b318bc/packages/util/rwutil/convert.go#L76
 function size64Decode(readByte: () => number): [bigint, null | Error] {
-    let byte = BigInt(readByte())
+    let byte = readByte()
 
     if (!byte) {
         return [BigInt(0), new Error('no more bytes')]
     }
 
     if (byte < 0x80) {
-        return [byte, null]
+        return [BigInt(byte), null]
     }
 
-    let value = byte & BigInt(0x7f)
+    let value = BigInt(byte) & BigInt(0x7f)
 
     for (let shift = 7; shift < 63; shift += 7) {
-        byte = BigInt(readByte())
+        byte = readByte()
         if (!byte) {
             return [BigInt(0), new Error('no more bytes')]
         }
         if (byte < 0x80) {
-            return [value | shiftLeft(byte, BigInt(shift)), null]
+            return [value | (BigInt(byte) << BigInt(shift)), null]
         }
-        value |= shiftLeft(byte & BigInt(0x7f), BigInt(shift))
+        value |= (BigInt(byte) & BigInt(0x7f)) << BigInt(shift)
     }
 
-    byte = BigInt(readByte())
+    byte = readByte()
     if (!byte) {
         return [BigInt(0), new Error('no more bytes')]
     }
@@ -173,5 +168,5 @@ function size64Decode(readByte: () => number): [bigint, null | Error] {
         return [BigInt(0), new Error('size64 overflow')]
     }
 
-    return [value | shiftLeft(byte, BigInt(63)), null]
+    return [value | (BigInt(byte) << BigInt(63)), null]
 }
