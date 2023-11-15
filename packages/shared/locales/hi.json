@@ -812,12 +812,6 @@
             "errorBody2": "वर्तमान में आपके पास इस खाते पर {balance} बैलेंस है। कृपया इन निधियों को एक अलग खाते में ले जाएँ और पुनः प्रयास करें",
             "errorBody3": "आप इस वॉलेट को नहीं हटा सकते, आपके पास कम से कम एक होना चाहिए।"
         },
-        "addressHistory": {
-            "title": "{name} खाता पता इतिहास",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "सेव करें",
         "importSeed": "एक मौजूदा सीड आयात करें",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "अक्सर पूछे FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "स्थिति देखें",
+        "viewAddressHistory": "एड्रेस का इतिहास देखें",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "छुपे हुए वॉलेट दिखाएँ",
