@@ -812,12 +812,6 @@
             "errorBody2": "در حال حاضر مانده حساب شما {balance} میباشد. لطفا این مبلغ را به کیف پول دیگری انتقال داده و دوباره امتحان کنید.",
             "errorBody3": "شما نمیتوانید این حساب را حذف کنید، باید حداقل یک کیف پول داشته باشید."
         },
-        "addressHistory": {
-            "title": "تاریخچه آدرس {name}",
-            "currentBalance": "موجودی {balance}",
-            "internal": "آدرس های درونی",
-            "external": "آدرس دریافت"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "ذخیره",
         "importSeed": "وارد کردن سید موجود",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "بخش سوالات متداول را ببینید",
         "viewDownloads": "View downloads",
         "viewStatus": "نشان دادن موقعیت",
+        "viewAddressHistory": "نمایش سوابق آدرس",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "نمایش کیف پول های مخفی",

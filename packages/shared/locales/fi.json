@@ -812,12 +812,6 @@
             "errorBody2": "Sinulla on tällä hetkellä {balance} jäljellä tässä lompakossa. Ole hyvä ja siirrä nämä varat toiseen lompakkoon ja yritä uudelleen.",
             "errorBody3": "Et voi piilottaa tätä lompakkoa, sinulla on oltava vähintään yksi."
         },
-        "addressHistory": {
-            "title": "Lompakon {name} osoitehistoria",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Sisäinen osoite",
-            "external": "Talletusosoite"
-        },
         "excludeNode": {
             "title": "Hylkää solmu",
             "body": "Oletko varma, että haluat sulkea osoitteen {url} pois käytettävissä olevien solmujen joukosta?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Tallenna",
         "importSeed": "Tuo olemassaoleva seed-merkkijono",
         "restoreWallet": {
-            "iota": "Siirrä tai palauta lompakko",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Palauta Shimmer-profiili",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Palauta olemassaoleva Shimmer-profiili",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Katso usein kysytyt kysymykset",
         "viewDownloads": "View downloads",
         "viewStatus": "Näytä tila",
+        "viewAddressHistory": "Näytä osoitehistoria",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Näytä piilotetut lompakot",

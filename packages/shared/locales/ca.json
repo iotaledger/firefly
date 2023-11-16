@@ -812,12 +812,6 @@
             "errorBody2": "Actualment, teniu un balanç {balance} en aquest moneder. Moveu aquests fons a un moneder diferent i torneu-ho a provar.",
             "errorBody3": "No podeu amagar aquest moneder, n'heu de tenir un, com a mínim."
         },
-        "addressHistory": {
-            "title": "Historial d'adreces de {name}",
-            "currentBalance": "Saldo {balance}",
-            "internal": "Adreça interna",
-            "external": "Adreça de dipòsit"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Historial de l'adreça",
+            "disclaimer": "Llista d'adreces amb fons o reconegudes per aquest perfil",
+            "indexAndType": "{internal, select, true {Adreça interna} other {Adreça de dipòsit}}{index}",
+            "internal": "Interna"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Guardar",
         "importSeed": "Importeu una llavor existent",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Visita les FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Mostra l'estat",
+        "viewAddressHistory": "Veure l'historial d'adreces",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verifiqueu l'adreça de destí",
         "showHiddenAccounts": "Mostra els moneders amagats",

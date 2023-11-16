@@ -812,12 +812,6 @@
             "errorBody2": "目前您在這個錢包仍擁有 {balance} 餘額。請將這些資金移至另一個錢包後再重試。",
             "errorBody3": "您無法隱藏此錢包，您必須至少擁有一個錢包。"
         },
-        "addressHistory": {
-            "title": "{name} 地址記錄",
-            "currentBalance": "餘額：{balance}",
-            "internal": "內部地址",
-            "external": "存款地址"
-        },
         "excludeNode": {
             "title": "排除節點",
             "body": "您是否確定要將 {url} 排除在可用節點之外？"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "需要驗證",
             "body": "此節點需要額外的認證。請填寫正確的資訊。"
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "儲存",
         "importSeed": "匯入現有的種子",
         "restoreWallet": {
-            "iota": "遷移或復原錢包",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "復原Shimmer設定檔",
             "testnet": "恢復測試網設定檔",
             "custom": "恢復自訂網路設定檔"
         },
         "restoreWalletDescription": {
-            "iota": "遷移至Chrysalis或恢復一個既存錢包",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "復原既有的Shimmer檔",
             "testnet": "恢復既有的測試網設定檔",
@@ -1338,6 +1338,7 @@
         "visitFaq": "訪問常見問題解答",
         "viewDownloads": "查看下載",
         "viewStatus": "查看狀態",
+        "viewAddressHistory": "檢視地址歷史紀錄",
         "viewBalanceBreakdown": "檢視餘額明細",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "顯示隱藏錢包",
