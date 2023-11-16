@@ -25,11 +25,12 @@ export enum OptionalInputType {
 export function getInitialExpirationDate(
     expirationDate: Date,
     storageDeposit: number,
-    giftStorageDeposit: boolean
+    giftStorageDeposit: boolean,
+    isLayer2: boolean
 ): TimePeriod {
     if (expirationDate) {
         return TimePeriod.Custom
-    } else if (storageDeposit && !giftStorageDeposit) {
+    } else if ((storageDeposit && !giftStorageDeposit) || isLayer2) {
         return TimePeriod.OneDay
     } else {
         return TimePeriod.None
