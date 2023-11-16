@@ -812,12 +812,6 @@
             "errorBody2": "Niha we {balance} li ser vê cuzdank maye. Ji kerema xwe van dravî veguherînin hesabek cûda û dîsa biceribînin.",
             "errorBody3": "Hûn nikarin vê cuzdankê jêbibin, divê bi kêmanî yek ya te hebe."
         },
-        "addressHistory": {
-            "title": "{name} dîroka navnîşanê",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Tomarkirin",
         "importSeed": "Seed'ek heyî barbikê hundir",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Here PPP",
         "viewDownloads": "View downloads",
         "viewStatus": "Rewşê bibîn",
+        "viewAddressHistory": "Bûyera navnîşanê nîşan bide",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Cuzdankê veşartî nîşan bidin",

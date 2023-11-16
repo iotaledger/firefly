@@ -1,3 +1,3 @@
 import { ILayer2TransferAllowanceMetadata } from '../interfaces'
 
-export type Layer2Metadata = Omit<ILayer2TransferAllowanceMetadata, 'baseTokens' | 'nativeTokens' | 'nfts'>
+export type Layer2Metadata = Omit<ILayer2TransferAllowanceMetadata, 'nativeTokens' | 'nfts'>

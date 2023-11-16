@@ -21,9 +21,8 @@ export class SpecialStream extends WriteStream {
 }
 
 export class ReadSpecialStream extends ReadStream {
-    readUInt64SpecialEncoding(name: string): number | bigint {
-        const [value] = size64Decode(() => this.readUInt8(name))
-        return value
+    readUInt64SpecialEncodingWithError(name: string): [bigint, Error | null] {
+        return size64Decode(() => this.readUInt8(name))
     }
 
     readUInt32SpecialEncoding(name: string): number | bigint {
@@ -137,33 +136,37 @@ function size64Encode(n: bigint): Buffer {
 }
 
 // Adapted from WASP golang implementation https://github.com/iotaledger/wasp/blob/7f880a7983d24d0dcd225e994d67b29741b318bc/packages/util/rwutil/convert.go#L76
-function size64Decode(readByte: () => number): [number, null | Error] {
+function size64Decode(readByte: () => number): [bigint, null | Error] {
     let byte = readByte()
 
-    if (byte < 0x80) {
-        return [byte, null]
+    if (!byte) {
+        return [BigInt(0), new Error('no more bytes')]
     }
 
-    let value = byte & 0x7f
+    if (byte < 0x80) {
+        return [BigInt(byte), null]
+    }
+
+    let value = BigInt(byte) & BigInt(0x7f)
 
     for (let shift = 7; shift < 63; shift += 7) {
         byte = readByte()
         if (!byte) {
-            return [0, null]
+            return [BigInt(0), new Error('no more bytes')]
         }
         if (byte < 0x80) {
-            return [Number(value | (byte << shift)), null]
+            return [value | (BigInt(byte) << BigInt(shift)), null]
         }
-        value |= (byte & 0x7f) << shift
+        value |= (BigInt(byte) & BigInt(0x7f)) << BigInt(shift)
     }
 
     byte = readByte()
     if (!byte) {
-        return [0, null]
+        return [BigInt(0), new Error('no more bytes')]
     }
     if (byte > 0x01) {
-        return [0, new Error('size64 overflow')]
+        return [BigInt(0), new Error('size64 overflow')]
     }
 
-    return [value | (byte << 63), new Error('Unexpected end of data')]
+    return [value | (BigInt(byte) << BigInt(63)), null]
 }

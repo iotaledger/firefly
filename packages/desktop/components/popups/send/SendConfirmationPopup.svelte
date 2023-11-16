@@ -65,8 +65,9 @@
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
     $: isInternal = recipient.type === 'account'
+    $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedAccount.isTransferring
-    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
+    $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
@@ -84,7 +85,12 @@
 
         if (isSendAndClosePopup) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
-            initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+            initialExpirationDate = getInitialExpirationDate(
+                expirationDate,
+                storageDeposit,
+                giftStorageDeposit,
+                isLayer2Transaction
+            )
 
             try {
                 await _onMount()
@@ -111,7 +117,12 @@
             // as it updates expiration date through the ExpirationTimePicker bind
             // Could be avoided with a rework of ExpirationTimePicker
             if (transactionDetails.expirationDate === undefined) {
-                initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+                initialExpirationDate = getInitialExpirationDate(
+                    expirationDate,
+                    storageDeposit,
+                    giftStorageDeposit,
+                    isLayer2Transaction
+                )
             }
         } catch (err) {
             handleError(err)
