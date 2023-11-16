@@ -33,6 +33,7 @@ export async function generateSingleBasicActivity(
     const id = outputId || transactionId
 
     const output = wrappedOutput.output as BasicOutput
+    const amount = getAmountFromOutput(output)
 
     const isShimmerClaiming = isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 
@@ -44,13 +45,15 @@ export async function generateSingleBasicActivity(
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
+    const layer2Allowance = Number(parsedLayer2Metadata?.baseTokens ?? '0')
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
+    const gasFee = layer2Allowance > 0 ? amount - layer2Allowance : 0
 
     let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
-    const baseTokenAmount = getAmountFromOutput(output) - storageDeposit - gasBudget
+    const baseTokenAmount = amount - storageDeposit - gasFee
 
     const nativeToken = await getNativeTokenFromOutput(output)
     const assetId = fallbackAssetId ?? nativeToken?.id ?? getCoinType()
