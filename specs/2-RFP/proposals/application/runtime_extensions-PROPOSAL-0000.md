@@ -79,7 +79,7 @@ Are there compatibility concerns?
 
 
 Things to think about:
-- How to add new extensions (on desktop, and with mobile app stores)
+- How to add new extensions (on desktop)
   - Downloading the plugin’s JSON file and storing it in the app storage
 - How to limit API access for extensions
   - See topic 1.

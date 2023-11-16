@@ -8,6 +8,7 @@
         convertToRawAmount,
         formatTokenAmountBestMatch,
         formatTokenAmountDefault,
+        getRequiredStorageDepositForMinimalBasicOutput,
         getUnitFromTokenMetadata,
         visibleSelectedAccountAssets,
     } from '@core/wallet'
@@ -51,9 +52,14 @@
         unit = undefined
     }
 
-    export function validate(allowZeroOrNull = false): Promise<void> {
+    export async function validate(allowZeroOrNull = false): Promise<void> {
         const amountAsFloat = parseCurrency(amount)
         const isAmountZeroOrNull = !Number(amountAsFloat)
+        const standard = asset?.metadata?.standard
+        const remainderBalance = Number(Big(availableBalance)?.minus(bigAmount))
+        // Calculate the minimum required storage deposit for a minimal basic output
+        // This is used to check if the user is leaving dust behind that cant cover the storage deposit
+        const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
         // Zero value transactions can still contain metadata/tags
         error = ''
         if (allowZeroOrNull && isAmountZeroOrNull) {
@@ -62,7 +68,7 @@
         } else if (isAmountZeroOrNull) {
             error = localize('error.send.amountInvalidFormat')
         } else if (
-            ((asset?.metadata?.standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
+            ((standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
                 (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
             Number.parseInt(amount, 10).toString() !== amount
         ) {
@@ -73,6 +79,17 @@
             error = localize('error.send.amountZero')
         } else if (!bigAmount.mod(1).eq(Big(0))) {
             error = localize('error.send.amountSmallerThanSubunit')
+        } else if (
+            standard === TokenStandard.BaseToken &&
+            remainderBalance !== 0 &&
+            remainderBalance < minRequiredStorageDeposit
+        ) {
+            // don't allow leaving dust(amount less than minimum required storage deposit) for base token
+            error = localize('error.send.leavingDust', {
+                values: {
+                    minRequiredStorageDeposit: formatTokenAmountBestMatch(minRequiredStorageDeposit, asset?.metadata),
+                },
+            })
         }
 
         if (error) {

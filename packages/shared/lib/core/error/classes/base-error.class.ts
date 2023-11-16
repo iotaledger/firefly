@@ -21,7 +21,15 @@ export class BaseError extends Error {
         }
 
         if (params?.saveToErrorLog) {
-            addError({ ...params, message, type: 'BaseError', time: Date.now() })
+            let logMessage
+            if (params?.originalError) {
+                try {
+                    logMessage = JSON.stringify(params.originalError)
+                } catch {
+                    logMessage = message
+                }
+            }
+            addError({ ...params, message: logMessage ?? message, type: 'BaseError', time: Date.now() })
         }
 
         if (params?.showNotification) {

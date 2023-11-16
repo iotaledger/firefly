@@ -3,6 +3,7 @@
     import { TogglableButton, Modal } from '@ui'
     import { FilterItem, FilterModal } from '@components'
     import { Filter } from '@core/utils'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let filterStore: Writable<Filter>
     let filter: Filter = structuredClone($filterStore)
@@ -48,7 +49,7 @@
 </script>
 
 <filter-container class="block h-6 relative">
-    <TogglableButton icon="filter" bind:active={filterActive} onClick={modal?.toggle} />
+    <TogglableButton icon={IconEnum.Filter} bind:active={filterActive} onClick={modal?.toggle} />
     {#if activeFilterCount}
         <filter-badge
             class="inline-flex items-center justify-center h-3 w-3 -ml-2 -mt-0.5 absolute rounded-full bg-blue-500 text-white text-8"

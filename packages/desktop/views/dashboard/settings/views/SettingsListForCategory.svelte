@@ -3,7 +3,6 @@
     import { activeProfile, isActiveLedgerProfile } from '@core/profile'
     import { SettingsRoute } from '@core/router'
     import features from '@features/features'
-    import { HR } from 'shared/components'
     import { SETTINGS } from './settings.constant'
 
     export let category: SettingsRoute
@@ -24,11 +23,11 @@
 
 <div class="flex flex-col space-y-5">
     {#each visibleSettings as { component, childRoute, props }, index}
-        <section id={childRoute} class="w-full sm:w-3/4">
+        <section id={childRoute} class="w-3/4">
             <svelte:component this={component} {...props} route={childRoute} />
         </section>
         {#if index < visibleSettings.length - 1}
-            <HR classes="justify-center" />
+            <hr />
         {/if}
     {/each}
 </div>

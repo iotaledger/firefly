@@ -1,11 +1,11 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import { initialisePincodeManager } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { isValidPin } from '@core/utils'
     import { Animation, Button, HTMLButtonType, PinInput, Text } from '@ui'
     import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false
 
@@ -104,7 +104,7 @@
             {localize('actions.continue')}
         </Button>
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-pink dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="pin-desktop" />
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-pink dark:bg-gray-900">
+        <Animation animation={AnimationEnum.PinDesktop} />
     </div>
 </OnboardingLayout>

@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import type { ParticipationEventId, ParticipationEventWithNodes } from '@iota/wallet'
+import type { ParticipationEventId, ParticipationEventWithNodes } from '@iota/sdk/out/types'
 import { selectedAccount } from '@core/account/stores'
 
 export function getVotingEvent(eventId: ParticipationEventId): Promise<ParticipationEventWithNodes> {

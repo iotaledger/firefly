@@ -10,6 +10,7 @@ export const externalAllowedLinks = [
     'wiki.iota.org',
     'explorer.iota.org',
     'govern.iota.org',
+    'explorer.iota-alphanet.iotaledger.net',
 
     // Assembly / Shimmer
     'assembly.sc',

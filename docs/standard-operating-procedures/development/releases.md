@@ -31,7 +31,6 @@ This SOP is only applicable to maintainers of this repository, that are responsi
 * [Regular Releases](#regular-releases)
 * [Milestone Releases](#milestone-releases)
 * [Hotfix Releases](#hotfix-releases)
-* [@iota/wallet (NPM) release](#iotawallet-npm-release)
 
 ## External References
 
@@ -61,7 +60,7 @@ Where we use the optional channel and build number for pre-releases.
 
 In tags and branches, the versioning will also be prefixed with the platform:
 `desktop-1.4.0` - branch or production release tag
-`mobile-1.0.0-alpha-1` - pre-release tag
+`desktop-1.0.0-alpha-1` - pre-release tag
 
 ---
 
@@ -287,23 +286,3 @@ After the hotfix has been released we can then merge the release branch into bot
 * Do **not** use squash and merge at this point as we will loose the commit history used for the changelog
 * Do **not** delete the release branch, as it will be used as the base for hotfixes in the future
 
-## @iota/wallet (NPM) Release
-
-The Firefly team is partly responsible for the npm package release of the [wallet.rs bindings](https://github.com/iotaledger/wallet.rs/tree/production/bindings/nodejs). The package serves
-as the backend of the application. The following steps describe the release process of the wallet.rs bindings.
-
-### 1. Opening changelog PR
-
-To trigger the release process, you add a markdown file describing the type of release (major/minor/patch) together with a description of what changed.
-The GitHub action expects the file to be under `wallet.rs/.changes`. More information can be found [here](https://github.com/iotaledger/wallet.rs/tree/production/.changes#readme).
-
-[Here](https://github.com/iotaledger/wallet.rs/pull/1212) is an example PR.
-
-The merge of this PR triggers the action described in the following step.
-
-### 2. Merge the release PR
-
-Upon merging the PR from the previous step, GitHub actions automatically opens a new PR. This PR deletes the previously added .md file and updates
-the package.json file and appends the changelog message to the changelog file. Merging this PR triggers the automatic release of the npm package.
-
-[Here](https://github.com/iotaledger/wallet.rs/pull/1216) is an example PR.

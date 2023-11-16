@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Platform } from '@core/app'
     import { LoginRoute, loginRoute } from '@core/router'
+    import features from '@features/features'
     import { UpdateStrongholdRouterView } from '@views'
     import { Transition } from 'shared/components'
     import { EnterPinView, LoadProfileView, SelectProfileView } from './views'
-    import features from '@features/features'
 
     $: if (features.analytics.loginRoute.enabled && $loginRoute)
         Platform.trackEvent('login-route', { route: $loginRoute })

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
-    import { HTMLButtonType, TextType } from 'shared/components/enums'
+    import { HTMLButtonType, TextType, TextHintVariant } from 'shared/components/enums'
     import { selectedAccount } from '@core/account/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
@@ -25,6 +25,7 @@
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||
         $selectedAccount?.hasVotingTransactionInProgress ||
+        $selectedAccount?.hasConsolidatingOutputsTransactionInProgress ||
         $selectedAccount?.isTransferring
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
@@ -87,7 +88,7 @@
             disabled={hasTransactionInProgress}
             {votingPower}
         />
-        <TextHint info text={localize('popups.manageVotingPower.hint')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.manageVotingPower.hint')} />
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>

@@ -1,18 +1,32 @@
 import { get } from 'svelte/store'
-import { selectedAccount, updateSelectedAccount } from '@core/account'
+import { PreparedTransaction } from '@iota/sdk/out/types'
+import { IAccountState, selectedAccount } from '@core/account'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
+import { plainToInstance } from 'class-transformer'
+import { updateActiveAccount } from '@core/profile'
 
-export async function consolidateOutputs(): Promise<void> {
-    const account = get(selectedAccount)
+export async function consolidateOutputs(accountToConsolidate?: IAccountState): Promise<void> {
+    const account = accountToConsolidate || get(selectedAccount)
+    if (!account) return Promise.reject('No account selected')
+
     try {
-        updateSelectedAccount({ isTransferring: true })
+        updateActiveAccount(account.index, { hasConsolidatingOutputsTransactionInProgress: true, isTransferring: true })
 
-        const transaction = await account.consolidateOutputs(false, 2)
+        const preparedConsolidateOutputsTransaction = await account.prepareConsolidateOutputs({
+            force: false,
+            outputThreshold: 2,
+            targetAddress: account.depositAddress,
+        })
+        const preparedTransaction = plainToInstance(PreparedTransaction, preparedConsolidateOutputsTransaction)
+        const transaction = await preparedTransaction?.send()
+
         await processAndAddToActivities(transaction, account)
     } catch (err) {
         handleError(err)
-    } finally {
-        updateSelectedAccount({ isTransferring: false })
+        updateActiveAccount(account.index, {
+            hasConsolidatingOutputsTransactionInProgress: false,
+            isTransferring: false,
+        })
     }
 }

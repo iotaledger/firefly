@@ -3,179 +3,183 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {network} tokens",
-                    "body": "Firefly is the official wallet software for {network}."
+                    "title": "{network} 토큰 보내기, 받기 및 관리하기",
+                    "body": "Firefly는 {network} 의 공식 지갑 소프트웨어입니다."
                 },
                 "legal": {
-                    "title": "Privacy Policy & Terms of Service",
-                    "body": "Please review the Privacy Policy and Terms of Service.",
-                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
+                    "title": "개인정보 보호정책 및 서비스 약관",
+                    "body": "개인 정보 보호 정책 및 서비스 약관을 검토하십시오.",
+                    "checkbox": "개인정보 보호정책 및 서비스 약관을 읽었으며 이에 동의합니다."
                 },
                 "languageAndAppearance": {
-                    "title": "Language & appearance",
-                    "body": "Choose your language and theme."
+                    "title": "언어 및 모양",
+                    "body": "언어와 테마를 선택하세요."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Choose protocol",
-                    "body": "Set the protocol for your profile.",
-                    "iota": "Default IOTA network",
-                    "shimmer": "Experimental IOTA staging network"
+                    "title": "프로토콜을 선택하세요.",
+                    "body": "프로필의 프로토콜을 설정합니다.",
+                    "iota": "기본 IOTA 네트워크",
+                    "shimmer": "실험적인 IOTA 스테이징 네트워크"
                 },
                 "chooseNetwork": {
-                    "title": "Choose network",
-                    "body": "Set the network for your profile.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
+                    "title": "네트워크를 선택하세요.",
+                    "body": "프로필의 네트워크를 설정하세요.",
                     "shimmer": {
                         "title": "Shimmer",
-                        "body": "Staging network for IOTA"
+                        "body": "IOTA의 스테이징 네트워크"
                     },
                     "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                        "title": "테스트넷",
+                        "body": "Shimmer의 공개 베타 네트워크"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA 메인넷"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA 알파넷",
+                        "body": "IOTA 알파넷"
                     },
                     "custom": {
-                        "title": "Custom network",
-                        "body": "Support for custom networks and/or nodes"
+                        "title": "사용자 지정 네트워크",
+                        "body": "사용자 지정 네트워크 및/또는 노드 지원"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a custom network or node",
-                    "body": "Fill the form with the node information and connect to a custom network or node."
+                    "title": "사용자 지정 네트워크 또는 노드에 연결",
+                    "body": "양식에 노드 정보를 입력하고 사용자 지정 네트워크 또는 노드에 연결하세요."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
-                    "body": "Select the appropriate method to set up your {network} profile."
+                    "title": "{network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} 프로필 설정",
+                    "body": "{network} 프로필을 설정하려면 적절한 방법을 선택하세요."
                 },
                 "setupNew": {
-                    "title": "Create a profile",
-                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "title": "프로필 만들기",
+                    "body": "일반 소프트웨어 지갑을 선택하거나 Ledger 장치가 있는 경우 하드웨어 지갑을 설정할 수 있습니다.",
                     "softwareAccount": {
-                        "title": "Create a software profile",
-                        "description": "Provides a Stronghold file and recovery phrase"
+                        "title": "소프트웨어 프로필 만들기",
+                        "description": "Stronghold 파일 및 복구 문구 제공"
                     },
                     "ledgerAccount": {
-                        "title": "Create a hardware profile",
-                        "description": "Ledger Nano S or Nano X required"
+                        "title": "하드웨어 프로필 만들기",
+                        "description": "Ledger Nano S, Nano S Plus 또는 Nano X가 필요합니다."
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {network} profile",
-                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
-                    "importMnemonic": "Use recovery phrase",
-                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
-                    "importFile": "Use Stronghold backup",
-                    "importFileDescription": "Import your Stronghold backup file",
-                    "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                    "title": "{network} 프로필 복구",
+                    "body": "기존 복원 문구 또는 Stronghold 백업 파일이 있는 경우 불러올 수 있습니다.",
+                    "importMnemonic": "복구 문구 사용",
+                    "importMnemonicDescription": "24단어 복 문구를 입력하세요.",
+                    "importFile": "Stronghold 백업 사용",
+                    "importFileDescription": "Stronghold 백업 파일 가져오기",
+                    "importLedger": "Ledger 장치 사용",
+                    "importLedgerDescription": "Ledger Nano S, Nano S Plus or Nano X 기기에서 복원"
                 },
                 "setupClaimed": {
-                    "title": "Claim Shimmer staking rewards",
-                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                    "title": "Shimmer 스테이킹 보상 요청하기",
+                    "body": "IOTA 프로필을 가져오고 Shimmer 스테이킹 보상을 요청하세요."
                 },
                 "enterName": {
-                    "title": "Create your {network} profile",
-                    "profileName": "Profile name",
-                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "title": "{network} 프로필을 생성하세요",
+                    "profileName": "프로필 이름",
+                    "body1": "여러 사용자 프로필을 생성하여 지갑을 구성하고, 프라이버시를 강화할 수 있습니다.",
                     "body2": {
-                        "first": "For now, let's start with your first profile name.",
-                        "nonFirst": "For now, let's start with your profile name."
+                        "first": "지금은 첫 번째 프로필 이름부터 시작하겠습니다.",
+                        "nonFirst": "지금은 프로필 이름부터 시작하겠습니다."
                     },
-                    "addMore": "You can add more profiles later."
+                    "addMore": "나중에 더 많은 프로필을 추가할 수 있습니다."
                 }
             },
             "strongholdSetup": {
                 "setupStrongholdPassword": {
-                    "title": "Create a password",
-                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                    "title": "비밀번호 만들기",
+                    "body1": "자금을 보호하려면 강력한 비밀번호가 필요합니다. 여러 단어의 조합을 사용하고 흔한 문구, 이름 또는 날짜는 피하십시오.",
+                    "body2": "복구 키트에 비밀번호를 적어 두는 것을 권장합니다."
                 }
             },
             "storageProtectionSetup": {
                 "setupPinProtection": {
-                    "title": "Set up PIN code",
-                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-                    "body2": "Use numbers only"
+                    "title": "PIN 코드 설정",
+                    "body1": "아래에 6자리 PIN을 입력하세요. 프로필에 액세스하려면 PIN을 입력하라는 메시지가 표시됩니다.",
+                    "body2": "숫자만 사용하세요."
                 }
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "Back up your recovery phrase",
-                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                    "title": "복원 문구를 백업하세요.",
+                    "body1": "이제 복원 문구가 표시됩니다. 이 문구를 복원 키트에 적어 두세요.",
+                    "body2": "복원 문구를 누구와도 공유하지 마세요. 어디에서나 토큰에 액세스하는 데 사용될 수 있습니다.",
+                    "body3": "복원 문구를 분실하면 자금을 잃을 수 있습니다."
                 },
                 "viewMnemonic": {
-                    "title": "Recovery phrase",
-                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-                    "body2": "Keep this private and safely stored.",
-                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-                    "revealRecoveryPhrase": "Reveal recovery phrase",
-                    "hideRecoveryPhrase": "Hide recovery phrase"
+                    "title": "복원 문구",
+                    "body1": "복원 키트에, 표시된 정확한 순서대로 단어를 적어 두세요.",
+                    "body2": "이 문구를 비공개로 안전하게 보관하세요.",
+                    "body3": "수기로 기록된 백업을 갖는 것이 중요합니다. 컴퓨터는 종종 고장나고 파일이 손상될 수 있습니다.",
+                    "revealRecoveryPhrase": "복원 문구 보이기",
+                    "hideRecoveryPhrase": "복원 문구 숨기기"
                 },
                 "verifyMnemonic": {
-                    "title": "Verify recovery phrase",
-                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
-                    "word": "Word",
-                    "verified": "Recovery phrase verified",
-                    "verifiedBody": "Remember to keep it private and safely stored."
+                    "title": "복원 문구 확인",
+                    "body": "문구를 올바르게 입력했는지 확인해 보세요. 번호순으로 각 단어를 선택하세요. \n팁: 키보드에서 단어 옆에 있는 숫자를 눌러 선택할 수 있습니다.",
+                    "word": "단어",
+                    "verified": "복원 문구가 확인되었습니다.",
+                    "verifiedBody": "비공개로 유지하고 안전하게 보관하세요."
                 },
                 "backupStronghold": {
-                    "title": "Back up to a Stronghold file",
-                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
-                    "body2": "Reasons why digital backups are important:",
-                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
-                    "reason2": "Import your wallets on other devices",
-                    "reason3": "Recover your full transaction history"
+                    "title": "Stronghold 파일로 백업",
+                    "body1": "프로필의 Stronghold 백업을 생성하려면 비밀번호를 입력하세요. 비밀번호는 백업 파일을 암호화하는 데 사용됩니다.",
+                    "body2": "디지털 백업이 중요한 이유:",
+                    "reason1": "복원 문구를 입력하지 않고도 지갑을 쉽게 복구할 수 있습니다.",
+                    "reason2": "다른 기기에서 지갑 가져오기",
+                    "reason3": "전체 거래 내역 복구"
                 }
             },
             "profileRecovery": {
                 "importMnemonicPhrase": {
-                    "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
-                    "enter": "Enter your secret recovery phrase",
-                    "phraseDetected": "24 word recovery phrase detected"
+                    "title": "복원 문구를 입력하세요.",
+                    "body": "복구 문구의 길이는 24단어이며 모두 소문자이며 사이에 공백이 있습니다. 이는 기존 Firefly 프로필을 복구하는 데 사용됩니다.",
+                    "enter": "비밀 복원 문구를 입력하세요",
+                    "phraseDetected": "24단어 복원 문구가 감지되었습니다."
                 },
                 "importStrongholdBackup": {
-                    "title": "Import your Stronghold backup",
-                    "body": "Import a Stronghold backup file to restore your profile."
+                    "title": "Stronghold 백업 가져오기",
+                    "body": "프로필 복원을 위한 Stronghold 백업 파일 가져오기"
                 },
                 "backupPassword": {
-                    "body1": "Please enter your backup password.",
-                    "body2": "This is the password you set when you first created your backup."
+                    "body1": "백업 비밀번호를 입력해주세요.",
+                    "body2": "이는 처음 백업을 생성할 때 설정한 비밀번호입니다."
                 },
                 "success": {
-                    "title": "You have successfully recovered your backup",
-                    "body": "You can now set up your new profile."
+                    "title": "백업을 성공적으로 복구했습니다.",
+                    "body": "이제 새 프로필을 설정할 수 있습니다."
                 }
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "Your Shimmer staking rewards",
-                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                    "title": "Shimmer 스테이킹 보상",
+                    "body": "Shimmer 스테이킹 보상이 올바른지 확인하세요. 전체 잔액을 찾으려면 여러 번 검색해야 할 수도 있습니다."
                 },
                 "success": {
-                    "title": "Shimmer claimed",
-                    "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards",
-                    "successfullyFound": "Successfully found {amount}"
+                    "title": "Shimmer가 요청되었습니다.",
+                    "body": "Shimmer 토큰을 성공적으로 청구했습니다.",
+                    "totalRewards": "총 보상",
+                    "successfullyFound": "{amount} 를 찾았습니다."
                 }
             },
             "congratulations": {
-                "title": "Profile setup almost complete...",
-                "fundsMigrated": "Funds migrated",
-                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
-                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
-                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-                "exportMigration": "Export migration log and finish setup"
+                "title": "프로필 설정이 거의 완료되었습니다...",
+                "fundsMigrated": "자금이 이전되었습니다.",
+                "body": "대시보드가 ​​성공적으로 로드되면 새 프로필이 준비됩니다.",
+                "ledgerHint": "대시보드 로드가 완료될 때까지 Ledger 장치를 연결 해제하지 마십시오.",
+                "softwareMigratedBody": "자금을 새 네트워크로 성공적으로 이전했습니다.",
+                "fireflyLedgerBody": "Ledger 프로필이 성공적으로 복구되었으며 이제 계속할 수 있습니다.",
+                "trinityLedgerBody": "Ledger를 새 네트워크로 성공적으로 이전했습니다.",
+                "exportMigration": "마이그레이션 로그 내보내기 및 설정 완료"
             }
         },
         "setupLedger": {
@@ -187,10 +191,10 @@
             "videoGuide": "Ledger 마이그레이션 비디오 가이드"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {network} app on your Ledger device?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
+            "title": "Ledger 기기에 {network} 앱을 설치하셨나요?",
+            "body1": "진행하기 전에 Ledger Live를 사용하여 {network} 앱을 찾아 설치해야 합니다.",
             "body2": "Ledger 펌웨어가 최신인지 반드시 확인하세요. 이전에 설치했던 모든 앱들을 전부 최신 버전으로 업데이트 해야합니다.",
-            "action": "Yes, I've installed the {network} app"
+            "action": "네, {network} 앱을 설치했습니다."
         },
         "importFromLedger": {
             "title": "여러분의 Ledger를 복원하거나 마이그레이션하세요.",
@@ -203,9 +207,9 @@
         "connectLedger": {
             "title": "Ledger를 Firefly에 연결하세요.",
             "body": "Firefly가 Ledger 장치를 발견하려면, 공식 Ledger Live 애플리케이션이 반드시 종료된 상태여야 합니다.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Ledger에서 새로운 Shimmer 앱을 여세요.",
+            "connect": "Ledger 장치를 연결하세요.",
+            "unlock": "Pin으로 Ledger를 잠금 해제하세요.",
+            "openApp": "Ledger에서 {network} 앱을 여세요.",
             "tips": "Ledger 연결이 잘 되지 않을 때 참고할 도움말"
         },
         "restoreFromFireflyLedger": {
@@ -246,26 +250,26 @@
         "settings": {
             "settings": "설정",
             "general": {
-                "title": "General",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "일반",
+                "description": "앱의 모양 및 기타 일반 설정 구성"
             },
             "profile": {
                 "title": "프로필",
                 "description": "프로필 이름을 바꾸거나 사진 등록하기"
             },
             "network": {
-                "title": "Network"
+                "title": "네트워크"
             },
             "collectibles": {
-                "title": "Collectibles"
+                "title": "수집품"
             },
             "security": {
                 "title": "보안",
                 "description": "비밀번호 변경 및 다른 보안 관련 설정들"
             },
             "advanced": {
-                "title": "Advanced",
-                "description": "Tools and manual settings for technical users"
+                "title": "고급",
+                "description": "고급 사용자를 위한 도구 및 수동 설정"
             },
             "helpAndInfo": {
                 "title": "도움말 및 정보",
@@ -284,6 +288,9 @@
                 "title": "언어",
                 "description": ""
             },
+            "appName": {
+                "title": "앱 이름"
+            },
             "currency": {
                 "title": "통화",
                 "description": "잔고 계산 및 차트 설정에 반영됩니다"
@@ -301,24 +308,24 @@
                 "description": "Stronghold 파일로 내보내기 - 지갑과 최신 거래 내역의 완전한 암호화 백업"
             },
             "appLock": {
-                "title": "Automatic logout",
+                "title": "자동 로그아웃",
                 "description": "지갑이 잠기고 로그아웃 되기 전 비활성 시간"
             },
             "strongholdPasswordTimeout": {
-                "title": "Stronghold Timeout",
-                "description": "Length of time before your Stronghold password is required again"
+                "title": "Stronghold 시간초과",
+                "description": "Stronghold 비밀번호가 다시 요구되기까지의 시간"
             },
             "maxMediaSize": {
-                "title": "Maximum media size",
-                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+                "title": "최대 미디어 크기",
+                "description": "이 제한보다 큰 크기의 NFT 미디어는 다운로드되지 않으며 대신 미디어 유형을 나타내는 자리 표시자가 표시됩니다."
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "최대 다운로드 시간",
+                "description": "다운로드하는 데 이 제한보다 오래 걸리는 NFT 미디어는 취소되고 미디어 유형을 나타내는 자리 표시자가 대신 표시됩니다."
             },
             "refreshNftMedia": {
-                "title": "Refresh NFT media",
-                "description": "NFT media cached for this account will be deleted and then downloaded again"
+                "title": "NFT 미디어 새로 고침",
+                "description": "이 계정에 캐시된 NFT 미디어는 삭제된 후 다시 다운로드됩니다."
             },
             "changePassword": {
                 "title": "비밀번호 변경하기",
@@ -337,9 +344,9 @@
                 "description": "내 Firefly 프로필 이름을 바꿉니다",
                 "success": "프로필 이름을 변경했습니다"
             },
-            "walletFinder": {
-                "title": "Wallet finder",
-                "description": "Perform an extended search of your previously used wallets"
+            "balanceFinder": {
+                "title": "잔고 찾기",
+                "description": "잔액에 대한 확장 검색 수행"
             },
             "hiddenAccounts": {
                 "title": "숨겨진 지갑",
@@ -350,12 +357,12 @@
                 "description": "지갑, 프로필 및 거래 내역 전체를 삭제합니다. 삭제 전에 백업해 놓았는지 확인해주세요"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
+                "title": "딥 링크",
+                "description": "{appProtocol}://로 시작하는 딥링크를 클릭하면 Firefly에 거래 데이터가 자동으로 채워집니다."
             },
             "networkInformation": {
-                "title": "Network information",
-                "connectedTo": "Connected to"
+                "title": "네트워크 정보",
+                "connectedTo": "연결된 대상"
             },
             "configureNodeList": {
                 "title": "노드 구성",
@@ -365,16 +372,16 @@
                 "includeNode": "포함 노드",
                 "editDetails": "세부 정보 수정",
                 "viewInfo": "정보 보기",
-                "setAsPrimary": "Set primary node",
-                "unsetAsPrimary": "Clear primary node",
+                "setAsPrimary": "기본 노드 설정",
+                "unsetAsPrimary": "기본 노드 지우기",
                 "removeNode": "노드 삭제",
                 "includeOfficialNodeList": "공식 노드 목록 포함",
                 "noNodes": "노드가 없으며, 네트워크에 연결할 수 없습니다",
                 "noNodesAuto": "노드가 없으며 대신 자동 선택이 사용됩니다"
             },
             "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "작업증명",
+                "description": "장치에서 로컬로 작업 증명을 완료하거나 노드에 아웃소싱합니다."
             },
             "errorLog": {
                 "title": "오류 로그",
@@ -420,41 +427,41 @@
                 "description": "개발진에게 오류를 보고합니다. 보고하기 전에 이미 보고된 오류인지 다시 한번 확인해 주세요"
             },
             "developerToggle": {
-                "title": "Developer Mode",
-                "description": "Switch developer mode on to enable more features in experimental state"
+                "title": "개발자 모드",
+                "description": "실험적 상태에서 더 많은 기능을 사용하려면 개발자 모드를 켜세요."
             }
         },
         "login": {
             "pleaseWait": "{time, plural, other {#초}} 동안 기다려주십시오.",
             "incorrectAttempts": "{attempts, plural, other {잘못된 시도 #회}}",
-            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
+            "hintStronghold": "Stronghold가 최신 버전이 아닙니다. Stronghold를 업데이트하려면 로그인하세요."
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Initialising profile manager",
-                "updateNodeInfo": "Checking node health",
-                "recoverAccounts": "Generating accounts",
-                "loadAccounts": "Syncing accounts",
-                "loadAssets": "Loading native assets",
-                "loadActivities": "Building activity history",
-                "setStrongholdStatus": "Securing stronghold",
-                "startBackgroundSync": "Starting background sync",
-                "loggingIn": "Loading dashboard"
+                "buildProfileManager": "프로필 관리자 초기화 중",
+                "updateNodeInfo": "노드 상태 확인",
+                "recoverAccounts": "계정 생성 중",
+                "loadAccounts": "계정 동기화 중",
+                "loadAssets": "Native 자산 로드 중",
+                "loadActivities": "활동 기록 만드는 중",
+                "setStrongholdStatus": "Stronghold 암호화 중",
+                "startBackgroundSync": "백그라운드 동기화 시작 중",
+                "loggingIn": "대시보드 로드 중"
             }
         },
         "dashboard": {
             "network": {
-                "operational": "Network operational",
-                "degraded": "Network degraded",
-                "down": "Network down",
-                "disconnected": "Disconnected from node",
+                "operational": "네트워크 운영",
+                "degraded": "네트워크 성능저하됨",
+                "down": "네트워크 다운",
+                "disconnected": "노드에서 연결이 끊어졌습니다.",
                 "status": "상태",
                 "messagesPerSecond": "초당 메세지",
                 "referencedRate": "참조 비율"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "profileApplication": "Profile, application, security",
+                "allSettings": "전체 설정",
+                "profileApplication": "프로필, 어플리케이션, 보안",
                 "logout": "로그아웃",
                 "stronghold": {
                     "title": "프로필 잠금",
@@ -474,7 +481,7 @@
                 },
                 "backup": {
                     "title": "지갑 백업",
-                    "lastBackup": "{date} 마지막으로 백업했습니다",
+                    "lastBackup": "{date} 에 마지막으로 백업했습니다",
                     "notBackedUp": "백업되지 않음",
                     "button": "백업"
                 },
@@ -482,55 +489,6 @@
                     "title": "새 업데이트 있음",
                     "updateVersion": "Firefly v{version}",
                     "button": "업데이트"
-                }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
                 }
             }
         },
@@ -551,19 +509,19 @@
                 "headers": {
                     "upcoming": "나중에 다시 확인",
                     "commencing": "Pre-staking 시작",
-                    "holding": "{duration} of staking left",
+                    "holding": "{duration} 남은 스테이킹 기간",
                     "ended": "스테이킹이 이제 종료되었습니다",
-                    "inactive": "No staking events detected"
+                    "inactive": "스테이킹 이벤트가 감지되지 않았습니다."
                 },
                 "bodies": {
-                    "upcoming": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
-                    "holdingAndStaking": "You automatically receive rewards every 10 seconds.",
-                    "holdingAndNotStaking": "Stake your {token} tokens to receive rewards every 10 seconds.",
-                    "endedAndDidStake": "{token} rewards will be distributed to your wallet once the network launches.",
-                    "endedAndDidNotStake": "You did not participate in this airdrop.",
-                    "endedAndDidNotReachMinRewards": "You did not stake enough {token} tokens to reach the minimum airdrop rewards.",
-                    "inactive": "Open network configuration in the advanced settings and make sure the current node has the \"Participation\" feature by clicking \"View info\"."
+                    "upcoming": "{date} 에 스테이킹이 시작되면, 10초마다 자동으로 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "commencing": "{date} 에 스테이킹이 시작되면 10초마다 자동으로 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "holdingAndStaking": "10초마다 자동으로 보상을 받습니다.",
+                    "holdingAndNotStaking": "10초마다 보상을 받으려면 {token} 토큰을 스테이킹하세요.",
+                    "endedAndDidStake": "네트워크가 출시되면 {token} 보상이 지갑에 배포됩니다.",
+                    "endedAndDidNotStake": "이번 에어드랍에 참여하지 않았습니다.",
+                    "endedAndDidNotReachMinRewards": "최소 에어드롭 보상에 도달할 만큼 충분한 {token} 토큰을 스테이킹하지 않았습니다.",
+                    "inactive": "고급 설정에서 네트워크 구성을 열고 \"정보 보기\"를 클릭하여 현재 노드에 \"참여\" 기능이 있는지 확인하세요."
                 }
             },
             "airdrops": {
@@ -573,16 +531,16 @@
                 "totalWalletRewards": "총 지갑 보상",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly는 구성 가능한 스마트 계약을 구축하고 배포하기 위한 무허가형, 확장성이 뛰어난 다중 체인 네트워크입니다. Assembly는 web3의 미래입니다. "
                 },
                 "shimmer": {
                     "name": "Shimmer",
-                    "description": "The incentivized staging network to advance major innovations on IOTA. Whatever happens, happens. How Shimmer evolves is up to you."
+                    "description": "IOTA의 주요 혁신을 발전시키기 위한 인센티브화된 스테이징 네트워크입니다. 무슨 일이든 일어날 수 있습니다. Shimmer가 어떻게 진화하는지는 당신에게 달려 있습니다."
                 }
             },
             "banners": {
                 "new": "새 이벤트",
-                "complete": "Complete"
+                "complete": "완료"
             }
         },
         "picker": {
@@ -593,233 +551,274 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "Collectibles",
-                "emptyTitle": "No collectibles",
-                "noResults": "No results",
-                "emptyDescription": "Deposit or Receive your first collectible now!"
+                "title": "수집품",
+                "emptyTitle": "수집품 없음",
+                "noResults": "결과 없음",
+                "emptyDescription": "지금 첫 번째 수집품을 입금하거나 받으세요!"
             },
             "details": {
-                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
-                "attributes": "Attributes",
+                "storageDepositDescription": "Tangle에 NFT를 저장하려면 환불 가능한 보증금이 필요합니다.",
+                "attributes": "속성",
                 "menu": {
-                    "download": "Download",
-                    "setPfp": "Set NFT profile pic",
-                    "unsetPfp": "Unset NFT profile pic",
-                    "view": "View media in browser",
-                    "burn": "Burn NFT"
+                    "download": "다운로드",
+                    "setPfp": "NFT 프로필 사진 설정",
+                    "unsetPfp": "NFT 프로필 사진 설정 해제",
+                    "view": "브라우저에서 미디어 보기",
+                    "burn": "NFT 소각"
                 }
             }
         },
         "governance": {
             "votingPower": {
-                "title": "Voting power",
-                "maximal": "Maximal voting power: {value}",
-                "manage": "Manage voting power"
+                "title": "투표 권한",
+                "maximal": "최대 투표권: {value}",
+                "manage": "투표권 관리"
             },
             "proposalsDetails": {
-                "title": "Details",
-                "totalProposals": "Total proposals",
-                "activeProposals": "Active proposals",
-                "votingProposals": "Proposals you are voting on",
-                "votedProposals": "Total proposals you voted on"
+                "title": "세부 사항",
+                "totalProposals": "전체 제안",
+                "activeProposals": "진행중인 제안",
+                "votingProposals": "투표중인 제안",
+                "votedProposals": "투표한 모든 제안"
             },
             "proposals": {
-                "title": "Proposals",
-                "voted": "Voted",
-                "successEdit": "Proposal successfully edited",
-                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
-                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
-                "successRemove": "Proposal successfully removed",
-                "emptyTitle": "No proposals"
+                "title": "제안",
+                "voted": "투표했습니다.",
+                "successEdit": "제안이 성공적으로 수정되었습니다.",
+                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} 성공적으로 추가되었습니다.",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}}이 모든 계정에 성공적으로 추가되었습니다.",
+                "successRemove": "제안이 삭제되었습니다.",
+                "emptyTitle": "제안 없음"
             },
             "statusTimeline": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting starts",
-                "ended": "Counting stops"
+                "upcoming": "공지사항",
+                "commencing": "투표 시작",
+                "holding": "집계 시작",
+                "ended": "집계 중단"
             },
             "details": {
                 "yourVote": {
-                    "title": "Your vote",
-                    "total": "Total votes counted",
-                    "power": "Voting power"
+                    "title": "내 투표",
+                    "total": "총 투표수",
+                    "power": "투표권"
                 },
                 "proposalInformation": {
-                    "title": "Proposal information",
-                    "votingOpens": "Voting opens on",
-                    "countingStarts": "Counting starts on",
-                    "countingEnds": "Counting ends on",
-                    "countingEnded": "Counting ended on",
-                    "eventId": "Event ID",
-                    "nodeUrl": "Node URL"
+                    "title": "제안 정보",
+                    "votingOpens": "투표 시작일",
+                    "countingStarts": "집계 시작일",
+                    "countingEnds": "집계 종료일",
+                    "countingEnded": "집계가   종료됨",
+                    "eventId": "이벤트 ID",
+                    "nodeUrl": "노드 URL"
                 },
-                "fetching": "Fetching proposal data",
-                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+                "fetching": "제안 데이터를 가져오는 중",
+                "hintVote": "발표 단계에 있는 제안에는 투표할 수 없습니다. 투표는 {time} 에 시작됩니다."
             }
         },
         "updateStronghold": {
             "update": {
-                "title": "Update Stronghold",
-                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
-                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+                "title": "Stronghold 업데이트",
+                "loginBody": "Stronghold가 최신 버전이 아닙니다. Stronghold를 업데이트하려면 비밀번호를 입력하세요.",
+                "recoveryBody": "가져온 Stronghold의 버전이 오래되었습니다. 계속하려면 Stronghold를 최신 버전으로 업데이트해야 합니다."
             },
             "updateBackup": {
-                "loginTitle": "Stronghold updated",
-                "loginBody": "It's all good now - you're running the latest Stronghold version",
-                "recoveryTitle": "Stronghold is successfully recovered and updated",
-                "recoveryBody": "You can now continue setting up your wallet",
-                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+                "loginTitle": "Stronghold 업데이트됨",
+                "loginBody": "이제 모든 것이 정상입니다. 최신 Stronghold 버전을 실행 중입니다.",
+                "recoveryTitle": "Stronghold가 성공적으로 복구 및 업데이트되었습니다.",
+                "recoveryBody": "이제 지갑 설정을 계속할 수 있습니다.",
+                "hint": "이전 Stronghold 백업 파일을 모두 삭제하고 새 파일을 저장하는 것이 좋습니다."
             },
             "changePassword": {
-                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
+                "hint": "Stronghold가 오래되어 업데이트되었습니다. Stronghold 비밀번호를 변경하는 것이 좋습니다."
+            }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "잠금 해제됨",
+                "locked": "잠김",
+                "total": "전체"
+            },
+            "timeUntilNextUnlock": "다음 잠금 해제까지 남은 시간",
+            "collect": "수집",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "격주 잠금 해제 일정",
+                "information": "지급 정보",
+                "tooltip": {
+                    "title": "지급",
+                    "amount": "수량",
+                    "unlockDate": "잠금 해제 날짜"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "IOTA 토큰 에어드랍을 통해 사용자가 받은 토큰 중 10%는 IOTA Stardust 네트워크가 시작되는 즉시 사용자에게 제공됩니다. 나머지는 2주마다 동일한 비율로 2년에 걸쳐 점진적으로 잠금 해제됩니다."
             }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "지급 세부정보",
+            "amount": "총 수량",
+            "unlockDate": "잠금 해제 날짜",
+            "status": "상태"
+        },
+        "vestingCollect": {
+            "title": "수집",
+            "body": "미청구 자금을 놓치지 마세요! 지금 아래 버튼을 클릭하여 자금을 확인하고 청구하세요.",
+            "unclaimedFunds": "미청구 금액",
+            "button": "수집"
+        },
+        "metricSystemInfo": {
+            "title": "미터법 접두사에서 전환",
+            "body1": "IOTA 초기에 우리는 미터법 접두사를 사용하여 표준을 준수하려고 했습니다. 그러나 단위의 배수 또는 약수를 나타내는 것은 비현실적인 것으로 입증되었습니다.",
+            "body2": "킬로(KIOTA), 메가(MIOTA) 등 대신 IOTA의 새로운 최소 단위를 'micro(마이크로)', 여러 단위의 경우 'micros'라고 합니다. 이전에 1 MIOTA였던 것은 이제 간단히 1 IOTA라고 불립니다. 1,000,000 마이크로는 1 IOTA와 같습니다.",
+            "body3": "이 변경은 귀하의 자산 가치에 영향을 미치지 않으니 안심하시기 바랍니다. 이는 기능 변경이 아닌 언어 개선입니다. 자세한 내용은 변경 사항을 알리는 블로그 게시물에서 확인할 수 있습니다.",
+            "link": "새로운 IOTA 토큰 명칭: 미터법 단위 접두사에서 벗어나기"
+        },
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "블라인드 서명 활성화",
+            "info": "이 거래를 확인하려면 원장 장치에서 블라인드 서명을 활성화해야 합니다.",
+            "step_1": "Ledger 장치를 연결하고 잠금 해제하세요.",
+            "step_2": "{network} 애플리케이션을 여세요.",
+            "step_3": "오른쪽 버튼을 눌러 설정으로 이동하세요. 그런 다음 두 버튼을 모두 눌러 확인하십시오. Ledger 장치에 블라인드 서명이 표시됩니다.",
+            "step_4": "거래 비공개 서명을 활성화하려면 두 버튼을 모두 누르세요. 장치에 활성화됨이 표시됩니다. 이제 끝났습니다."
         },
         "balanceBreakdown": {
-            "title": "Balance breakdown",
+            "title": "잔액 분석",
             "available": {
-                "title": "Available",
-                "subtitle": "Funds fully available for spending"
+                "title": "사용가능함",
+                "subtitle": "지출에 충분한 자금이 있습니다."
             },
             "pending": {
-                "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "title": "보류 중",
+                "subtitle": "일시적으로 거래가 잠겨있습니다.(베스팅 제외)"
             },
             "locked": {
-                "title": "Locked",
-                "subtitle": "Temporarily locked for governance"
+                "title": "잠김",
+                "subtitle": "거버넌스 때문에 일시적으로 잠겨 있습니다."
             },
             "storageDeposit": {
-                "title": "Storage deposit",
-                "subtitle": "These funds are reserved for storing native assets."
+                "title": "보관 보증금",
+                "subtitle": "이 자금은 기본 자산을 저장하기 위해 예약되어 있습니다."
             },
             "totalBalance": {
-                "title": "Total balance",
+                "title": "총 잔액",
                 "subtitle": ""
             },
             "basicOutputs": {
-                "title": "Native Tokens",
-                "subtitle": "Reserved for Native Token storage"
+                "title": "기본 토큰",
+                "subtitle": "기본 토큰 저장용으로 예약되어있습니다."
             },
             "nftOutputs": {
                 "title": "NFTs",
-                "subtitle": "Reserved for NFT storage"
+                "subtitle": "NFT 저장용으로 예약됨"
             },
             "aliasOutputs": {
                 "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+                "subtitle": "Alias 저장용으로 예약됨"
             },
             "foundryOutputs": {
-                "title": "Foundries",
-                "subtitle": "Reserved for Native Token Foundry storage"
+                "title": "파운드리",
+                "subtitle": "네이티브 토큰 파운드리 저장용으로 예약됨"
             },
             "unclaimed": {
-                "title": "Unclaimed transaction",
-                "subtitle": "Temporarily locked in unclaimed transactions"
+                "title": "미청구된 거래",
+                "subtitle": "청구되지 않은 거래에 일시 잠김"
             },
             "timelock": {
-                "title": "Time lock",
-                "subtitle": "Temporarily locked in timelocked transactions"
+                "title": "시간 잠금",
+                "subtitle": "시간 잠금된 거래에 일시 잠김"
             },
             "storageDepositReturn": {
                 "title": "SDRUC",
-                "subtitle": "Temporarily locked in Storage Deposit Return"
+                "subtitle": "보관예치금 반환에 일시 잠김"
             },
             "governance": {
-                "title": "Governance",
-                "subtitle": "Reserved for voting power"
+                "title": "거버넌스",
+                "subtitle": "투표권을 위해 예약됨"
             },
-            "minimizeStorageDepositButton": "Minimize storage deposit"
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
+            },
+            "minimizeStorageDepositButton": "보관 보증금 최소화"
         },
         "minimizeStorageDeposit": {
-            "title": "Minimize storage deposit",
-            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
-            "confirmButton": "Consolidate"
+            "title": "보관 보증금 최소화",
+            "description": "출력을 통합하여 필요한 저장 보증금을 최소화하고 사용 가능한 잔고를 늘리세요.",
+            "confirmButton": "통합하기"
         },
         "alias": {
-            "title": "Confirm alias creation"
+            "title": "별칭 생성 확인"
         },
         "password": {
-            "title": "비밀번호 필요",
-            "subtitle": "Please provide your password to unlock your wallets",
+            "title": "비밀번호가 필요합니다.",
+            "subtitle": "지갑을 잠금 해제하려면 비밀번호를 입력하세요.",
             "backup": "백업을 내보내기 위해 비밀번호를 입력해주세요"
         },
         "qr": {
-            "title": "나의 QR 코드"
+            "title": "QR 코드"
         },
         "appUpdate": {
-            "title": "Check for updates",
-            "installedVersion": "Installed version",
-            "newVerion": "New version",
-            "stage": "Stage",
-            "prod": "Production",
-            "alpha": "Alpha",
-            "beta": "Beta",
-            "releasedAt": "Released at",
-            "updateAvailable": "Update is available",
-            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
-            "latestInstalled": "You are running the latest and safest version"
+            "title": "업데이트 확인",
+            "installedVersion": "설치된 버전",
+            "newVerion": "새로운 버전",
+            "stage": "단계",
+            "prod": "생산",
+            "alpha": "알파",
+            "beta": "베타",
+            "releasedAt": "출시일",
+            "updateAvailable": "업데이트 가능",
+            "updatesDisabled": "사용 가능한 업데이트가 있지만, 운영 체제에 대한 인앱 업그레이드가 비활성화되어 있습니다.",
+            "latestInstalled": "가장 안전한 최신 버전을 실행 중입니다."
         },
         "backupStronghold": {
-            "title": "Backup your stronghold file",
-            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+            "title": "Stronghold 파일을 백업하세요.",
+            "body": "지갑과 거래 내역의 사본을 확보하려면 지갑을 정기적으로 백업하는 것이 중요합니다. 백업 및 복구 문구를 분실하면 자금에 접근할 수 없게 됩니다."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "지갑 선택",
+            "body": "방금 딥 링크를 팔로우했습니다. 계속 사용하고 싶은 지갑을 선택해주세요."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "실패한 링크",
+            "body": "이 링크는 실패했거나 유효하지 않습니다. 다시 시도하거나 링크 소스를 다시 확인하세요."
         },
         "deleteAccount": {
             "title": "{name} 계정을 삭제할까요?",
-            "body": "Are you sure you want to delete this wallet?",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
+            "body": "정말 이 지갑을 삭제하시겠습니까?",
+            "hint": "참고: 삭제된 후에는, 설정에서 \"지갑 찾기\"를 사용하여 이 지갑을 복원할 수 있습니다.",
             "typePassword": "계정을 삭제하려면 지갑 비밀번호를 입력하세요.",
             "hideAccount": "지갑 삭제",
             "errorTitle": "{name} 계정을 삭제할 수 없습니다",
             "errorBody1": "이 지갑은 삭제할 수 없습니다. 최소한 하나는 있어야합니다."
         },
         "externalUrl": {
-            "title": "Open URL in Browser",
-            "body": "Are you sure you want to open \"{url}\" in the browser?",
-            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
-            "action": "Open URL",
-            "invalidProtocol": "Cannot open URL with invalid protocol"
+            "title": "브라우저에서 URL 열기",
+            "body": "브라우저에서 \"{url}\"을 여시겠습니까?",
+            "hint": "생소한 URL입니다. URL을 열기 전에 다시 한 번 확인하시기 바랍니다.",
+            "action": "URL 열기",
+            "invalidProtocol": "잘못된 프로토콜로 URL을 열 수 없습니다."
         },
         "hideAccount": {
             "title": "{name} 계정을 숨길까요?",
             "body": "숨겨진 지갑은 고급설정의 \"숨긴 지갑 표시\"를 활성화하면 다시 찾을 수 있습니다.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "확인을 위해 지갑 비밀번호를 입력하세요.",
             "hideAccount": "지갑 숨기기",
             "errorTitle": "{name} 계정을 숨길 수 없습니다",
             "errorBody1": "지갑을 숨기기 위해서는 잔액이 0이어야 합니다.",
             "errorBody2": "이 지갑에 잔액이 {balance} 만큼 남아있습니다. 이것을 다른 지갑으로 옮기고 다시 시도하세요.",
             "errorBody3": "이 지갑은 숨길 수 없습니다. 최소한 하나는 있어야합니다."
         },
-        "addressHistory": {
-            "title": "주소 {name} 이력",
-            "currentBalance": "잔액: {balance}",
-            "internal": "내부 주소",
-            "external": "입금 주소"
-        },
         "excludeNode": {
-            "title": "Exclude node",
-            "body": "Are you sure you want to exclude {url} from the available node pool?"
+            "title": "노드 제외하기",
+            "body": "사용 가능한 노드 풀에서 {url} 을 제외하시겠습니까?"
         },
         "unsetAsPrimaryNode": {
-            "title": "Clear primary node",
-            "body": "Are you sure you want to clear {url} as the primary node?"
+            "title": "기본 노드 지우기",
+            "body": "기본 노드에서 {url} 을 삭제하시겠습니까?"
         },
         "node": {
             "titleAdd": "노드 추가",
@@ -827,10 +826,10 @@
             "titleRemove": "노드 삭제",
             "titleRemoveAll": "모든 노드 삭제",
             "titleDetails": "노드 세부사항",
-            "titleInfo": "Node information",
+            "titleInfo": "노드 정보",
             "addingNode": "노드 추가 중",
             "updatingNode": "노드 갱신 중",
-            "loadingNodeInfo": "추가 정보를 불러오는 중",
+            "loadingNodeInfo": "노드 정보를 불러오는 중",
             "nodeAddress": "노드 주소",
             "optionalUsername": "사용자 이름 (선택사항)",
             "optionalPassword": "비밀번호 (선택사항)",
@@ -839,39 +838,39 @@
             "removeConfirmation": "이 노드를 삭제하시겠습니까?",
             "info": {
                 "general": {
-                    "tab": "General",
-                    "name": "Name",
+                    "tab": "일반",
+                    "name": "이름",
                     "url": "URL",
-                    "version": "Version",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone",
-                    "pruningIndex": "Pruning index",
-                    "features": "Features"
+                    "version": "버전",
+                    "latestMilestone": "최신 이정표",
+                    "confirmedMilestone": "승인된 이정표",
+                    "pruningIndex": "가지치기 지수",
+                    "features": "기능"
                 },
                 "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone"
+                    "tab": "통계",
+                    "blocksPerSecond": "초당 블록",
+                    "referencedBlocksPerSecond": "초당 참조된 블록",
+                    "referencedRate": "참조율",
+                    "latestMilestone": "최신 이정표",
+                    "confirmedMilestone": "승인된 이정표"
                 },
                 "protocol": {
-                    "tab": "Protocol",
-                    "network": "Network",
+                    "tab": "프로토콜",
+                    "network": "네트워크",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Token supply",
-                    "version": "Version",
-                    "minPowScore": "Min PoW Score"
+                    "tokenSupply": "토큰 공급",
+                    "version": "버전",
+                    "minPowScore": "최소 PoW 점수"
                 },
                 "baseToken": {
-                    "tab": "Base token",
-                    "token": "Token",
+                    "tab": "기본토큰",
+                    "token": "토큰",
                     "tickerSymbol": "Ticker",
-                    "unit": "Unit",
-                    "subunit": "Sub-unit",
-                    "decimals": "Decimals",
-                    "useMetricPrefix": "Use metric prefix"
+                    "unit": "단위",
+                    "subunit": "하위 유닛",
+                    "decimals": "소수점",
+                    "useMetricPrefix": "미터법 접두사 사용"
                 }
             }
         },
@@ -903,23 +902,34 @@
             "userPath": "사용자 경로"
         },
         "transaction": {
-            "title": "Send asset",
+            "title": "자산 보내기",
             "body": "{amount} 만큼 보내려고 합니다",
-            "selectToken": "Select a token",
-            "selectAmount": "Send {tokenName}",
-            "selectRecipient": "Send {assetName} to",
-            "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "selectToken": "토큰 선택",
+            "selectAmount": "{tokenName} 보내기",
+            "selectRecipient": "{assetName} 를 다음으로 보내기",
+            "transactionSummary": "{recipient} 에게 거래",
+            "surplusIncluded": "이 거래에는 잉여 금액이 포함되어 있습니다. 보내려는 금액이 맞는지 다시 한번 확인해 주세요.",
             "sendingFromStakedAccount": "현재 staking중인 지갑에서 이체를 하고 있습니다. 이로 인해 여러분의 토큰 staking이 취소될 수 있습니다. 자유로이 이체하시되 그후에 남은 토큰을 다시 staking할 필요가 있을 수 있다는 점을 알아두세요.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "sendingFromStakedAccountBelowMinReward": "아직 최소 스테이킹 보상에 도달하지 않은 지갑에서 이체를 보내고 있습니다. 이로 인해 토큰의 스테이킹이 해제될 수 있으며 이 지갑에 대한 스테이킹 보상을 잃을 수 있습니다."
         },
-        "walletFinder": {
-            "title": "Wallet finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
-            "accountsSearched": "Wallets searched",
-            "accountsFound": "Wallets found",
-            "totalWalletBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        "balanceFinder": {
+            "title": "잔액 검색기",
+            "body": "보다 철저한 잔액 검색을 수행합니다.",
+            "addressesSearched": "주소가 검색됨",
+            "addressesFound": "주소가 발견됨",
+            "totalAddressBalance": "총 잔액",
+            "searchAgainHint": "잔액이나 지갑 개수가 정확하지 않나요? 전체 잔액이 표시될 때까지 다시 검색하세요.",
+            "currentWallet": "현재 지갑에서만 검색"
+        },
+        "balanceOverview": {
+            "title": "잔액 개요",
+            "body": "모든 지갑과 각 지갑의 잔액에 대한 정보를 찾아보세요."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "보상에 대한 검색을 더욱 철저히 수행합니다.",
+            "totalAddressBalance": "총 보상",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "경고: 마이그레이션 중 위험에 처한 자금",
@@ -927,7 +937,7 @@
             "body2": "위험 수준이 보통 이상인 주소에 대해서는 프로세스를 다시 실행하는 것이 좋습니다."
         },
         "missingBundle": {
-            "title": "Warning: funds at risk during migration",
+            "title": "경고: 마이그레이션 중 위험에 처한 자금",
             "body": "사용한 주소에 대한 자금이 있지만 보안에 필요한 정보를 찾을 수 없습니다. 이것은 오래 전에 거래를 한 경우 발생할 수 있습니다. 계속할 수 있지만 마이그레이션 중에 {value} 이 위험합니다.",
             "learnMore": "사용한 주소에 대해 자세히 알아보기",
             "proceed": "네, 위험 사항을 이해했습니다"
@@ -939,11 +949,11 @@
             "bodyFirefly": "Firefly는 완료 될 때까지 비활성화됩니다. 이후에도 토큰 마이그레이션이 가능합니다."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Ledger 장치를 연결하세요.",
+            "notConnected": "계속하려면 Ledger 장치를 연결하세요.",
+            "locked": "계속하려면 Ledger 장치를 잠금 해제하세요.",
+            "appNotOpen": "계속하려면 Ledger 장치의 {legacy} 앱을 여세요.",
+            "correctAppOpen": "Ledger가 성공적으로 연결되었습니다, 계속해주세요."
         },
         "ledgerConfirmation": {
             "confirm": "진행하기 위해서 Ledger 장치에 표시된 안내를 확인하세요."
@@ -959,11 +969,11 @@
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Ledger가 연결되지 않을 때의 팁",
             "steps": {
                 "0": "Ledger Live가 열려있지 않도록 확인하세요.",
                 "1": "Ledger 장치를 PIN 번호로 잠금해제 했는지 확인하세요.",
-                "2": "Ledger 장치에서 새로운 IOTA 앱을 여세요.",
+                "2": "Ledger 장치에서 새로운 {network} 앱을 여세요.",
                 "3": {
                     "text": "아직 해결되지 않았나요?",
                     "link": "공식 Ledger 지원 페이지를 확인해보세요."
@@ -971,13 +981,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "거래 확인",
+            "info": "Ledger 기기에 표시된 거래 정보를 아래 정보와 비교하여 확인하세요."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "내부 거래 확인",
+            "info": "Ledger 기기에서 내부 거래를 확인하세요.",
+            "hint": "내부 거래를 보낼 때 모든 자산은 지갑에 남아 있습니다."
         },
         "ledgerAddress": {
             "title": "받는 주소를 확인하세요.",
@@ -998,26 +1008,26 @@
             "title": "Staking 관리",
             "description": "지갑을 staking 하면 해당 자금에 staking 표시를 하여 여러분께 보내게됩니다. 자금은 언제든 이체 가능하지만 staking 보상 수령을 계속 받지는 못하게 됩니다.",
             "totalFundsStaked": "Staking 총 자금",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "stakedSuccessfully": "귀하의 자금은 {account} 에 스테이킹되었습니다.",
+            "unstakedSuccessfully": "자금이 {account} 에 대해 언스테이킹되었습니다.",
+            "singleAccountHint": "지갑을 찾고 계십니까? Firefly가 바뀌었습니다. 상단 메뉴 표시줄에서 지갑을 전환하세요."
         },
         "stakingConfirmation": {
-            "title": "Confirm Participation",
+            "title": "참여 확인",
             "subtitleStake": "Staking이 이제 시작됩니다.",
             "subtitleMerge": "Merge를 곧 시작합니다.",
-            "multiAirdropWarning": "If you do not want to participate in both airdrops, you can opt-out below. You can unstake and restake to opt back in at any time.",
-            "mergeStakeWarning": "Your funds will be staked for {airdrop}. To change which airdrops you want to participate in, unstake this wallet and stake it again.",
+            "multiAirdropWarning": "두 가지 에어드랍에 모두 참여하고 싶지 않다면 아래에서 선택 해제할 수 있습니다. 언제든지 스테이크를 해제하고 다시 스테이킹하여 다시 참여할 수 있습니다.",
+            "mergeStakeWarning": "자금은 {airdrop} 에 스테이킹됩니다. 참여하고 싶은 에어드랍을 변경하려면, 이 지갑을 언스테이킹하고 다시 스테이킹하세요.",
             "estimatedAirdrop": "예상 보상"
         },
         "newStakingPeriodNotification": {
-            "title": "Staking phase {periodNumber} from {date}",
-            "body": "IOTA staking for Assembly continues... Participate in phase {periodNumber} for 90 days. Stake your IOTA tokens and earn ASMB rewards!",
-            "info": "Shimmer staking is now complete and only ASMB tokens will be distributed."
+            "title": "{date} 부터 스테이킹 단계 {periodNumber}",
+            "body": "어셈블리를 위한 IOTA 스테이킹이 계속됩니다... 90일 동안 {periodNumber} 단계에 참여하세요. IOTA 토큰을 스테이킹하고 ASMB 보상을 받으세요!",
+            "info": "이제 Shimmer 스테이킹이 완료되었으며 ASMB 토큰만 배포됩니다."
         },
         "shimmer-info": {
             "title": "Shimmer에 대하여",
-            "body1": "Congratulations you have earned SMR tokens as a staking reward. Shimmer is an incentivized staging network to test major upgrades on IOTA.",
+            "body1": "스테이킹 보상으로 SMR 토큰을 획득하신 것을 축하합니다. Shimmer는 IOTA의 주요 업그레이드를 테스트하기 위한 인센티브화된 네트워크입니다.",
             "body2": "Shimmer의 출발은 2022년을 목표로 하고 있습니다. 여러분의 토큰은 네트워크가 열리면 즉시 전송할 수 있게됩니다."
         },
         "assembly-info": {
@@ -1032,7 +1042,7 @@
         "crashReporting": {
             "title": "충돌 보고",
             "body": "오류 또는 충돌이 발생할 때 진단 데이터를 자동으로 보내면 개발자가 Firefly를 개선하는 데 도움이 됩니다. 설정은 Firefly가 다시 시작된 후에 적용됩니다.",
-            "checkbox": "Send crash reports to the IOTA Foundation"
+            "checkbox": "IOTA 재단에 충돌 보고서 보내기"
         },
         "legalUpdate": {
             "tosTitle": "서비스 약관",
@@ -1045,142 +1055,139 @@
             "privPolicyCheckbox": "변경된 개인정보 보호 정책을 읽었으며 이에 동의합니다"
         },
         "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
+            "title": "Firefly 사용 방식이 변경되었습니다.",
+            "body": "각 탭의 콘텐츠는 이제 단일 지갑의 맥락에 있습니다. 제목 표시줄의 전환기를 사용하여 어디에서나 선택한 지갑을 변경할 수 있습니다.",
+            "hint": "지갑을 찾을 수 없나요? 이전에 사용한 지갑을 찾으려면 설정에서 잔액 찾기를 사용하세요."
         },
         "transactionDetails": {
-            "title": "Transaction details",
+            "title": "상세 거래 내역",
             "giftedStorageDeposit": {
-                "tooltipTitle": "Gift storage deposit",
-                "tooltipDescription": "Amount kept by the recipient"
+                "tooltipTitle": "선물 보관 보증금",
+                "tooltipDescription": "수령인이 보관하는 양"
             }
         },
         "sendForm": {
-            "title": "Send funds"
+            "title": "자금 보내기"
         },
         "tokenInformation": {
-            "newTokenTitle": "New token",
-            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "newTokenTitle": "새 토큰",
+            "verificationWarning": "이 토큰은 검증되지 않았습니다. 토큰 메타데이터를 해당 팀의 공식 웹사이트와 비교해보세요. 신뢰할 수 있는 토큰만 검증하세요.",
             "tokenMetadata": {
-                "standard": "Standard",
-                "name": "Name",
-                "tokenId": "Token ID",
+                "standard": "표준",
+                "name": "이름",
+                "tokenId": "토큰 ID",
                 "url": "URL"
             },
             "buttons": {
-                "verifyToken": "I verify this token"
+                "verifyToken": "이 토큰을 검증합니다."
             }
         },
         "sendNft": {
-            "formTitle": "Send NFT",
-            "confirmationTitle": "Confirm sending NFT",
+            "formTitle": "NFT 보내기",
+            "confirmationTitle": "NFT 전송 확인",
             "property": {
                 "nft": "NFT"
             }
         },
         "nativeToken": {
-            "formTitle": "Mint native tokens",
-            "confirmationTitle": "Mint native tokens",
+            "formTitle": "기본 토큰 발행",
+            "confirmationTitle": "기본 토큰 발행",
             "property": {
-                "totalSupply": "Total supply",
-                "maximumSupply": "Maximum supply",
-                "mintedTokens": "Minted tokens",
+                "totalSupply": "총 공급량",
+                "maximumSupply": "최대 공급량",
+                "mintedTokens": "생성된 토큰",
                 "meltedTokens": "Melted tokens",
-                "circulatingSupply": "Circulating supply",
-                "aliasAddress": "Alias controller address",
-                "standard": "Standard",
-                "tokenName": "Name",
-                "unit": "Unit",
-                "subunit": "Subunit",
-                "storageDeposit": "Storage Deposit",
-                "description": "Description",
-                "symbol": "Symbol",
-                "decimals": "Decimals",
+                "circulatingSupply": "유통량",
+                "aliasAddress": "별칭 컨트롤러 주소",
+                "standard": "표준",
+                "tokenName": "이름",
+                "unit": "단위",
+                "subunit": "하위 단위",
+                "storageDeposit": "보관 보증금",
+                "description": "설명",
+                "symbol": "상징",
+                "decimals": "소수점",
                 "url": "URL",
-                "logoUrl": "Logo URL",
-                "logo": "Logo",
-                "alias": "Alias",
-                "assetId": "Asset Id"
+                "logoUrl": "로고 URL",
+                "logo": "로고",
+                "alias": "별칭",
+                "assetId": "자산 Id"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
-            "title": "Unable to mint",
-            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+            "title": "생성할 수 없습니다.",
+            "description": "네이티브 토큰을 생성하려면 별칭 출력을 소유해야 합니다. 계속하려면 먼저 별칭을 만드세요."
         },
         "mintNftForm": {
-            "title": "Mint simple NFT",
+            "title": "심플 NFT 생성",
             "errors": {
-                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
-                "quantityTooSmall": "Quantity needs to be greater than 0",
-                "quantityTooLarge": "Quantity needs to be smaller than 64",
-                "emptyName": "Name is a required field",
-                "invalidURI": "Invalid URI, please provide a valid URI",
-                "notReachable": "URI not reachable, unable to check NFT type",
-                "royaltiesMustBeObject": "Royalties must be an object",
-                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
-                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
-                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
-                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
-                "attributesMustBeJSON": "Attributes must be a valid JSON",
-                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
-                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
-                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
+                "invalidMimetype": "잘못된 MimeType입니다. 파일 형식이 지원되는지 확인하세요.",
+                "quantityTooSmall": "수량은 0보다 커야 합니다.",
+                "quantityTooLarge": "수량은 64보다 작아야 합니다.",
+                "emptyName": "이름은 필수 항목입니다.",
+                "invalidURI": "잘못된 URI입니다. 유효한 URI를 입력하세요.",
+                "notReachable": "URI에 연결할 수 없으므로, NFT 유형을 확인할 수 없습니다.",
+                "royaltiesMustBeObject": "로열티는 객체여야 합니다.",
+                "royaltiesMustBeJSON": "로열티는 유효한 JSON이어야 합니다.",
+                "invalidAddress": "주소가 잘못되었습니다. 로열티가 지급될 곳은 유효한 {networkHrp} 주소여야 합니다.",
+                "invalidRoyaltyValue": "잘못된 값입니다. 0.05와 같이, 필요한 백분율을 나타내는 소수점 숫자여야 합니다.",
+                "invalidRoyaltyValueSum": "값이 잘못되었습니다. 모든 로열티의 합계는 1' 이하여야 합니다.",
+                "attributesMustBeJSON": "속성은 유효한 JSON이어야 합니다.",
+                "attributesMustBeArrayOfObjects": "속성은 객체의 배열이어야 합니다.",
+                "attributesInvalidKeys": "키가 잘못되었습니다. 속성에는 'trait_type' 및 'value' 키가 있어야 합니다.",
+                "attributesInvalidValues": "잘못된 값입니다. 'trait_type'은 비어 있지 않은 문자열이어야 하며, 'value'는 비어 있지 않은 문자열 또는 숫자여야 합니다."
             }
         },
         "faucetRequest": {
-            "title": "Faucet request",
-            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+            "title": "Faucet 요청",
+            "body": "{network} faucet에서 {token} 토큰을 요청하시겠습니까?"
         },
         "manageVotingPower": {
-            "title": "Manage voting power",
-            "body": "Define your voting power to vote on proposals.",
-            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
-            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+            "title": "투표권 관리",
+            "body": "제안에 투표할 수 있는 투표권을 정의하세요.",
+            "hint": "투표에 할당한 모든 자금은 잠겨 있습니다. 다시 사용할 수 있게 하려면 투표권을 줄여야 합니다. 이는 활성 투표가 있는 모든 제안에 영향을 미칩니다.",
+            "amountZero": "투표권을 0으로 설정하면 현재 투표중인 모든 제안에 대한 모든 투표가 중단된다는 점에 유의하세요."
         },
         "addProposal": {
-            "title": "Add proposal",
-            "body": "Please provide the information listed below to add a proposal.",
-            "addToAllAccounts": "Add the proposal to all accounts"
+            "title": "제안 추가",
+            "body": "제안을 추가하려면 아래 정보를 제공해 주세요.",
+            "addToAllAccounts": "모든 계정에 제안 추가"
         },
         "editProposal": {
-            "title": "Edit proposal",
-            "body": "Please provide the new url for the node that contains this proposal."
+            "title": "제안 수정",
+            "body": "이 제안이 포함된 노드의 새 Url을 제공하세요."
         },
         "voteForProposal": {
-            "title": "Vote for proposal",
-            "body": "You're about to vote for {proposal} proposal.",
-            "key": "Your voting power",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
-            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+            "title": "제안 투표하기",
+            "body": "{proposal} 제안에 투표하려고 합니다.",
+            "key": "귀하의 투표권",
+            "hasAbstained": "{numberOfQuestions, plural, one {# question} other {# questions}} 에 대한 답변을 기권하고 있습니다.",
+            "noVotingPower": "투표권이 없습니다. 거버넌스 대시보드에서 투표권을 높여주세요."
         },
         "revote": {
-            "title": "Revote on proposals",
-            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
-            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
+            "title": "제안에 재투표하기",
+            "body": "투표권을 변경하면 집계중인 모든 제안에 대한 투표가 일시적으로 중단됩니다. 투표를 재개하려면 \"재투표하기\"를 클릭하세요.",
+            "hint": "Firefly는 이전에 투표한 모든 제안과 답변 옵션을 기억합니다."
         },
         "removeProposal": {
-            "title": "Remove proposal",
-            "body": "Are you sure you want to remove this proposal?",
-            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+            "title": "제안 삭제",
+            "body": "이 제안을 삭제하시겠습니까?",
+            "hint": "집계 기간 동안 제안을 삭제하면 투표가 중단되지만 이미 집계된 투표에는 영향을 미치지 않습니다."
         },
         "stopVoting": {
-            "title": "Stop voting",
-            "body": "You're about to stop voting for the {proposalName} proposal.",
-            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+            "title": "투표 중지",
+            "body": "{proposalName} 제안에 대한 투표를 중단하려고 합니다.",
+            "hint": "집계 기간 동안 투표를 중단해도 이미 집계된 투표에는 영향을 미치지 않습니다."
         },
         "nodeAuthRequired": {
-            "title": "Authentication required",
-            "body": "This node requires additional authentication. Please fill in the appropriate information."
+            "title": "인증이 필요함",
+            "body": "이 노드에는 추가 인증이 필요합니다. 해당 정보를 입력해 주세요."
+        },
+        "addressHistory": {
+            "title": "주소 이력",
+            "disclaimer": "자금이 있거나 이 프로필로 알려진 주소 목록",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "내부"
         }
     },
     "charts": {
@@ -1197,7 +1204,7 @@
         "timeframe1Month": "1달"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "적용",
         "continue": "계속하기",
         "back": "뒤로가기",
         "previous": "이전",
@@ -1205,56 +1212,58 @@
         "cancel": "취소",
         "close": "닫기",
         "dismiss": "무시하기",
-        "claim": "Claim",
-        "claiming": "Claiming",
+        "claim": "받기",
+        "claiming": "받는 중",
         "claimingRewards": "보상 요청 중",
-        "reject": "Reject",
+        "reject": "거부",
         "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+            "title": "거래 거부",
+            "description": "이 거래를 거부하시겠습니까?",
+            "node": "거래를 거부하면 활동 피드에서만 숨겨집니다."
         },
         "confirmTokenBurn": {
-            "title": "Burn {assetName}",
-            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+            "title": "{assetName} 소각",
+            "hint": "토큰을 소각하면 그에 첨부된 저장 보증금이 해제될 수 있으며 되돌릴 수 없습니다."
         },
         "confirmNftBurn": {
-            "title": "Burn {nftName}",
-            "description": "Are you sure you want to burn this NFT?",
-            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+            "title": "{nftName} 소각",
+            "description": "이 NFT를 소각하시겠습니까?",
+            "hint": "NFT를 소각하면 그에 첨부된 저장 보증금이 해제되며 되돌릴 수 없습니다."
         },
         "proceedAnyway": "계속 진행",
         "save": "저장하기",
         "importSeed": "기존 시드 불러오기",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
-            "shimmer": "Restore Shimmer profile",
-            "testnet": "Restore Testnet profile",
-            "custom": "Restore Custom Network profile"
+            "iota": "IOTA 프로필 복원",
+            "iotaAlphanet": "IOTA 알파넷 프로필 복원",
+            "shimmer": "Shimmer 프로필 복원",
+            "testnet": "테스트넷 프로필 복원",
+            "custom": "사용자 정의 네트워크 프로필 복원"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
-            "shimmer": "Restore an existing Shimmer profile",
-            "testnet": "Restore an existing Testnet profile",
-            "custom": "Restore an existing Custom Network profile"
+            "iota": "기존 IOTA 프로필 복원",
+            "iotaAlphanet": "기존 IOTA 알파넷 프로필을 복원합니다.",
+            "shimmer": "기존 Shimmer 프로필을 복원합니다.",
+            "testnet": "기존 테스트넷 프로필을 복원합니다.",
+            "custom": "기존 사용자 정의 네트워크 프로필을 복원합니다."
         },
         "refreshNftMedia": {
-            "title": "Refresh NFT media",
-            "description": "Do you want to delete and re-download all NFT media for this account?"
+            "title": "NFT 미디어 새로 고침",
+            "description": "이 계정의 모든 NFT 미디어를 삭제하고 다시 다운로드하시겠습니까?"
         },
-        "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
-        "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
-        "createAlias": "Create alias",
-        "createAliasDescription": "Create alias output",
+        "createWallet": "새 {network} 프로필 만들기",
+        "createWalletDescription": "{network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 에서 실행되는 새로운 프로필을 생성합니다.",
+        "claimShimmer": "Shimmer 스테이킹 보상 요청하기",
+        "claimShimmerDescription": "IOTA 프로필을 가져오고 스테이킹 보상을 요청합니다.",
+        "createAlias": "별칭 만들기",
+        "createAliasDescription": "별칭 출력 생성",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
-        "setupPinCode": "Setup PIN code",
-        "setPin": "Set PIN",
-        "setPinCode": "Set PIN code",
-        "confirmPin": "Confirm PIN",
-        "confirmPinCode": "Confirm PIN code",
+        "setupPinCode": "PIN 코드 설정",
+        "setPin": "PIN 설정하기",
+        "setPinCode": "PIN 코드 설정하기",
+        "confirmPin": "PIN 확인하기",
+        "confirmPinCode": "PIN 코드 확인하기",
         "enterYourPin": "PIN 입력하기",
         "saveBackupFile": "백업 파일 저장하기",
         "iveWrittenRecoveryPhrase": "복원 문구를 옮겨 적었습니다",
@@ -1265,7 +1274,7 @@
         "send": "보내기",
         "receive": "받기",
         "create": "새로 만들기",
-        "updateAndContinue": "Update and continue",
+        "updateAndContinue": "업데이트하고 계속하기",
         "beginTransfer": "전송하기",
         "tryAgain": "다시 시도하기",
         "visitDiscord": "Discord 방문하기",
@@ -1274,42 +1283,42 @@
         "chooseFile": "파일을 선택하기",
         "dropHere": "파일을 여기로 끌어넣으세요.",
         "syncAll": "모두 동기화하기",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "가져오기",
+        "importing": "가져오는 중",
         "export": "내보내기",
         "exporting": "내보내는 중",
         "exportNewStronghold": "새 Stronghold 내보내기",
-        "enableDeepLinks": "Enable deep links",
+        "enableDeepLinks": "딥 링크 활성화",
         "enableDeveloperMode": "개발자 모드 활성화하기",
         "enableSystemNotifications": "시스템 알림 켜기",
-        "exportTransactionHistory": "Export transaction history",
+        "exportTransactionHistory": "거래 내역 내보내기",
         "localProofOfWork": "내 기기로 작업증명",
         "unlock": "잠금 해제",
         "updateFirefly": "Firefly 업데이트",
         "restartNow": "지금 다시 시작",
-        "refresh": "Refresh",
+        "refresh": "새로고침",
         "saveBackup": "Stronghold 백업 저장하기",
         "customizeAcount": "취향대로 지갑 설정하기",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "지갑 숨기기",
         "showAccount": "지갑 숨김 해제",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "지갑 삭제",
         "max": "최대",
         "addNode": "노드 추가",
-        "addingNode": "Adding node",
-        "addOfficialNodes": "Add official nodes",
+        "addingNode": "노드 추가 중",
+        "addOfficialNodes": "공식 노드 추가",
         "updateNode": "노드 변경",
         "removeNode": "노드 삭제",
         "hide": "숨기기",
         "hideOthers": "나머지 숨기기",
         "showAll": "모두 보기",
-        "useMax": "Use Max",
+        "useMax": "최대치 사용",
         "quit": "나가기",
         "edit": "수정",
         "undo": "되돌리기",
         "redo": "다시 실행",
         "cut": "잘라내기",
         "copy": "복사하기",
-        "copyAllInformation": "Copy all information",
+        "copyAllInformation": "모든 정보 복사",
         "paste": "붙여넣기",
         "selectAll": "모두 선택",
         "addAccount": "지갑 추가하기",
@@ -1323,71 +1332,75 @@
         "skip": "건너뛰기",
         "reset": "초기화",
         "downloadRecoveryKit": "복원 양식 파일 저장하기",
-        "skipBackup": "Skip wallet backup",
+        "skipBackup": "지갑 백업 건너뛰기",
         "finishSetup": "설정 완료하기",
         "readDocumentation": "설명서 읽기",
         "visitFaq": "자주 묻는 질문들 보기",
-        "viewDownloads": "View downloads",
+        "viewDownloads": "다운로드보기",
         "viewStatus": "상태 보기",
-        "viewBalanceBreakdown": "View balance breakdown",
+        "viewAddressHistory": "주소 이력 보기",
+        "viewBalanceBreakdown": "잔액 내역 보기",
+        "verifyDepositAddress": "입금주소 확인",
         "showHiddenAccounts": "숨김 지갑 표시",
         "confirm": "확인",
         "hideNetworkStatistics": "네트워크 통계 숨기기",
-        "findWallets": "Find wallets",
-        "useBalanceFinder": "Use balance finder",
-        "search": "Search",
-        "searching": "Searching",
+        "findWallets": "지갑 찾기",
+        "findBalances": "잔고 찾기",
+        "useBalanceFinder": "잔액 검색기 사용",
+        "search": "검색",
+        "searching": "검색 중",
         "searchAgain": "다시 검색",
         "closeFirefly": "Firefly 닫기",
-        "generateAddress": "Generate address",
+        "generateAddress": "주소 생성",
         "migrateAgain": "다른 인덱스 마이그레이션",
         "visitWebsite": "웹 사이트 방문",
         "howItWorks": "작동 방식",
         "learnAboutStaking": "Staking 배우기",
-        "stake": "Stake",
-        "unstake": "Unstake",
-        "stakeFunds": "Stake funds",
-        "manageStake": "Manage stake",
+        "stake": "스테이킹",
+        "unstake": "스테이킹 해제",
+        "stakeFunds": "자금 스테이킹하기",
+        "manageStake": "스테이킹 관리",
         "merge": "병합",
         "mergeFunds": "자금 병합",
         "done": "완료",
-        "okIUnderstand": "OK, I understand",
-        "readMore": "Read more",
-        "searchForRewards": "Search for rewards",
-        "claimRewards": "Claim rewards",
-        "rerunClaimProcess": "Rerun claim process",
-        "addPublicNote": "Add public note",
-        "backup": "Backup",
-        "mint": "Mint",
-        "mintNativeToken": "Mint native token",
-        "mintNft": "Mint NFT",
-        "verifyToken": "Verify token",
-        "unverifyToken": "Unverify token",
-        "hideToken": "Hide token",
-        "unhideToken": "Unhide token",
-        "burn": "Burn",
-        "burnToken": "Burn token",
-        "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata",
+        "okIUnderstand": "네, 이해했습니다.",
+        "readMore": "더 보기",
+        "searchForRewards": "보상 검색",
+        "claimRewards": "보상 청구",
+        "rerunClaimProcess": "청구 프로세스 재실행",
+        "addPublicNote": "공개 메모 추가",
+        "backup": "백업",
+        "mint": "발행",
+        "mintNativeToken": "기본 토큰 발행",
+        "mintNft": "NFT 발행",
+        "verifyToken": "토큰 확인",
+        "unverifyToken": "토큰 확인 취소",
+        "hideToken": "토큰 숨기기",
+        "unhideToken": "토큰 숨기기 해제",
+        "burn": "소각",
+        "burnToken": "토큰 소각",
+        "faucetRequest": "{token} 토큰 받기",
+        "refreshTokenMetadata": "토큰 메타데이터 새로 고침",
         "test": "테스트",
         "testDeepLink": "딥 링크 테스트",
         "initialize": "초기화",
         "initializing": "초기화 중",
-        "delete": "Delete",
-        "remove": "Remove",
-        "addReference": "Add reference",
-        "depositNft": "Deposit NFTs",
-        "vote": "Vote",
-        "addProposal": "Add proposal",
-        "removeProposal": "Remove proposal",
-        "changeNode": "Change node",
-        "stopVoting": "Stop voting",
-        "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "delete": "삭제",
+        "remove": "제거",
+        "addReference": "참조 추가",
+        "depositNft": "NFT 입금",
+        "vote": "투표하기",
+        "addProposal": "제안 추가",
+        "removeProposal": "제안 삭제",
+        "changeNode": "노드 변경",
+        "stopVoting": "투표 중지",
+        "revote": "재투표하기",
+        "skipAndKeep": "건너뛰고 이전 비밀번호 유지",
+        "addChain": "체인 추가",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
-        "recipient": "Recipient",
+        "recipient": "수령인",
         "password": "비밀번호",
         "confirmPassword": "비밀번호 확인하기",
         "currentPassword": "현재 비밀번호",
@@ -1400,74 +1413,76 @@
         "sending": "보내는 중",
         "received": "받음",
         "receiving": "받는 중",
-        "newVotingPower": "New voting power",
-        "votingPower": "Voting power",
-        "increased": "Voting power increased",
-        "increasing": "Increasing voting power",
-        "decreased": "Voting power decreased",
-        "decreasing": "Decreasing voting power",
-        "voted": "Voted",
-        "voting": "Voting",
-        "changedVote": "Changed vote",
-        "changingVote": "Changing vote",
-        "revoted": "Revoted",
-        "revoting": "Revoting",
-        "unvoted": "Unvoted",
-        "unvoting": "Unvoting",
-        "sentNft": "NFT sent",
-        "sendingNft": "Sending NFT",
-        "receivedNft": "NFT received",
-        "receivingNft": "Receiving NFT",
-        "transfer": "Transfer",
-        "transferring": "Transferring",
-        "transferNft": "Transfer NFT",
-        "transferringNft": "Transferring NFT",
-        "mintedNft": "Minted NFT",
-        "mintingNft": "Minting NFT",
+        "newVotingPower": "새로운 투표권",
+        "votingPower": "투표권",
+        "increased": "투표권이 증가됨",
+        "increasing": "투표권 높이기",
+        "decreased": "투표권이 감소됨",
+        "decreasing": "투표권 줄이기",
+        "voted": "투표했습니다.",
+        "voting": "투표",
+        "changedVote": "투표가 변경됨",
+        "changingVote": "투표 변경",
+        "revoted": "재투표됨",
+        "revoting": "재투표하기",
+        "unvoted": "투표취소",
+        "unvoting": "투표 안함",
+        "sentNft": "NFT 전송됨",
+        "sendingNft": "NFT 보내기",
+        "receivedNft": "NFT 받음",
+        "receivingNft": "NFT 받기",
+        "transfer": "이체",
+        "transferring": "이체중",
+        "transferNft": "NFT 전송",
+        "transferringNft": "NFT 전송중",
+        "mintedNft": "NFT 발행됨",
+        "mintingNft": "NFT 발행",
         "shimmerClaimed": "받음",
         "shimmerClaiming": "받는 중",
-        "shimmerGenesis": "Shimmer Genesis",
-        "minted": "Minted",
-        "minting": "Minting",
-        "burned": "Burned",
-        "burning": "Burning",
-        "consolidated": "Outputs consolidated",
-        "consolidating": "Consolidating outputs",
-        "aliasCreated": "Alias created",
-        "creatingAlias": "Creating Alias",
+        "shimmerGenesis": "Shimmer 기원",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust 기원",
+        "minted": "발행됨",
+        "minting": "발행",
+        "burned": "소각됨",
+        "burning": "소각",
+        "consolidated": "출력 통합됨",
+        "consolidating": "출력 통합",
+        "aliasCreated": "별칭 생성됨",
+        "creatingAlias": "별칭 만들기",
         "sendPayment": "보내기",
         "moveFunds": "내부 전송",
         "sendTo": "전송",
-        "sendAssets": "Send assets",
-        "sendAssetToAddress": "Send asset to an address",
+        "sendAssets": "자산 보내기",
+        "sendAssetToAddress": "주소로 자산 보내기",
         "sendToAddress": "주소로 보내기",
-        "sendToken": "Send token",
-        "sendNft": "Send NFT",
-        "sendNftToAddress": "Send NFT to an address",
+        "sendToken": "토큰 전송",
+        "sendNft": "NFT 전송",
+        "sendNftToAddress": "NFT를 주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
         "moveFundsBetweenAccounts": "지갑간 자금 이체하기",
         "manageAccount": "지갑 관리",
         "customizeAcount": "취향대로 지갑 설정하기",
-        "account": "Wallet",
+        "account": "지갑",
         "sendingToAddress": "주소로 보내는 중",
         "amount": "수량",
         "addAddress": "주소 추가하기",
         "reference": "참고",
         "from": "보낸이",
         "to": "받는이",
-        "and": "and",
-        "receiveFunds": "Receive funds",
+        "and": "그리고",
+        "receiveFunds": "자금 받기",
         "address": "주소",
-        "myAddress": "My address",
-        "myNetworkAddress": "My {networkName} address",
+        "myAddress": "내 주소",
+        "myNetworkAddress": "내 {networkName} 주소",
         "shareAddress": "주소 공유하기",
         "yourAddress": "내 주소",
         "newRemainder": "새로운 잔돈",
         "remainder": "잔돈",
         "generateNewAddress": "새 주소 생성하기",
-        "copyToClipboard": "Copy to clipboard",
+        "copyToClipboard": "클립보드에 복사",
         "copyAddress": "주소 복사하기",
-        "viewOnExplorer": "View on Explorer",
+        "viewOnExplorer": "Explorer에서 보기",
         "import": "불러오기",
         "stronghold": "Stronghold",
         "language": "언어",
@@ -1476,8 +1491,8 @@
         "darkTheme": "어둡게",
         "systemTheme": "시스템",
         "balance": "잔고",
-        "balanceWithValue": "Balance: {balance}",
-        "balanceWithNetwork": "{network} Balance",
+        "balanceWithValue": "잔액: {balance}",
+        "balanceWithNetwork": "{network} 잔액",
         "all": "전부",
         "incoming": "받음",
         "outgoing": "보냄",
@@ -1488,15 +1503,15 @@
         "profiles": "프로필",
         "dev": "개발자",
         "createAccount": "지갑 만들기",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "지갑 추가",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",
         "transactions": "거래내역",
-        "activity": "Activity",
+        "activity": "활동",
         "security": "보안",
         "accountAddress": "지갑 주소",
         "network": "네트워크",
-        "destinationNetwork": "Destination network",
+        "destinationNetwork": "대상 네트워크",
         "nodes": "노드",
         "wallet": "지갑",
         "help": "도움말",
@@ -1506,22 +1521,22 @@
         "receiveAddress": "받은 주소",
         "newAddress": "새 주소",
         "date": "날짜",
-        "status": "Status",
+        "status": "상태",
         "confirmed": "승인됨",
         "pending": "처리 중",
         "noAccounts": "지갑이 없습니다. 생성해 주세요.",
         "loadingAccounts": "불러오는 중입니다. 잠시만 기다려 주세요...",
         "addProfile": "프로필 추가",
         "noRecentHistory": "최근 기록 없음",
-        "noFilteredActivity": "No matching activities",
-        "noAssets": "No assets",
-        "noFilteredAsset": "No matching assets",
-        "thisMonth": "This month",
-        "search": "Search",
+        "noFilteredActivity": "일치하는 활동 없음",
+        "noAssets": "자산 없음",
+        "noFilteredAsset": "일치하는 자산없음",
+        "thisMonth": "이번 달",
+        "search": "검색",
         "firstSync": "기록을 동기화하는 중입니다. 다소 시간이 걸릴 수 있습니다...",
         "transferSyncing": "지갑 동기화하기",
         "transferSelectingInputs": "보낼 주소를 선택하는 중",
-        "transferRemainderAddress": "잔돈 주소 생성하기",
+        "transferRemainderAddress": "나머지 주소 생성 중",
         "transferPreparedTransaction": "거래 준비하기",
         "transferSigning": "거래에 서명하는 중",
         "transferPow": "작업 증명 수행 중",
@@ -1529,7 +1544,7 @@
         "transferComplete": "전송 완료",
         "generatingReceiveAddress": "받는 주소 생성하기",
         "broadcasting": "송출 중",
-        "confirming": "Confirming",
+        "confirming": "확인중",
         "creatingAccount": "지갑을 만드는 중입니다. 잠시만 기다려 주세요...",
         "updatingAccount": "지갑을 업데이트 중입니다. 잠시만 기다려 주세요...",
         "accountSyncing": "지갑 동기화 중",
@@ -1537,7 +1552,7 @@
         "passwordUpdating": "비밀번호를 변경합니다...",
         "passwordSuccess": "비밀번호를 성공적으로 변경하였습니다",
         "passwordFailed": "비밀번호를 변경하지 못했습니다",
-        "syncing": "Syncing",
+        "syncing": "동기화 중",
         "syncingAccounts": "지갑 동기화 중...",
         "exportingStronghold": "Stronghold를 내보내는 중...",
         "exportingStrongholdSuccess": "Stronghold를 성공적으로 내보냈습니다",
@@ -1554,212 +1569,207 @@
         "creatingProfile": "프로필을 만드는 중입니다. 잠시만 기다려 주세요...",
         "fundMigration": "자금 마이그레이션",
         "accountRemoved": "이 지갑은 숨겨져 있습니다. 거래를 위해 숨김 취소를 해주세요.",
-        "fromAddress": "from {account}",
-        "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "fromAddress": "{account} 로부터",
+        "toAddress": "{account} 로",
+        "stakedFor": "{account} 에 스테이킹됨",
+        "unstakedFor": "{account} 에 대한 스테이킹 해제됨",
+        "votedFor": "{account} 에 투표함",
+        "unvotedFor": "{account} 에 대한 투표가 취소됨",
+        "stakingTransaction": "스테이킹 거래",
+        "unstakingTransaction": "스테이킹 해제 거래",
         "legacyNetwork": "예전 네트워크",
         "capsLock": "Caps Lock 켜짐",
         "version": "{version} 버전",
-        "yourWallets": "Your Wallets",
+        "yourWallets": "지갑",
         "unknown": "알 수 없음",
-        "unknownAddress": "Unknown address",
+        "unknownAddress": "알 수 없는 주소",
         "none": "없음",
-        "staked": "Staked",
-        "unstaked": "Unstaked",
+        "staked": "스테이킹되었습니다.",
+        "unstaked": "스테이킹 해제됨",
         "staking": "스테이킹",
-        "unstaking": "Unstaking",
-        "notStaked": "Not staked",
-        "stakedFunds": "Staked funds",
-        "unstakedFunds": "Unstaked funds",
+        "unstaking": "스테이킹 해제",
+        "notStaked": "스태이킹 되지않음",
+        "stakedFunds": "스테이킹된 자금",
+        "unstakedFunds": "스테이킹되지 않은 자금",
         "accountColor": "지갑 색상",
-        "transactionTime": "Transaction time",
-        "surplus": "Surplus",
-        "storageDeposit": "Storage deposit",
+        "transactionTime": "거래 시간",
+        "surplus": "여분",
+        "storageDeposit": "보관 보증금",
         "giftedStorageDeposit": "Gifted storage deposit",
-        "storageDepositPerNft": "Storage deposit per NFT",
-        "totalStorageDeposit": "Total storage deposit",
-        "expirationTime": "Expiration time",
+        "storageDepositPerNft": "NFT당 보관 보증금",
+        "totalStorageDeposit": "총 보관 보증금",
+        "expirationTime": "만료 시간",
         "timelockDate": "Timelock",
         "claimedTime": "Claimed at",
-        "nftAddress": "NFT Address",
+        "nftAddress": "NFT 주소",
         "nftId": "NFT ID",
-        "nftMetadata": "NFT Metadata",
-        "aliasId": "Alias ID",
+        "nftMetadata": "NFT 메타데이터",
+        "aliasId": "별칭 ID",
         "governorAddress": "Governor Address",
-        "stateControllerAddress": "State Controller Address",
-        "copiedToClipboard": "Copied to clipboard",
+        "stateControllerAddress": "컨트롤러 주소 지정",
+        "copiedToClipboard": "클립보드에 복사됨",
         "total": "총액: {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
-        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
-        "amountClaimed": "{amount} claimed",
-        "metadata": "Metadata",
-        "amountConsolidatedInputs": "Consolidated outputs",
-        "name": "Name",
-        "tag": "Tag",
-        "nodeList": "Node list",
+        "availableBalanceWithValue": "사용가능한 잔액: {balance}",
+        "availableBalance": "사용가능한 잔액",
+        "availableBalanceTooltip": "자산의 총 잔액에서 저장 보증금을 충당하는 데 필요한 자금(예: 보류 중인 거래에 잠겨 있는 자금, 네이티브 토큰용으로 예약된 자금 또는 NFT용으로 예약된 자금)을 뺀 금액입니다.",
+        "amountClaimed": "{amount} 청구됨",
+        "metadata": "메타데이터",
+        "amountConsolidatedInputs": "출력 통합됨",
+        "name": "이름",
+        "tag": "태그",
+        "nodeList": "노드 목록",
         "claimedIn": "Claimed in",
         "claimingIn": "Claiming in",
-        "assets": "Assets",
-        "nativeTokens": "Native tokens",
-        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
-        "mintNftDescription": "Mint NFT following IRC27 standard",
-        "faucetRequestDescription": "Request tokens from the {network} faucet",
-        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "assets": "자산",
+        "nativeTokens": "기본 토큰",
+        "mintNativeTokenDescription": "IRC30 표준을 따르는 기본 토큰을 발행합니다.",
+        "mintNftDescription": "IRC27 표준을 따르는 NFT를 발행합니다.",
+        "faucetRequestDescription": "{network} faucet에서 토큰을 요청합니다.",
+        "refreshTokenMetadataDescription": "모든 토큰 메타데이터 재설정 및 새로고침",
+        "refreshTokenMetadataHint": "이렇게 하면 확인 상태를 포함한 모든 토큰의 메타데이터가 재설정되고 숨겨진 자산이 모두 드러납니다.",
+        "giftStorageDeposit": "선물 보관 보증금",
+        "excluded": "제외됨",
+        "developerTools": "개발자 도구",
+        "testDeepLinkDescription": "Firefly로 전송된 딥링크 요청을 시뮬레이션합니다.",
         "url": "URL",
         "hash": "해시",
-        "creating": "Creating",
-        "updating": "Updating",
-        "enterAddress": "Enter address",
-        "transaction": "Transaction",
-        "alias": "Alias",
+        "creating": "생성 중",
+        "updating": "업데이트중",
+        "enterAddress": "주소 입력",
+        "transaction": "거래",
+        "alias": "별칭",
         "foundry": "Foundry",
-        "token": "Token",
+        "token": "토큰",
         "nft": "NFT",
-        "type": "Type",
+        "type": "유형",
         "immutableIssuer": "Immutable Issuer",
-        "smartContract": "Smart Contract",
-        "targetContract": "Target contract",
-        "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
-        "standard": "Standard",
+        "smartContract": "스마트 컨트랙트",
+        "targetContract": "대상계약",
+        "contractFunction": "계약 기능",
+        "gasBudget": "가스 예산",
+        "standard": "표준",
         "uri": "URI",
-        "issuer": "Issuer",
-        "issuerAddress": "Issuer Address",
-        "issuerName": "Issuer Name",
-        "quantity": "Quantity",
-        "collection": "Collection",
-        "collectionId": "Collection ID",
-        "collectionName": "Collection Name",
+        "issuer": "발행자",
+        "issuerAddress": "발행자 주소",
+        "issuerName": "발행자 이름",
+        "quantity": "수량",
+        "collection": "수집품",
+        "collectionId": "수집품 ID",
+        "collectionName": "수집품 이름",
         "royalties": "Royalties",
-        "description": "Description",
-        "attributes": "Attributes",
-        "details": "Details",
-        "availableAmount": "{amount} available",
-        "properties": "Properties",
-        "statistics": "Statistics",
-        "username": "Username",
-        "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction",
-        "coinType": "Coin type",
-        "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "description": "설명",
+        "attributes": "속성",
+        "details": "세부 사항",
+        "availableAmount": "{amount} 사용 가능",
+        "properties": "특성.",
+        "statistics": "통계",
+        "username": "사용자 이름",
+        "jwt": "JSON 웹 토큰",
+        "internalTransaction": "내부 거래",
+        "coinType": "코인 유형",
+        "custom": "사용자 정의",
+        "verifyLedgerDepositAddress": "Ledger 기기를 확인하여 입금주소가 ledger 기기에 표시된 주소와 일치하는지 확인해주세요."
     },
     "filters": {
-        "title": "Filters",
+        "title": "필터",
         "showHidden": {
-            "label": "Show hidden",
-            "yes": "Yes",
-            "no": "No"
+            "label": "숨긴 항목 표시",
+            "yes": "네",
+            "no": "아니오"
         },
         "showRejected": {
-            "label": "Show rejected",
-            "yes": "Yes",
-            "no": "No"
+            "label": "거부된 항목 표시",
+            "yes": "네",
+            "no": "아니오"
         },
         "showValueless": {
             "label": "Show valueless",
-            "yes": "Yes",
-            "no": "No"
+            "yes": "네",
+            "no": "아니오"
         },
         "ascDesc": {
-            "Asc": "Ascending",
-            "Desc": "Descending"
+            "Asc": "오름차순",
+            "Desc": "내림차순"
         },
         "assetOrder": {
-            "label": "Order",
-            "Name": "Name",
-            "Amount": "Amount"
+            "label": "주문",
+            "Name": "이름",
+            "Amount": "수량"
         },
         "internalExternal": {
-            "label": "Internal / External",
-            "internal": "Internal",
-            "external": "External"
+            "label": "내부/외부",
+            "internal": "내부",
+            "external": "외부"
         },
         "verificationStatus": {
-            "label": "Verification status",
-            "new": "New",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "label": "확인 상태",
+            "new": "신규",
+            "skipped": "건너뛴 승인",
+            "selfVerified": "자체 승인",
+            "official": "공식"
         },
         "asset": {
-            "label": "Assets"
+            "label": "자산"
         },
         "amount": {
-            "label": "Amount",
-            "equal": "is equal to",
-            "range": "is between",
-            "greater": "is greater than",
-            "less": "is less than"
+            "label": "수량",
+            "equal": "같음",
+            "range": "사이임",
+            "greater": "더 큼",
+            "less": "보다 적음"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "날짜",
+            "equals": "같음",
+            "last": "마지막으로",
+            "range": "사이임",
+            "after": "이후임",
+            "afterOrEquals": "같거나 이후임",
+            "before": "이전임.",
+            "Days": "일",
+            "Months": "개월",
+            "Years": "년"
         },
         "status": {
-            "label": "Status",
-            "confirmed": "confirmed",
-            "pending": "pending",
-            "claimed": "claimed",
-            "unclaimed": "unclaimed"
+            "label": "상태",
+            "confirmed": "확인됨",
+            "pending": "보류 중",
+            "claimed": "수령함",
+            "unclaimed": "미수령"
         },
         "type": {
-            "label": "Type",
-            "basic": "Basic",
+            "label": "유형",
+            "basic": "기본",
             "nft": "NFT",
-            "alias": "Alias",
+            "alias": "별칭",
             "foundry": "Foundry",
-            "governance": "Governance",
-            "consolidation": "Consolidation"
+            "governance": "거버넌스",
+            "consolidation": "통합",
+            "vesting": "Vesting"
         },
         "direction": {
-            "label": "Direction",
+            "label": "방향",
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
         },
         "proposalType": {
-            "label": "Type",
-            "official": "Official",
-            "custom": "Custom"
+            "label": "유형",
+            "official": "공식",
+            "custom": "사용자 지정"
         },
         "phase": {
-            "label": "Phase"
+            "label": "단계"
         },
         "participated": {
-            "label": "Participated",
-            "yes": "Yes",
-            "no": "No"
+            "label": "참여함",
+            "yes": "네",
+            "no": "아니오"
         },
         "proposalOrder": {
-            "label": "Order",
-            "name": "Name",
-            "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
+            "label": "순서",
+            "name": "이름",
+            "phase": "단계"
         }
     },
     "dates": {
@@ -1799,68 +1809,68 @@
             "error": "{accountAlias}의 거래 내역을 내보낼 수 없습니다"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Please login to initiate the deep link",
-            "notEnabled": "Deep links are not enabled",
-            "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not an integer number {amount}",
-            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
-            "surplusNotSupported": "The surplus is only supported for native tokens",
+            "receivedWhileLoggedOut": "딥링크를 시작하려면 로그인하세요.",
+            "notEnabled": "딥링크가 활성화되지 않았습니다.",
+            "invalidFormat": "팔로우한 딥 링크가 잘못되었습니다.",
+            "invalidAmount": "딥링크의 수량이 정수가 아닙니다. {amount}",
+            "invalidSurplus": "딥링크의 여분이 숫자가 아닙니다. {surplus}",
+            "surplusNotSupported": "잉여분은 기본 토큰에만 지원됩니다.",
             "governance": {
-                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+                "unrecognizedOperation": "인식할 수 없는 거버넌스 작업: {operation}"
             },
             "wallet": {
                 "send": {
-                    "success": "Payment details added from deep link"
+                    "success": "딥링크에서 추가된 결제 세부정보"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "인식할 수 없는 지갑 작업: {operation}"
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "syncing": "지갑을 변경하려면 동기화가 완료될 때까지 기다려주세요.",
+        "transferring": "모든 거래가 완료될 때까지 기다려 주세요.",
+        "participating": "지갑을 변경하려면 모든 스테이킹/투표 거래가 완료될 때까지 기다려 주세요.",
         "claimed": {
-            "success": "Transaction claimed",
-            "error": "Claiming transaction failed"
+            "success": "거래 청구됨",
+            "error": "거래 청구에 실패했습니다."
         },
         "hideActivity": {
-            "success": "Activity was hidden",
-            "error": "Failed to hide activity"
+            "success": "활동이 숨겨졌습니다.",
+            "error": "활동을 숨기지 못했습니다."
         },
         "faucetRequest": {
-            "success": "Request for tokens sent to the faucet"
+            "success": "Faucet으로 전송된 토큰 요청"
         },
         "mintNativeToken": {
-            "success": "Native token minting transaction sent"
+            "success": "기본 토큰 발행 트랜잭션이 전송되었습니다."
         },
         "burnNativeToken": {
-            "success": "Native token burning transaction sent"
+            "success": "기본 토큰 소각 트랜잭션이 전송되었습니다."
         },
         "mintNft": {
-            "success": "NFT minting transaction sent"
+            "success": "NFT 발행 트랜잭션이 전송되었습니다."
         },
         "burnNft": {
-            "success": "NFT burning transaction sent"
+            "success": "NFT 소각 트랜잭션이 전송되었습니다."
         },
         "refreshTokenMetadata": {
-            "success": "All token metadata has been reset and refreshed"
+            "success": "모든 토큰 메타데이터가 재설정되고 새로 고쳐졌습니다."
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
-            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+            "wrongProtocol": "프로토콜이 Stronghold 백업에서 발견된 코인 유형과 일치하지 않습니다.",
+            "wrongProtocolForClaiming": "Shimmer 보상을 받으려면 IOTA 기반 Stronghold 백업을 사용해야 합니다."
         },
         "findShimmerRewards": {
-            "success": "Successfully found Shimmer rewards",
-            "error": "An error occurred while searching for rewards"
+            "success": "Shimmer 보상을 성공적으로 찾았습니다.",
+            "error": "보상을 검색하는 중에 오류가 발생했습니다."
         },
         "claimShimmerRewards": {
-            "success": "Shimmer rewards claimed for {accountAlias}",
-            "error": "An error occurred while claiming. Try again."
+            "success": "{accountAlias} 에 대한 Shimmer 보상이 청구되었습니다.",
+            "error": "청구중에 오류가 발생했습니다. 다시 시도하십시오."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "투표가 성공적으로 진행되었습니다."
         },
         "stopVoting": {
-            "success": "Voting successfully stopped"
+            "success": "투표가 성공적으로 중단되었습니다."
         }
     },
     "error": {
@@ -1870,8 +1880,9 @@
             "delete": {
                 "nonEmptyAccounts": "프로필을 삭제하기 전 모든 잔액을 전송해야 합니다."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "type": "프로필 유형을 확인할 수 없습니다.",
+            "setupType": "프로필 설정 유형을 확인할 수 없습니다.",
+            "chrysalisDevnetStardustError": "이 버전의 Firefly에서는 Chrysalis Devnet이 지원되지 않기 때문에 이 프로필에 액세스할 수 없습니다. Chrysalis 호환 Firefly 버전을 사용하세요."
         },
         "password": {
             "doNotMatch": "비밀번호가 맞지 않습니다.",
@@ -1889,21 +1900,21 @@
             "word": "하나의 단어로 구성된 암호는 추측하기 쉽습니다.",
             "incorrect": "비밀번호가 올바르지 않습니다.",
             "length": "비밀번호는 {length, plural, other {#자}}를 초과할 수 없습니다.",
-            "sameAsOld": "Your new password must be different from your old password."
+            "sameAsOld": "새 비밀번호는 이전 비밀번호와 달라야 합니다."
         },
         "pincode": {
             "length": "PIN은 {length, plural, other {#자리}}로 구성되어야 합니다.",
             "match": "PIN이 일치하지 않습니다.",
             "incorrect": "PIN이 잘못되었습니다.",
-            "invalid": "Invalid PIN code."
+            "invalid": "잘못된 PIN 코드입니다."
         },
         "address": {
-            "wrongAddressType": "Wrong address type"
+            "wrongAddressType": "잘못된 주소 유형입니다."
         },
         "account": {
-            "addressNotFound": "The address cannot be found in your account.",
+            "addressNotFound": "계정에서 주소를 찾을 수 없습니다.",
             "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "프로필 이름에는 적어도 문자 1자 이상이 포함되어야 합니다.",
             "notEmpty": "이 지갑을 삭제하려면 지갑에 남은 잔고를 비워야 합니다.",
             "duplicate": "같은 이름의 지갑이 이미 있습니다.",
             "tilde": "프로필 이름은 `~`로 시작할 수 없습니다.",
@@ -1913,67 +1924,67 @@
             "index": "계정 인덱스가 반드시 0 과 2,147,483,647 사이의 숫자여야 합니다.",
             "page": "계좌 페이지가 반드시 0 과 2,147,483,647 사이의 숫자여야 합니다.",
             "syncing": "지갑을 동기화하는 중 에러가 발생했습니다.",
-            "cannotRemove": "Unable to remove wallet.",
-            "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "cannotRemove": "지갑을 삭제할 수 없습니다.",
+            "withBalance": "이 지갑을 삭제하기 전에 모든 잔액을 이체해야 합니다.",
+            "notLast": "마지막 지갑만 삭제할 수 있습니다.",
+            "notFound": "계정을 찾을 수 없습니다.",
+            "cannotGetBoundAccount": "바인딩된 계정을 얻을 수 없습니다."
         },
         "send": {
             "addressLength": "주소는 {length, plural, other {#자}}여야 합니다.",
             "amountTooHigh": "사용 가능한 잔액보다 큽니다.",
-            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
+            "amountNoFloat": "최소 단위를 선택한 경우 소수점 이하 자릿수를 사용할 수 없습니다.",
             "amountInvalidFormat": "금액에 잘못된 내용이 있습니다.",
-            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "amountSmallerThanSubunit": "수량은 가장 작은 하위 단위보다 커야 합니다.",
+            "tagTooLong": "태그는 64바이트를 초과할 수 없습니다.",
+            "metadataTooLong": "메타데이터는 8192바이트를 초과할 수 없습니다.",
             "amountZero": "보내는 양은 0보다 커야 합니다.",
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
-            "invalidAssetId": "The asset id is not valid.",
-            "unknownAsset": "The asset is not known to this account.",
+            "invalidAssetId": "자산 Id가 유효하지 않습니다.",
+            "unknownAsset": "이 계정에서는 자산을 알 수 없습니다.",
             "insufficientFunds": "지갑에 자금이 부족합니다.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
-            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
-            "cannotClaimTwice": "Output has been already claimed",
+            "insufficientFundsStorageDeposit": "보관 보증금을 감당할 자금이 부족합니다.",
+            "ongoingTransaction": "진행 중인 거래가 있는 경우, 확인을 기다려 주세요.",
+            "cannotClaimTwice": "출력이 이미 청구되었습니다.",
             "noToAccount": "보낼 지갑을 선택하지 않았습니다.",
             "sendingDust": "1 Mi 미만은 보낼 수 없습니다.",
-            "leavingDust": "주소에 1 Mi 미만을 남겨놓을 수 없습니다.",
+            "leavingDust": "주소에는 최소 필수 보관 보증금({minRequiredStorageDeposit}) 미만으로 남겨 둘 수 없습니다.",
             "cancelled": "거래가 취소되었습니다.",
             "transaction": "거래를 보내는 중 에러가 발생했습니다. 다시 시도하세요.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
-            "noInputs": "No inputs found.",
-            "notEnoughBalance": "Not enough balance.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
-            "recipientRequired": "Recipient is required",
-            "nftRequired": "NFT is required",
-            "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession",
-            "reservedTagKeyword": "Unable to use reserved tag keyword"
+            "invalidExpirationDateTime": "선택한 만료 날짜/시간이 잘못되었습니다.",
+            "noInputs": "입력을 찾을 수 없습니다",
+            "notEnoughBalance": "잔고가 부족합니다.",
+            "missingTransactionId": "거래 ID가 누락되었습니다.",
+            "missingTransactionProgressEventPayload": "거래 진행 이벤트 페이로드가 누락되었습니다.",
+            "recipientRequired": "받는 사람을 입력하세요.",
+            "nftRequired": "NFT가 필요합니다.",
+            "nftNotInHex": "NFT 주소는 HEX 형식이어야 합니다.",
+            "nftNotInPossession": "NFT를 보유하고 있지 않습니다.",
+            "reservedTagKeyword": "예약된 태그 키워드를 사용할 수 없습니다."
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다."
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
-            "dns": "Unable to find DNS resolution for node",
+            "dns": "노드에 대한 DNS 해결방법을 찾을 수 없습니다.",
             "timedOut": "연결 시간이 초과되었습니다.",
             "refused": "연결이 거부되었습니다.",
             "handshake": "노드와의 핸드셰이크를 실패했습니다.",
             "invalidCertificate": "인증서가 유효하지 않아 연결할 수 없습니다.",
             "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "사용 가능한 동기화된 노드가 없습니다.",
+            "timeNotSynced": "장치 시간이 정확하지 않아 노드를 동기화할 수 없습니다.",
             "answer": "모든 노드로부터 응답을 받을 수 없습니다.",
             "forbidden": "이 노드 연결은 금지되었습니다.",
-            "pluginNotAvailable": "The \"{nodePlugin}\" plugin is not available on the current node.",
-            "unabledToConnect": "Unable to connect to the node",
-            "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node",
-            "noCoinType": "No coin type specified"
+            "pluginNotAvailable": "현재 노드에서는 \"{nodePlugin}\" 플러그인을 사용할 수 없습니다.",
+            "unabledToConnect": "노드에 연결할 수 없습니다.",
+            "differentNetwork": "노드가 다른 네트워크에 있습니다.",
+            "duplicateNodes": "중복된 노드를 추가할 수 없습니다.",
+            "noCoinType": "코인 유형이 지정되지 않았습니다."
         },
         "network": {
             "mismatch": "노드의 네트워크 ID는 \"{networkId}\"이며, 현재 네트워크에 맞지 않습니다.",
@@ -1988,28 +1999,28 @@
             "invalid": "백업 파일이 인식되지 않았습니다.",
             "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Stronghold 이전이 필요합니다.",
             "seedTooShort": "시드의 길이는 81자여야 합니다. 현재 길이는 {length, plural, other {#자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
             "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
             "phraseUnrecognizedWord": "복원 문구에 인식할 수 없는 단어 \"{word}\"가 있습니다",
             "phraseCaseWord": "\"{word}\" 단어는 소문자로 입력해주세요.",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "Stronghold 백업 파일을 복사할 수 없습니다.",
+            "unableToRestoreForProfileManager": "프로필 관리자에 대한 Stronghold 백업을 복원할 수 없습니다."
         },
         "ledger": {
-            "appNotOpen": "Ledger 장치에서 IOTA 앱을 열어야합니다.",
+            "appNotOpen": "Ledger 기기에서 {network} 앱을 열어야 합니다.",
             "generic": "Ledger 장치에 연결하는 중 에러가 있었습니다.",
             "legacyConnected": "Ledger 장치에서 잘못된 앱이 열려있습니다.",
             "locked": "PIN 전호를 입력하여 Ledger 장치의 잠금을 해제하세요.",
             "mnemonicMismatch": "잘못된 Ledger 장치를 연결하였거나 mnemonic이 바뀌었습니다.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Ledger 기기가 감지되지 않았습니다.",
             "notFound": "Ledger 장치를 찾을 수 없습니다.",
             "otherConnected": "Ledger 장치에서 잘못된 앱을 열었습니다.",
             "generateAddress": "주소를 생성하는 중 에러가 있었습니다.",
             "timeout": "Ledger 장치가 시간을 초과하였습니다.",
             "disconnected": "Ledger 장치의 연결이 끊어졌습니다.",
-            "noStronghold": "Unable to use Stronghold with Ledger profile."
+            "noStronghold": "Ledger 프로필로는 Stronghold를 사용할 수 없습니다."
         },
         "popup": {
             "preventClose": "이 팝업창을 닫을 수 없습니다."
@@ -2021,90 +2032,86 @@
             "cannotDecodeBech32": "문자열을 Bech32 주소로 디코드할 수 없습니다."
         },
         "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
+            "cannotUseAccount": "지정된 계정을 사용할 수 없습니다.",
+            "cannotFindStakingEvent": "스테이킹 이벤트를 찾을 수 없습니다.",
+            "cannotVisitAirdropWebsite": "{airdrop} 웹사이트를 열 수 없습니다.",
+            "invalidStakingEventId": "잘못된 스테이킹 이벤트 ID입니다."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME",
+        "invalidDate": "잘못된 날짜",
+        "invalidTime": "잘못된 시간",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "Shimmer 청구 프로필 관리자를 찾을 수 없습니다.",
+            "cannotInitialiseAccount": "Shimmer 청구 계정을 초기화할 수 없습니다.",
+            "missingAccount": "Shimmer 청구 계정을 찾을 수 없습니다."
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
+            "invalidAccountIndex": "{eventName} 이벤트에 대한 잘못된 계정 색인",
             "invalidPayload": "Invalid payload for {eventName} event"
         },
         "aliasMinting": {
-            "aliasRequired": "Alias is required",
+            "aliasRequired": "별칭이 필요합니다.",
             "aliasNotInPossession": "Alias not in possession"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "noOutputsToConsolidate": "통합할 출력이 충분하지 않습니다.",
         "eventId": {
-            "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long",
-            "alreadyRegistered": "Event ID already registered"
+            "doesNotStartWith0x": "이벤트 ID는 '0x'로 시작해야 합니다.",
+            "insufficientLength": "이벤트 ID는 66자(영문 기준) 여야 합니다.",
+            "alreadyRegistered": "이벤트 ID가 이미 등록되었습니다."
         },
         "nft": {
             "unsupportedUrl": {
-                "short": "Url not supported",
-                "long": "Url schema not supported"
+                "short": "지원되지 않는 Url입니다.",
+                "long": "Url 도식이 지원되지 않습니다."
             },
             "unsupportedFileType": {
-                "short": "Unsupported media type",
-                "long": "The media type is not currently supported"
+                "short": "지원되지 않는 미디어 유형입니다.",
+                "long": "그 미디어 유형은 현재 지원되지 않습니다."
             },
             "notMatchingFileTypes": {
-                "short": "Loading blocked",
-                "long": "NFT file type does not match the expected media type"
+                "short": "로드가 차단되었습니다.",
+                "long": "NFT 파일 유형이 예상 미디어 유형과 일치하지 않습니다."
             },
             "notReachable": {
-                "short": "Not reachable",
-                "long": "NFT file is not reachable"
+                "short": "연결할수 없습니다",
+                "long": "NFT 파일에 접근할 수 없습니다."
             },
             "tooLargeFile": {
-                "short": "File is too large",
-                "long": "Loading NFT blocked because the file is too large"
+                "short": "파일이 너무 큽니다",
+                "long": "파일이 너무 커서 NFT 로드가 차단되었습니다."
             },
             "downloadTooLong": {
-                "short": "File took too long to download",
-                "long": "Loading NFT blocked because the file took too long to download"
+                "short": "파일을 다운로드하는 데 시간이 너무 오래 걸립니다.",
+                "long": "파일을 다운로드하는 데 시간이 너무 오래 걸려서 NFT 로드가 차단되었습니다."
             },
             "corsError": {
-                "short": "Loading blocked",
-                "long": "Loading NFT blocked by CORS policy"
+                "short": "로드가 차단되었습니다.",
+                "long": "CORS 정책에 의해 NFT 로드가 차단되었습니다."
             },
             "unsafeToLoad": {
-                "short": "Unsafe to load",
-                "long": "An error occurred while checking if the NFT was safe to load"
+                "short": "로드하기에 안전하지 않습니다.",
+                "long": "NFT를 로드해도 안전한지 확인하는 중 오류가 발생했습니다."
             },
             "loadingError": {
-                "short": "Unable to load",
-                "long": "An error occurred while loading the NFT"
+                "short": "불러올 수 없습니다.",
+                "long": "NFT를 로드하는 중 오류가 발생했습니다."
             }
         },
         "governance": {
             "unableToAddProposal": {
-                "short": "Unable to add proposal",
-                "long": "Unable to find proposal {proposalId} on the specified node"
+                "short": "제안을 추가할 수 없습니다.",
+                "long": "지정된 노드에서 {proposalId} 제안을 찾을 수 없습니다."
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date is invalid."
+            "invalidExpirationDateTime": "선택한 만료 날짜가 잘못되었습니다."
         },
         "node": {
             "http": "HTTP를 기반으로 노드를 이용하는 경우 트래픽이 암호화되지 않으며 보안 위험을 초래할 수 있습니다."
         },
         "participation": {
-            "noFunds": "You do not have any IOTA."
+            "noFunds": "IOTA가 없습니다."
         }
     },
     "tooltips": {
@@ -2117,98 +2124,98 @@
             "veryLow": "매우 낮음"
         },
         "partiallyStakedFunds": {
-            "title": "New unstaked funds: {amount}",
-            "titleNoFunds": "New unstaked funds",
-            "preBody": "You have received tokens that are not staked.",
-            "body": "You need to manually stake these new funds to receive airdrop rewards for them."
+            "title": "새로운 스테이킹되지않은 자금: {amount}",
+            "titleNoFunds": "새로운 스테이킹되지않은 자금",
+            "preBody": "스테이킹되지 않은 토큰을 받았습니다.",
+            "body": "에어드랍 보상을 받으려면 이러한 새 자금을 수동으로 스테이킹해야 합니다."
         },
         "stakingMinRewards": {
-            "title": "Below minimum reward value",
-            "titleMinBalance": "{amount} minimum balance required",
-            "bodyMinBalance": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward and cannot therefore be staked.",
-            "continue": "Please continue staking for another {duration}.",
-            "bodyBelowMin": "This wallet has not reached the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyWillReachMin": "You must stake for another {duration} to reach the minimum.",
-            "bodyWillNotReachMin": "You will not reach the minimum reward value during the remaining staking period unless you add more IOTA.",
-            "bodyDidNotReachMin": "You did not stake enough IOTA to reach the minimum reward value for {airdrop} ({airdropRewardMin}).",
-            "bodyMinBalanceAirdrop": "This wallet does not have enough IOTA tokens to reach the minimum airdrop reward for {airdrop}."
+            "title": "최소 보상 가치 미만",
+            "titleMinBalance": "{amount} 최소 잔액 필요",
+            "bodyMinBalance": "이 지갑에는 최소 에어드랍 보상에 도달할 만큼 충분한 IOTA 토큰이 없으므로 스테이킹할 수 없습니다.",
+            "continue": "또 다른 {duration} 동안 스테이킹을 계속하세요.",
+            "bodyBelowMin": "이 지갑은 {airdrop}({airdropRewardMin}) 에 대한 최소 보상 값에 도달하지 않았습니다.",
+            "bodyWillReachMin": "최소 금액에 도달하려면 또 다른 {duration} 동안 스테이킹해야 합니다.",
+            "bodyWillNotReachMin": "IOTA를 더 추가하지 않으면 남은 스테이킹 기간 동안 최소 보상 값에 도달하지 못할 것입니다.",
+            "bodyDidNotReachMin": "{airdrop}({airdropRewardMin}) 의 최소 보상값에 도달할 만큼 충분한 IOTA를 스테이킹하지 않았습니다.",
+            "bodyMinBalanceAirdrop": "이 지갑에는 {airdrop} 에 대한 최소 에어드롭 보상에 도달할 만큼 충분한 IOTA 토큰이 없습니다."
         },
-        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "optionalInput": "이 선택적 데이터는 Explorer에 공개되며 모든 사람이 볼 수 있습니다.",
         "transactionDetails": {
             "minting": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "Tangle에 거래를 저장하려면 환불 가능한 토큰 보증금이 필요합니다.",
+                "giftedStorageDeposit": "이 거래에 대한 저장 보증금이 귀하에게 선물되었습니다. 보증금을 환불할 필요는 없습니다.",
+                "expirationTime": "만료 시간 전에 이 자금을 요청하세요. 그렇지 않으면 송금인에게 반환됩니다.",
+                "timelockDate": "송금인은 이 자금에 대해 시간 잠금을 설정했습니다. 제한 시간이 만료되면 해당 금액을 사용할 수 있습니다.",
+                "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
+                "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다."
             },
             "incoming": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "storageDeposit": "Tangle에 거래를 저장하려면 환불 가능한 토큰 보증금이 필요합니다.",
+                "giftedStorageDeposit": "이 거래에 대한 저장 보증금이 귀하에게 선물되었습니다. 보증금을 환불할 필요는 없습니다.",
+                "expirationTime": "만료 시간 전에 이 자금을 요청하세요. 그렇지 않으면 송금인에게 반환됩니다.",
+                "timelockDate": "송금인은 이 자금에 대해 시간 잠금을 설정했습니다. 제한 시간이 만료되면 해당 금액을 사용할 수 있습니다.",
+                "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
+                "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
+                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
             },
             "outgoing": {
-                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
-                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "storageDeposit": "보관 보증금은 Tangle에 거래를 저장하는 데 필요한 환불 가능한 보증금입니다.",
+                "giftedStorageDeposit": "수취인은 보증금을 환불할 필요가 없습니다.",
+                "expirationTime": "수령인이 제때에 청구하지 않으면 토큰이 귀하에게 반환됩니다.",
+                "timelockDate": "이 거래에 시간 잠금을 추가했습니다. 수령인은 시간 잠금이 만료될 때까지 이 자금을 사용할 수 없습니다.",
+                "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
+                "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
+                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
             },
             "nftMetadata": {
-                "standard": "The NFT standard e.g. IRC27.",
-                "type": "The MimeType of the NFT. e.g. image/png.",
-                "collectionId": "UTXO string of the collection NFT that minted this NFT",
-                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
-                "issuerName": "The name of the creator",
-                "attributes": "An array of traits and values that define attributes of the NFT"
+                "standard": "NFT 표준(예: IRC27)",
+                "type": "NFT의 Mime유형 (예: image/png)",
+                "collectionId": "이 NFT를 발행한 컬렉션 NFT의 UTXO 문자열",
+                "royalties": "지급 비율에 매핑되는 주소의 키-값 쌍을 포함하는 객체",
+                "issuerName": "창작자의 이름",
+                "attributes": "NFT의 속성을 정의하는 일련의 특성과 값"
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 선택적 매개변수: 토큰이 사용하는 소수 자릿수(사용자 표현을 얻으려면 토큰 금액을 10^소수로 나눕니다).",
+            "description": "IRC30 선택적 매개변수: 사람이 읽을 수 있는 토큰 설명입니다.",
+            "url": "IRC30 선택적 매개변수: 웹사이트나 소셜 미디어 페이지와 같은 토큰에 대한 추가 리소스를 가리키는 URL입니다.",
+            "logoUrl": "IRC30 선택적 매개변수: 토큰 로고의 이미지 리소스를 가리키는 URL입니다."
         },
         "mintNftForm": {
-            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
-            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
-            "issuerName": "Optional parameter: The name of the creator",
-            "description": "Optional parameter: A description of the NFT",
-            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
-            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+            "collectionId": "선택적 매개변수: 이 NFT를 발행한 컬렉션 NFT의 UTXO 문자열",
+            "collectionName": "선택적 매개변수: 컬렉션 이름",
+            "royalties": "선택적 매개변수: 지급 비율에 매핑되는 주소의 키-값 쌍을 포함하는 객체",
+            "issuerName": "선택적 매개변수: 작성자 이름",
+            "description": "선택적 매개변수: NFT에 대한 설명",
+            "attributes": "선택적 매개변수: NFT의 속성을 정의하는 일련의 특성 및 값",
+            "uri": "사용자 정의 미디어를 사용하여 URI를 생성하려면 먼저 스토리지 서비스(예: https://nft.storage/)를 통해 IPFS에 파일을 업로드하세요.",
+            "quantity": "선택적 매개변수: 이 메타데이터로 발행된 사본의 수량"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "removeProposalWarning": "이 제안을 제거하기 전에 해당 제안에 대한 투표를 중단해야 합니다.",
             "outdatedNode": {
-                "title": "Outdated node URL",
-                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+                "title": "오래된 노드 URL",
+                "body": "이 제안의 노드 URL이 오래되었습니다. 최신 투표 결과에 액세스하려면 업데이트하세요."
             },
             "resultsNotAvailable": {
-                "title": "Results not available",
-                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+                "title": "결과를 확인할 수 없음",
+                "body": "이 제안의 해당 노드에서는 더 이상 결과를 사용할 수 없습니다. 결과에 액세스하려면 업데이트하세요."
             }
         },
         "updateStronghold": {
-            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
+            "profileBadge": "당신의 Stronghold는 오래되었습니다. Stronghold를 업데이트하려면 로그인하세요."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
-            "internal": "Internal",
-            "rawValue": "Raw Value",
-            "formattedValue": "Formatted Value",
-            "date": "Date",
-            "time": "Time"
+            "messageId": "메시지 ID",
+            "internal": "내부",
+            "rawValue": "Raw 값",
+            "formattedValue": "형식화된 값",
+            "date": "날짜",
+            "time": "시간"
         }
     },
     "indicators": {
@@ -2216,148 +2223,153 @@
             "warningText": "현재 개발자 프로필을 사용하는 중이며 {networkName} 네트워크에 연결되었습니다"
         },
         "networkIndicator": {
-            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
+            "warningText": "네트워크 성능이 저하되었습니다. 메시지 확인은 평소보다 조금 더 오래 걸릴 수 있습니다."
         }
     },
     "permissions": {
         "camera": {
-            "request": "We need your permission to use your camera to be able to scan QR codes.",
-            "requestInAppSettings": "If you want to grant permission for using your camera to scan QR codes, please enable it in the app settings."
+            "request": "QR 코드를 스캔하기 위해 카메라를 사용하려면 권한이 필요합니다.",
+            "requestInAppSettings": "카메라를 사용하여 QR 코드를 스캔할 수 있는 권한을 부여하려면 앱 설정에서 해당 권한을 활성화하세요."
         }
     },
     "tabs": {
-        "wallet": "Wallet",
-        "collectibles": "Collectibles",
-        "governance": "Governance",
+        "wallet": "지갑",
+        "collectibles": "수집품",
+        "governance": "거버넌스",
         "developer": "개발자",
         "tokens": "토큰",
-        "activity": "활동"
+        "activity": "활동",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+            "Pending": "스테이킹 중",
+            "Confirmed": "스테이킹됨",
+            "Conflicting": "스테이킹 실패"
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "받는 중",
+                "Confirmed": "수신 완료",
+                "Conflicting": "수신 실패"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "보내는 중",
+                "Confirmed": "발송 완료",
+                "Conflicting": "발송 실패"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "계정에서 이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "계정으로 이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             },
             "selfTransaction": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             }
         },
         "mint": {
-            "Pending": "minting",
-            "Confirmed": "minted",
-            "Conflicting": "failed to mint"
+            "Pending": "발행 중",
+            "Confirmed": "발행 완료",
+            "Conflicting": "발행 실패"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "소각 중",
+            "Confirmed": "소각 완료",
+            "Conflicting": "소각 실패"
         },
         "consolidation": {
-            "Pending": "Consolidating outputs",
-            "Confirmed": "Outputs consolidated",
-            "Conflicting": "failed to consolidate outputs"
+            "Pending": "출력 통합 중",
+            "Confirmed": "출력 통합 완료",
+            "Conflicting": "출력 통합 실패"
         },
         "migrate": {
-            "Pending": "migrating for",
-            "Confirmed": "migrated for",
-            "Conflicting": "failed to migrate"
+            "Pending": "이전 중",
+            "Confirmed": "이전 완료",
+            "Conflicting": "이전 실패"
         },
         "asyncStatus": {
-            "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
+            "unclaimed": "미수령",
+            "claimed": "수령 완료",
+            "expired": "만료됨"
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "투표권 높이는 중",
+                "Confirmed": "투표권 증가됨",
+                "Conflicting": "투표권 증가 실패"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "투표권 줄이는 중",
+                "Confirmed": "투표권 감소됨",
+                "Conflicting": "투표권 감소 실패"
             },
             "startVoting": {
-                "Pending": "voting for",
-                "Confirmed": "voted for",
-                "Conflicting": "failed to vote for"
+                "Pending": "투표 중",
+                "Confirmed": "투표 완료",
+                "Conflicting": "투표 실패"
             },
             "stopVoting": {
-                "Pending": "stopping voting for",
-                "Confirmed": "stopped voting for",
-                "Conflicting": "failed to stopped voting for"
+                "Pending": "투표 중지 중",
+                "Confirmed": "투표 중지됨",
+                "Conflicting": "투표 중지 실패"
             },
             "changedVote": {
-                "Pending": "changing vote for",
-                "Confirmed": "changed vote for",
-                "Conflicting": "failed to change vote for"
+                "Pending": "투표 변경 중",
+                "Confirmed": "투표 변경 완료",
+                "Conflicting": "투표 변경 실패"
             },
             "revote": {
-                "Pending": "revoting",
-                "Confirmed": "revote",
-                "Conflicting": "failed to revote"
+                "Pending": "재투표 중",
+                "Confirmed": "재투표 완료",
+                "Conflicting": "재투표 실패"
             },
             "proposalStatus": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting",
-                "ended": "Closed",
-                "nodeOutdated": "Outdated node URL",
-                "resultsNotAvailable": "Results not available"
+                "upcoming": "공지",
+                "commencing": "투표 시작",
+                "holding": "집계 중",
+                "ended": "닫힘",
+                "nodeOutdated": "노드 URL이 오래됨",
+                "resultsNotAvailable": "결과를 확인할 수 없음"
             }
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "별칭 생성 중",
+                "Confirmed": "별칭 생성 완료",
+                "Failed": "별칭 생성 실패"
             }
         },
         "networkHealth": {
-            "down": "Down",
-            "degraded": "Degraded",
-            "operational": "Operational",
-            "disconnected": "Disconnected"
+            "down": "다운됨",
+            "degraded": "열화됨",
+            "operational": "운영",
+            "disconnected": "연결 끊김"
         },
-        "locked": "locked",
-        "smartContract": "smart contract"
+        "locked": "잠김",
+        "smartContract": "스마트 계약",
+        "vesting": {
+            "unlocked": "잠금 해제됨",
+            "locked": "잠김"
+        }
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "만료 시간 없음",
+            "1hour": "1시간 후",
+            "1day": "1일 후",
+            "1week": "1주일 후",
             "customDate": {
-                "title": "Custom date",
-                "subtitle": "Set custom expiry date"
+                "title": "사용자 지정 날짜",
+                "subtitle": "만료일을 사용자가 지정합니다."
             }
         }
     }

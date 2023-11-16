@@ -29,6 +29,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { ExplorerEndpoint } from '@core/network'
+    import { TextHintVariant } from 'shared/components/enums'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -70,9 +71,8 @@
                 title: localize('actions.confirmRejection.title'),
                 description: localize('actions.confirmRejection.description'),
                 hint: localize('actions.confirmRejection.node'),
-                info: true,
                 confirmText: localize('actions.reject'),
-                warning: true,
+                variant: TextHintVariant.Warning,
                 onConfirm: () => {
                     rejectActivity(activityId)
                     closePopup()
@@ -117,7 +117,7 @@
         {/if}
     </div>
     <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-        {#if activity.type === ActivityType.Basic}
+        {#if activity.type === ActivityType.Basic || activity.type === ActivityType.Vesting}
             <BasicActivityDetails {activity} />
         {:else if activity.type === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />

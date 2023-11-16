@@ -9,12 +9,15 @@
     import { hasCompletedAppSetup, lastAcceptedPrivacyPolicy, lastAcceptedTermsOfService } from '@core/app/stores'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
-    import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
-    import features from '@features/features'
+    import { getEnabledNetworkFromFeatureFlags, getNetworkNameFromNetworkId } from '@core/network'
     import { Animation, Button, Checkbox, Link, Text, TextType } from '@ui'
     import { onboardingRouter } from '../onboarding-router'
     import { initialiseOnboardingProfile } from '@contexts/onboarding/actions'
     import { shouldBeDeveloperProfile } from '@contexts/onboarding/utils'
+    import { AnimationEnum } from '@auxiliary/animation'
+
+    const NETWORK_ID = getEnabledNetworkFromFeatureFlags()
+    const NETWORK = getNetworkNameFromNetworkId(NETWORK_ID)
 
     let termsAccepted: boolean = false
 
@@ -40,9 +43,7 @@
         <Text type={TextType.h1}
             >{localize('views.onboarding.appSetup.welcome.title', {
                 values: {
-                    network: features?.onboarding?.iota?.enabled
-                        ? getNetworkNameFromNetworkId(NetworkId.Iota)
-                        : getNetworkNameFromNetworkId(NetworkId.Shimmer),
+                    network: NETWORK,
                 },
             })}
         </Text>
@@ -50,8 +51,8 @@
     <div slot="leftpane__action" class="flex flex-col space-y-8">
         <Checkbox bind:checked={termsAccepted}>
             <Text slot="label" type={TextType.p} secondary>
-                I've read and I accept the <Link onClick={onTermsOfServiceClick}>Terms of Service</Link> and <Link
-                    onClick={onPrivacyPolicyClick}>Privacy Policy</Link
+                I've read and I accept the <Link on:click={onTermsOfServiceClick}>Terms of Service</Link> and <Link
+                    on:click={onPrivacyPolicyClick}>Privacy Policy</Link
                 >
             </Text>
         </Checkbox>
@@ -60,6 +61,6 @@
         >
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center">
-        <Animation classes="setup-anim-aspect-ratio" animation="welcome-desktop" />
+        <Animation animation={AnimationEnum.WelcomeDeskop} />
     </div>
 </OnboardingLayout>

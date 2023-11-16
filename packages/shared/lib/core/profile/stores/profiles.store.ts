@@ -1,8 +1,8 @@
 import { persistent } from '@core/utils/store'
 
-import { IPersistedProfile } from '../interfaces'
+import { IChrysalisPersistedProfile, IPersistedProfile } from '../interfaces'
 
-export const profiles = persistent<IPersistedProfile[]>('profiles', [])
+export const profiles = persistent<(IPersistedProfile | IChrysalisPersistedProfile)[]>('profiles', [])
 
 /**
  * Adds a new profile to persistent storage
@@ -11,7 +11,7 @@ export const profiles = persistent<IPersistedProfile[]>('profiles', [])
  * @returns {void}
  */
 export function addNewProfile(newProfile: IPersistedProfile): void {
-    profiles.update((state) => [...state, newProfile])
+    profiles.update((state) => [...state, newProfile] as IPersistedProfile[])
 }
 
 /**
@@ -22,7 +22,7 @@ export function addNewProfile(newProfile: IPersistedProfile): void {
  */
 export function saveProfile(profileToPersist: IPersistedProfile): void {
     profiles.update((state) =>
-        state.map((profile) => (profile.id === profileToPersist.id ? profileToPersist : profile))
+        state.map((profile) => (profile.id === profileToPersist.id ? profileToPersist : profile) as IPersistedProfile)
     )
 }
 
@@ -33,14 +33,15 @@ export function saveProfile(profileToPersist: IPersistedProfile): void {
  * @returns {void}
  */
 export function updateProfile(profileId: string, fieldsToUpdate: Partial<IPersistedProfile>): void {
-    profiles.update((state) =>
-        state.map((profile) => {
-            if (profile.id === profileId) {
-                return { ...profile, ...fieldsToUpdate }
-            } else {
-                return profile
-            }
-        })
+    profiles.update(
+        (state) =>
+            state.map((profile) => {
+                if (profile.id === profileId) {
+                    return { ...profile, ...fieldsToUpdate }
+                } else {
+                    return profile
+                }
+            }) as IPersistedProfile[]
     )
 }
 

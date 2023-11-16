@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Choose network",
                     "body": "Set the network for your profile.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnet",
                         "body": "Public beta network for Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -62,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Create a hardware profile",
-                        "description": "Ledger Nano S or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -73,7 +77,7 @@
                     "importFile": "Use Stronghold backup",
                     "importFileDescription": "Import your Stronghold backup file",
                     "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S or X device"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Claim Shimmer staking rewards",
@@ -205,7 +209,7 @@
             "body": "Щоб ваш пристрій Ledger був знайдений Firefly, переконайтесь, що офіційна програма Ledger Live закрита.",
             "connect": "Connect your Ledger device",
             "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the Shimmer app on your Ledger",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Поради, якщо Ledger не підключається"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Мова",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Валюта",
                 "description": "Регулювання конверсії балансу і поновлення графіка"
@@ -337,9 +344,9 @@
                 "description": "Змінити назву профілю Firefly",
                 "success": "Ви змінили назву профілю"
             },
-            "walletFinder": {
-                "title": "Wallet finder",
-                "description": "Perform an extended search of your previously used wallets"
+            "balanceFinder": {
+                "title": "Шукач балансу",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "Приховані гаманці",
@@ -483,55 +490,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Update"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -673,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "Enable Blind Signing",
             "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
             "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open Shimmer Application",
+            "step_2": "Open {network} Application",
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
         },
@@ -692,7 +693,7 @@
             },
             "pending": {
                 "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Locked",
@@ -737,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -806,12 +811,6 @@
             "errorBody1": "Щоб приховати гаманець він повинен мати 0 баланс.",
             "errorBody2": "Наразі на цьому гаманці залишилося {balance}. Будь ласка, перемістіть ці кошти на інший гаманець і спробуйте ще раз.",
             "errorBody3": "Ви не можете приховати цей гаманець, у вас повинен бути принаймні один."
-        },
-        "addressHistory": {
-            "title": "Історія адрес: {name}",
-            "currentBalance": "Баланс: {balance}",
-            "internal": "Внутрішня адреса",
-            "external": "Адреса поповнення"
         },
         "excludeNode": {
             "title": "Exclude node",
@@ -913,13 +912,24 @@
             "sendingFromStakedAccount": "Ви надсилаєте переказ з гаманця, який знаходеться в стейкінгу. Ваша ставка зупинеться. Ви можете надсилати переказ, але потім, можливо, знадобиться поставити свої токени знову.",
             "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
         },
-        "walletFinder": {
-            "title": "Wallet finder",
-            "body": "Perform a more exhaustive search of addresses to find missing balances and wallets.",
-            "accountsSearched": "Wallets searched",
-            "accountsFound": "Wallets found",
-            "totalWalletBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+        "balanceFinder": {
+            "title": "Balance finder",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Попередження: кошти, що знаходяться під загрозою під час міграції",
@@ -942,7 +952,7 @@
             "title": "Connect your Ledger",
             "notConnected": "Connect your Ledger device to continue.",
             "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger successfully connected, please continue."
         },
         "ledgerConfirmation": {
@@ -963,7 +973,7 @@
             "steps": {
                 "0": "Переконайтеся, що Ledger Live не відкритий на вашому комп'ютері",
                 "1": "Переконайтеся, що ви розблокували свій пристрій Ledger за допомогою PIN -коду",
-                "2": "Відкрийте новий додаток IOTA на пристрої Ledger",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "Все ще не пощастило?",
                     "link": "Спробуйте офіційну сторінку підтримки Ledger"
@@ -1104,15 +1114,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Unable to mint",
             "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
@@ -1181,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1227,13 +1234,15 @@
         "save": "Зберегти",
         "importSeed": "Імпортувати існуючий seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
@@ -1329,11 +1338,14 @@
         "visitFaq": "Відвідати FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Перегляд статусу",
+        "viewAddressHistory": "Перегляд історії адрес",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Показати приховані гаманці",
         "confirm": "Підтвердити",
         "hideNetworkStatistics": "Приховати статистику мережі",
         "findWallets": "Find wallets",
+        "findBalances": "Знайти баланси",
         "useBalanceFinder": "Use balance finder",
         "search": "Search",
         "searching": "Searching",
@@ -1384,7 +1396,8 @@
         "stopVoting": "Stop voting",
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Recipient",
@@ -1427,6 +1440,8 @@
         "shimmerClaimed": "Claimed",
         "shimmerClaiming": "Claiming",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Minted",
         "minting": "Minting",
         "burned": "Burned",
@@ -1653,10 +1668,7 @@
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
         "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filters",
@@ -1732,7 +1744,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Direction",
@@ -1757,9 +1770,6 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -1816,7 +1826,7 @@
             }
         },
         "syncing": "Please wait until synchronization is finished to change wallets.",
-        "transferring": "Please wait until all transactions are completed to change wallets.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
         "claimed": {
             "success": "Transaction claimed",
@@ -1871,7 +1881,8 @@
                 "nonEmptyAccounts": "Ви повинні перенести всі баланси, перш ніж ви зможете видалити свій профіль."
             },
             "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type"
+            "setupType": "Unable to determine the profile setup type",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "Паролі не співпадають.",
@@ -1939,7 +1950,7 @@
             "cannotClaimTwice": "Output has been already claimed",
             "noToAccount": "Ви не вибрали гаманець для надсилання коштів.",
             "sendingDust": "Ви не можете надіслати менш 1 Mi.",
-            "leavingDust": "Ви не можете залишити менше 1 Mi на вашій адресі.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Транзакцію було скасовано.",
             "transaction": "Під час відправлення транзакції сталася помилка. Будь ласка, спробуйте ще раз.",
             "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
@@ -1998,7 +2009,7 @@
             "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
         },
         "ledger": {
-            "appNotOpen": "Вам необхідно відкрити додаток IOTA на вашому пристрої Ledger.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Під час підключення до вашого пристрою Ledger сталася помилка.",
             "legacyConnected": "На вашому пристрої Ledger відкрито неправильний додаток.",
             "locked": "Будь ласка, розблокуйте пристрій Ledger, ввівши PIN -код.",
@@ -2090,10 +2101,6 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
@@ -2231,7 +2238,8 @@
         "governance": "Governance",
         "developer": "Developer",
         "tokens": "Tokens",
-        "activity": "Activity"
+        "activity": "Activity",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2347,7 +2355,11 @@
             "disconnected": "Disconnected"
         },
         "locked": "locked",
-        "smartContract": "smart contract"
+        "smartContract": "smart contract",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

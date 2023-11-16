@@ -1,12 +1,5 @@
 import { IAccountState } from '@core/account'
-import {
-    ActivityAction,
-    ActivityType,
-    IProcessedTransaction,
-    OUTPUT_TYPE_ALIAS,
-    OUTPUT_TYPE_FOUNDRY,
-    OUTPUT_TYPE_NFT,
-} from '@core/wallet'
+import { ActivityAction, ActivityType, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { generateSingleAliasActivity } from './generateSingleAliasActivity'
@@ -19,6 +12,8 @@ import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOut
 import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
+import { OutputType } from '@iota/sdk/out/types'
+import { generateVestingActivity } from './generateVestingActivity'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
@@ -38,22 +33,22 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     const { outputs, wrappedInputs } = processedTransaction
     const activities: Activity[] = []
 
-    const containsFoundryActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_FOUNDRY)
+    const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
     if (containsFoundryActivity) {
         const foundryActivities = await generateActivitiesFromFoundryOutputs(processedTransaction, account)
         activities.push(...foundryActivities)
     }
 
-    const containsNftActivity = outputs.some((output) => output.output.type === OUTPUT_TYPE_NFT)
+    const containsNftActivity = outputs.some((output) => output.output.type === OutputType.Nft)
     if (containsNftActivity) {
         const nftActivities = await generateActivitiesFromNftOutputs(processedTransaction, account)
         activities.push(...nftActivities)
     }
 
     const containsAliasActivity =
-        outputs.some((output) => output.output.type === OUTPUT_TYPE_ALIAS) && !containsFoundryActivity
+        outputs.some((output) => output.output.type === OutputType.Alias) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const aliasActivities = generateActivitiesFromAliasOutputs(processedTransaction, account)
+        const aliasActivities = await generateActivitiesFromAliasOutputs(processedTransaction, account)
         activities.push(...aliasActivities)
     }
 
@@ -106,6 +101,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateSingleAliasActivity(account, params)
                 case ActivityType.Nft:
                     return generateSingleNftActivity(account, params)
+                case ActivityType.Vesting:
+                    return generateVestingActivity(account, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }

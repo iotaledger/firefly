@@ -4,6 +4,8 @@
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
+    import { TextHintVariant, TextType } from 'shared/components/enums'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     export let toAddress: string
     export let toAmount: string
@@ -20,11 +22,11 @@
     })
 </script>
 
-<Text type="h4" classes="mb-4">{localize(`${locale}.title`)}</Text>
-<Text type="p" classes="mb-4" secondary>{localize(`${locale}.info`)}</Text>
+<Text type={TextType.h4} classes="mb-4">{localize(`${locale}.title`)}</Text>
+<Text type={TextType.p} classes="mb-4" secondary>{localize(`${locale}.info`)}</Text>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-    <LedgerAnimation animation="ledger-confirm-prompt-desktop" />
+    <LedgerAnimation animation={AnimationEnum.LedgerConfirmPromptDesktop} />
 </div>
 <div class="flex flex-col space-y-2">
     {#if hasSendConfirmationProps}
@@ -35,6 +37,6 @@
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
     {:else if $showInternalVerificationPopup}
-        <TextHint info text={localize('popups.verifyInternalLedgerTransaction.hint')} />
+        <TextHint variant={TextHintVariant.Info} text={localize('popups.verifyInternalLedgerTransaction.hint')} />
     {/if}
 </div>

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
     import { OnboardingType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { mobile } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
@@ -9,6 +8,8 @@
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { onboardingRouter } from '../onboarding-router'
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { AnimationEnum } from '@auxiliary/animation'
 
     const networkId = $onboardingProfile?.network?.id
 
@@ -53,12 +54,10 @@
                     network: getNetworkNameFromNetworkId(networkId),
                 },
             })}
-            secondaryText={!$mobile
-                ? localize('actions.createWalletDescription', {
-                      values: { network: networkId },
-                  })
-                : ''}
-            icon="plus"
+            secondaryText={localize('actions.createWalletDescription', {
+                values: { network: networkId },
+            })}
+            icon={IconEnum.Plus}
             iconHeight="11"
             iconWidth="11"
             hidden={features?.onboarding?.[networkId]?.newProfile?.hidden}
@@ -67,16 +66,16 @@
         />
         <OnboardingButton
             primaryText={localize(`actions.restoreWallet.${networkId}`)}
-            secondaryText={!$mobile ? localize(`actions.restoreWalletDescription.${networkId}`) : ''}
-            icon="transfer"
+            secondaryText={localize(`actions.restoreWalletDescription.${networkId}`)}
+            icon={IconEnum.Transfer}
             hidden={features?.onboarding?.[networkId]?.restoreProfile?.hidden}
             disabled={!features?.onboarding?.[networkId]?.restoreProfile?.enabled}
             onClick={() => onProfileSetupSelectionClick(OnboardingType.Restore)}
         />
         <OnboardingButton
             primaryText={localize('actions.claimShimmer')}
-            secondaryText={!$mobile ? localize('actions.claimShimmerDescription') : ''}
-            icon="tokens"
+            secondaryText={localize('actions.claimShimmerDescription')}
+            icon={IconEnum.Tokens}
             iconHeight="24"
             iconWidth="24"
             hidden={features?.onboarding?.[networkId]?.claimRewards?.hidden}
@@ -84,7 +83,7 @@
             onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
     </div>
-    <div slot="rightpane" class="w-full h-full flex justify-center {!$mobile && 'bg-pastel-green dark:bg-gray-900'}">
-        <Animation classes="setup-anim-aspect-ratio" animation="setup-desktop" />
+    <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
+        <Animation animation={AnimationEnum.SetupDesktop} />
     </div>
 </OnboardingLayout>

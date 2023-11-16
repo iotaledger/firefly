@@ -1,11 +1,8 @@
 <script lang="ts">
-    import { Alert, Icon } from 'shared/components'
-
+    import { Alert, Icon, Logo } from 'shared/components'
     import { localize } from '@core/i18n'
-
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
-
-    import Logo from './Logo.svelte'
+    import { Logo as LogoEnum } from './enums'
     import { INotificationData } from '@auxiliary/notification'
 
     export let toast: INotificationData
@@ -16,7 +13,7 @@
         info: {
             backgroundColor: 'blue-500',
             iconBackgroundColor: 'white',
-            logo: 'logo-firefly',
+            logo: LogoEnum.Firefly,
             messageColor: 'white',
             subMessageColor: 'blue-300',
             buttonSecondary: 'white',
@@ -57,13 +54,13 @@
             class="flex shrink-0 justify-center items-center bg-{style?.iconBackgroundColor} rounded-lg text-{style?.iconColor}"
         >
             {#if style?.logo}
-                <Logo logo={style?.logo} overrideStage="prod" />
+                <Logo logo={style?.logo} />
             {:else}
                 <Icon icon={style?.icon} />
             {/if}
         </div>
-        <div class="flex flex-auto flex-col px-4">
-            <span class="flex text-12 text-{style?.messageColor}">{toast.message}</span>
+        <div class="w-full flex flex-auto flex-col px-4">
+            <p class="text-12 text-{style?.messageColor} break-words">{toast.message}</p>
             {#if toast.progress !== undefined}
                 <span class="block bg-{style?.subMessageColor}" style={'width:100%;height:2px;margin:4px 0'}>
                     <span class="block bg-{style?.messageColor}" style={`width:${toast.progress}%;height:2px`} />

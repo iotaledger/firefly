@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Netzwerk auswählen",
                     "body": "Lege das Netzwek für dein Profil fest.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging Netzwerk für das IOTA Mainnet"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnetz",
                         "body": "Öffentliches Beta Netzwerk für Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Benutzerdefiniertes Netzwerk",
@@ -62,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Erstelle ein (Ledger-) Hardware Profil",
-                        "description": "Ledger Nano S oder Nano X erforderlich"
+                        "description": "Ledger Nano S, Nano S Plus oder Nano X erforderlich"
                     }
                 },
                 "setupRecovered": {
@@ -73,7 +77,7 @@
                     "importFile": "Stronghold-Backup verwenden",
                     "importFileDescription": "Importiere deine Stronghold-Backup Datei",
                     "importLedger": "Ledger-Gerät verwenden",
-                    "importLedgerDescription": "Wiederherstellen von deinem Ledger Nano S oder X Gerät"
+                    "importLedgerDescription": "Von deinem Ledger Nano S, Nano S Plus oder X wiederherstellen"
                 },
                 "setupClaimed": {
                     "title": "Shimmer Staking-Rewards beanspruchen",
@@ -205,7 +209,7 @@
             "body": "Stelle bitte sicher, dass die offizielle Ledger Live-Anwendung geschlossen ist, damit dein Ledger von Firefly gefunden wird.",
             "connect": "Verbinde dein Ledger-Gerät",
             "unlock": "Entsperre deinen Ledger mit seinem PIN",
-            "openApp": "Öffne die Shimmer App auf deinem Ledger",
+            "openApp": "Öffne die {network} App auf deinem Ledger",
             "tips": "Tipps, wenn sich dein Ledger nicht verbindet"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Sprache",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Währung",
                 "description": "Passt die Guthaben-Umrechnung und Chart-Optionen an"
@@ -337,9 +344,9 @@
                 "description": "Ändere deinen Firefly-Profilnamen",
                 "success": "Du hast deinen Profilnamen geändert"
             },
-            "walletFinder": {
-                "title": "Wallet-Suche",
-                "description": "Führe eine erweitere Suche nach zuvor genutzten Wallets durch"
+            "balanceFinder": {
+                "title": "Guthaben suchen",
+                "description": "Führe eine erweiterte Suche nach deinem Guthaben durch"
             },
             "hiddenAccounts": {
                 "title": "Ausgeblendete Wallets",
@@ -483,55 +490,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Aktualisieren"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Blockchain hinzufügen"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Einzahlungsadresse",
-                        "networkTitle": "Netzwerk-Einzahlungsadresse"
-                    },
-                    "chainInformation": {
-                        "title": "Blockchain Informationen"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Bestätige die EVM-Adresse",
-                        "header": "Wir haben deine EVM-Adresse generiert"
-                    },
-                    "connectedChains": {
-                        "title": "Verbundene Chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Verbinde deinen Ledger",
-                        "header": "Öffne die Ethereum App",
-                        "body": "Damit dein Ledger von Firefly gefunden wird, stelle bitte sicher, dass die offizielle Ledger Live-Anwendung geschlossen ist, bevor du diesen Schritten folgst.",
-                        "requirements": {
-                            "connect": "Verbinde und entsperre deinen Ledger",
-                            "openApp": "Öffne die Ethereum-App auf deinem Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Blockchain bearbeiten"
-                    },
-                    "removeChain": {
-                        "title": "Blockchain entfernen"
-                    }
-                }
             }
         },
         "staking": {
@@ -673,14 +631,57 @@
             "changePassword": {
                 "hint": "Dein Stronghold war veraltet und wurde aktualisiert. Wir empfehlen dir, dein Stronghold-Passwort zu ändern."
             }
+        },
+        "vesting": {
+            "title": "Anspruch",
+            "overview": {
+                "unlocked": "Entsperrt",
+                "locked": "Gesperrt",
+                "total": "Gesamt"
+            },
+            "timeUntilNextUnlock": "Zeit bis zum nächsten Entsperren",
+            "collect": "Einsammeln",
+            "search": "Finde Ansprüche auf Belohnungen",
+            "payouts": {
+                "title": "Zeitplan der zweiwöchentlichen Entsperrungen",
+                "information": "Auszahlungsinformationen",
+                "tooltip": {
+                    "title": "Auszahlung",
+                    "amount": "Betrag",
+                    "unlockDate": "Entsperrungszeitpunkt"
+                }
+            },
+            "infoTooltip": {
+                "title": "Übertragung der Token",
+                "body": "Von den Token, die die Nutzer über einen IOTA Token Airdrop empfangen werden, stehen 10% den Nutzern sofort mit dem Beginn des IOTA Stardust Netzwerks zur Verfügung. Der Rest wird über zwei Jahre gleichmäßig alle zwei Wochen freigeschaltet."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Auszahlungsdetails",
+            "amount": "Gesamtbetrag",
+            "unlockDate": "Entsperrungszeitpunkt",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Einsammeln",
+            "body": "Verpasse nicht die noch nicht abgeholten Beträge! Klicke auf die Schaltfläche unten, um sie zu überprüfen und dein Guthaben jetzt anzufordern.",
+            "unclaimedFunds": "Unbeanspruchte Beträge",
+            "button": "Einsammeln"
+        },
+        "metricSystemInfo": {
+            "title": "Übergang von metrischen Präfixen",
+            "body1": "Zu Beginn von IOTA wollten wir uns an die Standards halten, indem wir metrische Systempräfixe verwendeten. Allerdings hat sich die Angabe eines multiplen bzw. mehrfach multiplen der Grundeinheit als nicht praktikabel erwiesen.",
+            "body2": "Anstelle von Kilo (KIOTA), Mega (MIOTA) etc., wird die neue kleinste Einheit in IOTA 'micro' oder 'micros' für mehrere Einheiten heißen. Was bisher 1 MIOTA war, wird jetzt einfach nur 1 IOTA genannt: 1.000.000 micros entsprechen 1 IOTA.",
+            "body3": "Hierbei ist klarzustellen, dass diese Änderung den Wert deines Vermögens nicht beeinträchtigen wird - es handelt sich um eine sprachliche Verfeinerung und nicht um eine funktionale Änderung. Weitere Informationen findest du im Blogpost, der diese Änderung angekündigt hat.",
+            "link": "Neue IOTA Token-Bezeichnung: Abkehr von metrischen Einheitspräfixen"
+        },
         "enableLedgerBlindSigning": {
             "title": "Blind-Signierung aktivieren",
             "info": "Um diese Transaktion zu bestätigen, musst du die Blind-Signierung auf deinem Gerät aktivieren.",
             "step_1": "Verbinde und entsperre dein Ledger-Gerät",
-            "step_2": "Öffne die Shimmer App",
+            "step_2": "Öffne {network} Anwendung",
             "step_3": "Drücke die rechte Taste, um zu den Einstellungen zu navigieren. Drücke dann beide Schaltflächen, um sie zu validieren. Dein Ledger-Gerät zeigt Blindsignierung an.",
             "step_4": "Drücke beide Tasten, um die Transaktionsblindsignierung zu aktivieren. Das Gerät wird aktiviert. Du bist fertig."
         },
@@ -692,7 +693,7 @@
             },
             "pending": {
                 "title": "Ausstehend",
-                "subtitle": "Vorübergehend gesperrte Transaktionen"
+                "subtitle": "Vorübergehend gesperrt in Transaktionen (ohne offene Ansprüche)"
             },
             "locked": {
                 "title": "Gesperrt",
@@ -737,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserviert für Stimmrecht"
+            },
+            "vesting": {
+                "title": "Anspruch",
+                "subtitle": "Gesperrtes Guthaben wartet auf die Entsperrung basierend auf dem Entsperrungszeitplan"
             },
             "minimizeStorageDepositButton": "Storage Deposit reduzieren"
         },
@@ -806,12 +811,6 @@
             "errorBody1": "Um eine Wallet auszublenden, muss diese ein Guthaben von 0 aufweisen.",
             "errorBody2": "Du hast derzeit {balance} auf dieser Wallet. Bitte verschiebe dein Guthaben auf eine andere Wallet und versuche es erneut.",
             "errorBody3": "Du kannst diese Wallet nicht ausblenden. Es musst mindestens eine vorhanden sein."
-        },
-        "addressHistory": {
-            "title": "{name} Adressverlauf",
-            "currentBalance": "Guthaben: {balance}",
-            "internal": "Interne Adresse",
-            "external": "Einzahlungsadresse"
         },
         "excludeNode": {
             "title": "Node ausschließen",
@@ -913,13 +912,24 @@
             "sendingFromStakedAccount": "Du versendest Token von einer Wallet, auf welcher Guthaben gestaked wird. Dies kann zur Aufhebung des Stakens führen. Du kannst diese Token versenden aber es kann sein, dass du verbleibendes Guthaben erneut staken musst.",
             "sendingFromStakedAccountBelowMinReward": "Du überweist Guthaben von einer Wallet, die noch nicht den minimalen Staking-Reward erreicht hat. Dadurch kann das Staking deiner Guthaben aufgehoben werden und gegebenfalls verfallen."
         },
-        "walletFinder": {
-            "title": "Walletsuche",
-            "body": "Führe eine erweiterte Suche nach Adressen durch, um fehlendes Guthaben und fehlende Wallets zu finden.",
-            "accountsSearched": "Durchsuchte Wallets",
-            "accountsFound": "Gefundene Wallets",
-            "totalWalletBalance": "Gesamtguthaben",
-            "searchAgainHint": "Ist das angezeigte Guthaben oder die Anzahl der Wallets nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird."
+        "balanceFinder": {
+            "title": "Guthabensuche",
+            "body": "Führe eine erweiterte Suche nach Guthaben durch.",
+            "addressesSearched": "Durchsuchte Adressen",
+            "addressesFound": "Gefundene Adressen",
+            "totalAddressBalance": "Gesamtguthaben",
+            "searchAgainHint": "Ist das angezeigte Guthaben oder die Anzahl der Wallets nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird.",
+            "currentWallet": "Nur im aktuellen Wallet suchen"
+        },
+        "balanceOverview": {
+            "title": "Guthabenübersicht",
+            "body": "Finde Informationen über alle deine Wallets und das Saldo jedes einzelnen Kontos."
+        },
+        "vestingRewards": {
+            "title": "Finde Ansprüche auf Belohnungen",
+            "body": "Führe eine erweiterte Suche nach Guthaben durch.",
+            "totalAddressBalance": "Gesamte Belohnungen",
+            "searchAgainHint": "Sind deine Ansprüche auf Belohnungen nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird."
         },
         "riskFunds": {
             "title": "Warnung: Verlust von Guthaben möglich",
@@ -942,7 +952,7 @@
             "title": "Verbinde deinen Ledger",
             "notConnected": "Verbinde dein Ledger-Gerät, um fortzufahren.",
             "locked": "Entsperre dein Ledger-Gerät, um fortzufahren.",
-            "appNotOpen": "Öffne die Shimmer App auf deinem Ledger-Gerät, um fortzufahren.",
+            "appNotOpen": "Öffne die {legacy} App auf deinem Ledger-Gerät, um fortzufahren.",
             "correctAppOpen": "Ledger erfolgreich verbunden, bitte fortfahren."
         },
         "ledgerConfirmation": {
@@ -1104,15 +1114,6 @@
                 "assetId": "Asset Id"
             }
         },
-        "importErc20Token": {
-            "title": "ERC20-Token importieren",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token-Adresse"
-            },
-            "success": "{tokenSymbol} Token importiert",
-            "error": "ERC20-Token konnte nicht importiert werden"
-        },
         "noAlias": {
             "title": "Kann nicht gemintet werden",
             "description": "Du musst einen Alias-Output besitzen, um native Token zu prägen. Um fortzufahren, erstellen bitte zuerst einen Alias"
@@ -1181,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Anmeldung erforderlich",
             "body": "Diese Node erfordert zusätzliche Authentifizierung. Bitte gib die entsprechenden Informationen ein."
+        },
+        "addressHistory": {
+            "title": "Adressverlauf",
+            "disclaimer": "Liste der Adressen mit Guthaben bzw. die diesem Profil bekannt sind",
+            "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
+            "internal": "Intern"
         }
     },
     "charts": {
@@ -1227,13 +1234,15 @@
         "save": "Speichern",
         "importSeed": "Importiere einen vorhandenen Seed",
         "restoreWallet": {
-            "iota": "Wallet migrieren oder wiederherstellen",
+            "iota": "IOTA-Profil wiederherstellen",
+            "iotaAlphanet": "IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Shimmer Profil wiederherstellen",
             "testnet": "Testnet Profil wiederherstellen",
             "custom": "Benutzerdefiniertes Netzwerkprofil wiederherstellen"
         },
         "restoreWalletDescription": {
-            "iota": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
+            "iota": "Bestehendes IOTA-Profil wiederherstellen",
+            "iotaAlphanet": "Ein bestehendes IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen",
             "testnet": "Ein existierendes Testnet Profil wiederherstellen",
             "custom": "Ein bestehendes benutzerdefiniertes Profil wiederherstellen"
@@ -1329,11 +1338,14 @@
         "visitFaq": "Gehe zu den FAQs",
         "viewDownloads": "Downloads anzeigen",
         "viewStatus": "Status ansehen",
+        "viewAddressHistory": "Adressverlauf anzeigen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
         "findWallets": "Wallets suchen",
+        "findBalances": "Guthaben suchen",
         "useBalanceFinder": "Guthabensuche verwenden",
         "search": "Suchen",
         "searching": "Suche läuft",
@@ -1384,7 +1396,8 @@
         "stopVoting": "Abstimmen beenden",
         "revote": "Wiederabstimmen",
         "skipAndKeep": "Überspringen und altes Passwort behalten",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Empfänger",
@@ -1427,6 +1440,8 @@
         "shimmerClaimed": "Beansprucht",
         "shimmerClaiming": "Beanspruche",
         "shimmerGenesis": "Shimmer Genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Gemintet",
         "minting": "Minting",
         "burned": "Verbrannt",
@@ -1653,10 +1668,7 @@
         "internalTransaction": "Interne Transaktion",
         "coinType": "Cointyp",
         "custom": "Benutzerdefiniert",
-        "evmAddress": "EVM-Adresse",
-        "chain": "Chain",
-        "importErc20Token": "ERC20-Token importieren",
-        "importErc20TokenDescription": "ERC20-Token aus EVM-Chain importieren"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",
@@ -1732,7 +1744,8 @@
             "alias": "Alias",
             "foundry": "Foundry-Fabrik",
             "governance": "Governance",
-            "consolidation": "Konsolidierung"
+            "consolidation": "Konsolidierung",
+            "vesting": "Anspruch"
         },
         "direction": {
             "label": "Richtung",
@@ -1757,9 +1770,6 @@
             "label": "Reihenfolge",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -1816,7 +1826,7 @@
             }
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
-        "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind, um die Wallets zu ändern.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Bitte warte mit dem Wechseln der Wallet, bis alle Staking/Voting Transaktionen abgeschlossen sind.",
         "claimed": {
             "success": "Transaktion beansprucht",
@@ -1871,7 +1881,8 @@
                 "nonEmptyAccounts": "Du musst alle Guthaben transferieren, bevor du dein Profil löschen kannst."
             },
             "type": "Profiltyp konnte nicht ermittelt werden",
-            "setupType": "Profil-Setup-Typ kann nicht ermittelt werden"
+            "setupType": "Profil-Setup-Typ kann nicht ermittelt werden",
+            "chrysalisDevnetStardustError": "Du kannst nicht auf dieses Profil zugreifen, da das Chrysalis Devnet in dieser Version von Firefly nicht unterstützt wird. Bitte verwende eine Chrysalis kompatible Firefly Version."
         },
         "password": {
             "doNotMatch": "Die Passwörter stimmen nicht überein.",
@@ -1939,7 +1950,7 @@
             "cannotClaimTwice": "UTXO Output wurde bereits beansprucht",
             "noToAccount": "Du hast keine Wallet ausgewählt, auf welche das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
-            "leavingDust": "Du kannst nicht weniger als 1 Mi auf deiner Adresse hinterlassen.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Die Transaktion wurde abgebrochen.",
             "transaction": "Beim Senden deiner Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
             "invalidExpirationDateTime": "Das gewählte Ablaufdatum bzw. die gewählte Ablaufzeit ist ungültig.",
@@ -2090,10 +2101,6 @@
                 "short": "Vorschlag kann nicht hinzugefügt werden",
                 "long": "Vorschlag {proposalId} konnte nicht auf der angegebenen Node gefunden werden"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Muss Hexadezimalformat sein",
-            "invalidAddressLength": "Länge ist ungültig"
         }
     },
     "warning": {
@@ -2231,7 +2238,8 @@
         "governance": "Governance",
         "developer": "Entwickler*in",
         "tokens": "Token",
-        "activity": "Aktivität"
+        "activity": "Aktivität",
+        "vesting": "Anspruch"
     },
     "pills": {
         "stake": {
@@ -2347,7 +2355,11 @@
             "disconnected": "Nicht verbunden"
         },
         "locked": "gesperrt",
-        "smartContract": "Smart-Contract"
+        "smartContract": "Smart-Contract",
+        "vesting": {
+            "unlocked": "Entsperrt",
+            "locked": "Gesperrt"
+        }
     },
     "menus": {
         "expirationTimePicker": {

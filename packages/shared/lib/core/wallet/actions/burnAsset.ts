@@ -1,3 +1,6 @@
+import { PreparedTransaction } from '@iota/sdk/out/types'
+import { plainToInstance } from 'class-transformer'
+
 import { get } from 'svelte/store'
 import { showAppNotification } from '@auxiliary/notification'
 import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
@@ -10,7 +13,12 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const account = get(selectedAccount)
     try {
         updateSelectedAccount({ isTransferring: true })
-        const burnTokenTransaction = await account.burnNativeToken(assetId, Converter.decimalToHex(Number(rawAmount)))
+        const prepareBurnNativeTokenTransaction = await account?.prepareBurnNativeToken(
+            assetId,
+            Converter.decimalToHex(Number(rawAmount))
+        )
+        const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNativeTokenTransaction)
+        const burnTokenTransaction = await preparedTransaction?.send()
 
         await processAndAddToActivities(burnTokenTransaction, account)
 

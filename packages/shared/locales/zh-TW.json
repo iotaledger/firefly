@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "選擇網路",
                     "body": "設定您的個人檔案之網路.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA 主網"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "IOTA 的測試網路"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "測試網",
                         "body": "Shimmer 的公開 beta 版網路"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA 主網"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "自訂網路",
@@ -62,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "建立硬體設定檔",
-                        "description": "需要Ledger Nano S或是Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -73,7 +77,7 @@
                     "importFile": "使用Sronghold備份",
                     "importFileDescription": "匯入你的 Stronghold 備份檔",
                     "importLedger": "使用冷錢包",
-                    "importLedgerDescription": "還原自您的Ledger Nano S 或 X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "領取 Shimmer 質押獎勵",
@@ -205,7 +209,7 @@
             "body": "請確定官方Ledger Live軟體已關閉，使Firefly能找到您的Ledger裝置。",
             "connect": "連接您的 Ledger 裝置",
             "unlock": "使用 Pin 碼解鎖你的 Ledger",
-            "openApp": "在你的 Ledger 上啟動 Shimmer app",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Ledger無法連結時的處理技巧"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "語言",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "貨幣",
                 "description": "調整餘額轉換並更新圖表選項"
@@ -337,9 +344,9 @@
                 "description": "變更您的Firefly設定檔名稱",
                 "success": "您已更換您的設定檔名稱"
             },
-            "walletFinder": {
-                "title": "搜尋錢包",
-                "description": "執行進階的搜尋以尋找您之前用過的錢包"
+            "balanceFinder": {
+                "title": "餘額查詢",
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "隱藏錢包",
@@ -483,55 +490,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "更新"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "新增鏈"
-                    },
-                    "chain": {
-                        "chainId": "鏈 ID",
-                        "aliasAddress": "別名位址",
-                        "iscpEndpoint": "ISCP 端點",
-                        "explorerEndpoint": "瀏覽器端點 (選擇性)",
-                        "errors": {
-                            "cannotBeEmpty": "名稱不能空白",
-                            "nameTooLong": "名稱過長",
-                            "aliasAddressWrongFormat": "必須是 hex 或 Bech32 格式",
-                            "aliasAddressAlreadyInUse": "別名位址已被使用",
-                            "invalidUrl": "無效的 URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "鏈上存款位址",
-                        "networkTitle": "網路存款位址"
-                    },
-                    "chainInformation": {
-                        "title": "鏈資訊"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "確認 EVM 位址",
-                        "header": "我們已生成您的 EVM 位址"
-                    },
-                    "connectedChains": {
-                        "title": "已連接的鏈"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "連接到 Ledger 裝置",
-                        "header": "開啟 Ethereum 應用程式",
-                        "body": "為了使 Firefly 能找到您的 Ledger 裝置，請先確定官方 Ledger Live 應用程式已關閉，再進行下列步驟。",
-                        "requirements": {
-                            "connect": "連接並解鎖你的 Ledger",
-                            "openApp": "在你的 Ledger 上開啟 Ethereum 應用程式"
-                        }
-                    },
-                    "editChain": {
-                        "title": "編輯鏈"
-                    },
-                    "removeChain": {
-                        "title": "刪除鏈"
-                    }
-                }
             }
         },
         "staking": {
@@ -673,14 +631,57 @@
             "changePassword": {
                 "hint": "您先前過時的 Stronghold 已更新。我們建議變更您的 Stronghold 密碼。"
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "啟用 Blind Signing",
             "info": "為了確認這筆交易你必須在你的 Ledger 裝置上啟用 Blind Signing。",
             "step_1": "連接並解鎖你的 Ledger 裝置",
-            "step_2": "打開 Shimmer 應用",
+            "step_2": "Open {network} Application",
             "step_3": "按下右鍵來瀏覽設定。然後同時按下左右兩鍵做確認。你的 Ledger 裝飾顯示 Blind Signing。",
             "step_4": "同時按下雙鍵來啟用交易 Blind Signing。裝置顯示啟用。代表已完成。"
         },
@@ -692,7 +693,7 @@
             },
             "pending": {
                 "title": "等待中",
-                "subtitle": "暫時鎖定於交易中"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "已鎖定",
@@ -737,6 +738,10 @@
             "governance": {
                 "title": "治理",
                 "subtitle": "保留給表決權"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "把存儲空間費用最小化"
         },
@@ -806,12 +811,6 @@
             "errorBody1": "要隱藏一個帳戶，它必須要有 0 餘額。",
             "errorBody2": "目前您在這個錢包仍擁有 {balance} 餘額。請將這些資金移至另一個錢包後再重試。",
             "errorBody3": "您無法隱藏此錢包，您必須至少擁有一個錢包。"
-        },
-        "addressHistory": {
-            "title": "{name} 地址記錄",
-            "currentBalance": "餘額：{balance}",
-            "internal": "內部地址",
-            "external": "存款地址"
         },
         "excludeNode": {
             "title": "排除節點",
@@ -913,13 +912,24 @@
             "sendingFromStakedAccount": "您正在從質押中的錢包發送交易。這將解除您的代幣質押。交易可繼續進行，但交易後您將需要重新質押剩餘的代幣。",
             "sendingFromStakedAccountBelowMinReward": "您正從未達質押門檻的錢包傳送交易。這將解除錢包內的代幣質押，並將使您錯失質押獎勵。"
         },
-        "walletFinder": {
-            "title": "搜尋錢包",
-            "body": "對地址執行更詳盡的搜索，以尋找遺漏的資金與錢包。",
-            "accountsSearched": "已搜尋錢包",
-            "accountsFound": "錢包尋獲",
-            "totalWalletBalance": "總餘額",
-            "searchAgainHint": "您的錢包餘額或數字是否有誤？請重新搜尋直至顯示所有餘額。"
+        "balanceFinder": {
+            "title": "餘額查詢",
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "警告：資金在遷移過程中有風險",
@@ -942,7 +952,7 @@
             "title": "連接你的 Ledger",
             "notConnected": "連接你的 Ledger 裝置以繼續",
             "locked": "解鎖你的 Ledger 裝置以繼續",
-            "appNotOpen": "在你的 Ledger 裝置上開啟 Shimmer 應用程式以繼續。",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger 已成功的連接，請繼續。"
         },
         "ledgerConfirmation": {
@@ -963,7 +973,7 @@
             "steps": {
                 "0": "確保 Ledger Live 尚未於您的電腦上開啟",
                 "1": "確認您已經輸入 PIN 碼來解鎖您的 Ledger 裝置",
-                "2": "在您的 Ledger 裝置上開啟新版 IOTA app",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "仍未成功嗎？",
                     "link": "嘗試 Ledger 的官方支援頁面"
@@ -1104,15 +1114,6 @@
                 "assetId": "資產 ID"
             }
         },
-        "importErc20Token": {
-            "title": "匯入 ERC20 代幣",
-            "property": {
-                "chainId": "鏈 ID",
-                "tokenAddress": "代幣位址"
-            },
-            "success": "匯入的 {tokenSymbol} 代幣",
-            "error": "無法匯入 ERC20 代幣"
-        },
         "noAlias": {
             "title": "無法鑄造",
             "description": "您必須擁有別名輸出才能鑄造原生代幣。若要繼續，請先建立一個別名。"
@@ -1181,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "需要驗證",
             "body": "此節點需要額外的認證。請填寫正確的資訊。"
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1227,13 +1234,15 @@
         "save": "儲存",
         "importSeed": "匯入現有的種子",
         "restoreWallet": {
-            "iota": "遷移或復原錢包",
+            "iota": "Restore IOTA profile",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "復原Shimmer設定檔",
             "testnet": "恢復測試網設定檔",
             "custom": "恢復自訂網路設定檔"
         },
         "restoreWalletDescription": {
-            "iota": "遷移至Chrysalis或恢復一個既存錢包",
+            "iota": "Restore an existing IOTA profile",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "復原既有的Shimmer檔",
             "testnet": "恢復既有的測試網設定檔",
             "custom": "恢復既有的自訂網路設定檔"
@@ -1329,11 +1338,14 @@
         "visitFaq": "訪問常見問題解答",
         "viewDownloads": "查看下載",
         "viewStatus": "查看狀態",
+        "viewAddressHistory": "檢視地址歷史紀錄",
         "viewBalanceBreakdown": "檢視餘額明細",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
         "hideNetworkStatistics": "隱藏網路統計數據",
         "findWallets": "尋找錢包",
+        "findBalances": "尋找餘額",
         "useBalanceFinder": "資金查詢",
         "search": "搜尋",
         "searching": "搜尋中",
@@ -1384,7 +1396,8 @@
         "stopVoting": "停止投票",
         "revote": "重新投票",
         "skipAndKeep": "跳過並保留舊密碼",
-        "addChain": "新增鏈"
+        "addChain": "新增鏈",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "接收方",
@@ -1427,6 +1440,8 @@
         "shimmerClaimed": "已領取",
         "shimmerClaiming": "領取中",
         "shimmerGenesis": "Shimmer 創世",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "已鑄造",
         "minting": "鑄造中",
         "burned": "已燒毀",
@@ -1653,10 +1668,7 @@
         "internalTransaction": "內部交易",
         "coinType": "代幣類型",
         "custom": "自訂",
-        "evmAddress": "EVM 位址",
-        "chain": "鏈",
-        "importErc20Token": "匯入 ERC20 代幣",
-        "importErc20TokenDescription": "從 EVM 鏈匯入 ERC20 代幣"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "篩選",
@@ -1732,7 +1744,8 @@
             "alias": "別名",
             "foundry": "鑄造廠",
             "governance": "治理",
-            "consolidation": "合併"
+            "consolidation": "合併",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "方向",
@@ -1757,9 +1770,6 @@
             "label": "順序",
             "name": "名稱",
             "phase": "階段"
-        },
-        "network": {
-            "label": "網路"
         }
     },
     "dates": {
@@ -1816,7 +1826,7 @@
             }
         },
         "syncing": "請等待同步完成才更換錢包。",
-        "transferring": "請等待所有交易完成才更換錢包。",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "請等待所有質押/投票交易完成才更換錢包。",
         "claimed": {
             "success": "交易認領",
@@ -1871,7 +1881,8 @@
                 "nonEmptyAccounts": "您必須先轉出全部餘額，然後才能刪除您的設定檔。"
             },
             "type": "無法解析個人設定檔種類",
-            "setupType": "無法解析個人設定檔的設置種類"
+            "setupType": "無法解析個人設定檔的設置種類",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "密碼不吻合。",
@@ -1939,7 +1950,7 @@
             "cannotClaimTwice": "輸出已被認領",
             "noToAccount": "您尚未選擇匯款的目標錢包。",
             "sendingDust": "您無法發送少於1 Mi。",
-            "leavingDust": "您的地址不能少於1Mi。",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "交易取消。",
             "transaction": "交易發生錯誤，請重試。",
             "invalidExpirationDateTime": "您選擇的 失效日期/時間 為無效的",
@@ -1998,7 +2009,7 @@
             "unableToRestoreForProfileManager": "無法恢復配置文件管理器的要塞備份"
         },
         "ledger": {
-            "appNotOpen": "您必須在Ledger裝置上開啟IOTA app",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "連接至您的Ledger裝置時發生錯誤",
             "legacyConnected": "您的Ledger裝置開啟了錯誤的應用程式",
             "locked": "請輸入 PIN 碼來解鎖您的 Ledger 裝置",
@@ -2090,10 +2101,6 @@
                 "short": "無法新增提案",
                 "long": "在指定的節點上找不到 {proposalId} 提案"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "必須是十六進制格式",
-            "invalidAddressLength": "長度無效"
         }
     },
     "warning": {
@@ -2231,7 +2238,8 @@
         "governance": "治理",
         "developer": "開發人員",
         "tokens": "代幣",
-        "activity": "活動"
+        "activity": "活動",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2347,7 +2355,11 @@
             "disconnected": "已中斷"
         },
         "locked": "已鎖定",
-        "smartContract": "智能合約"
+        "smartContract": "智能合約",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

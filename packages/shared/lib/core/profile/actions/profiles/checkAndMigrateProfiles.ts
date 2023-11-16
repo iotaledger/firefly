@@ -2,12 +2,14 @@ import { IPersistedAccountData } from '@core/account/interfaces'
 import {
     COIN_TYPE,
     DEFAULT_CHAIN_CONFIGURATIONS,
+    DEFAULT_MAX_PARALLEL_API_REQUESTS,
     getDefaultPersistedNetwork,
     IIscpChainMetadata,
     NetworkId,
 } from '@core/network'
 import { INode, IPersistedNetwork } from '@core/network/interfaces'
 import { DEFAULT_MAX_NFT_DOWNLOADING_TIME_IN_SECONDS, DEFAULT_MAX_NFT_SIZE_IN_MEGABYTES } from '@core/nfts'
+import { ProfileType } from '@core/profile/enums'
 import { StrongholdVersion } from '@core/stronghold/enums'
 import { get } from 'svelte/store'
 import {
@@ -17,6 +19,7 @@ import {
 } from '../../constants'
 import { IPersistedProfile } from '../../interfaces'
 import { currentProfileVersion, profiles, saveProfile } from '../../stores'
+import { checkAndMigrateChrysalisProfiles } from './'
 
 /**
  * Migrates profile data in need of being modified to accommodate changes
@@ -25,7 +28,13 @@ import { currentProfileVersion, profiles, saveProfile } from '../../stores'
 
 export function checkAndMigrateProfiles(): void {
     const shouldMigratePersistedProfiles = (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
+
     if (shouldMigratePersistedProfiles) {
+        if (checkAndMigrateChrysalisProfiles()) {
+            // If there was a migration, we need to update the currentProfileVersion
+            // to the latest compatible with the chrysalis migration, which is 13
+            currentProfileVersion.set(13)
+        }
         migrateEachVersion()
     }
 }
@@ -60,6 +69,10 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     10: persistedProfileMigrationToV11,
     11: persistedProfileMigrationToV12,
     12: persistedProfileMigrationToV13,
+    13: persistedProfileMigrationToV14,
+    14: persistedProfileMigrationToV15,
+    15: persistedProfileMigrationToV16,
+    16: persistedProfileMigrationToV17,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -262,7 +275,7 @@ function persistedProfileMigrationToV13(
     const accountPersistedData = {}
     existingProfile.accountMetadata?.forEach((metadata) => {
         const { index, ...rest } = metadata
-        accountPersistedData[index] = { ...rest, depositAddress: '' }
+        accountPersistedData[index] = { ...rest }
     })
     existingProfile.accountPersistedData = accountPersistedData
     keysToKeep.forEach((key) => {
@@ -288,4 +301,33 @@ function persistedProfileMigrationToV13(
     }
 
     saveProfile(newProfile as IPersistedProfile)
+}
+
+function persistedProfileMigrationToV14(existingProfile: IPersistedProfile): void {
+    const isLedgerProfile = existingProfile?.type === ProfileType.Ledger
+    if (isLedgerProfile) {
+        delete existingProfile.strongholdVersion
+        saveProfile(existingProfile)
+    }
+}
+
+function persistedProfileMigrationToV15(existingProfile: IPersistedProfile): void {
+    if (existingProfile.clientOptions && !existingProfile.clientOptions.maxParallelApiRequests) {
+        existingProfile.clientOptions.maxParallelApiRequests = DEFAULT_MAX_PARALLEL_API_REQUESTS
+        saveProfile(existingProfile)
+    }
+}
+
+function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): void {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+    const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
+    existingProfile.network.chains = newChains
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV17(existingProfile: IPersistedProfile): void {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+    const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
+    existingProfile.network.chains = newChains
+    saveProfile(existingProfile)
 }

@@ -26,10 +26,6 @@
                 "chooseNetwork": {
                     "title": "Välj nätverk",
                     "body": "Ställ in nätverket för din profil.",
-                    "iota": {
-                        "title": "IOTA",
-                        "body": "IOTA Mainnet"
-                    },
                     "shimmer": {
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
@@ -37,6 +33,14 @@
                     "testnet": {
                         "title": "Testnet",
                         "body": "Public beta network for Shimmer"
+                    },
+                    "iota": {
+                        "title": "IOTA",
+                        "body": "IOTA Mainnet"
+                    },
+                    "iotaAlphanet": {
+                        "title": "IOTA Alphanet",
+                        "body": "IOTA Alphanet"
                     },
                     "custom": {
                         "title": "Custom network",
@@ -62,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Skapa en hårdvaruprofil",
-                        "description": "Ledger Nano S eller Nano X krävs"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -73,7 +77,7 @@
                     "importFile": "Använd Stronghold backup",
                     "importFileDescription": "Importera din Stronghold backupfil",
                     "importLedger": "Använd Ledger-enhet",
-                    "importLedgerDescription": "Återställ från din Ledger Nano S eller X enhet"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Hämta Shimmer staking-belöningar",
@@ -205,7 +209,7 @@
             "body": "För att din Ledger enhet ska hittas av Firefly, se till att den officiella Ledger Live-applikationen är stängd.",
             "connect": "Anslut din Ledger-enhet",
             "unlock": "Lås upp din Ledger med dess PIN-kod",
-            "openApp": "Öppna Shimmer-appen på din Ledger",
+            "openApp": "Open the {network} app on your Ledger",
             "tips": "Tips om din Ledger inte ansluter"
         },
         "restoreFromFireflyLedger": {
@@ -284,6 +288,9 @@
                 "title": "Språk",
                 "description": ""
             },
+            "appName": {
+                "title": "App Name"
+            },
             "currency": {
                 "title": "Valuta",
                 "description": "Justerar saldokonvertering och uppdaterar alternativ för diagram"
@@ -337,9 +344,9 @@
                 "description": "Ändra ditt Firefly profilnamn",
                 "success": "Du ändrade ditt profilnamn"
             },
-            "walletFinder": {
+            "balanceFinder": {
                 "title": "Hitta saldo",
-                "description": "Utför en utökad sökning av dina tidigare använda plånböcker"
+                "description": "Perform an extended search of your balance"
             },
             "hiddenAccounts": {
                 "title": "Dolda plånböcker",
@@ -483,55 +490,6 @@
                     "updateVersion": "Firefly v{version}",
                     "button": "Uppdatera"
                 }
-            },
-            "drawers": {
-                "networkConfig": {
-                    "addChain": {
-                        "title": "Add chain"
-                    },
-                    "chain": {
-                        "chainId": "Chain ID",
-                        "aliasAddress": "Alias Address",
-                        "iscpEndpoint": "ISCP Endpoint",
-                        "explorerEndpoint": "Explorer Endpoint (optional)",
-                        "errors": {
-                            "cannotBeEmpty": "Name cannot be empty",
-                            "nameTooLong": "Name is too long",
-                            "aliasAddressWrongFormat": "Must be in either hex or Bech32 format",
-                            "aliasAddressAlreadyInUse": "Alias address already in use",
-                            "invalidUrl": "Invalid URL"
-                        }
-                    },
-                    "chainDepositAddress": {
-                        "title": "Chain deposit address",
-                        "networkTitle": "Network deposit address"
-                    },
-                    "chainInformation": {
-                        "title": "Chain information"
-                    },
-                    "confirmLedgerEvmAddress": {
-                        "title": "Confirm EVM address",
-                        "header": "We have generated your EVM address"
-                    },
-                    "connectedChains": {
-                        "title": "Connected chains"
-                    },
-                    "connectLedgerDevice": {
-                        "title": "Connect Ledger Device",
-                        "header": "Open the Ethereum app",
-                        "body": "For your Ledger device to be found by Firefly, please ensure that the official Ledger Live application is closed before following these steps.",
-                        "requirements": {
-                            "connect": "Connect and unlock your Ledger",
-                            "openApp": "Open the Ethereum app on your Ledger"
-                        }
-                    },
-                    "editChain": {
-                        "title": "Edit chain"
-                    },
-                    "removeChain": {
-                        "title": "Remove chain"
-                    }
-                }
             }
         },
         "staking": {
@@ -673,14 +631,57 @@
             "changePassword": {
                 "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
             }
+        },
+        "vesting": {
+            "title": "Vesting",
+            "overview": {
+                "unlocked": "Unlocked",
+                "locked": "Locked",
+                "total": "Total"
+            },
+            "timeUntilNextUnlock": "Time until next unlock",
+            "collect": "Collect",
+            "search": "Find vesting rewards",
+            "payouts": {
+                "title": "Biweekly Unlock Schedule",
+                "information": "Payout Information",
+                "tooltip": {
+                    "title": "Payout",
+                    "amount": "Amount",
+                    "unlockDate": "Unlock Date"
+                }
+            },
+            "infoTooltip": {
+                "title": "Vesting of tokens",
+                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+            }
         }
     },
     "popups": {
+        "payoutDetails": {
+            "title": "Payout Details",
+            "amount": "Total amount",
+            "unlockDate": "Unlock date",
+            "status": "Status"
+        },
+        "vestingCollect": {
+            "title": "Collect",
+            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
+            "unclaimedFunds": "Unclaimed funds",
+            "button": "Collect"
+        },
+        "metricSystemInfo": {
+            "title": "Transitioning from metric prefixes",
+            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
+            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
+            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
+            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+        },
         "enableLedgerBlindSigning": {
             "title": "Aktivera blind signering",
             "info": "För att bekräfta denna transaktion måste du aktivera blind signering på din Ledger-enhet.",
             "step_1": "Anslut och lås upp din Ledger-enhet",
-            "step_2": "Öppna Shimmer-appen",
+            "step_2": "Open {network} Application",
             "step_3": "Tryck på höger knapp för att navigera till Inställningar. Tryck sedan på båda knapparna för att validera. Ledger-enheten visar blind signering.",
             "step_4": "Tryck på båda knapparna för att aktivera blind signering. Enheten visar Aktiverad. Du är klar."
         },
@@ -692,7 +693,7 @@
             },
             "pending": {
                 "title": "Pending",
-                "subtitle": "Temporarily locked in transactions"
+                "subtitle": "Temporarily locked in transactions (excluding vesting)"
             },
             "locked": {
                 "title": "Locked",
@@ -737,6 +738,10 @@
             "governance": {
                 "title": "Governance",
                 "subtitle": "Reserved for voting power"
+            },
+            "vesting": {
+                "title": "Vesting",
+                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -806,12 +811,6 @@
             "errorBody1": "För att dölja en plånbok måste den ha 0 i saldo.",
             "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa tillgångar till en annan plånbok och försök igen.",
             "errorBody3": "Du kan inte dölja denna plånbok, du måste ha minst en."
-        },
-        "addressHistory": {
-            "title": "{name} adresshistorik",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adress",
-            "external": "Insättningsadress"
         },
         "excludeNode": {
             "title": "Exkludera nod",
@@ -913,13 +912,24 @@
             "sendingFromStakedAccount": "Du skickar en överföring från en plånbok som för närvarande används för staking. Detta kan innebära att dina tokens slutar stakas. Fortsätt att skicka överföringen om du vill, men du kan behöva staka dina återstående tokens på nytt.",
             "sendingFromStakedAccountBelowMinReward": "Du skickar en överföring från en plånbok som ännu inte nått den lägsta belöningsnivån. Detta kan innebära att dina tokens slutar vara markerade som \"staked\" och du därmed förlorar dina stakingbelöningar på denna plånbok."
         },
-        "walletFinder": {
+        "balanceFinder": {
             "title": "Hitta saldo",
-            "body": "Utför en mer uttömmande sökning av adresser för att hitta saknade saldon och plånböcker.",
-            "accountsSearched": "Plånböcker genomsökta",
-            "accountsFound": "Plånböcker hittade",
-            "totalWalletBalance": "Totalt saldo",
-            "searchAgainHint": "Är ditt saldo eller antal plånböcker felaktiga? Tryck på sök igen tills ditt saldo visas."
+            "body": "Perform a more exhaustive search of balances.",
+            "addressesSearched": "Addresses searched",
+            "addressesFound": "Addresses found",
+            "totalAddressBalance": "Total balance",
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
+        },
+        "balanceOverview": {
+            "title": "Balance overview",
+            "body": "Find information about all your wallets and the balance of each."
+        },
+        "vestingRewards": {
+            "title": "Find vesting rewards",
+            "body": "Perform a more exhaustive search of your rewards.",
+            "totalAddressBalance": "Total rewards",
+            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
             "title": "Varning: Tillgångar i riskzonen vid migrering",
@@ -942,7 +952,7 @@
             "title": "Anslut din Ledger",
             "notConnected": "Anslut din Ledger-enhet för att fortsätta.",
             "locked": "Lås upp din Ledger-enhet för att fortsätta.",
-            "appNotOpen": "Open the Shimmer app on your Ledger device to continue.",
+            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
             "correctAppOpen": "Ledger har anslutits framgångsrikt, vänligen fortsätt."
         },
         "ledgerConfirmation": {
@@ -963,7 +973,7 @@
             "steps": {
                 "0": "Se till att Ledger Live inte är öppen på din dator",
                 "1": "Se till att du har låst upp din Ledger-enhet med din PIN-kod",
-                "2": "Öppna den nya IOTA-appen på din Ledger-enhet",
+                "2": "Open the new {network} app on your Ledger device",
                 "3": {
                     "text": "Funkar fortfarande inte?",
                     "link": "Prova den officiella Ledger support sidan"
@@ -1104,15 +1114,6 @@
                 "assetId": "Tillgångs-ID"
             }
         },
-        "importErc20Token": {
-            "title": "Import ERC20 token",
-            "property": {
-                "chainId": "Chain ID",
-                "tokenAddress": "Token address"
-            },
-            "success": "Imported {tokenSymbol} token",
-            "error": "Unable to import ERC20 token"
-        },
         "noAlias": {
             "title": "Det går inte att minta",
             "description": "Du måste äga en alias utdata för att mynta inhemska tokens. För att fortsätta, vänligen skapa ett alias först"
@@ -1181,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Autentisering krävs",
             "body": "Den här noden kräver ytterligare autentisering. Vänligen fyll i lämplig information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1227,13 +1234,15 @@
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
         "restoreWallet": {
-            "iota": "Migrera eller återställ en plånbok",
+            "iota": "Restore IOTA profile",
+            "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Återställ Shimmer-profil",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrera till Chrysalis eller återställ en befintlig plånbok",
+            "iota": "Restore an existing IOTA profile",
+            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Återställ en befintlig Shimmer-profil",
             "testnet": "Restore an existing Testnet profile",
             "custom": "Restore an existing Custom Network profile"
@@ -1329,11 +1338,14 @@
         "visitFaq": "Besök FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Visa status",
+        "viewAddressHistory": "Visa adresshistorik",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
         "hideNetworkStatistics": "Dölj nätverksstatistik",
         "findWallets": "Hitta plånböcker",
+        "findBalances": "Hitta saldo",
         "useBalanceFinder": "Använd \"Hitta saldo\"",
         "search": "Sök",
         "searching": "Söker",
@@ -1384,7 +1396,8 @@
         "stopVoting": "Sluta rösta",
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain"
+        "addChain": "Add chain",
+        "viewVestingRewardsFinder": "Find vesting rewards"
     },
     "general": {
         "recipient": "Mottagare",
@@ -1427,6 +1440,8 @@
         "shimmerClaimed": "Anspråkstagen",
         "shimmerClaiming": "Gör anspråk",
         "shimmerGenesis": "Shimmer genesis",
+        "vestingReward": "Vesting Reward Airdrop",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Mintad",
         "minting": "Mintar",
         "burned": "Burned",
@@ -1653,10 +1668,7 @@
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
         "custom": "Custom",
-        "evmAddress": "EVM address",
-        "chain": "Chain",
-        "importErc20Token": "Import ERC20 token",
-        "importErc20TokenDescription": "Import an ERC20 token from an EVM chain"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",
@@ -1732,7 +1744,8 @@
             "alias": "Alias",
             "foundry": "Foundry",
             "governance": "Governance",
-            "consolidation": "Consolidation"
+            "consolidation": "Consolidation",
+            "vesting": "Vesting"
         },
         "direction": {
             "label": "Riktning",
@@ -1757,9 +1770,6 @@
             "label": "Order",
             "name": "Name",
             "phase": "Phase"
-        },
-        "network": {
-            "label": "Network"
         }
     },
     "dates": {
@@ -1816,7 +1826,7 @@
             }
         },
         "syncing": "Vänta tills synkroniseringen är klar för att ändra plånbok.",
-        "transferring": "Vänta tills alla transaktioner är slutförda för att ändra plånbok.",
+        "transferring": "Please wait until all transactions are completed.",
         "participating": "Vänta tills alla staking-/röstningstransaktioner har slutförts för att ändra plånbok.",
         "claimed": {
             "success": "Transaktion anspråkstagen",
@@ -1871,7 +1881,8 @@
                 "nonEmptyAccounts": "Du måste överföra alla saldon innan du kan ta bort din profil."
             },
             "type": "Går inte att fastställa profiltypen",
-            "setupType": "Går inte att fastställa profilinställningstypen"
+            "setupType": "Går inte att fastställa profilinställningstypen",
+            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
             "doNotMatch": "Lösenorden matchar inte.",
@@ -1939,7 +1950,7 @@
             "cannotClaimTwice": "Utdatan har redan blivit anspråkstagen",
             "noToAccount": "Du har inte valt en plånbok att skicka tillgångarna till.",
             "sendingDust": "Du kan inte skicka mindre än 1 Mi.",
-            "leavingDust": "Du kan inte lämna mindre än 1 Mi på din adress.",
+            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "Transaktionen avbröts.",
             "transaction": "Det uppstod ett fel. Vänligen försök igen.",
             "invalidExpirationDateTime": "Det valda utgångsdatumet/tiden är ogiltig.",
@@ -1998,7 +2009,7 @@
             "unableToRestoreForProfileManager": "Det går inte att återställa Stronghold backup för profilhanteraren"
         },
         "ledger": {
-            "appNotOpen": "Du måste öppna IOTA appen på din Ledger-enhet.",
+            "appNotOpen": "You must open the {network} app on your Ledger device.",
             "generic": "Det gick inte att ansluta till din Ledger-enhet.",
             "legacyConnected": "Fel app är öppen på din Ledger-enhet.",
             "locked": "Lås upp din Ledger-enhet genom att ange PIN-koden.",
@@ -2090,10 +2101,6 @@
                 "short": "Unable to add proposal",
                 "long": "Unable to find proposal {proposalId} on the specified node"
             }
-        },
-        "erc20Token": {
-            "invalidAddressFormat": "Must be hexadecimal format",
-            "invalidAddressLength": "Length is invalid"
         }
     },
     "warning": {
@@ -2231,7 +2238,8 @@
         "governance": "Styrning",
         "developer": "Utvecklare",
         "tokens": "Tokens",
-        "activity": "Aktivitet"
+        "activity": "Aktivitet",
+        "vesting": "Vesting"
     },
     "pills": {
         "stake": {
@@ -2347,7 +2355,11 @@
             "disconnected": "Disconnected"
         },
         "locked": "låst",
-        "smartContract": "smartkontrakt"
+        "smartContract": "smartkontrakt",
+        "vesting": {
+            "unlocked": "Unlocked",
+            "locked": "Locked"
+        }
     },
     "menus": {
         "expirationTimePicker": {

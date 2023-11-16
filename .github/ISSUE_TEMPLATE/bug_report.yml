@@ -15,19 +15,7 @@ body:
 
     - type: markdown
       attributes:
-          value: '## Firefly application details'
-          
-    - type: dropdown
-      id: platform
-      attributes:
-          label: Platform
-          description: What platform does this issue occur on? (Select all that apply)
-          multiple: true
-          options:
-            - Desktop
-            - Mobile
-      validations:
-          required: true      
+          value: '## Firefly application details'    
     
     - type: input
       id: version
@@ -37,7 +25,6 @@ body:
           placeholder: "1.4.0"
       validations:
           required: true
-
 
     - type: markdown
       attributes:
@@ -102,8 +89,6 @@ body:
             - Linux
             - Mac
             - Windows
-            - iOS
-            - Android
       validations:
           required: true
           

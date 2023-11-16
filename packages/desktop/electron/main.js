@@ -359,12 +359,12 @@ app.on('window-all-closed', () => {
 
 powerMonitor.on('suspend', () => {
     // MacOS, Windows and Linux
-    windows.main.webContents.send('power-monitor-suspend')
+    windows.main?.webContents?.send('power-monitor-suspend')
 })
 
 powerMonitor.on('lock-screen', () => {
     // MacOS and Windows
-    windows.main.webContents.send('power-monitor-lock-screen')
+    windows.main?.webContents?.send('power-monitor-lock-screen')
 })
 
 app.once('ready', () => {
@@ -455,10 +455,12 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
 ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
+const argWithAppProtocol = (arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`)
+
 /**
  * Define deep link state
  */
-let deepLinkUrl = null
+let deepLinkUrl = process.argv.find(argWithAppProtocol)
 
 /**
  * Create a single instance only
@@ -472,7 +474,7 @@ if (!isFirstInstance) {
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`))
+            const params = args.find(argWithAppProtocol)
 
             if (params) {
                 windows.main.webContents.send('deep-link-params', params)
@@ -486,8 +488,8 @@ app.on('second-instance', (_e, args) => {
 })
 
 /**
- * Register firefly:// protocol for deep links
- * Set Firefly as the default handler for firefly:// protocol
+ * Register iota:// protocol for deep links
+ * Set Firefly as the default handler for iota:// protocol
  */
 protocol.registerSchemesAsPrivileged([
     { scheme: process.env.APP_PROTOCOL, privileges: { secure: true, standard: true } },
