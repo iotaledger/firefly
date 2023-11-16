@@ -6,7 +6,6 @@ import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 export const selectedAccount: Readable<IAccountState | undefined> = derived(
     [selectedAccountIndex, activeAccounts],
     ([$selectedAccountIndex, $activeAccounts]) => {
-        $activeAccounts?.find((account) => account.index === $selectedAccountIndex)
         return $activeAccounts?.find((account) => account.index === $selectedAccountIndex)
     }
 )

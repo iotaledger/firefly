@@ -1,10 +1,9 @@
+import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
 
-import { profileManager } from '../stores'
-
 export async function setStrongholdPassword(password: string): Promise<void> {
-    const manager = get(profileManager)
+    const account = get(selectedAccount)
     // Otherwise error is thrown, if password is still present in memory
-    await manager.clearStrongholdPassword()
-    await manager.setStrongholdPassword(password)
+    await account?.clearStrongholdPassword()
+    await account?.setStrongholdPassword(password)
 }

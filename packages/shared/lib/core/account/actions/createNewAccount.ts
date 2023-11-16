@@ -14,13 +14,17 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         alias: name || `${localize('general.account')} ${(get(activeAccounts)?.length ?? 0) + 1}`,
     })
 
-    await account.sync(DEFAULT_SYNC_OPTIONS)
+    //await account.sync(DEFAULT_SYNC_OPTIONS)
+   
 
     const [newAccount, accountPersistedData] = await buildAccountStateAndPersistedData(account, name, color)
-    const accountIndex = newAccount.getMetadata().index
+    
+    const accountIndex = 0 // TODO: CHANGE THIS
+   
     addAccountToActiveAccounts(newAccount)
     addAccountPersistedDataToActiveProfile(accountIndex, accountPersistedData)
     addEmptyAccountActivitiesToAllAccountActivities(accountIndex)
+ 
 
     return newAccount
 }

@@ -18,7 +18,7 @@ if (SEND_CRASH_REPORTS) {
     captureException = require('../sentry')(true).captureException
 }
 
-const profileManagers = {}
+const wallets = {}
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -108,60 +108,45 @@ try {
 
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         ...methods,
-        async getNodeInfo(managerId, url, auth) {
-            const manager = profileManagers[managerId]
-            const client = await manager.getClient()
-            const nodeUrl = url ?? (await client.getNode()).url
-
-            const nodeInfo = await client.getNodeInfo(nodeUrl, auth)
-
-            return {
-                url: nodeUrl,
-                nodeInfo,
-            }
-        },
-        createWallet(id, options) {
-            const manager = new IotaSdk.Wallet(options)
-            manager.id = id
-            profileManagers[id] = manager
-            bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, manager)
+        async createSecretManager(options) {
+            const manager = new IotaSdk.SecretManager(options);
+            bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
-        async createAccount(managerId, payload) {
-            const manager = profileManagers[managerId]
-            const account = await manager.createAccount(payload)
-            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
-            return account
+        // rename to createWallet
+        async createAccount(id, options) {
+            const wallet = new IotaSdk.Wallet(options)
+            wallet.id = id
+            wallets[id] = wallet
+            bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
+            return wallet
         },
         deleteWallet(id) {
-            if (id && id in profileManagers) {
-                delete profileManagers[id]
+            if (id && id in wallets) {
+                delete wallets[id]
             }
         },
         async getAccount(managerId, index) {
-            const manager = profileManagers[managerId]
+            const manager = wallets[managerId]
             const account = await manager.getAccount(index)
             bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
             return account
         },
-        async getAccounts(managerId) {
-            const manager = profileManagers[managerId]
-            const accounts = await manager.getAccounts()
+        async getAccounts(managerId, options) {
+            const accounts = [
+                new IotaSdk.Wallet({
+                    ...options,
+                    id: `${managerId}-0`
+                })
+            ]
             accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
         },
         async recoverAccounts(managerId, payload) {
-            const manager = profileManagers[managerId]
+            const manager = wallets[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))
             accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
-        },
-        async getClient(managerId) {
-            const manager = profileManagers[managerId]
-            const client = await manager.getClient()
-            bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
-
-            return client
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'

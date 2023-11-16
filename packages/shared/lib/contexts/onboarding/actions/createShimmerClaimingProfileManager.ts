@@ -19,11 +19,11 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
     const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)
 
     const manager = await initialiseProfileManager(
+        generateRandomId(),
         storagePath,
         coinType,
         clientOptions,
         secretManager,
-        generateRandomId()
     )
 
     if ($onboardingProfile?.restoreProfileType !== RestoreProfileType.Ledger) {

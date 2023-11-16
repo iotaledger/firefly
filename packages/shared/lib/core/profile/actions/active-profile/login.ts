@@ -64,14 +64,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
                 // Make sure the profile has the latest client options that we are using
                 updateActiveProfile({ clientOptions })
-                const manager = await initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
+                const manager = await initialiseProfileManager(id, storagePath, coinType, clientOptions, secretManager)
                 profileManager.set(manager)
             }
-
-            // Step 2: get node info to check we have a synced node
-            incrementLoginProgress()
-            await checkAndUpdateActiveProfileNetwork()
-            void pollNetworkStatus()
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
@@ -115,6 +110,20 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await loadAccounts()
 
+            let initialSelectedAccountindex = get(activeAccounts)?.[0]?.index
+            if (
+                lastUsedAccountIndex &&
+                get(activeAccounts)?.find((_account) => _account.index === lastUsedAccountIndex)
+            ) {
+                initialSelectedAccountindex = lastUsedAccountIndex
+            }
+            setSelectedAccount(initialSelectedAccountindex)
+
+            // Step 2: get node info to check we have a synced node
+            incrementLoginProgress()
+            await checkAndUpdateActiveProfileNetwork()
+            void pollNetworkStatus()
+
             // Step 5: load assets
             incrementLoginProgress()
             await refreshAccountAssetsForActiveProfile(
@@ -155,15 +164,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             if (isLedgerProfile(type)) {
                 pollLedgerNanoStatus()
             }
-
-            let initialSelectedAccountindex = get(activeAccounts)?.[0]?.index
-            if (
-                lastUsedAccountIndex &&
-                get(activeAccounts)?.find((_account) => _account.index === lastUsedAccountIndex)
-            ) {
-                initialSelectedAccountindex = lastUsedAccountIndex
-            }
-            setSelectedAccount(initialSelectedAccountindex)
             lastActiveAt.set(new Date())
             loggedIn.set(true)
             setTimeout(() => {
@@ -181,6 +181,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             throw Error('No active profile error')
         }
     } catch (err) {
+        console.log(err)
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
             void logout(false)

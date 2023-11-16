@@ -1,3 +1,4 @@
+import { Client } from '@iota/sdk'
 import type {
     AccountMetadata,
     AddressWithUnspentOutputs,
@@ -37,6 +38,12 @@ import type {
 } from '@iota/sdk/out/types'
 
 export interface IAccount {
+    isStrongholdPasswordAvailable(): Promise<boolean>
+    getClient(): Promise<Client>
+    setStrongholdPassword(password: string): Promise<void>
+    setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
+    changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
+    clearStrongholdPassword(): Promise<void>
     addresses(): Promise<AccountAddress[]>
     addressesWithUnspentOutputs(): Promise<AddressWithUnspentOutputs[]>
     prepareBurn(burn: Burn, transactionOptions?: TransactionOptions): Promise<PreparedTransaction>

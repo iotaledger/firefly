@@ -105,11 +105,11 @@
             const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
             updateActiveProfile({ clientOptions })
             const manager = await initialiseProfileManager(
+                $activeProfile?.id,
                 storagePath,
                 coinType,
                 clientOptions,
                 secretManager,
-                $activeProfile?.id
             )
             profileManager.set(manager)
         }

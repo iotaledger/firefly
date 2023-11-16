@@ -27,7 +27,7 @@ export async function buildAccountState(
         potentiallyLockedOutputs: {},
         aliases: [],
     }
-    const accountIndex = account.getMetadata().index
+    const accountIndex = 0; // TODO: CHANGE THIS
     let depositAddress = ''
     let votingPower = ''
     try {

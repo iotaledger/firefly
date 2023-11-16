@@ -15,15 +15,13 @@ import { WalletApiEventHandler } from '../types'
 
 export interface IProfileManager {
     id: string
+    getSecretManagerOptions(): any, // TODO: Use proper type
     backup(destination: string, password: string): Promise<void>
     bech32ToHex(bech32Address: string): Promise<string>
-    changeStrongholdPassword(currentPassword: string, newPassword: string): Promise<void>
-    clearStrongholdPassword(): Promise<void>
     destroy(): Promise<void>
     emitTestEvent(event: WalletEvent): Promise<void>
     generateEd25519Address(
         accountIndex: number,
-        addressIndex: number,
         options?: GenerateAddressOptions,
         bech32Hrp?: string
     ): Promise<string>
@@ -33,7 +31,6 @@ export interface IProfileManager {
     getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoWrapper>
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
-    isStrongholdPasswordAvailable(): Promise<boolean>
     listen(eventTypes: WalletEventType[], callback: WalletApiEventHandler): Promise<void>
     clearListeners(eventTypes: WalletEventType[]): Promise<void>
     removeLatestAccount(): Promise<void>
@@ -44,8 +41,6 @@ export interface IProfileManager {
         ignoreIfBech32Mismatch: string
     ): Promise<void>
     setClientOptions(options: IClientOptions): Promise<void>
-    setStrongholdPassword(password: string): Promise<void>
-    setStrongholdPasswordClearInterval(intervalInMilliseconds?: number): Promise<void>
     startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
     stopBackgroundSync(): Promise<void>
     storeMnemonic(mnemonic: string): Promise<void>

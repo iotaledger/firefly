@@ -12,13 +12,6 @@ export const MOCK_MNEMONIC =
 const profileManagers = {}
 
 const api: IApi = {
-    async createWallet(id: string, _: WalletOptions): Promise<ProfileManagerMock> {
-        const manager = new ProfileManagerMock(id)
-
-        profileManagers[id] = manager
-
-        return manager
-    },
     createAccount(_: string, __: CreateAccountPayload): Promise<IAccount> {
         return new Promise((resolve) => {
             resolve(new AccountMock())

@@ -3,8 +3,18 @@ import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.i
 import { get } from 'svelte/store'
 import { profileManager } from '../stores'
 import { api } from '../api'
+import { selectedAccount } from '@core/account'
 
-export function getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
-    const manager = get(profileManager)
-    return api.getNodeInfo(manager.id, url, auth)
+export async function getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
+    const wallet = get(selectedAccount)
+    
+    const client = await wallet!.getClient()
+    const nodeUrl = url ?? (await client.getNode()).url
+
+    const nodeInfo = await client.getNodeInfo(nodeUrl, auth)
+
+    return {
+        url: nodeUrl,
+        nodeInfo,
+    }
 }

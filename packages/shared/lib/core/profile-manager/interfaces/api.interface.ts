@@ -9,13 +9,12 @@ import { IProfileManager } from './profile-manager.interface'
 import { RecoverAccountsPayload } from './recover-account-payload.interface'
 
 export interface IApi {
+    createSecretManager(options: any): Promise<SecretManager>
     getNodeInfo(profileManagerId: string, url?: string, auth?: IAuth): Promise<INodeInfoResponse>
-    createWallet(id: string, options: WalletOptions): Promise<IProfileManager>
-    createAccount(managerId: string, payload: CreateAccountPayload): Promise<IAccount>
+    createAccount(id: string, payload: CreateAccountPayload): Promise<IAccount>
     deleteWallet(id: string): void
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
-    getAccounts(profileManagerId: string): Promise<IAccount[]>
-    getClient(profileManagerId: string): Promise<Client>
+    getAccounts(profileManagerId: string, payload: CreateAccountPayload): Promise<IAccount[]>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,

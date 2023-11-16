@@ -1,9 +1,8 @@
 import { Client } from '@iota/sdk/out/client'
-import { api } from './api'
 import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+import { selectedAccount } from '@core/account'
 
-export function getClient(manager = profileManager): Promise<Client> {
-    const { id } = get(manager)
-    return api.getClient(id)
+export function getClient(): Promise<Client> {
+    const account = get(selectedAccount)
+    return account!.getClient()
 }

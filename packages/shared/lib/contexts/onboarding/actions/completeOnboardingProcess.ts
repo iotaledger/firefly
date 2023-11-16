@@ -4,8 +4,9 @@ import { OnboardingType } from '../enums'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
 import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
+import { createNewAccount } from '@core/account'
 
-export function completeOnboardingProcess(): void {
+export async function completeOnboardingProcess(): void {
     // if we already have an active profile
     // it means we are trying to load again after an error
     // and we don't need to add it again
@@ -14,10 +15,10 @@ export function completeOnboardingProcess(): void {
     }
 
     const onboardingType = get(onboardingProfile)?.onboardingType
-    const shouldCreateAccount = onboardingType === OnboardingType.Create
     const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverAccounts)
-    void login({ isFromOnboardingFlow: true, shouldCreateAccount, shouldRecoverAccounts })
+    await createNewAccount()
+    void login({ isFromOnboardingFlow: true, shouldRecoverAccounts })
 
     onboardingProfile.set(undefined)
 }
