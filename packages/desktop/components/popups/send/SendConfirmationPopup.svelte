@@ -65,8 +65,9 @@
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
     $: isInternal = recipient.type === 'account'
+    $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedAccount.isTransferring
-    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
+    $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
@@ -88,7 +89,7 @@
                 expirationDate,
                 storageDeposit,
                 giftStorageDeposit,
-                !!layer2Parameters
+                isLayer2Transaction
             )
 
             try {
@@ -120,7 +121,7 @@
                     expirationDate,
                     storageDeposit,
                     giftStorageDeposit,
-                    !!layer2Parameters
+                    isLayer2Transaction
                 )
             }
         } catch (err) {
