@@ -2,9 +2,9 @@ import { DEFAULT_SYNC_OPTIONS, SearchAlgorithmType } from '@core/account'
 import { updateLedgerNanoStatus } from '@core/ledger'
 import {
     BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION,
-    ProfileType,
     UnableToFindProfileTypeError,
     activeProfile,
+    isActiveLedgerProfile,
 } from '@core/profile'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { get } from 'svelte/store'
@@ -42,12 +42,12 @@ export async function findBalances(
     init?: boolean,
     config?: RecoverAccountsPayload
 ): Promise<void> {
-    const profileType = get(activeProfile)?.type
+    const _isActiveLedgerProfile = get(isActiveLedgerProfile)
     try {
         if (init) {
             initialiseAccountRecoveryConfiguration(algortihmType, config)
         }
-        if (profileType === ProfileType.Ledger) {
+        if (_isActiveLedgerProfile) {
             // Note: This is a way to know the ledger is doing heavy work
             updateLedgerNanoStatus({ busy: true })
         }
@@ -64,8 +64,7 @@ export async function findBalances(
         const message = error?.message ?? error?.error ?? ''
         throw new Error(message)
     } finally {
-        if (profileType === ProfileType.Ledger) {
-            // Note: This is a way to know the ledger is doing heavy work
+        if (_isActiveLedgerProfile) {
             updateLedgerNanoStatus({ busy: false })
         }
     }
