@@ -812,12 +812,6 @@
             "errorBody2": "Du hast derzeit {balance} auf dieser Wallet. Bitte verschiebe dein Guthaben auf eine andere Wallet und versuche es erneut.",
             "errorBody3": "Du kannst diese Wallet nicht ausblenden. Es musst mindestens eine vorhanden sein."
         },
-        "addressHistory": {
-            "title": "{name} Adressverlauf",
-            "currentBalance": "Guthaben: {balance}",
-            "internal": "Interne Adresse",
-            "external": "Einzahlungsadresse"
-        },
         "excludeNode": {
             "title": "Node ausschließen",
             "body": "Bist du sicher, dass du {url} aus dem verfügbaren Nodepool ausschließen möchtest?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Anmeldung erforderlich",
             "body": "Diese Node erfordert zusätzliche Authentifizierung. Bitte gib die entsprechenden Informationen ein."
+        },
+        "addressHistory": {
+            "title": "Adressverlauf",
+            "disclaimer": "Liste der Adressen mit Guthaben bzw. die diesem Profil bekannt sind",
+            "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
+            "internal": "Intern"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Speichern",
         "importSeed": "Importiere einen vorhandenen Seed",
         "restoreWallet": {
-            "iota": "Wallet migrieren oder wiederherstellen",
+            "iota": "IOTA-Profil wiederherstellen",
             "iotaAlphanet": "IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Shimmer Profil wiederherstellen",
             "testnet": "Testnet Profil wiederherstellen",
             "custom": "Benutzerdefiniertes Netzwerkprofil wiederherstellen"
         },
         "restoreWalletDescription": {
-            "iota": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
+            "iota": "Bestehendes IOTA-Profil wiederherstellen",
             "iotaAlphanet": "Ein bestehendes IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen",
             "testnet": "Ein existierendes Testnet Profil wiederherstellen",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Gehe zu den FAQs",
         "viewDownloads": "Downloads anzeigen",
         "viewStatus": "Status ansehen",
+        "viewAddressHistory": "Adressverlauf anzeigen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
