@@ -21,9 +21,8 @@ export class SpecialStream extends WriteStream {
 }
 
 export class ReadSpecialStream extends ReadStream {
-    readUInt64SpecialEncoding(name: string): number | bigint {
-        const [value] = size64Decode(() => this.readUInt8(name))
-        return value
+    readUInt64SpecialEncodingWithError(name: string): [bigint, Error | null] {
+        return size64Decode(() => this.readUInt8(name))
     }
 
     readUInt32SpecialEncoding(name: string): number | bigint {

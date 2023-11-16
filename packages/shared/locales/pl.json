@@ -812,12 +812,6 @@
             "errorBody2": "Obecnie posiadasz {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
             "errorBody3": "Nie możesz ukryć tego portfela. Co najmniej jeden portfel musi pozostać aktywny."
         },
-        "addressHistory": {
-            "title": "Historia adresów dla {name}",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Adres wewnętrzny",
-            "external": "Adres odbiorcy"
-        },
         "excludeNode": {
             "title": "Wyklucz serwer",
             "body": "Czy na pewno chcesz wykluczyć {url} z dostępnej puli serwerów?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Wymagane uwierzytelnienie",
             "body": "Ten serwer wymaga dodatkowego uwierzytelnienia. Proszę wypełnić odpowiednie informacje."
+        },
+        "addressHistory": {
+            "title": "Historia adresów",
+            "disclaimer": "Lista adresów ze środkami lub adresów znanych przez ten profil",
+            "indexAndType": "{internal, select, true {Adres wewnętrzny} other {Adres odbiorcy}} {index}",
+            "internal": "Transfer wewnętrzny"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": {
-            "iota": "Migruj lub przywróć portfel",
+            "iota": "Przywróć profil IOTA",
             "iotaAlphanet": "Przywróć profil IOTA Alphanet",
             "shimmer": "Przywróć profil Shimmer",
             "testnet": "Przywróć profil Testnet",
             "custom": "Przywróć profil niestandardowej sieci"
         },
         "restoreWalletDescription": {
-            "iota": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
+            "iota": "Przywróć istniejący profil IOTA",
             "iotaAlphanet": "Przywróć istniejący profil IOTA Alphanet",
             "shimmer": "Przywróć istniejący profil Shimmer",
             "testnet": "Przywróć istniejący profil Testnet",
@@ -1338,8 +1338,9 @@
         "visitFaq": "Odwiedź FAQ",
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
+        "viewAddressHistory": "Pokaż historię adresów",
         "viewBalanceBreakdown": "Zestawienie środków",
-        "verifyDepositAddress": "Zweryfikuj adres depozytu",
+        "verifyDepositAddress": "Zweryfikuj adres odbiorcy",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1667,7 +1668,7 @@
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
         "custom": "Niestandardowe",
-        "verifyLedgerDepositAddress": "Sprawdź czy adres depozytu jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
+        "verifyLedgerDepositAddress": "Sprawdź czy adres odbiorcy jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
     },
     "filters": {
         "title": "Filtry",
