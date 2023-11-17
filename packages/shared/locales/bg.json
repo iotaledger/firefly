@@ -812,12 +812,6 @@
             "errorBody2": "В момента имате {balance} оставащи в този портфейл. Моля преместете средствата в друг портфейл и опитайте отново.",
             "errorBody3": "Не можете да изтриете този портфейл, трябва да имате минимум един."
         },
-        "addressHistory": {
-            "title": "{name} история на адрес",
-            "currentBalance": "Баланс: {balance}",
-            "internal": "Вътрешни адреси",
-            "external": "Депозит адрес"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Запис",
         "importSeed": "Импортиране на съществуващ seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Посети ЧЗВ-FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Покажи статус",
+        "viewAddressHistory": "Покажи история на адресите",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Покажи скрити портфейли",

@@ -1,20 +1,11 @@
 <script lang="ts">
-    import { localize } from '@core/i18n'
-    import { getOfficialExplorerUrl } from '@core/network/utils'
-    import {
-        Text,
-        Button,
-        FontWeight,
-        TextType,
-        BasicActivityDetails,
-        AliasActivityDetails,
-        FoundryActivityDetails,
-        GovernanceActivityDetails,
-        NftActivityDetails,
-        ConsolidationActivityDetails,
-        ActivityInformation,
-    } from 'shared/components'
+    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { openUrlInBrowser } from '@core/app'
+    import { localize } from '@core/i18n'
+    import { ExplorerEndpoint } from '@core/network'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { setClipboard, truncateString } from '@core/utils'
     import {
         ActivityAsyncStatus,
         ActivityDirection,
@@ -23,13 +14,21 @@
         rejectActivity,
         selectedAccountActivities,
     } from '@core/wallet'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { setClipboard } from '@core/utils'
-    import { truncateString } from '@core/utils'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { onMount } from 'svelte'
-    import { ExplorerEndpoint } from '@core/network'
+    import {
+        ActivityInformation,
+        AliasActivityDetails,
+        BasicActivityDetails,
+        Button,
+        ConsolidationActivityDetails,
+        FontWeight,
+        FoundryActivityDetails,
+        GovernanceActivityDetails,
+        NftActivityDetails,
+        Text,
+        TextType,
+    } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
+    import { onMount } from 'svelte'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -45,7 +44,13 @@
         activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     function onExplorerClick(): void {
-        openUrlInBrowser(`${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`)
+        let url: string
+        if (activity?.type === ActivityType.Vesting) {
+            url = `${explorerUrl}/${ExplorerEndpoint.Output}/${activity?.outputId}`
+        } else {
+            url = `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`
+        }
+        openUrlInBrowser(url)
     }
 
     function onTransactionIdClick(): void {
