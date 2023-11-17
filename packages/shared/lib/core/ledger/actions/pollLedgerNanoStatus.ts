@@ -5,7 +5,7 @@ import { ILedgerNanoStatusPollingConfiguration } from '../interfaces'
 import { isPollingLedgerDeviceStatus, ledgerNanoStatus } from '../stores'
 import { getAndUpdateLedgerNanoStatus } from './getAndUpdateLedgerNanoStatus'
 
-let intervalTimer: ReturnType<typeof setInterval> | null
+let timeoutTimer: ReturnType<typeof setInterval> | undefined
 
 export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfiguration): void {
     const { pollInterval, profileManager } = deconstructLedgerNanoStatusPollingConfiguration(config)
@@ -19,7 +19,7 @@ export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfigurat
             await getAndUpdateLedgerNanoStatus(profileManager)
             const isLedgerBusy = get(ledgerNanoStatus)?.busy
             const currentPollInterval = isLedgerBusy ? slowedPollInterval : defaultPollInterval
-            intervalTimer = setTimeout(() => void pollingFunction(), currentPollInterval)
+            timeoutTimer = setTimeout(() => void pollingFunction(), currentPollInterval)
         }
 
         void pollingFunction()
@@ -28,10 +28,8 @@ export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfigurat
 
 export function stopPollingLedgerNanoStatus(): void {
     if (get(isPollingLedgerDeviceStatus)) {
-        if (intervalTimer) {
-            clearInterval(intervalTimer)
-        }
-        intervalTimer = null
+        clearInterval(timeoutTimer)
+        timeoutTimer = undefined
         isPollingLedgerDeviceStatus.set(false)
     }
 }
