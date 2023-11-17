@@ -5,7 +5,7 @@ import { ILedgerNanoStatusPollingConfiguration } from '../interfaces'
 import { isPollingLedgerDeviceStatus, ledgerNanoStatus } from '../stores'
 import { getAndUpdateLedgerNanoStatus } from './getAndUpdateLedgerNanoStatus'
 
-let timeoutTimer: ReturnType<typeof setInterval> | undefined
+let timeoutTimer: ReturnType<typeof setTimeout> | undefined
 
 export function pollLedgerNanoStatus(config?: ILedgerNanoStatusPollingConfiguration): void {
     const { pollInterval, profileManager } = deconstructLedgerNanoStatusPollingConfiguration(config)
