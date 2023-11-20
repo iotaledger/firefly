@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Создать аппаратный профиль",
-                        "description": "Требуется Ledger Nano S или Nano X"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Использовать резервную копию Stronghold",
                     "importFileDescription": "Импортировать файл резервной копии Stronghold",
                     "importLedger": "Используйте устройство Ledger",
-                    "importLedgerDescription": "Восстановление с устройства Ledger Nano S или X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Запросить вознаграждение за ставки в Shimmer",
@@ -812,12 +812,6 @@
             "errorBody2": "В настоящее время на этом кошельке осталось {balance}. Пожалуйста, переведите эти средства на другой кошелек и повторите попытку.",
             "errorBody3": "Вы не можете скрыть этот кошелек, вы должны иметь хотя бы один."
         },
-        "addressHistory": {
-            "title": "История адресов: {name}",
-            "currentBalance": "Баланс: {balance}",
-            "internal": "Внутренний адрес",
-            "external": "Адрес пополнения счета"
-        },
         "excludeNode": {
             "title": "Исключить узел",
             "body": "Вы уверены, что хотите исключить {url} из списка доступных узлов?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Требуется аутентификация",
             "body": "Этот узел требует дополнительной аутентификации. Пожалуйста, заполните соответствующую информацию."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Сохранить",
         "importSeed": "Импортировать существующую мнемонику",
         "restoreWallet": {
-            "iota": "Перенос или восстановление кошелька",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Восстановить профиль Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Перенос на Chrysalis или восстановление существующего кошелька",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Восстановить существующий профиль Shimmer",
             "testnet": "Restore an existing Testnet profile",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Посетить FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Просмотр статуса",
+        "viewAddressHistory": "Просмотр истории адресов",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Показать скрытые кошельки",
         "confirm": "Подтвердить",
         "hideNetworkStatistics": "Скрыть статистику сети",
@@ -1438,7 +1441,7 @@
         "shimmerClaiming": "Востребование",
         "shimmerGenesis": "Shimmer Genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Отчеканено",
         "minting": "Чеканка",
         "burned": "Сожжено",
@@ -1664,7 +1667,8 @@
         "jwt": "JSON веб-токен",
         "internalTransaction": "Внутренняя транзакция",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Фильтры",

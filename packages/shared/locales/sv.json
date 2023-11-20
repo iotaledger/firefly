@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Skapa en hårdvaruprofil",
-                        "description": "Ledger Nano S eller Nano X krävs"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Använd Stronghold backup",
                     "importFileDescription": "Importera din Stronghold backupfil",
                     "importLedger": "Använd Ledger-enhet",
-                    "importLedgerDescription": "Återställ från din Ledger Nano S eller X enhet"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Hämta Shimmer staking-belöningar",
@@ -812,12 +812,6 @@
             "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa tillgångar till en annan plånbok och försök igen.",
             "errorBody3": "Du kan inte dölja denna plånbok, du måste ha minst en."
         },
-        "addressHistory": {
-            "title": "{name} adresshistorik",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adress",
-            "external": "Insättningsadress"
-        },
         "excludeNode": {
             "title": "Exkludera nod",
             "body": "Är du säker på att du vill exkludera {url} från den tillgängliga nodpoolen?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Autentisering krävs",
             "body": "Den här noden kräver ytterligare autentisering. Vänligen fyll i lämplig information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
         "restoreWallet": {
-            "iota": "Migrera eller återställ en plånbok",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Återställ Shimmer-profil",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrera till Chrysalis eller återställ en befintlig plånbok",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Återställ en befintlig Shimmer-profil",
             "testnet": "Restore an existing Testnet profile",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Besök FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Visa status",
+        "viewAddressHistory": "Visa adresshistorik",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Visa dolda plånböcker",
         "confirm": "Bekräfta",
         "hideNetworkStatistics": "Dölj nätverksstatistik",
@@ -1438,7 +1441,7 @@
         "shimmerClaiming": "Gör anspråk",
         "shimmerGenesis": "Shimmer genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Mintad",
         "minting": "Mintar",
         "burned": "Burned",
@@ -1664,7 +1667,8 @@
         "jwt": "JSON webb-token",
         "internalTransaction": "Internal transaction",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",

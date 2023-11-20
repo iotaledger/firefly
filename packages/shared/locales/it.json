@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Crea un profilo hardware",
-                        "description": "Ledger Nano S o Nano X necessario"
+                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Usa il backup di Stronghold",
                     "importFileDescription": "Importa il tuo file di backup di Stronghold",
                     "importLedger": "Usa dispositivo Ledger",
-                    "importLedgerDescription": "Ripristina dal tuo dispositivo Ledger Nano S o X"
+                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
                 },
                 "setupClaimed": {
                     "title": "Rivendica le ricompense di staking di Shimmer",
@@ -812,12 +812,6 @@
             "errorBody2": "Al momento hai {balance} rimanenti in questo wallet. Per favore sposta questi fondi in un wallet diverso e riprova.",
             "errorBody3": "Non puoi nascondere questo wallet, è necessario averne almeno uno."
         },
-        "addressHistory": {
-            "title": "cronologia degli indirizzi di {name}",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Indirizzi interni",
-            "external": "Indirizzo di deposito"
-        },
         "excludeNode": {
             "title": "Escludi il nodo",
             "body": "Sei sicuro di voler escludere {url} dal pool di nodi disponibile?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Autenticazione richiesta",
             "body": "Questo nodo richiede ulteriore autenticazione. Si prega di compilare le informazioni appropriate."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Salva",
         "importSeed": "Importa un seed esistente",
         "restoreWallet": {
-            "iota": "Migra o ripristina un wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Ripristina profilo Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Ripristina un profilo Shimmer esistente",
             "testnet": "Restore an existing Testnet profile",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Visita le Domande Frequenti",
         "viewDownloads": "View downloads",
         "viewStatus": "Visualizza stato",
+        "viewAddressHistory": "Visualizza cronologia indirizzi",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostra wallet nascosti",
         "confirm": "Conferma",
         "hideNetworkStatistics": "Nascondi le statistiche della rete",
@@ -1438,7 +1441,7 @@
         "shimmerClaiming": "Rivendicazione in corso",
         "shimmerGenesis": "Shimmer Genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Coniato",
         "minting": "Coniando",
         "burned": "Bruciato",
@@ -1664,7 +1667,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Transazione interna",
         "coinType": "Coin type",
-        "custom": "Custom"
+        "custom": "Custom",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filtri",

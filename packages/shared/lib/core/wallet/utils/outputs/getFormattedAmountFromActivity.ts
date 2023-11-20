@@ -8,7 +8,6 @@ export function getFormattedAmountFromActivity(
     signed: boolean = true
 ): string {
     if (!activity) return ''
-
     const metadata = getAssetFromPersistedAssets(activity.assetId)?.metadata
     const amount = formatTokenAmountBestMatch(activity.rawAmount, metadata)
     if (activity.type === ActivityType.Basic) {

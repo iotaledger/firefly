@@ -33,8 +33,7 @@ export async function generateActivitiesFromBasicOutputs(
         const burnedNftInputIndex = burnedNftInputs.findIndex(
             (input) => input.output.amount === basicOutput.output.amount
         )
-        const burnedNativeToken =
-            burnedNftInputIndex < 0 ? getBurnedNativeTokens(basicOutput, processedTransaction) : undefined
+        const burnedNativeToken = burnedNftInputIndex < 0 ? getBurnedNativeTokens(processedTransaction) : undefined
 
         if (isSelfTransaction && burnedNftInputIndex >= 0) {
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
@@ -105,26 +104,37 @@ function getBurnedNftInputs(processedTransaction: IProcessedTransaction): IWrapp
 }
 
 function getBurnedNativeTokens(
-    output: IWrappedOutput,
     processedTransaction: IProcessedTransaction
-): { assetId: string; amount: number } {
+): { assetId: string; amount: number } | undefined {
+    // If the transaction is unblanced and there is a surplus of native tokens on the
+    // input side of the transaction: the transaction destroys tokens.
     if (processedTransaction.direction !== ActivityDirection.SelfTransaction) {
-        return null
+        return
     }
 
     const inputNativeTokens: { [key: string]: number } = getAllNativeTokensFromOutputs(
         processedTransaction.wrappedInputs
     )
-    const outputNativeTokens: { [key: string]: number } = getAllNativeTokensFromOutputs([output])
-    for (const inputNativeTokenId of Object.keys(inputNativeTokens)) {
-        if (!outputNativeTokens[inputNativeTokenId]) {
-            return { assetId: inputNativeTokenId, amount: inputNativeTokens[inputNativeTokenId] }
-        }
+    // No burned native tokens if input doesn't contain any native tokens
+    if (Object.keys(inputNativeTokens).length === 0) {
+        return
+    }
 
-        if (inputNativeTokens[inputNativeTokenId] > Number(outputNativeTokens[inputNativeTokenId])) {
-            const burnedAmount = inputNativeTokens[inputNativeTokenId] - Number(outputNativeTokens[inputNativeTokenId])
-            return { assetId: inputNativeTokenId, amount: burnedAmount }
-        }
+    const outputNativeTokens: { [key: string]: number } = getAllNativeTokensFromOutputs(processedTransaction.outputs)
+    // Find missing native tokens in outputNativeTokens (ex. input native tokens count === 3, output native tokens count === 2)
+    // TO DO: adjust UI to account for burining entire amounts of multiple native tokens in one transaction.
+    // We assume here that transaction burns entire amount of only one token.
+    // There may be transactions created outside of FF that burn entire amount for multiple tokens from the input side
+    // (ex.input native tokens count === 3, output native tokens count === 0)
+    let burnedTokenKeys: string[] = Object.keys(inputNativeTokens).filter((key) => !(key in outputNativeTokens))
+    if (Object.keys(burnedTokenKeys).length > 0) {
+        return { assetId: burnedTokenKeys[0], amount: inputNativeTokens[burnedTokenKeys[0]] }
+    }
+    // Check if the amount of output native token was larger on the input side (partially burned native tokens)
+    burnedTokenKeys = Object.keys(outputNativeTokens).filter((key) => outputNativeTokens[key] < inputNativeTokens[key])
+    if (Object.keys(burnedTokenKeys).length > 0) {
+        const burnedAmount = inputNativeTokens[burnedTokenKeys[0]] - Number(outputNativeTokens[burnedTokenKeys[0]])
+        return { assetId: burnedTokenKeys[0], amount: burnedAmount }
     }
 }
 

@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Opret en hardwareprofil",
-                        "description": "Ledger Nano S/X kræves"
+                        "description": "Ledger Nano S, Nano S Plus eller Nano X kræves"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Benyt Stronghold-sikkerhedskopi",
                     "importFileDescription": "Importér Stronghold-sikkerhedskopien",
                     "importLedger": "Benyt Ledger-enhed",
-                    "importLedgerDescription": "Gendan fra Ledger Nano S-/X-enhed"
+                    "importLedgerDescription": "Gendan fra Ledger Nano S-, Nano S Plus- eller X-enhed"
                 },
                 "setupClaimed": {
                     "title": "Gør krav på Shimmer-staking belønninger",
@@ -812,12 +812,6 @@
             "errorBody2": "Du har i øjeblikket {balance} tilbage på denne wallet. Flyt disse midler til en anden wallet og prøv igen.",
             "errorBody3": "Du kan ikke skjule denne wallet, du skal have mindst en."
         },
-        "addressHistory": {
-            "title": "{name} adresse historik",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adresse",
-            "external": "Deponeringsadresse"
-        },
         "excludeNode": {
             "title": "Udeluk node",
             "body": "Sikker på, at {url} skal udelukkes fra den tilgængelige nodepulje?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown."
+            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
+            "currentWallet": "Søg kun i den aktuelle wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Adressehistorik",
+            "disclaimer": "Liste over adresser med midler eller kendt af denne profil",
+            "indexAndType": "{internal, select, true {Intern adresse} other {Indbetalingsadresse}} {index}",
+            "internal": "Intern"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Gem",
         "importSeed": "Importer et eksisterende seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Gendan IOTA-profil",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Gendan en eksisterende IOTA-profil",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Besøg FAQ",
         "viewDownloads": "Se downloads",
         "viewStatus": "Vis Status",
+        "viewAddressHistory": "Se historik for addresse",
         "viewBalanceBreakdown": "View balance breakdown",
+        "verifyDepositAddress": "Bekræft indbetalingsadresse",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",
         "hideNetworkStatistics": "Skjul netværksstatistik",
@@ -1438,7 +1441,7 @@
         "shimmerClaiming": "Modtager",
         "shimmerGenesis": "Shimmer Genesis",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Sturdust Genesis",
+        "stardustGenesis": "Stardust Genesis",
         "minted": "Mintet",
         "minting": "Mintning",
         "burned": "Brændt",
@@ -1664,7 +1667,8 @@
         "jwt": "JSON web token",
         "internalTransaction": "Intern transaktion",
         "coinType": "Mønttyper",
-        "custom": "Tilpasset"
+        "custom": "Tilpasset",
+        "verifyLedgerDepositAddress": "Tjek ledger-enheden og bekræft, at indbetalingsadressen matcher den, der vises på ledger-enheden"
     },
     "filters": {
         "title": "Filtre",
@@ -1878,7 +1882,7 @@
             },
             "type": "Profiltypen kan ikke bestemmes",
             "setupType": "Profilopsætningstypen kan ikke bestemmes",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Denne profil kan ikke tilgås, da Chrysalis Devnet er uunderstøttet i denne Firefly-version. Benyt i stedet en Chrysalis-kompatibel Firefly-version."
         },
         "password": {
             "doNotMatch": "Adgangskoderne er ikke ens.",

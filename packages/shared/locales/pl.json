@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Utwórz profil sprzętowy",
-                        "description": "Wymagany Ledger Nano S lub Nano X"
+                        "description": "Wymagany Ledger Nano S, Nano S Plus lub Nano X"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Użyj kopii zapasowej Stronghold",
                     "importFileDescription": "Importuj plik kopii zapasowej Stronghold",
                     "importLedger": "Użyj urządzenia Ledger",
-                    "importLedgerDescription": "Przywróć profil ze swojego urządzenia Ledger Nano S lub X"
+                    "importLedgerDescription": "Przywróć profil ze swojego urządzenia Ledger Nano S, Nano S Plus lub Nano X"
                 },
                 "setupClaimed": {
                     "title": "Odbierz nagrody Shimmer ze stakingu",
@@ -812,12 +812,6 @@
             "errorBody2": "Obecnie posiadasz {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
             "errorBody3": "Nie możesz ukryć tego portfela. Co najmniej jeden portfel musi pozostać aktywny."
         },
-        "addressHistory": {
-            "title": "Historia adresów dla {name}",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Adres wewnętrzny",
-            "external": "Adres odbiorcy"
-        },
         "excludeNode": {
             "title": "Wyklucz serwer",
             "body": "Czy na pewno chcesz wykluczyć {url} z dostępnej puli serwerów?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Przeszukane adresy",
             "addressesFound": "Znalezione adresy",
             "totalAddressBalance": "Wszystkie środki",
-            "searchAgainHint": "Czy Twoje saldo lub liczba portfeli są nieprawidłowe? Wykonaj ponowne szukanie, aż Twoje pełne saldo zostanie wyświetlone."
+            "searchAgainHint": "Czy Twoje saldo lub liczba portfeli są nieprawidłowe? Wykonaj ponowne szukanie, aż Twoje pełne saldo zostanie wyświetlone.",
+            "currentWallet": "Szukaj tylko w bieżącym portfelu"
         },
         "balanceOverview": {
             "title": "Przegląd salda",
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Wymagane uwierzytelnienie",
             "body": "Ten serwer wymaga dodatkowego uwierzytelnienia. Proszę wypełnić odpowiednie informacje."
+        },
+        "addressHistory": {
+            "title": "Historia adresów",
+            "disclaimer": "Lista adresów ze środkami lub adresów znanych przez ten profil",
+            "indexAndType": "{internal, select, true {Adres wewnętrzny} other {Adres odbiorcy}} {index}",
+            "internal": "Transfer wewnętrzny"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": {
-            "iota": "Migruj lub przywróć portfel",
+            "iota": "Przywróć profil IOTA",
             "iotaAlphanet": "Przywróć profil IOTA Alphanet",
             "shimmer": "Przywróć profil Shimmer",
             "testnet": "Przywróć profil Testnet",
             "custom": "Przywróć profil niestandardowej sieci"
         },
         "restoreWalletDescription": {
-            "iota": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
+            "iota": "Przywróć istniejący profil IOTA",
             "iotaAlphanet": "Przywróć istniejący profil IOTA Alphanet",
             "shimmer": "Przywróć istniejący profil Shimmer",
             "testnet": "Przywróć istniejący profil Testnet",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Odwiedź FAQ",
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
+        "viewAddressHistory": "Pokaż historię adresów",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "verifyDepositAddress": "Zweryfikuj adres odbiorcy",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1664,7 +1667,8 @@
         "jwt": "Token internetowy JSON",
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
-        "custom": "Niestandardowe"
+        "custom": "Niestandardowe",
+        "verifyLedgerDepositAddress": "Sprawdź czy adres odbiorcy jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
     },
     "filters": {
         "title": "Filtry",
@@ -1878,7 +1882,7 @@
             },
             "type": "Nie można określić typu profilu",
             "setupType": "Nie można określić typu konfiguracji profilu",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Nie możesz uzyskać dostępu do tego profilu, ponieważ Chrysalis Devnet nie jest obsługiwany w tej wersji Firefly. Użyj wersji Firefly kompatybilnej z Chrysalis."
         },
         "password": {
             "doNotMatch": "Hasła nie są zgodne.",

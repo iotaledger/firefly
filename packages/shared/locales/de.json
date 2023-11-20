@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Erstelle ein (Ledger-) Hardware Profil",
-                        "description": "Ledger Nano S oder Nano X erforderlich"
+                        "description": "Ledger Nano S, Nano S Plus oder Nano X erforderlich"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Stronghold-Backup verwenden",
                     "importFileDescription": "Importiere deine Stronghold-Backup Datei",
                     "importLedger": "Ledger-Gerät verwenden",
-                    "importLedgerDescription": "Wiederherstellen von deinem Ledger Nano S oder X Gerät"
+                    "importLedgerDescription": "Von deinem Ledger Nano S, Nano S Plus oder X wiederherstellen"
                 },
                 "setupClaimed": {
                     "title": "Shimmer Staking-Rewards beanspruchen",
@@ -812,12 +812,6 @@
             "errorBody2": "Du hast derzeit {balance} auf dieser Wallet. Bitte verschiebe dein Guthaben auf eine andere Wallet und versuche es erneut.",
             "errorBody3": "Du kannst diese Wallet nicht ausblenden. Es musst mindestens eine vorhanden sein."
         },
-        "addressHistory": {
-            "title": "{name} Adressverlauf",
-            "currentBalance": "Guthaben: {balance}",
-            "internal": "Interne Adresse",
-            "external": "Einzahlungsadresse"
-        },
         "excludeNode": {
             "title": "Node ausschließen",
             "body": "Bist du sicher, dass du {url} aus dem verfügbaren Nodepool ausschließen möchtest?"
@@ -924,7 +918,8 @@
             "addressesSearched": "Durchsuchte Adressen",
             "addressesFound": "Gefundene Adressen",
             "totalAddressBalance": "Gesamtguthaben",
-            "searchAgainHint": "Ist das angezeigte Guthaben oder die Anzahl der Wallets nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird."
+            "searchAgainHint": "Ist das angezeigte Guthaben oder die Anzahl der Wallets nicht korrekt? Dann suche erneut, bis dein gesamtes Guthaben angezeigt wird.",
+            "currentWallet": "Nur im aktuellen Wallet suchen"
         },
         "balanceOverview": {
             "title": "Guthabenübersicht",
@@ -957,7 +952,7 @@
             "title": "Verbinde deinen Ledger",
             "notConnected": "Verbinde dein Ledger-Gerät, um fortzufahren.",
             "locked": "Entsperre dein Ledger-Gerät, um fortzufahren.",
-            "appNotOpen": "Öffne die IOTA Legacy App auf deinem Ledger-Gerät, um fortzufahren.",
+            "appNotOpen": "Öffne die {legacy} App auf deinem Ledger-Gerät, um fortzufahren.",
             "correctAppOpen": "Ledger erfolgreich verbunden, bitte fortfahren."
         },
         "ledgerConfirmation": {
@@ -1187,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Anmeldung erforderlich",
             "body": "Diese Node erfordert zusätzliche Authentifizierung. Bitte gib die entsprechenden Informationen ein."
+        },
+        "addressHistory": {
+            "title": "Adressverlauf",
+            "disclaimer": "Liste der Adressen mit Guthaben bzw. die diesem Profil bekannt sind",
+            "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
+            "internal": "Intern"
         }
     },
     "charts": {
@@ -1233,14 +1234,14 @@
         "save": "Speichern",
         "importSeed": "Importiere einen vorhandenen Seed",
         "restoreWallet": {
-            "iota": "Wallet migrieren oder wiederherstellen",
+            "iota": "IOTA-Profil wiederherstellen",
             "iotaAlphanet": "IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Shimmer Profil wiederherstellen",
             "testnet": "Testnet Profil wiederherstellen",
             "custom": "Benutzerdefiniertes Netzwerkprofil wiederherstellen"
         },
         "restoreWalletDescription": {
-            "iota": "Zu Chrysalis migrieren oder vorhandene Wallet wiederherstellen",
+            "iota": "Bestehendes IOTA-Profil wiederherstellen",
             "iotaAlphanet": "Ein bestehendes IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen",
             "testnet": "Ein existierendes Testnet Profil wiederherstellen",
@@ -1337,7 +1338,9 @@
         "visitFaq": "Gehe zu den FAQs",
         "viewDownloads": "Downloads anzeigen",
         "viewStatus": "Status ansehen",
+        "viewAddressHistory": "Adressverlauf anzeigen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
+        "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
@@ -1664,7 +1667,8 @@
         "jwt": "JSON-Web-Token",
         "internalTransaction": "Interne Transaktion",
         "coinType": "Cointyp",
-        "custom": "Benutzerdefiniert"
+        "custom": "Benutzerdefiniert",
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
     },
     "filters": {
         "title": "Filter",
@@ -1878,7 +1882,7 @@
             },
             "type": "Profiltyp konnte nicht ermittelt werden",
             "setupType": "Profil-Setup-Typ kann nicht ermittelt werden",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "chrysalisDevnetStardustError": "Du kannst nicht auf dieses Profil zugreifen, da das Chrysalis Devnet in dieser Version von Firefly nicht unterstützt wird. Bitte verwende eine Chrysalis kompatible Firefly Version."
         },
         "password": {
             "doNotMatch": "Die Passwörter stimmen nicht überein.",

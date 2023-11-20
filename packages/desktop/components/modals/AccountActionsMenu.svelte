@@ -3,11 +3,16 @@
 
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { activeAccounts, visibleActiveAccounts } from '@core/profile/stores'
+    import { activeAccounts, activeProfile, isActiveLedgerProfile, visibleActiveAccounts } from '@core/profile/stores'
     import { deleteAccount } from '@core/profile-manager/actions'
 
     import { Icon } from '@auxiliary/icon/enums'
     import { openPopup, PopupId } from '@auxiliary/popup'
+    import { profileManager } from '@core/profile-manager'
+    import { checkOrConnectLedger } from '@core/ledger'
+    import { showAppNotification } from '@auxiliary/notification'
+    import { handleError } from '@core/error/handlers'
+    import { NetworkId } from '@core/network/enums'
 
     export let modal: Modal = undefined
 
@@ -22,6 +27,34 @@
     function onViewBalanceClick(): void {
         openPopup({ id: PopupId.BalanceBreakdown })
         modal?.close()
+    }
+
+    function onViewAddressHistoryClick(): void {
+        openPopup({ id: PopupId.AddressHistory })
+        modal?.close()
+    }
+
+    function onVerifyAddressClick(): void {
+        const ADDRESS_INDEX = 0
+        checkOrConnectLedger(() => {
+            try {
+                if ($profileManager && $selectedAccount && $isActiveLedgerProfile) {
+                    $profileManager.generateEd25519Address($selectedAccount.index, ADDRESS_INDEX, {
+                        internal: false,
+                        ledgerNanoPrompt: true,
+                    })
+                    showAppNotification({
+                        type: 'info',
+                        message: localize('general.verifyLedgerDepositAddress'),
+                    })
+                }
+            } catch (err) {
+                handleError(err)
+            } finally {
+                modal?.close()
+            }
+            return Promise.resolve()
+        })
     }
 
     function onDeleteAccountClick(): void {
@@ -39,7 +72,21 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
+        {#if $activeProfile?.network?.id === NetworkId.Iota}
+            <MenuItem
+                icon={Icon.Timer}
+                title={localize('actions.viewAddressHistory')}
+                onClick={onViewAddressHistoryClick}
+            />
+        {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
+        {#if $isActiveLedgerProfile}
+            <MenuItem
+                icon={Icon.Ledger}
+                title={localize('actions.verifyDepositAddress')}
+                onClick={onVerifyAddressClick}
+            />
+        {/if}
         <ToggleHiddenAccountMenuItem onClick={modal?.close} />
         <hr />
         {#if showDeleteAccount}
