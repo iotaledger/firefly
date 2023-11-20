@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "Nie można użyć zarezerwowanego słowa kluczowego tagu"
         },
         "layer2": {
-            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1."
+            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",

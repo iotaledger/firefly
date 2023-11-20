@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "Nem használható fenntartott tag kulcsszó"
         },
         "layer2": {
-            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára."
+            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
