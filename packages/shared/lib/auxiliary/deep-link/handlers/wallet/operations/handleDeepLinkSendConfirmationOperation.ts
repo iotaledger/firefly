@@ -1,4 +1,6 @@
 import { PopupId, openPopup } from '@auxiliary/popup'
+import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { getNetworkHrp } from '@core/profile/actions'
 import { getByteLengthOfString, isStringTrue, isValidBech32AddressAndPrefix, validateAssetId } from '@core/utils'
 import {
     NewTransactionDetails,
@@ -21,9 +23,7 @@ import {
     TagLengthError,
     UnknownAssetError,
 } from '../../../errors'
-import { getRawAmountFromSearchParam } from '../../../utils'
-import { getNetworkHrp } from '@core/profile/actions'
-import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
+import { getExpirationDateFromSearchParam, getRawAmountFromSearchParam } from '../../../utils'
 
 export function handleDeepLinkSendConfirmationOperation(searchParams: URLSearchParams): void {
     const transactionDetails = parseSendConfirmationOperation(searchParams)
@@ -90,19 +90,11 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new TagLengthError()
     }
 
-    const getExpirationDate = (expirationDate: string): Date | undefined => {
-        if (!expirationDate) {
-            return undefined
-        }
-        const expirationDateTime = new Date(expirationDate)
-        return expirationDateTime
-    }
-
     const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
-    const expirationDate = getExpirationDate(searchParams.get(SendOperationParameter.ExpirationDate))
+    const expirationDate = getExpirationDateFromSearchParam(searchParams.get(SendOperationParameter.ExpirationDate))
 
     return {
         type: NewTransactionType.TokenTransfer,
