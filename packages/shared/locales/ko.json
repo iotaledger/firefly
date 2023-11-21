@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "예약된 태그 키워드를 사용할 수 없습니다."
         },
         "layer2": {
-            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다."
+            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",

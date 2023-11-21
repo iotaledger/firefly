@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "无法使用保留标签关键字"
         },
         "layer2": {
-            "layer1Recipient": "L2事务不能发送到L1帐户。"
+            "layer1Recipient": "L2事务不能发送到L1帐户。",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "请输入有效的URL",
