@@ -1,8 +1,10 @@
 import { DEFAULT_SYNC_OPTIONS, SearchAlgorithmType } from '@core/account'
+import { updateLedgerNanoStatus } from '@core/ledger'
 import {
     BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION,
     UnableToFindProfileTypeError,
     activeProfile,
+    isActiveLedgerProfile,
 } from '@core/profile'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { get } from 'svelte/store'
@@ -40,17 +42,31 @@ export async function findBalances(
     init?: boolean,
     config?: RecoverAccountsPayload
 ): Promise<void> {
-    if (init) {
-        initialiseAccountRecoveryConfiguration(algortihmType, config)
-    }
-    if (algortihmType === SearchAlgorithmType.BFS || algortihmType === SearchAlgorithmType.IDS) {
-        await breadthSearchAndRecoverAccounts(config)
-        searchAccountStartIndex += _accountGapLimit
-    }
-    if (algortihmType === SearchAlgorithmType.DFS || algortihmType === SearchAlgorithmType.IDS) {
-        await depthSearchAndRecoverAccounts(config)
-        // TODO: Improve the address start index, checking which is the last address index found in a account and continuing searching from that index
-        searchAddressStartIndex += _addressGapLimit
+    const _isActiveLedgerProfile = get(isActiveLedgerProfile)
+    try {
+        if (init) {
+            initialiseAccountRecoveryConfiguration(algortihmType, config)
+        }
+        if (_isActiveLedgerProfile) {
+            // Note: This is a way to know the ledger is doing heavy work
+            updateLedgerNanoStatus({ busy: true })
+        }
+        if (algortihmType === SearchAlgorithmType.BFS || algortihmType === SearchAlgorithmType.IDS) {
+            await breadthSearchAndRecoverAccounts(config)
+            searchAccountStartIndex += _accountGapLimit
+        }
+        if (algortihmType === SearchAlgorithmType.DFS || algortihmType === SearchAlgorithmType.IDS) {
+            await depthSearchAndRecoverAccounts(config)
+            // TODO: Improve the address start index, checking which is the last address index found in a account and continuing searching from that index
+            searchAddressStartIndex += _addressGapLimit
+        }
+    } catch (error) {
+        const message = error?.message ?? error?.error ?? ''
+        throw new Error(message)
+    } finally {
+        if (_isActiveLedgerProfile) {
+            updateLedgerNanoStatus({ busy: false })
+        }
     }
 }
 

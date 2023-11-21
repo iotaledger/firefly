@@ -812,12 +812,6 @@
             "errorBody2": "U hebt momenteel {balance} resterend in deze portemonnee. Verplaats dit tegoed naar een andere portemonnee en probeer het opnieuw.",
             "errorBody3": "U kunt deze portemonnee niet verbergen, u moet ten minste één hebben."
         },
-        "addressHistory": {
-            "title": "{name} adresgeschiedenis",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adres",
-            "external": "Ontvangstadres"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Opslaan",
         "importSeed": "Importeer een bestaande seed",
         "restoreWallet": {
-            "iota": "Migreer of herstel een portemonnee",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Herstel Shimmer profiel",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Een bestaand Shimmer profiel herstellen",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Bezoek veelgestelde vragen",
         "viewDownloads": "View downloads",
         "viewStatus": "Bekijk status",
+        "viewAddressHistory": "Bekijk adresgeschiedenis",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Toon verborgen portemonnees",
@@ -1964,7 +1965,8 @@
             "reservedTagKeyword": "Gereserveerd tag trefwoord kan niet worden gebruikt"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Voer een geldige URL in.",

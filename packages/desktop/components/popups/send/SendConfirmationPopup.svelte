@@ -1,7 +1,23 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { get } from 'svelte/store'
-    import { FontWeight, Tab, TextHintVariant, TextType } from 'shared/components/enums'
+    import { PopupId, closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
+    import { prepareOutput, selectedAccount } from '@core/account'
+    import { handleError } from '@core/error/handlers/handleError'
+    import { localize } from '@core/i18n'
+    import { ledgerPreparedOutput } from '@core/ledger'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { TimePeriod } from '@core/utils'
+    import { sendOutput } from '@core/wallet/actions'
+    import { TokenStandard } from '@core/wallet/enums'
+    import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
+    import { NewTokenTransactionDetails, NftActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
+    import {
+        getDefaultTransactionOptions,
+        getOutputParameters,
+        getStorageDepositFromOutput,
+        validateSendConfirmation,
+    } from '@core/wallet/utils'
+    import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
     import {
         ActivityInformation,
         BasicActivityDetails,
@@ -13,26 +29,10 @@
         TextHint,
         Toggle,
     } from '@ui'
-    import { prepareOutput, selectedAccount } from '@core/account'
-    import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
-    import { TimePeriod } from '@core/utils'
-    import { TokenStandard } from '@core/wallet/enums'
-    import { newTransactionDetails, NewTransactionType, updateNewTransactionDetails } from '@core/wallet/stores'
-    import { sendOutput } from '@core/wallet/actions'
-    import {
-        validateSendConfirmation,
-        getStorageDepositFromOutput,
-        getOutputParameters,
-        getDefaultTransactionOptions,
-    } from '@core/wallet/utils'
-    import { closePopup, openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
-    import { NewTokenTransactionDetails, NftActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
-    import { CommonOutput, Output } from '@iota/sdk/out/types'
-    import { ledgerPreparedOutput } from '@core/ledger'
-    import { handleError } from '@core/error/handlers/handleError'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
-    import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
+    import { FontWeight, Tab, TextHintVariant, TextType } from 'shared/components/enums'
+    import { onMount } from 'svelte'
+    import { get } from 'svelte/store'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let isSendAndClosePopup: boolean = false
@@ -65,8 +65,9 @@
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
     $: isInternal = recipient.type === 'account'
+    $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedAccount.isTransferring
-    $: hideGiftToggle = isBaseTokenTransfer || !!layer2Parameters || (disableToggleGift && !giftStorageDeposit)
+    $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
@@ -84,7 +85,12 @@
 
         if (isSendAndClosePopup) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
-            initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+            initialExpirationDate = getInitialExpirationDate(
+                expirationDate,
+                storageDeposit,
+                giftStorageDeposit,
+                isLayer2Transaction
+            )
 
             try {
                 await _onMount()
@@ -111,7 +117,12 @@
             // as it updates expiration date through the ExpirationTimePicker bind
             // Could be avoided with a rework of ExpirationTimePicker
             if (transactionDetails.expirationDate === undefined) {
-                initialExpirationDate = getInitialExpirationDate(expirationDate, storageDeposit, giftStorageDeposit)
+                initialExpirationDate = getInitialExpirationDate(
+                    expirationDate,
+                    storageDeposit,
+                    giftStorageDeposit,
+                    isLayer2Transaction
+                )
             }
         } catch (err) {
             handleError(err)
@@ -153,8 +164,17 @@
     }
 
     async function sendOutputAndClosePopup(): Promise<void> {
-        await sendOutput(preparedOutput)
-        closePopup()
+        try {
+            await sendOutput(preparedOutput)
+            closePopup()
+        } catch (err) {
+            handleError(err)
+        } finally {
+            // make sure to close the popup if the user is using a ledger device
+            if ($isActiveLedgerProfile) {
+                closePopup(true)
+            }
+        }
     }
 
     async function onConfirmClick(): Promise<void> {
