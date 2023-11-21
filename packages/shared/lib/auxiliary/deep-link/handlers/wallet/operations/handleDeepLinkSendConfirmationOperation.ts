@@ -90,10 +90,19 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         throw new TagLengthError()
     }
 
+    const getExpirationDate = (expirationDate: string): Date | undefined => {
+        if (!expirationDate) {
+            return undefined
+        }
+        const expirationDateTime = new Date(expirationDate)
+        return expirationDateTime
+    }
+
     const unit = searchParams.get(SendOperationParameter.Unit) ?? getUnitFromTokenMetadata(asset.metadata)
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
+    const expirationDate = getExpirationDate(searchParams.get(SendOperationParameter.ExpirationDate))
 
     return {
         type: NewTransactionType.TokenTransfer,
@@ -107,5 +116,6 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
         ...(surplus && { surplus }),
         ...(disableToggleGift && { disableToggleGift }),
         ...(disableChangeExpiration && { disableChangeExpiration }),
+        ...(expirationDate && { expirationDate }),
     }
 }
