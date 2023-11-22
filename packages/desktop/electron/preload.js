@@ -121,7 +121,7 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             return wallet
         },
-        // TODO(2.0): review this implementation
+        // TODO(2.0): also remove from file system
         deleteWallet(id) {
             if (id && id in wallets) {
                 delete wallets[id]
@@ -143,6 +143,9 @@ try {
             const accounts = await manager.recoverAccounts(...Object.values(payload))
             accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
+        },
+        clearWalletsFromMemory() {
+            Object.keys(wallets).forEach((id) => delete wallets[id])
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'
