@@ -7,8 +7,8 @@ export function getBech32AddressFromAddressTypes(address: Address): string {
     switch (address.type) {
         case AddressType.Ed25519:
             return api.hexToBech32((address as Ed25519Address).pubKeyHash, hrp)
-        case AddressType.Alias:
-            return api.aliasIdToBech32((address as AliasAddress).aliasId, hrp)
+        case AddressType.Account:
+            return api.accountIdToBech32((address as AliasAddress).aliasId, hrp)
         case AddressType.Nft:
             return api.nftIdToBech32((address as NftAddress).nftId, hrp)
     }

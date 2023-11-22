@@ -113,7 +113,7 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
-        // rename to createWallet
+        // TODO(2.0): rename to createWallet
         async createAccount(id, options) {
             const wallet = new IotaSdk.Wallet(options)
             wallet.id = id
@@ -121,27 +121,23 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             return wallet
         },
+        // TODO(2.0): review this implementation
         deleteWallet(id) {
             if (id && id in wallets) {
                 delete wallets[id]
             }
         },
-        async getAccount(managerId, index) {
-            const manager = wallets[managerId]
-            const account = await manager.getAccount(index)
-            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
-            return account
+        // TODO(2.0): Rename this to getWallet and fix all usages
+        async getAccount(id, walletOptions) {
+            let wallet = wallets[id]
+            if(!wallet){
+                wallet = new IotaSdk.Wallet(walletOptions)
+                wallets[id] = wallet
+                bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, wallet)
+            }
+            return wallet
         },
-        async getAccounts(managerId, options) {
-            const accounts = [
-                new IotaSdk.Wallet({
-                    ...options,
-                    id: `${managerId}-0`
-                })
-            ]
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
-            return accounts
-        },
+        // TODO(2.0): remove this method from here and move to new profile
         async recoverAccounts(managerId, payload) {
             const manager = wallets[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))

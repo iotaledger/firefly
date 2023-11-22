@@ -15,7 +15,7 @@
 
     const aliasOptions: IOption[] =
         $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
-            const aliasId = api.aliasIdToBech32(hexAliasId, getNetworkHrp())
+            const aliasId = api.accountIdToBech32(hexAliasId, getNetworkHrp())
             return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []
 

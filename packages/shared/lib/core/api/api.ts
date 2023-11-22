@@ -1,4 +1,4 @@
-import { IApi } from '../interfaces'
+import { IApi } from './interfaces'
 
 declare global {
     interface Window {

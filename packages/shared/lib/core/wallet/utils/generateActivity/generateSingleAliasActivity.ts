@@ -68,6 +68,6 @@ export async function generateSingleAliasActivity(
 
 function getAliasId(output: AliasOutput, outputId: string): string {
     const isNewAlias = output.aliasId === EMPTY_HEX_ID
-    const aliasId = isNewAlias ? api.computeAliasId(outputId) : output.aliasId
-    return api.aliasIdToBech32(aliasId, getNetworkHrp())
+    const aliasId = isNewAlias ? api.computeAccountId(outputId) : output.aliasId
+    return api.accountIdToBech32(aliasId, getNetworkHrp())
 }

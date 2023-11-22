@@ -37,7 +37,7 @@ export async function generateSingleFoundryActivity(
         (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
     ) as ImmutableAliasAddressUnlockCondition
     const aliasId = (addressUnlockCondition?.address as AliasAddress)?.aliasId
-    const aliasAddress = aliasId ? api.aliasIdToBech32(aliasId, getNetworkHrp()) : undefined
+    const aliasAddress = aliasId ? api.accountIdToBech32(aliasId, getNetworkHrp()) : undefined
 
     const isHidden = false
     const isAssetHidden = false

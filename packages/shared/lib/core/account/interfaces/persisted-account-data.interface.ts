@@ -1,4 +1,4 @@
-import { ParticipationEventId } from '@iota/sdk/out/types'
+import { ParticipationEventId, WalletOptions } from '@iota/sdk/out/types'
 
 export interface IPersistedAccountData {
     name: string
@@ -6,4 +6,5 @@ export interface IPersistedAccountData {
     hidden: boolean
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
+    walletOptions: WalletOptions
 }

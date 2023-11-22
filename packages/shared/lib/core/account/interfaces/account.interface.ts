@@ -1,4 +1,3 @@
-import { Client } from '@iota/sdk'
 import type {
     AccountMetadata,
     AddressWithUnspentOutputs,
@@ -6,6 +5,7 @@ import type {
     Balance,
     CreateNativeTokenParams,
     ConsolidationParams,
+    Client,
     FilterOptions,
     GenerateAddressOptions,
     MintNftParams,
