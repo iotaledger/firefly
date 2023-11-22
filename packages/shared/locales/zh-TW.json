@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "無法使用保留的標籤關鍵字"
         },
         "layer2": {
-            "layer1Recipient": "第二層上的交易無法發送到第一層的帳戶。"
+            "layer1Recipient": "第二層上的交易無法發送到第一層的帳戶。",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
