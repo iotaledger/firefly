@@ -94,7 +94,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     const giftStorageDeposit = isStringTrue(searchParams.get(SendOperationParameter.GiftStorageDeposit))
     const disableToggleGift = isStringTrue(searchParams.get(SendOperationParameter.DisableToggleGift))
     const disableChangeExpiration = isStringTrue(searchParams.get(SendOperationParameter.DisableChangeExpiration))
-    const expirationDate = getExpirationDateFromSearchParam(searchParams.get(SendOperationParameter.ExpirationDate))
+    const expirationDate = getExpirationDateFromSearchParam(searchParams.get(SendOperationParameter.Expiration))
 
     return {
         type: NewTransactionType.TokenTransfer,

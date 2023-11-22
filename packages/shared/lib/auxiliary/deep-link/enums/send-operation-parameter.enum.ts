@@ -12,5 +12,5 @@ export enum SendOperationParameter {
     Surplus = 'surplus',
     DisableToggleGift = 'disableToggleGift',
     DisableChangeExpiration = 'disableChangeExpiration',
-    ExpirationDate = 'expirationDate',
+    Expiration = 'expiration',
 }
