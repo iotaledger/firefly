@@ -7,6 +7,7 @@ export interface IApi {
     createAccount(id: string, payload: WalletOptions): Promise<IAccount>
     deleteWallet(id: string): void
     getAccount(id: string, walletOptions: WalletOptions): Promise<IAccount>
+    clearWalletsFromMemory(): void
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,
         currentPassword: string,

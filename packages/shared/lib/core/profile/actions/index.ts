@@ -1,3 +1,8 @@
+export * from './createAccount'
+export * from './getAccount'
+export * from './getAccounts'
+export * from './recoverAccounts'
+
 export * from './active-accounts'
 export * from './active-profile'
 export * from './profiles'

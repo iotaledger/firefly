@@ -33,7 +33,6 @@ export interface IProfileManager {
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     listen(eventTypes: WalletEventType[], callback: WalletApiEventHandler): Promise<void>
     clearListeners(eventTypes: WalletEventType[]): Promise<void>
-    removeLatestAccount(): Promise<void>
     restoreBackup(
         source: string,
         password: string,

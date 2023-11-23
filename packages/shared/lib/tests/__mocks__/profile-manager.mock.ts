@@ -159,10 +159,6 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve([])
     }
 
-    removeLatestAccount(): Promise<void> {
-        throw new Error('Method not implemented.')
-    }
-
     restoreBackup(
         source: string,
         password: string,

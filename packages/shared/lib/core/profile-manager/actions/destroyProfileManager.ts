@@ -1,9 +1,10 @@
 import { get, Writable } from 'svelte/store'
 
-import { api } from '../api'
+import { api } from '@core/api'
 import { IProfileManager } from '../interfaces'
 import { profileManager } from '../stores'
 
+// TODO(2.0): replace all its usage with api.clearWalletsFromMemory()
 export async function destroyProfileManager(
     _profileManager: Writable<IProfileManager> = profileManager
 ): Promise<void> {
@@ -11,6 +12,6 @@ export async function destroyProfileManager(
     if (!manager) return
 
     _profileManager.set(null)
-    api.deleteWallet(manager?.id)
+    api.clearWalletsFromMemory()
     await manager.destroy()
 }
