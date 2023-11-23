@@ -8,7 +8,7 @@ export async function buildAccountStateAndPersistedData(
     name?: string,
     color?: string
 ): Promise<[IAccountState, IPersistedAccountData]> {
-    const index = 0; // TODO: CHANGE THIS
+    const index = 0; // TODO(2.0): CHANGE THIS
     const persistedAccountData: IPersistedAccountData = {
         name: name || `${localize('general.account')} ${index + 1}`,
         color: color || getRandomAccountColor(),

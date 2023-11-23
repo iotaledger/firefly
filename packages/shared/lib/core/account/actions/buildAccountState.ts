@@ -27,7 +27,7 @@ export async function buildAccountState(
         potentiallyLockedOutputs: {},
         aliases: [],
     }
-    const accountIndex = 0; // TODO: CHANGE THIS
+    const accountIndex = 0; // TODO(2.0): CHANGE THIS
     let depositAddress = ''
     let votingPower = ''
     try {

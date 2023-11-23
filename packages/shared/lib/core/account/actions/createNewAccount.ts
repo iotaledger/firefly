@@ -14,17 +14,17 @@ export async function createNewAccount(name?: string, color?: string): Promise<I
         alias: name || `${localize('general.account')} ${(get(activeAccounts)?.length ?? 0) + 1}`,
     })
 
+    // TODO(2.0): test & fix sync when we have iota2.0 nodes
     //await account.sync(DEFAULT_SYNC_OPTIONS)
-   
 
     const [newAccount, accountPersistedData] = await buildAccountStateAndPersistedData(account, name, color)
-    
-    const accountIndex = 0 // TODO: CHANGE THIS
-   
+
+    const accountIndex = 0 // TODO(2.0): CHANGE THIS
+
     addAccountToActiveAccounts(newAccount)
     addAccountPersistedDataToActiveProfile(accountIndex, accountPersistedData)
     addEmptyAccountActivitiesToAllAccountActivities(accountIndex)
- 
+
 
     return newAccount
 }
