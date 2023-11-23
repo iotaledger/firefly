@@ -2,9 +2,10 @@ import { get } from 'svelte/store'
 import {
     Event,
     TransactionProgressWalletEvent,
-    PreparedTransactionEssenceHashProgress,
+    PreparedTransactionSigningHashProgress,
     WalletEventType,
     TransactionProgressType,
+    TransactionProgress,
 } from '@iota/sdk/out/types'
 
 import { selectedAccountIndex } from '@core/account'
@@ -14,9 +15,8 @@ import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 
-import { MissingTransactionProgressEventPayloadError } from '../../errors'
-import { TransactionProgressEventPayload } from '../../types'
-import { validateWalletApiEvent } from '../../utils'
+import { MissingTransactionProgressEventPayloadError } from '../../../profile-manager/errors'
+import { validateWalletApiEvent } from '../../../profile-manager/utils'
 
 export function handleTransactionProgressEvent(error: Error, rawEvent: Event): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
@@ -29,7 +29,7 @@ export function handleTransactionProgressEvent(error: Error, rawEvent: Event): v
 
 export function handleTransactionProgressEventInternal(
     accountIndex: number,
-    payload: TransactionProgressEventPayload
+    payload: TransactionProgress
 ): void {
     if (get(isActiveLedgerProfile)) {
         if (get(selectedAccountIndex) === accountIndex) {
@@ -42,7 +42,7 @@ export function handleTransactionProgressEventInternal(
     }
 }
 
-function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload): void {
+function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
     if (payload) {
         const type = payload.type
         if (type === TransactionProgressType.PreparedTransaction) {
@@ -54,14 +54,14 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                     ...deconstructLedgerVerificationProps(),
                 },
             })
-        } else if (type === TransactionProgressType.PreparedTransactionEssenceHash) {
+        } else if (type === TransactionProgressType.PreparedTransactionSigningHash) {
             if (get(ledgerNanoStatus)?.blindSigningEnabled) {
                 openPopup({
                     id: PopupId.VerifyLedgerTransaction,
                     hideClose: true,
                     preventClose: true,
                     props: {
-                        hash: (payload as PreparedTransactionEssenceHashProgress).hash,
+                        hash: (payload as PreparedTransactionSigningHashProgress).hash,
                     },
                 })
             } else {
@@ -71,6 +71,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgressEventPayload)
                     preventClose: true,
                 })
             }
+            // TODO(2.0): check if this is still needed (PerformingPow)
         } else if (type === TransactionProgressType.PerformingPow) {
             closePopup(true)
         }

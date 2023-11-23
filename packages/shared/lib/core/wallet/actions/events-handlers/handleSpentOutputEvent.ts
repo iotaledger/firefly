@@ -6,7 +6,7 @@ import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
 import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent } from '../../utils'
+import { validateWalletApiEvent } from '../../../profile-manager/utils'
 import { getAddressesWithOutputs } from '@core/account'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {

@@ -8,7 +8,7 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { TextHintVariant } from 'shared/components/enums'
 
-    export let deleteAccount: (index: number) => Promise<void> = async () => {}
+    export let deleteWallet: (index: number) => Promise<void> = async () => {}
 
     let password: string
     let error: string
@@ -26,7 +26,7 @@
             if ($isSoftwareProfile) {
                 await setStrongholdPassword(password)
             }
-            await deleteAccount($selectedAccount?.index)
+            await deleteWallet($selectedAccount?.index)
             closePopup()
         } catch (err) {
             error = err.error

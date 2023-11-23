@@ -124,6 +124,8 @@ try {
         // TODO(2.0): also remove from file system
         deleteWallet(id) {
             if (id && id in wallets) {
+                const wallet = wallets[id]
+                wallet.destroy()
                 delete wallets[id]
             }
         },
@@ -145,7 +147,11 @@ try {
             return accounts
         },
         clearWalletsFromMemory() {
-            Object.keys(wallets).forEach((id) => delete wallets[id])
+            Object.keys(wallets).forEach((id) => {
+                const wallet = wallets[id]
+                wallet.destroy()
+                delete wallets[id]
+            })
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'

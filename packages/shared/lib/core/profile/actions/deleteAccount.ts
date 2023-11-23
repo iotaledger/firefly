@@ -8,7 +8,7 @@ import { removeAccountFromActiveAccounts, visibleActiveAccounts } from '@core/pr
 import { routerManager } from '@core/router/stores'
 
 // TODO(2.0): replace all its usage, before it was numeric index, now it's id
-export async function deleteAccount(id: string): Promise<void> {
+export async function deleteWallet(id: string): Promise<void> {
     const accountToBeDeleted = get(visibleActiveAccounts).find((account) => account?.id === id)
     const accounts = get(visibleActiveAccounts)
 

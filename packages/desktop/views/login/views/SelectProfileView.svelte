@@ -9,7 +9,7 @@
     } from '@core/app'
     import { localize } from '@core/i18n'
     import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
-    import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { clearProfileFromMemory } from '@core/profile-manager/actions'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
@@ -41,7 +41,7 @@
         // Clean up if user has navigated back to this view from onboarding
         if ($onboardingProfile) {
             if ($onboardingProfile.hasInitialisedProfileManager) {
-                await destroyProfileManager()
+                await clearProfileFromMemory()
                 await removeProfileFolder($onboardingProfile.id)
             }
             $onboardingProfile = undefined

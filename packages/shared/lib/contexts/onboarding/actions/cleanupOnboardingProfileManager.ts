@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { destroyProfileManager, profileManager } from '@core/profile-manager'
+import { clearProfileFromMemory, profileManager } from '@core/profile-manager'
 import { removeProfileFolder } from '@core/profile'
 
 export async function cleanupOnboardingProfileManager(): Promise<void> {
@@ -10,6 +10,6 @@ export async function cleanupOnboardingProfileManager(): Promise<void> {
 
     const { id } = get(profileManager)
 
-    await destroyProfileManager()
+    await clearProfileFromMemory()
     await removeProfileFolder(id)
 }

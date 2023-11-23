@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { getStorageDirectoryOfProfile } from '@core/profile/utils'
-import { destroyProfileManager } from '@core/profile-manager/actions'
+import { clearProfileFromMemory } from '@core/profile-manager/actions'
 import { api } from '@core/profile-manager/api'
 import { getSecretManagerPath } from '@core/profile-manager/utils'
 import { StrongholdVersion } from '@core/stronghold/enums'
@@ -23,6 +23,6 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
         updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 
-    await destroyProfileManager()
+    await clearProfileFromMemory()
     await initialiseProfileManagerFromOnboardingProfile()
 }

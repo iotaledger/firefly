@@ -1,12 +1,13 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 
-import { isLedgerProfile } from '@core/profile'
+import { isLedgerProfile, ProfileType } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
 import { IBaseToken } from '@core/wallet/interfaces'
 import { IPersistedNetwork } from '@core/network'
 
-export const onboardingProfile = writable<Partial<IOnboardingProfile>>(null)
+
+export const onboardingProfile = writable<IOnboardingProfile | null>(null)
 
 export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>
     isLedgerProfile($onboardingProfile?.type)

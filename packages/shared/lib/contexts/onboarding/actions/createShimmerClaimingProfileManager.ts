@@ -18,6 +18,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
     const clientOptions = $onboardingProfile?.clientOptions
     const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)
 
+    // TODO(2.0): Fix all shimmer claiming
     const manager = await initialiseProfileManager(
         generateRandomId(),
         storagePath,

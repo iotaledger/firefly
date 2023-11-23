@@ -14,7 +14,7 @@ import {
     updateActivityByTransactionId,
 } from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent } from '../../utils'
+import { validateWalletApiEvent } from '../../../profile-manager/utils'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: Event): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)

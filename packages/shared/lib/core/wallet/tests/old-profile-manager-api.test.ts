@@ -4,13 +4,14 @@ import { MOCK_MNEMONIC } from '@mocks/api.mock'
 
 import { get } from 'svelte/store'
 
-import { generateRandomId } from '../../../core/utils/'
+import { generateRandomId } from '../../utils'
 
-import { destroyProfileManager } from '../actions'
+import { clearProfileFromMemory } from '../actions'
 import { generateMnemonic, setStrongholdPassword, storeMnemonic, verifyMnemonic, backup, restoreBackup } from '../api'
 import { profileManager } from '../stores'
 import { IApi } from '../interfaces'
 
+// TODO(2.0): fix all these tests
 describe('File: api.test.ts', () => {
     let profileManagerMock: ProfileManagerMock
     let spy: jest.SpyInstance
@@ -29,7 +30,7 @@ describe('File: api.test.ts', () => {
     })
 
     it('should destroy the profile manager correctly', async () => {
-        await destroyProfileManager()
+        await clearProfileFromMemory()
         expect(get(profileManager)).toBeNull()
     })
 

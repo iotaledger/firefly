@@ -25,6 +25,7 @@ export * from './parseGovernanceMetadata'
 export * from './processAndAddToActivities'
 export * from './validateIrc30Metadata'
 export * from './validateTokenAmount'
+export * from './validateWalletApiEvent'
 
 // Folders
 export * from './generateActivity'

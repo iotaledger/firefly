@@ -104,6 +104,7 @@
             const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
             const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
             updateActiveProfile({ clientOptions })
+            // TODO(2.0): Update initialiseProfileManager to new logic
             const manager = await initialiseProfileManager(
                 $activeProfile?.id,
                 storagePath,

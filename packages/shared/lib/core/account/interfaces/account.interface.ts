@@ -35,8 +35,21 @@ import type {
     ParticipationEventType,
     ParticipationEventId,
     Burn,
+    WalletEventType,
+    IAuth,
 } from '@iota/sdk/out/types'
+import type {
+    IClientOptions,
+    GenerateAddressOptions,
+    LedgerNanoStatus,
+    INodeInfoWrapper,
+    SyncOptions,
+    WalletEvent,
+    WalletEventType,
+} from '@iota/sdk/out/types'
+import { WalletApiEventHandler } from '@core/wallet'
 
+// TODO(2.0): rename to IWallet & check all functions in this interface to make sure they still exist
 export interface IAccount {
     isStrongholdPasswordAvailable(): Promise<boolean>
     getClient(): Promise<Client>
@@ -118,4 +131,19 @@ export interface IAccount {
     transactions(): Promise<Transaction[]>
     unspentOutputs(filterOptions?: FilterOptions): Promise<OutputData[]>
     prepareVote(eventId?: string, answers?: number[]): Promise<PreparedTransaction>
+    listen(eventTypes: WalletEventType[], callback: WalletApiEventHandler): Promise<void>
+    clearListeners(eventTypes: WalletEventType[]): Promise<void>
+    backup(destination: string, password: string): Promise<void>
+    destroy(): Promise<void>
+    emitTestEvent(event: WalletEvent): Promise<void>
+    restoreBackup(
+        source: string,
+        password: string,
+        ignoreIfCoinTypeMismatch: boolean,
+        ignoreIfBech32Mismatch: string
+    ): Promise<void>
+    setClientOptions(options: IClientOptions): Promise<void>
+    startBackgroundSync(options?: SyncOptions, intervalInMilliseconds?: number): Promise<void>
+    stopBackgroundSync(): Promise<void>
+    updateNodeAuth(url: string, auth?: IAuth): Promise<void>
 }

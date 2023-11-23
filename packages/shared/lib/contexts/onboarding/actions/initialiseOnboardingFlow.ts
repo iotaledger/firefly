@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { stopPollingLedgerNanoStatus } from '@core/ledger/actions'
 import { isPollingLedgerDeviceStatus } from '@core/ledger/stores'
 import { getDefaultPersistedNetwork } from '@core/network/utils'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
+import { clearProfileFromMemory, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
 import { resetActiveProfile } from '@core/profile/actions'
 
 import { IOnboardingInitialisationOptions } from '../interfaces'
@@ -20,7 +20,7 @@ export async function initialiseOnboardingFlow(options: IOnboardingInitialisatio
         stopPollingLedgerNanoStatus()
     }
     await unsubscribeFromWalletApiEvents()
-    await destroyProfileManager()
+    await clearProfileFromMemory()
 
     const { isDeveloperProfile, networkId } = options
 

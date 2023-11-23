@@ -1,8 +1,7 @@
 import { WalletApiEventMap } from '../types'
-
-import { IProfileManager } from './profile-manager.interface'
+import { IAccount } from '@core/account/interfaces'
 
 export interface IWalletApiEventSubscriptionConfiguration {
     eventMap: WalletApiEventMap
-    profileManager?: IProfileManager
+    wallet: IAccount
 }

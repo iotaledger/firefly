@@ -1,10 +1,11 @@
 import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
-import { getSecretManagerFromProfileType, ProfileManagerOptions } from '@core/profile-manager'
+import { getSecretManagerFromProfileType } from '@core/profile-manager'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
+import { WalletOptions } from '@iota/sdk/out/types'
 
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
-): Promise<ProfileManagerOptions> {
+): Promise<WalletOptions> {
     const { id, type, network } = profileData
     const storagePath = await getStorageDirectoryOfProfile(id)
     const coinType = network?.coinType ? network?.coinType : network ? COIN_TYPE[network?.id] ?? 1 : 1
@@ -17,7 +18,9 @@ export async function buildProfileManagerOptionsFromProfileData(
 
     return {
         storagePath,
-        coinType,
+        bipPath: {
+            coinType
+        },
         clientOptions,
         secretManager,
     }

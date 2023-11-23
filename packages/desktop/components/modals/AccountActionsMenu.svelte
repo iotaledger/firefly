@@ -4,7 +4,7 @@
     import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
     import { activeAccounts, activeProfile, isActiveLedgerProfile, visibleActiveAccounts } from '@core/profile/stores'
-    import { deleteAccount } from '@core/profile-manager/actions'
+    import { deleteWallet } from '@core/profile-manager/actions'
 
     import { Icon } from '@auxiliary/icon/enums'
     import { openPopup, PopupId } from '@auxiliary/popup'
@@ -62,7 +62,7 @@
             id: PopupId.DeleteAccount,
             props: {
                 account: selectedAccount,
-                deleteAccount,
+                deleteWallet,
             },
         })
         modal?.close()

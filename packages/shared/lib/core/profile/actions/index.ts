@@ -2,6 +2,8 @@ export * from './createAccount'
 export * from './getAccount'
 export * from './getAccounts'
 export * from './recoverAccounts'
+export * from './clearProfileFromMemory'
+export * from './deleteAccount'
 
 export * from './active-accounts'
 export * from './active-profile'

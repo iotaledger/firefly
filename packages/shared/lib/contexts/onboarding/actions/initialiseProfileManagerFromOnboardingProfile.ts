@@ -1,29 +1,32 @@
 import { get } from 'svelte/store'
 
 import {
-    buildProfileManagerOptionsFromProfileData,
-    initialiseProfileManager,
-    profileManager,
+    getSecretManagerFromProfileType
 } from '@core/profile-manager'
+import { onboardingProfileSecretManager } from '../stores'
 
+import { getStorageDirectoryOfProfile, removeProfileFolder } from '@core/profile'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
-import { removeProfileFolder } from '@core/profile'
 
-export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingManager?: boolean): Promise<void> {
-    const existingManager = get(profileManager)
-    if (existingManager) {
-        if (!checkForExistingManager) {
-            await existingManager.destroy()
-            removeProfileFolder(existingManager.id)
+export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingSecretManager?: boolean): Promise<void> {
+    const secretManager = get(onboardingProfileSecretManager)
+    const activeOnboardingProfile = get(onboardingProfile)
+
+    if (!activeOnboardingProfile) {
+        return
+    }
+
+    if (secretManager) {
+        if (!checkForExistingSecretManager) {
+            removeProfileFolder(activeOnboardingProfile.id)
         } else {
             return
         }
     }
 
-    const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(get(onboardingProfile))
-    const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-    const { id } = get(onboardingProfile)
-    const manager = await initialiseProfileManager(id, storagePath, coinType, clientOptions, secretManager)
-    profileManager.set(manager)
-    updateOnboardingProfile({ hasInitialisedProfileManager: true })
+    const storagePath = await getStorageDirectoryOfProfile(activeOnboardingProfile.id)
+
+    const secretManagerOptions = getSecretManagerFromProfileType(activeOnboardingProfile.type, storagePath)
+
+    updateOnboardingProfile({ secretManagerOptions, hasInitialisedProfileManager: true })
 }

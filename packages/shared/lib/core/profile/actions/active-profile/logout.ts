@@ -14,7 +14,7 @@ import { stopDownloadingNftMediaFromQueue } from '@core/nfts/actions'
 import { lockStronghold, resetActiveProfile } from '@core/profile/actions'
 import { activeAccounts, activeProfile, isSoftwareProfile, isDestroyingManager } from '@core/profile/stores'
 import { isLedgerProfile } from '@core/profile/utils'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
+import { clearProfileFromMemory, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
 import { IProfileManager } from '@core/profile-manager/interfaces'
 import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
@@ -71,6 +71,6 @@ async function destroyWalletRsObjects(manager: IProfileManager): Promise<void> {
     isDestroyingManager.set(true)
     await manager?.stopBackgroundSync()
     await unsubscribeFromWalletApiEvents()
-    await destroyProfileManager()
+    await clearProfileFromMemory()
     isDestroyingManager.set(false)
 }
