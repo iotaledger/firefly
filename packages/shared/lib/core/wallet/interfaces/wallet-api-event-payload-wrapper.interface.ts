@@ -8,7 +8,7 @@ import {
 } from '@iota/sdk/out/types'
 
 export interface IWalletApiEventPayloadWrapper {
-    accountIndex: number
+    walletId: string
     payload: IWalletApiEventPayload
 }
 

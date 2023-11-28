@@ -1,7 +1,7 @@
 import { Event, NewOutputWalletEvent, OutputType, WalletEventType } from '@iota/sdk/out/types'
 
 import { getAddressesWithOutputs } from '@core/account'
-import { syncBalance } from '@core/account/actions/syncBalance'
+import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
@@ -16,10 +16,8 @@ import {
     addActivitiesToAccountActivitiesInAllAccountActivities,
     allAccountActivities,
 } from '@core/wallet/stores/all-account-activities.store'
-import { getBech32AddressFromAddressTypes } from '@core/wallet/utils/getBech32AddressFromAddressTypes'
-import { preprocessGroupedOutputs } from '@core/wallet/utils/outputs/preprocessGroupedOutputs'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent } from '../../../profile-manager/utils'
+import { validateWalletApiEvent, getBech32AddressFromAddressTypes, preprocessGroupedOutputs} from '@core/wallet/utils'
 
 export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
     const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
@@ -29,6 +27,7 @@ export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
     }
 }
 
+// TODO(2.0) Use wallet instead of accounts and fix all usages
 export async function handleNewOutputEventInternal(accountIndex: number, payload: NewOutputWalletEvent): Promise<void> {
     const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
     const outputData = payload.output

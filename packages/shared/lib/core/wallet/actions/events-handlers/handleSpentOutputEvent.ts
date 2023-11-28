@@ -1,29 +1,30 @@
+// TODO(2.0) Fix all of events code, blocked by https://github.com/iotaledger/iota-sdk/issues/1708
+
 import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
-import { syncBalance } from '@core/account/actions/syncBalance'
+import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
-import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
-import { ActivityAsyncStatus, ActivityType } from '@core/wallet'
+import { ActivityAsyncStatus, ActivityType, validateWalletApiEvent } from '@core/wallet'
 import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent } from '../../../profile-manager/utils'
-import { getAddressesWithOutputs } from '@core/account'
+import { activeWallets } from 'shared/lib/core/profile'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
+    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
     const type = payload.type
     if (type === WalletEventType.SpentOutput) {
-        await handleSpentOutputEventInternal(accountIndex, payload as SpentOutputWalletEvent)
+        await handleSpentOutputEventInternal(walletId, payload as SpentOutputWalletEvent)
     }
 }
 
+// TODO(2.0) Fix all usages
 export async function handleSpentOutputEventInternal(
-    accountIndex: number,
+    walletId: string,
     payload: SpentOutputWalletEvent
 ): Promise<void> {
-    const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
+    const account = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
-    await syncBalance(accountIndex)
+    await syncBalance(walletId)
     if (account) {
         const addressesWithOutputs = await getAddressesWithOutputs(account)
         updateActiveAccount(account.index, { addressesWithOutputs })

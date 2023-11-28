@@ -43,7 +43,7 @@ import {
     updateActiveProfile,
 } from '../../stores'
 import { isLedgerProfile } from '../../utils'
-import { loadAccounts } from './loadAccounts'
+import { loadAccounts } from './loadWallets'
 import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'

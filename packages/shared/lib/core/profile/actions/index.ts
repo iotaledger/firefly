@@ -1,9 +1,9 @@
-export * from './createAccount'
+export * from './createWallet'
 export * from './getAccount'
 export * from './getAccounts'
 export * from './recoverAccounts'
 export * from './clearProfileFromMemory'
-export * from './deleteAccount'
+export * from './deleteWallet'
 
 export * from './active-accounts'
 export * from './active-profile'

@@ -26,6 +26,12 @@ export * from './processAndAddToActivities'
 export * from './validateIrc30Metadata'
 export * from './validateTokenAmount'
 export * from './validateWalletApiEvent'
+export * from './sumBalanceForWallets'
+export * from './sumTotalFromOutputs'
+export * from './getDepositAddress'
+export * from './getBoundWallet'
+export * from './getRandomWalletColor'
+export * from './getIconColorFromString'
 
 // Folders
 export * from './generateActivity'

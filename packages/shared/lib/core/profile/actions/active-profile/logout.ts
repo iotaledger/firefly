@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 
-import { resetSelectedAccountIndex } from '@core/account/actions'
+import { resetSelectedWalletId } from '@core/account/actions'
 import {
     clearSelectedParticipationEventStatus,
     resetProposalOverviews,
@@ -50,7 +50,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     loggedIn.set(false)
     lastActiveAt.set(new Date())
     hasLoadedAccounts.set(false)
-    resetSelectedAccountIndex()
+    resetSelectedWalletId()
 
     void stopDownloadingNftMediaFromQueue()
 

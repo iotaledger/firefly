@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getIconColorFromString } from '@core/account/utils'
+    import { getIconColorFromString } from '@core/wallet/utils'
     import { IPersistedProfile } from '@core/profile'
     import { getInitials } from '@core/utils'
     import { NftMedia, Text, FontWeight, Size } from '@ui'

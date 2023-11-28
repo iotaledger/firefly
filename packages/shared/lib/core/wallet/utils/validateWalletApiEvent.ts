@@ -14,9 +14,9 @@ export function validateWalletApiEvent(
         throw new WalletApiEventError(error)
     } else {
         /* eslint-disable-next-line prefer-const */
-        const { accountIndex, event } = rawEvent
+        const { walletId, event } = rawEvent
 
-        if (Number.isNaN(accountIndex)) {
+        if (Number.isNaN(walletId)) {
             throw new WalletApiEventValidationError(
                 localize('error.walletApiEvent.invalidAccountIndex', { values: { eventName: apiEvent } })
             )

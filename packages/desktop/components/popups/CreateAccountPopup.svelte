@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
-    import { getRandomAccountColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
+    import { getRandomWalletColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -10,7 +10,7 @@
 
     export let accountAlias = ''
     export let error: string
-    export let color = getRandomAccountColor()
+    export let color = getRandomWalletColor()
     export let isBusy = false
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 

@@ -1,7 +1,7 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { isValidIrc30Token } from '@core/token'
 
-import { selectedAccount } from '../../account/stores/selected-account.store'
+import { selectedAccount } from './selected-wallet.store'
 import { Activity } from '../types/activity.type'
 import { ActivityType, SubjectType } from '../enums'
 import { ActivityFilter } from '../interfaces/activity-filter.interface'
