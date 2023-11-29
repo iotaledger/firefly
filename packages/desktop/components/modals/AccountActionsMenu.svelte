@@ -1,23 +1,23 @@
 <script lang="ts">
     import { MenuItem, MenuItemVariant, Modal, ToggleHiddenAccountMenuItem } from '@ui'
 
-    import { selectedAccount } from '@core/account/stores'
     import { localize } from '@core/i18n'
-    import { activeAccounts, activeProfile, isActiveLedgerProfile, visibleActiveAccounts } from '@core/profile/stores'
-    import { deleteWallet } from '@core/profile-manager/actions'
+    import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
 
     import { Icon } from '@auxiliary/icon/enums'
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { profileManager } from '@core/profile-manager'
     import { checkOrConnectLedger } from '@core/ledger'
     import { showAppNotification } from '@auxiliary/notification'
     import { handleError } from '@core/error/handlers'
     import { NetworkId } from '@core/network/enums'
+    import { selectedWallet } from '@core/account/stores'
+    import { activeProfileSecretManager } from '@core/secret-manager'
+    import { deleteWallet } from '@core/profile'
 
     export let modal: Modal = undefined
 
-    const showDeleteAccount =
-        $selectedAccount?.index === $activeAccounts?.length - 1 && $visibleActiveAccounts?.length > 1
+    const showDeleteAccount = true // TODO(2.0) Is there anything preventing us from deleting any account ?
+     // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
 
     function onCustomiseAccountClick(): void {
         openPopup({ id: PopupId.ManageAccount })
@@ -38,10 +38,13 @@
         const ADDRESS_INDEX = 0
         checkOrConnectLedger(() => {
             try {
-                if ($profileManager && $selectedAccount && $isActiveLedgerProfile) {
-                    $profileManager.generateEd25519Address($selectedAccount.index, ADDRESS_INDEX, {
-                        internal: false,
-                        ledgerNanoPrompt: true,
+                if ($activeProfileSecretManager && $selectedWallet && $isActiveLedgerProfile) {
+                    $activeProfileSecretManager.generateEd25519Addresses({
+                        accountIndex: ADDRESS_INDEX, // TODO(2.0) This shouldn't be named accountIndex
+                        options: {
+                            internal: false,
+                            ledgerNanoPrompt: true,
+                        }
                     })
                     showAppNotification({
                         type: 'info',
@@ -61,7 +64,7 @@
         openPopup({
             id: PopupId.DeleteAccount,
             props: {
-                account: selectedAccount,
+                account: selectedWallet,
                 deleteWallet,
             },
         })
