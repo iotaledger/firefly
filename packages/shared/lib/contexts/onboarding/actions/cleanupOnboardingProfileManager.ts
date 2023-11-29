@@ -1,14 +1,13 @@
-import { get } from 'svelte/store'
+import { clearProfileFromMemory, removeProfileFolder } from '@core/profile'
+import { getSelectedWallet } from 'shared/lib/core/wallet'
 
-import { clearProfileFromMemory, profileManager } from '@core/profile-manager'
-import { removeProfileFolder } from '@core/profile'
-
+// TODO(2.0) Fix all usages and rename
 export async function cleanupOnboardingProfileManager(): Promise<void> {
-    if (!get(profileManager)) {
+    if (!getSelectedWallet()) {
         return
     }
 
-    const { id } = get(profileManager)
+    const { id } = getSelectedWallet()
 
     await clearProfileFromMemory()
     await removeProfileFolder(id)

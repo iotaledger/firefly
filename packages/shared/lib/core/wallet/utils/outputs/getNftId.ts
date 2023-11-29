@@ -1,5 +1,5 @@
 import { EMPTY_HEX_ID } from '@core/wallet/constants'
-import { api } from '@core/profile-manager'
+import { api } from 'shared/lib/core/api'
 
 export function getNftId(nftId: string, outputId: string): string {
     const isNewNft = nftId === EMPTY_HEX_ID

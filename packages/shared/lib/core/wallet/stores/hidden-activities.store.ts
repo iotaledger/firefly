@@ -7,16 +7,16 @@ import type { IHiddenActivities } from '../interfaces'
 
 export const hiddenActivities = persistent<IHiddenActivities>('hiddenActivities', {})
 
-export function isActivityHiddenForAccountIndex(accountIndex: number, activityId: string): boolean {
-    const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[accountIndex]
+export function isActivityHiddenForWalletId(walletId: string, activityId: string): boolean {
+    const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[walletId]
     return activities ? activities.includes(activityId) : false
 }
 
-export function removeActivityFromHiddenActivities(accountIndex: number, activityId: string): void {
-    const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[accountIndex]
+export function removeActivityFromHiddenActivities(walletId: number, activityId: string): void {
+    const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[walletId]
     if (activities) {
         hiddenActivities.update((state) => {
-            state[get(activeProfileId)][accountIndex] = activities.filter((id) => id !== activityId)
+            state[get(activeProfileId)][walletId] = activities.filter((id) => id !== activityId)
             return state
         })
     }

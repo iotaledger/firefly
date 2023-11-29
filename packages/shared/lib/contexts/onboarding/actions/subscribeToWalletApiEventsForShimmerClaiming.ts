@@ -7,6 +7,7 @@ import { shimmerClaimingProfileManager } from '../stores'
 
 import { handleTransactionInclusionEventForShimmerClaiming } from './handleTransactionInclusionEventForShimmerClaiming'
 
+// TODO(2.0) Fix
 export function subscribeToWalletApiEventsForShimmerClaiming(): void {
     const profileManager = get(shimmerClaimingProfileManager)
     const eventMap: WalletApiEventMap = {

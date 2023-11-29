@@ -37,7 +37,7 @@ import {
     activeAccounts,
     activeProfile,
     incrementLoginProgress,
-    isDestroyingManager,
+    isDestroyingWallets,
     resetLoginProgress,
     setTimeStrongholdLastUnlocked,
     updateActiveProfile,
@@ -50,6 +50,7 @@ import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfil
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { checkActiveProfileAuth } from '@core/profile'
 
+// TODO(2.0) Remove usage of profile manager
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
@@ -193,7 +194,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
 async function waitForPreviousManagerToBeDestroyed(): Promise<void> {
     for (let count = 0; count < CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT; count++) {
-        if (!get(isDestroyingManager)) {
+        if (!get(isDestroyingWallets)) {
             return Promise.resolve()
         }
         await sleep(CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL)

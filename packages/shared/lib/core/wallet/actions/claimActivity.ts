@@ -3,7 +3,7 @@ import { selectedAccount } from '@core/account/stores'
 import { handleError } from '@core/error/handlers'
 
 import {
-    isActivityHiddenForAccountIndex,
+    isActivityHiddenForWalletId,
     removeActivityFromHiddenActivities,
     updateAsyncDataByActivityId,
 } from '../stores'
@@ -12,7 +12,7 @@ import { Activity } from '../types'
 export async function claimActivity(activity: Activity): Promise<void> {
     const account = get(selectedAccount)
     try {
-        if (isActivityHiddenForAccountIndex(account.index, activity.id)) {
+        if (isActivityHiddenForWalletId(account.index, activity.id)) {
             removeActivityFromHiddenActivities(account.index, activity.id)
             updateAsyncDataByActivityId(account.index, activity.id, { isRejected: false })
         }

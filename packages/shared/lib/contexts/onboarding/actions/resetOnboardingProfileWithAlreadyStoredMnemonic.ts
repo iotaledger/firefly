@@ -1,6 +1,5 @@
+import { setStrongholdPassword } from '@core/wallet'
 import { get } from 'svelte/store'
-
-import { setStrongholdPassword } from '@core/profile-manager'
 
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 

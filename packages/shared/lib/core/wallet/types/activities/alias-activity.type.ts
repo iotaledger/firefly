@@ -3,7 +3,7 @@ import { BaseActivity } from './base-activity.type'
 
 export type AliasActivity = BaseActivity & {
     type: ActivityType.Alias
-    aliasId: string
+    accountId: string
     governorAddress: string
     stateControllerAddress: string
 }

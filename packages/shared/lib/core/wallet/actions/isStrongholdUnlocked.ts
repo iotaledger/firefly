@@ -1,7 +1,6 @@
-import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+import { getSelectedWallet } from '../stores'
 
 export function isStrongholdUnlocked(): Promise<boolean> {
-    const manager = get(profileManager)
-    return manager.isStrongholdPasswordAvailable()
+    const wallet = getSelectedWallet();
+    return wallet.isStrongholdPasswordAvailable()
 }

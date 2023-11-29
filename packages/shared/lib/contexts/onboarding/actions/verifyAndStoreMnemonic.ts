@@ -1,4 +1,4 @@
-import { storeMnemonic, verifyMnemonic } from '@core/profile-manager'
+import { storeMnemonic, verifyMnemonic } from '@core/secret-manager'
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
 

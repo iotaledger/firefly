@@ -13,6 +13,7 @@ import {
     updateOnboardingProfile,
 } from '../stores'
 
+// TODO(2.0) Fix this
 export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
     if (!get(shimmerClaimingProfileManager)) {
         throw new MissingShimmerClaimingProfileManagerError()

@@ -9,6 +9,7 @@ import {
 } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
+// TODO(2.0) Fix this
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {
         const { id, importFilePath, clientOptions } = get(onboardingProfile)

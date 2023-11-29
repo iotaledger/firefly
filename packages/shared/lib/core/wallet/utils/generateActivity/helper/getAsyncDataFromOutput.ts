@@ -1,5 +1,4 @@
-import { IAccountState } from '@core/account'
-import { isActivityHiddenForAccountIndex, IClaimData, AsyncData } from '@core/wallet'
+import { isActivityHiddenForWalletId, IClaimData, AsyncData, IWalletState } from '@core/wallet'
 import { getExpirationDateFromOutput } from '../../outputs/getExpirationDateFromOutput'
 import { getTimelockDateFromOutput } from './getTimelockDateFromOutput'
 import { isOutputAsync } from '../../outputs/isOutputAsync'
@@ -11,7 +10,7 @@ export async function getAsyncDataFromOutput(
     output: Output,
     outputId: string,
     claimingData: IClaimData,
-    account: IAccountState
+    wallet: IWalletState
 ): Promise<AsyncData> {
     const isAsync = isOutputAsync(output)
     if (isAsync) {
@@ -19,11 +18,11 @@ export async function getAsyncDataFromOutput(
         const isClaiming = false
         const claimingTransactionId = claimingData?.claimingTransactionId
         const claimedDate = claimingData?.claimedDate
-        const isRejected = isActivityHiddenForAccountIndex(account.index, outputId)
+        const isRejected = isActivityHiddenForWalletId(wallet.id, outputId)
 
         const expirationDate = getExpirationDateFromOutput(commonOutput)
         const timelockDate = getTimelockDateFromOutput(commonOutput)
-        const { storageDeposit } = await getStorageDepositFromOutput(account, commonOutput)
+        const { storageDeposit } = await getStorageDepositFromOutput(wallet, commonOutput)
 
         const asyncStatus = getAsyncStatus(
             !!claimingTransactionId,

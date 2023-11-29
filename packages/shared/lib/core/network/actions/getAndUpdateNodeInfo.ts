@@ -1,4 +1,4 @@
-import { getNodeInfo } from '@core/profile-manager'
+import { getNodeInfo } from '@core/wallet/actions'
 import { INodeInfoResponse } from '../interfaces/node-info-response.interface'
 import { setNodeInfo } from '../stores/node-info.store'
 

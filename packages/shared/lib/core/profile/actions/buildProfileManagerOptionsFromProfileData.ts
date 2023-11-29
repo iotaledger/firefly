@@ -1,9 +1,9 @@
-import { getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
-import { getSecretManagerFromProfileType } from '@core/profile-manager'
+import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile, IPersistedProfile } from '@core/profile'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
 import { WalletOptions } from '@iota/sdk/out/types'
 
 // TODO(2.0) Fix this and all usages
+// - Do we even need this function at all?
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
 ): Promise<WalletOptions> {

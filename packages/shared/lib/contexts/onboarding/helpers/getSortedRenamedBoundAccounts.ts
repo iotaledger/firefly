@@ -5,6 +5,7 @@ import { localize } from '@core/i18n'
 import { IProfileManager, profileManager as _profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex } from '@core/utils'
 
+// TODO(2.0) Fix this, account indexes are gone
 export async function getSortedRenamedBoundAccounts(
     accounts: IAccount[],
     profileManager: Writable<IProfileManager> = _profileManager

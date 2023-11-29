@@ -1,7 +1,7 @@
-import { clearProfileFromMemory } from '@core/profile-manager'
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
 import { removeProfileFolder } from '@core/profile/utils'
+import { clearProfileFromMemory } from '@core/profile'
 
 /**
  * Deletes a new profile

@@ -1,14 +1,9 @@
-import { IAuth } from '@core/network'
-import { INodeInfoResponse } from '@core/network/interfaces/node-info-response.interface'
-import { get } from 'svelte/store'
-import { profileManager } from '../stores'
-import { api } from '../../api'
-import { selectedAccount } from '@core/account'
+import { IAuth } from '@iota/sdk/out/types';
+import { INodeInfoResponse } from '@core/network';
+import { getClient } from './getClient'
 
 export async function getNodeInfo(url?: string, auth?: IAuth): Promise<INodeInfoResponse> {
-    const wallet = get(selectedAccount)
-    
-    const client = await wallet!.getClient()
+    const client = await getClient();
     const nodeUrl = url ?? (await client.getNode()).url
 
     const nodeInfo = await client.getNodeInfo(nodeUrl, auth)
