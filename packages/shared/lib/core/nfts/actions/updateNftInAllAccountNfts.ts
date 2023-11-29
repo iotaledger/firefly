@@ -1,7 +1,8 @@
+import { INft } from '../interfaces'
 import { allAccountNfts } from '../stores'
 import { getIpfsUri } from '../utils'
 
-export function updateNftInAllAccountNfts(accountIndex: number, nftId: string): void {
+export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, partialNft: Partial<INft>): void {
     allAccountNfts.update((state) => {
         if (!state[accountIndex]) {
             state[accountIndex] = []
@@ -15,6 +16,7 @@ export function updateNftInAllAccountNfts(accountIndex: number, nftId: string): 
                     nft.composedUrl = ipfsUri
                 }
             })
+            Object.assign(nft, { ...nft, ...partialNft })
         }
         return state
     })
