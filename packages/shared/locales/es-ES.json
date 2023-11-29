@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Tipo de dirección incorrecta"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "No se pudo encontrar la dirección en tu cuenta.",
             "length": "El nombre de tu cartera no puede tener más de {length, plural, one {# carácter} other {# caracteres}}.",
             "emptyName": "El nombre debe contener al menos 1 carácter.",

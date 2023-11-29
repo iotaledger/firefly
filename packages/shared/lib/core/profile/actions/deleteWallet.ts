@@ -4,7 +4,7 @@ import { api } from '@core/api'
 import { AppContext } from '@core/app/enums'
 import { routerManager } from '@core/router/stores'
 import { visibleActiveWallets } from '../stores'
-import { CannotRemoveAccountError, RemoveNotLastAccountError, setSelectedWallet } from '@core/wallet'
+import { CannotRemoveWalletError, RemoveNotLastWalletError, setSelectedWallet } from '@core/wallet'
 
 // TODO(2.0): replace all its usage, before it was numeric index, now it's id
 export async function deleteWallet(id: string): Promise<void> {
@@ -13,7 +13,7 @@ export async function deleteWallet(id: string): Promise<void> {
  
 
     if (accountToBeDeleted !== accounts[accounts.length - 1]) {
-        throw new RemoveNotLastAccountError()
+        throw new RemoveNotLastWalletError()
     }
 
     try {
@@ -22,6 +22,6 @@ export async function deleteWallet(id: string): Promise<void> {
         setSelectedWallet(accounts[0]?.id ?? null)
         get(routerManager).resetRouterForAppContext(AppContext.Dashboard)
     } catch (err) {
-        throw new CannotRemoveAccountError()
+        throw new CannotRemoveWalletError()
     }
 }

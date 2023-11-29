@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "错误的地址类型"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "在您的帐户中找不到地址。",
             "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "emptyName": "配置文件名称必须包含至少 1 个字符。",

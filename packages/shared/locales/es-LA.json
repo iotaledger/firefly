@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "El nombre de tu billetera no puede tener mas de {length, plural, one {# carácter} other {# caracteres}}.",
             "emptyName": "El nombre del perfil debe contener al menos 1 carácter.",

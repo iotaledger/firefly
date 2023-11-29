@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "ウォレット名は{length, plural, one {#  文字} other {# 文字 }}より長くすることはできません。",
             "emptyName": "プロフィール名は少なくとも1文字以上でなければなりません。",

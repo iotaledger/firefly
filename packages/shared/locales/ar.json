@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "يجب أن لا يتعدى اسم محفظتك {length, plural, one {# حرف } other {# حروف}}.",
             "emptyName": "يجب أن يحتوي اسم ملف التعريف على حرف واحد على الأقل.",

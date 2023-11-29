@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "잘못된 주소 유형입니다."
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "계정에서 주소를 찾을 수 없습니다.",
             "length": "지갑 이름은 {length, plural, other {#자}}보다 길 수 없습니다.",
             "emptyName": "프로필 이름에는 적어도 문자 1자 이상이 포함되어야 합니다.",

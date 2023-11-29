@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Το όνομα του πορτοφολιού σας δεν μπορεί να είναι μεγαλύτερο από {length, plural, one {1 χαρακτήρα} other {# χαρακτήρες}}.",
             "emptyName": "Ένα όνομα προφίλ πρέπει να περιέχει τουλάχιστον 1 χαρακτήρα.",

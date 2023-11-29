@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

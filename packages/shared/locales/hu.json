@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Helytelen címtípus"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "A cím nem található meg a számláján.",
             "length": "A tárca neve nem lehet {length, plural, one {# karakternél} other {# karakternél}} hosszabb.",
             "emptyName": "A profilnévnek legalább 1 karakterből kell állnia.",

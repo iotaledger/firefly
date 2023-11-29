@@ -13,7 +13,7 @@ export function validateWalletName(
     if (validateLength && getTrimmedLength(name) > MAX_WALLET_NAME_LENGTH) {
         return Promise.reject(
             new Error(
-                localize('error.account.length', { // TODO(2.0) Rename error code
+                localize('error.wallet.length', { // TODO(2.0) Rename error code
                     values: {
                         length: MAX_WALLET_NAME_LENGTH,
                     },
@@ -22,7 +22,7 @@ export function validateWalletName(
         )
     }
     if (validateDuplicate && get(activeWallets)?.find((existingWallet) => existingWallet.name === name)) {
-        return Promise.reject(new Error(localize('error.account.duplicate')))
+        return Promise.reject(new Error(localize('error.wallet.duplicate')))
     }
     return Promise.resolve()
 }

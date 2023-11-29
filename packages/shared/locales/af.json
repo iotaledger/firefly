@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Jou beursie naam mag nie langer as {length, plural, one {# karakter} other {# karakters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

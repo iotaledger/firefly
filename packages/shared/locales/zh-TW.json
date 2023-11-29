@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "地址類型錯誤"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "從你的帳戶中找不到此地址。",
             "length": "您的錢包名稱長度不能超過 {length, plural, one {# 字元} other {# 字元}}。",
             "emptyName": "設定檔名稱需包含至少1個字元。",
