@@ -1,9 +1,9 @@
-import { selectedAccount } from '@core/account'
 import { get } from 'svelte/store'
+import { selectedWallet } from '../stores/selected-wallet.store'
 
 export async function setStrongholdPassword(password: string): Promise<void> {
-    const account = get(selectedAccount)
+    const wallet = get(selectedWallet)
     // Otherwise error is thrown, if password is still present in memory
-    await account?.clearStrongholdPassword()
-    await account?.setStrongholdPassword(password)
+    await wallet?.clearStrongholdPassword()
+    await wallet?.setStrongholdPassword(password)
 }
