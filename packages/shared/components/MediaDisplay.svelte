@@ -31,7 +31,7 @@
 </script>
 
 <div class="h-full w-full object-cover">
-    {#if htmlTag === ParentMimeType.Image}
+    {#if htmlTag === ParentMimeType.Image || htmlTag === ParentMimeType.Text}
         <img {src} {alt} loading="lazy" class="w-full h-full object-cover" />
     {:else if htmlTag === ParentMimeType.Video}
         <video

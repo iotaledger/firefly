@@ -1,14 +1,20 @@
 import { allAccountNfts } from '../stores'
-import { INft } from '../interfaces'
+import { getIpfsUri } from '../utils'
 
-export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, partialNft: Partial<INft>): void {
+export function updateNftInAllAccountNfts(accountIndex: number, nftId: string): void {
     allAccountNfts.update((state) => {
         if (!state[accountIndex]) {
             state[accountIndex] = []
         }
         const nft = state[accountIndex].find((_nft) => _nft.id === nftId)
         if (nft) {
-            Object.assign(nft, { ...nft, ...partialNft })
+            const downloadUrl = nft.downloadUrl
+            void getIpfsUri({ hash: downloadUrl }).then((ipfsUri) => {
+                if (ipfsUri) {
+                    nft.downloadUrl = ipfsUri
+                    nft.composedUrl = ipfsUri
+                }
+            })
         }
         return state
     })
