@@ -1502,7 +1502,7 @@
         "myAccounts": "Els meus moneders",
         "profiles": "Perfils",
         "dev": "Dev",
-        "createAccount": "Crea un moneder",
+        "createWallet": "Crea un moneder",
         "addAWallet": "Add a wallet",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",

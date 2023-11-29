@@ -1,11 +1,22 @@
 import { SecretManager } from '@iota/sdk'
-import { AccountId, FoundryId, HexEncodedString, NftId, Output, OutputId, SecretManagerType, TransactionId, WalletOptions, Bech32Address } from '@iota/sdk/out/types'
+import {
+    AccountId,
+    FoundryId,
+    HexEncodedString,
+    NftId,
+    Output,
+    OutputId,
+    SecretManagerType,
+    TransactionId,
+    WalletOptions,
+    Bech32Address,
+} from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
 // TODO(2.0): Every method should return a promise (maybe except Utils, needs research)
 export interface IApi {
     createSecretManager(options: SecretManagerType): Promise<SecretManager>
-    createAccount(id: string, payload: WalletOptions): Promise<IWallet>
+    createWallet(id: string, payload: WalletOptions): Promise<IWallet>
     deleteWallet(id: string): void
     getAccount(id: string, walletOptions: WalletOptions): Promise<IWallet>
     clearWalletsFromMemory(): void

@@ -1502,7 +1502,7 @@
         "myAccounts": "Tárcáim",
         "profiles": "Profilok",
         "dev": "Fejlesztő",
-        "createAccount": "Tárca létrehozása",
+        "createWallet": "Tárca létrehozása",
         "addAWallet": "Tárca hozzáadása",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",

@@ -1502,7 +1502,7 @@
         "myAccounts": "Cüzdanlarım",
         "profiles": "Profiller",
         "dev": "Geliştirici",
-        "createAccount": "Cüzdan Oluştur",
+        "createWallet": "Cüzdan Oluştur",
         "addAWallet": "Cüzdan ekle",
         "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",

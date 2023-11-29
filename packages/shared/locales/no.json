@@ -1502,7 +1502,7 @@
         "myAccounts": "Lommebøkene mine",
         "profiles": "Profiler",
         "dev": "Utvikling",
-        "createAccount": "Opprette lommebok",
+        "createWallet": "Opprette lommebok",
         "addAWallet": "Add a wallet",
         "accountName": "Navn på lommebok",
         "latestTransactions": "Siste transaksjoner",

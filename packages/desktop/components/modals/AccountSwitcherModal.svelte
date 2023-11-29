@@ -21,9 +21,9 @@
         element?.scrollIntoView({ behavior: 'auto' })
     }
 
-    function onCreateAccountClick(): void {
+    function oncreateWalletClick(): void {
         modal?.close()
-        openPopup({ id: PopupId.CreateAccount })
+        openPopup({ id: PopupId.createWallet })
     }
 </script>
 
@@ -45,7 +45,7 @@
     <button
         type="button"
         class=" flex flex-row justify-between w-full p-8 hover:bg-gray-50 dark:hover:bg-gray-800"
-        on:click={onCreateAccountClick}
+        on:click={oncreateWalletClick}
     >
         <div class="flex flex-row items-center text-right space-x-4">
             <Icon icon={IconEnum.Plus} height="12" width="12" classes="text-blue-500" />

@@ -1502,7 +1502,7 @@
         "myAccounts": "Ví của tôi",
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
-        "createAccount": "Khởi tạo ví",
+        "createWallet": "Khởi tạo ví",
         "addAWallet": "Add a wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",

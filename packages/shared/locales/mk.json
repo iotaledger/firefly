@@ -1502,7 +1502,7 @@
         "myAccounts": "Мои паричници",
         "profiles": "Профили",
         "dev": "Девелопер",
-        "createAccount": "Креирај паричник",
+        "createWallet": "Креирај паричник",
         "addAWallet": "Add a wallet",
         "accountName": "Име на паричник",
         "latestTransactions": "Последни трансакции",

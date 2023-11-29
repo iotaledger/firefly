@@ -1502,7 +1502,7 @@
         "myAccounts": "내 지갑",
         "profiles": "프로필",
         "dev": "개발자",
-        "createAccount": "지갑 만들기",
+        "createWallet": "지갑 만들기",
         "addAWallet": "지갑 추가",
         "accountName": "지갑 이름",
         "latestTransactions": "최근 거래",

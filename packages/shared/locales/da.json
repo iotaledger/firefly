@@ -1502,7 +1502,7 @@
         "myAccounts": "Mine Wallets",
         "profiles": "Profiler",
         "dev": "Udvikler",
-        "createAccount": "Opret ny Wallet",
+        "createWallet": "Opret ny Wallet",
         "addAWallet": "Add a wallet",
         "accountName": "Wallet navn",
         "latestTransactions": "Seneste transaktioner",

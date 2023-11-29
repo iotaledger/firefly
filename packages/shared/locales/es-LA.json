@@ -1502,7 +1502,7 @@
         "myAccounts": "Mis Billeteras",
         "profiles": "Perfiles",
         "dev": "Dev",
-        "createAccount": "Crear una Billetera",
+        "createWallet": "Crear una Billetera",
         "addAWallet": "Añadir una bileltera",
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",

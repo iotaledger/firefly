@@ -1502,7 +1502,7 @@
         "myAccounts": "محافظي",
         "profiles": "الملفات الشخصية",
         "dev": "المطور",
-        "createAccount": "إنشاء محفظة",
+        "createWallet": "إنشاء محفظة",
         "addAWallet": "Add a wallet",
         "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",

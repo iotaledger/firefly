@@ -1502,7 +1502,7 @@
         "myAccounts": "Мої гаманці",
         "profiles": "Профілі",
         "dev": "Розробник",
-        "createAccount": "Створити гаманець",
+        "createWallet": "Створити гаманець",
         "addAWallet": "Add a wallet",
         "accountName": "Назва гаманця",
         "latestTransactions": "Останні транзакції",

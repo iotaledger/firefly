@@ -1,6 +1,6 @@
 import { IAccount } from '@core/account'
 import { handleLedgerError } from '@core/ledger/utils'
-import { createAccount, getAccounts, profileManager } from '@core/profile-manager'
+import { createWallet, getAccounts, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 import { get } from 'svelte/store'
 import { RestoreProfileType } from '../enums'
@@ -26,14 +26,14 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
              * will NOT have any accounts, so we create one.
              */
             const shimmerClaimingAccount = await prepareShimmerClaimingAccount(
-                await createAccount({}, shimmerClaimingProfileManager),
-                await createAccount({}, profileManager)
+                await createWallet({}, shimmerClaimingProfileManager),
+                await createWallet({}, profileManager)
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (restoreProfileType === RestoreProfileType.Stronghold) {
             const accounts = await getAccounts(shimmerClaimingProfileManager)
             if (accounts?.length === 0) {
-                const account = await createAccount({}, shimmerClaimingProfileManager)
+                const account = await createWallet({}, shimmerClaimingProfileManager)
                 accounts.push(account)
             }
             accounts.sort(sortAccountsByIndex)
@@ -41,7 +41,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             const twinAccounts = (
                 await Promise.all(
                     accounts.map((boundAccount) =>
-                        createAccount({ alias: boundAccount?.getMetadata()?.alias }, profileManager)
+                        createWallet({ alias: boundAccount?.getMetadata()?.alias }, profileManager)
                     )
                 )
             ).sort(sortAccountsByIndex)

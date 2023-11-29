@@ -1502,7 +1502,7 @@
         "myAccounts": "My Wallets",
         "profiles": "Профили",
         "dev": "Dev",
-        "createAccount": "Create a Wallet",
+        "createWallet": "Create a Wallet",
         "addAWallet": "Add a wallet",
         "accountName": "Wallet name",
         "latestTransactions": "Latest Transactions",

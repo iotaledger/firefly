@@ -1502,7 +1502,7 @@
         "myAccounts": "Mes Portefeuilles",
         "profiles": "Profils",
         "dev": "Dév",
-        "createAccount": "Créer un Portefeuille",
+        "createWallet": "Créer un Portefeuille",
         "addAWallet": "Ajouter un portefeuille",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",

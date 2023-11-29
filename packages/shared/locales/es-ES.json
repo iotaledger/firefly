@@ -1502,7 +1502,7 @@
         "myAccounts": "Mis Carteras",
         "profiles": "Perfiles",
         "dev": "Desarrollador",
-        "createAccount": "Crear una Cartera",
+        "createWallet": "Crear una Cartera",
         "addAWallet": "Añadir una cartera",
         "accountName": "Nombre de cartera",
         "latestTransactions": "Últimas Transacciones",

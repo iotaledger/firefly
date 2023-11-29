@@ -1502,7 +1502,7 @@
         "myAccounts": "Mina plånböcker",
         "profiles": "Profiler",
         "dev": "Utvecklare",
-        "createAccount": "Skapa en plånbok",
+        "createWallet": "Skapa en plånbok",
         "addAWallet": "Lägg till en plånbok",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",

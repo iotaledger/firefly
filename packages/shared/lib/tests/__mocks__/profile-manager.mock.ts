@@ -2,7 +2,7 @@ import { AccountMock } from './account.mock'
 
 import type {
     AccountId,
-    CreateAccountPayload,
+    createWalletPayload,
     SyncOptions,
     IClientOptions,
     WalletEvent,
@@ -42,7 +42,7 @@ export class ProfileManagerMock implements IProfileManager {
         return Promise.resolve()
     }
 
-    createAccount(account: CreateAccountPayload): Promise<IAccount> {
+    createWallet(account: createWalletPayload): Promise<IAccount> {
         return Promise.resolve(new AccountMock())
     }
 

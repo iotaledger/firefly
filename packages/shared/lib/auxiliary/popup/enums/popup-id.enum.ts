@@ -11,7 +11,7 @@ export enum PopupId {
     CheckForUpdates = 'checkForUpdates',
     Confirmation = 'confirmation',
     ConnectLedger = 'connectLedger',
-    CreateAccount = 'createAccount',
+    createWallet = 'createWallet',
     DeepLinkError = 'deepLinkError',
     DeleteAccount = 'deleteAccount',
     DeleteProfile = 'deleteProfile',

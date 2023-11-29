@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje denarnice",
         "profiles": "Profili",
         "dev": "Dev",
-        "createAccount": "Ustvari denarnico",
+        "createWallet": "Ustvari denarnico",
         "addAWallet": "Add a wallet",
         "accountName": "Ime denarnice",
         "latestTransactions": "Zadnje transakcije",

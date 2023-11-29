@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje peněženky",
         "profiles": "Profily",
         "dev": "Vývojář",
-        "createAccount": "Vytvořit peněženku",
+        "createWallet": "Vytvořit peněženku",
         "addAWallet": "Add a wallet",
         "accountName": "Název peněženky",
         "latestTransactions": "Poslední transakce",

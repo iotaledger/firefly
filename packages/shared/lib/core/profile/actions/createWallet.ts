@@ -1,9 +1,9 @@
-import { api } from '@core/api';
-import { generateRandomId } from '@core/utils';
-import { get } from 'svelte/store';
-import { IWallet } from '../interfaces';
-import { activeProfile as activeProfileStore } from '../stores';
-import { getStorageDirectoryOfProfile } from '../utils';
+import { api } from '@core/api'
+import { generateRandomId } from '@core/utils'
+import { get } from 'svelte/store'
+import { IWallet } from '../interfaces'
+import { activeProfile as activeProfileStore } from '../stores'
+import { getStorageDirectoryOfProfile } from '../utils'
 
 // TODO(2.0): Fix and finish this method
 /* - __storage__/
@@ -13,8 +13,8 @@ import { getStorageDirectoryOfProfile } from '../utils';
         - __wallet2__/
 */
 export async function createWallet(): Promise<IWallet> {
-    const id = generateRandomId();
-    const storagePath = await getStorageDirectoryOfProfile(id);
+    const id = generateRandomId()
+    const storagePath = await getStorageDirectoryOfProfile(id)
     const snapshotPath = ''
 
     const activeProfile = get(activeProfileStore)
@@ -24,13 +24,13 @@ export async function createWallet(): Promise<IWallet> {
         secretManager: {
             stronghold: {
                 snapshotPath,
-            }
+            },
         },
     }
-    const wallet = await api.createAccount(id, {
+    const wallet = await api.createWallet(id, {
         ...walletOptions,
-        storagePath
-    });
+        storagePath,
+    })
 
     return wallet
 }

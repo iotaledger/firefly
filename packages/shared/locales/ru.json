@@ -1502,7 +1502,7 @@
         "myAccounts": "Мои кошельки",
         "profiles": "Профили",
         "dev": "Разработчик",
-        "createAccount": "Создать кошелёк",
+        "createWallet": "Создать кошелёк",
         "addAWallet": "Добавить кошелек",
         "accountName": "Имя кошелька",
         "latestTransactions": "Последние Транзакции",

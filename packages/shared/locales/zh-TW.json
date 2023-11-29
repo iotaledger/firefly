@@ -1502,7 +1502,7 @@
         "myAccounts": "我的錢包",
         "profiles": "設定檔",
         "dev": "開發者",
-        "createAccount": "建立一個錢包",
+        "createWallet": "建立一個錢包",
         "addAWallet": "新增錢包",
         "accountName": "錢包名稱",
         "latestTransactions": "最新交易",

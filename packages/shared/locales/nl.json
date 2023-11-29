@@ -1502,7 +1502,7 @@
         "myAccounts": "Mijn Portemonnees",
         "profiles": "Profielen",
         "dev": "Ontwikkelaar",
-        "createAccount": "Maak een portemonnee aan",
+        "createWallet": "Maak een portemonnee aan",
         "addAWallet": "Portemonnee toevoegen",
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
