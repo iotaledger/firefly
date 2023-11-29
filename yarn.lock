@@ -767,9 +767,9 @@
   resolved "https://registry.yarnpkg.com/@iota/pad/-/pad-1.0.0-beta.30.tgz#de19728f8f1b09c20e2365d0da34945006760082"
   integrity sha512-fnhPMPul18WunLq9Ni4rxzBFmhna6eaG8WroDg6GdQqSK/eN62uFHV8tpspJHXuCqwgCUVp6NpuUna7+B2OV9g==
 
-"@iota/sdk@https://gitpkg.now.sh/iotaledger/iota-sdk/bindings/nodejs?79b052a169d2b07a855d095c17aeb42560563feb":
+"@iota/sdk@https://gitpkg.now.sh/iotaledger/iota-sdk/bindings/nodejs?bc6eb3a7219b50f3645aea5b59dc436d2dbefad3":
   version "1.1.4"
-  resolved "https://gitpkg.now.sh/iotaledger/iota-sdk/bindings/nodejs?79b052a169d2b07a855d095c17aeb42560563feb#62bb845469d343dfbf0b05f8929a44943798de3b"
+  resolved "https://gitpkg.now.sh/iotaledger/iota-sdk/bindings/nodejs?bc6eb3a7219b50f3645aea5b59dc436d2dbefad3#d15e2d2ae9b287516676970e6dc19847845f929f"
   dependencies:
     "@types/node" "^18.15.12"
     cargo-cp-artifact "^0.1.6"
