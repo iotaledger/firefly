@@ -87,11 +87,8 @@
 
             const outputParams = await getOutputParameters(details)
             preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
-
-            return Promise.resolve()
         } catch (err) {
             handleError(err)
-            return Promise.reject()
         } finally {
             isPreparingOutput = false
         }

@@ -1965,7 +1965,8 @@
             "reservedTagKeyword": "Reserviertes Schlagwort kann nicht verwendet werden"
         },
         "layer2": {
-            "layer1Recipient": "Eine Layer-2-Transaktion kann nicht an ein Layer-1-Konto gesendet werden."
+            "layer1Recipient": "Eine Layer-2-Transaktion kann nicht an ein Layer-1-Konto gesendet werden.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",
