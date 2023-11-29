@@ -1,18 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { getProfileManager } from '@core/profile-manager/stores'
-    import { checkActiveProfileAuth, getActiveProfile } from '@core/profile'
+    import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
     import { fetchWithTimeout } from '@core/nfts'
-    import { CHRONICLE_URLS } from '@core/network/constants/chronicle-urls.constant'
+    import { CHRONICLE_URLS, CHRONICLE_ADDRESS_HISTORY_ROUTE } from '@core/network/constants/chronicle-urls.constant'
     import { getSelectedAccount } from '@core/account'
-    import {
-        Button,
-        FontWeight,
-        KeyValueBox,
-        Text,
-        TextType,
-        Spinner,
-    } from 'shared/components'
+    import { Button, Error, FontWeight, KeyValueBox, Text, TextType, Spinner } from 'shared/components'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { AccountAddress } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup/actions/closePopup'
@@ -20,96 +13,117 @@
     import { truncateString } from '@core/utils'
 
     interface AddressHistory {
-        address: string,
-        items: [{
-            milestoneIndex: number,
-            milestoneTimestamp: number,
-            outputId: string,
-            isSpent: boolean
-        }]
+        address: string
+        items: [
+            {
+                milestoneIndex: number
+                milestoneTimestamp: number
+                outputId: string
+                isSpent: boolean
+            }
+        ]
     }
-
-    const CHRONICLE_ROUTE = 'api/explorer/v2/ledger/updates/by-address/'
 
     const account = getSelectedAccount()
     const accountIndex = account.index
-    const network = getActiveProfile().network.id;
-    const chronicleEndpoints = CHRONICLE_URLS[network];
-    // TODO Care with the 0
-    const chronicleRoot = chronicleEndpoints[0]
-    const baseURL = `${chronicleRoot}${CHRONICLE_ROUTE}`
+    const network = getActiveProfile().network.id
+    const ADDRESS_GAP_LIMIT = 20
 
+    let error: string = ''
+    let searchURL: string
     let knownAddresses: AccountAddress[] | undefined = undefined
-
-    let addressSearchIndex = 0
-    const foundAddresses: string[] = []
-    const isBusy = false
-
-    $: console.log('Network', network);
-    $: console.log('Chronicle', chronicleRoot);
-    $: console.log('Known addresses are:', knownAddresses);
+    let searchAddressStartIndex = 0
+    let currendSearchGap = 0
+    let isBusy = false
 
     onMount(() => {
-        getSelectedAccount()
-            ?.addresses()
-            .then((_addressList) => {
-                knownAddresses = _addressList?.sort((a, b) => a.keyIndex - b.keyIndex) ?? []
-            })
-            .catch((err) => {
-                console.error(err)
-                knownAddresses = []
-            })
+        knownAddresses = getSelectedAccount().knownAddresses
+        if (knownAddresses === undefined) {
+            getSelectedAccount()
+                ?.addresses()
+                .then((_addressList) => {
+                    knownAddresses = _addressList ?? []
+                    updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        }
+
+        if (CHRONICLE_URLS[network] && CHRONICLE_URLS[network].length > 0) {
+            const chronicleRoot = CHRONICLE_URLS[network][0]
+            searchURL = `${chronicleRoot}${CHRONICLE_ADDRESS_HISTORY_ROUTE}`
+        } else {
+            error = 'Chronicle not configured'
+        }
     })
 
     async function isAddressWithHistory(address: string): Promise<boolean> {
         try {
-            const response = await fetchWithTimeout(`${baseURL}${address}`, 3, { method: 'GET' });
+            const response = await fetchWithTimeout(`${searchURL}${address}`, 3, { method: 'GET' })
             const addressHistory: AddressHistory = await response.json()
             return addressHistory?.items?.length > 0
         } catch (err) {
             console.error(err)
-            return false;
+            error = 'Couldn\'t fetch address history'
         }
     }
 
-    const GENERATE_STEP = 10
-    async function generateAddresses(): Promise<string[]> {
-        console.debug('Generating...')
-        let generatedCount = 0;
-        const generatedAddresses = [];
-        while (generatedCount < GENERATE_STEP) {
-            const address = await getProfileManager().generateEd25519Address(
-                accountIndex,
-                addressSearchIndex
-            )
+    async function generateNextUnknownAddress(): Promise<[string, number]> {
+        let nextUnknownAddress: string
 
-            addressSearchIndex++
+        try {
+            do {
+                nextUnknownAddress = await getProfileManager().generateEd25519Address(
+                    accountIndex,
+                    searchAddressStartIndex
+                )
 
-            if (knownAddresses.map(accountAddress => accountAddress.address).includes(address)) {
-                continue
-            }
-
-            generatedAddresses.push(address)
-            generatedCount++
+                searchAddressStartIndex++
+            } while (knownAddresses.map((accountAddress) => accountAddress.address).includes(nextUnknownAddress))
+        } catch (err) {
+            console.error(err)
+            error = 'Couldn\'t generate a new address'
         }
 
-        return generatedAddresses
+        return [nextUnknownAddress, searchAddressStartIndex - 1]
     }
 
     async function search(): Promise<void> {
+        currendSearchGap = 0
         const isUnlocked = await unlock
-        if (isUnlocked) {
-            const nextAddressesToCheck = await generateAddresses()
-            console.debug('Generated addresses:', nextAddressesToCheck)
 
-            for (const addressToCheck of nextAddressesToCheck) {
-                const hasHistory = await isAddressWithHistory(addressToCheck)
+        if (isUnlocked && !error) {
+            isBusy = true
+            while (currendSearchGap < ADDRESS_GAP_LIMIT) {
+                const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
+                if (!nextAddressToCheck) {
+                    isBusy = false
+                    break
+                }
+
+                const hasHistory = await isAddressWithHistory(nextAddressToCheck)
+                if (error) {
+                    isBusy = false
+                    break
+                }
+
                 if (hasHistory) {
-                    foundAddresses.push(addressToCheck)
+                    const accountAddress: AccountAddress = {
+                        address: nextAddressToCheck,
+                        keyIndex: addressIndex,
+                        internal: false,
+                        used: true,
+                    }
+
+                    knownAddresses.push(accountAddress)
+                } else {
+                    currendSearchGap++
                 }
             }
 
-            console.debug('Found addresses', foundAddresses)
+            updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
+            isBusy = false
         }
     }
 
@@ -163,6 +177,9 @@
             <Spinner />
         </div>
     {/if}
+    {#if error}
+        <Error {error} />
+    {/if}
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
     <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}>
@@ -171,7 +188,7 @@
     <Button
         classes="w-full"
         onClick={search}
-        disabled={isBusy}
+        disabled={isBusy || !!error}
         {isBusy}
         busyMessage={localize('actions.searching')}
     >

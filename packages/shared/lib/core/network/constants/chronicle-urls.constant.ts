@@ -7,3 +7,4 @@ export const CHRONICLE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
     [NetworkId.Testnet]: ['https://chronicle.testnet.shimmer.network/'],
 }
 
+export const CHRONICLE_ADDRESS_HISTORY_ROUTE = 'api/explorer/v2/ledger/updates/by-address/'
