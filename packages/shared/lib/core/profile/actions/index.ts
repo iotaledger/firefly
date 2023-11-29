@@ -1,7 +1,7 @@
 export * from './createWallet'
-export * from './getAccount'
-export * from './getAccounts'
-export * from './recoverAccounts'
+export * from './getWallet'
+export * from './getWallets'
+export * from './recoverWallets'
 export * from './clearProfileFromMemory'
 export * from './deleteWallet'
 

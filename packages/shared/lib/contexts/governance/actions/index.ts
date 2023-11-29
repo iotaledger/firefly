@@ -1,6 +1,6 @@
 export * from './addProposalsFromParticipationEventMap'
 export * from './getVotingEvent'
-export * from './getAccountsParticipationEventStatusForEvent'
+export * from './getWalletsParticipationEventStatusForEvent'
 export * from './initializeParticipationOverviews'
 export * from './initializeRegisteredProposals'
 export * from './pollParticipationEventStatus'

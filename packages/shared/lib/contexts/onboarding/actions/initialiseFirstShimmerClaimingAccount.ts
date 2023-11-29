@@ -1,6 +1,6 @@
 import { IAccount } from '@core/account'
 import { handleLedgerError } from '@core/ledger/utils'
-import { createWallet, getAccounts, profileManager } from '@core/profile-manager'
+import { createWallet, getWallets, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
 import { get } from 'svelte/store'
 import { RestoreProfileType } from '../enums'
@@ -31,7 +31,7 @@ export async function initialiseFirstShimmerClaimingAccount(): Promise<void> {
             )
             updateOnboardingProfile({ shimmerClaimingAccounts: [shimmerClaimingAccount] })
         } else if (restoreProfileType === RestoreProfileType.Stronghold) {
-            const accounts = await getAccounts(shimmerClaimingProfileManager)
+            const accounts = await getWallets(shimmerClaimingProfileManager)
             if (accounts?.length === 0) {
                 const account = await createWallet({}, shimmerClaimingProfileManager)
                 accounts.push(account)

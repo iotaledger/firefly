@@ -12,7 +12,7 @@ import { pollNetworkStatus } from '@core/network/actions'
 import { initialiseProfileManager } from '@core/profile-manager/actions'
 import { loadNftsForActiveProfile } from '@core/nfts'
 import {
-    getAccounts,
+    getWallets,
     isStrongholdUnlocked,
     recoverAccounts,
     setStrongholdPasswordClearInterval,
@@ -81,7 +81,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 }
                 accounts = await recoverAccounts(recoverAccountsPayload)
             } else {
-                accounts = await getAccounts()
+                accounts = await getWallets()
             }
             /**
              * NOTE: In the case no accounts with funds were recovered, we must

@@ -130,7 +130,7 @@ try {
             }
         },
         // TODO(2.0): Rename this to getWallet and fix all usages
-        async getAccount(id, walletOptions) {
+        async getWallet(id, walletOptions) {
             let wallet = wallets[id]
             if (!wallet) {
                 wallet = new IotaSdk.Wallet(walletOptions)

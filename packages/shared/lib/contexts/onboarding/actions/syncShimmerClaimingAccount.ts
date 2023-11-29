@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { IAccount } from '@core/account'
-import { getAccount, profileManager } from '@core/profile-manager'
+import { getWallet, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
@@ -17,8 +17,8 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
         throw new MissingShimmerClaimingProfileManagerError()
     }
     const { index } = account?.getMetadata() ?? {}
-    const boundShimmerClaimingAccount = await getAccount(index, shimmerClaimingProfileManager)
-    const boundTwinAccount = await getAccount(index, profileManager)
+    const boundShimmerClaimingAccount = await getWallet(index, shimmerClaimingProfileManager)
+    const boundTwinAccount = await getWallet(index, profileManager)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         boundShimmerClaimingAccount,

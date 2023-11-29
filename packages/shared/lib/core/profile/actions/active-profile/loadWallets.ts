@@ -1,11 +1,11 @@
 import { loadWallet } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeAccounts, activeProfile } from '../../stores'
-import { getAccounts } from '../getAccounts'
+import { getWallets } from '../getWallets'
 
 export async function loadWallets(): Promise<void> {
     const { hasLoadedAccounts } = get(activeProfile)
-    const walletResponse = await getAccounts()
+    const walletResponse = await getWallets()
     if (walletResponse.length === 0) {
         hasLoadedAccounts.set(true)
         return

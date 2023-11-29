@@ -5,12 +5,12 @@ import { IWallet } from '../interfaces/wallet.interface'
 
 // TODO(2.0): Fix all usages of this method
 // TODO(2.0): Finalize when new profile is ready
-export async function getAccounts(): Promise<IWallet[]> {
+export async function getWallets(): Promise<IWallet[]> {
     const profile = get(activeProfile)
     let wallets: IWallet[] = []
     if (profile.accountPersistedData) {
         wallets = await Promise.all(Object.entries(profile.accountPersistedData)
-            .map(([id, data]) => api.getAccount(id, data.walletOptions)))
+            .map(([id, data]) => api.getWallet(id, data.walletOptions)))
     }
     return wallets
 }

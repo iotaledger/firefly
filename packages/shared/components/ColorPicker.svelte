@@ -72,7 +72,7 @@
         }
     }
 
-    function getAccountColors(): string[] {
+    function getWalletColors(): string[] {
         return Object.keys(AccountColors)
             .filter((key) => key.startsWith('#'))
             .map((key) => {
@@ -92,7 +92,7 @@
         </title-container>
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each getAccountColors() as color, i}
+        {#each getWalletColors() as color, i}
             <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}

@@ -10,8 +10,8 @@ export const selectedWallet: Readable<IWalletState | undefined> = derived(
     }
 )
 
-export function getSelectedWallet(): IWalletState | undefined {
-    return get(selectedWallet)
+export function getSelectedWallet(): IWalletState {
+    return get(selectedWallet) as IWalletState
 }
 
 export function updateSelectedWallet(payload: Partial<IWalletState>): void {

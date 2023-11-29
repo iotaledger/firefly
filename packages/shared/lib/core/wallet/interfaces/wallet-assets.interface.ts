@@ -1,11 +1,11 @@
 import { IAsset } from './asset.interface'
 
-export type AccountAssets = {
+export type WalletAssets = {
     // [networkId: string] | [chainId: number]
-    [id: number | string]: IAccountAssetsPerNetwork
+    [id: number | string]: IWalletAssetsPerNetwork
 }
 
-export interface IAccountAssetsPerNetwork {
+export interface IWalletAssetsPerNetwork {
     baseCoin: IAsset | undefined
     nativeTokens: IAsset[]
 }

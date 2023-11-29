@@ -1,10 +1,9 @@
-import { IAccount } from '@core/account'
-import { RecoverAccountsPayload } from '@core/profile-manager/interfaces'
+import { IWallet, RecoverAccountsPayload } from '../interfaces'
 
 // TODO(2.0): Refactor all this, recover accounts has changed completely
 // as it is not provided by the SDK anymore
-export function recoverAccounts(
+export function recoverWallets(
     _recoverAccountsPayload: RecoverAccountsPayload,
-): Promise<IAccount[]> {
+): Promise<IWallet[]> {
     return Promise.resolve([])
 }

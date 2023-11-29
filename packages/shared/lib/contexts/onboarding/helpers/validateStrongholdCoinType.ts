@@ -1,6 +1,6 @@
 import { localize } from '@core/i18n'
 import { COIN_TYPE, NetworkId } from '@core/network'
-import { createWallet, getAccounts, IProfileManager } from '@core/profile-manager'
+import { createWallet, getWallets, IProfileManager } from '@core/profile-manager'
 import { get, Writable } from 'svelte/store'
 import { OnboardingType } from '../enums'
 import { CannotRestoreWithMismatchedCoinTypeError } from '../errors'
@@ -10,7 +10,7 @@ export async function validateStrongholdCoinType(
     profileManager: Writable<IProfileManager>,
     networkId: NetworkId
 ): Promise<void> {
-    const accounts = await getAccounts(profileManager)
+    const accounts = await getWallets(profileManager)
     if (accounts?.length === 0) {
         const alias = `${localize('general.account')} 1`
         const account = await createWallet({ alias }, profileManager)

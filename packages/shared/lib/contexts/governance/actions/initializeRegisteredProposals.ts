@@ -7,7 +7,7 @@ import { activeAccounts } from '@core/profile/stores'
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
 import { createProposalFromError, createProposalFromEvent } from '../utils'
-import { getAccountsParticipationEventStatusForEvent } from './getAccountsParticipationEventStatusForEvent'
+import { getWalletsParticipationEventStatusForEvent } from './getWalletsParticipationEventStatusForEvent'
 
 export async function initializeRegisteredProposals(): Promise<void> {
     const allProposals: { [accountId: number]: IRegisteredProposals } = {}
@@ -40,7 +40,7 @@ async function getParticipationEventsAndCreateProposalsForAccount(
             break
         }
         try {
-            await getAccountsParticipationEventStatusForEvent(event.id, account)
+            await getWalletsParticipationEventStatusForEvent(event.id, account)
             proposals[event.id] = proposal
         } catch (err) {
             proposals[event.id] = createProposalFromError(proposal, err)

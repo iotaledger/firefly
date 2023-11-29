@@ -8,6 +8,6 @@ import {activeProfile } from '../stores'
 export async function getWallet(walletId: string): Promise<IWallet> {
     const profile: IPersistedProfile = get(activeProfile)
     const persistedWallet: IPersistedWalletData = profile?.accountPersistedData[walletId]
-    const wallet = await api.getAccount(walletId, persistedWallet.walletOptions)
+    const wallet = await api.getWallet(walletId, persistedWallet.walletOptions)
     return wallet
 }
