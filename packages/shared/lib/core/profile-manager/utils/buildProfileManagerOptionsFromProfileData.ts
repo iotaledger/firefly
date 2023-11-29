@@ -3,6 +3,7 @@ import { getSecretManagerFromProfileType } from '@core/profile-manager'
 import { COIN_TYPE, getDefaultClientOptions } from '@core/network'
 import { WalletOptions } from '@iota/sdk/out/types'
 
+// TODO(2.0) Fix this and all usages
 export async function buildProfileManagerOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
 ): Promise<WalletOptions> {
@@ -19,7 +20,7 @@ export async function buildProfileManagerOptionsFromProfileData(
     return {
         storagePath,
         bipPath: {
-            coinType
+            coinType,
         },
         clientOptions,
         secretManager,
