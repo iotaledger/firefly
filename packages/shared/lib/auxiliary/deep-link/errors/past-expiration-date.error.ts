@@ -6,7 +6,7 @@ export class PastExpirationDateError extends BaseError {
         const message = localize('error.send.pastExpirationDate')
         super({
             message,
-            showNotification: false,
+            showNotification: true,
             saveToErrorLog: false,
             logToConsole: true,
         })

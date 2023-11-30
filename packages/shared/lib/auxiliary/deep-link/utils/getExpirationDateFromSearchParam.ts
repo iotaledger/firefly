@@ -1,18 +1,7 @@
+import { convertUnixTimestampToDate } from 'shared/lib/core/utils'
+import { EXPIRATION_DATE_REGEX, TIME_UNIT_MS_MAP } from '../constants'
+import { TimeUnit } from '../enums'
 import { InvalidExpirationDateError, PastExpirationDateError } from '../errors'
-
-enum TimeUnit {
-    Weeks = 'w',
-    Days = 'd',
-    Hours = 'h',
-    Minutes = 'm',
-}
-
-const timeUnitValues: Record<TimeUnit, number> = {
-    [TimeUnit.Weeks]: 604800000,
-    [TimeUnit.Days]: 86400000,
-    [TimeUnit.Hours]: 3600000,
-    [TimeUnit.Minutes]: 60000,
-}
 
 export function getExpirationDateFromSearchParam(expirationDate: string): Date | undefined {
     if (!expirationDate) {
@@ -22,7 +11,7 @@ export function getExpirationDateFromSearchParam(expirationDate: string): Date |
     // Check if it's a Unix timestamp (numeric value)
     if (!isNaN(Number(expirationDate))) {
         const expirationTimestamp = parseInt(expirationDate)
-        const expirationDateTime = new Date(expirationTimestamp * 1000) // Convert seconds to milliseconds
+        const expirationDateTime = convertUnixTimestampToDate(expirationTimestamp) // Convert seconds to milliseconds
         if (isNaN(expirationDateTime.getTime())) {
             throw new InvalidExpirationDateError()
         } else if (expirationDateTime.getTime() < Date.now()) {
@@ -33,8 +22,7 @@ export function getExpirationDateFromSearchParam(expirationDate: string): Date |
     }
 
     // Validate expiration date format for relative time
-    const expirationRegex = /^(\d+)([hdwm])$/
-    const regexMatch = expirationRegex.exec(expirationDate)
+    const regexMatch = EXPIRATION_DATE_REGEX.exec(expirationDate)
 
     if (!regexMatch) {
         throw new InvalidExpirationDateError()
@@ -43,7 +31,7 @@ export function getExpirationDateFromSearchParam(expirationDate: string): Date |
     const value = parseInt(regexMatch[1])
     const unit = regexMatch[2] as TimeUnit
 
-    const selectedTimeUnitValue = timeUnitValues[unit]
+    const selectedTimeUnitValue = TIME_UNIT_MS_MAP[unit]
 
     if (selectedTimeUnitValue === undefined) {
         throw new InvalidExpirationDateError()

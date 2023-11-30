@@ -68,6 +68,12 @@
     $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedAccount.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
+    $: initialExpirationDate = getInitialExpirationDate(
+        expirationDate,
+        storageDeposit,
+        giftStorageDeposit,
+        isLayer2Transaction
+    )
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
