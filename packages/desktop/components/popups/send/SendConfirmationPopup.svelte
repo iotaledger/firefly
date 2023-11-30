@@ -90,14 +90,6 @@
         await updateStorageDeposit()
 
         if (isSendAndClosePopup) {
-            // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
-            initialExpirationDate = getInitialExpirationDate(
-                expirationDate,
-                storageDeposit,
-                giftStorageDeposit,
-                isLayer2Transaction
-            )
-
             try {
                 await _onMount()
             } catch (err) {
@@ -118,18 +110,6 @@
             const outputParams = await getOutputParameters(transactionDetails)
             preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
             await updateStorageDeposit()
-
-            // This potentially triggers a second 'prepareOutput',
-            // as it updates expiration date through the ExpirationTimePicker bind
-            // Could be avoided with a rework of ExpirationTimePicker
-            if (transactionDetails.expirationDate === undefined) {
-                initialExpirationDate = getInitialExpirationDate(
-                    expirationDate,
-                    storageDeposit,
-                    giftStorageDeposit,
-                    isLayer2Transaction
-                )
-            }
         } catch (err) {
             handleError(err)
         }
