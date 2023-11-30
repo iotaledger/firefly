@@ -1,6 +1,7 @@
 <script lang="ts">
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { activeProfile } from '@core/profile'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
     import {
         IAsset,
@@ -15,13 +16,12 @@
     import Big from 'big.js'
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
-    import { activeProfile } from '@core/profile'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
     export let isFocused = false
     export let votingPower: number = 0
-    export let asset: IAsset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
+    export let asset: IAsset
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false
@@ -40,6 +40,7 @@
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
     $: rawAmount = bigAmount?.toString()
+    $: asset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? asset
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
