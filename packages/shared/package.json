@@ -13,7 +13,6 @@
         "@iota/unit-converter": "^1.0.0-beta.30",
         "@iota/util.js": "^2.0.0-rc.1",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
-        "add": "^2.0.6",
         "big-integer": "^1.6.51",
         "big.js": "^6.0.3",
         "lottie-web": "^5.7.8",
@@ -23,7 +22,6 @@
         "svelte-i18n": "3.7.0",
         "svelte-markdown": "0.2.3",
         "svelty-picker": "^5.0.0",
-        "yarn": "^1.22.21",
         "zxcvbn": "^4.4.2"
     },
     "scripts": {
