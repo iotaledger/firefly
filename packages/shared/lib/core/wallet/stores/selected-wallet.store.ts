@@ -1,5 +1,5 @@
 import { derived, get, Readable } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from '@core/profile'
+import { activeWallets, updateActiveWallet } from '@core/profile/stores'
 import { IWalletState } from '../interfaces'
 import { selectedWalletId } from './selected-wallet-id.store'
 

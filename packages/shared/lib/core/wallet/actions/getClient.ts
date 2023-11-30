@@ -1,8 +1,7 @@
 import { Client } from '@iota/sdk/out/client'
-import { get } from 'svelte/store'
-import { selectedAccount } from '@core/account'
+import { getSelectedWallet } from '@core/wallet/stores'
 
 export function getClient(): Promise<Client> {
-    const account = get(selectedAccount)
-    return account!.getClient()
+    const wallet = getSelectedWallet();
+    return wallet!.getClient()
 }

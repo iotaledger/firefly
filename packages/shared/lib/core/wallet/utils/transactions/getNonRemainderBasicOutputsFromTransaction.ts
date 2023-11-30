@@ -1,9 +1,9 @@
 import { getRecipientAddressFromOutput } from '..'
-import { IWrappedOutput } from '@core/wallet/interfaces'
+import { AddressWithOutputs, IWrappedOutput } from '@core/wallet/interfaces'
 import { ActivityDirection } from '@core/wallet/enums'
 import { CommonOutput } from '@iota/sdk/out/types'
-import { AddressWithOutputs } from '@core/account'
 
+// TODO(2.0) Fix all usages
 export function getNonRemainderBasicOutputsFromTransaction(
     wrappedOutputs: IWrappedOutput[],
     accountAddressesWithOutputs: AddressWithOutputs[],

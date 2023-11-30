@@ -6,7 +6,7 @@ import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile, removePr
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 // TODO(2.0) Fix this, profile manager is gone
-export async function initialiseProfileManagerFromOnboardingProfile(checkForExistingSecretManager?: boolean): Promise<void> {
+export async function initialiseOnboardingProfileWithSecretManager(checkForExistingSecretManager?: boolean): Promise<void> {
     const secretManager = get(onboardingProfileSecretManager)
     const activeOnboardingProfile = get(onboardingProfile)
 

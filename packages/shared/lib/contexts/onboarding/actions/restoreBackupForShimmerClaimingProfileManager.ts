@@ -1,5 +1,4 @@
 import { NetworkId } from '@core/network/enums'
-import { profileManager } from '@core/profile-manager'
 import { getStorageDirectoryOfProfile } from '@core/profile/utils'
 import { get } from 'svelte/store'
 import {

@@ -32,6 +32,8 @@ export * from './getDepositAddress'
 export * from './getBoundWallet'
 export * from './getRandomWalletColor'
 export * from './getIconColorFromString'
+export * from './syncWalletsInSeries'
+export * from './syncWalletsInParallel'
 
 // Folders
 export * from './generateActivity'

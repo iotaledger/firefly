@@ -1,9 +1,9 @@
 import { onboardingProfile } from '@contexts/onboarding/stores';
 import { api } from '@core/api';
 import { SecretManager } from '@iota/sdk';
-import { Readable, derived } from 'svelte/store';
+import { Readable, derived, get } from 'svelte/store';
 
-const onboardingProfileSecretManagerOptions = derived(onboardingProfile, (onboardingProfile) => onboardingProfile.secretManagerOptions);
+const onboardingProfileSecretManagerOptions = derived(onboardingProfile, (onboardingProfile) => onboardingProfile?.secretManagerOptions);
 
 export const onboardingProfileSecretManager: Readable<SecretManager | null> = derived(onboardingProfileSecretManagerOptions, (onboardingProfileSecretManagerOptions, set) => {
     if (onboardingProfileSecretManagerOptions) {
@@ -15,3 +15,7 @@ export const onboardingProfileSecretManager: Readable<SecretManager | null> = de
         set(null)
     }
 })
+
+export function isOnboardingSecretManagerInitialized(): boolean {
+    return !!get(onboardingProfileSecretManager)
+}

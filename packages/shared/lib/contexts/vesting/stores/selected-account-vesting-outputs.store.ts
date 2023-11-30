@@ -1,13 +1,14 @@
-import { selectedAccount } from '@core/account/stores'
+import { selectedWallet } from '@core/wallet/stores/selected-wallet.store'
 import { Readable, derived } from 'svelte/store'
 import { AddressWithVestingOutputs } from '../interfaces'
 import { getVestingType, isVestingOutput, mapBasicOutputToVestingOutput, sortVestingOutputs } from '../utils'
 
+// TODO(2.0) Fix this and all usages
 export const selectedAccountVestingOutputs: Readable<AddressWithVestingOutputs[]> = derived(
-    selectedAccount,
-    ($selectedAccount) => {
+    selectedWallet,
+    ($selectedWallet) => {
         const addressesWithVestingOutputs =
-            $selectedAccount?.addressesWithOutputs?.filter((addressWithOutputs) =>
+            $selectedWallet?.addressesWithOutputs?.filter((addressWithOutputs) =>
                 addressWithOutputs.outputs?.find(isVestingOutput)
             ) ?? []
         return addressesWithVestingOutputs.map((addressWithOutputs) => {

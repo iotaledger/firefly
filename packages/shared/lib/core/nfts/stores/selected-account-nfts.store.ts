@@ -1,16 +1,16 @@
 import { derived, Readable, Writable, writable } from 'svelte/store'
 
-import { selectedAccount } from '@core/account/stores'
-
 import { INft } from '../interfaces'
 import { allAccountNfts } from './all-account-nfts.store'
 import { time } from '@core/app/stores/time.store'
+import { selectedWalletId } from '@core/wallet/stores/selected-wallet-id.store'
 
+// TODO(2.0) Rename this
 export const selectedAccountNfts: Readable<INft[]> = derived(
-    [selectedAccount, allAccountNfts],
-    ([$selectedAccount, $allAccountNfts]) => {
-        if ($selectedAccount) {
-            return $allAccountNfts[$selectedAccount.index] ?? []
+    [selectedWalletId, allAccountNfts],
+    ([$selectedWalletId, $allAccountNfts]) => {
+        if ($selectedWalletId) {
+            return $allAccountNfts[$selectedWalletId] ?? []
         } else {
             return []
         }

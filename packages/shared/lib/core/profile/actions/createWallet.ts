@@ -12,12 +12,10 @@ import { getStorageDirectoryOfProfile } from '../utils'
         - __wallet1__/
         - __wallet2__/
 */
-export async function createWallet(): Promise<IWallet> {
+export async function createWallet(activeProfile = get(activeProfileStore)): Promise<IWallet> {
     const id = generateRandomId()
     const storagePath = await getStorageDirectoryOfProfile(id)
     const snapshotPath = ''
-
-    const activeProfile = get(activeProfileStore)
 
     const walletOptions = {
         clientOptions: activeProfile.clientOptions,

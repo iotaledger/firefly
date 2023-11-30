@@ -1,5 +1,5 @@
 import { derived, Readable, writable } from 'svelte/store'
-import { IWalletState } from '../../wallet'
+import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfile } from './active-profile.store'
 
 export const activeWallets = writable<IWalletState[]>([])

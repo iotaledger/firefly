@@ -5,7 +5,7 @@ import { getSelectedWallet } from 'shared/lib/core/wallet/stores/selected-wallet
 
 export function getWalletsParticipationEventStatusForEvent(
     eventId: ParticipationEventId,
-    account: IWallet = getSelectedWallet()
+    wallet: IWallet = getSelectedWallet()
 ): Promise<ParticipationEventStatus> {
-    return account?.getParticipationEventStatus(eventId)
+    return wallet?.getParticipationEventStatus(eventId)
 }

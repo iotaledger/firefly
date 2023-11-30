@@ -1,53 +1,55 @@
 import { get, writable } from 'svelte/store'
 import { Activity, AsyncData, BaseActivity } from '../types'
 
-export const allAccountActivities = writable<Activity[][]>([])
+// TODO(2.0) Rename file
 
-export function addEmptyAccountActivitiesToAllAccountActivities(accountIndex: number): void {
-    setAccountActivitiesInAllAccountActivities(accountIndex, [])
+export const allWalletActivities = writable<Record<string, Activity[]>>({})
+
+export function addEmptyWalletActivitiesToAllWalletActivities(walletId: string): void {
+    setWalletActivitiesInAllWalletActivities(walletId, [])
 }
 
-export function addActivityToAccountActivitiesInAllAccountActivities(accountIndex: number, activity: Activity): void {
-    allAccountActivities.update((state) => {
-        if (!state[accountIndex]) {
-            state[accountIndex] = []
+export function addActivityToWalletActivitiesInAllWalletActivities(walletId: string, activity: Activity): void {
+    allWalletActivities.update((state) => {
+        if (!state[walletId]) {
+            state[walletId] = []
         }
-        state[accountIndex].push(activity)
+        state[walletId].push(activity)
         return state
     })
 }
 
-export function addActivitiesToAccountActivitiesInAllAccountActivities(
-    accountIndex: number,
+export function addActivitiesToWalletActivitiesInAllWalletActivities(
+    walletId: string,
     activities: Activity[]
 ): void {
-    allAccountActivities.update((state) => {
-        if (!state[accountIndex]) {
-            state[accountIndex] = []
+    allWalletActivities.update((state) => {
+        if (!state[walletId]) {
+            state[walletId] = []
         }
-        state[accountIndex].push(...activities)
+        state[walletId].push(...activities)
         return state
     })
 }
 
-export function setAccountActivitiesInAllAccountActivities(accountIndex: number, accountActivities: Activity[]): void {
-    allAccountActivities.update((state) => {
-        state[accountIndex] = accountActivities
+export function setWalletActivitiesInAllWalletActivities(walletId: string, walletActivities: Activity[]): void {
+    allWalletActivities.update((state) => {
+        state[walletId] = walletActivities
         return state
     })
 }
 
-export function getActivityByTransactionId(accountIndex: number, transactionId: string): Activity | undefined {
-    return get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity?.transactionId === transactionId)
+export function getActivityByTransactionId(walletId: string, transactionId: string): Activity | undefined {
+    return get(allWalletActivities)?.[walletId]?.find((_activity) => _activity?.transactionId === transactionId)
 }
 
 export function updateActivityByTransactionId(
-    accountIndex: number,
+    walletId: string,
     transactionId: string,
     partialBaseActivity: Partial<BaseActivity>
 ): void {
-    allAccountActivities.update((state) => {
-        const activities = state[accountIndex]?.filter((_activity) => _activity?.transactionId === transactionId)
+    allWalletActivities.update((state) => {
+        const activities = state[walletId]?.filter((_activity) => _activity?.transactionId === transactionId)
 
         activities.forEach((activity) => Object.assign(activity, partialBaseActivity))
         return state
@@ -55,12 +57,12 @@ export function updateActivityByTransactionId(
 }
 
 export function updateActivityByActivityId(
-    accountIndex: number,
+    walletId: string,
     activityId: string,
     partialBaseActivity: Partial<BaseActivity>
 ): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
+    allWalletActivities.update((state) => {
+        const activity = state[walletId]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             Object.assign(activity, partialBaseActivity)
@@ -70,12 +72,12 @@ export function updateActivityByActivityId(
 }
 
 export function updateAsyncDataByActivityId(
-    accountIndex: number,
+    walletId: string,
     activityId: string,
     partialAsyncData: Partial<AsyncData>
 ): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity.id === activityId)
+    allWalletActivities.update((state) => {
+        const activity = state[walletId]?.find((_activity) => _activity.id === activityId)
 
         if (activity) {
             Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })
@@ -85,12 +87,12 @@ export function updateAsyncDataByActivityId(
 }
 
 export function updateAsyncDataByTransactionId(
-    accountIndex: number,
+    walletId: string,
     transactionId: string,
     partialAsyncData: Partial<AsyncData>
 ): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find((_activity) => _activity?.transactionId === transactionId)
+    allWalletActivities.update((state) => {
+        const activity = state[walletId]?.find((_activity) => _activity?.transactionId === transactionId)
 
         if (activity) {
             Object.assign(activity, { asyncData: { ...activity.asyncData, ...partialAsyncData } })

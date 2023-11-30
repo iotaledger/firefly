@@ -4,6 +4,7 @@ import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFro
 import { ActivityDirection } from '@core/wallet/enums'
 import { CommonOutput } from '@iota/sdk/out/types'
 
+// TODO(2.0) Fix all usages
 export function getDirectionFromOutgoingTransaction(
     wrappedOutputs: IWrappedOutput[],
     accountAddressesWithOutputs: AddressWithOutputs[]

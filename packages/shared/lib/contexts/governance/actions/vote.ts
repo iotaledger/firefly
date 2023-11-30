@@ -1,22 +1,20 @@
 import { PreparedTransaction } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 
-import { get } from 'svelte/store'
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { localize } from '@core/i18n'
 import { handleError } from '@core/error/handlers'
-import { processAndAddToActivities } from '@core/wallet'
+import { getSelectedWallet, processAndAddToActivities, updateSelectedWallet } from '@core/wallet'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
-    const account = get(selectedAccount)
+    const wallet = getSelectedWallet();
     try {
-        updateSelectedAccount({ hasVotingTransactionInProgress: true })
-        const prepareVoteTransaction = await account?.prepareVote(eventId, answers)
+        updateSelectedWallet({ hasVotingTransactionInProgress: true })
+        const prepareVoteTransaction = await wallet?.prepareVote(eventId, answers)
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareVoteTransaction)
         const transaction = await preparedTransaction?.send()
 
-        await processAndAddToActivities(transaction, account)
+        await processAndAddToActivities(transaction, wallet)
 
         showAppNotification({
             type: 'success',
@@ -24,7 +22,7 @@ export async function vote(eventId?: string, answers?: number[]): Promise<void> 
             alert: true,
         })
     } catch (err) {
-        updateSelectedAccount({ hasVotingTransactionInProgress: false })
+        updateSelectedWallet({ hasVotingTransactionInProgress: false })
         handleError(err)
     }
 }

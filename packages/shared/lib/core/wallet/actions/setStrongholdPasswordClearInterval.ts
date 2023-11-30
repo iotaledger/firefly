@@ -1,7 +1,6 @@
-import { get } from 'svelte/store'
-import { profileManager } from '../stores'
+import { getSelectedWallet } from '../stores'
 
 export async function setStrongholdPasswordClearInterval(intervalInSeconds: number): Promise<void> {
-    const manager = get(profileManager)
-    await manager.setStrongholdPasswordClearInterval(intervalInSeconds * 1000)
+    const wallet = getSelectedWallet();
+    await wallet.setStrongholdPasswordClearInterval(intervalInSeconds * 1000)
 }

@@ -3,7 +3,7 @@ import { derived, get, Readable, writable } from 'svelte/store'
 import { isLedgerProfile, ProfileType } from '@core/profile'
 
 import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
-import { IBaseToken } from '@core/wallet/interfaces'
+import { IBaseToken, IPersistedWalletData } from '@core/wallet/interfaces'
 import { IPersistedNetwork } from '@core/network'
 
 
@@ -40,4 +40,18 @@ export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerCla
 
 export function getOnboardingBaseToken(): IBaseToken {
     return get(onboardingProfile)?.network?.baseToken
+}
+
+
+export function addWalletPersistedDataToOnboardingProfile(
+    walletId: string,
+    walletPersistedData: IPersistedWalletData
+): void {
+    onboardingProfile?.update((state) => {
+        if (!state?.accountPersistedData) {
+            state.accountPersistedData = {}
+        }
+        state.accountPersistedData[walletId] = walletPersistedData
+        return state
+    })
 }

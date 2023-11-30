@@ -1,5 +1,5 @@
 import { api } from '@core/api';
-import { activeProfile } from '@core/profile';
+import { activeProfile } from '@core/profile/stores';
 import { SecretManager } from '@iota/sdk';
 import { Readable, derived } from 'svelte/store';
 

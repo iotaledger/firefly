@@ -1,20 +1,20 @@
 import { PreparedTransaction } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 
-import { get } from 'svelte/store'
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
+import { getSelectedWallet, updateSelectedWallet } from '../stores'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
-    const account = get(selectedAccount)
+    const wallet = getSelectedWallet();
     try {
-        updateSelectedAccount({ isTransferring: true })
-        const prepareBurnNativeTokenTransaction = await account?.prepareBurnNativeToken(
+        updateSelectedWallet({ isTransferring: true })
+        const prepareBurnNativeTokenTransaction = await wallet?.prepareBurnNativeToken(
             assetId,
+            // TODO(2.0) Fox this
             Converter.decimalToHex(Number(rawAmount))
         )
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNativeTokenTransaction)
@@ -30,6 +30,6 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     } catch (err) {
         handleError(err)
     } finally {
-        updateSelectedAccount({ isTransferring: false })
+        updateSelectedWallet({ isTransferring: false })
     }
 }

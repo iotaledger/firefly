@@ -1,7 +1,6 @@
-import { IAccount } from '@core/account'
 import { handleLedgerError } from '@core/ledger/utils'
-import { createWallet, getWallets, profileManager } from '@core/profile-manager'
 import { sortAccountsByIndex, zip } from '@core/utils'
+import { createWallet, getWallets } from '@core/profile'
 import { get } from 'svelte/store'
 import { RestoreProfileType } from '../enums'
 import { CannotInitialiseShimmerClaimingAccountError, MissingShimmerClaimingProfileManagerError } from '../errors'

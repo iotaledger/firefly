@@ -7,6 +7,7 @@ import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 
+// TODO(2.0) Fix all usages
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     transactionInputs: OutputResponse[],
@@ -36,6 +37,7 @@ export function preprocessGroupedOutputs(
     }
 }
 
+// TODO(2.0) Fix all usages
 function getDirectionForOutputs(
     outputs: OutputData[],
     wrappedInputs: IWrappedOutput[],

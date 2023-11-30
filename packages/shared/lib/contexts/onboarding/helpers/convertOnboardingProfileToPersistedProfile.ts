@@ -22,8 +22,8 @@ export function convertOnboardingProfileToPersistedProfile(
         }),
         ...(onboardingProfile?.isDeveloperProfile && { isDeveloperProfile: onboardingProfile.isDeveloperProfile }),
         ...(onboardingProfile?.hasVisitedDashboard && { hasVisitedDashboard: onboardingProfile.hasVisitedDashboard }),
-        ...(onboardingProfile?.lastUsedAccountIndex && {
-            lastUsedAccountIndex: onboardingProfile.lastUsedAccountIndex,
+        ...(onboardingProfile?.lastUsedWalletId && {
+            lastUsedAccountIndex: onboardingProfile.lastUsedWalletId,
         }),
         ...(onboardingProfile?.clientOptions && { clientOptions: onboardingProfile.clientOptions }),
     }

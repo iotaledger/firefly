@@ -1,18 +1,17 @@
 import { ParticipationEventMap, ParticipationEventRegistrationOptions } from '@iota/sdk/out/types'
+import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
 
 import { get } from 'svelte/store'
 
-import { IAccountState } from '@core/account/interfaces'
 
 import { addProposalsFromParticipationEventMap } from './addProposalsFromParticipationEventMap'
-import { selectedAccount } from '@core/account'
 
 export async function registerParticipationEvents(
     registrationOptions: ParticipationEventRegistrationOptions,
-    account: IAccountState
+    wallet: IWalletState
 ): Promise<ParticipationEventMap> {
     let newRegistrationOptions = registrationOptions
-    const { removedProposalIds } = get(selectedAccount) ?? {}
+    const { removedProposalIds } = getSelectedWallet() ?? {}
     if (removedProposalIds?.length > 0) {
         newRegistrationOptions = {
             ...registrationOptions,
@@ -20,7 +19,7 @@ export async function registerParticipationEvents(
         }
     }
 
-    const eventMap = await account.registerParticipationEvents(newRegistrationOptions)
-    addProposalsFromParticipationEventMap(eventMap, account)
+    const eventMap = await wallet.registerParticipationEvents(newRegistrationOptions)
+    addProposalsFromParticipationEventMap(eventMap, wallet)
     return eventMap
 }

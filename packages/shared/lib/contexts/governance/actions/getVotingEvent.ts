@@ -1,8 +1,7 @@
-import { get } from 'svelte/store'
 import type { ParticipationEventId, ParticipationEventWithNodes } from '@iota/sdk/out/types'
-import { selectedAccount } from '@core/account/stores'
+import { getSelectedWallet } from 'shared/lib/core/wallet'
 
 export function getVotingEvent(eventId: ParticipationEventId): Promise<ParticipationEventWithNodes> {
-    const account = get(selectedAccount)
-    return account.getParticipationEvent(eventId)
+    const wallet = getSelectedWallet();
+    return wallet.getParticipationEvent(eventId)
 }

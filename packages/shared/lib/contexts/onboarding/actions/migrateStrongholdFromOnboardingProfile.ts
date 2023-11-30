@@ -5,7 +5,7 @@ import { StrongholdVersion } from '@core/stronghold/enums'
 
 import { copyStrongholdFileToProfileDirectory } from '../helpers'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
-import { initialiseProfileManagerFromOnboardingProfile } from './initialiseProfileManagerFromOnboardingProfile'
+import { initialiseOnboardingProfileWithSeretManager } from './initialiseProfileManagerFromOnboardingProfile'
 import { api } from '@core/api'
 import { clearProfileFromMemory } from '@core/profile'
 
@@ -24,5 +24,5 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
     }
 
     await clearProfileFromMemory()
-    await initialiseProfileManagerFromOnboardingProfile()
+    await initialiseOnboardingProfileWithSeretManager()
 }

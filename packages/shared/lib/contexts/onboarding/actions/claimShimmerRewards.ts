@@ -7,6 +7,7 @@ import {
     NewTransactionType,
     NewTokenTransactionDetails,
     SubjectType,
+    getDepositAddress,
 } from '@core/wallet'
 import { logAndNotifyError } from '@core/error/actions'
 
@@ -19,8 +20,9 @@ import {
     updateShimmerClaimingAccount,
 } from '../stores'
 import { handleLedgerError } from '@core/ledger/utils'
-import { getDepositAddress } from '@core/account/utils'
 import { SHIMMER_CLAIM_DEFAULT_TRANSACTION_OPTIONS } from '../constants'
+
+// TODO(2.0) Fix this
 
 export async function claimShimmerRewards(): Promise<void> {
     const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts

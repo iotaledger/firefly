@@ -2,26 +2,26 @@ import { PreparedTransaction } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount, updateSelectedAccount } from '@core/account/stores/selected-account.store'
+import { getSelectedWallet, updateSelectedWallet } from '@core/wallet/stores/selected-wallet.store'
 import { localize } from '@core/i18n'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { handleError } from '@core/error/handlers'
-import { get } from 'svelte/store'
 import { processAndAddToActivities } from '../utils'
 
+// TODO(2.0) Fix all usages
 export async function burnNft(nftId: string): Promise<void> {
-    const account = get(selectedAccount)
+    const wallet = getSelectedWallet();
     try {
-        updateSelectedAccount({ isTransferring: true })
-        const prepareBurnNftTransaction = await account?.prepareBurnNft(nftId)
+        updateSelectedWallet({ isTransferring: true })
+        const prepareBurnNftTransaction = await wallet?.prepareBurnNft(nftId)
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNftTransaction)
         const burnNftTransaction = await preparedTransaction?.send()
 
         // Generate Activity
-        await processAndAddToActivities(burnNftTransaction, account)
+        await processAndAddToActivities(burnNftTransaction, wallet)
 
         // Update NFT
-        updateNftInAllAccountNfts(account.index, nftId, { isSpendable: false })
+        updateNftInAllAccountNfts(wallet.id, nftId, { isSpendable: false })
 
         showAppNotification({
             type: 'success',

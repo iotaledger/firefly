@@ -4,7 +4,7 @@ import { WalletOptions } from '@iota/sdk/out/types'
 
 // TODO(2.0) Fix this and all usages
 // - Do we even need this function at all?
-export async function buildProfileManagerOptionsFromProfileData(
+export async function buildProfileOptionsFromProfileData(
     profileData: Partial<IPersistedProfile>
 ): Promise<WalletOptions> {
     const { id, type, network } = profileData
