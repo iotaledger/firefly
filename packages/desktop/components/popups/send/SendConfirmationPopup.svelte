@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
-    import { prepareOutput, selectedAccount } from '@core/account'
+    import { prepareOutput, selectedWallet } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { ledgerPreparedOutput } from '@core/ledger'
@@ -66,7 +66,7 @@
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
     $: isInternal = recipient.type === 'account'
     $: isLayer2Transaction = !!layer2Parameters
-    $: isTransferring = $selectedAccount.isTransferring
+    $: isTransferring = $selectedWallet.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
@@ -110,7 +110,7 @@
         try {
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
-            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.index, outputParams, getDefaultTransactionOptions())
             await updateStorageDeposit()
 
             // This potentially triggers a second 'prepareOutput',
@@ -132,7 +132,7 @@
     async function updateStorageDeposit(): Promise<void> {
         if (preparedOutput) {
             const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-                await getStorageDepositFromOutput($selectedAccount, preparedOutput as CommonOutput)
+                await getStorageDepositFromOutput($selectedWallet, preparedOutput as CommonOutput)
 
             storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
 

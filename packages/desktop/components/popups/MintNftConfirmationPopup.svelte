@@ -51,7 +51,7 @@
     }
 
     async function prepareNftOutput(): Promise<void> {
-        const outputData = buildNftOutputData(irc27Metadata, $selectedAccount.depositAddress)
+        const outputData = buildNftOutputData(irc27Metadata, $selectedWallet.depositAddress)
         const client = await getClient()
         const preparedOutput = await client.buildNftOutput(outputData)
         storageDeposit = Number(preparedOutput.amount) ?? 0
@@ -121,7 +121,7 @@
                     {/if}
                     <KeyValueBox
                         keyText={localize('general.immutableIssuer')}
-                        valueText={$selectedAccount.depositAddress}
+                        valueText={$selectedWallet.depositAddress}
                     />
                 {:else if activeTab === Tab.Nft}
                     {#each Object.entries(nftTabDetails) as [key, value]}
@@ -138,14 +138,14 @@
         </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={$selectedAccount.isTransferring} onClick={onBackClick}>
+        <Button outline classes="w-full" disabled={$selectedWallet.isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedAccount.isTransferring}
+            disabled={$selectedWallet.isTransferring}
             onClick={onConfirmClick}
-            isBusy={$selectedAccount.isTransferring}
+            isBusy={$selectedWallet.isTransferring}
         >
             {localize('actions.confirm')}
         </Button>

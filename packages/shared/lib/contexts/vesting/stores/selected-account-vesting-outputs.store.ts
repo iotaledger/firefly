@@ -4,7 +4,7 @@ import { AddressWithVestingOutputs } from '../interfaces'
 import { getVestingType, isVestingOutput, mapBasicOutputToVestingOutput, sortVestingOutputs } from '../utils'
 
 // TODO(2.0) Fix this and all usages
-export const selectedAccountVestingOutputs: Readable<AddressWithVestingOutputs[]> = derived(
+export const selectedWalletVestingOutputs: Readable<AddressWithVestingOutputs[]> = derived(
     selectedWallet,
     ($selectedWallet) => {
         const addressesWithVestingOutputs =

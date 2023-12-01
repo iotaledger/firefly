@@ -10,15 +10,15 @@
 
     const asset = $visibleSelectedWalletAssets?.[$activeProfile?.network.id]?.baseCoin
 
-    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
-    $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower
+    $: votingPower = parseInt($selectedWallet?.votingPower, 10)
+    $: maxVotingPower = parseInt($selectedWallet?.balances?.baseCoin?.available) + votingPower
     $: formattedVotingPower = formatTokenAmountBestMatch(votingPower, asset?.metadata)
     $: formattedMaxVotingPower = formatTokenAmountBestMatch(maxVotingPower, asset?.metadata)
     $: hasTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress ||
-        $selectedAccount?.hasVotingTransactionInProgress ||
-        $selectedAccount?.hasConsolidatingOutputsTransactionInProgress ||
-        $selectedAccount?.isTransferring
+        $selectedWallet?.hasVotingPowerTransactionInProgress ||
+        $selectedWallet?.hasVotingTransactionInProgress ||
+        $selectedWallet?.hasConsolidatingOutputsTransactionInProgress ||
+        $selectedWallet?.isTransferring
 
     function onManageVotingPowerClick(): void {
         openPopup({

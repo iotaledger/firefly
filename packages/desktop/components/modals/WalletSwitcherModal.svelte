@@ -1,23 +1,23 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { sumBalanceForAccounts } from '@core/account'
-    import { selectedAccount } from '@core/account/stores'
+    import { sumBalanceForWallets } from '@core/wallet'
+    import { selectedWallet } from '@core/wallet/stores'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { activeProfile, getBaseToken, visibleActiveAccounts } from '@core/profile'
+    import { activeProfile, getBaseToken, visibleActiveWallets } from '@core/profile'
     import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
-    import { AccountSwitcherMenuItem, FontWeight, Icon, Modal, Text, TextType } from '@ui'
+    import { WalletSwitcherMenuItem, FontWeight, Icon, Modal, Text, TextType } from '@ui'
     import { tick } from 'svelte'
 
     export let modal: Modal = undefined
 
-    $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
+    $: totalBalance = sumBalanceForWallets($visibleActiveWallets)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
-    async function scrollToSelectedAccount(): Promise<void> {
+    async function scrollToSelectedWallet(): Promise<void> {
         await tick()
-        const element = document.getElementById(`account-${$selectedAccount.index}`)
+        const element = document.getElementById(`account-${$selectedWallet.id}`)
         element?.scrollIntoView({ behavior: 'auto' })
     }
 
@@ -29,15 +29,15 @@
 
 <Modal
     bind:this={modal}
-    on:open={scrollToSelectedAccount}
+    on:open={scrollToSelectedWallet}
     classes="transform -translate-x-1/2"
     size="large"
     position={{ top: '30px', left: '50%' }}
 >
     <account-list-container class="block p-4">
         <account-list class="flex flex-col space-y-1 max-h-96 scrollable-y">
-            {#each $visibleActiveAccounts as account}
-                <AccountSwitcherMenuItem id="account-{account.index}" {account} onClick={modal?.close} />
+            {#each $visibleActiveWallets as wallet}
+                <WalletSwitcherMenuItem id="account-{wallet.id}" {wallet} onClick={modal?.close} />
             {/each}
         </account-list>
     </account-list-container>

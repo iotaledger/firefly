@@ -23,10 +23,10 @@
 
     let metadata: IIrc30Metadata | undefined
     $: metadata = getMetadata($mintTokenDetails)
-    $: isTransferring = $selectedAccount?.isTransferring
+    $: isTransferring = $selectedWallet?.isTransferring
 
     async function prepareFoundryOutput(): Promise<void> {
-        if ($mintTokenDetails && $selectedAccount && metadata) {
+        if ($mintTokenDetails && $selectedWallet && metadata) {
             const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
             const outputData = await buildFoundryOutputData(
                 Number(totalSupply),

@@ -11,7 +11,7 @@
 
     import { ProposalStatus } from '@contexts/governance/enums'
     import { IProposal } from '@contexts/governance/interfaces'
-    import { participationOverviewForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
+    import { participationOverviewForSelectedWallet, selectedProposalId } from '@contexts/governance/stores'
     import { isVotingForProposal } from '@contexts/governance/utils'
 
     import { Icon } from '@auxiliary/icon/enums'
@@ -20,7 +20,7 @@
 
     let hasVoted = false
 
-    $: $participationOverviewForSelectedAccount, setHasVoted()
+    $: $participationOverviewForSelectedWallet, setHasVoted()
     $: dark = $appSettings.darkMode
 
     function setHasVoted(): void {

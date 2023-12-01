@@ -2,7 +2,7 @@
     import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
     import { HTMLButtonType, TextHintVariant } from 'shared/components/enums'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile/actions'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -12,11 +12,11 @@
 
     export let selectedAnswerValues: number[]
 
-    $: formattedVotingPower = formatTokenAmountBestMatch(Number($selectedAccount?.votingPower), getBaseToken())
-    $: hasVotingPower = Number($selectedAccount?.votingPower) > 0
+    $: formattedVotingPower = formatTokenAmountBestMatch(Number($selectedWallet?.votingPower), getBaseToken())
+    $: hasVotingPower = Number($selectedWallet?.votingPower) > 0
 
     $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+        $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress
 
     $: numberOfAbstainedQuestions =
         selectedAnswerValues?.filter((answerValue) => answerValue === ABSTAIN_VOTE_VALUE).length ?? 0

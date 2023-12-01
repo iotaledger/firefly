@@ -1,7 +1,7 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { registerProposalsForAccounts, registeredProposalsForSelectedAccount } from '@contexts/governance'
+    import { registerProposalsForAccounts, registeredProposalsForSelectedWallet } from '@contexts/governance'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
@@ -39,8 +39,8 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            updateActiveAccountPersistedData($selectedAccount.index, {
-                removedProposalIds: $selectedAccount.removedProposalIds?.filter((id) => id !== inputtedEventId),
+            updateActiveAccountPersistedData($selectedWallet.index, {
+                removedProposalIds: $selectedWallet.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false
         } catch (err) {
@@ -82,7 +82,7 @@
             node: { url: nodeUrl, auth },
             eventsToRegister: isRegisteringAllProposals ? [] : [eventId],
         }
-        const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedAccount]
+        const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedWallet]
         await registerProposalsForAccounts(options, accounts)
         showAppNotification({
             type: 'success',
@@ -114,7 +114,7 @@
             eventIdError = localize('error.eventId.insufficientLength')
             return Promise.reject(eventIdError)
         }
-        if (checkIfAlreadyRegistered && $registeredProposalsForSelectedAccount[eventId]) {
+        if (checkIfAlreadyRegistered && $registeredProposalsForSelectedWallet[eventId]) {
             eventIdError = localize('error.eventId.alreadyRegistered')
             return Promise.reject(eventIdError)
         }

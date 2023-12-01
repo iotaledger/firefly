@@ -1,16 +1,16 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Text, Button, FontWeight, TextType, AccountSelector } from 'shared/components'
+    import { Text, Button, FontWeight, TextType, WalletSelector } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
-    import { IAccountState, setSelectedAccount } from '@core/account'
+    import { IWalletState, setSelectedWallet } from '@core/wallet'
 
     export let onCancel: () => void
     export let onConfirm: () => void
 
-    let account: IAccountState
+    let wallet: IWalletState
 
     function onConfirmClick(): void {
-        setSelectedAccount(account.index)
+        setSelectedWallet(wallet.id)
         onConfirm && onConfirm()
     }
 
@@ -20,22 +20,22 @@
     }
 </script>
 
-<account-switcher-popup class="space-y-6 flex flex-col shrink-0">
+<wallet-switcher-popup class="space-y-6 flex flex-col shrink-0">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.deeplinkAccountSwitch.title')}
     </Text>
     <div class="flex flex-col space-y-4">
         <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.deeplinkAccountSwitch.body')}</Text>
-        <AccountSelector bind:account />
+        <WalletSelector bind:wallet={wallet} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button classes="w-full" onClick={onConfirmClick}>{localize('actions.confirm')}</Button>
     </popup-buttons>
-</account-switcher-popup>
+</wallet-switcher-popup>
 
 <style lang="scss">
-    account-input {
+    wallet-input {
         button {
             @apply w-full;
             @apply flex flex-row flex-1;

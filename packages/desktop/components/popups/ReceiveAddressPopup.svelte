@@ -5,7 +5,7 @@
 
     export let title: string = localize('general.receiveFunds')
 
-    $: receiveAddress = $selectedAccount.depositAddress
+    $: receiveAddress = $selectedWallet.depositAddress
 </script>
 
 <receive-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">

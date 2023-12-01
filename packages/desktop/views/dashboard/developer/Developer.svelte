@@ -11,15 +11,15 @@
 
     import features from '@features/features'
 
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
 </script>
 
-{#if $selectedAccount}
+{#if $selectedWallet}
     <div
         class="w-full h-full flex flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900 justify-center items-start"
     >
-        {#key $selectedAccount?.index}
+        {#key $selectedWallet?.index}
             <div class="flex columns-3 gap-4 min-h-0 min-w-0 max-w-7xl">
                 <Pane>
                     <div class="flex flex-col space-y-6">

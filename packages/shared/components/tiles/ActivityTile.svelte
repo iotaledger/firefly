@@ -7,7 +7,7 @@
         IAsset,
         InclusionState,
         NotVerifiedStatus,
-        getTokenFromSelectedAccount,
+        getTokenFromSelectedWallet,
         selectedWalletAssets,
     } from '@core/wallet'
     import {
@@ -30,7 +30,7 @@
     $: $selectedWalletAssets,
         (asset =
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
-                ? getTokenFromSelectedAccount(activity.assetId)
+                ? getTokenFromSelectedWallet(activity.assetId)
                 : undefined)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed

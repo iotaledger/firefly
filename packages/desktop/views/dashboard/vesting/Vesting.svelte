@@ -7,12 +7,12 @@
         VestingOutputStatus,
         VestingType,
         calculateAsmbEquivalence,
-        selectedAccountVestingOutputs,
-        selectedAccountVestingOverview,
-        selectedAccountVestingPayouts,
-        selectedAccountVestingUnclaimedFunds,
+        selectedWalletVestingOutputs,
+        selectedWalletVestingOverview,
+        selectedWalletVestingPayouts,
+        selectedWalletVestingUnclaimedFunds,
     } from '@contexts/vesting'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile } from '@core/profile'
@@ -45,33 +45,33 @@
 
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network?.id])
     $: hasTransactionInProgress =
-        $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
-    $: $selectedAccount, areOutputsReadyForConsolidation()
+        $selectedWallet?.isTransferring || $selectedWallet.hasConsolidatingOutputsTransactionInProgress
+    $: $selectedWallet, areOutputsReadyForConsolidation()
     $: vestingOverview = [
         {
             title: localize('views.vesting.overview.unlocked'),
-            iotaAmount: $selectedAccountVestingOverview?.accumulatedPayout || 0,
+            iotaAmount: $selectedWalletVestingOverview?.accumulatedPayout || 0,
         },
         {
             title: localize('views.vesting.overview.locked'),
-            iotaAmount: $selectedAccountVestingOverview?.remainingPayout || 0,
+            iotaAmount: $selectedWalletVestingOverview?.remainingPayout || 0,
         },
         {
             title: localize('views.vesting.overview.total'),
-            iotaAmount: $selectedAccountVestingOverview?.totalRewards || 0,
+            iotaAmount: $selectedWalletVestingOverview?.totalRewards || 0,
             asmbAmount:
-                $selectedAccountVestingOverview?.totalRewards &&
-                $selectedAccountVestingOutputs.every((payout) => payout.type === VestingType.Staker)
-                    ? calculateAsmbEquivalence($selectedAccountVestingOverview?.totalRewards, baseCoin.metadata)
+                $selectedWalletVestingOverview?.totalRewards &&
+                $selectedWalletVestingOutputs.every((payout) => payout.type === VestingType.Staker)
+                    ? calculateAsmbEquivalence($selectedWalletVestingOverview?.totalRewards, baseCoin.metadata)
                     : undefined,
         },
     ]
-    $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
+    $: $selectedWalletVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
     $: canCollect =
-        $selectedAccountVestingUnclaimedFunds > 0 &&
+        $selectedWalletVestingUnclaimedFunds > 0 &&
         !hasTransactionInProgress &&
         minRequiredStorageDeposit !== null &&
-        $selectedAccount?.balances?.baseCoin?.available > minRequiredStorageDeposit &&
+        $selectedWallet?.balances?.baseCoin?.available > minRequiredStorageDeposit &&
         hasOutputsToConsolidate
 
     onMount(() => {
@@ -79,7 +79,7 @@
     })
 
     function areOutputsReadyForConsolidation(): void {
-        $selectedAccount
+        $selectedWallet
             .prepareConsolidateOutputs({ force: false, outputThreshold: 2 })
             .then(() => (hasOutputsToConsolidate = true))
             .catch(() => (hasOutputsToConsolidate = false))
@@ -97,7 +97,7 @@
 
     function getTimeUntilNextPayout(): string {
         // Note: we can look at the time of the first output, since all outputs along the addresses are unlocked at the same time
-        const upcomingPayout: IVestingPayout = $selectedAccountVestingPayouts?.find(
+        const upcomingPayout: IVestingPayout = $selectedWalletVestingPayouts?.find(
             (payout) => payout.status === VestingOutputStatus.Locked
         )
         if (!upcomingPayout) {
@@ -113,12 +113,12 @@
     }
 </script>
 
-{#if $selectedAccount}
+{#if $selectedWallet}
     <vesting-container
         class="w-full h-full flex flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900 space-x-4 justify-center"
     >
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
-            {#key $selectedAccount?.index}
+            {#key $selectedWallet?.index}
                 <left-pane class="flex flex-col w-1/3">
                     <Pane height={Height.Full}>
                         <left-pane-content class="flex flex-col justify-between h-full">
@@ -199,7 +199,7 @@
                     <Pane height={Height.Full}>
                         <Text type={TextType.h5} classes="text-left">{localize('views.vesting.payouts.title')}</Text>
                         <div class="h-full flex justify-center items-center">
-                            <VestingSchedule payouts={$selectedAccountVestingPayouts} />
+                            <VestingSchedule payouts={$selectedWalletVestingPayouts} />
                         </div>
                     </Pane>
                 </right-pane>

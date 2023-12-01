@@ -10,7 +10,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { handleError } from '@core/error/handlers'
     import { NetworkId } from '@core/network/enums'
-    import { selectedWallet } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { activeProfileSecretManager } from '@core/secret-manager'
     import { deleteWallet } from '@core/profile'
 

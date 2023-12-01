@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
@@ -14,7 +14,7 @@
     let modal: Modal = undefined
 
     const aliasOptions: IOption[] =
-        $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
+        $selectedWallet.balances?.aliases.map((hexAliasId, index) => {
             const aliasId = api.accountIdToBech32(hexAliasId, getNetworkHrp())
             return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []

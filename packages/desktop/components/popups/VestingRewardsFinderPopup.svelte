@@ -2,9 +2,9 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { selectedAccountVestingOverview } from '@contexts/vesting'
+    import { selectedWalletVestingOverview } from '@contexts/vesting'
     import { SearchAlgorithmType, findBalances } from '@core/account'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { loadNftsForActiveProfile } from '@core/nfts'
@@ -33,7 +33,7 @@
 
     const { isStrongholdLocked, type } = $activeProfile
     const config: RecoverAccountsPayload = {
-        accountStartIndex: $selectedAccount.index,
+        accountStartIndex: $selectedWallet.index,
         accountGapLimit: 0,
         addressGapLimit: BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION[type].addressGapLimit,
     }
@@ -112,7 +112,7 @@
     >
 
     <div class="w-full flex-col space-y-2 balance-overview-wrapper">
-        <VirtualList items={$selectedAccountVestingOverview.rewardsPerAddresses} let:item>
+        <VirtualList items={$selectedWalletVestingOverview.rewardsPerAddresses} let:item>
             <div class="mb-1">
                 <KeyValueBox
                     isCopyable
@@ -128,7 +128,7 @@
         <KeyValueBox
             keyText={localize('popups.vestingRewards.totalAddressBalance')}
             valueText={formatTokenAmountBestMatch(
-                Math.round($selectedAccountVestingOverview.totalRewards),
+                Math.round($selectedWalletVestingOverview.totalRewards),
                 getBaseToken()
             )}
         />

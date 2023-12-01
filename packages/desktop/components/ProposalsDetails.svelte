@@ -9,8 +9,8 @@
         getNumberOfTotalProposals,
         getNumberOfVotedProposals,
         getNumberOfVotingProposals,
-        participationOverviewForSelectedAccount,
-        registeredProposalsForSelectedAccount,
+        participationOverviewForSelectedWallet,
+        registeredProposalsForSelectedWallet,
         updateParticipationOverview,
         IProposalsDetails,
     } from '@contexts/governance'
@@ -25,9 +25,9 @@
         votedProposals: null,
     }
 
-    $: isOverviewLoaded = !!$participationOverviewForSelectedAccount
-    $: $registeredProposalsForSelectedAccount, $participationOverviewForSelectedAccount, updateProposalsDetails()
-    $: $selectedAccount, void setParticipationOverview()
+    $: isOverviewLoaded = !!$participationOverviewForSelectedWallet
+    $: $registeredProposalsForSelectedWallet, $participationOverviewForSelectedWallet, updateProposalsDetails()
+    $: $selectedWallet, void setParticipationOverview()
 
     function updateProposalsDetails(): void {
         if ($activeProfileId) {
@@ -42,7 +42,7 @@
 
     async function setParticipationOverview(): Promise<void> {
         if (!isOverviewLoaded || getNumberOfVotedProposals() === 0) {
-            await updateParticipationOverview($selectedAccount.index)
+            await updateParticipationOverview($selectedWallet.index)
         }
     }
 

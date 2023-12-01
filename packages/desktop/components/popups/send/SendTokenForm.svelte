@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { AssetAmountInput, Button, Error, NetworkInput, OptionalInput, RecipientInput } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { prepareOutput, selectedAccount } from '@core/account'
+    import { prepareOutput, selectedWallet } from '@core/account'
     import { Output } from '@iota/sdk/out/types'
     import {
         getDefaultTransactionOptions,
@@ -60,7 +60,7 @@
             tag,
             metadata,
             layer2Parameters: isLayer2Transfer
-                ? { networkAddress: iscpChainAddress, senderAddress: $selectedAccount.depositAddress }
+                ? { networkAddress: iscpChainAddress, senderAddress: $selectedWallet.depositAddress }
                 : null,
             disableAssetSelection,
         })
@@ -76,7 +76,7 @@
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
-            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.index, outputParams, getDefaultTransactionOptions())
         } catch (err) {
             handleError(err)
         } finally {

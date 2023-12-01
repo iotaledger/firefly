@@ -5,7 +5,7 @@
 
     import { localize } from '@core/i18n'
 
-    import { registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
+    import { registeredProposalsForSelectedWallet } from '@contexts/governance/stores'
     import { IllustrationEnum } from '@auxiliary/illustration'
 </script>
 
@@ -20,7 +20,7 @@
     </div>
     <span class="block w-0.5 h-full bg-gray-200 dark:bg-gray-800" />
     <div class="w-2/3">
-        {#if Object.keys($registeredProposalsForSelectedAccount).length}
+        {#if Object.keys($registeredProposalsForSelectedWallet).length}
             <Proposals />
         {:else}
             <div class="w-full h-full flex flex-col items-center justify-center">

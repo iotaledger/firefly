@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile/actions'
@@ -8,7 +8,7 @@
     import { TextHintVariant } from 'shared/components/enums'
 
     $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+        $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress
 
     async function onSubmit(): Promise<void> {
         await checkActiveProfileAuth(async () => {

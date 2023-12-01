@@ -6,7 +6,7 @@
     import { Button, Height, KeyValueBox, MarkdownBlock, Pane, ProposalStatusPill, Text, TextHint, TextType } from '@ui'
     import { ProposalDetailsButton, ProposalInformationPane, ProposalQuestion } from '@components'
 
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { networkStatus } from '@core/network/stores'
@@ -23,7 +23,7 @@
     import { ProposalStatus } from '@contexts/governance/enums'
     import {
         clearSelectedParticipationEventStatus,
-        participationOverviewForSelectedAccount,
+        participationOverviewForSelectedWallet,
         selectedParticipationEventStatus,
         selectedProposal,
         updateParticipationOverviewForEventId,
@@ -54,7 +54,7 @@
     let isUpdatingVotedAnswerValues: boolean = false
     let lastAction: 'vote' | 'stopVote'
 
-    $: selectedProposalOverview = $participationOverviewForSelectedAccount?.participations?.[$selectedProposal?.id]
+    $: selectedProposalOverview = $participationOverviewForSelectedWallet?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
     $: currentMilestone = $networkStatus.currentMilestone
 
@@ -77,7 +77,7 @@
     $: $selectedParticipationEventStatus, (textHintString = getTextHintString())
 
     $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+        $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress
 
     $: areSelectedAndVotedAnswersEqual = JSON.stringify(selectedAnswerValues) === JSON.stringify(votedAnswerValues)
 
@@ -242,7 +242,7 @@
                     <li>
                         <KeyValueBox
                             keyText={localize('views.governance.details.yourVote.power')}
-                            valueText={formatTokenAmountBestMatch(parseInt($selectedAccount?.votingPower), metadata)}
+                            valueText={formatTokenAmountBestMatch(parseInt($selectedWallet?.votingPower), metadata)}
                         />
                     </li>
                 </ul>

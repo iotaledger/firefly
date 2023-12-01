@@ -1,13 +1,13 @@
 import { get } from 'svelte/store'
 import { PreparedTransaction } from '@iota/sdk/out/types'
-import { IAccountState, selectedAccount } from '@core/account'
+import { IAccountState, selectedWallet } from '@core/account'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 import { plainToInstance } from 'class-transformer'
 import { updateActiveAccount } from '@core/profile'
 
 export async function consolidateOutputs(accountToConsolidate?: IAccountState): Promise<void> {
-    const account = accountToConsolidate || get(selectedAccount)
+    const account = accountToConsolidate || get(selectedWallet)
     if (!account) return Promise.reject('No account selected')
 
     try {

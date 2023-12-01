@@ -8,7 +8,7 @@
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
-    import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
+    import AccountSwitcherPopup from './WalletSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import AddProposalPopup from './AddProposalPopup.svelte'
@@ -19,7 +19,7 @@
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
-    import createWalletPopup from './createWalletPopup.svelte'
+    import createWalletPopup from './CreateWalletPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccountPopup from './DeleteAccountPopup.svelte'
     import DeleteProfilePopup from './DeleteProfilePopup.svelte'

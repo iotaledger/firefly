@@ -8,7 +8,7 @@ export const allParticipationOverviews = writable<{ [walletId: string]: Particip
 let isUpdatingParticipationOverview: boolean = false
 
 // TODO(2.0) Rename this store
-export const participationOverviewForSelectedAccount: Readable<ParticipationOverview> = derived(
+export const participationOverviewForSelectedWallet: Readable<ParticipationOverview> = derived(
     [selectedWalletId, allParticipationOverviews],
     ([$selectedWalletId, $allParticipationOverviews]) => {
         $allParticipationOverviews[$selectedWalletId]

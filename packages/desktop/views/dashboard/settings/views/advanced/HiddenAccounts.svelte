@@ -2,13 +2,13 @@
     import { Checkbox, Text } from 'shared/components'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfile } from '@core/profile'
-    import { setNextSelectedAccount } from '@core/account'
+    import { setNextSelectedWallet } from '@core/account'
 
     let showHiddenAccounts = $activeProfile?.showHiddenAccounts
     $: updateActiveProfile({ showHiddenAccounts: showHiddenAccounts })
 
     $: if ($activeProfile?.hasLoadedAccounts && !showHiddenAccounts) {
-        setNextSelectedAccount()
+        setNextSelectedWallet()
     }
 </script>
 

@@ -8,7 +8,7 @@
         selectedProposalId,
     } from '@contexts/governance/stores'
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
@@ -22,9 +22,9 @@
 
     async function onConfirmClick(): Promise<void> {
         try {
-            await $selectedAccount.deregisterParticipationEvent($selectedProposalId)
-            updateActiveAccountPersistedData($selectedAccount.index, {
-                removedProposalIds: [...($selectedAccount.removedProposalIds ?? []), $selectedProposalId],
+            await $selectedWallet.deregisterParticipationEvent($selectedProposalId)
+            updateActiveAccountPersistedData($selectedWallet.index, {
+                removedProposalIds: [...($selectedWallet.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()
             clearEvent()
@@ -40,7 +40,7 @@
     }
 
     function clearEvent(): void {
-        removePersistedProposal($selectedProposalId, $selectedAccount.index)
+        removePersistedProposal($selectedProposalId, $selectedWallet.index)
         $selectedProposalId = null
         clearSelectedParticipationEventStatus()
     }

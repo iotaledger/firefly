@@ -32,6 +32,6 @@ export async function burnNft(nftId: string): Promise<void> {
         handleError(err)
         throw err
     } finally {
-        updateSelectedAccount({ isTransferring: false })
+        updateSelectedWallet({ isTransferring: false })
     }
 }

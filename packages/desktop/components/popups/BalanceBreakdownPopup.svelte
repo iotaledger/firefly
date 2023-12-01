@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { isVestingOutputId, selectedAccountVestingOverview } from '@contexts/vesting'
+    import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
     import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -22,7 +22,7 @@
         Timelock = 'timelock',
     }
 
-    $: accountBalance = $selectedAccount?.balances
+    $: accountBalance = $selectedWallet?.balances
     $: accountBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
@@ -53,7 +53,7 @@
         const subBreakdown = {}
         for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
             if (!unlocked) {
-                const output = (await $selectedAccount.getOutput(outputId)).output
+                const output = (await $selectedWallet.getOutput(outputId)).output
 
                 let type: string
                 let amount: number
@@ -66,7 +66,7 @@
                         containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedAccount, output as CommonOutput))
+                        amount = (await getStorageDepositFromOutput($selectedWallet, output as CommonOutput))
                             ?.storageDeposit
                     } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
@@ -89,7 +89,7 @@
     }
 
     function getLockedBreakdown(): BalanceBreakdown {
-        const governanceAmount = parseInt($selectedAccount?.votingPower, 10)
+        const governanceAmount = parseInt($selectedWallet?.votingPower, 10)
         const totalLockedAmount = governanceAmount
 
         const subBreakdown = {
@@ -119,7 +119,7 @@
     }
 
     function getVestingBreakdown(): BalanceBreakdown {
-        return { amount: $selectedAccountVestingOverview?.remainingPayout }
+        return { amount: $selectedWalletVestingOverview?.remainingPayout }
     }
 
     function containsUnlockCondition(unlockConditions: UnlockCondition[], unlockConditionId: number): boolean {

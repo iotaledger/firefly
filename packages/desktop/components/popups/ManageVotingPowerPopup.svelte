@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint, AssetAmountInput } from 'shared/components'
     import { HTMLButtonType, TextType, TextHintVariant } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
@@ -17,16 +17,16 @@
 
     let assetAmountInput: AssetAmountInput
     let amount: string
-    let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
+    let rawAmount = newVotingPower ?? $selectedWallet?.votingPower
     let confirmDisabled = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network.id].baseCoin
-    $: votingPower = parseInt($selectedAccount?.votingPower, 10)
+    $: votingPower = parseInt($selectedWallet?.votingPower, 10)
     $: hasTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress ||
-        $selectedAccount?.hasVotingTransactionInProgress ||
-        $selectedAccount?.hasConsolidatingOutputsTransactionInProgress ||
-        $selectedAccount?.isTransferring
+        $selectedWallet?.hasVotingPowerTransactionInProgress ||
+        $selectedWallet?.hasVotingTransactionInProgress ||
+        $selectedWallet?.hasConsolidatingOutputsTransactionInProgress ||
+        $selectedWallet?.isTransferring
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
@@ -35,7 +35,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled = convertedSliderAmount === $selectedAccount?.votingPower || hasTransactionInProgress
+        confirmDisabled = convertedSliderAmount === $selectedWallet?.votingPower || hasTransactionInProgress
     }
 
     function onCancelClick(): void {
@@ -46,7 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            if (amount === '0' && isWalletVoting($selectedAccount.index)) {
+            if (amount === '0' && isWalletVoting($selectedWallet.index)) {
                 openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }

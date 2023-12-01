@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Modal, MenuItem, MeatballMenuButton, MenuItemVariant } from '@ui'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { IProposal } from '@contexts/governance'
-    import { participationOverviewForSelectedAccount } from '@contexts/governance/stores'
+    import { participationOverviewForSelectedWallet } from '@contexts/governance/stores'
     import { isVotingForSelectedProposal } from '@contexts/governance/utils'
     import { Icon } from '@auxiliary/icon'
     import { openPopup, PopupId } from '@auxiliary/popup'
@@ -17,8 +17,8 @@
     let isVotingForProposal: boolean
     let isBusy = true // starts in a busy state because data needs to be fetched before displaying selectable options
 
-    $: isTransferring = $selectedAccount?.isTransferring
-    $: isTransferring, $participationOverviewForSelectedAccount, void updateIsVoting() // vote/stop vote changes the isTransferring value. Relying on this requires less updates than relying on proposalsState
+    $: isTransferring = $selectedWallet?.isTransferring
+    $: isTransferring, $participationOverviewForSelectedWallet, void updateIsVoting() // vote/stop vote changes the isTransferring value. Relying on this requires less updates than relying on proposalsState
     $: isBusy = isVotingForProposal === undefined
 
     $: buttons = [

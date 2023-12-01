@@ -1,12 +1,13 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
-    import { getRandomWalletColor, tryCreateAdditionalAccount, validateAccountName } from '@core/account'
+    import { getRandomWalletColor } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { getTrimmedLength } from '@core/utils'
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
+    import { validateWalletName, tryCreateAdditionalWallet } from '@core/wallet'
 
     export let accountAlias = ''
     export let error: string
@@ -24,7 +25,7 @@
             }
             isBusy = true
             error = null
-            await validateAccountName(trimmedAccountAlias)
+            await validateWalletName(trimmedAccountAlias)
             updatePopupProps({ accountAlias, color, error, isBusy })
             await checkActiveProfileAuth(_create, { stronghold: true, ledger: true })
             isBusy = false
@@ -43,7 +44,7 @@
     async function _create(): Promise<void> {
         if (trimmedAccountAlias && color) {
             try {
-                await tryCreateAdditionalAccount(trimmedAccountAlias, color.toString())
+                await tryCreateAdditionalWallet(trimmedAccountAlias, color.toString())
                 closePopup()
             } catch (err) {
                 isBusy = false

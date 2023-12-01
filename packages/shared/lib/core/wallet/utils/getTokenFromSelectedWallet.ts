@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { IAsset } from '../interfaces'
 import { selectedWalletAssets } from '../stores'
 
-export function getTokenFromSelectedAccount(tokenId: string): IAsset | undefined {
+export function getTokenFromSelectedWallet(tokenId: string): IAsset | undefined {
     const networkId = getActiveNetworkId()
     if (!networkId) {
         return undefined
