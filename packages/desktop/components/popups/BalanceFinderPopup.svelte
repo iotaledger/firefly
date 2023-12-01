@@ -3,7 +3,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType, selectedAccountIndex } from '@core/account'
+    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType, selectedWalletId } from '@core/account'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { NetworkId } from '@core/network'
@@ -56,7 +56,7 @@
         (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
     )
     $: visibleWalletList = searchInCurrentWallet
-        ? $visibleActiveAccounts?.filter((account) => account.index === $selectedAccountIndex)
+        ? $visibleActiveAccounts?.filter((account) => account.index === $selectedWalletId)
         : $visibleActiveAccounts
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { selectedAccountIndex } from '@core/account'
+    import { selectedWalletId } from '@core/wallet
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
     import { ActivityDirection } from '@core/wallet/enums'
@@ -22,7 +22,7 @@
     }
     $: subjectLocale = getSubjectLocaleFromActivity(activity)
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+    $: nft = getNftByIdFromAllAccountNfts($selectedWalletId, activity.nftId)
 </script>
 
 <ActivityTileContent {action} {subject} {formattedAsset}>

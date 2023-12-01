@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, KeyValueBox, Text, Modal, MeatballMenuButton, ButtonSize, FontWeight, MenuItem } from '@ui'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { activeProfileId } from '@core/profile'
     import {

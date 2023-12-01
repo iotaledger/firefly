@@ -3,7 +3,7 @@
     import { IVestingPayout, VestingOutputStatus } from '@contexts/vesting'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { Pill, Text, TextType, Tooltip } from '@ui'
 
     export let payouts: IVestingPayout[] = []
@@ -13,7 +13,7 @@
 
     $: columnsAmount = calculateOptimalColumns(payouts.length)
     $: remainingSpaces = calculateRemainingGridSpaces(payouts.length, columnsAmount)
-    $: baseCoin = ($selectedAccountAssets?.[$activeProfile?.network?.id] ?? {}).baseCoin
+    $: baseCoin = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).baseCoin
 
     const MAX_GRID_COLUMNS = 14
 

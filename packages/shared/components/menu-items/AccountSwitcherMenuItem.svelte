@@ -3,14 +3,14 @@
     import { formatCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile, getBaseToken } from '@core/profile'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { FontWeight, Text, AccountLabel } from '@ui'
 
     export let account: IAccountState
     export let onClick: () => unknown
     export let id: string = ''
 
-    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network?.id])
 
     function onAccountClick(accountIndex: number): void {
         setSelectedAccount(accountIndex)

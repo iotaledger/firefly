@@ -2,4 +2,4 @@ import { writable } from 'svelte/store'
 
 import { INft } from '../interfaces'
 
-export const allAccountNfts = writable<INft[][]>([])
+export const allWalletNfts = writable<Record<string, INft[]>>({})

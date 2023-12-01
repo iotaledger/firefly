@@ -8,31 +8,32 @@ import {
     TransactionProgress,
 } from '@iota/sdk/out/types'
 
-import { selectedAccountIndex } from '@core/account'
+
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
+import { validateWalletApiEvent } from '../../utils'
+import { selectedWalletId } from '../../stores'
+import { MissingTransactionProgressEventPayloadError } from '../../errors'
 
-import { MissingTransactionProgressEventPayloadError } from '../../../profile-manager/errors'
-import { validateWalletApiEvent } from '../../../profile-manager/utils'
 
 export function handleTransactionProgressEvent(error: Error, rawEvent: Event): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
+    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
     const type = payload.type
     if (type === WalletEventType.TransactionProgress) {
         const progress = (payload as TransactionProgressWalletEvent).progress
-        handleTransactionProgressEventInternal(accountIndex, progress)
+        handleTransactionProgressEventInternal(walletId, progress)
     }
 }
 
 export function handleTransactionProgressEventInternal(
-    accountIndex: number,
+    walletId: string,
     payload: TransactionProgress
 ): void {
     if (get(isActiveLedgerProfile)) {
-        if (get(selectedAccountIndex) === accountIndex) {
+        if (get(selectedWalletId) === walletId) {
             openPopupIfVerificationNeeded(payload)
         }
     } else if (get(isOnboardingLedgerProfile)) {

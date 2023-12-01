@@ -1,5 +1,5 @@
 import { Readable, derived } from 'svelte/store'
-import { profileNetwork } from '@core/profile'
+import { profileNetwork } from '@core/profile/stores/profile-network.store'
 import { onboardingProfileNetwork } from '@contexts/onboarding'
 import { LedgerAppName } from '@core/ledger'
 import { NetworkId } from '@core/network'

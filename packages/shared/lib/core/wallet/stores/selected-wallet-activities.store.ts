@@ -1,20 +1,20 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { isValidIrc30Token } from '@core/token'
 
-import { selectedAccount } from './selected-wallet.store'
+import { selectedWalletId } from './selected-wallet-id.store'
 import { Activity } from '../types/activity.type'
 import { ActivityType, SubjectType } from '../enums'
 import { ActivityFilter } from '../interfaces/activity-filter.interface'
 import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { allAccountActivities } from './all-account-activities.store'
+import { allWalletActivities } from './all-wallet-activities.store'
 import { DEFAULT_ACTIVITY_FILTER } from '../constants'
 
-export const selectedAccountActivities: Readable<Activity[]> = derived(
-    [selectedAccount, allAccountActivities],
-    ([$selectedAccount, $allAccountActivities]) => {
-        if ($selectedAccount) {
-            return $allAccountActivities[$selectedAccount?.index] ?? []
+export const selectedWalletActivities: Readable<Activity[]> = derived(
+    [selectedWalletId, allWalletActivities],
+    ([$selectedWallet, $allWalletActivities]) => {
+        if ($selectedWallet) {
+            return $allWalletActivities[$selectedWallet] ?? []
         } else {
             return []
         }
@@ -26,9 +26,9 @@ export const activityFilter: Writable<ActivityFilter> = writable(DEFAULT_ACTIVIT
 export const activitySearchTerm: Writable<string> = writable('')
 
 export const queriedActivities: Readable<Activity[]> = derived(
-    [selectedAccountActivities, activitySearchTerm, activityFilter],
-    ([$selectedAccountActivities, $activitySearchTerm]) => {
-        let activityList = $selectedAccountActivities.filter((_activity) => {
+    [selectedWalletActivities, activitySearchTerm, activityFilter],
+    ([$selectedWalletActivities, $activitySearchTerm]) => {
+        let activityList = $selectedWalletActivities.filter((_activity) => {
             const containsAssets = _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
             if (!_activity.isHidden && !containsAssets) {
                 return true

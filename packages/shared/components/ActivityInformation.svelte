@@ -14,7 +14,7 @@
     import { Tab } from 'shared/components/enums'
     import { ActivityType, Activity } from '@core/wallet'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import { selectedAccountIndex } from '@core/account'
+    import { selectedWalletId } from '@core/wallet'
 
     export let activity: Activity
     export let activeTab: Tab = Tab.Transaction
@@ -23,7 +23,7 @@
     $: {
         const storedNft =
             activity?.type === ActivityType.Nft
-                ? getNftByIdFromAllAccountNfts($selectedAccountIndex, activity?.nftId)
+                ? getNftByIdFromAllAccountNfts($selectedWalletId, activity?.nftId)
                 : undefined
         hasMetadata = !!storedNft?.metadata
     }

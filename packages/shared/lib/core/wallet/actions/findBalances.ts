@@ -7,8 +7,8 @@ import {
     UnableToFindProfileTypeError,
     activeProfile,
     isActiveLedgerProfile,
+    RecoverAccountsPayload,
 } from '@core/profile'
-import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { get } from 'svelte/store'
 
 const INITIAL_SEARCH_ADDRESS_START_INDEX = 0
@@ -80,7 +80,7 @@ async function depthSearchAndRecoverAccounts(config?: RecoverAccountsPayload): P
             ...config,
             syncOptions: {
                 ...(config.syncOptions || DEFAULT_SYNC_OPTIONS),
-                addressStartIndex: searchAddressStartIndex,
+                addressStartIndex: searchAddressStartIndex, // TODO(2.0) Fix this
                 addressStartIndexInternal: searchAddressStartIndex,
             },
         }
@@ -113,7 +113,7 @@ async function breadthSearchAndRecoverAccounts(config?: RecoverAccountsPayload):
                 accountStartIndex: searchAccountStartIndex,
                 syncOptions: {
                     ...(config.syncOptions || DEFAULT_SYNC_OPTIONS),
-                    addressStartIndex: chunkAddressStartIndex,
+                    addressStartIndex: chunkAddressStartIndex, // TODO(2.0) Fix this
                     addressStartIndexInternal: chunkAddressStartIndex,
                 },
             }
@@ -124,7 +124,7 @@ async function breadthSearchAndRecoverAccounts(config?: RecoverAccountsPayload):
                 addressGapLimit: _addressGapLimit,
                 syncOptions: {
                     ...DEFAULT_SYNC_OPTIONS,
-                    addressStartIndex: chunkAddressStartIndex,
+                    addressStartIndex: chunkAddressStartIndex, // TODO(2.0) Fix this
                     addressStartIndexInternal: chunkAddressStartIndex,
                 },
             }

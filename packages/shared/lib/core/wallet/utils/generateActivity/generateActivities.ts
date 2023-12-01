@@ -15,6 +15,7 @@ import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasi
 import { OutputType } from '@iota/sdk/out/types'
 import { generateVestingActivity } from './generateVestingActivity'
 
+// TODO(2.0) Use wallets instead of account
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
     account: IAccountState

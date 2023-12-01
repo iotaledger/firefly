@@ -11,7 +11,7 @@
     import { localize } from '@core/i18n'
     import { networkStatus } from '@core/network/stores'
     import { getBestTimeDuration, milestoneToDate } from '@core/utils'
-    import { visibleSelectedAccountAssets } from '@core/wallet/stores'
+    import { visibleSelectedWalletAssets } from '@core/wallet/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 
     import { getVotingEvent } from '@contexts/governance/actions'
@@ -38,7 +38,7 @@
     import { activeProfile } from '@core/profile'
     import { TextHintVariant } from 'shared/components/enums'
 
-    const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
+    const { metadata } = $visibleSelectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
 
     let selectedAnswerValues: number[] = []
     let votedAnswerValues: number[] = []

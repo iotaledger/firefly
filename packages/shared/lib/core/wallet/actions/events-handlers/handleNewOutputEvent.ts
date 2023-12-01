@@ -1,55 +1,55 @@
 import { Event, NewOutputWalletEvent, OutputType, WalletEventType } from '@iota/sdk/out/types'
 
-import { getAddressesWithOutputs } from '@core/account'
-import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
-import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
 import {
     ActivityType,
     IWrappedOutput,
     addPersistedAsset,
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
+    allWalletActivities,
+    getAddressesWithOutputs,
+    syncBalance,
+    validateWalletApiEvent,
+     getBech32AddressFromAddressTypes,
+      preprocessGroupedOutputs,
+      addActivitiesToWalletActivitiesInAllWalletActivities
 } from '@core/wallet'
-import {
-    addActivitiesToAccountActivitiesInAllAccountActivities,
-    allAccountActivities,
-} from '@core/wallet/stores/all-account-activities.store'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent, getBech32AddressFromAddressTypes, preprocessGroupedOutputs} from '@core/wallet/utils'
+import { activeWallets, updateActiveWallet } from '@core/profile'
 
 export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
+    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
     const type = payload.type
     if (type === WalletEventType.NewOutput) {
-        void handleNewOutputEventInternal(accountIndex, payload as NewOutputWalletEvent)
+        void handleNewOutputEventInternal(walletId, payload as NewOutputWalletEvent)
     }
 }
 
 // TODO(2.0) Use wallet instead of accounts and fix all usages
-export async function handleNewOutputEventInternal(accountIndex: number, payload: NewOutputWalletEvent): Promise<void> {
-    const account = get(activeAccounts)?.find((account) => account.index === accountIndex)
+export async function handleNewOutputEventInternal(walletId: string, payload: NewOutputWalletEvent): Promise<void> {
+    const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const outputData = payload.output
 
-    if (!account || !outputData) return
+    if (!wallet || !outputData) return
 
     const output = outputData.output
 
     const address = getBech32AddressFromAddressTypes(outputData.address)
     const isNewAliasOutput =
         output.type === OutputType.Account &&
-        !get(allAccountActivities)[accountIndex].find((_activity) => _activity.id === outputData.outputId)
+        !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
 
-    if ((account?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
-        await syncBalance(account.index)
-        const addressesWithOutputs = await getAddressesWithOutputs(account)
-        updateActiveAccount(account.index, { addressesWithOutputs })
+    if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
+        await syncBalance(wallet.id)
+        const addressesWithOutputs = await getAddressesWithOutputs(wallet)
+        updateActiveWallet(wallet.id, { addressesWithOutputs })
 
         const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], account)
 
-        const activities = await generateActivities(processedOutput, account)
+        const activities = await generateActivities(processedOutput, wallet)
         for (const activity of activities) {
             if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
                 const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
@@ -58,14 +58,14 @@ export async function handleNewOutputEventInternal(accountIndex: number, payload
                 }
             }
         }
-        addActivitiesToAccountActivitiesInAllAccountActivities(account.index, activities)
+        addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
 
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
-        const nft = buildNftFromNftOutput(wrappedOutput, account.depositAddress)
-        addOrUpdateNftInAllAccountNfts(account.index, nft)
-        void addNftsToDownloadQueue(accountIndex, [nft])
+        const nft = buildNftFromNftOutput(wrappedOutput, wallet.depositAddress)
+        addOrUpdateNftInAllAccountNfts(wallet.id, nft)
+        void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()
     }

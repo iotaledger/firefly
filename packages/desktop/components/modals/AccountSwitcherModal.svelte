@@ -6,14 +6,14 @@
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile, getBaseToken, visibleActiveAccounts } from '@core/profile'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { AccountSwitcherMenuItem, FontWeight, Icon, Modal, Text, TextType } from '@ui'
     import { tick } from 'svelte'
 
     export let modal: Modal = undefined
 
     $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
-    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network.id])
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     async function scrollToSelectedAccount(): Promise<void> {
         await tick()

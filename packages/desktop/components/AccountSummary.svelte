@@ -5,7 +5,7 @@
 
     import { localize } from '@core/i18n'
     import { nodeInfo } from '@core/network'
-    import { selectedAccountAssets } from '@core/wallet'
+    import { selectedWalletAssets } from '@core/wallet'
     import { activeProfile } from '@core/profile'
 
     $: fomattedNetworkName = $nodeInfo?.protocol.networkName
@@ -13,7 +13,7 @@
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ')
 
-    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network.id])
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 </script>
 
 <account-summary class="block relative space-y-4">

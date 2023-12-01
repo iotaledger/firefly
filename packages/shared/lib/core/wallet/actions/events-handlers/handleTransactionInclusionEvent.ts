@@ -2,58 +2,52 @@ import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { updateParticipationOverview } from '@contexts/governance/stores'
-import { isAccountVoting } from '@contexts/governance/utils/isAccountVoting'
-import { syncVotingPower } from '@core/account'
+import { isWalletVoting } from 'shared/lib/contexts/governance/utils/isWalletVoting'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { updateActiveAccountPersistedData } from '@core/profile/actions'
-import { activeAccounts, updateActiveAccount } from '@core/profile/stores'
-import { ActivityAction, ActivityDirection, ActivityType, GovernanceActivity, InclusionState } from '@core/wallet'
-import { updateClaimingTransactionInclusion } from '@core/wallet/actions/activities/updateClaimingTransactionInclusion'
-import {
-    getActivityByTransactionId,
-    updateActivityByTransactionId,
-} from '@core/wallet/stores/all-account-activities.store'
+import { syncVotingPower, getActivityByTransactionId,
+    updateActivityByTransactionId, validateWalletApiEvent, updateClaimingTransactionInclusion,  ActivityAction, ActivityDirection, ActivityType, GovernanceActivity, InclusionState } from '@core/wallet'
 import { get } from 'svelte/store'
-import { validateWalletApiEvent } from '../../../profile-manager/utils'
+import { activeWallets, updateActiveWallet } from 'shared/lib/core/profile'
 
 export function handleTransactionInclusionEvent(error: Error, rawEvent: Event): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
+    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
     const type = payload?.type
     if (type === WalletEventType.TransactionInclusion) {
-        handleTransactionInclusionEventInternal(accountIndex, payload as TransactionInclusionWalletEvent)
+        handleTransactionInclusionEventInternal(walletId, payload as TransactionInclusionWalletEvent)
     }
 }
 
 export function handleTransactionInclusionEventInternal(
-    accountIndex: number,
+    walletId: string,
     payload: TransactionInclusionWalletEvent
 ): void {
     const { inclusionState, transactionId } = payload
-    updateActivityByTransactionId(accountIndex, transactionId, { inclusionState })
+    updateActivityByTransactionId(walletId, transactionId, { inclusionState })
 
-    const activity = getActivityByTransactionId(accountIndex, transactionId)
+    const activity = getActivityByTransactionId(walletId, transactionId)
 
     if (activity?.type === ActivityType.Nft) {
         const isSpendable =
             (activity.direction === ActivityDirection.Incoming ||
                 activity.direction === ActivityDirection.SelfTransaction) &&
             activity.action !== ActivityAction.Burn
-        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable })
+        updateNftInAllAccountNfts(walletId, activity.nftId, { isSpendable })
     }
 
     if (activity?.type === ActivityType.Governance) {
-        handleGovernanceTransactionInclusionEvent(accountIndex, inclusionState, activity)
+        handleGovernanceTransactionInclusionEvent(walletId, inclusionState, activity)
     }
 
     if (activity?.type === ActivityType.Consolidation) {
-        handleConsolidationTransactionInclusionEvent(accountIndex, inclusionState)
+        handleConsolidationTransactionInclusionEvent(walletId, inclusionState)
     }
 
-    updateClaimingTransactionInclusion(transactionId, inclusionState, accountIndex)
+    updateClaimingTransactionInclusion(transactionId, inclusionState, walletId)
 }
 
 function handleGovernanceTransactionInclusionEvent(
-    accountIndex: number,
+    walletId: string,
     inclusionState: InclusionState,
     activity: GovernanceActivity
 ): void {
@@ -61,41 +55,41 @@ function handleGovernanceTransactionInclusionEvent(
         // TODO: Normally we update active account after a wallet.rs returns a transaction
         // With governance we wait for the transaction confirmation
         // we should think about making this consistent in the future
-        updateActiveAccount(accountIndex, { isTransferring: false })
+        updateActiveWallet(walletId, { isTransferring: false })
         // TODO: move this
         closePopup(true)
 
-        const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
-        if (!account) {
+        const wallet = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
+        if (!wallet) {
             return
         }
-        if (account.hasVotingPowerTransactionInProgress) {
-            updateActiveAccount(accountIndex, { hasVotingPowerTransactionInProgress: false })
-            if (isAccountVoting(accountIndex) && activity.votingPower !== 0) {
-                updateActiveAccountPersistedData(accountIndex, { shouldRevote: true })
+        if (wallet.hasVotingPowerTransactionInProgress) {
+            updateActiveWallet(walletId, { hasVotingPowerTransactionInProgress: false })
+            if (isWalletVoting(walletId) && activity.votingPower !== 0) {
+                updateActiveAccountPersistedData(walletId, { shouldRevote: true })
                 openPopup({ id: PopupId.Revote })
             }
         } else {
-            updateActiveAccount(accountIndex, { hasVotingTransactionInProgress: false })
-            updateActiveAccountPersistedData(accountIndex, { shouldRevote: false })
+            updateActiveWallet(walletId, { hasVotingTransactionInProgress: false })
+            updateActiveAccountPersistedData(walletId, { shouldRevote: false })
         }
-        void updateParticipationOverview(accountIndex)
+        void updateParticipationOverview(walletId)
     }
-    syncVotingPower(accountIndex)
+    syncVotingPower(walletId)
 }
 
-function handleConsolidationTransactionInclusionEvent(accountIndex: number, inclusionState: InclusionState): void {
+function handleConsolidationTransactionInclusionEvent(walletId: string, inclusionState: InclusionState): void {
     if (inclusionState === InclusionState.Confirmed) {
         // TODO: Normally we update active account after a the sdk returns a transaction
         // With output consolidation we wait for the transaction confirmation to improve the UX of the vesting tab
         // we should think about making this consistent in the future
-        updateActiveAccount(accountIndex, { isTransferring: false })
-        const account = get(activeAccounts)?.find((_account) => _account.index === accountIndex)
+        updateActiveWallet(walletId, { isTransferring: false })
+        const account = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
         if (!account) {
             return
         }
         if (account?.hasConsolidatingOutputsTransactionInProgress) {
-            updateActiveAccount(accountIndex, { hasConsolidatingOutputsTransactionInProgress: false })
+            updateActiveWallet(walletId, { hasConsolidatingOutputsTransactionInProgress: false })
         }
     }
 }

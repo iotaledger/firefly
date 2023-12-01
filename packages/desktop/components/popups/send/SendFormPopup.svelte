@@ -1,7 +1,7 @@
 <script lang="ts">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import {
         isReservedTagKeyword,
         InclusionState,

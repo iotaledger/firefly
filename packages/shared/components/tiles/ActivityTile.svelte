@@ -8,7 +8,7 @@
         InclusionState,
         NotVerifiedStatus,
         getTokenFromSelectedAccount,
-        selectedAccountAssets,
+        selectedWalletAssets,
     } from '@core/wallet'
     import {
         AliasActivityTileContent,
@@ -27,7 +27,7 @@
     export let activity: Activity
 
     let asset: IAsset | undefined
-    $: $selectedAccountAssets,
+    $: $selectedWalletAssets,
         (asset =
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getTokenFromSelectedAccount(activity.assetId)

@@ -2,12 +2,10 @@
 
 import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
-import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
 import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
-import { ActivityAsyncStatus, ActivityType, validateWalletApiEvent } from '@core/wallet'
-import { allAccountActivities, updateAsyncDataByTransactionId } from '@core/wallet/stores/all-account-activities.store'
+import { syncBalance, ActivityAsyncStatus, ActivityType, validateWalletApiEvent, updateAsyncDataByTransactionId, allWalletActivities} from '@core/wallet'
 import { get } from 'svelte/store'
-import { activeWallets } from 'shared/lib/core/profile'
+import { activeWallets, updateActiveWallet } from '@core/profile'
 
 export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
     const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
@@ -22,28 +20,29 @@ export async function handleSpentOutputEventInternal(
     walletId: string,
     payload: SpentOutputWalletEvent
 ): Promise<void> {
-    const account = get(activeWallets)?.find((wallet) => wallet.id === walletId)
+    const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
     await syncBalance(walletId)
-    if (account) {
-        const addressesWithOutputs = await getAddressesWithOutputs(account)
-        updateActiveAccount(account.index, { addressesWithOutputs })
+    if (wallet) {
+        // TODO(2.0) Fix getAddressesWithOutputs is missing
+        const addressesWithOutputs = await getAddressesWithOutputs(wallet)
+        updateActiveWallet(walletId, { addressesWithOutputs })
     }
     const outputId = output?.outputId
-    const activity = get(allAccountActivities)?.[accountIndex]?.find((_activity) => _activity.outputId === outputId)
+    const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)
 
     if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
         const transactionId = output?.metadata?.transactionId
-        updateAsyncDataByTransactionId(accountIndex, transactionId, {
+        updateAsyncDataByTransactionId(walletId, transactionId, {
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
     }
 
     if (activity?.type === ActivityType.Nft) {
-        const previousOutputId = getNftByIdFromAllAccountNfts(accountIndex, activity.nftId)?.latestOutputId
-        const previousOutput = await account.getOutput(previousOutputId)
+        const previousOutputId = getNftByIdFromAllAccountNfts(walletId, activity.nftId)?.latestOutputId
+        const previousOutput = await wallet.getOutput(previousOutputId)
         if (output.metadata.milestoneTimestampBooked > previousOutput.metadata.milestoneTimestampBooked) {
-            updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable: false })
+            updateNftInAllAccountNfts(walletId, activity.nftId, { isSpendable: false })
         }
     }
 }

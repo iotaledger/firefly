@@ -1,5 +1,5 @@
 import { ActivityAsyncStatus, ActivityType, InclusionState } from '@core/wallet/enums'
-import { addClaimedActivity, allAccountActivities } from '@core/wallet/stores'
+import { addClaimedActivity, allWalletActivities } from '@core/wallet/stores'
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { updateActivityFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
@@ -7,10 +7,10 @@ import { updateActivityFromPartialActivity } from '@core/wallet/utils/generateAc
 export function updateClaimingTransactionInclusion(
     transactionId: string,
     inclusionState: InclusionState,
-    accountIndex: number
+    walletId: string
 ): void {
-    allAccountActivities.update((state) => {
-        const activity = state[accountIndex]?.find(
+    allWalletActivities.update((state) => {
+        const activity = state[walletId]?.find(
             (_activity) => _activity.asyncData?.claimingTransactionId === transactionId
         )
 
@@ -25,7 +25,7 @@ export function updateClaimingTransactionInclusion(
                         asyncStatus: ActivityAsyncStatus.Claimed,
                     },
                 })
-                addClaimedActivity(accountIndex, activity?.transactionId, {
+                addClaimedActivity(walletId, activity?.transactionId, {
                     id: activity.id,
                     claimingTransactionId: transactionId,
                     claimedTimestamp: new Date().getTime(),

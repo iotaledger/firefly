@@ -2,13 +2,13 @@
     import { Button, Text } from '@ui'
     import { ButtonSize, FontWeight, TextType } from '@ui/enums'
 
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, visibleSelectedWalletAssets } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
-    const asset = $visibleSelectedAccountAssets?.[$activeProfile?.network.id]?.baseCoin
+    const asset = $visibleSelectedWalletAssets?.[$activeProfile?.network.id]?.baseCoin
 
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: maxVotingPower = parseInt($selectedAccount?.balances?.baseCoin?.available) + votingPower

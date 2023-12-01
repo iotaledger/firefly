@@ -20,7 +20,7 @@
     import {
         formatTokenAmountBestMatch,
         getRequiredStorageDepositForMinimalBasicOutput,
-        selectedAccountAssets,
+        selectedWalletAssets,
     } from '@core/wallet'
     import {
         Button,
@@ -43,7 +43,7 @@
     let minRequiredStorageDeposit: number | null
     let hasOutputsToConsolidate = false
 
-    $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network?.id])
     $: hasTransactionInProgress =
         $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
     $: $selectedAccount, areOutputsReadyForConsolidation()

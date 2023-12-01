@@ -14,7 +14,7 @@
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
     import { getClient } from '@core/profile-manager'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}

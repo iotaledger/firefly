@@ -1,7 +1,7 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedAccountVestingOverview } from '@contexts/vesting'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'

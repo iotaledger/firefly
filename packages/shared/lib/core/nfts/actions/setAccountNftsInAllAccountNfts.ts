@@ -1,8 +1,8 @@
-import { allAccountNfts } from '../stores'
+import { allWalletNfts } from '../stores'
 import { INft } from '../interfaces'
 
 export function setAccountNftsInAllAccountNfts(accountIndex: number, accountNfts: INft[]): void {
-    allAccountNfts.update((state) => {
+    allWalletNfts.update((state) => {
         state[accountIndex] = accountNfts
         return state
     })

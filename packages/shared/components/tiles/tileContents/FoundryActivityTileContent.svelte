@@ -6,14 +6,14 @@
         getAssetFromPersistedAssets,
         getFormattedAmountFromActivity,
         IPersistedAsset,
-        selectedAccountAssets,
+        selectedWalletAssets,
     } from '@core/wallet'
     import { AssetIcon, ActivityTileContent } from 'shared/components'
 
     export let activity: FoundryActivity
 
     let asset: IPersistedAsset | undefined
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
+    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: action = localize(getActivityTileTitle(activity))
     $: amount = getFormattedAmountFromActivity(activity)
     $: formattedAsset = {

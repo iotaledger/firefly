@@ -1,6 +1,6 @@
 <script lang="ts">
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { selectedAccountIndex } from '@core/account/stores'
+    import { selectedWalletId } from '@core/account/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
@@ -43,7 +43,7 @@
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
-    const nft: INft = getNftByIdFromAllAccountNfts($selectedAccountIndex, $selectedNftId)
+    const nft: INft = getNftByIdFromAllAccountNfts($selectedWalletId, $selectedNftId)
 
     const { id, name, issuer, address, metadata, downloadMetadata, storageDeposit } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
@@ -63,7 +63,7 @@
     }
 
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
-    $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
+    $: returnIfNftWasSent($allAccountNfts[$selectedWalletId], $time)
     $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
     $: alertText = getAlertText(downloadMetadata)
     $: detailsList = {

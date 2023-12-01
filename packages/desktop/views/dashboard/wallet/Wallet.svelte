@@ -1,7 +1,7 @@
 <script lang="ts">
     import { AssetList, Overflow, Pane, ReceiveAddressButton } from '@ui'
     import { AccountSummary, AccountActivity, SendButton } from '@components'
-    import { selectedAccountAssets } from '@core/wallet'
+    import { selectedWalletAssets } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'
     import features from '@features/features'
 </script>
@@ -30,7 +30,7 @@
                 </div>
                 <Pane>
                     {#if features?.wallet?.assets?.enabled}
-                        <AssetList assets={$selectedAccountAssets} />
+                        <AssetList assets={$selectedWalletAssets} />
                     {/if}
                 </Pane>
                 <Pane>

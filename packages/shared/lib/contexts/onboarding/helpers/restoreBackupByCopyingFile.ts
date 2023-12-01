@@ -3,11 +3,11 @@ import { get, Writable } from 'svelte/store'
 import { IClientOptions } from '@iota/sdk/out/types'
 
 import { ClientError, CLIENT_ERROR_REGEXES } from '@core/error'
-import { IProfileManager } from '@core/profile-manager'
 
 import { copyStrongholdFileToProfileDirectory } from '../helpers'
 import { StrongholdMigrationRequiredError, UnableToRestoreBackupForProfileManagerError } from '../errors'
 
+// TODO(2.0) Fix this, profile manager is gone
 export async function restoreBackupByCopyingFile(
     importFilePath: string,
     storageDirectory: string,

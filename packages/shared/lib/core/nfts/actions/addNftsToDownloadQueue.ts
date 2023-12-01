@@ -3,6 +3,7 @@ import { INft } from '../interfaces'
 import { addNftToDownloadQueue } from '../stores'
 import { checkIfNftShouldBeDownloaded } from '../utils/checkIfNftShouldBeDownloaded'
 
+// TODO(2.0) Use wallets instead of acounts
 export function addNftsToDownloadQueue(accountIndex: number, nfts: INft[], forceDownload: boolean = true): void {
     for (const nft of nfts) {
         const shouldNotDownloadNft =

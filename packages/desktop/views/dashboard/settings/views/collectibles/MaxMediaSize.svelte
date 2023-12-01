@@ -2,7 +2,7 @@
     import { Dropdown, Text } from '@ui'
     import { TextType } from '@ui/enums'
 
-    import { selectedAccountIndex } from '@core/account/stores'
+    import { selectedWalletId } from '@core/account/stores'
     import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import {
@@ -10,7 +10,7 @@
         DownloadWarningType,
         INft,
         persistedNftForActiveProfile,
-        selectedAccountNfts,
+        selectedWalletNfts,
         updateNftInAllAccountNfts,
     } from '@core/nfts'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile/stores'
@@ -41,7 +41,7 @@
         const nftsToDelete: INft[] = []
 
         Object.keys($persistedNftForActiveProfile ?? {}).forEach((nftId) => {
-            const nft = $selectedAccountNfts.find((nft) => nft.id === nftId)
+            const nft = $selectedWalletNfts.find((nft) => nft.id === nftId)
             if (!nft) {
                 return
             }
@@ -59,11 +59,11 @@
             }
         })
 
-        addNftsToDownloadQueue($selectedAccountIndex, nftsToDownload, true)
+        addNftsToDownloadQueue($selectedWalletId, nftsToDownload, true)
         await Promise.all(
             nftsToDelete.map(async (nft) => {
                 await Platform.deleteFile(nft.filePath)
-                updateNftInAllAccountNfts($selectedAccountIndex, nft.id, {
+                updateNftInAllAccountNfts($selectedWalletId, nft.id, {
                     downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.TooLargeFile } },
                 })
             })

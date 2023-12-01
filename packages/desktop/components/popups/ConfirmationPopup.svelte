@@ -4,7 +4,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { TextHintVariant } from 'shared/components/enums'
 
     export let title: string

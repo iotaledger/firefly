@@ -6,10 +6,10 @@
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { convertToRawAmount, visibleSelectedAccountAssets } from '@core/wallet'
+    import { convertToRawAmount, visibleSelectedWalletAssets } from '@core/wallet'
     import { closePopup, openPopup, PopupId, popupState } from '@auxiliary/popup'
     import { onMount } from 'svelte'
-    import { isAccountVoting } from '@contexts/governance/utils'
+    import { isWalletVoting } from '@contexts/governance/utils'
     import { activeProfile } from '@core/profile'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -20,7 +20,7 @@
     let rawAmount = newVotingPower ?? $selectedAccount?.votingPower
     let confirmDisabled = false
 
-    $: asset = $visibleSelectedAccountAssets[$activeProfile?.network.id].baseCoin
+    $: asset = $visibleSelectedWalletAssets[$activeProfile?.network.id].baseCoin
     $: votingPower = parseInt($selectedAccount?.votingPower, 10)
     $: hasTransactionInProgress =
         $selectedAccount?.hasVotingPowerTransactionInProgress ||
@@ -46,7 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            if (amount === '0' && isAccountVoting($selectedAccount.index)) {
+            if (amount === '0' && isWalletVoting($selectedAccount.index)) {
                 openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }

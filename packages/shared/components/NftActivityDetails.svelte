@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccountIndex } from '@core/account/stores'
+    import { selectedWalletId } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, ownedNfts, selectedNftId } from '@core/nfts'
@@ -22,7 +22,7 @@
 
     export let activity: NftActivity
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedAccountIndex, activity.nftId)
+    $: nft = getNftByIdFromAllAccountNfts($selectedWalletId, activity.nftId)
     $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)

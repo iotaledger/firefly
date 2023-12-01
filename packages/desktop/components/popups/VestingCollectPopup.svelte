@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccountVestingUnclaimedFunds } from '@contexts/vesting'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { handleError } from '@core/error/handlers'
@@ -13,7 +13,7 @@
 
     let isBusy = false
 
-    $: ({ baseCoin } = $selectedAccountAssets[network?.id])
+    $: ({ baseCoin } = $selectedWalletAssets[network?.id])
 
     $: unclaimedFunds = baseCoin
         ? formatTokenAmountBestMatch(Math.round($selectedAccountVestingUnclaimedFunds), baseCoin.metadata)
