@@ -31,7 +31,7 @@ Our system incorporates two specific deeplink schemes—namely IOTA and SHIMMER.
 iota[-<stage>]://<context>/<operation>[?param=<param>]
 ```
 
-**SHIMMER**
+**Shimmer**
 
 ```
 firefly[-<stage>]://<context>/<operation>[?param=<param>]
@@ -49,7 +49,7 @@ The parameters are as follows:
 -   `operation` - an operation within a specific context (see below for more detail)
 -   `param` - query parameter(s) relevant for the specified operation
 
-To target the production version, use the following deeplink prefix:
+To target the production version simply don't specify any stages, example for Shimmer:
 
 ```
 firefly://
