@@ -9,7 +9,7 @@
         updateNftInAllAccountNfts,
     } from '@core/nfts'
     import { Platform } from '@core/app'
-    import { selectedWalletId } from '@core/wallet
+    import { selectedWalletId } from '@core/wallet'
 
     let isLoading = false
 

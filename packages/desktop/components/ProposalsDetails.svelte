@@ -42,7 +42,7 @@
 
     async function setParticipationOverview(): Promise<void> {
         if (!isOverviewLoaded || getNumberOfVotedProposals() === 0) {
-            await updateParticipationOverview($selectedWallet.index)
+            await updateParticipationOverview($selectedWallet.id)
         }
     }
 

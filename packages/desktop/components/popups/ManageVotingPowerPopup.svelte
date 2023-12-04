@@ -46,7 +46,7 @@
         try {
             await assetAmountInput?.validate(true)
 
-            if (amount === '0' && isWalletVoting($selectedWallet.index)) {
+            if (amount === '0' && isWalletVoting($selectedWallet.id)) {
                 openPopup({ id: PopupId.VotingPowerToZero })
                 return
             }

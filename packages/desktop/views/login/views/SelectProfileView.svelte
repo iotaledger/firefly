@@ -8,8 +8,13 @@
         needsToAcceptLatestTermsOfService,
     } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ProfileType, loadPersistedProfileIntoActiveProfile, profiles, removeProfileFolder } from '@core/profile'
-    import { clearProfileFromMemory } from '@core/profile-manager/actions'
+    import {
+        ProfileType,
+        clearProfileFromMemory,
+        loadPersistedProfileIntoActiveProfile,
+        profiles,
+        removeProfileFolder,
+    } from '@core/profile'
     import { loginRouter, routerManager } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'

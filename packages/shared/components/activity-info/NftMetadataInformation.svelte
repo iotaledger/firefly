@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { selectedWalletId } from '@core/wallet
+    import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
     import { NftActivity } from '@core/wallet'

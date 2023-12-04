@@ -1,15 +1,16 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { IAuth, NetworkId } from '@core/network'
+    import { NetworkId } from '@core/network'
     import { EMPTY_NODE } from '@core/network/constants'
-    import { IClientOptions, INode, INodeInfoResponse } from '@core/network/interfaces'
+    import { INode, INodeInfoResponse } from '@core/network/interfaces'
     import { nodeInfo } from '@core/network/stores'
     import { checkNetworkId, checkNodeUrlValidity, getNetworkNameFromNetworkId } from '@core/network/utils'
     import { activeProfile } from '@core/profile'
-    import { getNodeInfo } from '@core/profile-manager'
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
     import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
+    import { getNodeInfo } from '@core/wallet/actions'
+    import { IAuth, IClientOptions } from '@iota/sdk/out/types'
     interface INodeValidationOptions {
         checkNodeInfo: boolean
         checkSameNetwork: boolean

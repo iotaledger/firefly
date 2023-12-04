@@ -2,7 +2,7 @@
     import { onMount } from 'svelte'
     import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { getClient } from '@core/profile-manager'
+    import { getClient } from '@core/wallet/actions'
     import { selectedWallet } from '@core/wallet'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'

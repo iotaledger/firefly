@@ -1,19 +1,13 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        RestoreProfileType,
-        initialiseProfileManagerFromOnboardingProfile,
-        onboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { RestoreProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
-    import { ProfileType, removeProfileFolder } from '@core/profile'
+    import { ProfileType, clearProfileFromMemory, removeProfileFolder } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
-    import { clearProfileFromMemory } from '@core/profile-manager/actions'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
 
@@ -31,6 +25,7 @@
         isBusy = { ...isBusy, [restoreProfileType]: true }
         const type = restoreProfileType === RestoreProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         updateOnboardingProfile({ type, restoreProfileType })
+        // TODO(2.0) This is gone
         await initialiseProfileManagerFromOnboardingProfile()
         $restoreProfileRouter.next()
     }

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
-    import { prepareOutput, selectedWallet } from '@core/account'
+    import { prepareOutput, selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { ledgerPreparedOutput } from '@core/ledger'
@@ -110,7 +110,7 @@
         try {
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
-            preparedOutput = await prepareOutput($selectedWallet.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
             await updateStorageDeposit()
 
             // This potentially triggers a second 'prepareOutput',

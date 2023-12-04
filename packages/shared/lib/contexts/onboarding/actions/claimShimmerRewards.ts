@@ -11,8 +11,8 @@ import {
 } from '@core/wallet'
 import { logAndNotifyError } from '@core/error/actions'
 
-import { ShimmerClaimingAccountState } from '../enums'
-import { IShimmerClaimingAccount } from '../interfaces'
+import { ShimmerClaimingWalletState } from '../enums'
+import { IShimmerClaimingWallet } from '../interfaces'
 import {
     isOnboardingLedgerProfile,
     onboardingProfile,
@@ -32,19 +32,19 @@ export async function claimShimmerRewards(): Promise<void> {
 }
 
 async function claimShimmerRewardsForShimmerClaimingAccounts(
-    shimmerClaimingAccounts: IShimmerClaimingAccount[]
+    shimmerClaimingAccounts: IShimmerClaimingWallet[]
 ): Promise<void> {
     for (const shimmerClaimingAccount of shimmerClaimingAccounts) {
         try {
             updateShimmerClaimingAccount({
                 ...shimmerClaimingAccount,
-                state: ShimmerClaimingAccountState.Claiming,
+                state: ShimmerClaimingWalletState.Claiming,
             })
             await claimShimmerRewardsForShimmerClaimingAccount(shimmerClaimingAccount)
         } catch (err) {
             updateShimmerClaimingAccount({
                 ...shimmerClaimingAccount,
-                state: ShimmerClaimingAccountState.Failed,
+                state: ShimmerClaimingWalletState.Failed,
             })
             if (get(isOnboardingLedgerProfile)) {
                 handleLedgerError(err?.error ?? err)
@@ -62,7 +62,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 }
 
 async function claimShimmerRewardsForShimmerClaimingAccount(
-    shimmerClaimingAccount: IShimmerClaimingAccount
+    shimmerClaimingAccount: IShimmerClaimingWallet
 ): Promise<void> {
     const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
@@ -98,7 +98,7 @@ async function claimShimmerRewardsForShimmerClaimingAccount(
          * display as "claiming" to user until it's updated
          * later by the transaction inclusion event handler.
          */
-        state: ShimmerClaimingAccountState.Claiming,
+        state: ShimmerClaimingWalletState.Claiming,
         claimingTransaction,
         claimedRewards,
         unclaimedRewards,

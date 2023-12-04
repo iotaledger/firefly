@@ -3,20 +3,20 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { selectedWalletVestingOverview } from '@contexts/vesting'
-    import { SearchAlgorithmType, findBalances } from '@core/account'
+    import { SearchAlgorithmType, findBalances } from '@core/wallet'
     import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { loadNftsForActiveProfile } from '@core/nfts'
     import {
         BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION,
+        RecoverAccountsPayload,
         activeProfile,
         getBaseToken,
         isActiveLedgerProfile,
         isSoftwareProfile,
-        loadAccounts,
+        loadWallets,
     } from '@core/profile'
-    import { RecoverAccountsPayload } from '@core/profile-manager'
     import { truncateString } from '@core/utils'
     import {
         formatTokenAmountBestMatch,
@@ -33,7 +33,7 @@
 
     const { isStrongholdLocked, type } = $activeProfile
     const config: RecoverAccountsPayload = {
-        accountStartIndex: $selectedWallet.index,
+        accountStartIndex: $selectedWallet.id, // TODO(2.0) Index?
         accountGapLimit: 0,
         addressGapLimit: BALANCE_FINDER_ACCOUNT_RECOVERY_CONFIGURATION[type].addressGapLimit,
     }
@@ -72,7 +72,7 @@
                     return
                 }
                 await findBalances(SearchAlgorithmType.DFS, !hasUsedVestingRewardsFinder, config)
-                await loadAccounts()
+                await loadWallets()
                 hasUsedVestingRewardsFinder = true
             } catch (err) {
                 error = localize(err.error)

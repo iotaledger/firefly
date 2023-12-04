@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import {
     ActivityAction,
@@ -16,7 +16,7 @@ import { CommonOutput, NftOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<Activity[]> {
     const activities = []
 

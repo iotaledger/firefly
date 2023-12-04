@@ -1,11 +1,10 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 
-import { isLedgerProfile, ProfileType } from '@core/profile'
+import { isLedgerProfile } from '@core/profile'
 
-import { IOnboardingProfile, IShimmerClaimingAccount } from '../interfaces'
+import { IOnboardingProfile, IShimmerClaimingWallet } from '../interfaces'
 import { IBaseToken, IPersistedWalletData } from '@core/wallet/interfaces'
 import { IPersistedNetwork } from '@core/network'
-
 
 export const onboardingProfile = writable<IOnboardingProfile | null>(null)
 
@@ -22,7 +21,7 @@ export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): v
     return onboardingProfile.update((state) => ({ ...state, ...payload }))
 }
 
-export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingAccount): void {
+export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingWallet): void {
     let shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts ?? []
     const claimingAccountIndex = shimmerClaimingAccount?.getMetadata()?.index
     const isNewShimmerClaimingAccount = !shimmerClaimingAccounts.some(
@@ -41,7 +40,6 @@ export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerCla
 export function getOnboardingBaseToken(): IBaseToken {
     return get(onboardingProfile)?.network?.baseToken
 }
-
 
 export function addWalletPersistedDataToOnboardingProfile(
     walletId: string,

@@ -4,6 +4,7 @@ export * from './getWallets'
 export * from './recoverWallets'
 export * from './clearProfileFromMemory'
 export * from './deleteWallet'
+export * from './changePasswordAndUnlockStronghold'
 
 export * from './active-accounts'
 export * from './active-profile'

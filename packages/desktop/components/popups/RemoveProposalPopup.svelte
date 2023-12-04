@@ -23,7 +23,7 @@
     async function onConfirmClick(): Promise<void> {
         try {
             await $selectedWallet.deregisterParticipationEvent($selectedProposalId)
-            updateActiveAccountPersistedData($selectedWallet.index, {
+            updateActiveAccountPersistedData($selectedWallet.id, {
                 removedProposalIds: [...($selectedWallet.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()
@@ -40,7 +40,7 @@
     }
 
     function clearEvent(): void {
-        removePersistedProposal($selectedProposalId, $selectedWallet.index)
+        removePersistedProposal($selectedProposalId, $selectedWallet.id)
         $selectedProposalId = null
         clearSelectedParticipationEventStatus()
     }

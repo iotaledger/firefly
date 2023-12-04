@@ -1,12 +1,11 @@
 import { Transaction } from '@iota/sdk/out/types'
+import { IWallet } from '@core/profile'
 
-import { IAccount } from '@core/account'
+import { ShimmerClaimingWalletState } from '../enums'
 
-import { ShimmerClaimingAccountState } from '../enums'
-
-export interface IShimmerClaimingAccount extends IAccount {
-    twinAccount: IAccount
-    state: ShimmerClaimingAccountState
+export interface IShimmerClaimingWallet extends IWallet {
+    twinAccount: IWallet
+    state: ShimmerClaimingWalletState
     claimedRewards: number
     unclaimedRewards: number
     claimingTransaction?: Transaction

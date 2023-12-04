@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { AssetAmountInput, Button, Error, NetworkInput, OptionalInput, RecipientInput } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { prepareOutput, selectedWallet } from '@core/account'
+    import { prepareOutput, selectedWallet } from '@core/wallet'
     import { Output } from '@iota/sdk/out/types'
     import {
         getDefaultTransactionOptions,
@@ -76,7 +76,7 @@
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
-            preparedOutput = await prepareOutput($selectedWallet.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
         } catch (err) {
             handleError(err)
         } finally {

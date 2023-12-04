@@ -1,11 +1,11 @@
 import type { OutputData, OutputResponse, Transaction } from '@iota/sdk/out/types'
 
-import { IAccountState } from '@core/account/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 
 import { preprocessGroupedOutputs } from '../../utils/outputs'
 import { IProcessedTransaction } from '../../interfaces'
 
-export async function preprocessOutputsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
+export async function preprocessOutputsForAccount(account: IWalletState): Promise<IProcessedTransaction[]> {
     const outputs = await account.outputs()
 
     const transactions = await account.transactions()

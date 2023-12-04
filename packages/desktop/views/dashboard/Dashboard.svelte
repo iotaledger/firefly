@@ -28,7 +28,7 @@
         resetNftDownloadQueue,
         selectedWalletNfts,
     } from '@core/nfts'
-    import { selectedWalletId } from '@core/wallet
+    import { selectedWalletId } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
     import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'

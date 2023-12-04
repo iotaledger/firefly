@@ -1,30 +1,29 @@
-import { get } from 'svelte/store'
 import { PreparedTransaction } from '@iota/sdk/out/types'
-import { IAccountState, selectedWallet } from '@core/account'
+import { getSelectedWallet, IWalletState } from '@core/wallet'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 import { plainToInstance } from 'class-transformer'
-import { updateActiveAccount } from '@core/profile'
+import { updateActiveWallet } from '@core/profile'
 
-export async function consolidateOutputs(accountToConsolidate?: IAccountState): Promise<void> {
-    const account = accountToConsolidate || get(selectedWallet)
-    if (!account) return Promise.reject('No account selected')
+export async function consolidateOutputs(accountToConsolidate?: IWalletState): Promise<void> {
+    const wallet = accountToConsolidate || getSelectedWallet()
+    if (!wallet) return Promise.reject('No account selected')
 
     try {
-        updateActiveAccount(account.index, { hasConsolidatingOutputsTransactionInProgress: true, isTransferring: true })
+        updateActiveWallet(wallet.id, { hasConsolidatingOutputsTransactionInProgress: true, isTransferring: true })
 
-        const preparedConsolidateOutputsTransaction = await account.prepareConsolidateOutputs({
+        const preparedConsolidateOutputsTransaction = await wallet.prepareConsolidateOutputs({
             force: false,
             outputThreshold: 2,
-            targetAddress: account.depositAddress,
+            targetAddress: wallet.depositAddress,
         })
         const preparedTransaction = plainToInstance(PreparedTransaction, preparedConsolidateOutputsTransaction)
         const transaction = await preparedTransaction?.send()
 
-        await processAndAddToActivities(transaction, account)
+        await processAndAddToActivities(transaction, wallet)
     } catch (err) {
         handleError(err)
-        updateActiveAccount(account.index, {
+        updateActiveWallet(wallet.id, {
             hasConsolidatingOutputsTransactionInProgress: false,
             isTransferring: false,
         })

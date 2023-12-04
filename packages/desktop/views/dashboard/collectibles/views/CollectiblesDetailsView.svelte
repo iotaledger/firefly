@@ -1,6 +1,6 @@
 <script lang="ts">
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { selectedWalletId } from '@core/account/stores'
+    import { selectedWalletId } from '@core/wallet/stores'
     import { time } from '@core/app'
     import { openUrlInBrowser } from '@core/app/utils'
     import { localize } from '@core/i18n'
@@ -8,7 +8,7 @@
     import {
         INft,
         NftDownloadMetadata,
-        allAccountNfts,
+        allWalletNfts,
         convertAndFormatNftMetadata,
         getNftByIdFromAllAccountNfts,
         selectedNftId,
@@ -63,7 +63,7 @@
     }
 
     $: formattedMetadata = convertAndFormatNftMetadata(metadata)
-    $: returnIfNftWasSent($allAccountNfts[$selectedWalletId], $time)
+    $: returnIfNftWasSent($allWalletNfts[$selectedWalletId], $time)
     $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
     $: alertText = getAlertText(downloadMetadata)
     $: detailsList = {

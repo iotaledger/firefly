@@ -5,11 +5,11 @@ import { Transaction } from '@iota/sdk/out/types'
 import { filterShimmerClaimingOutputs } from '@core/utils'
 
 import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
-import { ShimmerClaimingAccountState } from '../enums'
-import { IShimmerClaimingAccount } from '../interfaces'
+import { ShimmerClaimingWalletState } from '../enums'
+import { IShimmerClaimingWallet } from '../interfaces'
 import { isOnboardingLedgerProfile } from '../stores'
 
-import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccountState'
+import { deriveShimmerClaimingWalletState } from './deriveShimmerClaimingWalletState'
 import { IWallet } from '@core/profile'
 import { syncWalletsInSeries, syncWalletsInParallel } from '@core/wallet/utils'
 import { sumTotalFromOutputs } from '@core/wallet'
@@ -20,9 +20,9 @@ export async function prepareShimmerClaimingAccount(
     wallet: IWallet,
     twinWallet?: IWallet,
     syncAccounts?: boolean,
-    state?: ShimmerClaimingAccountState,
+    state?: ShimmerClaimingWalletState,
     claimingTransaction?: Transaction
-): Promise<IShimmerClaimingAccount> {
+): Promise<IShimmerClaimingWallet> {
     if (syncAccounts) {
         if (get(isOnboardingLedgerProfile)) {
             /**
@@ -47,7 +47,7 @@ export async function prepareShimmerClaimingAccount(
     const unspentOutputs = (await account?.unspentOutputs())?.filter(filterShimmerClaimingOutputs)
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
-    state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
+    state = state ?? deriveShimmerClaimingWalletState(claimedRewards, unclaimedRewards)
 
     return {
         ...account,

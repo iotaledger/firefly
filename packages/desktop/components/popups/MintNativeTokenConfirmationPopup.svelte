@@ -13,9 +13,9 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
-    import { getClient } from '@core/profile-manager'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
+    import { getClient } from '@core/wallet/actions'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 

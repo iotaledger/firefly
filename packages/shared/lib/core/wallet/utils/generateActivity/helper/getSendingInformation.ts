@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { ActivityDirection } from '@core/wallet/enums'
 import { IProcessedTransaction } from '@core/wallet/interfaces'
 import { SenderInfo } from '@core/wallet/types'
@@ -11,7 +11,7 @@ import { CommonOutput } from '@iota/sdk/out/types'
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: CommonOutput,
-    account: IAccountState
+    account: IWalletState
 ): SenderInfo {
     const { direction, wrappedInputs } = processedTransaction
 

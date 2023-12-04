@@ -1,5 +1,4 @@
-import { AddressWithOutputs } from '@core/account/interfaces'
-import { IWrappedOutput } from '../../interfaces'
+import { AddressWithOutputs, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFromOutput'
 import { ActivityDirection } from '@core/wallet/enums'
 import { CommonOutput } from '@iota/sdk/out/types'

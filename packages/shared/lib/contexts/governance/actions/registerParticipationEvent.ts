@@ -4,14 +4,14 @@ import type {
     ParticipationEventId,
     ParticipationEventRegistrationOptions,
 } from '@iota/sdk/out/types'
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet'
 import { addOrUpdateProposalToRegisteredProposals } from '../stores'
 import { createProposalFromEvent } from '@contexts/governance'
 
 export async function registerParticipationEvent(
     eventId: ParticipationEventId,
     node: INode,
-    account: IAccountState
+    account: IWalletState
 ): Promise<ParticipationEventWithNodes> {
     const options: ParticipationEventRegistrationOptions = {
         node,
@@ -21,7 +21,7 @@ export async function registerParticipationEvent(
     const event = eventMap[eventId]
 
     const proposal = createProposalFromEvent(event)
-    addOrUpdateProposalToRegisteredProposals(proposal, account.index)
+    addOrUpdateProposalToRegisteredProposals(proposal, account.id)
 
     return event
 }

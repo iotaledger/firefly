@@ -1,6 +1,6 @@
 <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
-    import { selectedWalletId } from '@core/account/stores'
+    import { selectedWalletId } from '@core/wallet/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllAccountNfts, ownedNfts, selectedNftId } from '@core/nfts'

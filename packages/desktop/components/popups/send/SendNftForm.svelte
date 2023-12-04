@@ -16,7 +16,7 @@
     } from '@core/wallet'
     import features from '@features/features'
     import { activeProfile } from '@core/profile'
-    import { prepareOutput } from '@core/account'
+    import { prepareOutput } from '@core/wallet'
     import { handleError } from '@core/error/handlers'
     import { MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { OptionalInputType } from '@core/wallet/utils/send/sendUtils'
@@ -86,7 +86,7 @@
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
-            preparedOutput = await prepareOutput($selectedWallet.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
         } catch (err) {
             handleError(err)
         } finally {

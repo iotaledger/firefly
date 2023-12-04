@@ -39,7 +39,7 @@
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            updateActiveAccountPersistedData($selectedWallet.index, {
+            updateActiveAccountPersistedData($selectedWallet.id, {
                 removedProposalIds: $selectedWallet.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false

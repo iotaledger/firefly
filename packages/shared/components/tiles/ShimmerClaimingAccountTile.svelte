@@ -2,18 +2,18 @@
     import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
-    import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
+    import { IShimmerClaimingWallet, ShimmerClaimingWalletState } from '@contexts/onboarding'
     import { IBaseToken } from '@core/wallet/interfaces'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let shimmerClaimingAccount: IShimmerClaimingAccount
+    export let shimmerClaimingAccount: IShimmerClaimingWallet
     export let baseToken: IBaseToken
 
-    $: shouldDisplayFailedState = shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Failed
-    $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.FullyClaimed
+    $: shouldDisplayFailedState = shimmerClaimingAccount?.state === ShimmerClaimingWalletState.Failed
+    $: shouldDisplayUnclaimedRewards = shimmerClaimingAccount?.state !== ShimmerClaimingWalletState.FullyClaimed
     $: shouldDisplayClaimedRewards =
-        shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.UnclaimedWithRewards &&
-        shimmerClaimingAccount?.state !== ShimmerClaimingAccountState.UnclaimedWithoutRewards
+        shimmerClaimingAccount?.state !== ShimmerClaimingWalletState.UnclaimedWithRewards &&
+        shimmerClaimingAccount?.state !== ShimmerClaimingWalletState.UnclaimedWithoutRewards
 </script>
 
 {#if shimmerClaimingAccount}
@@ -26,7 +26,7 @@
                 </Text>
             </div>
             <div class="flex flex-col">
-                {#if shimmerClaimingAccount?.state === ShimmerClaimingAccountState.Claiming}
+                {#if shimmerClaimingAccount?.state === ShimmerClaimingWalletState.Claiming}
                     <Text type={TextType.p} secondary fontWeight={FontWeight.semibold}>
                         {`${localize('actions.claimingRewards')}...`}
                     </Text>

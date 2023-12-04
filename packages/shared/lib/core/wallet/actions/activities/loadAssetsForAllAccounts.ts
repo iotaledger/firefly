@@ -1,11 +1,11 @@
 import { getOrRequestAssetFromPersistedAssets } from '../getOrRequestAssetFromPersistedAssets'
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { ActivityType } from '@core/wallet/enums'
 import { allAccountActivities, addPersistedAsset } from '../../stores'
 import { IPersistedAsset } from '@core/wallet/interfaces'
 
-export async function loadAssetsForAllActivities(account: IAccountState): Promise<void> {
+export async function loadAssetsForAllActivities(account: IWalletState): Promise<void> {
     const accountActivities = get(allAccountActivities)[account.index]
 
     const persistedAssets: IPersistedAsset[] = []

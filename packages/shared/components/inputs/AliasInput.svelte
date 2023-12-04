@@ -5,7 +5,9 @@
     import { validateBech32Address } from '@core/utils/crypto'
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
     import { getNetworkHrp } from '@core/profile/actions'
-    import { api } from '@core/profile-manager'
+    import { api } from '@core/api'
+
+    // TODO(2.0) Alias are gone.
 
     export let alias: string = ''
     export let error: string = ''

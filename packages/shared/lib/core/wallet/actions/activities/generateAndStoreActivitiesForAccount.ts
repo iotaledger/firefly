@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 
 import { setAccountActivitiesInAllAccountActivities } from '../../stores'
 
@@ -10,7 +10,7 @@ import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { generateActivitiesFromProcessedTransactions } from './generateActivitiesFromProcessedTransactions'
 import { loadAssetsForAllActivities } from './loadAssetsForAllAccounts'
 
-export async function generateAndStoreActivitiesForAccount(account: IAccountState): Promise<void> {
+export async function generateAndStoreActivitiesForAccount(account: IWalletState): Promise<void> {
     // Step 1: process account transactions and outputs into processed transactions
     const processedTransactions = [
         ...(await preprocessTransactionsForAccount(account)),

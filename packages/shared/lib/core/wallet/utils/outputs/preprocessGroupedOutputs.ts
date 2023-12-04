@@ -1,6 +1,6 @@
 import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
-import { AddressWithOutputs, IAccountState } from '@core/account/interfaces'
+import { AddressWithOutputs, IWalletState } from '@core/wallet/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
@@ -11,7 +11,7 @@ import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransacti
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     transactionInputs: OutputResponse[],
-    account: IAccountState
+    account: IWalletState
 ): IProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(

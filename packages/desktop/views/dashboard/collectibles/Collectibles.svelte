@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { selectedWalletId } from '@core/account/stores'
+    import { selectedWalletId } from '@core/wallet/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
 

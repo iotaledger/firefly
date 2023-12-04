@@ -2,7 +2,7 @@
     import { Dropdown, Text } from '@ui'
     import { TextType } from '@ui/enums'
 
-    import { selectedWalletId } from '@core/account/stores'
+    import { selectedWalletId } from '@core/wallet/stores'
     import { Platform } from '@core/app'
     import { localize } from '@core/i18n'
     import {

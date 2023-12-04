@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { ActivityAction, ActivityType, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
@@ -18,7 +18,7 @@ import { generateVestingActivity } from './generateVestingActivity'
 // TODO(2.0) Use wallets instead of account
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<Activity[]> {
     if (processedTransaction.wrappedInputs?.length > 0) {
         return generateActivitiesFromProcessedTransactionsWithInputs(processedTransaction, account)
@@ -29,7 +29,7 @@ export async function generateActivities(
 
 async function generateActivitiesFromProcessedTransactionsWithInputs(
     processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<Activity[]> {
     const { outputs, wrappedInputs } = processedTransaction
     const activities: Activity[] = []
@@ -80,7 +80,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
  */
 async function generateActivitiesFromProcessedTransactionsWithoutInputs(
     processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<Activity[]> {
     const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
     const activities = await Promise.all(

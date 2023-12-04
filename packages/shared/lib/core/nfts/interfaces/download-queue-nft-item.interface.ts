@@ -4,5 +4,5 @@ export interface DownloadQueueNftItem {
     nft: INft
     downloadUrl: string
     path: string
-    accountIndex: number
+    walletId: string
 }

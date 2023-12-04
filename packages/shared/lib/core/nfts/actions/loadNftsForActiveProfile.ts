@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 import { activeAccounts } from '@core/profile/stores'
 import { getNftId } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
@@ -15,7 +15,7 @@ export async function loadNftsForActiveProfile(): Promise<void> {
     }
 }
 
-async function loadNftsForAccount(account: IAccountState): Promise<void> {
+async function loadNftsForAccount(account: IWalletState): Promise<void> {
     const accountNfts: INft[] = []
     const unspentOutputs = await account.unspentOutputs()
     for (const outputData of unspentOutputs) {

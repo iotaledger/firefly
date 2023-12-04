@@ -1,11 +1,11 @@
 import { tryNumberOrZero } from '@core/utils'
 
-import { IShimmerClaimingAccount } from '../interfaces'
+import { IShimmerClaimingWallet } from '../interfaces'
 import { Output, RegularTransactionEssence } from '@iota/sdk/out/types'
 
-export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): number {
+export function sumTotalClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingWallet[]): number {
     return shimmerClaimingAccounts?.reduce(
-        (total: number, curr: IShimmerClaimingAccount) =>
+        (total: number, curr: IShimmerClaimingWallet) =>
             total +
             tryNumberOrZero(
                 (curr?.claimingTransaction?.payload?.essence as RegularTransactionEssence).outputs?.reduce(

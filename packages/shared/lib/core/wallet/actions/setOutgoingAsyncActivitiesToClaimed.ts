@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { BasicOutput, OutputData } from '@iota/sdk/out/types'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
@@ -6,7 +6,7 @@ import { ActivityAsyncStatus, ActivityDirection } from '../enums'
 import { allAccountActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 
-export async function setOutgoingAsyncActivitiesToClaimed(account: IAccountState): Promise<void> {
+export async function setOutgoingAsyncActivitiesToClaimed(account: IWalletState): Promise<void> {
     const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter(

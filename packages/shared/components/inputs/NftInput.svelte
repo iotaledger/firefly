@@ -2,7 +2,7 @@
     import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
     import { ownedNfts } from '@core/nfts'
     import { getNftByIdFromAllAccountNfts } from '@core/nfts'
-    import { selectedWalletId } from '@core/wallet
+    import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { time } from '@core/app'
 
