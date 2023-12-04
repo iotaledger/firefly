@@ -38,7 +38,7 @@ const IPFS_PREFIX = '/ipfs/'
 
 export async function getIpfsUri(link: { path?: string; hash: string }): Promise<string | undefined> {
     try {
-        const slicedLink = link.hash.slice('https://ipfs.io/'.length)
+        const slicedLink = link.hash.slice(IPFS_ENDPOINT.length)
         const ipfsEntry = await ls(slicedLink)
         if (ipfsEntry) {
             if (ipfsEntry.type === 'dir') {

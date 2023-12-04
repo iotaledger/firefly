@@ -10,12 +10,14 @@ export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, p
         const nft = state[accountIndex].find((_nft) => _nft.id === nftId)
         if (nft) {
             const downloadUrl = nft.downloadUrl
-            void getIpfsUri({ hash: downloadUrl }).then((ipfsUri) => {
-                if (ipfsUri) {
-                    nft.downloadUrl = ipfsUri
-                    nft.composedUrl = ipfsUri
-                }
-            })
+            if (downloadUrl) {
+                void getIpfsUri({ hash: downloadUrl }).then((ipfsUri) => {
+                    if (ipfsUri) {
+                        nft.downloadUrl = ipfsUri
+                        nft.composedUrl = ipfsUri
+                    }
+                })
+            }
             Object.assign(nft, { ...nft, ...partialNft })
         }
         return state
