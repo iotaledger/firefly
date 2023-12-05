@@ -1,27 +1,27 @@
 <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
-    import { selectedAccount, validateAccountName } from '@core/account'
     import { localize } from '@core/i18n'
     import { updateActiveAccountPersistedData } from '@core/profile/actions'
     import { getTrimmedLength } from '@core/utils'
+    import { selectedWallet, validateWalletName } from '@core/wallet'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
 
     export let error = ''
 
     let isBusy = false
-    let accountAlias = $selectedAccount.name
-    let color = $selectedAccount.color
+    let accountAlias = $selectedWallet.name
+    let color = $selectedWallet.color
 
     $: accountAlias, (error = '')
     $: trimmedAccountAlias = accountAlias.trim()
-    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedAccount.name
-    $: hasColorChanged = $selectedAccount.color !== color
+    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedWallet.name
+    $: hasColorChanged = $selectedWallet.color !== color
 
     async function onSaveClick(): Promise<void> {
         if (trimmedAccountAlias) {
             error = ''
             try {
-                await validateAccountName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedAccount.name)
+                await validateWalletName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedWallet.name)
             } catch ({ message }) {
                 error = message
                 return
@@ -39,7 +39,7 @@
     function saveAccountPersistedData(): void {
         try {
             if (trimmedAccountAlias || color) {
-                updateActiveAccountPersistedData($selectedAccount?.index, { name: trimmedAccountAlias, color })
+                updateActiveAccountPersistedData($selectedWallet?.id, { name: trimmedAccountAlias, color })
                 closePopup()
             }
         } finally {

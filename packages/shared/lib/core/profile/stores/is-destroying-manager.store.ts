@@ -1,3 +1,3 @@
 import { writable } from 'svelte/store'
 
-export const isDestroyingManager = writable<boolean>(false)
+export const isDestroyingWallets = writable<boolean>(false)

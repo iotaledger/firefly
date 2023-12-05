@@ -8,7 +8,7 @@
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
-    import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
+    import AccountSwitcherPopup from './WalletSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import AddProposalPopup from './AddProposalPopup.svelte'
@@ -19,7 +19,7 @@
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
-    import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import createWalletPopup from './CreateWalletPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccountPopup from './DeleteAccountPopup.svelte'
     import DeleteProfilePopup from './DeleteProfilePopup.svelte'
@@ -78,7 +78,7 @@
 
     $: switch (id) {
         case PopupId.ConnectLedger:
-        case PopupId.CreateAccount:
+        case PopupId.createWallet:
         case PopupId.ManageAccount:
             size = PopupSize.Small
             break
@@ -105,7 +105,7 @@
         [PopupId.BurnNativeTokensConfirmation]: BurnNativeTokensConfirmationPopup,
         [PopupId.Confirmation]: ConfirmationPopup,
         [PopupId.ConnectLedger]: ConnectLedgerPopup,
-        [PopupId.CreateAccount]: CreateAccountPopup,
+        [PopupId.createWallet]: createWalletPopup,
         [PopupId.DeepLinkError]: DeepLinkErrorPopup,
         [PopupId.DeleteAccount]: DeleteAccountPopup,
         [PopupId.DeleteProfile]: DeleteProfilePopup,

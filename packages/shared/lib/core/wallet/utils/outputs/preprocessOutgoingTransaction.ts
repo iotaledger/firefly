@@ -3,11 +3,11 @@ import { Output, OutputType, RegularTransactionEssence, Transaction, UTXOInput }
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 
 export async function preprocessOutgoingTransaction(
     transaction: Transaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<IProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.essence as RegularTransactionEssence
 

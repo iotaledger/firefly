@@ -2,8 +2,8 @@
     import { Button, Text, FontWeight, TextType, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { selectedAccountVestingUnclaimedFunds } from '@contexts/vesting'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { selectedWalletVestingUnclaimedFunds } from '@contexts/vesting'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { handleError } from '@core/error/handlers'
@@ -13,10 +13,10 @@
 
     let isBusy = false
 
-    $: ({ baseCoin } = $selectedAccountAssets[network?.id])
+    $: ({ baseCoin } = $selectedWalletAssets[network?.id])
 
     $: unclaimedFunds = baseCoin
-        ? formatTokenAmountBestMatch(Math.round($selectedAccountVestingUnclaimedFunds), baseCoin.metadata)
+        ? formatTokenAmountBestMatch(Math.round($selectedWalletVestingUnclaimedFunds), baseCoin.metadata)
         : DEFAULT_EMPTY_VALUE_STRING
 
     async function onConfirmClick(): Promise<void> {

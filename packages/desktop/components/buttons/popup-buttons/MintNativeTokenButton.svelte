@@ -1,18 +1,19 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
 
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { resetMintTokenDetails } from '@core/wallet'
 
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { TextHintVariant } from 'shared/components/enums'
 
-    $: hasAliases = $selectedAccount.balances?.aliases.length > 0
+    // TODO(2.0) Should this be checking if it has accounts?
+    $: hasAccounts = $selectedWallet.balances?.accounts.length > 0
 
     function onMintNativeTokenClick(): void {
         resetMintTokenDetails()
-        if (hasAliases) {
+        if (hasAccounts) {
             openPopup({
                 id: PopupId.MintNativeTokenForm,
             })

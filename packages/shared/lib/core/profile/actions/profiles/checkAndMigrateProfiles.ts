@@ -1,4 +1,4 @@
-import { IPersistedAccountData } from '@core/account/interfaces'
+import { IPersistedWalletData } from '@core/wallet/interfaces'
 import {
     COIN_TYPE,
     DEFAULT_CHAIN_CONFIGURATIONS,
@@ -254,7 +254,7 @@ function persistedProfileMigrationToV12(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV13(
-    existingProfile: IPersistedProfile & { accountMetadata: (IPersistedAccountData & { index: number })[] }
+    existingProfile: IPersistedProfile & { accountMetadata: (IPersistedWalletData & { index: number })[] }
 ): void {
     const newProfile = {}
     const keysToKeep = [

@@ -7,12 +7,11 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { ProfileType, removeProfileFolder } from '@core/profile'
+    import { ProfileType, clearProfileFromMemory, removeProfileFolder } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { createProfileRouter } from '../create-profile-router'
-    import { destroyProfileManager } from '@core/profile-manager/actions'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
 
@@ -40,7 +39,7 @@
     onMount(async () => {
         // Clean up if user has navigated back to this view
         if ($onboardingProfile.hasInitialisedProfileManager) {
-            await destroyProfileManager()
+            await clearProfileFromMemory()
             await removeProfileFolder($onboardingProfile.id)
         }
         updateOnboardingProfile({ type: undefined, createProfileType: undefined, hasInitialisedProfileManager: false })

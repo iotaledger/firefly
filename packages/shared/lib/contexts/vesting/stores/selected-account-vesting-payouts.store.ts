@@ -1,23 +1,23 @@
 import { Readable, derived } from 'svelte/store'
-import { selectedAccountVestingOutputs } from '.'
+import { selectedWalletVestingOutputs } from '.'
 import { STAKER_VESTING_DURATION, VESTING_PAYOUTS_IN_1_YEAR, VESTING_PAYOUT_SCHEDULE_MILLISECONDS } from '../constants'
 import { VestingOutputStatus, VestingType } from '../enums'
 import { IVestingPayout } from '../interfaces'
 import { getTotalVestingPayouts } from '../utils'
 
-export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived(
-    selectedAccountVestingOutputs,
-    ($selectedAccountVestingOutputs) => {
+export const selectedWalletVestingPayouts: Readable<IVestingPayout[]> = derived(
+    selectedWalletVestingOutputs,
+    ($selectedWalletVestingOutputs) => {
         const now = new Date()
         const payouts: IVestingPayout[] = []
-        if ($selectedAccountVestingOutputs?.length) {
+        if ($selectedWalletVestingOutputs?.length) {
             // Calculate the total number of vesting payouts
             const numberOfPayouts = getTotalVestingPayouts()
             // Find the latest unlock time among the selected account vesting outputs
             // This is used to calculate the unlock time for each payout
             const lastUnlockTime = new Date(
                 Math.max(
-                    ...$selectedAccountVestingOutputs.map(({ lastOutput }) => lastOutput?.unlockTime?.getTime() ?? 0)
+                    ...$selectedWalletVestingOutputs.map(({ lastOutput }) => lastOutput?.unlockTime?.getTime() ?? 0)
                 )
             )
             if (numberOfPayouts && lastUnlockTime) {
@@ -25,9 +25,9 @@ export const selectedAccountVestingPayouts: Readable<IVestingPayout[]> = derived
                 for (let i = 0; i < numberOfPayouts; i++) {
                     // If the payout is in the staking years, include all vesting outputs
                     // If the payout is in the vesting only years, include only investor vesting outputs
-                    let addressSetToCompute = $selectedAccountVestingOutputs
+                    let addressSetToCompute = $selectedWalletVestingOutputs
                     if (i >= VESTING_PAYOUTS_IN_1_YEAR * STAKER_VESTING_DURATION) {
-                        addressSetToCompute = $selectedAccountVestingOutputs.filter(
+                        addressSetToCompute = $selectedWalletVestingOutputs.filter(
                             ({ type }) => type === VestingType.Investor
                         )
                     }

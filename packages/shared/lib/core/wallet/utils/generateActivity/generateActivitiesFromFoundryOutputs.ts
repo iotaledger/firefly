@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { ActivityAction, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
@@ -6,7 +6,7 @@ import { OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromFoundryOutputs(
     processedTransaction: IProcessedTransaction,
-    account: IAccountState
+    account: IWalletState
 ): Promise<Activity[]> {
     const outputs = processedTransaction.outputs
     const activities = []

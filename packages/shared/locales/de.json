@@ -1502,7 +1502,7 @@
         "myAccounts": "Meine Wallets",
         "profiles": "Profile",
         "dev": "Entwickler",
-        "createAccount": "Wallet erstellen",
+        "createWallet": "Wallet erstellen",
         "addAWallet": "Wallet hinzufügen",
         "accountName": "Wallet-Name",
         "latestTransactions": "Neueste Transaktionen",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Falscher Adresstyp"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "Die Adresse kann in deinem Konto nicht gefunden werden.",
             "length": "Der Name deiner Wallet darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "emptyName": "Ein Profilname muss mindestens 1 Zeichen enthalten.",

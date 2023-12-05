@@ -8,7 +8,7 @@ import { IClaimedActivities, IClaimedActivitiesPerProfile } from '../interfaces'
 export const claimedActivities = persistent<IClaimedActivitiesPerProfile>('claimedActivities', {})
 
 export function addClaimedActivity(
-    accountIndex: number,
+    walletId: string,
     transactionId: string,
     claimedActivity: IClaimedActivities
 ): void {
@@ -21,10 +21,10 @@ export function addClaimedActivity(
         if (!state[profileId]) {
             state[profileId] = {}
         }
-        if (!state[profileId][accountIndex]) {
-            state[profileId][accountIndex] = {}
+        if (!state[profileId][walletId]) {
+            state[profileId][walletId] = {}
         }
-        state[profileId][accountIndex][transactionId] = claimedActivity
+        state[profileId][walletId][transactionId] = claimedActivity
         return state
     })
 }

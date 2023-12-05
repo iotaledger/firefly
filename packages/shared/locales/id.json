@@ -1502,7 +1502,7 @@
         "myAccounts": "Dompet saya",
         "profiles": "Profil",
         "dev": "Pengembang",
-        "createAccount": "Buat dompet",
+        "createWallet": "Buat dompet",
         "addAWallet": "Add a wallet",
         "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Nama dompet Anda tidak dapat lebih panjang dari {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

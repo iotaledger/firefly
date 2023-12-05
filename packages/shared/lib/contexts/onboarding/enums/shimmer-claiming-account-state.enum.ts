@@ -1,4 +1,4 @@
-export enum ShimmerClaimingAccountState {
+export enum ShimmerClaimingWalletState {
     Claiming = 'claiming',
     Failed = 'failed',
     FullyClaimed = 'fullyClaimed',

@@ -3,23 +3,21 @@ import { get } from 'svelte/store'
 import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { localize } from '@core/i18n'
-import { validateWalletApiEvent } from '@core/profile-manager'
-import { InclusionState, MissingTransactionIdError } from '@core/wallet'
+import { InclusionState, MissingTransactionIdError, validateWalletApiEvent } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
 
-import { ShimmerClaimingAccountState } from '../enums'
+import { ShimmerClaimingWalletState } from '../enums'
 import { MissingShimmerClaimingAccountError } from '../errors'
-import { IShimmerClaimingAccount } from '../interfaces'
+import { IShimmerClaimingWallet } from '../interfaces'
 import { onboardingProfile, shimmerClaimingTransactions, updateShimmerClaimingAccount } from '../stores'
 
+// TODO(2.0) Fix this
+
 export function handleTransactionInclusionEventForShimmerClaiming(error: Error, rawEvent: Event): void {
-    const { accountIndex, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
+    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
     const type = payload.type
     if (type === WalletEventType.TransactionInclusion) {
-        handleTransactionInclusionEventForShimmerClaimingInternal(
-            accountIndex,
-            payload as TransactionInclusionWalletEvent
-        )
+        handleTransactionInclusionEventForShimmerClaimingInternal(walletId, payload as TransactionInclusionWalletEvent)
     }
 }
 
@@ -38,7 +36,7 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
             if (inclusionState === InclusionState.Confirmed) {
                 updateShimmerClaimingAccount({
                     ...shimmerClaimingAccount,
-                    state: ShimmerClaimingAccountState.FullyClaimed,
+                    state: ShimmerClaimingWalletState.FullyClaimed,
                 })
                 showAppNotification({
                     type: 'success',
@@ -69,12 +67,12 @@ export function handleTransactionInclusionEventForShimmerClaimingInternal(
 }
 
 function handleShimmerClaimingTransactionInclusionEventFailure(
-    shimmerClaimingAccount: IShimmerClaimingAccount,
+    shimmerClaimingAccount: IShimmerClaimingWallet,
     displayNotification = true
 ): void {
     updateShimmerClaimingAccount({
         ...shimmerClaimingAccount,
-        state: ShimmerClaimingAccountState.Failed,
+        state: ShimmerClaimingWalletState.Failed,
     })
     if (displayNotification) {
         showAppNotification({

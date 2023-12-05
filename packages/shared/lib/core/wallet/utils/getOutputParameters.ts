@@ -1,4 +1,3 @@
-import { getSelectedAccount, prepareOutput } from '@core/account'
 import { ILayer2GasEstimatePayload } from '@core/layer-2/interfaces'
 import {
     getEstimatedGasForTransferFromTransactionDetails,
@@ -11,8 +10,9 @@ import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
 import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
+import { prepareOutput } from '../actions/prepareOutput'
 import { ReturnStrategy } from '../enums'
-import { NewTransactionType, newTransactionDetails } from '../stores'
+import { NewTransactionType, newTransactionDetails, getSelectedWallet } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
@@ -56,7 +56,7 @@ async function buildOutputParametersForLayer2(
     transactionDetails: NewTransactionDetails
 ): Promise<OutputParams | undefined> {
     const { expirationDate, timelockDate, layer2Parameters } = transactionDetails ?? {}
-    const selectedAccount = getSelectedAccount()
+    const selectedWallet = getSelectedWallet()
 
     if (!layer2Parameters) {
         // This should never happen as it's checked right before calling this function
@@ -95,7 +95,7 @@ async function buildOutputParametersForLayer2(
         gasEstimatePayload: ILayer2GasEstimatePayload
     }> {
         const outputForEstimate = (await prepareOutput(
-            selectedAccount.index,
+            selectedWallet.id,
             outputParams,
             getDefaultTransactionOptions()
         )) as unknown as BasicOutput | NftOutput

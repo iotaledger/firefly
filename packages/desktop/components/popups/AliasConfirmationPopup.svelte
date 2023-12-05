@@ -1,25 +1,27 @@
 <script lang="ts">
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
-    import { selectedAccount, updateSelectedAccount } from '@core/account'
-    import { api, getClient } from '@core/profile-manager'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
-    import { formatTokenAmountPrecise, EMPTY_HEX_ID, processAndAddToActivities } from '@core/wallet'
-    import { AliasOutput, UnlockConditionType, PreparedTransaction } from '@iota/sdk/out/types'
+    import { formatTokenAmountPrecise, EMPTY_HEX_ID, processAndAddToActivities, selectedWallet, updateSelectedWallet } from '@core/wallet'
+    import { UnlockConditionType, PreparedTransaction, AccountOutput } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
     import { plainToInstance } from 'class-transformer'
+    import { api } from '@core/api'
+    import { getClient } from '@core/wallet/actions/getClient'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+
+    // TODO(2.0) Does it still make sense to have this popup?
 
     let storageDeposit: string = '0'
 
     $: address = {
         type: 0,
-        pubKeyHash: api.bech32ToHex($selectedAccount.depositAddress),
+        pubKeyHash: api.bech32ToHex($selectedWallet.depositAddress),
     }
-    $: aliasOutput = address
+    $: accountOutput = address
         ? {
               aliasId: EMPTY_HEX_ID,
               unlockConditions: [
@@ -35,13 +37,13 @@
           }
         : ''
 
-    $: void setStorageDeposit(aliasOutput)
-    $: isTransferring = $selectedAccount.isTransferring
+    $: void setStorageDeposit(accountOutput)
+    $: isTransferring = $selectedWallet.isTransferring
 
-    async function setStorageDeposit(aliasOutput: AliasOutput): Promise<void> {
+    async function setStorageDeposit(accountOutput: AccountOutput): Promise<void> {
         try {
             const client = await getClient()
-            const { amount } = await client.buildAliasOutput(aliasOutput)
+            const { amount } = await client.buildAccountOutput(accountOutput)
             storageDeposit = formatTokenAmountPrecise(Number(amount), getBaseToken())
         } catch (err) {
             handleError(err)
@@ -50,16 +52,16 @@
 
     async function createAlias(): Promise<void> {
         try {
-            updateSelectedAccount({ isTransferring: true })
-            const transaction = await $selectedAccount
-                .prepareCreateAliasOutput()
+            updateSelectedWallet({ isTransferring: true })
+            const transaction = await $selectedWallet
+                .prepareCreateAccountOutput()
                 .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
-            await processAndAddToActivities(transaction, $selectedAccount)
+            await processAndAddToActivities(transaction, $selectedWallet)
             closePopup()
         } catch (err) {
             handleError(err)
         } finally {
-            updateSelectedAccount({ isTransferring: false })
+            updateSelectedWallet({ isTransferring: false })
         }
     }
 
@@ -91,12 +93,12 @@
         />
         <KeyValueBox
             keyText={localize('general.governorAddress')}
-            valueText={$selectedAccount.depositAddress}
+            valueText={$selectedWallet.depositAddress}
             isCopyable
         />
         <KeyValueBox
             keyText={localize('general.stateControllerAddress')}
-            valueText={$selectedAccount.depositAddress}
+            valueText={$selectedWallet.depositAddress}
             isCopyable
         />
     </div>

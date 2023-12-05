@@ -1,9 +1,9 @@
-import { AddressWithOutputs } from '@core/account/interfaces'
-import { IWrappedOutput } from '../../interfaces'
+import { AddressWithOutputs, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFromOutput'
 import { ActivityDirection } from '@core/wallet/enums'
 import { CommonOutput } from '@iota/sdk/out/types'
 
+// TODO(2.0) Fix all usages
 export function getDirectionFromOutgoingTransaction(
     wrappedOutputs: IWrappedOutput[],
     accountAddressesWithOutputs: AddressWithOutputs[]

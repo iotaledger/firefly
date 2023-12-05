@@ -5,9 +5,9 @@
     import { updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { Subrouter } from '@core/router'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { setStrongholdPassword } from '@core/wallet/actions'
     import { Animation, Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
     import zxcvbn from 'zxcvbn'
 

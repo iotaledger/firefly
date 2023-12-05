@@ -1502,7 +1502,7 @@
         "myAccounts": "Mes Portefeuilles",
         "profiles": "Profils",
         "dev": "Dév",
-        "createAccount": "Créer un Portefeuille",
+        "createWallet": "Créer un Portefeuille",
         "addAWallet": "Ajouter un portefeuille",
         "accountName": "Nom du portefeuille",
         "latestTransactions": "Dernières Transactions",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Le nom de votre portefeuille ne peut pas contenir plus de {length, plural, one {# caractère} other {# caractères}}.",
             "emptyName": "Un nom de profil doit contenir au moins 1 caractère.",

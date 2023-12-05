@@ -1,43 +1,40 @@
 import { derived, get, Readable, writable } from 'svelte/store'
 import type { ParticipationOverview } from '@iota/sdk/out/types'
-import { selectedAccountIndex } from '@core/account/stores'
-import { getParticipationOverview } from '@core/account/api/getParticipationOverview'
 import { DEFAULT_PARTICIPATION_OVERVIEW } from '../constants'
+import { getParticipationOverview } from '@core/wallet/actions'
+import { selectedWalletId } from '@core/wallet/stores/selected-wallet-id.store'
 
-export const allParticipationOverviews = writable<{ [accountId: number]: ParticipationOverview }>({})
+export const allParticipationOverviews = writable<{ [walletId: string]: ParticipationOverview }>({})
 let isUpdatingParticipationOverview: boolean = false
 
-export const participationOverviewForSelectedAccount: Readable<ParticipationOverview> = derived(
-    [selectedAccountIndex, allParticipationOverviews],
-    ([$selectedAccountIndex, $allParticipationOverviews]) => {
-        if ($selectedAccountIndex >= 0) {
-            return $allParticipationOverviews[$selectedAccountIndex]
-        } else {
-            return undefined
-        }
+// TODO(2.0) Rename this store
+export const participationOverviewForSelectedWallet: Readable<ParticipationOverview> = derived(
+    [selectedWalletId, allParticipationOverviews],
+    ([$selectedWalletId, $allParticipationOverviews]) => {
+        $allParticipationOverviews[$selectedWalletId]
     }
 )
 
-export async function updateParticipationOverview(accountIndex: number = get(selectedAccountIndex)): Promise<void> {
+export async function updateParticipationOverview(walletId: string = get(selectedWalletId)): Promise<void> {
     if (!isUpdatingParticipationOverview) {
         isUpdatingParticipationOverview = true
-        const overview = await getParticipationOverview(accountIndex)
+        const overview = await getParticipationOverview(walletId)
         isUpdatingParticipationOverview = false
         allParticipationOverviews.update((state) => {
-            state[accountIndex] = overview ?? DEFAULT_PARTICIPATION_OVERVIEW
+            state[walletId] = overview ?? DEFAULT_PARTICIPATION_OVERVIEW
             return state
         })
     }
 }
 
 export async function updateParticipationOverviewForEventId(eventId: string): Promise<void> {
-    const accountIndex = get(selectedAccountIndex)
-    const overview = await getParticipationOverview(accountIndex, eventId)
+    const walletId = get(selectedWalletId)
+    const overview = await getParticipationOverview(walletId, eventId)
     allParticipationOverviews.update((state) => {
-        if (!state[accountIndex]) {
-            state[accountIndex] = { participations: {} }
+        if (!state[walletId]) {
+            state[walletId] = { participations: {} }
         }
-        state[accountIndex].participations[eventId] = overview.participations[eventId]
+        state[walletId].participations[eventId] = overview.participations[eventId]
         return state
     })
 }

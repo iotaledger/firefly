@@ -1,5 +1,5 @@
-import { api } from '@core/profile-manager'
 import { Converter } from '@iota/util.js'
+import { api } from '@core/api'
 import { EXTERNALLY_OWNED_ACCOUNT_TYPE_ID } from '../constants'
 
 export function evmAddressToAgentID(evmStoreAccount: string, aliasAddress: string): Uint8Array {

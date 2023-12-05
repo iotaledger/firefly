@@ -1,8 +1,8 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { preprocessOutgoingTransaction } from '../../utils'
 import { IProcessedTransaction } from '../../interfaces/processed-transaction.interface'
 
-export async function preprocessTransactionsForAccount(account: IAccountState): Promise<IProcessedTransaction[]> {
+export async function preprocessTransactionsForAccount(account: IWalletState): Promise<IProcessedTransaction[]> {
     const transactions = await account.transactions()
 
     const processedTransactions: IProcessedTransaction[] = []

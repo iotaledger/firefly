@@ -1,12 +1,12 @@
-import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
+import { IShimmerClaimingWallet, ShimmerClaimingWalletState } from '@contexts/onboarding'
 
-export function canUserClaimRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+export function canUserClaimRewards(shimmerClaimingAccounts: IShimmerClaimingWallet[]): boolean {
     return shimmerClaimingAccounts?.some((shimmerClaimingAccount) => {
         const { state } = shimmerClaimingAccount
         return (
-            state === ShimmerClaimingAccountState.UnclaimedWithRewards ||
-            state === ShimmerClaimingAccountState.PartiallyClaimed ||
-            state === ShimmerClaimingAccountState.Failed
+            state === ShimmerClaimingWalletState.UnclaimedWithRewards ||
+            state === ShimmerClaimingWalletState.PartiallyClaimed ||
+            state === ShimmerClaimingWalletState.Failed
         )
     })
 }

@@ -4,7 +4,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { TextHintVariant } from 'shared/components/enums'
 
     export let title: string
@@ -65,8 +65,8 @@
         <Button
             classes="w-full"
             variant={buttonVariant}
-            disabled={$selectedAccount.isTransferring || isBusy}
-            isBusy={$selectedAccount.isTransferring || isBusy}
+            disabled={$selectedWallet.isTransferring || isBusy}
+            isBusy={$selectedWallet.isTransferring || isBusy}
             onClick={onConfirmClick}
         >
             {confirmText}

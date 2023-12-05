@@ -1,22 +1,22 @@
 <script lang="ts">
-    import { IAsset, visibleSelectedAccountAssets } from '@core/wallet'
+    import { IAsset, visibleSelectedWalletAssets } from '@core/wallet'
     import { AssetTile, Icon, Text, AssetIcon, FontWeight, AssetIconSize } from 'shared/components'
     import { clickOutside } from '@core/utils'
     import { activeProfile } from '@core/profile'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
-    export let asset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
+    export let asset = $visibleSelectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let readonly: boolean = false
 
     let isDropdownOpen = false
     let assetList: IAsset[] = []
 
-    $: isReadonly = readonly || $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.nativeTokens.length === 0
-    $: $visibleSelectedAccountAssets, (assetList = getAssetList())
+    $: isReadonly = readonly || $visibleSelectedWalletAssets?.[$activeProfile?.network?.id]?.nativeTokens.length === 0
+    $: $visibleSelectedWalletAssets, (assetList = getAssetList())
 
     function getAssetList(): IAsset[] {
         const list = []
-        for (const assetsPernetwork of Object.values($visibleSelectedAccountAssets)) {
+        for (const assetsPernetwork of Object.values($visibleSelectedWalletAssets)) {
             if (assetsPernetwork?.baseCoin) {
                 list.push(assetsPernetwork.baseCoin)
             }

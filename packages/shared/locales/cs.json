@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje peněženky",
         "profiles": "Profily",
         "dev": "Vývojář",
-        "createAccount": "Vytvořit peněženku",
+        "createWallet": "Vytvořit peněženku",
         "addAWallet": "Add a wallet",
         "accountName": "Název peněženky",
         "latestTransactions": "Poslední transakce",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "Název profilu musí obsahovat alespoň 1 znak.",

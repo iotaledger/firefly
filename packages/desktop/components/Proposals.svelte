@@ -5,10 +5,10 @@
 
     import { localize } from '@core/i18n'
 
-    import { proposalFilter, registeredProposalsForSelectedAccount } from '@contexts/governance/stores'
+    import { proposalFilter, registeredProposalsForSelectedWallet } from '@contexts/governance/stores'
     import { isVisibleProposal, sortProposals } from '@contexts/governance/utils'
 
-    $: proposals = Object.values($registeredProposalsForSelectedAccount)
+    $: proposals = Object.values($registeredProposalsForSelectedWallet)
 
     let searchTerm = ''
 

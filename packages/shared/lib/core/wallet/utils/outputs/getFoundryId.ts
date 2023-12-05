@@ -1,23 +1,24 @@
-import { api } from '@core/profile-manager'
 import {
+    AccountAddress,
     AddressType,
-    AliasAddress,
     FoundryId,
     FoundryOutput,
-    ImmutableAliasAddressUnlockCondition,
+    ImmutableAccountAddressUnlockCondition,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
+import { api } from '@core/api'
 
+// TODO(2.0) Alias outputs are gone 
 export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
-    const unlockCondition = foundry.unlockConditions[0] as ImmutableAliasAddressUnlockCondition
-    const isImmutableAliasAddress = unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
+    const unlockCondition = foundry.unlockConditions[0] as ImmutableAccountAddressUnlockCondition
+    const isImmutableAccountAddress = unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
 
     let aliasId = ''
 
-    if (isImmutableAliasAddress) {
-        const hasAliasAddress = unlockCondition.address.type === AddressType.Alias
-        if (hasAliasAddress) {
-            aliasId = (unlockCondition.address as AliasAddress).aliasId
+    if (isImmutableAccountAddress) {
+        const hasAccountAddress = unlockCondition.address.type === AddressType.Account
+        if (hasAccountAddress) {
+            aliasId = (unlockCondition.address as AccountAddress).accountId
         }
     }
 

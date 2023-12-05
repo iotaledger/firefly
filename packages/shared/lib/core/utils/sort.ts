@@ -1,8 +1,9 @@
-import { IAccount } from '@core/account/interfaces'
+import { IWallet } from '@core/profile'
 
-export function sortAccountsByIndex(account1: IAccount, account2: IAccount): number {
-    const index1 = account1.getMetadata()?.index
-    const index2 = account2.getMetadata()?.index
+// TODO(2.0) Wallets do not have indexes anymore
+export function sortAccountsByIndex(walletA: IWallet, walletB: IWallet): number {
+    const index1 = walletA.getMetadata()?.index
+    const index2 = walletB.getMetadata()?.index
     if (index1 < index2) {
         return -1
     } else if (index1 > index2) {

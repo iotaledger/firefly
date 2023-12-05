@@ -1,7 +1,7 @@
 import { ClientOptions } from '@core/network'
 import { activeProfile, updateActiveProfile } from '@core/profile'
-import { setClientOptions } from '@core/profile-manager'
 import { get } from 'svelte/store'
+import { setClientOptions } from '@core/wallet'
 
 /**
  * Update the client options for a profile.

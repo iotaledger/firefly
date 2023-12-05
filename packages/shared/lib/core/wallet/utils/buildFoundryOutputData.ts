@@ -1,25 +1,25 @@
 import {
-    ImmutableAliasAddressUnlockCondition,
     type FoundryOutputBuilderParams,
     type UnlockCondition,
-    AliasAddress,
     SimpleTokenScheme,
     MetadataFeature,
     Feature,
+    ImmutableAccountAddressUnlockCondition,
+    AccountAddress,
 } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { getSerialNumberFromAliasOutput } from './outputs/getSerialNumberFromAliasOutput'
-import { api } from '@core/profile-manager'
+import { api } from '@core/api'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
     circulatingSupply: number,
     metadata: IIrc30Metadata,
-    aliasId: string
+    accountId: string
 ): Promise<FoundryOutputBuilderParams> {
-    const immutableAliasUnlockCondition = new ImmutableAliasAddressUnlockCondition(
-        new AliasAddress(api.bech32ToHex(aliasId))
+    const immutableAliasUnlockCondition = new ImmutableAccountAddressUnlockCondition(
+        new AccountAddress(api.bech32ToHex(accountId))
     )
 
     const unlockConditions: UnlockCondition[] = [immutableAliasUnlockCondition]
@@ -30,7 +30,7 @@ export async function buildFoundryOutputData(
 
     const immutableFeatures: Feature[] = [metadataFeature]
 
-    const serialNumber = await getSerialNumberFromAliasOutput(aliasId)
+    const serialNumber = await getSerialNumberFromAliasOutput(accountId)
 
     return {
         serialNumber,

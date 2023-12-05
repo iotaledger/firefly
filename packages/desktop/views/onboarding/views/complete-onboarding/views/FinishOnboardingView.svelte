@@ -12,12 +12,12 @@
     import { localize } from '@core/i18n'
     import { checkOrConnectLedger } from '@core/ledger'
     import { ProfileType } from '@core/profile'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
     import { TextHintVariant } from 'shared/components/enums'
     import { TextType } from '@ui/enums'
     import { onboardingRouter } from '@views/onboarding/onboarding-router'
+    import { setStrongholdPassword } from '@core/wallet/actions/setStrongholdPassword'
 
     function onContinueClick(): void {
         if ($isOnboardingLedgerProfile) {

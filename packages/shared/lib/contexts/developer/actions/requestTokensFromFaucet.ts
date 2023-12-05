@@ -1,4 +1,4 @@
-import { selectedAccount } from '@core/account'
+import { selectedWallet } from '@core/wallet'
 import { localize } from '@core/i18n'
 import { FAUCET_URLS } from '@core/network'
 import { showAppNotification } from '@auxiliary/notification'
@@ -19,7 +19,7 @@ export async function requestTokensFromFaucet(): Promise<void> {
     const headers = new Headers()
     headers.append('Content-Type', 'application/json')
 
-    const address = get(selectedAccount)?.depositAddress
+    const address = get(selectedWallet)?.depositAddress
     const body = JSON.stringify({ address })
 
     const requestInit = {

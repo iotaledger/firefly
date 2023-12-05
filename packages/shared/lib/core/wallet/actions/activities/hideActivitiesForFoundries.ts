@@ -1,10 +1,10 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { updateActivityFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
 import { get } from 'svelte/store'
 import { ActivityType } from '../../enums'
 import { allAccountActivities } from '../../stores'
 
-export function hideActivitiesForFoundries(account: IAccountState): void {
+export function hideActivitiesForFoundries(account: IWalletState): void {
     const accountActivities = get(allAccountActivities)[account.index]
 
     const activities = accountActivities.filter((activity) => activity.type === ActivityType.Foundry)

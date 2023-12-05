@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
-    import { AccountColors } from '@core/account'
+    import { WalletColors } from '@core/wallet/enums'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, convertHexToRgba } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -9,7 +9,7 @@
     export let active: string = ''
     export let isCustomColorEnabled: boolean = false
 
-    const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
+    const accountColors = Object.values(WalletColors).filter((c) => /[#]/.test(c as string))
     const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
 
     let indexOfActiveElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
@@ -72,11 +72,11 @@
         }
     }
 
-    function getAccountColors(): string[] {
-        return Object.keys(AccountColors)
+    function getWalletColors(): string[] {
+        return Object.keys(WalletColors)
             .filter((key) => key.startsWith('#'))
             .map((key) => {
-                const color = AccountColors[key as keyof typeof AccountColors].toString().toLowerCase()
+                const color = WalletColors[key as keyof typeof WalletColors].toString().toLowerCase()
                 return `bg-${color}-500 hover:bg-${color}-600`
             })
     }
@@ -92,7 +92,7 @@
         </title-container>
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each getAccountColors() as color, i}
+        {#each getWalletColors() as color, i}
             <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}

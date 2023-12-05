@@ -14,7 +14,7 @@ export const validateProfileName = (trimmedName: string): void => {
     const validateError = validateFilenameChars(trimmedName)
 
     if (validateError) {
-        throw new Error(localize(`error.account.${validateError}`))
+        throw new Error(localize(`error.wallet.${validateError}`))
     }
 
     if (getTrimmedLength(trimmedName) > MAX_PROFILE_NAME_LENGTH) {

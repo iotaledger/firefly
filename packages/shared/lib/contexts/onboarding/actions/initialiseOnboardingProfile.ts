@@ -1,5 +1,5 @@
 import { stopPollingLedgerNanoStatus } from '@core/ledger'
-import { destroyProfileManager, profileManager } from '@core/profile-manager'
+import { clearProfileFromMemory } from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingProfileManagerAlreadyInitializedError } from '../errors'
 import { buildInitialOnboardingProfile } from '../helpers'
@@ -12,12 +12,13 @@ export async function initialiseOnboardingProfile(
     isDeveloperProfile: boolean,
     destroyPreviousManager = false
 ): Promise<void> {
+    // TODO(2.0) Refactor this logic
     if (get(profileManager)) {
         if (destroyPreviousManager) {
             if (get(isOnboardingLedgerProfile)) {
                 stopPollingLedgerNanoStatus()
             }
-            await destroyProfileManager()
+            await clearProfileFromMemory()
         } else {
             throw new OnboardingProfileManagerAlreadyInitializedError()
         }

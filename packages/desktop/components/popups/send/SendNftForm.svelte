@@ -4,7 +4,7 @@
     import { Button, Error, NetworkInput, NftInput, OptionalInput, RecipientInput } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { Output } from '@iota/sdk/out/types'
     import {
         getDefaultTransactionOptions,
@@ -16,7 +16,7 @@
     } from '@core/wallet'
     import features from '@features/features'
     import { activeProfile } from '@core/profile'
-    import { prepareOutput } from '@core/account'
+    import { prepareOutput } from '@core/wallet'
     import { handleError } from '@core/error/handlers'
     import { MAX_METADATA_BYTES, MAX_TAG_BYTES } from '@core/utils'
     import { OptionalInputType } from '@core/wallet/utils/send/sendUtils'
@@ -63,7 +63,7 @@
             tag,
             metadata,
             layer2Parameters: isLayer2Transfer
-                ? { networkAddress: iscpChainAddress, senderAddress: $selectedAccount.depositAddress }
+                ? { networkAddress: iscpChainAddress, senderAddress: $selectedWallet.depositAddress }
                 : null,
             disableAssetSelection,
         })
@@ -73,7 +73,7 @@
     $: nftId, !showLayer2 && networkInput?.reset()
 
     onMount(() => {
-        if (Number($selectedAccount.balances.baseCoin.available) === 0) {
+        if (Number($selectedWallet.balances.baseCoin.available) === 0) {
             giftStorageDeposit = true
             disableChangeExpiration = true
             disableToggleGift = true
@@ -86,7 +86,7 @@
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
-            preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
+            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
         } catch (err) {
             handleError(err)
         } finally {

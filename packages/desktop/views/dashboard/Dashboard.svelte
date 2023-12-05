@@ -26,9 +26,9 @@
         interruptNftDownloadAfterTimeout,
         nftDownloadQueue,
         resetNftDownloadQueue,
-        selectedAccountNfts,
+        selectedWalletNfts,
     } from '@core/nfts'
-    import { selectedAccountIndex } from '@core/account'
+    import { selectedWalletId } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
     import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
@@ -49,15 +49,15 @@
 
     $: $hasStrongholdLocked && reflectLockedStronghold()
     $: $nftDownloadQueue, downloadNextNftInQueue()
-    $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedAccountIndex))
-    $: addSelectedAccountNftsToDownloadQueue($selectedAccountIndex)
+    $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedWalletId))
+    $: addselectedWalletNftsToDownloadQueue($selectedWalletId)
 
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })
 
-    function addSelectedAccountNftsToDownloadQueue(accountIndex: number): void {
+    function addselectedWalletNftsToDownloadQueue(accountIndex: number): void {
         resetNftDownloadQueue()
-        void addNftsToDownloadQueue(accountIndex, $selectedAccountNfts)
+        void addNftsToDownloadQueue(accountIndex, $selectedWalletNfts)
     }
 
     function handleDeepLinkRequest(data: string): void {

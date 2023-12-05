@@ -1502,7 +1502,7 @@
         "myAccounts": "Moji novčanici",
         "profiles": "Profili",
         "dev": "Programer",
-        "createAccount": "Stvori novčanik",
+        "createWallet": "Stvori novčanik",
         "addAWallet": "Dodaj novčanik",
         "accountName": "Ime novčanika",
         "latestTransactions": "Najnovije transakcije",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Ime novčanika ne smije biti dulje od {length, plural, one {# znaka} few {# znaka} other {# znakova}}.",
             "emptyName": "Ime profila mora sadržavati najmanje 1 znak.",

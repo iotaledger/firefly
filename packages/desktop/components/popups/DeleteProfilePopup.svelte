@@ -2,9 +2,9 @@
     import { Button, PasswordInput, Text, ButtonVariant } from 'shared/components'
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { closePopup } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
+    import { setStrongholdPassword } from '@core/wallet'
 
     let isBusy = false
     let error = ''

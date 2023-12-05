@@ -7,14 +7,14 @@
         getAssetFromPersistedAssets,
         getFormattedAmountFromActivity,
         getSubjectLocaleFromActivity,
-        selectedAccountAssets,
+        selectedWalletAssets,
     } from '@core/wallet'
     import { ActivityTileContent, AssetIcon } from 'shared/components'
 
     export let activity: VestingActivity
 
     let asset: IPersistedAsset
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
+    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: action = localize(getActivityTileTitle(activity))
     $: subject = getSubjectLocaleFromActivity(activity)
     $: amount = getFormattedAmountFromActivity(activity)

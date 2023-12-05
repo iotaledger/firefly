@@ -1,12 +1,13 @@
-import { allAccountNfts } from '../stores'
+import { allWalletNfts } from '../stores'
 import { INft } from '../interfaces'
 
-export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, partialNft: Partial<INft>): void {
-    allAccountNfts.update((state) => {
-        if (!state[accountIndex]) {
-            state[accountIndex] = []
+// TODO(2.0) Fix usages
+export function updateNftInAllAccountNfts(walletId: string, nftId: string, partialNft: Partial<INft>): void {
+    allWalletNfts.update((state) => {
+        if (!state[walletId]) {
+            state[walletId] = []
         }
-        const nft = state[accountIndex].find((_nft) => _nft.id === nftId)
+        const nft = state[walletId].find((_nft) => _nft.id === nftId)
         if (nft) {
             Object.assign(nft, { ...nft, ...partialNft })
         }

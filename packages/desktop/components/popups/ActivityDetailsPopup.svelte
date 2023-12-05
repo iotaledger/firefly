@@ -12,7 +12,7 @@
         ActivityType,
         claimActivity,
         rejectActivity,
-        selectedAccountActivities,
+        selectedWalletActivities,
     } from '@core/wallet'
     import {
         ActivityInformation,
@@ -35,7 +35,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: activity = $selectedAccountActivities.find((_activity) => _activity.id === activityId)
+    $: activity = $selectedWalletActivities.find((_activity) => _activity.id === activityId)
     $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
         activity?.asyncData &&

@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje portfele",
         "profiles": "Profile",
         "dev": "Deweloper",
-        "createAccount": "Utwórz portfel",
+        "createWallet": "Utwórz portfel",
         "addAWallet": "Dodaj portfel",
         "accountName": "Nazwa portfela",
         "latestTransactions": "Ostatnie transakcje",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Nieprawidłowy typ adresu"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "Adres nie może zostać odnaleziony na Twoim koncie.",
             "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "emptyName": "Nazwa profilu musi zawierać co najmniej 1 znak.",

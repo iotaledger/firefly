@@ -1,11 +1,11 @@
-import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
+import { IShimmerClaimingWallet, ShimmerClaimingWalletState } from '@contexts/onboarding'
 
-export function canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+export function canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts: IShimmerClaimingWallet[]): boolean {
     return shimmerClaimingAccounts?.every((shimmerClaimingAccount) => {
         const { state } = shimmerClaimingAccount
         return (
-            state === ShimmerClaimingAccountState.UnclaimedWithoutRewards ||
-            state === ShimmerClaimingAccountState.FullyClaimed
+            state === ShimmerClaimingWalletState.UnclaimedWithoutRewards ||
+            state === ShimmerClaimingWalletState.FullyClaimed
         )
     })
 }

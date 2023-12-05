@@ -2,13 +2,13 @@
     import { Button, PasswordInput, Text, Error, ButtonVariant, HTMLButtonType, TextHint, TextType } from '@ui'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { isSoftwareProfile } from '@core/profile'
-    import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { TextHintVariant } from 'shared/components/enums'
+    import { selectedWallet } from '@core/wallet/stores'
+    import { setStrongholdPassword } from '@core/wallet/actions'
 
-    export let deleteAccount: (index: number) => Promise<void> = async () => {}
+    export let deleteWallet: (walletId: string) => Promise<void> = async () => {}
 
     let password: string
     let error: string
@@ -26,7 +26,7 @@
             if ($isSoftwareProfile) {
                 await setStrongholdPassword(password)
             }
-            await deleteAccount($selectedAccount?.index)
+            await deleteWallet($selectedWallet.id)
             closePopup()
         } catch (err) {
             error = err.error
@@ -42,7 +42,7 @@
 <div class="mb-5">
     <Text type={TextType.h4}>
         {localize('popups.deleteAccount.title', {
-            values: { name: $selectedAccount?.name },
+            values: { name: $selectedWallet?.name },
         })}
     </Text>
 </div>

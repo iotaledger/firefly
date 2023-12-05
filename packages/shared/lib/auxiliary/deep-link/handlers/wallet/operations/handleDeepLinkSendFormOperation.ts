@@ -2,7 +2,7 @@ import {
     NewTransactionDetails,
     Subject,
     setNewTransactionDetails,
-    selectedAccountAssets,
+    selectedWalletAssets,
     getAssetById,
     NewTransactionType,
     getUnitFromTokenMetadata,
@@ -41,7 +41,7 @@ function parseSendFormOperation(searchParams: URLSearchParams): NewTransactionDe
     const assetId = searchParams.get(SendOperationParameter.AssetId)
 
     const networkId = getActiveNetworkId()
-    const baseAsset = networkId ? get(selectedAccountAssets)[networkId].baseCoin : undefined
+    const baseAsset = networkId ? get(selectedWalletAssets)[networkId].baseCoin : undefined
     const asset = assetId && networkId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()

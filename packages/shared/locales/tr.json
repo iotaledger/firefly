@@ -1502,7 +1502,7 @@
         "myAccounts": "Cüzdanlarım",
         "profiles": "Profiller",
         "dev": "Geliştirici",
-        "createAccount": "Cüzdan Oluştur",
+        "createWallet": "Cüzdan Oluştur",
         "addAWallet": "Cüzdan ekle",
         "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Cüzdan adınız şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n",
             "emptyName": "hata -> hesap -> boş ad",

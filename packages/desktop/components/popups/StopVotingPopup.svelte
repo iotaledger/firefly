@@ -5,11 +5,11 @@
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { checkActiveProfileAuth } from '@core/profile/actions'
 
     $: hasGovernanceTransactionInProgress =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+        $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress
 
     function onCancelClick(): void {
         closePopup()

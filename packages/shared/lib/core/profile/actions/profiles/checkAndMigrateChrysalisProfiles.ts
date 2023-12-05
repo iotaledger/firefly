@@ -1,4 +1,4 @@
-import { IPersistedAccountData } from '@core/account/interfaces'
+import { IPersistedWalletData } from '@core/wallet/interfaces'
 import { MarketCurrency } from '@core/market'
 import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
 import { INode } from '@core/network/interfaces'
@@ -40,7 +40,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
             // accountPersistedData
             if (chrysalisProfile.accounts) {
                 const accountPersistedData: {
-                    [accountId: string]: IPersistedAccountData
+                    [accountId: string]: IPersistedWalletData
                 } = {}
                 chrysalisProfile.accounts.forEach((account, index) => {
                     accountPersistedData[index] = {

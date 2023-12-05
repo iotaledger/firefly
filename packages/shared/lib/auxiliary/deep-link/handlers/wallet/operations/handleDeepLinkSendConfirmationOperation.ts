@@ -7,7 +7,7 @@ import {
     SubjectType,
     getAssetById,
     getUnitFromTokenMetadata,
-    selectedAccountAssets,
+    selectedWalletAssets,
     setNewTransactionDetails,
 } from '@core/wallet'
 import { get } from 'svelte/store'
@@ -65,7 +65,7 @@ function parseSendConfirmationOperation(searchParams: URLSearchParams): NewTrans
     assetId && validateAssetId(assetId)
 
     const networkId = getActiveNetworkId()
-    const baseAsset = networkId ? get(selectedAccountAssets)[networkId].baseCoin : undefined
+    const baseAsset = networkId ? get(selectedWalletAssets)[networkId].baseCoin : undefined
     const asset = assetId && networkId ? getAssetById(assetId, networkId) : baseAsset
     if (!asset) {
         throw new UnknownAssetError()

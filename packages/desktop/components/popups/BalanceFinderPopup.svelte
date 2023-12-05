@@ -3,7 +3,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findBalances, sumBalanceForAccounts, SearchAlgorithmType, selectedAccountIndex } from '@core/account'
+    import { findBalances, sumBalanceForWallets, SearchAlgorithmType, selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { NetworkId } from '@core/network'
@@ -13,8 +13,8 @@
         getBaseToken,
         isActiveLedgerProfile,
         isSoftwareProfile,
-        loadAccounts,
-        visibleActiveAccounts,
+        loadWallets,
+        visibleActiveWallets,
     } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
@@ -52,15 +52,15 @@
 
     const { isStrongholdLocked, network } = $activeProfile
 
-    $: isTransferring = $visibleActiveAccounts.some(
-        (account) => account.hasConsolidatingOutputsTransactionInProgress || account.isTransferring
+    $: isTransferring = $visibleActiveWallets.some(
+        (_wallet) => _wallet.hasConsolidatingOutputsTransactionInProgress || _wallet.isTransferring
     )
     $: visibleWalletList = searchInCurrentWallet
-        ? $visibleActiveAccounts?.filter((account) => account.index === $selectedAccountIndex)
-        : $visibleActiveAccounts
+        ? $visibleActiveWallets?.filter((_wallet) => _wallet.id === $selectedWalletId)
+        : $visibleActiveWallets
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
     $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
-    $: totalBalance = sumBalanceForAccounts($visibleActiveAccounts)
+    $: totalBalance = sumBalanceForWallets($visibleActiveWallets)
     $: searchInCurrentWallet, (shouldInitSearch = true)
     $: searchAlgorithm = searchInCurrentWallet
         ? SearchAlgorithmType.DFS
@@ -94,7 +94,7 @@
     // Actions
     async function findProfileBalances(): Promise<void> {
         await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
-        await loadAccounts()
+        await loadWallets()
         hasUsedBalanceFinder = true
         shouldInitSearch = false
     }
@@ -102,8 +102,8 @@
     async function consolidateProfileAccounts(): Promise<void> {
         const consolidationPromises: Promise<void>[] = []
 
-        for (const account of get(visibleActiveAccounts)) {
-            consolidationPromises.push(consolidateOutputs(account))
+        for (const wallet of get(visibleActiveWallets)) {
+            consolidationPromises.push(consolidateOutputs(wallet))
         }
 
         await Promise.all(consolidationPromises)

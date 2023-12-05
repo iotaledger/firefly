@@ -1,12 +1,12 @@
 import { derived, Readable } from 'svelte/store'
-import { selectedAccountVestingOutputs } from '.'
+import { selectedWalletVestingOutputs } from '.'
 import { IVestingOutput } from '../interfaces'
 import { isVestingOutputTimeLocked } from '../utils'
 
-export const selectedAccountVestingUnclaimedFunds: Readable<number> = derived(
-    selectedAccountVestingOutputs,
-    ($selectedAccountVestingOutputs) => {
-        const allVestingOutputs = $selectedAccountVestingOutputs.flatMap(({ outputs }) => outputs) ?? []
+export const selectedWalletVestingUnclaimedFunds: Readable<number> = derived(
+    selectedWalletVestingOutputs,
+    ($selectedWalletVestingOutputs) => {
+        const allVestingOutputs = $selectedWalletVestingOutputs.flatMap(({ outputs }) => outputs) ?? []
         const unclaimedOutputs = allVestingOutputs.filter(
             (output) => !isVestingOutputTimeLocked(output) && !output.isSpent
         )

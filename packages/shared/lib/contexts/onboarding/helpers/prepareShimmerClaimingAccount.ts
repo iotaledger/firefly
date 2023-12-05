@@ -2,23 +2,27 @@ import { get } from 'svelte/store'
 
 import { Transaction } from '@iota/sdk/out/types'
 
-import { IAccount, sumTotalFromOutputs, syncAccountsInParallel, syncAccountsInSeries } from '@core/account'
 import { filterShimmerClaimingOutputs } from '@core/utils'
 
 import { SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
-import { ShimmerClaimingAccountState } from '../enums'
-import { IShimmerClaimingAccount } from '../interfaces'
+import { ShimmerClaimingWalletState } from '../enums'
+import { IShimmerClaimingWallet } from '../interfaces'
 import { isOnboardingLedgerProfile } from '../stores'
 
-import { deriveShimmerClaimingAccountState } from './deriveShimmerClaimingAccountState'
+import { deriveShimmerClaimingWalletState } from './deriveShimmerClaimingWalletState'
+import { IWallet } from '@core/profile'
+import { syncWalletsInSeries, syncWalletsInParallel } from '@core/wallet/utils'
+import { sumTotalFromOutputs } from '@core/wallet'
+
+// TODO(2.0) Fix code
 
 export async function prepareShimmerClaimingAccount(
-    account: IAccount,
-    twinAccount?: IAccount,
+    wallet: IWallet,
+    twinWallet?: IWallet,
     syncAccounts?: boolean,
-    state?: ShimmerClaimingAccountState,
+    state?: ShimmerClaimingWalletState,
     claimingTransaction?: Transaction
-): Promise<IShimmerClaimingAccount> {
+): Promise<IShimmerClaimingWallet> {
     if (syncAccounts) {
         if (get(isOnboardingLedgerProfile)) {
             /**
@@ -27,13 +31,13 @@ export async function prepareShimmerClaimingAccount(
              * the device from multiple profile managers at once),
              * we sync the accounts in series.
              */
-            await syncAccountsInSeries(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, account, twinAccount)
+            await syncWalletsInSeries(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, wallet, twinWallet)
         } else {
-            await syncAccountsInParallel(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, account, twinAccount)
+            await syncWalletsInParallel(SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS, wallet, twinWallet)
         }
     }
 
-    const twinUnspentOutputs = await twinAccount?.unspentOutputs()
+    const twinUnspentOutputs = await twinWallet?.unspentOutputs()
     const claimedRewards = sumTotalFromOutputs(twinUnspentOutputs)
 
     /**
@@ -43,7 +47,7 @@ export async function prepareShimmerClaimingAccount(
     const unspentOutputs = (await account?.unspentOutputs())?.filter(filterShimmerClaimingOutputs)
     const unclaimedRewards = sumTotalFromOutputs(unspentOutputs)
 
-    state = state ?? deriveShimmerClaimingAccountState(claimedRewards, unclaimedRewards)
+    state = state ?? deriveShimmerClaimingWalletState(claimedRewards, unclaimedRewards)
 
     return {
         ...account,

@@ -109,44 +109,49 @@ try {
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         ...methods,
         async createSecretManager(options) {
-            const manager = new IotaSdk.SecretManager(options);
+            const manager = new IotaSdk.SecretManager(options)
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
-        // rename to createWallet
-        async createAccount(id, options) {
+        // TODO(2.0): rename to createWallet
+        async createWallet(id, options) {
             const wallet = new IotaSdk.Wallet(options)
             wallet.id = id
             wallets[id] = wallet
             bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             return wallet
         },
+        // TODO(2.0): also remove from file system
         deleteWallet(id) {
             if (id && id in wallets) {
+                const wallet = wallets[id]
+                wallet.destroy()
                 delete wallets[id]
             }
         },
-        async getAccount(managerId, index) {
-            const manager = wallets[managerId]
-            const account = await manager.getAccount(index)
-            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
-            return account
+        // TODO(2.0): Rename this to getWallet and fix all usages
+        async getWallet(id, walletOptions) {
+            let wallet = wallets[id]
+            if (!wallet) {
+                wallet = new IotaSdk.Wallet(walletOptions)
+                wallets[id] = wallet
+                bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, wallet)
+            }
+            return wallet
         },
-        async getAccounts(managerId, options) {
-            const accounts = [
-                new IotaSdk.Wallet({
-                    ...options,
-                    id: `${managerId}-0`
-                })
-            ]
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
-            return accounts
-        },
+        // TODO(2.0): remove this method from here and move to new profile
         async recoverAccounts(managerId, payload) {
             const manager = wallets[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))
             accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
             return accounts
+        },
+        clearWalletsFromMemory() {
+            Object.keys(wallets).forEach((id) => {
+                const wallet = wallets[id]
+                wallet.destroy()
+                delete wallets[id]
+            })
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'

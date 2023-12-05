@@ -1502,7 +1502,7 @@
         "myAccounts": "Lommebøkene mine",
         "profiles": "Profiler",
         "dev": "Utvikling",
-        "createAccount": "Opprette lommebok",
+        "createWallet": "Opprette lommebok",
         "addAWallet": "Add a wallet",
         "accountName": "Navn på lommebok",
         "latestTransactions": "Siste transaksjoner",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "account": {
+        "wallet": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

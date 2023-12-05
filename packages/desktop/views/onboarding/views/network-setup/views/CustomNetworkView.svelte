@@ -14,7 +14,7 @@
         getEnabledNetworkFromFeatureFlags,
         getNetworkIdFromNetworkName,
     } from '@core/network'
-    import { getNodeInfo } from '@core/profile-manager'
+    import { getNodeInfo } from '@core/wallet/actions'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { networkSetupRouter } from '../network-setup-router'

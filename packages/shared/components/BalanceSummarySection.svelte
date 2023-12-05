@@ -1,7 +1,7 @@
 <script lang="ts">
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
@@ -15,7 +15,7 @@
     let expanded: boolean = false
 
     $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
-    $: ({ baseCoin } = $selectedAccountAssets?.[$activeProfile?.network?.id] ?? {})
+    $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getAmount(amount: number): string {
         return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''

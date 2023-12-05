@@ -1,13 +1,12 @@
 import { get } from 'svelte/store'
 import { showAppNotification } from '@auxiliary/notification'
-import { selectedAccount, updateSelectedAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
 import { CreateNativeTokenParams, PreparedTransaction } from '@iota/sdk/out/types'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
-import { resetMintTokenDetails } from '../stores'
+import { getSelectedWallet, resetMintTokenDetails, updateSelectedWallet } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { plainToInstance } from 'class-transformer'
 import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
@@ -18,15 +17,15 @@ export async function createNativeToken(
     metadata: IIrc30Metadata
 ): Promise<void> {
     try {
-        updateSelectedAccount({ isTransferring: true })
-        const account = get(selectedAccount)
+        updateSelectedWallet({ isTransferring: true })
+        const wallet = getSelectedWallet();
         const params: CreateNativeTokenParams = {
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),
             foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
         }
 
-        const preparedNativeTokenTransaction = await account?.prepareCreateNativeToken(
+        const preparedNativeTokenTransaction = await wallet?.prepareCreateNativeToken(
             params,
             getDefaultTransactionOptions()
         )
@@ -39,7 +38,7 @@ export async function createNativeToken(
         )
         addPersistedAsset(persistedAsset)
 
-        await processAndAddToActivities(transaction, account)
+        await processAndAddToActivities(transaction, wallet)
 
         showAppNotification({
             type: 'success',
@@ -50,6 +49,6 @@ export async function createNativeToken(
     } catch (err) {
         return Promise.reject(err)
     } finally {
-        updateSelectedAccount({ isTransferring: false })
+        updateSelectedWallet({ isTransferring: false })
     }
 }
