@@ -31,6 +31,7 @@
     async function onAddProfileClick(): Promise<void> {
         onboardingRouter.set(new OnboardingRouter())
         await initialiseOnboardingProfile(shouldBeDeveloperProfile())
+        console.log("shuld be created")
         $routerManager.goToAppContext(AppContext.Onboarding)
     }
 

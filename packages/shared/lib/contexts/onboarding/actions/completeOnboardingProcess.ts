@@ -11,9 +11,12 @@ export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
     // it means we are trying to load again after an error
     // and we don't need to add it again
+    console.log(get(activeProfile), get(onboardingProfile))
     if (!get(activeProfile)?.id) {
         createNewProfileFromOnboardingProfile()
     }
+
+    console.log(get(activeProfile))
 
     const onboardingType = get(onboardingProfile)?.onboardingType
     const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
@@ -31,8 +34,12 @@ export async function createOnboardingWallet(name?: string, color?: string): Pro
     // 1. Get the wallet name
     const walletName = name || `${localize('general.account')} ${(get(activeWallets)?.length ?? 0) + 1}`;
 
+    console.log("walletName", walletName)
+
     // 2. Create the wallet instance
     const wallet = await createWallet()
+
+    console.log("wallet", wallet)
 
     // 3. Sync the wallet with the Node
     // TODO(2.0): test & fix sync when we have iota2.0 nodes
@@ -40,6 +47,8 @@ export async function createOnboardingWallet(name?: string, color?: string): Pro
 
     // 4. Create a wrapper over the wallet instance and the persisted data
     const [walletState, accountPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
+
+    console.log("walletState", walletState, accountPersistedData)
 
     // TODO(2.0) Fix
     // addAccountToActiveAccounts(walletState)

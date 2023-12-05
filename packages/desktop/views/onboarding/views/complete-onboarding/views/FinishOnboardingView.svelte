@@ -28,6 +28,7 @@
     }
 
     async function _continue(): Promise<void> {
+        console.log($onboardingProfile)
         // Note: needed to cover the cases where the user has waited so long that the stronghold is locked
         if ($onboardingProfile?.restoreProfileType === RestoreProfileType.Stronghold) {
             await setStrongholdPassword($onboardingProfile.strongholdPassword)

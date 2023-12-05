@@ -3,7 +3,7 @@ import { generateRandomId } from '@core/utils'
 import { get } from 'svelte/store'
 import { IWallet } from '../interfaces'
 import { activeProfile as activeProfileStore } from '../stores'
-import { getStorageDirectoryOfProfile } from '../utils'
+import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '../utils'
 
 // TODO(2.0): Fix and finish this method
 /* - __storage__/
@@ -19,16 +19,20 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
 
     const walletOptions = {
         clientOptions: activeProfile.clientOptions,
-        secretManager: {
-            stronghold: {
-                snapshotPath,
-            },
-        },
+        secretManager: getSecretManagerFromProfileType(activeProfile.type, storagePath),
+        bipPath: {
+            coinType: activeProfile.network.coinType
+        }
     }
+    console.log("walletOptions", walletOptions);
+
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,
     })
+
+    console.log("wallet", wallet);
+    
 
     return wallet
 }
