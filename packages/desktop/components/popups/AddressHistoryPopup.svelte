@@ -1,13 +1,20 @@
 <script lang="ts">
     import { getSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { truncateString } from '@core/utils'
+    import { setClipboard, truncateString } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
+    import { Icon } from '@ui'
+    import { Icon as IconEnum } from '@auxiliary/icon'
 
     let addressList: AccountAddress[] | undefined = undefined
+
+    function onCopyClick(): void {
+        const addresses = addressList.map((address) => address.address).join(',')
+        setClipboard(addresses)
+    }
 
     onMount(() => {
         getSelectedAccount()
@@ -26,7 +33,12 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.addressHistory.title')}
     </Text>
-    <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.addressHistory.disclaimer')}</Text>
+    <div class="flex w-full items-center justify-between">
+        <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.addressHistory.disclaimer')}</Text>
+        <button on:click={onCopyClick} class="text-gray-500 dark:text-gray-100 p2" type="button">
+            <Icon icon={IconEnum.Copy} />
+        </button>
+    </div>
     {#if addressList}
         {#if addressList.length > 0}
             <div class="w-full flex-col space-y-2 virtual-list-wrapper">
