@@ -1,19 +1,21 @@
-const URL =
-  "https://archive.evm.shimmer.shimmer.network/v1/chains/smr1prxvwqvwf7nru5q5xvh5thwg54zsm2y4wfnk6yk56hj3exxkg92mx20wl3s/core/accounts/account/{address}/balance";
+import { get } from 'svelte/store'
+import { activeProfile } from '@core/profile'
+import { DEFAULT_CHAIN_CONFIGURATIONS } from '@core/network'
 
 interface Response {
-  baseTokens: number;
+    baseTokens: number
 }
 
+export async function withdrawFunds(address: string): Promise<number> {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
+    // todo: change to withdraw endpoint
+    const URL = `${defaultChainConfig?.archiveEndpoint}/core/accounts/account/${address}/balance`
 
-export async function withdrawFunds(address: string) {
-  const url = URL.replace("{address}", address);
-  try {
-    const res: Response = await fetch(url)
-      .then((r) => r.json());
+    try {
+        const res: Response = await fetch(URL).then((r) => r.json())
 
-    return res.baseTokens;
-  } catch (_) {
-    return 0;
-  }
+        return res.baseTokens
+    } catch (_) {
+        return 0
+    }
 }
