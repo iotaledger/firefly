@@ -11,19 +11,23 @@ export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
     // it means we are trying to load again after an error
     // and we don't need to add it again
-    console.log(get(activeProfile), get(onboardingProfile))
+    console.log("get(activeProfile), get(onboardingProfile)", get(activeProfile), get(onboardingProfile))
     if (!get(activeProfile)?.id) {
         createNewProfileFromOnboardingProfile()
     }
 
-    console.log(get(activeProfile))
+    console.log("post createNewProfileFromOnboardingProfile", get(activeProfile))
 
     const onboardingType = get(onboardingProfile)?.onboardingType
     const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverAccounts)
 
+    console.log("pre createOnboardingWallet -----")
 
     await createOnboardingWallet()
+
+    console.log("post  createOnboardingWallet and pre login");
+    
     
     void login({ isFromOnboardingFlow: true, shouldRecoverAccounts })
 
