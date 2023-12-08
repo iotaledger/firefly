@@ -272,7 +272,7 @@
             isBusy={isTransferring ||
                 isPreparingOutput ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
-            busyMessage={isPreparingOutput ? localize('general.transferPreparedTransaction') : ''}
+            busyMessage={isPreparingOutput ? 'Preparing' : ''}
         >
             {localize('actions.send')}
         </Button>

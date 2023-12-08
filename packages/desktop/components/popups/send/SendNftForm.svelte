@@ -167,7 +167,7 @@
             onClick={onContinueClick}
             disabled={isTransferring || isPreparingOutput}
             isBusy={isTransferring || isPreparingOutput}
-            busyMessage={isPreparingOutput ? localize('general.transferPreparedTransaction') : ''}
+            busyMessage={isPreparingOutput ? 'Preparing' : ''}
         >
             {localize('actions.next')}
         </Button>
