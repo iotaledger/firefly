@@ -54,7 +54,7 @@
             const chronicleRoot = CHRONICLE_URLS[network][0]
             searchURL = `${chronicleRoot}${CHRONICLE_ADDRESS_HISTORY_ROUTE}`
         } else {
-            error = 'Chronicle not configured'
+            error = localize('popups.addressHistory.errorNoChronicle')
         }
     })
 
@@ -65,7 +65,7 @@
             return addressHistory?.items?.length > 0
         } catch (err) {
             console.error(err)
-            error = 'Couldn\'t fetch address history'
+            error = localize('popups.addressHistory.errorFailedFetch')
         }
     }
 
@@ -83,7 +83,7 @@
             } while (knownAddresses.map((accountAddress) => accountAddress.address).includes(nextUnknownAddress))
         } catch (err) {
             console.error(err)
-            error = 'Couldn\'t generate a new address'
+            error = localize('popups.addressHistory.errorFailedGenerate')
         }
 
         return [nextUnknownAddress, searchAddressStartIndex - 1]
