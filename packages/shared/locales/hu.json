@@ -812,12 +812,6 @@
             "errorBody2": "{balance} összeg van a tárcájában. Kérjük, küldje át ezt az összeget egy másik tárcájába, majd próbálja újra.",
             "errorBody3": "Nem tudja elrejteni ezt a tárcát, legalább eggyel rendelkeznie kell."
         },
-        "addressHistory": {
-            "title": "{name} korábban használt címei",
-            "currentBalance": "Egyenleg: {balance}",
-            "internal": "Tárcán belüli cím",
-            "external": "Letéti cím"
-        },
         "excludeNode": {
             "title": "Csomópont mellőzése",
             "body": "Biztosan szeretné a(z) {url} URL-t mellőzni az elérhető csomópontok listájában?"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Hitelesítés szükséges",
             "body": "Ez a csomópont további hitelesítést igényel. Kérjük, adja meg a megfelelő adatokat!"
+        },
+        "addressHistory": {
+            "title": "Címek előzményei",
+            "disclaimer": "A pénzeszközökkel rendelkező vagy a jelen profil által ismert címek listája",
+            "indexAndType": "{internal, select, true {Tárcán belüli cím} other {Letéti cím}} {index}",
+            "internal": "Tárcán belüli"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Mentés",
         "importSeed": "Meglévő seed importálása",
         "restoreWallet": {
-            "iota": "Tárca átköltöztetése vagy helyreállítása",
+            "iota": "IOTA-profil helyreállítása",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Shimmer-profil helyreállítása",
             "testnet": "Teszt hálózati profil helyreállítása",
             "custom": "Egyéni hálózati profil helyreállítása"
         },
         "restoreWalletDescription": {
-            "iota": "Költöztetés a Chrysalis-hálózatra vagy egy meglévő tárca helyreállítása",
+            "iota": "Meglévő IOTA-profil helyreállítása",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Egy meglévő Shimmer-profil helyreállítása",
             "testnet": "Meglévő teszt hálózati profil helyreállítása",
@@ -1338,6 +1338,7 @@
         "visitFaq": "GYIK megtekintése",
         "viewDownloads": "Letöltések megtekintése",
         "viewStatus": "Állapot megtekintése",
+        "viewAddressHistory": "Címek előzményeinek megjelenítése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
         "verifyDepositAddress": "Letéti cím megerősítése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
@@ -1964,7 +1965,8 @@
             "reservedTagKeyword": "Nem használható fenntartott tag kulcsszó"
         },
         "layer2": {
-            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára."
+            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",

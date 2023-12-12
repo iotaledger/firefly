@@ -1240,14 +1240,14 @@
         "save": "Save",
         "importSeed": "Import an existing seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1972,7 +1972,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Please enter a valid URL.",
