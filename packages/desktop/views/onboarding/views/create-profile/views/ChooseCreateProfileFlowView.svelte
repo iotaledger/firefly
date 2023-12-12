@@ -2,12 +2,11 @@
     import { OnboardingLayout } from '@components'
     import {
         CreateProfileType,
-        initialiseProfileManagerFromOnboardingProfile,
         onboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { ProfileType, clearProfileFromMemory, removeProfileFolder } from '@core/profile'
+    import { ProfileType, clearProfileFromMemory, getSecretManagerFromProfileType, getStorageDirectoryOfProfile, removeProfileFolder } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
@@ -27,8 +26,10 @@
     async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
         isBusy = { ...isBusy, [createProfileType]: true }
         const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        updateOnboardingProfile({ createProfileType, type })
-        await initialiseProfileManagerFromOnboardingProfile()
+        const storagePath = await getStorageDirectoryOfProfile($onboardingProfile.id)
+        const secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
+        console.log("secretManagerOptions", secretManagerOptions)
+        updateOnboardingProfile({ createProfileType, type, secretManagerOptions })
         $createProfileRouter.next()
     }
 

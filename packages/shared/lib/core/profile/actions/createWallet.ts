@@ -3,7 +3,8 @@ import { generateRandomId } from '@core/utils'
 import { get } from 'svelte/store'
 import { IWallet } from '../interfaces'
 import { activeProfile as activeProfileStore } from '../stores'
-import { getStorageDirectoryOfProfile } from '../utils'
+import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '../utils'
+import { WalletOptions } from '@iota/sdk'
 
 // TODO(2.0): Fix and finish this method
 /* - __storage__/
@@ -15,20 +16,22 @@ import { getStorageDirectoryOfProfile } from '../utils'
 export async function createWallet(activeProfile = get(activeProfileStore)): Promise<IWallet> {
     const id = generateRandomId()
     const storagePath = await getStorageDirectoryOfProfile(id)
-    const snapshotPath = ''
+    // const snapshotPath = ''
 
-    const walletOptions = {
+    const walletOptions: WalletOptions = {
         clientOptions: activeProfile.clientOptions,
-        secretManager: {
-            stronghold: {
-                snapshotPath,
-            },
+        secretManager: getSecretManagerFromProfileType(activeProfile.type, storagePath),
+        bipPath: {
+            coinType: activeProfile.network.coinType,
+            account: 0,
+            addressIndex: 0
         },
+        coinType: activeProfile.network.coinType
     }
+    console.log("walletOptions", walletOptions);
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,
     })
-
     return wallet
 }

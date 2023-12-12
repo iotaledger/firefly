@@ -21,12 +21,14 @@ export async function buildWalletState(
             basic: BigInt(0),
             foundry: BigInt(0),
             nft: BigInt(0),
+            delegation: BigInt(0)
         },
         nativeTokens: [],
         nfts: [],
         foundries: [],
         potentiallyLockedOutputs: {},
         accounts: [],
+        delegations: []
     }
     
     let depositAddress = ''

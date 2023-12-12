@@ -18,6 +18,9 @@ export async function buildWalletStateAndPersistedData(
         shouldRevote: false,
         walletOptions: {}
     }
+    console.log("persistedWalletData", persistedWalletData);
+    
     const accountState = await buildWalletState(wallet, persistedWalletData)
+    console.log("accountState", accountState);
     return [accountState, persistedWalletData]
 }

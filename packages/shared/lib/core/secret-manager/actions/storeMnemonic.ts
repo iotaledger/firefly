@@ -1,8 +1,13 @@
+import { onboardingProfileSecretManager } from 'shared/lib/contexts/onboarding'
 import { get } from 'svelte/store'
 import { activeProfileSecretManager } from '../stores'
 
 export async function storeMnemonic(mnemonic: string): Promise<void> {
-    const secretManager = get(activeProfileSecretManager)
+    // TODO(2.0) There are two secret managers, but we might only actually need one to store the mnemonic.
+    const secretManager = get(onboardingProfileSecretManager)
+
+    console.log("storeMnemonic", mnemonic, "secretManager", secretManager);
+    
 
     if (!secretManager) {
         return undefined

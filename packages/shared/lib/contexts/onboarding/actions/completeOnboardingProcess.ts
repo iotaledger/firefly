@@ -1,4 +1,4 @@
-import { activeProfile, activeWallets, addWalletPersistedDataToActiveProfile, createWallet, login } from '@core/profile'
+import { IWallet, activeProfile, activeWallets, addWalletPersistedDataToActiveProfile, createWallet, login } from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingType } from '../enums'
 import { addWalletPersistedDataToOnboardingProfile, onboardingProfile } from '../stores'
@@ -11,6 +11,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
     // it means we are trying to load again after an error
     // and we don't need to add it again
+    console.log("get(activeProfile), get(onboardingProfile)", get(activeProfile), get(onboardingProfile))
     if (!get(activeProfile)?.id) {
         createNewProfileFromOnboardingProfile()
     }
@@ -19,15 +20,13 @@ export async function completeOnboardingProcess(): Promise<void> {
     const shouldRecoverAccounts = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverAccounts)
 
-
     await createOnboardingWallet()
-    
     void login({ isFromOnboardingFlow: true, shouldRecoverAccounts })
 
     onboardingProfile.set(undefined)
 }
 
-export async function createOnboardingWallet(name?: string, color?: string): Promise<IWalletState> {
+export async function createOnboardingWallet(name?: string, color?: string): Promise<IWallet> {
     // 1. Get the wallet name
     const walletName = name || `${localize('general.account')} ${(get(activeWallets)?.length ?? 0) + 1}`;
 
@@ -36,17 +35,16 @@ export async function createOnboardingWallet(name?: string, color?: string): Pro
 
     // 3. Sync the wallet with the Node
     // TODO(2.0): test & fix sync when we have iota2.0 nodes
-    //await account.sync(DEFAULT_SYNC_OPTIONS)
-
+    //await wallet.sync(DEFAULT_SYNC_OPTIONS)
     // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, accountPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
+    // const [walletState, accountPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
 
     // TODO(2.0) Fix
     // addAccountToActiveAccounts(walletState)
-    addWalletPersistedDataToOnboardingProfile(walletState.id, accountPersistedData)
+    // addWalletPersistedDataToOnboardingProfile(walletState.id, accountPersistedData)
     // TODO(2.0) Fix
     // addEmptyAccountActivitiesToAllAccountActivities(walletState.id)
 
 
-    return walletState
+    return wallet
 }

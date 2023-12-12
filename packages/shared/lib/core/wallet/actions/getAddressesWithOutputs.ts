@@ -3,10 +3,10 @@ import { IWallet } from '@core/profile/interfaces'
 import { Address } from '@iota/sdk/out/types'
 
 // TODO(2.0) Fix all usages
-export async function getAddressesWithOutputs(account: IWallet | IWalletState): Promise<AddressWithOutputs[]> {
+export async function getAddressesWithOutputs(wallet: IWallet | IWalletState): Promise<AddressWithOutputs[]> {
     let addressesWithOutputs: AddressWithOutputs[] = []
     const addresses: Address[] = [] // await account.accounts
-    const outputs = await account.outputs()
+    const outputs = await wallet.outputs()
 
     const outputMapped: AddressWithOutputs[] = outputs.reduce((acc: AddressWithOutputs[], output) => {
         const address = getBech32AddressFromAddressTypes(output.address)

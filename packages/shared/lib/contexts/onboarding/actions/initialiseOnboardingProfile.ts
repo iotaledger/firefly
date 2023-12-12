@@ -12,17 +12,17 @@ export async function initialiseOnboardingProfile(
     isDeveloperProfile: boolean,
     destroyPreviousManager = false
 ): Promise<void> {
-    // TODO(2.0) Refactor this logic
-    if (get(profileManager)) {
-        if (destroyPreviousManager) {
-            if (get(isOnboardingLedgerProfile)) {
-                stopPollingLedgerNanoStatus()
-            }
-            await clearProfileFromMemory()
-        } else {
-            throw new OnboardingProfileManagerAlreadyInitializedError()
-        }
-    }
+    // TODO(2.0) Profile manager is gone, we should maybe check onboarding SecretManager insteadd
+    // if (get(profileManager)) {
+    //     if (destroyPreviousManager) {
+    //         if (get(isOnboardingLedgerProfile)) {
+    //             stopPollingLedgerNanoStatus()
+    //         }
+    //         await clearProfileFromMemory()
+    //     } else {
+    //         throw new OnboardingProfileManagerAlreadyInitializedError()
+    //     }
+    // }
 
     const _newProfile = buildInitialOnboardingProfile(isDeveloperProfile)
     onboardingProfile.set(_newProfile)

@@ -2,11 +2,11 @@ import { IWrappedOutput } from '@core/wallet/interfaces'
 import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
 import {
     AddressUnlockCondition,
-    AliasAddress,
-    AliasOutput,
+    AccountOutput,
     CommonOutput,
     ExpirationUnlockCondition,
     UnlockConditionType,
+    AccountAddress,
 } from '@iota/sdk/out/types'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
@@ -38,10 +38,10 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
         }
 
         // TODO: if additional metadata is added to an aliasOutput, we could use it to determine the EVM Sender.
-        const aliasId = (output as AliasOutput)?.aliasId
+        const accountId = (output as AccountOutput)?.accountId
 
-        if (aliasId) {
-            return getBech32AddressFromAddressTypes(new AliasAddress(aliasId))
+        if (accountId) {
+            return getBech32AddressFromAddressTypes(new AccountAddress(accountId))
         }
     }
 
