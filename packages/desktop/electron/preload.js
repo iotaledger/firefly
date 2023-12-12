@@ -178,6 +178,11 @@ try {
         async migrateDbChrysalisToStardust(path, pinCode) {
             return IotaSdk.migrateDbChrysalisToStardust(path, pinCode)
         },
+        async signEd25519(secretManagerOptions, message, chain) {
+            const secretManager = new IotaSdk.SecretManager(secretManagerOptions)
+            const signature = await secretManager.signEd25519(message, chain)
+            return signature
+        },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)
 } catch (err) {
