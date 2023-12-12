@@ -1,16 +1,16 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
-    import { getProfileManager } from '@core/profile-manager/stores'
-    import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
-    import { fetchWithTimeout } from '@core/nfts'
-    import { CHRONICLE_URLS, CHRONICLE_ADDRESS_HISTORY_ROUTE } from '@core/network/constants/chronicle-urls.constant'
-    import { getSelectedAccount } from '@core/account'
-    import { Button, Error, FontWeight, KeyValueBox, Text, TextType, Spinner } from 'shared/components'
-    import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { AccountAddress } from '@iota/sdk/out/types'
-    import { closePopup } from '@auxiliary/popup/actions/closePopup'
+    import { getSelectedAccount, selectedAccount } from '@core/account'
+    import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
+    import { CHRONICLE_ADDRESS_HISTORY_ROUTE, CHRONICLE_URLS } from '@core/network/constants/chronicle-urls.constant'
+    import { fetchWithTimeout } from '@core/nfts'
+    import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
+    import { getProfileManager } from '@core/profile-manager/stores'
     import { truncateString } from '@core/utils'
+    import { AccountAddress } from '@iota/sdk/out/types'
+    import VirtualList from '@sveltejs/svelte-virtual-list'
+    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { onMount } from 'svelte'
 
     interface AddressHistory {
         address: string
@@ -24,37 +24,26 @@
         ]
     }
 
-    const account = getSelectedAccount()
-    const accountIndex = account.index
-    const network = getActiveProfile().network.id
+    const activeProfile = getActiveProfile()
     const ADDRESS_GAP_LIMIT = 20
 
-    let error: string = ''
+    $: accountIndex = $selectedAccount?.index
+    $: network = activeProfile?.network?.id
+    $: knownAddresses = $selectedAccount?.knownAddresses
+
     let searchURL: string
-    let knownAddresses: AccountAddress[] | undefined = undefined
     let searchAddressStartIndex = 0
     let currentSearchGap = 0
     let isBusy = false
 
     onMount(() => {
         knownAddresses = getSelectedAccount().knownAddresses
-        if (knownAddresses === undefined) {
-            getSelectedAccount()
-                ?.addresses()
-                .then((_addressList) => {
-                    knownAddresses = _addressList ?? []
-                    updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
-                })
-                .catch((err) => {
-                    console.error(err)
-                })
-        }
 
         if (CHRONICLE_URLS[network] && CHRONICLE_URLS[network].length > 0) {
             const chronicleRoot = CHRONICLE_URLS[network][0]
             searchURL = `${chronicleRoot}${CHRONICLE_ADDRESS_HISTORY_ROUTE}`
         } else {
-            error = localize('popups.addressHistory.errorNoChronicle')
+            throw new Error(localize('popups.addressHistory.errorNoChronicle'))
         }
     })
 
@@ -64,14 +53,12 @@
             const addressHistory: AddressHistory = await response.json()
             return addressHistory?.items?.length > 0
         } catch (err) {
-            console.error(err)
-            error = localize('popups.addressHistory.errorFailedFetch')
+            throw new Error(localize('popups.addressHistory.errorFailedFetch'))
         }
     }
 
     async function generateNextUnknownAddress(): Promise<[string, number]> {
         let nextUnknownAddress: string
-
         try {
             do {
                 nextUnknownAddress = await getProfileManager().generateEd25519Address(
@@ -82,8 +69,7 @@
                 searchAddressStartIndex++
             } while (knownAddresses.map((accountAddress) => accountAddress.address).includes(nextUnknownAddress))
         } catch (err) {
-            console.error(err)
-            error = localize('popups.addressHistory.errorFailedGenerate')
+            throw new Error(localize('popups.addressHistory.errorFailedGenerate'))
         }
 
         return [nextUnknownAddress, searchAddressStartIndex - 1]
@@ -91,54 +77,39 @@
 
     async function search(): Promise<void> {
         currentSearchGap = 0
-        const isUnlocked = await unlock
-
-        if (isUnlocked && !error) {
-            isBusy = true
-            while (currentSearchGap < ADDRESS_GAP_LIMIT) {
-                const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
-                if (!nextAddressToCheck) {
-                    isBusy = false
-                    break
-                }
-
-                const hasHistory = await isAddressWithHistory(nextAddressToCheck)
-                if (error) {
-                    isBusy = false
-                    break
-                }
-
-                if (hasHistory) {
-                    const accountAddress: AccountAddress = {
-                        address: nextAddressToCheck,
-                        keyIndex: addressIndex,
-                        internal: false,
-                        used: true,
-                    }
-
-                    knownAddresses.push(accountAddress)
-                } else {
-                    currentSearchGap++
-                }
+        while (currentSearchGap < ADDRESS_GAP_LIMIT) {
+            const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
+            if (!nextAddressToCheck) {
+                isBusy = false
+                break
             }
 
-            updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
-            isBusy = false
+            const hasHistory = await isAddressWithHistory(nextAddressToCheck)
+            if (hasHistory) {
+                const accountAddress: AccountAddress = {
+                    address: nextAddressToCheck,
+                    keyIndex: addressIndex,
+                    internal: false,
+                    used: true,
+                }
+
+                knownAddresses.push(accountAddress)
+            } else {
+                currentSearchGap++
+            }
         }
+        updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
     }
 
-    const unlock = new Promise<boolean>((resolve) => {
-        const onSuccess: () => Promise<void> = () => {
-            resolve(true)
-            return Promise.resolve()
+    async function handleSearchClick(): Promise<void> {
+        isBusy = true
+        try {
+            await checkActiveProfileAuth(search, { stronghold: true, ledger: true })
+        } catch (err) {
+            handleError(err)
+        } finally {
+            isBusy = false
         }
-        const onCancel: () => void = () => resolve(false)
-        const config = { stronghold: true, ledger: true }
-        checkActiveProfileAuth(onSuccess, config, onCancel)
-    })
-
-    function onCancelClick(): void {
-        closePopup()
     }
 </script>
 
@@ -177,18 +148,12 @@
             <Spinner />
         </div>
     {/if}
-    {#if error}
-        <Error {error} />
-    {/if}
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}>
-        {localize('actions.cancel')}
-    </Button>
     <Button
         classes="w-full"
-        onClick={search}
-        disabled={isBusy || !!error}
+        onClick={handleSearchClick}
+        disabled={isBusy}
         {isBusy}
         busyMessage={localize('actions.searching')}
     >
