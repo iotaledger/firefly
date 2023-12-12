@@ -10,7 +10,7 @@ import { loadNftsForActiveProfile } from '@core/nfts'
 import { routerManager } from '@core/router/stores'
 import { SECONDS_PER_MINUTE } from '@core/utils'
 import { sleep } from '@core/utils/os'
-import { createNewWallet, generateAndStoreActivitiesForAllAccounts, isStrongholdUnlocked, refreshAccountAssetsForActiveProfile, setSelectedWallet } from '@core/wallet/actions'
+import { createNewWallet, generateAndStoreActivitiesForAllWallets, isStrongholdUnlocked, refreshWalletAssetsForActiveProfile, setSelectedWallet } from '@core/wallet/actions'
 import { get } from 'svelte/store'
 import {
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
@@ -56,7 +56,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 3: load and build all the profile data
             incrementLoginProgress()
             let wallets: IWallet[] = []
-            if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverAccounts) {
+            
+            if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverWallets) {
                 /*
                 const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
                 const recoverAccountsPayload: RecoverAccountsPayload = {
@@ -71,7 +72,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 wallets = await getWallets()
             }
             /**
-             * NOTE: In the case no accounts with funds were recovered, we must
+             * NOTE: In the case no wallets with funds were recovered, we must
              * create one for the new profile.
              */
             if (wallets?.length === 0) {
@@ -81,7 +82,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                         return Promise.resolve()
                     }
                     const onCancel = () => resolve(false)
-                    const config = { stronghold: false, ledger: false }
+                    const config = { stronghold: false, ledger: false }                    
                     checkActiveProfileAuth(onSuccess, config, onCancel)
                 })
                 const success = await onUnlocked
@@ -93,17 +94,21 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 }
             }
 
-            // Step 4: load accounts
+            // Step 4: load wallets
             incrementLoginProgress()
             await loadWallets()
 
             let initialSelectedWalletId = get(activeWallets)?.[0]?.id
-            if (
-                initialSelectedWalletId &&
-                get(activeWallets)?.find((wallet) => wallet.id === initialSelectedWalletId)
-            ) {
-                initialSelectedWalletId = lastUsedWalletId
-            }
+            
+            // TODO(2.0): is needed lastUsedWalletId?
+            // if (
+            //     initialSelectedWalletId &&
+            //     get(activeWallets)?.find((wallet) => wallet.id === initialSelectedWalletId)
+            // ) {
+            //     initialSelectedWalletId = lastUsedWalletId
+            // }
+            // console.log("initialSelectedWalletId", initialSelectedWalletId);
+
             setSelectedWallet(initialSelectedWalletId)
 
             // Step 2: get node info to check we have a synced node
@@ -113,7 +118,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             // Step 5: load assets
             incrementLoginProgress()
-            await refreshAccountAssetsForActiveProfile(
+            await refreshWalletAssetsForActiveProfile(
                 _activeProfile.forceAssetRefresh,
                 _activeProfile.forceAssetRefresh
             )
@@ -121,9 +126,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             await loadNftsForActiveProfile()
             checkAndRemoveProfilePicture()
 
-            // Step 6: generate and store activities for all accounts
+            // Step 6: generate and store activities for all wallets
             incrementLoginProgress()
-            await generateAndStoreActivitiesForAllAccounts()
+            await generateAndStoreActivitiesForAllWallets()
 
             if (type === ProfileType.Software) {
                 // Step 7: set initial stronghold status
@@ -168,7 +173,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             throw Error('No active profile error')
         }
     } catch (err) {
-        console.log(err)
+        console.error(err)
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
             void logout(false)

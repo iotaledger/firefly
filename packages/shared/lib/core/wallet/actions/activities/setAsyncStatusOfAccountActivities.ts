@@ -2,7 +2,7 @@ import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
 import { updateNftInAllAccountNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { allAccountActivities } from '../../stores'
-import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
+import { refreshWalletAssetsForActiveProfile } from '../refreshWalletAssetsForActiveProfile'
 import { getAsyncStatus } from '@core/wallet/utils/generateActivity/helper'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
@@ -42,6 +42,6 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
         syncBalance(accountIndex)
     }
     if (balancesToUpdate.length) {
-        void refreshAccountAssetsForActiveProfile()
+        void refreshWalletAssetsForActiveProfile()
     }
 }

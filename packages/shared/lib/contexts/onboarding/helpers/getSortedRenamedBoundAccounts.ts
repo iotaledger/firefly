@@ -14,7 +14,7 @@ export async function getSortedRenamedBoundAccounts(
             accounts.map(async (account) => {
                 const { index, alias } = account?.getMetadata() ?? {}
                 const boundAccount = await getBoundAccount(index, true, profileManager)
-                const boundAccountAlias = Number.isNaN(alias) ? alias : `${localize('general.account')} ${index + 1}`
+                const boundAccountAlias = Number.isNaN(alias) ? alias : `${localize('general.wallet')} ${index + 1}`
                 await boundAccount.setAlias(boundAccountAlias)
                 return boundAccount
             })

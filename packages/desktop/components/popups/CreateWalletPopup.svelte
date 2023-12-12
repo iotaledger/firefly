@@ -73,7 +73,7 @@
             <Input
                 {error}
                 bind:value={accountAlias}
-                placeholder={localize('general.accountName')}
+                placeholder={localize('general.walletName')}
                 autofocus
                 submitHandler={onCreateClick}
                 disabled={isBusy}

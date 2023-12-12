@@ -33,13 +33,15 @@ export async function buildWalletState(
     
     let depositAddress = ''
     let votingPower = ''
-    try {
-        balances = await wallet.getBalance()
-        depositAddress = await getDepositAddress(wallet)
-        votingPower = balances.baseCoin.votingPower
-    } catch (err) {
-        console.error(err)
-    }
+
+    // TODO(2.0) Fix
+    // try {
+    //     balances = await wallet.getBalance()
+    //     depositAddress = await getDepositAddress(wallet)
+    //     votingPower = balances.baseCoin.votingPower
+    // } catch (err) {
+    //     console.error(err)
+    // }
     const addressesWithOutputs = await getAddressesWithOutputs(wallet)
 
     return {

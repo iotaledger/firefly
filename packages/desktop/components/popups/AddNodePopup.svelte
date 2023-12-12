@@ -5,7 +5,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
     import { Platform } from '@core/app'
-    import { activeAccounts, activeProfile } from '@core/profile'
+    import { activeWallets, activeProfile } from '@core/profile'
     import { registerProposalsForAccounts } from '@contexts/governance'
 
     export let node: INode = structuredClone(EMPTY_NODE)
@@ -33,7 +33,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                await registerProposalsForAccounts({ node }, $activeAccounts)
+                await registerProposalsForAccounts({ node }, $activeWallets)
             }
 
             onSuccess()

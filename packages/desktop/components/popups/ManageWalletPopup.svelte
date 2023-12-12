@@ -1,7 +1,7 @@
 <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { updateActiveWalletPersistedData } from '@core/profile/actions'
     import { getTrimmedLength } from '@core/utils'
     import { selectedWallet, validateWalletName } from '@core/wallet'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
@@ -9,26 +9,26 @@
     export let error = ''
 
     let isBusy = false
-    let accountAlias = $selectedWallet.name
+    let walletAlias = $selectedWallet.name
     let color = $selectedWallet.color
 
-    $: accountAlias, (error = '')
-    $: trimmedAccountAlias = accountAlias.trim()
-    $: invalidAliasUpdate = !getTrimmedLength(accountAlias) || isBusy || accountAlias === $selectedWallet.name
+    $: walletAlias, (error = '')
+    $: trimmedWalletAlias = walletAlias.trim()
+    $: invalidAliasUpdate = !getTrimmedLength(walletAlias) || isBusy || walletAlias === $selectedWallet.name
     $: hasColorChanged = $selectedWallet.color !== color
 
     async function onSaveClick(): Promise<void> {
-        if (trimmedAccountAlias) {
+        if (trimmedWalletAlias) {
             error = ''
             try {
-                await validateWalletName(trimmedAccountAlias, true, trimmedAccountAlias !== $selectedWallet.name)
+                await validateWalletName(trimmedWalletAlias, true, trimmedWalletAlias !== $selectedWallet.name)
             } catch ({ message }) {
                 error = message
                 return
             }
 
             isBusy = true
-            saveAccountPersistedData()
+            saveWalletPersistedData()
         }
     }
 
@@ -36,10 +36,10 @@
         closePopup()
     }
 
-    function saveAccountPersistedData(): void {
+    function saveWalletPersistedData(): void {
         try {
-            if (trimmedAccountAlias || color) {
-                updateActiveAccountPersistedData($selectedWallet?.id, { name: trimmedAccountAlias, color })
+            if (trimmedWalletAlias || color) {
+                updateActiveWalletPersistedData($selectedWallet?.id, { name: trimmedWalletAlias, color })
                 closePopup()
             }
         } finally {
@@ -51,13 +51,13 @@
 <manage-account-popup class="flex flex-col h-full justify-between space-y-4">
     <div>
         <title-container class="flex flex-row mb-6">
-            <Text type={TextType.h5}>{localize('general.manageAccount')}</Text>
+            <Text type={TextType.h5}>{localize('general.manageWallet')}</Text>
         </title-container>
         <manage-account-popup-inputs class="w-full flex flex-col justify-between space-y-4">
             <Input
                 {error}
-                bind:value={accountAlias}
-                placeholder={localize('general.accountName')}
+                bind:value={walletAlias}
+                placeholder={localize('general.walletName')}
                 autofocus
                 submitHandler={onSaveClick}
                 disabled={isBusy}

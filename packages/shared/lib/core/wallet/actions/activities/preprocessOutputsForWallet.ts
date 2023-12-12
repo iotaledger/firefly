@@ -1,16 +1,16 @@
-import type { OutputData, OutputResponse, Transaction } from '@iota/sdk/out/types'
+import type { OutputData, OutputResponse, TransactionWithMetadata } from '@iota/sdk/out/types'
 
 import { IWalletState } from '@core/wallet/interfaces'
 
 import { preprocessGroupedOutputs } from '../../utils/outputs'
 import { IProcessedTransaction } from '../../interfaces'
 
-export async function preprocessOutputsForAccount(account: IWalletState): Promise<IProcessedTransaction[]> {
-    const outputs = await account.outputs()
+export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<IProcessedTransaction[]> {
+    const outputs = await wallet.outputs()
 
-    const transactions = await account.transactions()
+    const transactions = await wallet.transactions()
     const transactionMap = getTransactionsMapFromList(transactions)
-    const incomingTransactions = getMapFromList(await account.incomingTransactions())
+    const incomingTransactions = getMapFromList(await wallet.incomingTransactions())
 
     const groupedOutputs: { [key: string]: OutputData[] } = {}
     for (const output of outputs) {
@@ -29,7 +29,7 @@ export async function preprocessOutputsForAccount(account: IWalletState): Promis
     for (const transactionId of Object.keys(groupedOutputs)) {
         try {
             const inputs: OutputResponse[] = incomingTransactions[transactionId]?.inputs ?? []
-            const processedTransaction = preprocessGroupedOutputs(groupedOutputs[transactionId], inputs, account)
+            const processedTransaction = preprocessGroupedOutputs(groupedOutputs[transactionId], inputs, wallet)
 
             processedTransactions.push(processedTransaction)
         } catch (err) {
@@ -39,7 +39,7 @@ export async function preprocessOutputsForAccount(account: IWalletState): Promis
     return processedTransactions
 }
 
-function getTransactionsMapFromList(transactions: Transaction[]): { [transactionId: string]: boolean } {
+function getTransactionsMapFromList(transactions: TransactionWithMetadata[]): { [transactionId: string]: boolean } {
     const transactionMap = {}
     for (const transaction of transactions) {
         transactionMap[transaction?.transactionId] = true
@@ -47,8 +47,8 @@ function getTransactionsMapFromList(transactions: Transaction[]): { [transaction
     return transactionMap
 }
 
-function getMapFromList(transactions: Transaction[]): {
-    [transactionId: string]: Transaction
+function getMapFromList(transactions: TransactionWithMetadata[]): {
+    [transactionId: string]: TransactionWithMetadata
 } {
     const transactionMap = {}
     for (const transaction of transactions) {

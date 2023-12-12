@@ -4,9 +4,9 @@ import { IWalletState } from '@core/wallet/interfaces'
 
 import { registerParticipationEvents } from './registerParticipationEvents'
 
-export async function registerProposalsForAccounts(
+export async function registerProposalsForWallets(
     registrationOptions: ParticipationEventRegistrationOptions,
-    accounts: IWalletState[]
+    wallets: IWalletState[]
 ): Promise<void> {
-    await Promise.all(accounts.map((account) => registerParticipationEvents(registrationOptions, account)))
+    await Promise.all(wallets.map((wallet) => registerParticipationEvents(registrationOptions, wallet)))
 }

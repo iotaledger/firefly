@@ -28,7 +28,6 @@
         const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         const storagePath = await getStorageDirectoryOfProfile($onboardingProfile.id)
         const secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
-        console.log("secretManagerOptions", secretManagerOptions)
         updateOnboardingProfile({ createProfileType, type, secretManagerOptions })
         $createProfileRouter.next()
     }

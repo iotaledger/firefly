@@ -10,17 +10,13 @@ export async function buildWalletStateAndPersistedData(
     name?: string,
     color?: string
 ): Promise<[IWalletState, IPersistedWalletData]> {
-
     const persistedWalletData: IPersistedWalletData = {
-        name: name || `${localize('general.account')}`,
+        name: name || `${localize('general.wallet')}`,
         color: color || getRandomWalletColor(),
         hidden: false,
         shouldRevote: false,
         walletOptions: {}
-    }
-    console.log("persistedWalletData", persistedWalletData);
-    
-    const accountState = await buildWalletState(wallet, persistedWalletData)
-    console.log("accountState", accountState);
-    return [accountState, persistedWalletData]
+    }    
+    const walletState = await buildWalletState(wallet, persistedWalletData)
+    return [walletState, persistedWalletData]
 }

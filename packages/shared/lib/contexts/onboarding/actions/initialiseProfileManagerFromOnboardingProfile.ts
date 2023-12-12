@@ -26,7 +26,5 @@ export async function initialiseOnboardingProfileWithSecretManager(checkForExist
 
     const secretManagerOptions = getSecretManagerFromProfileType(activeOnboardingProfile.type, storagePath)
 
-    console.log("secretManagerOptions", secretManagerOptions)
-
     updateOnboardingProfile({ secretManagerOptions, hasInitialisedProfileManager: true })
 }

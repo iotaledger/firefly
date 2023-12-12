@@ -1,6 +1,6 @@
-import { activeAccounts, activeProfile, getBaseToken, getCoinType } from '@core/profile'
+import { activeWallets, activeProfile, getBaseToken, getCoinType } from '@core/profile'
 import { get } from 'svelte/store'
-import { getOrRequestAssetFromPersistedAssets } from '../actions'
+import { getOrRequestAssetFromPersistedAssets } from '.'
 import { TokenStandard, VerifiedStatus } from '../enums'
 import { IPersistedAsset } from '../interfaces'
 import {
@@ -9,7 +9,7 @@ import {
     persistedAssets,
 } from '../stores/persisted-assets.store'
 
-export async function refreshAccountAssetsForActiveProfile(
+export async function refreshWalletAssetsForActiveProfile(
     clearPersistedAssets = false,
     keepVerificationStatus = false
 ): Promise<void> {
@@ -31,9 +31,9 @@ export async function refreshAccountAssetsForActiveProfile(
     }
 
     const assets: IPersistedAsset[] = []
-    const accounts = get(activeAccounts)
-    for (const account of accounts) {
-        const tokens = account?.balances?.nativeTokens ?? []
+    const wallets = get(activeWallets)
+    for (const wallet of wallets) {
+        const tokens = wallet?.balances?.nativeTokens ?? []
         for (const token of tokens) {
             try {
                 const persistedAsset = await getOrRequestAssetFromPersistedAssets(token.tokenId)

@@ -13,8 +13,8 @@ export interface IPersistedProfile {
     network: IPersistedNetwork
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
-    accountPersistedData: { // TODO(2.0) Shouldn't we rename this field?
-        [accountId: string]: IPersistedWalletData
+    walletPersistedData: {
+        [walletId: string]: IPersistedWalletData
     }
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean

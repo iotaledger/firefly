@@ -5,6 +5,9 @@ import { Address } from '@iota/sdk/out/types'
 // TODO(2.0) Fix all usages
 export async function getAddressesWithOutputs(wallet: IWallet | IWalletState): Promise<AddressWithOutputs[]> {
     let addressesWithOutputs: AddressWithOutputs[] = []
+    // TODO (2.0): fix
+    return addressesWithOutputs
+
     const addresses: Address[] = [] // await account.accounts
     const outputs = await wallet.outputs()
 

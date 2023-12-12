@@ -28,7 +28,6 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
         },
         coinType: activeProfile.network.coinType
     }
-    console.log("walletOptions", walletOptions);
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,

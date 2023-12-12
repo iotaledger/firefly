@@ -11,7 +11,7 @@
     import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { updateActiveWalletPersistedData } from '@core/profile/actions'
     import { governanceRouter } from '@core/router'
     import { Button, Text, TextHint, TextType } from 'shared/components'
     import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
@@ -23,7 +23,7 @@
     async function onConfirmClick(): Promise<void> {
         try {
             await $selectedWallet.deregisterParticipationEvent($selectedProposalId)
-            updateActiveAccountPersistedData($selectedWallet.id, {
+            updateActiveWalletPersistedData($selectedWallet.id, {
                 removedProposalIds: [...($selectedWallet.removedProposalIds ?? []), $selectedProposalId],
             })
             $governanceRouter.previous()
