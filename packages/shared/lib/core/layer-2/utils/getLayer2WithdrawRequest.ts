@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import BigInteger from 'big-integer'
 import { SpecialStream } from '../classes'
-import { ACCOUNTS_CONTRACT, WITHDRAW_FUNCTION } from '../constants'
+import { ACCOUNTS_CONTRACT, WITHDRAW } from '../constants'
 import { Blake2b } from '@iota/crypto.js'
 import { api, getSecretManagerFromProfileType } from '../../profile-manager'
 import { ProfileType, activeProfile, getStorageDirectoryOfProfile } from '../../profile'
@@ -31,7 +31,7 @@ export async function getLayer2WithdrawRequest(
     metadataStream.writeBytes('chainId', chainIdBytes.length, chainIdBytes)
 
     metadataStream.writeUInt32('targetContract', ACCOUNTS_CONTRACT)
-    metadataStream.writeUInt32('contractFunction', WITHDRAW_FUNCTION)
+    metadataStream.writeUInt32('contractFunction', WITHDRAW)
 
     metadataStream.writeUInt64SpecialEncoding('numOfParams', BigInteger(0))
     metadataStream.writeUInt64SpecialEncoding('nonce', BigInteger(nonce))
