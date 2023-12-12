@@ -33,7 +33,7 @@
     let searchURL: string
     let knownAddresses: AccountAddress[] | undefined = undefined
     let searchAddressStartIndex = 0
-    let currendSearchGap = 0
+    let currentSearchGap = 0
     let isBusy = false
 
     onMount(() => {
@@ -90,12 +90,12 @@
     }
 
     async function search(): Promise<void> {
-        currendSearchGap = 0
+        currentSearchGap = 0
         const isUnlocked = await unlock
 
         if (isUnlocked && !error) {
             isBusy = true
-            while (currendSearchGap < ADDRESS_GAP_LIMIT) {
+            while (currentSearchGap < ADDRESS_GAP_LIMIT) {
                 const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
                 if (!nextAddressToCheck) {
                     isBusy = false
@@ -118,7 +118,7 @@
 
                     knownAddresses.push(accountAddress)
                 } else {
-                    currendSearchGap++
+                    currentSearchGap++
                 }
             }
 
