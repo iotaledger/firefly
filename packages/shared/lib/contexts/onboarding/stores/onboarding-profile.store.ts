@@ -6,7 +6,7 @@ import { IOnboardingProfile, IShimmerClaimingWallet } from '../interfaces'
 import { IBaseToken, IPersistedWalletData } from '@core/wallet/interfaces'
 import { IPersistedNetwork } from '@core/network'
 
-export const onboardingProfile = writable<IOnboardingProfile | null>(null)
+export const onboardingProfile = writable<IOnboardingProfile | null | undefined>(null)
 
 export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>{
     console.log("Changed?")

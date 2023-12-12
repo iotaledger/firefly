@@ -34,7 +34,6 @@ export async function buildWalletState(
     let depositAddress = ''
     let votingPower = ''
     try {
-        await wallet.sync()
         balances = await wallet.getBalance()
         depositAddress = await getDepositAddress(wallet)
         votingPower = balances.baseCoin.votingPower
