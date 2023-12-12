@@ -21,7 +21,7 @@
     export let disabled = false
     export let isFocused = false
     export let votingPower: number = 0
-    export let asset: IAsset
+    export let asset: IAsset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false
@@ -33,14 +33,19 @@
     let amountInputElement: HTMLInputElement
     let error: string
 
+    $: baseCoinBalanceAvailable =
+        $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin?.balance?.available
+    $: assetAvailableBalance = asset?.balance?.available
     $: isFocused && (error = '')
     $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
-    $: availableBalance = asset?.balance?.available + votingPower
+    $: availableBalance =
+        baseCoinBalanceAvailable < assetAvailableBalance + votingPower
+            ? baseCoinBalanceAvailable
+            : assetAvailableBalance + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
     $: rawAmount = bigAmount?.toString()
-    $: asset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? asset
 
     function onClickAvailableBalance(): void {
         const isRawAmount = asset?.metadata?.decimals && getUnitFromTokenMetadata(asset?.metadata)
