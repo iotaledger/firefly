@@ -455,10 +455,12 @@ ipcMain.handle('get-machine-id', (_e) => getMachineId())
 ipcMain.handle('update-app-settings', (_e, settings) => updateSettings(settings))
 ipcMain.handle('update-theme', (_e, theme) => (nativeTheme.themeSource = theme))
 
+const argWithAppProtocol = (arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`)
+
 /**
  * Define deep link state
  */
-let deepLinkUrl = null
+let deepLinkUrl = process.argv.find(argWithAppProtocol)
 
 /**
  * Create a single instance only
@@ -472,7 +474,7 @@ if (!isFirstInstance) {
 app.on('second-instance', (_e, args) => {
     if (windows.main) {
         if (args.length > 1) {
-            const params = args.find((arg) => arg.startsWith(`${process.env.APP_PROTOCOL}://`))
+            const params = args.find(argWithAppProtocol)
 
             if (params) {
                 windows.main.webContents.send('deep-link-params', params)

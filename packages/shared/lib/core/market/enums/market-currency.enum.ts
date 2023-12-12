@@ -58,6 +58,4 @@ export enum MarketCurrency {
     Xdr = 'xdr',
     Xag = 'xag',
     Xau = 'xau',
-    Bits = 'bits',
-    Sats = 'sats',
 }

@@ -1,10 +1,15 @@
 import { getSelectedAccount, prepareOutput } from '@core/account'
-import { getEstimatedGasForTransferFromTransactionDetails, getLayer2MetadataForTransfer } from '@core/layer-2/utils'
+import { ILayer2GasEstimatePayload } from '@core/layer-2/interfaces'
+import {
+    getEstimatedGasForTransferFromTransactionDetails,
+    getLayer2MetadataForTransfer,
+    outputHexBytes,
+} from '@core/layer-2/utils'
 import { getCoinType } from '@core/profile'
-import { Converter, IBasicOutput, INftOutput, convertDateToUnixTimestamp, serializeOutput } from '@core/utils'
+import { Converter, convertDateToUnixTimestamp } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, OutputParams } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails } from '../stores'
@@ -47,7 +52,9 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
     }
 }
 
-async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
+async function buildOutputParametersForLayer2(
+    transactionDetails: NewTransactionDetails
+): Promise<OutputParams | undefined> {
     const { expirationDate, timelockDate, layer2Parameters } = transactionDetails ?? {}
     const selectedAccount = getSelectedAccount()
 
@@ -58,7 +65,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
 
     const senderAddress = layer2Parameters.senderAddress
     const recipientAddress = layer2Parameters?.networkAddress
-    let amount = getAmountFromTransactionDetails(transactionDetails)
+    const amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = getLayer2MetadataForTransfer(transactionDetails)
@@ -83,41 +90,54 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         },
     }
 
-    const outputForEstimate = (await prepareOutput(
-        selectedAccount.index,
-        outputParams,
-        getDefaultTransactionOptions()
-    )) as unknown as IBasicOutput | INftOutput
-    const serializedOutput = serializeOutput(outputForEstimate)
-    const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
-
-    // Now that we have the gasFeeCharged, update the amount & the tx details
-    if (gasEstimatePayload.gasFeeCharged) {
-        newTransactionDetails.update((state) => {
-            if (state?.layer2Parameters) {
-                state.layer2Parameters.gasBudget = BigInteger(gasEstimatePayload.gasFeeCharged as number)
-            }
-            return state
-        })
-        amount = (parseInt(outputForEstimate.amount, 10) + gasEstimatePayload.gasFeeCharged).toString()
+    async function getEstimateData(): Promise<{
+        outputForEstimate: BasicOutput | NftOutput
+        gasEstimatePayload: ILayer2GasEstimatePayload
+    }> {
+        const outputForEstimate = (await prepareOutput(
+            selectedAccount.index,
+            outputParams,
+            getDefaultTransactionOptions()
+        )) as unknown as BasicOutput | NftOutput
+        const serializedOutput = await outputHexBytes(outputForEstimate)
+        const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
+        return {
+            outputForEstimate,
+            gasEstimatePayload,
+        }
     }
 
-    return <OutputParams>{
-        recipientAddress,
-        amount,
-        ...(assets && { assets }),
-        features: {
-            ...(tag && { tag }),
-            ...(metadata && { metadata }),
-            ...(layer2Parameters && { sender: senderAddress }),
-        },
-        unlocks: {
-            ...(expirationUnixTime && { expirationUnixTime }),
-            ...(timelockUnixTime && { timelockUnixTime }),
-        },
-        storageDeposit: {
-            returnStrategy: ReturnStrategy.Gift,
-        },
+    let estimatedData = await getEstimateData()
+
+    if (estimatedData?.gasEstimatePayload?.gasBurned) {
+        //  The "+1" is due to an optimization in WASP nodes.
+        const metadata = getLayer2MetadataForTransfer(
+            transactionDetails,
+            (estimatedData.gasEstimatePayload.gasBurned as number) + 1
+        )
+        if (!outputParams.features) {
+            outputParams.features = {}
+        }
+        outputParams.features.metadata = metadata
+
+        estimatedData = await getEstimateData()
+
+        if (estimatedData?.gasEstimatePayload?.gasFeeCharged) {
+            // Now that we have the gasFeeCharged, update the amount & the tx details
+            newTransactionDetails.update((state) => {
+                if (state?.layer2Parameters) {
+                    state.layer2Parameters.gasBudget = BigInteger(
+                        estimatedData.gasEstimatePayload.gasFeeCharged as number
+                    )
+                }
+                return state
+            })
+            outputParams.amount = (
+                parseInt(estimatedData.outputForEstimate.amount, 10) + estimatedData.gasEstimatePayload.gasFeeCharged
+            ).toString()
+
+            return outputParams
+        }
     }
 }
 
