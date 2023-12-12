@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getSelectedAccount, selectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { CHRONICLE_ADDRESS_HISTORY_ROUTE, CHRONICLE_URLS } from '@core/network/constants/chronicle-urls.constant'
@@ -27,9 +27,10 @@
     const activeProfile = getActiveProfile()
     const ADDRESS_GAP_LIMIT = 20
 
+    let knownAddresses: AccountAddress[] = []
+
     $: accountIndex = $selectedAccount?.index
     $: network = activeProfile?.network?.id
-    $: knownAddresses = $selectedAccount?.knownAddresses
 
     let searchURL: string
     let searchAddressStartIndex = 0
@@ -37,7 +38,20 @@
     let isBusy = false
 
     onMount(() => {
-        knownAddresses = getSelectedAccount().knownAddresses
+        knownAddresses = $selectedAccount?.knownAddresses
+        if (!knownAddresses?.length) {
+            isBusy = true
+            $selectedAccount
+                .addresses()
+                .then((_knownAddresses) => {
+                    knownAddresses = sortAddresses(_knownAddresses)
+                    updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
+                    isBusy = false
+                })
+                .finally(() => {
+                    isBusy = false
+                })
+        }
 
         if (CHRONICLE_URLS[network] && CHRONICLE_URLS[network].length > 0) {
             const chronicleRoot = CHRONICLE_URLS[network][0]
@@ -77,6 +91,7 @@
 
     async function search(): Promise<void> {
         currentSearchGap = 0
+        const tmpKnownAddresses = [...knownAddresses]
         while (currentSearchGap < ADDRESS_GAP_LIMIT) {
             const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
             if (!nextAddressToCheck) {
@@ -93,11 +108,12 @@
                     used: true,
                 }
 
-                knownAddresses.push(accountAddress)
+                tmpKnownAddresses.push(accountAddress)
             } else {
                 currentSearchGap++
             }
         }
+        knownAddresses = sortAddresses(tmpKnownAddresses)
         updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
     }
 
@@ -110,6 +126,10 @@
         } finally {
             isBusy = false
         }
+    }
+
+    function sortAddresses(addresses: AccountAddress[] = []): AccountAddress[] {
+        return addresses.sort((a, b) => a.keyIndex - b.keyIndex)
     }
 </script>
 
