@@ -59,7 +59,7 @@
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
-    $: expirationTimePicker?.setNull(giftStorageDeposit)
+    $: expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
     $: isBaseTokenTransfer =
         transactionDetails.type === NewTransactionType.TokenTransfer &&
@@ -112,7 +112,6 @@
             const outputParams = await getOutputParameters(transactionDetails)
             preparedOutput = await prepareOutput($selectedAccount.index, outputParams, getDefaultTransactionOptions())
             await updateStorageDeposit()
-
             // This potentially triggers a second 'prepareOutput',
             // as it updates expiration date through the ExpirationTimePicker bind
             // Could be avoided with a rework of ExpirationTimePicker
@@ -236,7 +235,6 @@
                         slot="value"
                         bind:this={expirationTimePicker}
                         bind:value={expirationDate}
-                        initialSelected={initialExpirationDate}
                         disabled={disableChangeExpiration || isTransferring}
                     />
                 </KeyValueBox>
