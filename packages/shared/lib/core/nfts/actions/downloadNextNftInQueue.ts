@@ -15,7 +15,7 @@ export async function downloadNextNftInQueue(): Promise<void> {
         downloadingNftId.set(nft.id)
         const ipfsHash = getIPFSHash(downloadUrl)
         if (ipfsHash) {
-            const ipfsUri = await getIpfsUri({ hash: downloadUrl })
+            const ipfsUri = await getIpfsUri({ hash: ipfsHash })
             if (ipfsUri) {
                 downloadUrl = ipfsUri
             }

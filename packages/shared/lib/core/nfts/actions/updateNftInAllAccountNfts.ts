@@ -12,7 +12,7 @@ export function updateNftInAllAccountNfts(accountIndex: number, nftId: string, p
             const downloadUrl = nft.downloadUrl
             const ipfsHash = getIPFSHash(downloadUrl)
             if (ipfsHash) {
-                void getIpfsUri({ hash: downloadUrl }).then((ipfsUri) => {
+                void getIpfsUri({ hash: ipfsHash }).then((ipfsUri) => {
                     if (ipfsUri) {
                         nft.downloadUrl = ipfsUri
                         nft.composedUrl = ipfsUri

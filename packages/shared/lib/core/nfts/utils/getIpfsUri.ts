@@ -37,19 +37,22 @@ const IPFS_PATH = '/api/v0/ls'
 const IPFS_PREFIX = '/ipfs/'
 
 export async function getIpfsUri(link: { path?: string; hash: string }): Promise<string | undefined> {
+    let ipfsLink = `${link.hash}${link.path ?? ''}`
     try {
-        const slicedLink = link.hash.slice(IPFS_ENDPOINT.length)
-        const ipfsEntry = await ls(slicedLink)
+        const ipfsEntry = await ls(ipfsLink)
+
         if (ipfsEntry) {
             if (ipfsEntry.type === 'dir') {
                 const path = `${link.path ?? ''}/${ipfsEntry.name}`
                 return await getIpfsUri({ hash: link.hash, path })
             }
-            return `${link.hash}/${encodeURIComponent(ipfsEntry.name)}`
+            ipfsLink = `${ipfsLink}/${encodeURIComponent(ipfsEntry.name)}`
         }
     } catch (error) {
         console.error('error', error)
     }
+
+    return `${IPFS_ENDPOINT}${ipfsLink}`
 }
 
 async function ls(path: string): Promise<IIPfsEntry | undefined> {
