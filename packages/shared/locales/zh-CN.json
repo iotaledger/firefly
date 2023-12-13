@@ -812,12 +812,6 @@
             "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个钱包后重试。",
             "errorBody3": "您不能隐藏这个钱包，您必须至少有一个钱包"
         },
-        "addressHistory": {
-            "title": "{name} 地址历史记录",
-            "currentBalance": "余额：{balance}",
-            "internal": "内部地址",
-            "external": "充值地址"
-        },
         "excludeNode": {
             "title": "排除节点",
             "body": "您确定要将 {url} 排除在可用节点池之外吗？"
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "需要验证",
             "body": "此节点需要额外的验证。请填写适当的信息。"
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "保存",
         "importSeed": "导入已有的私钥种子",
         "restoreWallet": {
-            "iota": "迁移或恢复钱包",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "恢复 Shimmer 配置文件",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "恢复一个Shimmer 配置文件",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "访问常见问题",
         "viewDownloads": "View downloads",
         "viewStatus": "查看状态",
+        "viewAddressHistory": "显示地址历史记录",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "显示隐藏钱包",
@@ -1964,7 +1965,8 @@
             "reservedTagKeyword": "无法使用保留标签关键字"
         },
         "layer2": {
-            "layer1Recipient": "L2事务不能发送到L1帐户。"
+            "layer1Recipient": "L2事务不能发送到L1帐户。",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "请输入有效的URL",

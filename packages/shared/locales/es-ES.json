@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Crear un perfil de hardware",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Se requiere Ledger Nano S, Nano S Plus o Nano X"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Usar copia de seguridad de Stronghold",
                     "importFileDescription": "Importa tu copia de seguridad de Stronghold",
                     "importLedger": "Usar dispositivo Ledger",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Restaurar desde tu dispositivo Ledger Nano S, Nano S Plus o X"
                 },
                 "setupClaimed": {
                     "title": "Reclamar recompensas de staking de Shimmer",
@@ -812,12 +812,6 @@
             "errorBody2": "Actualmente tienes {balance} restantes en esta cartera. Por favor mueve estos fondos a una cartera distinta y prueba de nuevo.",
             "errorBody3": "No puedes ocultar esta cartera, debes tener al menos una."
         },
-        "addressHistory": {
-            "title": "{name} historial de direcciones",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Dirección interna",
-            "external": "Dirección de depósito"
-        },
         "excludeNode": {
             "title": "Excluir nodo",
             "body": "¿Está seguro que desea excluir a {url} del grupo de nodos disponibles?"
@@ -925,7 +919,7 @@
             "addressesFound": "Direcciones encontradas",
             "totalAddressBalance": "Balance total",
             "searchAgainHint": "¿Su saldo o número de billeteras es incorrecto? Busque de nuevo hasta que se muestre su saldo completo.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Buscar sólo en la cartera actual"
         },
         "balanceOverview": {
             "title": "Resumen del balance",
@@ -1188,6 +1182,12 @@
         "nodeAuthRequired": {
             "title": "Autenticación requerida",
             "body": "Este nodo requiere autenticación adicional. Por favor, rellena la información apropiada."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "disclaimer": "List of addresses with funds or known by this profile",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal"
         }
     },
     "charts": {
@@ -1234,14 +1234,14 @@
         "save": "Guardar",
         "importSeed": "Importar una semilla existente",
         "restoreWallet": {
-            "iota": "Migrar o restaurar una cartera",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar perfil de Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrar a Chrysalis o restaurar una cartera existente",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar un perfil de Shimmer existente",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1338,7 @@
         "visitFaq": "Ver las preguntas frecuentes resueltas",
         "viewDownloads": "View downloads",
         "viewStatus": "Ver estado",
+        "viewAddressHistory": "Ver historial de direcciones",
         "viewBalanceBreakdown": "Ver desglose de saldo",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostrar carteras ocultas",
@@ -1964,7 +1965,8 @@
             "reservedTagKeyword": "No se puede utilizar una palabra clave de etiqueta reservada"
         },
         "layer2": {
-            "layer1Recipient": "Una transacción de capa 2 no puede ser enviada a una cuenta de capa 1."
+            "layer1Recipient": "Una transacción de capa 2 no puede ser enviada a una cuenta de capa 1.",
+            "estimatedGas": "Error al estimar el gas."
         },
         "node": {
             "invalid": "Por favor, introduce una URL válida.",

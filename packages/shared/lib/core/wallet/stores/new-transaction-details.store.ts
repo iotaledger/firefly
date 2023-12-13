@@ -18,10 +18,6 @@ export function resetNewTokenTransactionDetails(): void {
     })
 }
 
-export function resetNewTransactionDetails(): void {
-    newTransactionDetails.set(undefined)
-}
-
 export function updateNewTransactionDetails(
     payload: Partial<NewTransactionDetails> & Pick<NewTransactionDetails, 'type'>
 ): void {
