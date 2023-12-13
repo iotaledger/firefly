@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Falló al estimarse el gas."
         },
         "node": {
             "invalid": "Por favor, introduzca una URL válida.",
