@@ -20,7 +20,7 @@ export interface IPersistedProfile {
     hasVisitedDashboard?: boolean
     lastUsedWalletId?: string // Todo(2.0) Fix all usages of lastUsedAccountIndex
     clientOptions: ClientOptions
-    secretManagerOptions: SecretManagerType,
+    secretManagerOptions: SecretManagerType, // TODO(2.0) This sould be gone.
     forceAssetRefresh: boolean
     strongholdVersion?: StrongholdVersion
     needsChrysalisToStardustDbMigration?: boolean

@@ -15,7 +15,7 @@ import { selectedWalletId } from '../../wallet'
         - __wallet2__/
 */
 export async function createWallet(activeProfile = get(activeProfileStore)): Promise<IWallet> {
-    const id = generateRandomId()
+    const id = activeProfile.id;
     const storagePath = await getStorageDirectoryOfProfile(id)
     // const snapshotPath = ''
 

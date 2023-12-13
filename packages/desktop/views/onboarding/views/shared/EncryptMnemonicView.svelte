@@ -2,7 +2,7 @@
     import { AnimationEnum } from '@auxiliary/animation'
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { buildOnboardingSecretManager, updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import { Subrouter } from '@core/router'
@@ -45,8 +45,9 @@
             try {
                 busy = true
                 await setStrongholdPassword(strongholdPassword)
-                await verifyAndStoreMnemonic()
                 updateOnboardingProfile({ strongholdPassword, hasStoredMnemonic: true })
+                await buildOnboardingSecretManager();
+                await verifyAndStoreMnemonic()
                 router.next()
             } catch (err) {
                 console.error(err)

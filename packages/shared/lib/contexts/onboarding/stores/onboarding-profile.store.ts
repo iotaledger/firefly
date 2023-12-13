@@ -19,6 +19,7 @@ export const onboardingProfileNetwork: Readable<IPersistedNetwork | undefined> =
 
 export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): void {
     onboardingProfile.update((state) => ({ ...state, ...payload }))
+    console.log("updated", get(onboardingProfile))
 }
 
 export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingWallet): void {

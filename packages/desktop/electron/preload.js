@@ -109,13 +109,13 @@ try {
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         ...methods,
         async createSecretManager(options) {
-            const manager = new IotaSdk.SecretManager(options)
+            const manager = await IotaSdk.SecretManager.create(options)
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
         // TODO(2.0): rename to createWallet
         async createWallet(id, options) {
-            const wallet = new IotaSdk.Wallet(options)
+            const wallet = await IotaSdk.Wallet.create(options)
             wallet.id = id
             wallets[id] = wallet
             bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
@@ -133,7 +133,7 @@ try {
         async getWallet(id, walletOptions) {
             let wallet = wallets[id]
             if (!wallet) {
-                wallet = new IotaSdk.Wallet(walletOptions)
+                wallet = await IotaSdk.Wallet.create(walletOptions)
                 wallets[id] = wallet
                 bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, wallet)
             }
