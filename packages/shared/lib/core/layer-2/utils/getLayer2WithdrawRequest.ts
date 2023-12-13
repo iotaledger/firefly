@@ -48,9 +48,10 @@ export async function getLayer2WithdrawRequest(
     const { id, type } = profile
     const storagePath = await getStorageDirectoryOfProfile(id)
 
-    const secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
+    let secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
     if (type !== ProfileType.Ledger) {
-        (secretManagerOptions as StrongholdSecretManager).stronghold.password = password
+        secretManagerOptions = secretManagerOptions as StrongholdSecretManager
+        secretManagerOptions.stronghold.password = password
     }
     const signed = await api.signEd25519(secretManagerOptions, essenceBytes, bip44) // Sign the essence with the secretManager and the Bip44 options set above.
     const publicKey = Converter.hexToBytes(signed.publicKey)
