@@ -5,6 +5,7 @@ import { IWallet } from '../interfaces'
 import { activeProfile as activeProfileStore } from '../stores'
 import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '../utils'
 import { WalletOptions } from '@iota/sdk'
+import { selectedWalletId } from '../../wallet'
 
 // TODO(2.0): Fix and finish this method
 /* - __storage__/
@@ -28,9 +29,15 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
         },
         coinType: activeProfile.network.coinType
     }
+    console.log("walletOptions", walletOptions);
+    
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,
     })
+
+    // TODO(2.0): Fix 
+    selectedWalletId.set(id)
+    console.log("wallet in createWallet", wallet);
     return wallet
 }
