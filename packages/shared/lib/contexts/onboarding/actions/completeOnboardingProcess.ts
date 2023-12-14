@@ -30,7 +30,7 @@ export async function createOnboardingWallet(name?: string, color?: string): Pro
     const walletName = name || `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`;
 
     // 2. Create the wallet instance
-    const wallet = await createNewWallet()
+    const wallet = await createWallet() // TODO(2.0) Not sure about this, I think this should be createWallet instead
 
     // 3. Sync the wallet with the Node
     // TODO(2.0): test & fix sync when we have iota2.0 nodes
@@ -41,6 +41,7 @@ export async function createOnboardingWallet(name?: string, color?: string): Pro
     // TODO(2.0) Fix
     addWalletToActiveWallets(walletState)
     addWalletPersistedDataToOnboardingProfile(walletState.id, walletPersistedData)
+    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData) // TODO(2.0) Not sure about this,
     // TODO(2.0) Fix
     addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
 

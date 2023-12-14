@@ -1,3 +1,3 @@
-import { IAccountSubject, IAddressSubject } from '../interfaces'
+import { IWalletSubject, IAddressSubject } from '../interfaces'
 
-export type Subject = IAccountSubject | IAddressSubject
+export type Subject = IWalletSubject | IAddressSubject

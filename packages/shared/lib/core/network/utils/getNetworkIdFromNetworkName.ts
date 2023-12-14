@@ -13,6 +13,7 @@ export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
         case 'testnet':
         case 'testnet-1':
         case 'testnet-2':
+        case 'docker':
             return NetworkId.Testnet
         default:
             return NetworkId.Custom

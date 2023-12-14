@@ -47,6 +47,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
+            console.log(1)
             await waitForPreviousManagerToBeDestroyed()
             // if (!isOnboardingSecretManagerInitialized()) {
             //     // TODO(2.0) Not sure about this
@@ -71,6 +72,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             } else {
                 wallets = await getWallets()
             }
+            console.log(2, wallets)
             /**
              * NOTE: In the case no wallets with funds were recovered, we must
              * create one for the new profile.
@@ -86,6 +88,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     checkActiveProfileAuth(onSuccess, config, onCancel)
                 })
                 const success = await onUnlocked
+                console.log("success", success)
                 if (success) {
                     await createNewWallet()
                 } else {
@@ -94,9 +97,13 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 }
             }
 
+            console.log(3)
+
             // Step 4: load wallets
             incrementLoginProgress()
             await loadWallets()
+
+            console.log(4)
 
             let initialSelectedWalletId = get(activeWallets)?.[0]?.id
             
@@ -115,6 +122,8 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await checkAndUpdateActiveProfileNetwork()
             void pollNetworkStatus()
+
+            console.log(5)
 
             // Step 5: load assets
             incrementLoginProgress()

@@ -4,11 +4,11 @@
     import { TextType } from '@ui/enums'
 
     import { localize } from '@core/i18n'
-    import { nodeInfo } from '@core/network'
+    import { nodeInfoNetworkName } from '@core/network'
     import { selectedWalletAssets } from '@core/wallet'
     import { activeProfile } from '@core/profile'
 
-    $: fomattedNetworkName = $nodeInfo?.protocol.networkName
+    $: fomattedNetworkName = $nodeInfoNetworkName
         .split(' ')
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ')

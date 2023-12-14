@@ -113,6 +113,15 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
+        async getClientFromWallet(id){
+            const wallet = wallets[id];
+            // Why is this here?:
+            // We cannot create classes from exposed functions 
+            // https://www.electronjs.org/docs/latest/api/context-bridge
+            const client =  await wallet.getClient();
+            bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
+            return client
+        },
         // TODO(2.0): rename to createWallet
         async createWallet(id, options) {
             const wallet = await IotaSdk.Wallet.create(options)
@@ -121,7 +130,7 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             return wallet
         },
-        // TODO(2.0): also remove from file system
+        // TODO(2.0): also remove from file system? Does it make sense? file system != memoery
         deleteWallet(id) {
             if (id && id in wallets) {
                 const wallet = wallets[id]
@@ -135,7 +144,7 @@ try {
             if (!wallet) {
                 wallet = await IotaSdk.Wallet.create(walletOptions)
                 wallets[id] = wallet
-                bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, wallet)
+                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             }
             return wallet
         },
@@ -143,7 +152,7 @@ try {
         async recoverAccounts(managerId, payload) {
             const manager = wallets[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, account))
             return accounts
         },
         clearWalletsFromMemory() {

@@ -27,8 +27,8 @@ export function getSubjectLocaleFromActivity(activity: Activity): string {
         return localize('general.shimmerGenesis')
     } else if (activity.type === ActivityType.Vesting) {
         return localize('general.stardustGenesis')
-    } else if (subject?.type === SubjectType.Account) {
-        return truncateString(subject?.account?.name, 13, 0)
+    } else if (subject?.type === SubjectType.Wallet) {
+        return truncateString(subject?.wallet?.name, 13, 0)
     } else if (subject?.type === SubjectType.Address) {
         const address = activity?.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
         const network = getLayer2NetworkFromAddress(address)

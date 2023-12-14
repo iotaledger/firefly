@@ -78,8 +78,8 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }
 
-    if (activity.subject?.type === SubjectType.Account) {
-        fieldsToSearch.push(activity.subject?.account?.name)
+    if (activity.subject?.type === SubjectType.Wallet) {
+        fieldsToSearch.push(activity.subject?.wallet?.name)
     } else if (activity.subject?.type === SubjectType.Address) {
         fieldsToSearch.push(activity.subject?.address)
     }
