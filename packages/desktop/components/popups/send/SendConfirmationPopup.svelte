@@ -59,6 +59,7 @@
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
+    let isPreparingOutput = false
     $: expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
     $: isBaseTokenTransfer =
@@ -101,6 +102,8 @@
     })
 
     async function rebuildTransactionOutput(): Promise<void> {
+        isPreparingOutput = true
+
         updateNewTransactionDetails({
             type: transactionType,
             expirationDate,
@@ -125,6 +128,8 @@
             }
         } catch (err) {
             handleError(err)
+        } finally {
+            isPreparingOutput = false
         }
     }
 
@@ -259,9 +264,12 @@
             classes="w-full"
             onClick={onConfirmClick}
             disabled={isTransferring ||
+                isPreparingOutput ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
             isBusy={isTransferring ||
+                isPreparingOutput ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+            busyMessage={isPreparingOutput ? 'Preparing' : ''}
         >
             {localize('actions.send')}
         </Button>
