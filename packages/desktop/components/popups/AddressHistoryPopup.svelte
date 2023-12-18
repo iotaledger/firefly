@@ -1,48 +1,151 @@
 <script lang="ts">
-    import { getSelectedAccount } from '@core/account'
+    import { selectedAccount } from '@core/account'
+    import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
+    import { CHRONICLE_ADDRESS_HISTORY_ROUTE, CHRONICLE_URLS } from '@core/network/constants/chronicle-urls.constant'
+    import { fetchWithTimeout } from '@core/nfts'
+    import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
+    import { getProfileManager } from '@core/profile-manager/stores'
     import { setClipboard, truncateString } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
-    import { Icon } from '@ui'
-    import { Icon as IconEnum } from '@auxiliary/icon'
 
-    let addressList: AccountAddress[] | undefined = undefined
+    interface AddressHistory {
+        address: string
+        items: [
+            {
+                milestoneIndex: number
+                milestoneTimestamp: number
+                outputId: string
+                isSpent: boolean
+            }
+        ]
+    }
+
+    const activeProfile = getActiveProfile()
+    const ADDRESS_GAP_LIMIT = 20
+
+    let knownAddresses: AccountAddress[] = []
+
+    $: accountIndex = $selectedAccount?.index
+    $: network = activeProfile?.network?.id
+
+    let searchURL: string
+    let searchAddressStartIndex = 0
+    let currentSearchGap = 0
+    let isBusy = false
 
     function onCopyClick(): void {
-        const addresses = addressList.map((address) => address.address).join(',')
+        const addresses = knownAddresses.map((address) => address.address).join(',')
         setClipboard(addresses)
     }
 
     onMount(() => {
-        getSelectedAccount()
-            ?.addresses()
-            .then((_addressList) => {
-                addressList = _addressList?.sort((a, b) => a.keyIndex - b.keyIndex) ?? []
-            })
-            .catch((err) => {
-                console.error(err)
-                addressList = []
-            })
+        knownAddresses = $selectedAccount?.knownAddresses
+        if (!knownAddresses?.length) {
+            isBusy = true
+            $selectedAccount
+                .addresses()
+                .then((_knownAddresses) => {
+                    knownAddresses = sortAddresses(_knownAddresses)
+                    updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
+                    isBusy = false
+                })
+                .finally(() => {
+                    isBusy = false
+                })
+        }
+
+        if (CHRONICLE_URLS[network] && CHRONICLE_URLS[network].length > 0) {
+            const chronicleRoot = CHRONICLE_URLS[network][0]
+            searchURL = `${chronicleRoot}${CHRONICLE_ADDRESS_HISTORY_ROUTE}`
+        } else {
+            throw new Error(localize('popups.addressHistory.errorNoChronicle'))
+        }
     })
+
+    async function isAddressWithHistory(address: string): Promise<boolean> {
+        try {
+            const response = await fetchWithTimeout(`${searchURL}${address}`, 3, { method: 'GET' })
+            const addressHistory: AddressHistory = await response.json()
+            return addressHistory?.items?.length > 0
+        } catch (err) {
+            throw new Error(localize('popups.addressHistory.errorFailedFetch'))
+        }
+    }
+
+    async function generateNextUnknownAddress(): Promise<[string, number]> {
+        let nextUnknownAddress: string
+        try {
+            do {
+                nextUnknownAddress = await getProfileManager().generateEd25519Address(
+                    accountIndex,
+                    searchAddressStartIndex
+                )
+
+                searchAddressStartIndex++
+            } while (knownAddresses.map((accountAddress) => accountAddress.address).includes(nextUnknownAddress))
+        } catch (err) {
+            throw new Error(localize('popups.addressHistory.errorFailedGenerate'))
+        }
+
+        return [nextUnknownAddress, searchAddressStartIndex - 1]
+    }
+
+    async function search(): Promise<void> {
+        currentSearchGap = 0
+        const tmpKnownAddresses = [...knownAddresses]
+        while (currentSearchGap < ADDRESS_GAP_LIMIT) {
+            const [nextAddressToCheck, addressIndex] = await generateNextUnknownAddress()
+            if (!nextAddressToCheck) {
+                isBusy = false
+                break
+            }
+
+            const hasHistory = await isAddressWithHistory(nextAddressToCheck)
+            if (hasHistory) {
+                const accountAddress: AccountAddress = {
+                    address: nextAddressToCheck,
+                    keyIndex: addressIndex,
+                    internal: false,
+                    used: true,
+                }
+
+                tmpKnownAddresses.push(accountAddress)
+            } else {
+                currentSearchGap++
+            }
+        }
+        knownAddresses = sortAddresses(tmpKnownAddresses)
+        updateAccountPersistedDataOnActiveProfile(accountIndex, { knownAddresses })
+    }
+
+    async function handleSearchClick(): Promise<void> {
+        isBusy = true
+        try {
+            await checkActiveProfileAuth(search, { stronghold: true, ledger: true })
+        } catch (err) {
+            handleError(err)
+        } finally {
+            isBusy = false
+        }
+    }
+
+    function sortAddresses(addresses: AccountAddress[] = []): AccountAddress[] {
+        return addresses.sort((a, b) => a.keyIndex - b.keyIndex)
+    }
 </script>
 
 <div class="flex flex-col space-y-6">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.addressHistory.title')}
     </Text>
-    <div class="flex w-full items-center justify-between">
-        <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.addressHistory.disclaimer')}</Text>
-        <button on:click={onCopyClick} class="text-gray-500 dark:text-gray-100 p2" type="button">
-            <Icon icon={IconEnum.Copy} />
-        </button>
-    </div>
-    {#if addressList}
-        {#if addressList.length > 0}
+    {#if knownAddresses}
+        {#if knownAddresses.length > 0}
             <div class="w-full flex-col space-y-2 virtual-list-wrapper">
-                <VirtualList items={addressList} let:item>
+                <VirtualList items={knownAddresses} let:item>
                     <div class="mb-1">
                         <KeyValueBox
                             isCopyable
@@ -69,6 +172,18 @@
             <Spinner />
         </div>
     {/if}
+</div>
+<div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
+    <div class="flex w-full justify-center pt-8 space-x-4">
+        <Button outline classes="w-1/2" onClick={onCopyClick}>{localize('actions.copy')}</Button>
+        <Button
+            classes="w-1/2"
+            onClick={handleSearchClick}
+            disabled={isBusy}
+            {isBusy}
+            busyMessage={localize('actions.searching')}>{localize('actions.search')}</Button
+        >
+    </div>
 </div>
 
 <style lang="scss">
