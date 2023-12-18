@@ -109,7 +109,7 @@ try {
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         ...methods,
         async createSecretManager(options) {
-            const manager = await IotaSdk.SecretManager.create(options)
+            const manager = IotaSdk.SecretManager.create(options)
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
@@ -122,19 +122,23 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
             return client
         },
-        // TODO(2.0): rename to createWallet
-        async createWallet(id, options) {
-            const wallet = await IotaSdk.Wallet.create(options)
-            wallet.id = id
-            wallets[id] = wallet
-            bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
+        // TODO(2.0): Is there a difference between this and getWallet? They both really make the same thing
+        async createWallet(id, walletOptions) {
+            let wallet = wallets[id]
+            if (!wallet) {
+                wallet = await IotaSdk.Wallet.create(walletOptions)
+                wallet.id = id
+                wallets[id] = wallet
+                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
+            }
             return wallet
         },
         // TODO(2.0): also remove from file system? Does it make sense? file system != memoery
-        deleteWallet(id) {
+        async deleteWallet(id) {
             if (id && id in wallets) {
                 const wallet = wallets[id]
-                wallet.destroy()
+                await wallet.stopBackgroundSync()
+                await wallet.destroy()
                 delete wallets[id]
             }
         },
@@ -143,6 +147,7 @@ try {
             let wallet = wallets[id]
             if (!wallet) {
                 wallet = await IotaSdk.Wallet.create(walletOptions)
+                wallet.id = id
                 wallets[id] = wallet
                 bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
             }
@@ -155,12 +160,12 @@ try {
             accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, account))
             return accounts
         },
-        clearWalletsFromMemory() {
-            Object.keys(wallets).forEach((id) => {
-                const wallet = wallets[id]
-                wallet.destroy()
+        async clearWalletsFromMemory() {
+            for(const [id, wallet] of Object.entries(wallets)){
+                await wallet.stopBackgroundSync()
+                await wallet.destroy()
                 delete wallets[id]
-            })
+            }
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'

@@ -17,9 +17,7 @@ export async function buildOnboardingSecretManager(){
             storagePath, 
             strongholdPassword
         })
-
-        console.log("options", secretManagerOptions)
-        
+     
         const secretManager = await api.createSecretManager(secretManagerOptions);
 
         onboardingProfileSecretManager.set(secretManager)

@@ -14,7 +14,7 @@ export async function buildWalletStateAndPersistedData(
 ): Promise<[IWalletState, IPersistedWalletData]> {
     const storagePath = await getStorageDirectoryOfProfile(wallet.id)
     const walletOptions = getWalletOptions(get(activeProfile), storagePath)
-    console.log("walletOptions", walletOptions)
+
     const persistedWalletData: IPersistedWalletData = {
         name: name || `${localize('general.wallet')}`,
         color: color || getRandomWalletColor(),

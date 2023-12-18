@@ -19,8 +19,6 @@ export function getWalletOptions(profile: IProfile, storagePath:string): WalletO
         },
     }
 
-    console.log("aaa", walletOptions)
-
     return walletOptions
 }
 
@@ -36,7 +34,6 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
     const storagePath = await getStorageDirectoryOfProfile(id)
 
     const walletOptions = getWalletOptions(activeProfile, storagePath);
-    console.log("walletOptions", walletOptions);
     
     const wallet = await api.createWallet(id, {
         ...walletOptions,
@@ -45,6 +42,5 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
 
     // TODO(2.0): Fix 
     selectedWalletId.set(id)
-    console.log("wallet in createWallet", wallet);
     return wallet
 }

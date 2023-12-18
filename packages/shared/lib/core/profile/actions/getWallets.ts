@@ -8,7 +8,6 @@ import { IWallet } from '../interfaces/wallet.interface'
 export async function getWallets(): Promise<IWallet[]> {
     const profile = get(activeProfile)
     let wallets: IWallet[] = [] 
-    console.log(profile)   
     if (profile.walletPersistedData) {
         wallets = await Promise.all(Object.entries(profile.walletPersistedData)
         .map(([id, data]) => api.getWallet(id, data.walletOptions)))

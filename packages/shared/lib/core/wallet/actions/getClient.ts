@@ -5,7 +5,6 @@ import { get } from 'svelte/store';
 
 export function getClient(): Promise<Client> {
     const selectedWallet = get(selectedWalletId);
-    console.log("wallet in getClient", selectedWallet);
 
     return api.getClientFromWallet(selectedWallet)
 }
