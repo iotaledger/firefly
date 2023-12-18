@@ -137,7 +137,6 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
         {localize('popups.addressHistory.title')}
     </Text>
-    <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.addressHistory.disclaimer')}</Text>
     {#if knownAddresses}
         {#if knownAddresses.length > 0}
             <div class="w-full flex-col space-y-2 virtual-list-wrapper">

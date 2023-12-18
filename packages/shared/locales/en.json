@@ -1185,7 +1185,6 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
             "internal": "Internal",
             "errorNoChronicle": "Chronicle not configured",
