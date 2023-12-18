@@ -6,7 +6,7 @@
     import { fetchWithTimeout } from '@core/nfts'
     import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
     import { getProfileManager } from '@core/profile-manager/stores'
-    import { truncateString } from '@core/utils'
+    import { setClipboard, truncateString } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
@@ -36,6 +36,11 @@
     let searchAddressStartIndex = 0
     let currentSearchGap = 0
     let isBusy = false
+
+    function onCopyClick(): void {
+        const addresses = knownAddresses.map((address) => address.address).join(',')
+        setClipboard(addresses)
+    }
 
     onMount(() => {
         knownAddresses = $selectedAccount?.knownAddresses
@@ -169,15 +174,16 @@
     {/if}
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <Button
-        classes="w-full"
-        onClick={handleSearchClick}
-        disabled={isBusy}
-        {isBusy}
-        busyMessage={localize('actions.searching')}
-    >
-        {localize('actions.search')}
-    </Button>
+    <div class="flex w-full justify-center pt-8 space-x-4">
+        <Button outline classes="w-1/2" onClick={onCopyClick}>{localize('actions.copy')}</Button>
+        <Button
+            classes="w-1/2"
+            onClick={handleSearchClick}
+            disabled={isBusy}
+            {isBusy}
+            busyMessage={localize('actions.searching')}>{localize('actions.search')}</Button
+        >
+    </div>
 </div>
 
 <style lang="scss">
