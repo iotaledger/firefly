@@ -1,5 +1,5 @@
 import { Client } from '@iota/sdk/out/client'
-import { getSelectedWallet, selectedWalletId } from '@core/wallet/stores'
+import { selectedWalletId } from '@core/wallet/stores'
 import { api } from '../../api'
 import { get } from 'svelte/store'
 

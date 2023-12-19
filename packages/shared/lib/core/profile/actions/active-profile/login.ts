@@ -1,5 +1,5 @@
 import { initializeRegisteredProposals, registerProposalsFromNodes } from '@contexts/governance/actions'
-import { cleanupOnboarding, initialiseOnboardingProfileWithSecretManager } from '@contexts/onboarding/actions'
+import { cleanupOnboarding } from '@contexts/onboarding/actions'
 import { Platform } from '@core/app/classes'
 import { AppContext } from '@core/app/enums'
 import { handleError } from '@core/error/handlers'
@@ -21,7 +21,6 @@ import { get } from 'svelte/store'
 import {
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT,
-    DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION,
 } from '../../constants'
 import { ProfileType } from '../../enums'
 import { ILoginOptions, IWallet } from '../../interfaces'
@@ -41,7 +40,6 @@ import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletA
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { checkActiveProfileAuth, getWallets } from '@core/profile'
-import { isOnboardingSecretManagerInitialized } from 'shared/lib/contexts/onboarding'
 import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
 
 // TODO(2.0) Remove usage of profile manager
@@ -49,7 +47,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
         const _activeProfile = get(activeProfile)
-        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type, lastUsedWalletId } = _activeProfile
+        const { loggedIn, lastActiveAt, id, isStrongholdLocked, type } = _activeProfile
         if (id) {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()

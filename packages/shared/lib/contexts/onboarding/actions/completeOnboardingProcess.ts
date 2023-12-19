@@ -14,7 +14,6 @@ import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 import {
     addEmptyWalletActivitiesToAllWalletActivities,
     buildWalletStateAndPersistedData,
-    createNewWallet,
     IWalletState,
 } from '@core/wallet'
 import { localize } from '@core/i18n'

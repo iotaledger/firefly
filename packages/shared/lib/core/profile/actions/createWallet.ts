@@ -1,10 +1,9 @@
 import { api } from '@core/api'
-import { generateRandomId } from '@core/utils'
 import { get } from 'svelte/store'
 import { IProfile, IWallet } from '../interfaces'
 import { activeProfile as activeProfileStore } from '../stores'
 import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '../utils'
-import { Wallet, WalletOptions } from '@iota/sdk'
+import { WalletOptions } from '@iota/sdk'
 import { selectedWalletId } from '../../wallet'
 
 export function getWalletOptions(profile: IProfile, storagePath: string): WalletOptions {

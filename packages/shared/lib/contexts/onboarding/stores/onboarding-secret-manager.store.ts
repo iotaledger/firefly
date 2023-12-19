@@ -7,7 +7,7 @@ import { get, writable, Writable } from 'svelte/store'
 
 export const onboardingProfileSecretManager: Writable<SecretManager | null> = writable(null)
 
-export async function buildOnboardingSecretManager() {
+export async function buildOnboardingSecretManager(): Promise<void> {
     const profile = get(onboardingProfile)
     if (profile) {
         const { id, type, strongholdPassword } = profile

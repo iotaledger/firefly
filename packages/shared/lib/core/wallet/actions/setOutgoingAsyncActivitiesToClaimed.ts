@@ -1,6 +1,5 @@
 import { IWalletState } from '@core/wallet/interfaces'
 import { BasicOutput, OutputData } from '@iota/sdk/out/types'
-import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection } from '../enums'
 import { allWalletActivities, updateAsyncDataByActivityId } from '../stores'

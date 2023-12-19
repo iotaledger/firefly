@@ -1,4 +1,3 @@
-import { get } from 'svelte/store'
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'

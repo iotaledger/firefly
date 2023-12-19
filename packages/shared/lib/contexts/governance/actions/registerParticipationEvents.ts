@@ -1,8 +1,5 @@
 import { ParticipationEventMap, ParticipationEventRegistrationOptions } from '@iota/sdk/out/types'
 import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
-
-import { get } from 'svelte/store'
-
 import { addProposalsFromParticipationEventMap } from './addProposalsFromParticipationEventMap'
 
 export async function registerParticipationEvents(

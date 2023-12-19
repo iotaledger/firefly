@@ -2,7 +2,6 @@ import { Balance } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
-import { getDepositAddress } from '../utils/getDepositAddress'
 import { getAddressesWithOutputs } from './getAddressesWithOutputs'
 
 // TODO(2.0): Fix usages of buildAccountState

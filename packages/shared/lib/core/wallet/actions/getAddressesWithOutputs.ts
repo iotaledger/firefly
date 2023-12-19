@@ -1,13 +1,12 @@
-import { AddressWithOutputs, getBech32AddressFromAddressTypes, IWalletState } from '@core/wallet'
-import { IWallet } from '@core/profile/interfaces'
-import { Address } from '@iota/sdk/out/types'
+import { AddressWithOutputs } from '@core/wallet'
 
 // TODO(2.0) Fix all usages
-export async function getAddressesWithOutputs(wallet: IWallet | IWalletState): Promise<AddressWithOutputs[]> {
-    let addressesWithOutputs: AddressWithOutputs[] = []
+export function getAddressesWithOutputs(/* wallet: IWallet | IWalletState*/): Promise<AddressWithOutputs[]> {
+    const addressesWithOutputs: AddressWithOutputs[] = []
     // TODO (2.0): fix
-    return addressesWithOutputs
+    return Promise.resolve(addressesWithOutputs)
 
+    /*
     const addresses: Address[] = [] // await account.accounts
     const outputs = await wallet.outputs()
 
@@ -29,5 +28,5 @@ export async function getAddressesWithOutputs(wallet: IWallet | IWalletState): P
         }
         return existingAddress
     })
-    return addressesWithOutputs
+    return addressesWithOutputs*/
 }
