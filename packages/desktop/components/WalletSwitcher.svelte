@@ -17,7 +17,7 @@
 </script>
 
 <svelte:window on:click={onOutsideClick} />
-<account-switcher>
+<wallet-switcher>
     <button type="button" on:click={onButtonClick} class="flex flex-row justify-center items-center space-x-2">
         <WalletLabel wallet={$selectedWallet} />
         <icon-container class:rotate={isModalOpened}>
@@ -25,10 +25,10 @@
         </icon-container>
     </button>
     <WalletSwitcherModal bind:modal />
-</account-switcher>
+</wallet-switcher>
 
 <style lang="scss">
-    account-switcher {
+    wallet-switcher {
         @apply block relative;
         -webkit-app-region: none;
     }

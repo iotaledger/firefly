@@ -1,5 +1,5 @@
 export enum PopupId {
-    AccountSwitcher = 'accountSwitcher',
+    WalletSwitcher = 'WalletSwitcher',
     ActivityDetails = 'activityDetails',
     AddNode = 'addNode',
     AddProposal = 'addProposal',
