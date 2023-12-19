@@ -1,4 +1,4 @@
-import { updateNftInAllAccountNfts } from '.'
+import { updateNftInAllWalletNfts } from '.'
 import { INft } from '../interfaces'
 import { addNftToDownloadQueue } from '../stores'
 import { checkIfNftShouldBeDownloaded } from '../utils/checkIfNftShouldBeDownloaded'
@@ -21,7 +21,7 @@ async function validateNftThenAddToQueue(walletId: string, nft: INft): Promise<v
         const { shouldDownload, downloadMetadata, downloadUrl } = await checkIfNftShouldBeDownloaded(nft)
         nft.downloadMetadata = downloadMetadata
         nft.downloadUrl = downloadUrl
-        updateNftInAllAccountNfts(walletId, nft.id, { downloadMetadata })
+        updateNftInAllWalletNfts(walletId, nft.id, { downloadMetadata })
 
         if (shouldDownload) {
             addNftToDownloadQueue({ nft: nft, downloadUrl, path: nft.filePath, walletId })

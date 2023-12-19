@@ -4,7 +4,7 @@ import { plainToInstance } from 'class-transformer'
 import { showAppNotification } from '@auxiliary/notification'
 import { getSelectedWallet, updateSelectedWallet } from '@core/wallet/stores/selected-wallet.store'
 import { localize } from '@core/i18n'
-import { updateNftInAllAccountNfts } from '@core/nfts'
+import { updateNftInAllWalletNfts } from '@core/nfts'
 import { handleError } from '@core/error/handlers'
 import { processAndAddToActivities } from '../utils'
 
@@ -21,7 +21,7 @@ export async function burnNft(nftId: string): Promise<void> {
         await processAndAddToActivities(burnNftTransaction, wallet)
 
         // Update NFT
-        updateNftInAllAccountNfts(wallet.id, nftId, { isSpendable: false })
+        updateNftInAllWalletNfts(wallet.id, nftId, { isSpendable: false })
 
         showAppNotification({
             type: 'success',

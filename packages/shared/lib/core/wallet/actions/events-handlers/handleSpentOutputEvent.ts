@@ -2,7 +2,7 @@
 
 import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
-import { getNftByIdFromAllAccountNfts, updateNftInAllAccountNfts } from '@core/nfts'
+import { getNftByIdFromAllAccountNfts, updateNftInAllWalletNfts } from '@core/nfts'
 import { syncBalance, ActivityAsyncStatus, ActivityType, validateWalletApiEvent, updateAsyncDataByTransactionId, allWalletActivities} from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -42,7 +42,7 @@ export async function handleSpentOutputEventInternal(
         const previousOutputId = getNftByIdFromAllAccountNfts(walletId, activity.nftId)?.latestOutputId
         const previousOutput = await wallet.getOutput(previousOutputId)
         if (output.metadata.milestoneTimestampBooked > previousOutput.metadata.milestoneTimestampBooked) {
-            updateNftInAllAccountNfts(walletId, activity.nftId, { isSpendable: false })
+            updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })
         }
     }
 }

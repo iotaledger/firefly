@@ -3,10 +3,10 @@ import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
 import { get } from 'svelte/store'
 import { DownloadWarningType } from '../enums'
 import { downloadingNftId } from '../stores'
-import { updateNftInAllAccountNfts } from './updateNftInAllAccountNfts'
+import { updateNftInAllWalletNfts } from './updateNftInAllAccountNfts'
 import { activeProfile } from '@core/profile/stores'
 
-export async function interruptNftDownloadAfterTimeout(accountIndex: number): Promise<void> {
+export async function interruptNftDownloadAfterTimeout(walletId: string): Promise<void> {
     const currentlyDownloadingNft = get(downloadingNftId)
 
     const downloadTimeout = get(activeProfile).settings.maxMediaDownloadTimeInSeconds * MILLISECONDS_PER_SECOND
@@ -15,7 +15,7 @@ export async function interruptNftDownloadAfterTimeout(accountIndex: number): Pr
 
     if (currentlyDownloadingNft && currentlyDownloadingNft === updatedDownloadingNft) {
         await Platform.cancelNftDownload(currentlyDownloadingNft)
-        updateNftInAllAccountNfts(accountIndex, currentlyDownloadingNft, {
+        updateNftInAllWalletNfts(walletId, currentlyDownloadingNft, {
             downloadMetadata: { isLoaded: false, warning: { type: DownloadWarningType.DownloadTooLong } },
         })
     }

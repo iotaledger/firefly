@@ -2,7 +2,7 @@ import { allWalletNfts } from '../stores'
 import { INft } from '../interfaces'
 
 // TODO(2.0) Fix usages
-export function updateNftInAllAccountNfts(walletId: string, nftId: string, partialNft: Partial<INft>): void {
+export function updateNftInAllWalletNfts(walletId: string, nftId: string, partialNft: Partial<INft>): void {
     allWalletNfts.update((state) => {
         if (!state[walletId]) {
             state[walletId] = []
