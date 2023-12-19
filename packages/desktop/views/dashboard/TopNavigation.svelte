@@ -1,6 +1,5 @@
 <script lang="ts">
     import { Icon, Text } from '@ui'
-    import { AccountSwitcher } from '@components'
     import { PlatformOption } from '@core/app'
     import { platform } from '@core/app/stores'
     import { localize } from '@core/i18n'
@@ -62,7 +61,8 @@
         {/if}
     </div>
 
-    <AccountSwitcher />
+    <!-- TODO(2.0) We hide the WalletSwitcher for now -->
+    <!-- <WalletSwitcher /> -->
 
     <div class="right-button flex justify-end" />
 </top-navigation>

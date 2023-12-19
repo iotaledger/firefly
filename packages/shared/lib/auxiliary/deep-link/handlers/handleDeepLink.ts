@@ -35,7 +35,7 @@ export function handleDeepLink(input: string): void {
 
         if (get(visibleActiveWallets).length > 1) {
             openPopup({
-                id: PopupId.AccountSwitcher,
+                id: PopupId.WalletSwitcher,
                 overflow: true,
                 props: {
                     onConfirm: () => {

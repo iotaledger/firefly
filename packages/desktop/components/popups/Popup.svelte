@@ -8,7 +8,7 @@
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
-    import AccountSwitcherPopup from './WalletSwitcherPopup.svelte'
+    import WalletSwitcherPopup from './WalletSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import AddProposalPopup from './AddProposalPopup.svelte'
@@ -94,7 +94,7 @@
     let popupContent
 
     const POPUP_MAP: PopupComponentMap = {
-        [PopupId.AccountSwitcher]: AccountSwitcherPopup,
+        [PopupId.WalletSwitcher]: WalletSwitcherPopup,
         [PopupId.ActivityDetails]: ActivityDetailsPopup,
         [PopupId.AddNode]: AddNodePopup,
         [PopupId.AddProposal]: AddProposalPopup,
