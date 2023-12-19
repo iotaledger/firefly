@@ -18,7 +18,7 @@ export async function deleteWallet(id: string): Promise<void> {
 
     try {
         await api.deleteWallet(id)
-        // TODO(2.0) do we need this?: removeAccountFromActiveAccounts(id)
+        // TODO(2.0) do we need this?: removewalletFromactiveWallets(id)
         setSelectedWallet(wallets[0]?.id ?? null)
         get(routerManager).resetRouterForAppContext(AppContext.Dashboard)
     } catch (err) {

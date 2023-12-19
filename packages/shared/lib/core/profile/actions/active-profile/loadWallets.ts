@@ -1,4 +1,4 @@
-import { loadWallet } from '@core/wallet'
+import { loadWallet, setSelectedWallet } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, activeProfile } from '../../stores'
 import { getWallets } from '../getWallets'

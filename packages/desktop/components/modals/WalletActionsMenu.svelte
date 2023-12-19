@@ -20,7 +20,7 @@
      // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
 
     function onCustomiseAccountClick(): void {
-        openPopup({ id: PopupId.ManageAccount })
+        openPopup({ id: PopupId.ManageWallet })
         modal?.close()
     }
 

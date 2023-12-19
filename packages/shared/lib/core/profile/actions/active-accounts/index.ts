@@ -1,3 +1,3 @@
-export * from './findActiveAccountWithAddress'
-export * from './updateActiveAccountPersistedData'
+export * from './findActiveWalletWithAddress'
+export * from './updateActiveWalletPersistedData'
 export * from './getWalletColorById'

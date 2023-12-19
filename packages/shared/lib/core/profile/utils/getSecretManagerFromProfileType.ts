@@ -6,7 +6,7 @@ import { ProfileType } from '@core/profile'
 // TODO(2.0) Fix all usages
 export function getSecretManagerFromProfileType(type?: ProfileType, storagePath?: string): SecretManagerType {
     const strongholdSecretManager = {
-        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password: 'mellamobego' },
+        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password: 'mellamobego' }, // TODO(2.0) Remove this harcoded password
     }
     const ledgerSecretManager = {
         ledgerNano: USE_LEDGER_SIMULATOR,

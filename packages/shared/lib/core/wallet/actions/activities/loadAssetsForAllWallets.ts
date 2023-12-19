@@ -2,14 +2,14 @@ import { getOrRequestAssetFromPersistedAssets } from '../getOrRequestAssetFromPe
 import { IWalletState } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { ActivityType } from '@core/wallet/enums'
-import { allAccountActivities, addPersistedAsset } from '../../stores'
+import { allWalletActivities, addPersistedAsset } from '../../stores'
 import { IPersistedAsset } from '@core/wallet/interfaces'
 
-export async function loadAssetsForAllActivities(account: IWalletState): Promise<void> {
-    const accountActivities = get(allAccountActivities)[account.index]
+export async function loadAssetsForAllWallets(wallet: IWalletState): Promise<void> {
+    const walletActivities = get(allWalletActivities)[wallet.id]
 
     const persistedAssets: IPersistedAsset[] = []
-    for (const activity of accountActivities) {
+    for (const activity of walletActivities) {
         try {
             if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
                 const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)

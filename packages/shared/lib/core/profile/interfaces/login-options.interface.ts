@@ -1,4 +1,4 @@
 export interface ILoginOptions {
     isFromOnboardingFlow?: boolean
-    shouldRecoverAccounts?: boolean
+    shouldRecoverWallets?: boolean
 }

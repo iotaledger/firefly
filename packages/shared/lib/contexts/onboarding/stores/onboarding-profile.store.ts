@@ -9,7 +9,6 @@ import { IPersistedNetwork } from '@core/network'
 export const onboardingProfile = writable<IOnboardingProfile | null | undefined>(null)
 
 export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>{
-    console.log("Changed?")
     return  isLedgerProfile($onboardingProfile?.type)
 })
 
@@ -20,7 +19,6 @@ export const onboardingProfileNetwork: Readable<IPersistedNetwork | undefined> =
 
 export function updateOnboardingProfile(payload: Partial<IOnboardingProfile>): void {
     onboardingProfile.update((state) => ({ ...state, ...payload }))
-    console.log("UPDATED", get(onboardingProfile))
 }
 
 export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerClaimingWallet): void {
@@ -48,10 +46,10 @@ export function addWalletPersistedDataToOnboardingProfile(
     walletPersistedData: IPersistedWalletData
 ): void {
     onboardingProfile?.update((state) => {
-        if (!state?.accountPersistedData) {
-            state.accountPersistedData = {}
+        if (!state?.walletPersistedData) {
+            state.walletPersistedData = {}
         }
-        state.accountPersistedData[walletId] = walletPersistedData
+        state.walletPersistedData[walletId] = walletPersistedData
         return state
     })
 }

@@ -30,7 +30,7 @@
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
-    import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import ManageWalletPopup from './ManageWalletPopup.svelte'
     import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
@@ -79,7 +79,7 @@
     $: switch (id) {
         case PopupId.ConnectLedger:
         case PopupId.createWallet:
-        case PopupId.ManageAccount:
+        case PopupId.ManageWallet:
             size = PopupSize.Small
             break
         case PopupId.LedgerAppGuide:
@@ -116,7 +116,7 @@
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,
-        [PopupId.ManageAccount]: ManageAccountPopup,
+        [PopupId.ManageWallet]: ManageWalletPopup,
         [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
         [PopupId.MetricSystemInfo]: MetricSystemInfoPopup,
         [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,

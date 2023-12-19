@@ -4,7 +4,7 @@ import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/s
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from 'shared/lib/contexts/governance/utils/isWalletVoting'
 import { updateNftInAllAccountNfts } from '@core/nfts'
-import { updateActiveAccountPersistedData } from '@core/profile/actions'
+import { updateActiveWalletPersistedData } from '@core/profile/actions'
 import { syncVotingPower, getActivityByTransactionId,
     updateActivityByTransactionId, validateWalletApiEvent, updateClaimingTransactionInclusion,  ActivityAction, ActivityDirection, ActivityType, GovernanceActivity, InclusionState } from '@core/wallet'
 import { get } from 'svelte/store'
@@ -66,12 +66,12 @@ function handleGovernanceTransactionInclusionEvent(
         if (wallet.hasVotingPowerTransactionInProgress) {
             updateActiveWallet(walletId, { hasVotingPowerTransactionInProgress: false })
             if (isWalletVoting(walletId) && activity.votingPower !== 0) {
-                updateActiveAccountPersistedData(walletId, { shouldRevote: true })
+                updateActiveWalletPersistedData(walletId, { shouldRevote: true })
                 openPopup({ id: PopupId.Revote })
             }
         } else {
             updateActiveWallet(walletId, { hasVotingTransactionInProgress: false })
-            updateActiveAccountPersistedData(walletId, { shouldRevote: false })
+            updateActiveWalletPersistedData(walletId, { shouldRevote: false })
         }
         void updateParticipationOverview(walletId)
     }

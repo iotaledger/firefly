@@ -1,11 +1,11 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification/actions'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { registerProposalsForAccounts, registeredProposalsForSelectedWallet } from '@contexts/governance'
+    import { registerProposalsForWallets, registeredProposalsForSelectedWallet } from '@contexts/governance'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
-    import { activeAccounts, updateActiveAccountPersistedData } from '@core/profile'
+    import { activeWallets, updateActiveWalletPersistedData } from '@core/profile'
     import { truncateString } from '@core/utils/string'
     import type { Auth } from '@iota/sdk/out/types'
     import { Button, Checkbox, NodeInput, Text, TextInput, TextType } from 'shared/components'
@@ -21,7 +21,7 @@
     let nodeInputError: string
     let isBusy = false
     let isRegisteringAllProposals = false
-    let isAddingForAllAccounts = false
+    let isAddingForAllWallets = false
 
     $: isEditMode = !!initialEventId && !!initialNodeUrl
     $: disabled = isBusy || !nodeUrl || (!isRegisteringAllProposals && !eventId)
@@ -35,11 +35,11 @@
         try {
             isBusy = true
             await Promise.all([
-                !isRegisteringAllProposals && validateEventId(!isAddingForAllAccounts && !isEditMode),
+                !isRegisteringAllProposals && validateEventId(!isAddingForAllWallets && !isEditMode),
                 nodeInput?.validate(),
             ])
             await registerParticipationWrapper()
-            updateActiveAccountPersistedData($selectedWallet.id, {
+            updateActiveWalletPersistedData($selectedWallet.id, {
                 removedProposalIds: $selectedWallet.removedProposalIds?.filter((id) => id !== inputtedEventId),
             })
             isBusy = false
@@ -82,8 +82,8 @@
             node: { url: nodeUrl, auth },
             eventsToRegister: isRegisteringAllProposals ? [] : [eventId],
         }
-        const accounts = isAddingForAllAccounts ? $activeAccounts : [$selectedWallet]
-        await registerProposalsForAccounts(options, accounts)
+        const wallets = isAddingForAllWallets ? $activeWallets : [$selectedWallet]
+        await registerProposalsForWallets(options, wallets)
         showAppNotification({
             type: 'success',
             message: generateSuccessMessage(),
@@ -96,7 +96,7 @@
         if (isEditMode) {
             return localize('views.governance.proposals.successEdit')
         } else {
-            return localize(`views.governance.proposals.${isAddingForAllAccounts ? 'successAddAll' : 'successAdd'}`, {
+            return localize(`views.governance.proposals.${isAddingForAllWallets ? 'successAddAll' : 'successAdd'}`, {
                 values: { numberOfProposals: isRegisteringAllProposals ? 'other' : 'one' },
             })
         }
@@ -139,7 +139,7 @@
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
         {#if !isEditMode}
-            <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllAccounts} />
+            <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllWallets} />
         {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">

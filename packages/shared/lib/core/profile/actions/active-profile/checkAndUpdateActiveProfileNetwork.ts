@@ -7,11 +7,12 @@ export async function checkAndUpdateActiveProfileNetwork(): Promise<void> {
     const $activeProfile = get(activeProfile)
     const nodeInfoResponse = await getAndUpdateNodeInfo(true)
     const networkId = $activeProfile?.network?.id
+    const networkName = nodeInfoResponse?.nodeInfo?.protocolParameters[0]?.parameters?.networkName
     if (!networkId || networkId === NetworkId.Custom) {
         const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse)
         network.chains = $activeProfile.network?.chains || []
         updateActiveProfile({ network })
-    } else if (networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)) {
+    } else if (networkId !== getNetworkIdFromNetworkName(networkName)) {
         throw new Error('error.node.networkIdMismatch')
     }
 }

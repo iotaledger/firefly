@@ -7,7 +7,7 @@ import { activeWallets } from '../../stores'
  * @param address The address to find
  * @returns The wallet matching the address or undefined if not found
  */
-export function findActiveAccountWithAddress(address: string): IWalletState {
+export function findActiveWalletWithAddress(address: string): IWalletState {
     if (!address) {
         return
     }

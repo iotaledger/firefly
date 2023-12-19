@@ -26,16 +26,16 @@ export function addWalletPersistedDataToActiveProfile(
     walletPersistedData: IPersistedWalletData
 ): void {
     activeProfile?.update((state) => {
-        if (!state?.accountPersistedData) {
-            state.accountPersistedData = {}
+        if (!state?.walletPersistedData) {
+            state.walletPersistedData = {}
         }
-        state.accountPersistedData[walletId] = walletPersistedData
+        state.walletPersistedData[walletId] = walletPersistedData
         return state
     })
 }
 
 export function getActiveProfilePersistedWalletData(walletId: string): IPersistedWalletData | undefined {
-    return get(activeProfile)?.accountPersistedData?.[walletId]
+    return get(activeProfile)?.walletPersistedData?.[walletId]
 }
 
 export function updateWalletPersistedDataOnActiveProfile(
@@ -43,11 +43,11 @@ export function updateWalletPersistedDataOnActiveProfile(
     partialWalletPersistedData: Partial<IPersistedWalletData>
 ): void {
     activeProfile?.update((state) => {
-        if (!state?.accountPersistedData) {
-            state.accountPersistedData = {}
+        if (!state?.walletPersistedData) {
+            state.walletPersistedData = {}
         }
-        state.accountPersistedData[walletId] = {
-            ...state?.accountPersistedData?.[walletId],
+        state.walletPersistedData[walletId] = {
+            ...state?.walletPersistedData?.[walletId],
             ...partialWalletPersistedData,
         }
         return state

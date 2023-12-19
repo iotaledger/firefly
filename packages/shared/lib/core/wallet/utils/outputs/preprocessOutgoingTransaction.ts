@@ -1,12 +1,12 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, RegularTransactionEssence, Transaction, UTXOInput } from '@iota/sdk/out/types'
+import { Output, OutputType, RegularTransactionEssence, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
 
 export async function preprocessOutgoingTransaction(
-    transaction: Transaction,
+    transaction: TransactionWithMetadata,
     account: IWalletState
 ): Promise<IProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.essence as RegularTransactionEssence

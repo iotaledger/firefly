@@ -13,14 +13,14 @@ export interface IPersistedProfile {
     network: IPersistedNetwork
     lastStrongholdBackupTime: Date
     settings: IProfileSettings
-    accountPersistedData: { // TODO(2.0) Shouldn't we rename this field?
-        [accountId: string]: IPersistedWalletData
+    walletPersistedData: {
+        [walletId: string]: IPersistedWalletData
     }
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
     lastUsedWalletId?: string // Todo(2.0) Fix all usages of lastUsedAccountIndex
     clientOptions: ClientOptions
-    secretManagerOptions: SecretManagerType,
+    secretManagerOptions: SecretManagerType, // TODO(2.0) This sould be gone.
     forceAssetRefresh: boolean
     strongholdVersion?: StrongholdVersion
     needsChrysalisToStardustDbMigration?: boolean

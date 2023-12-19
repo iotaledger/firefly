@@ -1,8 +1,7 @@
 <script lang="ts">
     import { selectedWallet, setNextSelectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { activeProfile, nonHiddenActiveWallets } from '@core/profile'
-    import { updateActiveAccountPersistedData } from '@core/profile/actions'
+    import { activeProfile, nonHiddenActiveWallets, updateActiveWalletPersistedData } from '@core/profile'
     import { Icon } from '@lib/auxiliary/icon'
     import { MenuItem } from '@ui'
 
@@ -10,7 +9,7 @@
 
     function onShowAccountClick(): void {
         if ($selectedWallet) {
-            updateActiveAccountPersistedData($selectedWallet.id, { hidden: false })
+            updateActiveWalletPersistedData($selectedWallet.id, { hidden: false })
             onClick && onClick()
         }
     }
@@ -18,7 +17,7 @@
     function onHideAccountClick(): void {
         if ($nonHiddenActiveWallets.length > 1) {
             if ($selectedWallet) {
-                updateActiveAccountPersistedData($selectedWallet.id, { hidden: true })
+                updateActiveWalletPersistedData($selectedWallet.id, { hidden: true })
                 if (!$activeProfile.showHiddenAccounts) {
                     setNextSelectedWallet()
                 }

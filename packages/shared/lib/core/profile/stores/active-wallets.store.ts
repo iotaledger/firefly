@@ -8,7 +8,7 @@ export function removewalletFromactiveWallets(walletId: string): void {
     activeWallets?.update((state) => state.filter((wallet) => wallet.id !== walletId))
 }
 
-export function addwalletToactiveWallets(wallet: IWalletState): void {
+export function addWalletToActiveWallets(wallet: IWalletState): void {
     activeWallets?.update((state) => [...state, wallet])
 }
 

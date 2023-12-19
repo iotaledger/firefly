@@ -17,8 +17,8 @@ export function convertOnboardingProfileToPersistedProfile(
         }),
         ...(onboardingProfile?.settings && { settings: onboardingProfile.settings }),
         ...(onboardingProfile?.strongholdVersion && { strongholdVersion: onboardingProfile.strongholdVersion }),
-        ...(onboardingProfile?.accountPersistedData && {
-            accountPersistedData: onboardingProfile.accountPersistedData,
+        ...(onboardingProfile?.walletPersistedData && {
+            walletPersistedData: onboardingProfile.walletPersistedData,
         }),
         ...(onboardingProfile?.isDeveloperProfile && { isDeveloperProfile: onboardingProfile.isDeveloperProfile }),
         ...(onboardingProfile?.hasVisitedDashboard && { hasVisitedDashboard: onboardingProfile.hasVisitedDashboard }),
