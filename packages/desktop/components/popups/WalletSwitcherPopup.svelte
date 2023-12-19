@@ -26,7 +26,7 @@
     </Text>
     <div class="flex flex-col space-y-4">
         <Text fontSize="15" color="gray-700" classes="text-left">{localize('popups.deeplinkAccountSwitch.body')}</Text>
-        <WalletSelector bind:wallet={wallet} />
+        <WalletSelector bind:wallet />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>

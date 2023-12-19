@@ -113,12 +113,12 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
-        async getClientFromWallet(id){
-            const wallet = wallets[id];
+        async getClientFromWallet(id) {
+            const wallet = wallets[id]
             // Why is this here?:
-            // We cannot create classes from exposed functions 
+            // We cannot create classes from exposed functions
             // https://www.electronjs.org/docs/latest/api/context-bridge
-            const client =  await wallet.getClient();
+            const client = await wallet.getClient()
             bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
             return client
         },
@@ -161,7 +161,7 @@ try {
             return accounts
         },
         async clearWalletsFromMemory() {
-            for(const [id, wallet] of Object.entries(wallets)){
+            for (const [id, wallet] of Object.entries(wallets)) {
                 await wallet.stopBackgroundSync()
                 await wallet.destroy()
                 delete wallets[id]

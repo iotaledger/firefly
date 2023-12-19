@@ -12,13 +12,13 @@ export async function isLedgerDeviceMatchingActiveProfile(): Promise<boolean | u
             }
 
             const cachedAddress = wallet?.depositAddress
-            const secretManager = getSecretManager();
+            const secretManager = getSecretManager()
             const generatedAddresses = await secretManager.generateEd25519Addresses({
                 accountIndex: 0,
                 options: {
                     internal: false,
                     ledgerNanoPrompt: false,
-                }
+                },
             })
             const generatedAddress = generatedAddresses[0]
 

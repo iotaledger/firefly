@@ -9,7 +9,7 @@ export function setNextSelectedWallet(): void {
     const otherWallets = get(nonHiddenActiveWallets)
     if (otherWallets.length > 0) {
         if (wallet?.hidden) {
-            const walletPosition = otherWallets.findIndex(w => w.id === wallet.id);
+            const walletPosition = otherWallets.findIndex((w) => w.id === wallet.id)
             const nextSelectedWalletId =
                 otherWallets[walletPosition + 1]?.id ?? otherWallets[otherWallets?.length - 1]?.id
             setSelectedWallet(nextSelectedWalletId)

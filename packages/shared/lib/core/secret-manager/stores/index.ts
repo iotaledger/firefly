@@ -1,1 +1,1 @@
-export * from './secret-manager.store';
+export * from './secret-manager.store'

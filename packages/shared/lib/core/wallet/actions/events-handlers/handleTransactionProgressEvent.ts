@@ -8,7 +8,6 @@ import {
     TransactionProgress,
 } from '@iota/sdk/out/types'
 
-
 import { ledgerNanoStatus } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
@@ -17,7 +16,6 @@ import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 import { validateWalletApiEvent } from '../../utils'
 import { selectedWalletId } from '../../stores'
 import { MissingTransactionProgressEventPayloadError } from '../../errors'
-
 
 export function handleTransactionProgressEvent(error: Error, rawEvent: Event): void {
     const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
@@ -28,10 +26,7 @@ export function handleTransactionProgressEvent(error: Error, rawEvent: Event): v
     }
 }
 
-export function handleTransactionProgressEventInternal(
-    walletId: string,
-    payload: TransactionProgress
-): void {
+export function handleTransactionProgressEventInternal(walletId: string, payload: TransactionProgress): void {
     if (get(isActiveLedgerProfile)) {
         if (get(selectedWalletId) === walletId) {
             openPopupIfVerificationNeeded(payload)

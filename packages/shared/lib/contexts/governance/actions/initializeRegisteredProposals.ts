@@ -2,7 +2,6 @@ import { activeWallets } from 'shared/lib/core/profile'
 import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
 import { get } from 'svelte/store'
 
-
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
 import { createProposalFromError, createProposalFromEvent } from '../utils'
@@ -12,7 +11,7 @@ export async function initializeRegisteredProposals(): Promise<void> {
     const allProposals: { [walletId: string]: IRegisteredProposals } = {}
 
     // Get selected wallet first to speed up showing proposals for the user
-    const _selectedWallet = getSelectedWallet();
+    const _selectedWallet = getSelectedWallet()
     allProposals[_selectedWallet.id] = await getParticipationEventsAndCreateProposalsForWallet(_selectedWallet)
     registeredProposals.set(allProposals)
 
@@ -28,9 +27,7 @@ export async function initializeRegisteredProposals(): Promise<void> {
     registeredProposals.set(allProposals)
 }
 
-async function getParticipationEventsAndCreateProposalsForWallet(
-    wallet: IWalletState
-): Promise<IRegisteredProposals> {
+async function getParticipationEventsAndCreateProposalsForWallet(wallet: IWalletState): Promise<IRegisteredProposals> {
     const proposals: IRegisteredProposals = {}
     const events = await wallet.getParticipationEvents()
     for (const event of Object.values(events)) {

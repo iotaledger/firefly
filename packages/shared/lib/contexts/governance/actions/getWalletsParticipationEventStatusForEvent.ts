@@ -2,7 +2,6 @@ import type { ParticipationEventId, ParticipationEventStatus } from '@iota/sdk/o
 import { IWallet } from 'shared/lib/core/profile'
 import { getSelectedWallet } from 'shared/lib/core/wallet/stores/selected-wallet.store'
 
-
 export function getWalletsParticipationEventStatusForEvent(
     eventId: ParticipationEventId,
     wallet: IWallet = getSelectedWallet()

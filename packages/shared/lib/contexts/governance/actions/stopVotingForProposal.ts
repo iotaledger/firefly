@@ -7,7 +7,7 @@ import { processAndAddToActivities } from '@core/wallet/utils'
 import { getSelectedWallet, updateSelectedWallet } from 'shared/lib/core/wallet'
 
 export async function stopVotingForProposal(eventId: string): Promise<Transaction | undefined> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         updateSelectedWallet({ hasVotingTransactionInProgress: true })
         const prepareStopParticipatingTransaction = await wallet?.prepareStopParticipating(eventId)

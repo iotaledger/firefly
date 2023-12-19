@@ -10,16 +10,20 @@ export async function generateEd25519Address(
 ): Promise<string | undefined> {
     const secretManager = get(activeSecretManager)
 
-    if(!secretManager){
+    if (!secretManager) {
         return undefined
     }
 
     // TODO(2.0) Ledger secret manager doesn't support this
-    return (await secretManager.generateEd25519Addresses({
-        accountIndex, options, bech32Hrp,
-        range: {
-            start: 0,
-            end: 1,
-        },
-    }))[0]
+    return (
+        await secretManager.generateEd25519Addresses({
+            accountIndex,
+            options,
+            bech32Hrp,
+            range: {
+                start: 0,
+                end: 1,
+            },
+        })
+    )[0]
 }

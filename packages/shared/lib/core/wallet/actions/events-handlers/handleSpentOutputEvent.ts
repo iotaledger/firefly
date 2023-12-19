@@ -3,7 +3,14 @@
 import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { getNftByIdFromAllAccountNfts, updateNftInAllWalletNfts } from '@core/nfts'
-import { syncBalance, ActivityAsyncStatus, ActivityType, validateWalletApiEvent, updateAsyncDataByTransactionId, allWalletActivities} from '@core/wallet'
+import {
+    syncBalance,
+    ActivityAsyncStatus,
+    ActivityType,
+    validateWalletApiEvent,
+    updateAsyncDataByTransactionId,
+    allWalletActivities,
+} from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
 
@@ -16,10 +23,7 @@ export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Pro
 }
 
 // TODO(2.0) Fix all usages
-export async function handleSpentOutputEventInternal(
-    walletId: string,
-    payload: SpentOutputWalletEvent
-): Promise<void> {
+export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
     await syncBalance(walletId)

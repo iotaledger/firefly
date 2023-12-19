@@ -10,7 +10,7 @@ import { processAndAddToActivities } from '../utils'
 
 // TODO(2.0) Fix all usages
 export async function burnNft(nftId: string): Promise<void> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         updateSelectedWallet({ isTransferring: true })
         const prepareBurnNftTransaction = await wallet?.prepareBurnNft(nftId)

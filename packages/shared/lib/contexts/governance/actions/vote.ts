@@ -7,7 +7,7 @@ import { handleError } from '@core/error/handlers'
 import { getSelectedWallet, processAndAddToActivities, updateSelectedWallet } from '@core/wallet'
 
 export async function vote(eventId?: string, answers?: number[]): Promise<void> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         updateSelectedWallet({ hasVotingTransactionInProgress: true })
         const prepareVoteTransaction = await wallet?.prepareVote(eventId, answers)

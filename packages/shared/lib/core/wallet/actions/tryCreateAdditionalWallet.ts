@@ -22,7 +22,7 @@ export async function tryCreateAdditionalWallet(alias: string, color: string): P
 
         return Promise.resolve()
     } catch (err) {
-        const errorMessage = (err as IError)?.error || err as string
+        const errorMessage = (err as IError)?.error || (err as string)
         if (err) {
             console.error(errorMessage)
             if (get(isActiveLedgerProfile)) {

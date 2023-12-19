@@ -1,7 +1,12 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { updateLedgerNanoStatus } from '@core/ledger'
-import { AccountRecoveryProfileConfiguration, ProfileType, RecoverAccountsPayload, UnableToFindProfileTypeError } from '@core/profile'
+import {
+    AccountRecoveryProfileConfiguration,
+    ProfileType,
+    RecoverAccountsPayload,
+    UnableToFindProfileTypeError,
+} from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { get } from 'svelte/store'

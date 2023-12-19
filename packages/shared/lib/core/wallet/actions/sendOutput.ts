@@ -6,7 +6,7 @@ import { NftOutput, Output, OutputType } from '@iota/sdk/out/types'
 export async function sendOutput(output: Output): Promise<void> {
     try {
         updateSelectedWallet({ isTransferring: true })
-        const wallet = getSelectedWallet();
+        const wallet = getSelectedWallet()
         if (!wallet) return
         const transaction = await wallet.sendOutputs([output], getDefaultTransactionOptions())
         // Reset transaction details state, since the transaction has been sent

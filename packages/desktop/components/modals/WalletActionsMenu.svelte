@@ -17,7 +17,7 @@
     export let modal: Modal = undefined
 
     const showDeleteAccount = true // TODO(2.0) Is there anything preventing us from deleting any account ?
-     // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
+    // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
 
     function onCustomiseAccountClick(): void {
         openPopup({ id: PopupId.ManageWallet })
@@ -44,7 +44,7 @@
                         options: {
                             internal: false,
                             ledgerNanoPrompt: true,
-                        }
+                        },
                     })
                     showAppNotification({
                         type: 'info',

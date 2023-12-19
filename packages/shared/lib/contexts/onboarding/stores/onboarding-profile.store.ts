@@ -8,8 +8,8 @@ import { IPersistedNetwork } from '@core/network'
 
 export const onboardingProfile = writable<IOnboardingProfile | null | undefined>(null)
 
-export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) =>{
-    return  isLedgerProfile($onboardingProfile?.type)
+export const isOnboardingLedgerProfile: Readable<boolean> = derived(onboardingProfile, ($onboardingProfile) => {
+    return isLedgerProfile($onboardingProfile?.type)
 })
 
 export const onboardingProfileNetwork: Readable<IPersistedNetwork | undefined> = derived(

@@ -9,9 +9,7 @@
 
     let modal: Modal | undefined
 
-    $: wallets = $visibleActiveWallets?.filter(
-        (wallet) => wallet.id !== $selectedWallet?.id || !hideSelectedWallet
-    )
+    $: wallets = $visibleActiveWallets?.filter((wallet) => wallet.id !== $selectedWallet?.id || !hideSelectedWallet)
 
     function getSuffixForWallet(wallet: IWalletState): string {
         return formatTokenAmountBestMatch(Number(wallet.balances.baseCoin.available), getBaseToken())

@@ -16,7 +16,7 @@ import {
 import { AccountOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone 
+// TODO(2.0) Alias outputs are gone
 export async function generateSingleAliasActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters

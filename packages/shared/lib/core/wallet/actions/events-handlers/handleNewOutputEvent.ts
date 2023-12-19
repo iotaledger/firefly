@@ -12,9 +12,9 @@ import {
     getAddressesWithOutputs,
     syncBalance,
     validateWalletApiEvent,
-     getBech32AddressFromAddressTypes,
-      preprocessGroupedOutputs,
-      addActivitiesToWalletActivitiesInAllWalletActivities
+    getBech32AddressFromAddressTypes,
+    preprocessGroupedOutputs,
+    addActivitiesToWalletActivitiesInAllWalletActivities,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'

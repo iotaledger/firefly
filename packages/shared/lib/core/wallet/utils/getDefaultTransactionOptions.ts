@@ -3,7 +3,7 @@ import { getSelectedWallet } from '../stores'
 
 export function getDefaultTransactionOptions(address?: string): TransactionOptions | undefined {
     if (!address) {
-        const wallet = getSelectedWallet();
+        const wallet = getSelectedWallet()
         if (!wallet) return
         address = wallet.depositAddress
     }

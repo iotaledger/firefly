@@ -14,7 +14,7 @@ export function addWalletToActiveWallets(wallet: IWalletState): void {
 
 export function updateActiveWallet(walletId: string, partialwallet: Partial<IWalletState>): void {
     activeWallets.update((state) => [
-        ...state.map((wallet) => (wallet.id === walletId ? { ...wallet, ...partialwallet } as IWalletState: wallet)),
+        ...state.map((wallet) => (wallet.id === walletId ? ({ ...wallet, ...partialwallet } as IWalletState) : wallet)),
     ])
 }
 

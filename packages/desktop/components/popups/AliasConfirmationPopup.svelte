@@ -2,7 +2,13 @@
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
-    import { formatTokenAmountPrecise, EMPTY_HEX_ID, processAndAddToActivities, selectedWallet, updateSelectedWallet } from '@core/wallet'
+    import {
+        formatTokenAmountPrecise,
+        EMPTY_HEX_ID,
+        processAndAddToActivities,
+        selectedWallet,
+        updateSelectedWallet,
+    } from '@core/wallet'
     import { UnlockConditionType, PreparedTransaction, AccountOutput } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'

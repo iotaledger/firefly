@@ -18,7 +18,7 @@ export async function createNativeToken(
 ): Promise<void> {
     try {
         updateSelectedWallet({ isTransferring: true })
-        const wallet = getSelectedWallet();
+        const wallet = getSelectedWallet()
         const params: CreateNativeTokenParams = {
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),

@@ -19,10 +19,7 @@ export function addActivityToWalletActivitiesInAllWalletActivities(walletId: str
     })
 }
 
-export function addActivitiesToWalletActivitiesInAllWalletActivities(
-    walletId: string,
-    activities: Activity[]
-): void {
+export function addActivitiesToWalletActivitiesInAllWalletActivities(walletId: string, activities: Activity[]): void {
     allWalletActivities.update((state) => {
         if (!state[walletId]) {
             state[walletId] = []

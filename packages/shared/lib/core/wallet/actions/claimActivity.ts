@@ -9,7 +9,7 @@ import {
 import { Activity } from '../types'
 
 export async function claimActivity(activity: Activity): Promise<void> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         if (isActivityHiddenForWalletId(wallet.id, activity.id)) {
             removeActivityFromHiddenActivities(wallet.id, activity.id)

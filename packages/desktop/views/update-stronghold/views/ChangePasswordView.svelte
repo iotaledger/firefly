@@ -108,7 +108,7 @@
                 storagePath,
                 coinType,
                 clientOptions,
-                secretManager,
+                secretManager
             )
             profileManager.set(manager)
         }

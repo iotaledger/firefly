@@ -9,7 +9,7 @@ import { processAndAddToActivities } from '../utils'
 import { getSelectedWallet, updateSelectedWallet } from '../stores'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         updateSelectedWallet({ isTransferring: true })
         const prepareBurnNativeTokenTransaction = await wallet?.prepareBurnNativeToken(

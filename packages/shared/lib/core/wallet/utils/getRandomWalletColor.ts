@@ -1,4 +1,4 @@
-import { WalletColors } from "../enums"
+import { WalletColors } from '../enums'
 
 export function getRandomWalletColor(): string {
     const colors = Object.values(WalletColors).filter((_, i) => !(i % 2))

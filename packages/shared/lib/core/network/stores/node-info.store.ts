@@ -7,4 +7,7 @@ export function setNodeInfo(newNodeInfo: INodeInfo | undefined): void {
     return nodeInfo.set(newNodeInfo)
 }
 
-export const nodeInfoNetworkName = derived(nodeInfo, ($nodeInfo) => $nodeInfo?.protocolParameters[0]?.parameters?.networkName)
+export const nodeInfoNetworkName = derived(
+    nodeInfo,
+    ($nodeInfo) => $nodeInfo?.protocolParameters[0]?.parameters?.networkName
+)

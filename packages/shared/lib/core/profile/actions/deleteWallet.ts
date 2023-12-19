@@ -10,7 +10,6 @@ import { CannotRemoveWalletError, RemoveNotLastWalletError, setSelectedWallet } 
 export async function deleteWallet(id: string): Promise<void> {
     const wallets = get(visibleActiveWallets)
     const walletToBeDeleted = wallets.find((wallet) => wallet?.id === id)
- 
 
     if (walletToBeDeleted !== wallets[wallets.length - 1]) {
         throw new RemoveNotLastWalletError()

@@ -1,4 +1,3 @@
-
 import { resetLedgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
 // TODO(2.0) Fix this, profile manager is gone

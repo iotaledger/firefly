@@ -5,4 +5,3 @@ export async function changeStrongholdPassword(currentPassword: string, newPassw
     const activeProfileSecretManagerInstance = get(activeProfileSecretManager)
     await activeProfileSecretManagerInstance.changeStrongholdPassword(currentPassword, newPassword)
 }
-

@@ -11,9 +11,7 @@ export async function loadWallets(): Promise<void> {
         return
     }
     if (walletResponse) {
-        const loadedWallets = await Promise.all(
-            walletResponse?.map((accountResponse) => loadWallet(accountResponse))
-        )
+        const loadedWallets = await Promise.all(walletResponse?.map((accountResponse) => loadWallet(accountResponse)))
         activeWallets.set(loadedWallets) // TODO(2.0) We can't sort this like this: sort((a, b) => a.getMetadata().index - b.getMetadata().index)
         hasLoadedAccounts.set(true)
     }

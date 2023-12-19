@@ -19,7 +19,7 @@ import {
 } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone 
+// TODO(2.0) Alias outputs are gone
 export async function generateSingleFoundryActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters

@@ -1,24 +1,24 @@
-import { onboardingProfile } from '@contexts/onboarding/stores';
-import { api } from '@core/api';
-import { SecretManager, SecretManagerType } from '@iota/sdk';
-import { USE_LEDGER_SIMULATOR } from 'shared/lib/core/ledger';
-import { getStorageDirectoryOfProfile, ProfileType } from 'shared/lib/core/profile';
-import { get, writable, Writable } from 'svelte/store';
+import { onboardingProfile } from '@contexts/onboarding/stores'
+import { api } from '@core/api'
+import { SecretManager, SecretManagerType } from '@iota/sdk'
+import { USE_LEDGER_SIMULATOR } from 'shared/lib/core/ledger'
+import { getStorageDirectoryOfProfile, ProfileType } from 'shared/lib/core/profile'
+import { get, writable, Writable } from 'svelte/store'
 
-export const onboardingProfileSecretManager: Writable<SecretManager | null> = writable(null);
+export const onboardingProfileSecretManager: Writable<SecretManager | null> = writable(null)
 
-export async function buildOnboardingSecretManager(){
-    const profile = get(onboardingProfile);
-    if(profile){
-        const { id, type, strongholdPassword } = profile;
+export async function buildOnboardingSecretManager() {
+    const profile = get(onboardingProfile)
+    if (profile) {
+        const { id, type, strongholdPassword } = profile
 
         const storagePath = await getStorageDirectoryOfProfile(id)
         const secretManagerOptions = getSecretManagerFromProfileType(type, {
-            storagePath, 
-            strongholdPassword
+            storagePath,
+            strongholdPassword,
         })
-     
-        const secretManager = await api.createSecretManager(secretManagerOptions);
+
+        const secretManager = await api.createSecretManager(secretManagerOptions)
 
         onboardingProfileSecretManager.set(secretManager)
     } else {
@@ -30,9 +30,16 @@ export function isOnboardingSecretManagerInitialized(): boolean {
     return !!get(onboardingProfileSecretManager)
 }
 
-export function getSecretManagerFromProfileType(type?: ProfileType, { storagePath, strongholdPassword }: {
-    storagePath?: string, strongholdPassword?: string
-} = {}): SecretManagerType {
+export function getSecretManagerFromProfileType(
+    type?: ProfileType,
+    {
+        storagePath,
+        strongholdPassword,
+    }: {
+        storagePath?: string
+        strongholdPassword?: string
+    } = {}
+): SecretManagerType {
     const strongholdSecretManager = {
         stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password: strongholdPassword },
     }

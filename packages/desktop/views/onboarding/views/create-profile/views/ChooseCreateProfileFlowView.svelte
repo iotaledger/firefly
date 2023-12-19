@@ -1,12 +1,14 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        CreateProfileType,
-        onboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { CreateProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { ProfileType, clearProfileFromMemory, getSecretManagerFromProfileType, getStorageDirectoryOfProfile, removeProfileFolder } from '@core/profile'
+    import {
+        ProfileType,
+        clearProfileFromMemory,
+        getSecretManagerFromProfileType,
+        getStorageDirectoryOfProfile,
+        removeProfileFolder,
+    } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'

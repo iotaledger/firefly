@@ -7,8 +7,7 @@ import { RestoreProfileType } from '../enums'
 import { getTemporaryProfileManagerStorageDirectory } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
-
-    // TODO(2.0): Fix all shimmer claiming and rename this
+// TODO(2.0): Fix all shimmer claiming and rename this
 export async function createShimmerClaimingProfileManager(): Promise<void> {
     const $onboardingProfile = get(onboardingProfile)
     if (!$onboardingProfile) {
@@ -25,7 +24,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
         storagePath,
         coinType,
         clientOptions,
-        secretManager,
+        secretManager
     )
 
     if ($onboardingProfile?.restoreProfileType !== RestoreProfileType.Ledger) {

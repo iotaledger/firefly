@@ -6,7 +6,7 @@ import { closePopup } from '@auxiliary/popup'
 import { getSelectedWallet, updateSelectedWallet } from 'shared/lib/core/wallet'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     try {
         if (!wallet) return
 

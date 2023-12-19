@@ -7,7 +7,7 @@ import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '.
 import { Wallet, WalletOptions } from '@iota/sdk'
 import { selectedWalletId } from '../../wallet'
 
-export function getWalletOptions(profile: IProfile, storagePath:string): WalletOptions {
+export function getWalletOptions(profile: IProfile, storagePath: string): WalletOptions {
     const walletOptions: WalletOptions = {
         clientOptions: profile.clientOptions,
         storagePath,
@@ -15,7 +15,7 @@ export function getWalletOptions(profile: IProfile, storagePath:string): WalletO
         bipPath: {
             coinType: profile.network.coinType,
             account: 0,
-            addressIndex: 0
+            addressIndex: 0,
         },
     }
 
@@ -30,17 +30,17 @@ export function getWalletOptions(profile: IProfile, storagePath:string): WalletO
         - __wallet2__/
 */
 export async function createWallet(activeProfile = get(activeProfileStore)): Promise<IWallet> {
-    const id = activeProfile.id;
+    const id = activeProfile.id
     const storagePath = await getStorageDirectoryOfProfile(id)
 
-    const walletOptions = getWalletOptions(activeProfile, storagePath);
-    
+    const walletOptions = getWalletOptions(activeProfile, storagePath)
+
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,
     })
 
-    // TODO(2.0): Fix 
+    // TODO(2.0): Fix
     selectedWalletId.set(id)
     return wallet
 }

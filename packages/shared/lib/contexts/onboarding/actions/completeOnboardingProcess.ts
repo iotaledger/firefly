@@ -1,10 +1,22 @@
-import { activeProfile, activeWallets, addWalletPersistedDataToActiveProfile, addWalletToActiveWallets, createWallet, login } from '@core/profile'
+import {
+    activeProfile,
+    activeWallets,
+    addWalletPersistedDataToActiveProfile,
+    addWalletToActiveWallets,
+    createWallet,
+    login,
+} from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingType } from '../enums'
 import { addWalletPersistedDataToOnboardingProfile, onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
 import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
-import { addEmptyWalletActivitiesToAllWalletActivities, buildWalletStateAndPersistedData, createNewWallet, IWalletState } from '@core/wallet'
+import {
+    addEmptyWalletActivitiesToAllWalletActivities,
+    buildWalletStateAndPersistedData,
+    createNewWallet,
+    IWalletState,
+} from '@core/wallet'
 import { localize } from '@core/i18n'
 
 export async function completeOnboardingProcess(): Promise<void> {
@@ -27,7 +39,7 @@ export async function completeOnboardingProcess(): Promise<void> {
 
 export async function createOnboardingWallet(name?: string, color?: string): Promise<IWalletState> {
     // 1. Get the wallet name
-    const walletName = name || `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`;
+    const walletName = name || `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
     const wallet = await createWallet() // TODO(2.0) Not sure about this, I think this should be createWallet instead

@@ -7,11 +7,7 @@ import { IClaimedActivities, IClaimedActivitiesPerProfile } from '../interfaces'
 
 export const claimedActivities = persistent<IClaimedActivitiesPerProfile>('claimedActivities', {})
 
-export function addClaimedActivity(
-    walletId: string,
-    transactionId: string,
-    claimedActivity: IClaimedActivities
-): void {
+export function addClaimedActivity(walletId: string, transactionId: string, claimedActivity: IClaimedActivities): void {
     claimedActivities.update((state) => {
         const profileId = get(activeProfileId)
         if (Array.isArray(state)) {

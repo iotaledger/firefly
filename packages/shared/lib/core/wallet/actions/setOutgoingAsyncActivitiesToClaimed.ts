@@ -20,7 +20,7 @@ export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState):
             if (isClaimed) {
                 updateAsyncDataByActivityId(wallet.id, activity.id, {
                     asyncStatus: ActivityAsyncStatus.Claimed,
-                    claimedDate: new Date() // TODO(2.0) Fix and use: new Date(detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND),
+                    claimedDate: new Date(), // TODO(2.0) Fix and use: new Date(detailedOutput.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND),
                 })
             }
         } catch (err) {
@@ -35,7 +35,8 @@ function isOutputClaimed(output: OutputData): boolean {
     if (expirationDate) {
         return (
             output.isSpent &&
-            new Date().getTime() /* TODO(2.0) Fix and use: output.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND */ < expirationDate.getTime()
+            new Date().getTime() /* TODO(2.0) Fix and use: output.metadata.milestoneTimestampSpent * MILLISECONDS_PER_SECOND */ <
+                expirationDate.getTime()
         )
     } else {
         return output?.isSpent

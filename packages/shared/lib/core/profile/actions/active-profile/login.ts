@@ -10,7 +10,13 @@ import { loadNftsForActiveProfile } from '@core/nfts'
 import { routerManager } from '@core/router/stores'
 import { SECONDS_PER_MINUTE } from '@core/utils'
 import { sleep } from '@core/utils/os'
-import { createNewWallet, generateAndStoreActivitiesForAllWallets, isStrongholdUnlocked, refreshWalletAssetsForActiveProfile, setSelectedWallet } from '@core/wallet/actions'
+import {
+    createNewWallet,
+    generateAndStoreActivitiesForAllWallets,
+    isStrongholdUnlocked,
+    refreshWalletAssetsForActiveProfile,
+    setSelectedWallet,
+} from '@core/wallet/actions'
 import { get } from 'svelte/store'
 import {
     CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
@@ -56,7 +62,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 3: load and build all the profile data
             incrementLoginProgress()
             let wallets: IWallet[] = []
-            
+
             if (loginOptions?.isFromOnboardingFlow && loginOptions?.shouldRecoverWallets) {
                 /*
                 const { initialAccountRange, addressGapLimit } = DEFAULT_ACCOUNT_RECOVERY_CONFIGURATION[type]
@@ -82,7 +88,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                         return Promise.resolve()
                     }
                     const onCancel = () => resolve(false)
-                    const config = { stronghold: false, ledger: false }                    
+                    const config = { stronghold: false, ledger: false }
                     checkActiveProfileAuth(onSuccess, config, onCancel)
                 })
                 const success = await onUnlocked
@@ -99,7 +105,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             await loadWallets()
 
             let initialSelectedWalletId = get(activeWallets)?.[0]?.id
-            
+
             // TODO(2.0): is needed lastUsedWalletId?
             // if (
             //     initialSelectedWalletId &&
@@ -115,7 +121,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await checkAndUpdateActiveProfileNetwork()
             void pollNetworkStatus()
-            
+
             // Step 5: load assets
             incrementLoginProgress()
             await refreshWalletAssetsForActiveProfile(

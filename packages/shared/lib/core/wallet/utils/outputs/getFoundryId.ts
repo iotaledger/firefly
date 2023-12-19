@@ -8,7 +8,7 @@ import {
 } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone 
+// TODO(2.0) Alias outputs are gone
 export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
     const unlockCondition = foundry.unlockConditions[0] as ImmutableAccountAddressUnlockCondition
     const isImmutableAccountAddress = unlockCondition.type === UnlockConditionType.ImmutableAccountAddress

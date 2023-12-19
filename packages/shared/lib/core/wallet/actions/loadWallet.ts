@@ -20,6 +20,6 @@ export async function loadWallet(wallet: IWallet): Promise<IWalletState> {
         addWalletPersistedDataToActiveProfile(walletId, walletPersistedData)
         accountState = newAccountState
     }
-    
+
     return accountState
 }

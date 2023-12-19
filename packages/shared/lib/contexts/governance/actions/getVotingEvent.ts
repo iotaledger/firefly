@@ -2,6 +2,6 @@ import type { ParticipationEventId, ParticipationEventWithNodes } from '@iota/sd
 import { getSelectedWallet } from 'shared/lib/core/wallet'
 
 export function getVotingEvent(eventId: ParticipationEventId): Promise<ParticipationEventWithNodes> {
-    const wallet = getSelectedWallet();
+    const wallet = getSelectedWallet()
     return wallet.getParticipationEvent(eventId)
 }

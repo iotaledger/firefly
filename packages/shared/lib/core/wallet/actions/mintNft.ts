@@ -4,7 +4,12 @@ import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata }
 import { Converter } from '@core/utils'
 import { MintNftParams, OutputType, PreparedTransaction } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
-import { addActivityToWalletActivitiesInAllWalletActivities, getSelectedWallet, resetMintNftDetails, updateSelectedWallet } from '../stores'
+import {
+    addActivityToWalletActivitiesInAllWalletActivities,
+    getSelectedWallet,
+    resetMintNftDetails,
+    updateSelectedWallet,
+} from '../stores'
 import { NftActivity } from '../types'
 import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
@@ -12,7 +17,7 @@ import { plainToInstance } from 'class-transformer'
 
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
-        const wallet = getSelectedWallet();
+        const wallet = getSelectedWallet()
         updateSelectedWallet({ isTransferring: true })
 
         if (!wallet) return
