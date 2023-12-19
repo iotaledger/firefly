@@ -7,13 +7,25 @@
     import { showAppNotification } from '@auxiliary/notification'
 
     export let value: Date | null = null
+    export let initialSelected: TimePeriod = TimePeriod.None
     export let disabled: boolean = false
 
+    export function setNull(bool: boolean): void {
+        if (bool && value) {
+            storedValue = value
+            value = null
+        } else {
+            value = storedValue ?? value
+        }
+    }
+
     let anchor: HTMLElement | undefined = undefined
-    let selectedTimePeriod: TimePeriod = TimePeriod.None
+    let selectedTimePeriod: TimePeriod = initialSelected
+    let previouslySelectedPeriod: TimePeriod = selectedTimePeriod
     let dateTimeSelectorValue: Date | undefined
     let showDateTimePickerModal: boolean = false
     let expirationTimePickerModal: Modal
+    let storedValue: Date
 
     $: selectedTimePeriod !== TimePeriod.Custom && (value = TIME_PERIOD_TO_DATE[selectedTimePeriod])
 
@@ -49,12 +61,13 @@
             dateTimeSelectorValue = undefined
         }
         expirationTimePickerModal?.close()
+        previouslySelectedPeriod = selectedTimePeriod
         selectedTimePeriod = _selected
     }
 
     function onCancelExpirationTimeClick(): void {
         if (!dateTimeSelectorValue) {
-            selectedTimePeriod = TimePeriod.None
+            selectedTimePeriod = previouslySelectedPeriod
         }
         showDateTimePickerModal = false
     }
