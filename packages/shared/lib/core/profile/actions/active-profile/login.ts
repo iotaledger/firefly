@@ -104,7 +104,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             await loadWallets()
 
-            let initialSelectedWalletId = get(activeWallets)?.[0]?.id
+            const initialSelectedWalletId = get(activeWallets)?.[0]?.id
 
             // TODO(2.0): is needed lastUsedWalletId?
             // if (

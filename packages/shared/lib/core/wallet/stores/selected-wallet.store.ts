@@ -5,13 +5,11 @@ import { selectedWalletId } from './selected-wallet-id.store'
 
 export const selectedWallet: Readable<IWalletState | undefined> = derived(
     [selectedWalletId, activeWallets],
-    ([$selectedWalletId, $activeWallets]) => {
-        return $activeWallets?.find((wallet) => wallet.id === $selectedWalletId)
-    }
+    ([$selectedWalletId, $activeWallets]) => $activeWallets?.find((wallet) => wallet.id === $selectedWalletId)
 )
 
 export function getSelectedWallet(): IWalletState {
-    return get(selectedWallet) as IWalletState
+    return get(selectedWallet)
 }
 
 export function updateSelectedWallet(payload: Partial<IWalletState>): void {

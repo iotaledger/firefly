@@ -10,7 +10,7 @@ export async function buildWalletState(
     wallet: IWallet,
     walletPersistedData: IPersistedWalletData
 ): Promise<IWalletState> {
-    let balances: Balance = {
+    const balances: Balance = {
         baseCoin: {
             total: BigInt(0),
             available: BigInt(0),
@@ -31,8 +31,8 @@ export async function buildWalletState(
         delegations: [],
     }
 
-    let depositAddress = ''
-    let votingPower = ''
+    const depositAddress = ''
+    const votingPower = ''
 
     // TODO(2.0) Fix
     // try {
