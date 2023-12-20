@@ -357,18 +357,19 @@ app.on('window-all-closed', () => {
     }
 })
 
-powerMonitor.on('suspend', () => {
-    // MacOS, Windows and Linux
-    windows.main?.webContents?.send('power-monitor-suspend')
-})
-
-powerMonitor.on('lock-screen', () => {
-    // MacOS and Windows
-    windows.main?.webContents?.send('power-monitor-lock-screen')
-})
-
 app.once('ready', () => {
+    powerMonitor.on('suspend', () => {
+        // MacOS, Windows and Linux
+        windows.main?.webContents?.send('power-monitor-suspend')
+    })
+
+    powerMonitor.on('lock-screen', () => {
+        // MacOS and Windows
+        windows.main?.webContents?.send('power-monitor-lock-screen')
+    })
+
     ipcMain.handle('error-data', () => lastError)
+
     app.on('activate', () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
