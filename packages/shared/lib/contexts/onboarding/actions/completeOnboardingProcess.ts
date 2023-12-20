@@ -16,6 +16,7 @@ import {
     buildWalletStateAndPersistedData,
     IWalletState,
 } from '@core/wallet'
+import { DEFAULT_SYNC_OPTIONS } from '@core/wallet/constants'
 import { localize } from '@core/i18n'
 
 export async function completeOnboardingProcess(): Promise<void> {
