@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "Una transacción de capa 2 no puede ser enviada a una cuenta de capa 1.",
-            "estimatedGas": "Error al estimar el gas."
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Por favor, introduce una URL válida.",

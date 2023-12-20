@@ -1598,7 +1598,7 @@
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
         "storageDepositPerNft": "Depozyt magazynowy na NFT",
         "totalStorageDeposit": "Całkowity depozyt magazynowy",
-        "expirationTime": "Termin ważności",
+        "expirationTime": "Czas wygaśnięcia",
         "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
@@ -1953,7 +1953,7 @@
             "leavingDust": "Nie możesz pozostawić na swoim adresie mniej niż ({minRequiredStorageDeposit}). Jest to minimalny wymagany depozyt magazynowy.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
-            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy.",
+            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
             "noInputs": "Nie znaleziono danych wejściowych.",
             "notEnoughBalance": "Brak wystarczających środków.",
             "missingTransactionId": "Brak ID transakcji",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1.",
-            "estimatedGas": "Nie udało się oszacować opłaty gas."
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -2106,7 +2106,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy."
+            "invalidExpirationDateTime": "Wybrana data wygaśnięcia jest nieprawidłowa."
         },
         "node": {
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
@@ -2364,13 +2364,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Brak terminu ważności",
+            "none": "Brak czasu wygaśnięcia",
             "1hour": "Za godzinę",
             "1day": "Za 1 dzień",
             "1week": "Za tydzień",
             "customDate": {
                 "title": "Niestandardowa data",
-                "subtitle": "Ustaw własny termin ważności"
+                "subtitle": "Ustaw własny czas wygaśnięcia"
             }
         }
     }

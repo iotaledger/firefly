@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Kunne ikke estimere gas."
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
