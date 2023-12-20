@@ -1502,7 +1502,7 @@
         "myAccounts": "Мои паричници",
         "profiles": "Профили",
         "dev": "Девелопер",
-        "createWallet": "Креирај паричник",
+        "createAccount": "Креирај паричник",
         "addAWallet": "Add a wallet",
         "accountName": "Име на паричник",
         "latestTransactions": "Последни трансакции",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

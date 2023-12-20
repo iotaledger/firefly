@@ -1502,7 +1502,7 @@
         "myAccounts": "Els meus moneders",
         "profiles": "Perfils",
         "dev": "Dev",
-        "createWallet": "Crea un moneder",
+        "createAccount": "Crea un moneder",
         "addAWallet": "Add a wallet",
         "accountName": "Nom del moneder",
         "latestTransactions": "Últimes transaccions",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "El nom del moneder no pot superar els {length, plural, one {1 caràcter} other {# caràcters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

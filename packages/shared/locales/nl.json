@@ -1502,7 +1502,7 @@
         "myAccounts": "Mijn Portemonnees",
         "profiles": "Profielen",
         "dev": "Ontwikkelaar",
-        "createWallet": "Maak een portemonnee aan",
+        "createAccount": "Maak een portemonnee aan",
         "addAWallet": "Portemonnee toevoegen",
         "accountName": "Naam portemonnee",
         "latestTransactions": "Meest recente transacties",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Je wallet naam kan niet langer zijn dan {length, plural, one {# karakter} other {# karakters}}.",
             "emptyName": "Een profielnaam moet ten minste 1 teken bevatten.",

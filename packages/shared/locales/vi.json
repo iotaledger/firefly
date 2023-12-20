@@ -1502,7 +1502,7 @@
         "myAccounts": "Ví của tôi",
         "profiles": "Hồ sơ cá nhân",
         "dev": "Nhà phát triển",
-        "createWallet": "Khởi tạo ví",
+        "createAccount": "Khởi tạo ví",
         "addAWallet": "Add a wallet",
         "accountName": "Tên ví",
         "latestTransactions": "Các giao dịch mới nhất",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

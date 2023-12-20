@@ -1502,7 +1502,7 @@
         "myAccounts": "Minu rahakotid",
         "profiles": "Profiilid",
         "dev": "Arendaja",
-        "createWallet": "Loo rahakott",
+        "createAccount": "Loo rahakott",
         "addAWallet": "Add a wallet",
         "accountName": "Rahakoti nimi",
         "latestTransactions": "Viimased tehingud",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

@@ -1502,7 +1502,7 @@
         "myAccounts": "我的钱包",
         "profiles": "用户配置",
         "dev": "开发者",
-        "createWallet": "创建钱包",
+        "createAccount": "创建钱包",
         "addAWallet": "添加新钱包",
         "accountName": "钱包名称",
         "latestTransactions": "最新交易",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "错误的地址类型"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "在您的帐户中找不到地址。",
             "length": "您的钱包名称不能超过 {length, plural, one {1 个字符} other {# 字符}}。",
             "emptyName": "配置文件名称必须包含至少 1 个字符。",

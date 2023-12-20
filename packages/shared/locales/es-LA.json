@@ -1502,7 +1502,7 @@
         "myAccounts": "Mis Billeteras",
         "profiles": "Perfiles",
         "dev": "Dev",
-        "createWallet": "Crear una Billetera",
+        "createAccount": "Crear una Billetera",
         "addAWallet": "Añadir una bileltera",
         "accountName": "Nombre de billetera",
         "latestTransactions": "Últimas transacciones",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "El nombre de tu billetera no puede tener mas de {length, plural, one {# carácter} other {# caracteres}}.",
             "emptyName": "El nombre del perfil debe contener al menos 1 carácter.",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Falló al estimarse el gas."
         },
         "node": {
             "invalid": "Por favor, introduzca una URL válida.",

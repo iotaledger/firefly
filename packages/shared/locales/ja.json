@@ -1502,7 +1502,7 @@
         "myAccounts": "マイウォレット",
         "profiles": "プロフィール",
         "dev": "開発者",
-        "createWallet": "ウォレットを作成",
+        "createAccount": "ウォレットを作成",
         "addAWallet": "Add a wallet",
         "accountName": "ウォレット名",
         "latestTransactions": "最新の取引",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "ウォレット名は{length, plural, one {#  文字} other {# 文字 }}より長くすることはできません。",
             "emptyName": "プロフィール名は少なくとも1文字以上でなければなりません。",

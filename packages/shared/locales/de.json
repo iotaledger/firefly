@@ -1502,7 +1502,7 @@
         "myAccounts": "Meine Wallets",
         "profiles": "Profile",
         "dev": "Entwickler",
-        "createWallet": "Wallet erstellen",
+        "createAccount": "Wallet erstellen",
         "addAWallet": "Wallet hinzufügen",
         "accountName": "Wallet-Name",
         "latestTransactions": "Neueste Transaktionen",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Falscher Adresstyp"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "Die Adresse kann in deinem Konto nicht gefunden werden.",
             "length": "Der Name deiner Wallet darf nicht länger als {length, plural, one {1 Zeichen} other {# Zeichen}} sein.",
             "emptyName": "Ein Profilname muss mindestens 1 Zeichen enthalten.",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "Eine Layer-2-Transaktion kann nicht an ein Layer-1-Konto gesendet werden.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Gas konnte nicht geschätzt werden."
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",

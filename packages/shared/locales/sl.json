@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje denarnice",
         "profiles": "Profili",
         "dev": "Dev",
-        "createWallet": "Ustvari denarnico",
+        "createAccount": "Ustvari denarnico",
         "addAWallet": "Add a wallet",
         "accountName": "Ime denarnice",
         "latestTransactions": "Zadnje transakcije",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

@@ -1502,7 +1502,7 @@
         "myAccounts": "کیف پول من",
         "profiles": "پروفایل ها",
         "dev": "برنامه نویس",
-        "createWallet": "ايجاد كيف پول",
+        "createAccount": "ايجاد كيف پول",
         "addAWallet": "Add a wallet",
         "accountName": "نام کیف پول",
         "latestTransactions": "آخرین تراکنش ها",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

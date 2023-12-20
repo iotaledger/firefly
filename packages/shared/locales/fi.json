@@ -1502,7 +1502,7 @@
         "myAccounts": "Minun lompakkoni",
         "profiles": "Profiilit",
         "dev": "Kehitys",
-        "createWallet": "Luo lompakko",
+        "createAccount": "Luo lompakko",
         "addAWallet": "Lisää lompakko",
         "accountName": "Lompakon nimi",
         "latestTransactions": "Viimeisimmät transaktiot",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Lompakkosi nimi ei voi olla pidempi kuin {length, plural, one {# merkki} other {# merkkiä}}.",
             "emptyName": "Profiilin nimessä on oltava vähintään yksi merkki.",

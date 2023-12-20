@@ -1502,7 +1502,7 @@
         "myAccounts": "Моите Портфейли",
         "profiles": "Профили",
         "dev": "За разработчици",
-        "createWallet": "Създаване на портфейл",
+        "createAccount": "Създаване на портфейл",
         "addAWallet": "Add a wallet",
         "accountName": "Име на портфейла",
         "latestTransactions": "Последни трансакции",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "Името на профила трябва да съдържа поне 1 символ.",

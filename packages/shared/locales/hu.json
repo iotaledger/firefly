@@ -1502,7 +1502,7 @@
         "myAccounts": "Tárcáim",
         "profiles": "Profilok",
         "dev": "Fejlesztő",
-        "createWallet": "Tárca létrehozása",
+        "createAccount": "Tárca létrehozása",
         "addAWallet": "Tárca hozzáadása",
         "accountName": "Tárca neve",
         "latestTransactions": "Legutóbbi tranzakciók",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Helytelen címtípus"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "A cím nem található meg a számláján.",
             "length": "A tárca neve nem lehet {length, plural, one {# karakternél} other {# karakternél}} hosszabb.",
             "emptyName": "A profilnévnek legalább 1 karakterből kell állnia.",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Tranzakciós költség (gáz) becslése sikertelen."
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",

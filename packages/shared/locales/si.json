@@ -1502,7 +1502,7 @@
         "myAccounts": "මගේ පසුම්බි",
         "profiles": "පැතිකඩ",
         "dev": "දේව්",
-        "createWallet": "Wallet එකක් සාදන්න",
+        "createAccount": "Wallet එකක් සාදන්න",
         "addAWallet": "මුදල් පසුම්බියක් එකතු කරන්න",
         "accountName": "පසුම්බියේ නම",
         "latestTransactions": "නවතම ගනුදෙනු",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "ඔබේ මුදල් පසුම්බියට වඩා දිගු විය නොහැක {length, plural, one {# ස්වභාවය} other {අක්ෂර #}}.",
             "emptyName": "පැතිකඩ නමක අවම වශයෙන් අනුලකුණු 1ක් වත් අඩංගු විය යුතුය.",

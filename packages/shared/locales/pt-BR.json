@@ -1502,7 +1502,7 @@
         "myAccounts": "Minhas Carteiras",
         "profiles": "Perfis",
         "dev": "Dev",
-        "createWallet": "Criar uma Carteira",
+        "createAccount": "Criar uma Carteira",
         "addAWallet": "Add a wallet",
         "accountName": "Nome da carteira",
         "latestTransactions": "Últimas transações",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "O nome da sua carteira não pode ser maior que {length, plural, one {# caractere} other {# caracteres}}.",
             "emptyName": "O nome do perfil deve conter pelo menos 1 caractere.",

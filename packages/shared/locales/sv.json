@@ -1502,7 +1502,7 @@
         "myAccounts": "Mina plånböcker",
         "profiles": "Profiler",
         "dev": "Utvecklare",
-        "createWallet": "Skapa en plånbok",
+        "createAccount": "Skapa en plånbok",
         "addAWallet": "Lägg till en plånbok",
         "accountName": "Plånboksnamn",
         "latestTransactions": "Senaste transaktionerna",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Ditt plånboksnamn kan inte vara längre än {length, plural, one {# tecken} other {# tecken}}.",
             "emptyName": "Ett profilnamn måste innehålla minst 1 tecken.",

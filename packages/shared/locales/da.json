@@ -1502,7 +1502,7 @@
         "myAccounts": "Mine Wallets",
         "profiles": "Profiler",
         "dev": "Udvikler",
-        "createWallet": "Opret ny Wallet",
+        "createAccount": "Opret ny Wallet",
         "addAWallet": "Add a wallet",
         "accountName": "Wallet navn",
         "latestTransactions": "Seneste transaktioner",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Kunne ikke estimere gas."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",

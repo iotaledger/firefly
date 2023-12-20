@@ -539,8 +539,8 @@
                 }
             },
             "banners": {
-                "new": "New Event",
-                "complete": "Complete"
+                "new": "حدث جديد",
+                "complete": "مكتمل"
             }
         },
         "picker": {
@@ -1502,7 +1502,7 @@
         "myAccounts": "محافظي",
         "profiles": "الملفات الشخصية",
         "dev": "المطور",
-        "createWallet": "إنشاء محفظة",
+        "createAccount": "إنشاء محفظة",
         "addAWallet": "Add a wallet",
         "accountName": "اسم المحفظة",
         "latestTransactions": "آخر المعاملات",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "يجب أن لا يتعدى اسم محفظتك {length, plural, one {# حرف } other {# حروف}}.",
             "emptyName": "يجب أن يحتوي اسم ملف التعريف على حرف واحد على الأقل.",

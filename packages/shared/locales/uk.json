@@ -1502,7 +1502,7 @@
         "myAccounts": "Мої гаманці",
         "profiles": "Профілі",
         "dev": "Розробник",
-        "createWallet": "Створити гаманець",
+        "createAccount": "Створити гаманець",
         "addAWallet": "Add a wallet",
         "accountName": "Назва гаманця",
         "latestTransactions": "Останні транзакції",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",

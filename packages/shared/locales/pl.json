@@ -1502,7 +1502,7 @@
         "myAccounts": "Moje portfele",
         "profiles": "Profile",
         "dev": "Deweloper",
-        "createWallet": "Utwórz portfel",
+        "createAccount": "Utwórz portfel",
         "addAWallet": "Dodaj portfel",
         "accountName": "Nazwa portfela",
         "latestTransactions": "Ostatnie transakcje",
@@ -1598,7 +1598,7 @@
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
         "storageDepositPerNft": "Depozyt magazynowy na NFT",
         "totalStorageDeposit": "Całkowity depozyt magazynowy",
-        "expirationTime": "Czas wygaśnięcia",
+        "expirationTime": "Termin ważności",
         "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Nieprawidłowy typ adresu"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "Adres nie może zostać odnaleziony na Twoim koncie.",
             "length": "Nazwa Twojego portfela nie może być dłuższa niż {length, plural, one {# znak} few {# znaki} many {# znaków} other {# znaków}}.",
             "emptyName": "Nazwa profilu musi zawierać co najmniej 1 znak.",
@@ -1953,7 +1953,7 @@
             "leavingDust": "Nie możesz pozostawić na swoim adresie mniej niż ({minRequiredStorageDeposit}). Jest to minimalny wymagany depozyt magazynowy.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
-            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy.",
             "noInputs": "Nie znaleziono danych wejściowych.",
             "notEnoughBalance": "Brak wystarczających środków.",
             "missingTransactionId": "Brak ID transakcji",
@@ -1966,7 +1966,7 @@
         },
         "layer2": {
             "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1.",
-            "estimatedGas": "Failed to estimate gas."
+            "estimatedGas": "Nie udało się oszacować opłaty gas."
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -2106,7 +2106,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Wybrana data wygaśnięcia jest nieprawidłowa."
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy."
         },
         "node": {
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
@@ -2364,13 +2364,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Brak czasu wygaśnięcia",
+            "none": "Brak terminu ważności",
             "1hour": "Za godzinę",
             "1day": "Za 1 dzień",
             "1week": "Za tydzień",
             "customDate": {
                 "title": "Niestandardowa data",
-                "subtitle": "Ustaw własny czas wygaśnięcia"
+                "subtitle": "Ustaw własny termin ważności"
             }
         }
     }

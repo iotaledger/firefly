@@ -1502,7 +1502,7 @@
         "myAccounts": "मेरा वॉलेट",
         "profiles": "प्रोफाइल्स",
         "dev": "देव",
-        "createWallet": "वॉलेट बनाएं",
+        "createAccount": "वॉलेट बनाएं",
         "addAWallet": "Add a wallet",
         "accountName": "वॉलेट का नाम",
         "latestTransactions": "नवीनतम ट्रांसक्शन्स",
@@ -1911,7 +1911,7 @@
         "address": {
             "wrongAddressType": "Wrong address type"
         },
-        "wallet": {
+        "account": {
             "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",
