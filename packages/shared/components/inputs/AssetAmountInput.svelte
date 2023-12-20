@@ -1,6 +1,7 @@
 <script lang="ts">
     import { formatCurrency, localize, parseCurrency } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { activeProfile } from '@core/profile'
     import { getMaxDecimalsFromTokenMetadata } from '@core/token/utils'
     import {
         IAsset,
@@ -15,7 +16,6 @@
     import Big from 'big.js'
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
     import UnitInput from './UnitInput.svelte'
-    import { activeProfile } from '@core/profile'
 
     export let inputElement: HTMLInputElement = undefined
     export let disabled = false
@@ -53,49 +53,56 @@
     }
 
     export async function validate(allowZeroOrNull = false): Promise<void> {
-        const amountAsFloat = parseCurrency(amount)
-        const isAmountZeroOrNull = !Number(amountAsFloat)
-        const standard = asset?.metadata?.standard
-        const remainderBalance = Number(Big(availableBalance)?.minus(bigAmount))
-        // Calculate the minimum required storage deposit for a minimal basic output
-        // This is used to check if the user is leaving dust behind that cant cover the storage deposit
-        const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
-        // Zero value transactions can still contain metadata/tags
-        error = ''
-        if (allowZeroOrNull && isAmountZeroOrNull) {
-            rawAmount = Big(0).toString()
-            return
-        } else if (isAmountZeroOrNull) {
-            error = localize('error.send.amountInvalidFormat')
-        } else if (
-            ((standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
-                (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
-            Number.parseInt(amount, 10).toString() !== amount
-        ) {
-            error = localize('error.send.amountNoFloat')
-        } else if (bigAmount.gt(Big(availableBalance))) {
-            error = localize('error.send.amountTooHigh')
-        } else if (bigAmount.lte(Big(0))) {
-            error = localize('error.send.amountZero')
-        } else if (!bigAmount.mod(1).eq(Big(0))) {
-            error = localize('error.send.amountSmallerThanSubunit')
-        } else if (
-            standard === TokenStandard.BaseToken &&
-            remainderBalance !== 0 &&
-            remainderBalance < minRequiredStorageDeposit
-        ) {
-            // don't allow leaving dust(amount less than minimum required storage deposit) for base token
-            error = localize('error.send.leavingDust', {
-                values: {
-                    minRequiredStorageDeposit: formatTokenAmountBestMatch(minRequiredStorageDeposit, asset?.metadata),
-                },
-            })
-        }
-
-        if (error) {
+        try {
+            const amountAsFloat = parseCurrency(amount)
+            const isAmountZeroOrNull = !Number(amountAsFloat)
+            const standard = asset?.metadata?.standard
+            const remainderBalance = bigAmount && Number(Big(availableBalance)?.minus(bigAmount))
+            // Calculate the minimum required storage deposit for a minimal basic output
+            // This is used to check if the user is leaving dust behind that cant cover the storage deposit
+            const minRequiredStorageDeposit = await getRequiredStorageDepositForMinimalBasicOutput()
+            // Zero value transactions can still contain metadata/tags
+            error = ''
+            if (allowZeroOrNull && isAmountZeroOrNull) {
+                rawAmount = Big(0).toString()
+                return
+            } else if (isAmountZeroOrNull) {
+                throw new Error(localize('error.send.amountInvalidFormat'))
+            } else if (
+                ((standard === TokenStandard.BaseToken && unit === asset?.metadata?.subunit) ||
+                    (unit === getUnitFromTokenMetadata(asset?.metadata) && asset?.metadata?.decimals === 0)) &&
+                Number.parseInt(amount, 10).toString() !== amount
+            ) {
+                throw new Error(localize('error.send.amountNoFloat'))
+            } else if (bigAmount?.gt(Big(availableBalance))) {
+                throw new Error(localize('error.send.amountTooHigh'))
+            } else if (bigAmount?.lte(Big(0))) {
+                throw new Error(localize('error.send.amountZero'))
+            } else if (!bigAmount?.mod(1).eq(Big(0))) {
+                throw new Error(localize('error.send.amountSmallerThanSubunit'))
+            } else if (
+                standard === TokenStandard.BaseToken &&
+                remainderBalance &&
+                remainderBalance !== 0 &&
+                remainderBalance < minRequiredStorageDeposit
+            ) {
+                // don't allow leaving dust(amount less than minimum required storage deposit) for base token
+                throw new Error(
+                    localize('error.send.leavingDust', {
+                        values: {
+                            minRequiredStorageDeposit: formatTokenAmountBestMatch(
+                                minRequiredStorageDeposit,
+                                asset?.metadata
+                            ),
+                        },
+                    })
+                )
+            }
+            rawAmount = bigAmount.toString()
+        } catch (err) {
+            error = err?.message ?? err
             return Promise.reject(error)
         }
-        rawAmount = bigAmount.toString()
     }
 </script>
 
