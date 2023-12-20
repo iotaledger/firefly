@@ -18,7 +18,7 @@ if (SEND_CRASH_REPORTS) {
     captureException = require('../sentry')(true).captureException
 }
 
-const profileManagers = {}
+const wallets = {}
 
 // Hook the error handlers as early as possible
 window.addEventListener('error', (event) => {
@@ -108,60 +108,64 @@ try {
 
     contextBridge.exposeInMainWorld('__WALLET__API__', {
         ...methods,
-        async getNodeInfo(managerId, url, auth) {
-            const manager = profileManagers[managerId]
-            const client = await manager.getClient()
-            const nodeUrl = url ?? (await client.getNode()).url
-
-            const nodeInfo = await client.getNodeInfo(nodeUrl, auth)
-
-            return {
-                url: nodeUrl,
-                nodeInfo,
-            }
-        },
-        createWallet(id, options) {
-            const manager = new IotaSdk.Wallet(options)
-            manager.id = id
-            profileManagers[id] = manager
-            bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, manager)
+        async createSecretManager(options) {
+            const manager = IotaSdk.SecretManager.create(options)
+            bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, manager)
             return manager
         },
-        async createAccount(managerId, payload) {
-            const manager = profileManagers[managerId]
-            const account = await manager.createAccount(payload)
-            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
-            return account
+        async getClientFromWallet(id) {
+            const wallet = wallets[id]
+            // Why is this here?:
+            // We cannot create classes from exposed functions
+            // https://www.electronjs.org/docs/latest/api/context-bridge
+            const client = await wallet.getClient()
+            bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
+            return client
         },
-        deleteWallet(id) {
-            if (id && id in profileManagers) {
-                delete profileManagers[id]
+        // TODO(2.0): Is there a difference between this and getWallet? They both really make the same thing
+        async createWallet(id, walletOptions) {
+            let wallet = wallets[id]
+            if (!wallet) {
+                wallet = await IotaSdk.Wallet.create(walletOptions)
+                wallet.id = id
+                wallets[id] = wallet
+                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
+            }
+            return wallet
+        },
+        // TODO(2.0): also remove from file system? Does it make sense? file system != memoery
+        async deleteWallet(id) {
+            if (id && id in wallets) {
+                const wallet = wallets[id]
+                await wallet.stopBackgroundSync()
+                await wallet.destroy()
+                delete wallets[id]
             }
         },
-        async getAccount(managerId, index) {
-            const manager = profileManagers[managerId]
-            const account = await manager.getAccount(index)
-            bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account)
-            return account
+        // TODO(2.0): Rename this to getWallet and fix all usages
+        async getWallet(id, walletOptions) {
+            let wallet = wallets[id]
+            if (!wallet) {
+                wallet = await IotaSdk.Wallet.create(walletOptions)
+                wallet.id = id
+                wallets[id] = wallet
+                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
+            }
+            return wallet
         },
-        async getAccounts(managerId) {
-            const manager = profileManagers[managerId]
-            const accounts = await manager.getAccounts()
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
-            return accounts
-        },
+        // TODO(2.0): remove this method from here and move to new profile
         async recoverAccounts(managerId, payload) {
-            const manager = profileManagers[managerId]
+            const manager = wallets[managerId]
             const accounts = await manager.recoverAccounts(...Object.values(payload))
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Account.prototype, account))
+            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, account))
             return accounts
         },
-        async getClient(managerId) {
-            const manager = profileManagers[managerId]
-            const client = await manager.getClient()
-            bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
-
-            return client
+        async clearWalletsFromMemory() {
+            for (const [id, wallet] of Object.entries(wallets)) {
+                await wallet.stopBackgroundSync()
+                await wallet.destroy()
+                delete wallets[id]
+            }
         },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'

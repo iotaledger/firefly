@@ -1,1 +1,7 @@
 export * from './missing-transaction-id.error'
+export * from './cannot-remove-wallet.error'
+export * from './missing-transaction-progress-event-payload.error'
+export * from './remove-not-last-wallet.error'
+export * from './wallet-api-event.error'
+export * from './wallet-api-event-validation.error'
+export * from './unable-to-get-bound-wallet.error'

@@ -2,7 +2,7 @@ import { AddressUnlockCondition, Ed25519Address, MetadataFeature, NftOutputBuild
 import { Converter } from '@core/utils'
 import { EMPTY_HEX_ID } from '../constants'
 import { IIrc27Metadata } from '@core/nfts/interfaces'
-import { api } from '@core/profile-manager'
+import { api } from '@core/api'
 
 export function buildNftOutputData(metadata: IIrc27Metadata, address: string): NftOutputBuilderParams {
     const addressUnlockCondition = new AddressUnlockCondition(new Ed25519Address(api.bech32ToHex(address)))

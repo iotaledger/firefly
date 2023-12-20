@@ -1,18 +1,16 @@
-import { selectedAccount } from '@core/account'
-import { AccountAddress, TransactionOptions } from '@iota/sdk/out/types'
-import { get } from 'svelte/store'
+import { Bip44Address, TransactionOptions } from '@iota/sdk/out/types'
+import { getSelectedWallet } from '../stores'
 
 export function getDefaultTransactionOptions(address?: string): TransactionOptions | undefined {
     if (!address) {
-        const account = get(selectedAccount)
-        if (!account) return
-        address = account.depositAddress
+        const wallet = getSelectedWallet()
+        if (!wallet) return
+        address = wallet.depositAddress
     }
-    const value: AccountAddress = {
+    const value: Bip44Address = {
         address: address,
         keyIndex: 0,
         internal: false,
-        used: false,
     }
     return {
         remainderValueStrategy: {

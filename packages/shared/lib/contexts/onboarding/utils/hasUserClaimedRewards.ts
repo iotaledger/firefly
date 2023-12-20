@@ -1,12 +1,12 @@
-import { IShimmerClaimingAccount, ShimmerClaimingAccountState } from '@contexts/onboarding'
+import { IShimmerClaimingWallet, ShimmerClaimingWalletState } from '@contexts/onboarding'
 
-export function hasUserClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingAccount[]): boolean {
+export function hasUserClaimedRewards(shimmerClaimingAccounts: IShimmerClaimingWallet[]): boolean {
     let hasAtLeastOneClaimingTransaction = false
     const hasClaimedAllRewards = shimmerClaimingAccounts.every((shimmerClaimingAccount) => {
         const { state, claimingTransaction } = shimmerClaimingAccount
-        if (state === ShimmerClaimingAccountState.UnclaimedWithoutRewards) {
+        if (state === ShimmerClaimingWalletState.UnclaimedWithoutRewards) {
             return true
-        } else if (state === ShimmerClaimingAccountState.FullyClaimed) {
+        } else if (state === ShimmerClaimingWalletState.FullyClaimed) {
             if (claimingTransaction) {
                 /**
                  * NOTE: This side effect is here to avoid iterating more than once in

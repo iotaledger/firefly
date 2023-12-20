@@ -1,7 +1,7 @@
 import { updateActiveProfile } from '@core/profile'
-import { backup } from '@core/profile-manager'
 import { Platform } from '@core/app'
 import { getDefaultStrongholdName } from '@core/stronghold'
+import { backup } from '@core/wallet/actions'
 
 export async function exportStronghold(
     password: string,

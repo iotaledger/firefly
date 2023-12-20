@@ -1,11 +1,11 @@
 <script lang="ts">
     import { get } from 'svelte/store'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import {
         isReservedTagKeyword,
         InclusionState,
-        selectedAccountActivities,
+        selectedWalletActivities,
         newTransactionDetails,
         NewTransactionType,
     } from '@core/wallet'
@@ -23,8 +23,8 @@
 
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isTransferInProgress =
-        $selectedAccountActivities.some((_activity) => _activity.inclusionState === InclusionState.Pending) ||
-        $selectedAccount.isTransferring
+        $selectedWalletActivities.some((_activity) => _activity.inclusionState === InclusionState.Pending) ||
+        $selectedWallet.isTransferring
 
     async function validate(
         inputValidations?: [() => Promise<void>],

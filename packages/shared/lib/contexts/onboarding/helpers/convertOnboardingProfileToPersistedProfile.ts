@@ -17,13 +17,13 @@ export function convertOnboardingProfileToPersistedProfile(
         }),
         ...(onboardingProfile?.settings && { settings: onboardingProfile.settings }),
         ...(onboardingProfile?.strongholdVersion && { strongholdVersion: onboardingProfile.strongholdVersion }),
-        ...(onboardingProfile?.accountPersistedData && {
-            accountPersistedData: onboardingProfile.accountPersistedData,
+        ...(onboardingProfile?.walletPersistedData && {
+            walletPersistedData: onboardingProfile.walletPersistedData,
         }),
         ...(onboardingProfile?.isDeveloperProfile && { isDeveloperProfile: onboardingProfile.isDeveloperProfile }),
         ...(onboardingProfile?.hasVisitedDashboard && { hasVisitedDashboard: onboardingProfile.hasVisitedDashboard }),
-        ...(onboardingProfile?.lastUsedAccountIndex && {
-            lastUsedAccountIndex: onboardingProfile.lastUsedAccountIndex,
+        ...(onboardingProfile?.lastUsedWalletId && {
+            lastUsedAccountIndex: onboardingProfile.lastUsedWalletId,
         }),
         ...(onboardingProfile?.clientOptions && { clientOptions: onboardingProfile.clientOptions }),
     }

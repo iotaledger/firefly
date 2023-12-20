@@ -7,8 +7,8 @@
         IAsset,
         InclusionState,
         NotVerifiedStatus,
-        getTokenFromSelectedAccount,
-        selectedAccountAssets,
+        getTokenFromSelectedWallet,
+        selectedWalletAssets,
     } from '@core/wallet'
     import {
         AliasActivityTileContent,
@@ -27,10 +27,10 @@
     export let activity: Activity
 
     let asset: IAsset | undefined
-    $: $selectedAccountAssets,
+    $: $selectedWalletAssets,
         (asset =
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
-                ? getTokenFromSelectedAccount(activity.assetId)
+                ? getTokenFromSelectedWallet(activity.assetId)
                 : undefined)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed

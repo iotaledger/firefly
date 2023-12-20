@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 
-import { participationOverviewForSelectedAccount } from '../stores'
+import { participationOverviewForSelectedWallet } from '../stores'
 
 import { isVotingForProposal } from './isVotingForProposal'
 
 export function getNumberOfVotingProposals(): number {
-    const overview = get(participationOverviewForSelectedAccount)
+    const overview = get(participationOverviewForSelectedWallet)
     if (!overview) {
         return undefined
     }

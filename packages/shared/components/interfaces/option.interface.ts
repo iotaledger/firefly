@@ -1,5 +1,5 @@
 export interface IOption {
-    id?: number
+    id?: string
     key?: string
     value?: string
 }

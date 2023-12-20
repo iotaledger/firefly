@@ -1,18 +1,18 @@
 import { get } from 'svelte/store'
 
-import { getStorageDirectoryOfProfile } from '@core/profile/utils'
-import { destroyProfileManager } from '@core/profile-manager/actions'
-import { api } from '@core/profile-manager/api'
-import { getSecretManagerPath } from '@core/profile-manager/utils'
+import { getSecretManagerPath, getStorageDirectoryOfProfile } from '@core/profile/utils'
 import { StrongholdVersion } from '@core/stronghold/enums'
 
 import { copyStrongholdFileToProfileDirectory } from '../helpers'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
-import { initialiseProfileManagerFromOnboardingProfile } from './initialiseProfileManagerFromOnboardingProfile'
+import { initialiseOnboardingProfileWithSeretManager } from './initialiseProfileManagerFromOnboardingProfile'
+import { api } from '@core/api'
+import { clearProfileFromMemory } from '@core/profile'
 
 export async function migrateStrongholdFromOnboardingProfile(password: string): Promise<void> {
     const profile = get(onboardingProfile)
     const profileDirectory = await getStorageDirectoryOfProfile(profile?.id)
+    // TODO(2.0) Update getSecretManagerPath
     const secretManagerPath = getSecretManagerPath(profileDirectory)
 
     await copyStrongholdFileToProfileDirectory(profileDirectory, profile?.importFilePath ?? '')
@@ -23,6 +23,6 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
         updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V3 })
     }
 
-    await destroyProfileManager()
-    await initialiseProfileManagerFromOnboardingProfile()
+    await clearProfileFromMemory()
+    await initialiseOnboardingProfileWithSeretManager()
 }

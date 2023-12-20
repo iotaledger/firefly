@@ -1,46 +1,42 @@
+import { activeWallets } from 'shared/lib/core/profile'
+import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
 import { get } from 'svelte/store'
-
-import { selectedAccount } from '@core/account/stores'
-import { IAccountState } from '@core/account/interfaces'
-import { activeAccounts } from '@core/profile/stores'
 
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
 import { createProposalFromError, createProposalFromEvent } from '../utils'
-import { getAccountsParticipationEventStatusForEvent } from './getAccountsParticipationEventStatusForEvent'
+import { getWalletsParticipationEventStatusForEvent } from './getWalletsParticipationEventStatusForEvent'
 
 export async function initializeRegisteredProposals(): Promise<void> {
-    const allProposals: { [accountId: number]: IRegisteredProposals } = {}
+    const allProposals: { [walletId: string]: IRegisteredProposals } = {}
 
-    // Get selected account first to speed up showing proposals for the user
-    const _selectedAccount = get(selectedAccount)
-    allProposals[_selectedAccount.index] = await getParticipationEventsAndCreateProposalsForAccount(_selectedAccount)
+    // Get selected wallet first to speed up showing proposals for the user
+    const _selectedWallet = getSelectedWallet()
+    allProposals[_selectedWallet.id] = await getParticipationEventsAndCreateProposalsForWallet(_selectedWallet)
     registeredProposals.set(allProposals)
 
-    // Then get the rest of the accounts in the background
-    for (const account of get(activeAccounts)) {
-        if (!get(selectedAccount)) {
+    // Then get the rest of the wallet in the background
+    for (const wallet of get(activeWallets)) {
+        if (!getSelectedWallet()) {
             break
         }
-        if (account.index !== _selectedAccount.index) {
-            allProposals[account.index] = await getParticipationEventsAndCreateProposalsForAccount(account)
+        if (wallet.id !== _selectedWallet.id) {
+            allProposals[wallet.id] = await getParticipationEventsAndCreateProposalsForWallet(wallet)
         }
     }
     registeredProposals.set(allProposals)
 }
 
-async function getParticipationEventsAndCreateProposalsForAccount(
-    account: IAccountState
-): Promise<IRegisteredProposals> {
+async function getParticipationEventsAndCreateProposalsForWallet(wallet: IWalletState): Promise<IRegisteredProposals> {
     const proposals: IRegisteredProposals = {}
-    const events = await account.getParticipationEvents()
+    const events = await wallet.getParticipationEvents()
     for (const event of Object.values(events)) {
         const proposal = createProposalFromEvent(event)
-        if (!get(selectedAccount)) {
+        if (!getSelectedWallet()) {
             break
         }
         try {
-            await getAccountsParticipationEventStatusForEvent(event.id, account)
+            await getWalletsParticipationEventStatusForEvent(event.id, wallet)
             proposals[event.id] = proposal
         } catch (err) {
             proposals[event.id] = createProposalFromError(proposal, err)

@@ -1,9 +1,9 @@
 import { showAppNotification } from '@auxiliary/notification/actions'
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { isValidUrl } from '@core/utils/validation'
-import { isProposalAlreadyAddedForSelectedAccount, isValidProposalId } from '@contexts/governance/utils'
+import { isProposalAlreadyAddedForSelectedWallet, isValidProposalId } from '@contexts/governance/utils'
 import { AddProposalOperationParameter } from '../../../enums'
-import { registeredProposalsForSelectedAccount, selectedProposalId } from '@contexts/governance/stores'
+import { registeredProposalsForSelectedWallet, selectedProposalId } from '@contexts/governance/stores'
 import { GovernanceRoute, governanceRouter } from '@core/router'
 import { get } from 'svelte/store'
 
@@ -15,8 +15,8 @@ export function handleDeepLinkAddProposalOperation(searchParams: URLSearchParams
     const eventId = searchParams.get(AddProposalOperationParameter.EventId)
     if (!isValidProposalId(eventId)) {
         throw new Error('Invalid proposal ID')
-    } else if (isProposalAlreadyAddedForSelectedAccount(eventId)) {
-        const proposal = get(registeredProposalsForSelectedAccount)[eventId]
+    } else if (isProposalAlreadyAddedForSelectedWallet(eventId)) {
+        const proposal = get(registeredProposalsForSelectedWallet)[eventId]
         if (proposal === undefined) {
             throw new Error(`Event with id ${eventId} not found`)
         } else {

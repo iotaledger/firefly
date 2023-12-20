@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { selectedAccountIndex } from '@core/account/stores'
+    import { selectedWalletId } from '@core/wallet/stores'
     import { collectiblesRoute, CollectiblesRoute, collectiblesRouter } from '@core/router'
     import { CollectiblesDetailsView, CollectiblesGalleryView } from './views'
 
-    $: $selectedAccountIndex !== undefined && $collectiblesRouter.reset()
+    $: $selectedWalletId !== undefined && $collectiblesRouter.reset()
 </script>
 
 <div class="w-full h-full flex flex-col flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900">

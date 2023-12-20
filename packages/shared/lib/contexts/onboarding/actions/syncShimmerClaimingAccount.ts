@@ -1,8 +1,6 @@
 import { get } from 'svelte/store'
 
 import { localize } from '@core/i18n'
-import { IAccount } from '@core/account'
-import { getAccount, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
@@ -10,15 +8,17 @@ import { getOnboardingBaseToken, shimmerClaimingProfileManager, updateShimmerCla
 import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { showAppNotification } from '@auxiliary/notification'
+import { getWallet, IWallet } from 'shared/lib/core/profile'
 
-export async function syncShimmerClaimingAccount(account: IAccount): Promise<void> {
+// TODO(2.0) Fix
+export async function syncShimmerClaimingAccount(wallet: IWallet): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
     if (!_shimmerClaimingProfileManager) {
         throw new MissingShimmerClaimingProfileManagerError()
     }
-    const { index } = account?.getMetadata() ?? {}
-    const boundShimmerClaimingAccount = await getAccount(index, shimmerClaimingProfileManager)
-    const boundTwinAccount = await getAccount(index, profileManager)
+    const { index } = wallet?.getMetadata() ?? {} // TODO(2.0) Indexes are gone...
+    const boundShimmerClaimingAccount = await getWallet(index, shimmerClaimingProfileManager) // TODO(2.0) What should we be passing instead?
+    const boundTwinAccount = await getWallet(index, profileManager)
 
     const syncedShimmerClaimingAccount = await prepareShimmerClaimingAccount(
         boundShimmerClaimingAccount,

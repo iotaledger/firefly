@@ -1,6 +1,5 @@
 import { get, writable } from 'svelte/store'
-
-import type { IPersistedAccountData } from '@core/account/interfaces'
+import { IPersistedWalletData } from '@core/wallet/interfaces'
 
 import { INITIAL_ACTIVE_PROFILE } from '../constants'
 import type { IProfile, IProfileSettings } from '../interfaces'
@@ -22,34 +21,34 @@ export function updateActiveProfileSettings(payload: Partial<IProfileSettings>):
     }))
 }
 
-export function addAccountPersistedDataToActiveProfile(
-    accountIndex: number,
-    accountPersistedData: IPersistedAccountData
+export function addWalletPersistedDataToActiveProfile(
+    walletId: string,
+    walletPersistedData: IPersistedWalletData
 ): void {
     activeProfile?.update((state) => {
-        if (!state?.accountPersistedData) {
-            state.accountPersistedData = {}
+        if (!state?.walletPersistedData) {
+            state.walletPersistedData = {}
         }
-        state.accountPersistedData[accountIndex] = accountPersistedData
+        state.walletPersistedData[walletId] = walletPersistedData
         return state
     })
 }
 
-export function getActiveProfilePersistedAccountData(accountIndex: number): IPersistedAccountData | undefined {
-    return get(activeProfile)?.accountPersistedData?.[accountIndex]
+export function getActiveProfilePersistedWalletData(walletId: string): IPersistedWalletData | undefined {
+    return get(activeProfile)?.walletPersistedData?.[walletId]
 }
 
-export function updateAccountPersistedDataOnActiveProfile(
-    accountIndex: number,
-    partialAccountPersistedData: Partial<IPersistedAccountData>
+export function updateWalletPersistedDataOnActiveProfile(
+    walletId: string,
+    partialWalletPersistedData: Partial<IPersistedWalletData>
 ): void {
     activeProfile?.update((state) => {
-        if (!state?.accountPersistedData) {
-            state.accountPersistedData = {}
+        if (!state?.walletPersistedData) {
+            state.walletPersistedData = {}
         }
-        state.accountPersistedData[accountIndex] = {
-            ...state?.accountPersistedData?.[accountIndex],
-            ...partialAccountPersistedData,
+        state.walletPersistedData[walletId] = {
+            ...state?.walletPersistedData?.[walletId],
+            ...partialWalletPersistedData,
         }
         return state
     })

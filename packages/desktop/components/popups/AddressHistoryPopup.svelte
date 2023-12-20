@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getSelectedAccount } from '@core/account'
+    import { getSelectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { truncateString } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
@@ -10,8 +10,8 @@
     let addressList: AccountAddress[] | undefined = undefined
 
     onMount(() => {
-        getSelectedAccount()
-            ?.addresses()
+        getSelectedWallet()
+            ?.addresses() // TODO(2.0) Wallets are now single address
             .then((_addressList) => {
                 addressList = _addressList?.sort((a, b) => a.keyIndex - b.keyIndex) ?? []
             })

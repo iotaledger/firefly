@@ -1,15 +1,15 @@
-import { syncBalance } from '@core/account/actions/syncBalance'
-import { updateNftInAllAccountNfts } from '@core/nfts'
+import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
+import { updateNftInAllWalletNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { allAccountActivities } from '../../stores'
-import { refreshAccountAssetsForActiveProfile } from '../refreshAccountAssetsForActiveProfile'
+import { allWalletActivities } from '../../stores'
+import { refreshWalletAssetsForActiveProfile } from '../refreshWalletAssetsForActiveProfile'
 import { getAsyncStatus } from '@core/wallet/utils/generateActivity/helper'
 
 export function setAsyncStatusOfAccountActivities(time: Date): void {
-    const balancesToUpdate: number[] = []
-    allAccountActivities.update((state) => {
-        state.forEach((accountActivities, accountIndex) => {
-            for (const activity of accountActivities.filter((_activity) => _activity.asyncData)) {
+    const balancesToUpdate: string[] = []
+    allWalletActivities.update((state) => {
+        Object.entries(state).forEach(([walletId, walletActivies]) => {
+            for (const activity of walletActivies.filter((_activity) => _activity.asyncData)) {
                 const oldAsyncStatus = activity.asyncData.asyncStatus
                 if (oldAsyncStatus === ActivityAsyncStatus.Claimed || oldAsyncStatus === ActivityAsyncStatus.Expired) {
                     continue
@@ -22,8 +22,8 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                     time.getTime()
                 )
                 if (oldAsyncStatus !== null && oldAsyncStatus !== activity.asyncData.asyncStatus) {
-                    if (!balancesToUpdate.includes(accountIndex)) {
-                        balancesToUpdate.push(accountIndex)
+                    if (!balancesToUpdate.includes(walletId)) {
+                        balancesToUpdate.push(walletId)
                     }
 
                     if (
@@ -31,17 +31,17 @@ export function setAsyncStatusOfAccountActivities(time: Date): void {
                         activity.asyncData.asyncStatus === ActivityAsyncStatus.Expired &&
                         activity.direction === ActivityDirection.Outgoing
                     ) {
-                        updateNftInAllAccountNfts(accountIndex, activity.nftId, { isSpendable: true })
+                        updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: true })
                     }
                 }
             }
         })
         return state
     })
-    for (const accountIndex of balancesToUpdate) {
-        syncBalance(accountIndex)
+    for (const walletId of balancesToUpdate) {
+        syncBalance(walletId)
     }
     if (balancesToUpdate.length) {
-        void refreshAccountAssetsForActiveProfile()
+        void refreshWalletAssetsForActiveProfile()
     }
 }

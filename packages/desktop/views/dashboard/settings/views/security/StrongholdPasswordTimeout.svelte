@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import { IDropdownItem, SECONDS_PER_MINUTE } from '@core/utils'
-    import { setStrongholdPasswordClearInterval } from '@core/profile-manager'
+    import { setStrongholdPasswordClearInterval } from '@core/wallet/actions'
 
     function onStrongholdPasswordTimeoutChange(option: IDropdownItem<number>): void {
         const strongholdPasswordTimeoutInMinutes = option.value

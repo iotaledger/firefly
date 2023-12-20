@@ -2,12 +2,12 @@
     import { AnimationEnum } from '@auxiliary/animation'
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
+    import { buildOnboardingSecretManager, updateOnboardingProfile, verifyAndStoreMnemonic } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
-    import { setStrongholdPassword } from '@core/profile-manager'
     import { Subrouter } from '@core/router'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
+    import { setStrongholdPassword } from '@core/wallet/actions'
     import { Animation, Button, HTMLButtonType, PasswordInput, Text, TextType } from '@ui'
     import zxcvbn from 'zxcvbn'
 
@@ -45,8 +45,9 @@
             try {
                 busy = true
                 await setStrongholdPassword(strongholdPassword)
-                await verifyAndStoreMnemonic()
                 updateOnboardingProfile({ strongholdPassword, hasStoredMnemonic: true })
+                await buildOnboardingSecretManager()
+                await verifyAndStoreMnemonic()
                 router.next()
             } catch (err) {
                 console.error(err)

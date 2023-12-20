@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { IActivityGenerationParameters, IWrappedOutput } from '@core/wallet/interfaces'
 import { ConsolidationActivity } from '@core/wallet/types'
 import { ActivityType } from '../../enums'
@@ -13,7 +13,7 @@ import {
 import { BasicOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateSingleConsolidationActivity(
-    account: IAccountState,
+    wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<ConsolidationActivity> {
     const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction

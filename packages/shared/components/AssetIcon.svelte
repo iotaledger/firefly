@@ -1,7 +1,7 @@
 <script lang="ts">
     import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
-    import { getIconColorFromString } from '@core/account'
+    import { getIconColorFromString } from '@core/wallet/utils'
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'

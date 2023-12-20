@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { visibleActiveAccounts } from '@core/profile/stores'
+import { visibleActiveWallets } from '@core/profile/stores'
 import { dashboardRouter } from '@core/router/routers'
 import { DashboardRoute } from '@core/router/enums'
 
@@ -33,9 +33,9 @@ export function handleDeepLink(input: string): void {
             throw new Error(`Does not start with ${process.env.APP_PROTOCOL}://`)
         }
 
-        if (get(visibleActiveAccounts).length > 1) {
+        if (get(visibleActiveWallets).length > 1) {
             openPopup({
-                id: PopupId.AccountSwitcher,
+                id: PopupId.WalletSwitcher,
                 overflow: true,
                 props: {
                     onConfirm: () => {

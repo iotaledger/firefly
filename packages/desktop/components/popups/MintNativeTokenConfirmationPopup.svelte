@@ -13,9 +13,9 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
     import { onMount } from 'svelte'
-    import { getClient } from '@core/profile-manager'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
+    import { getClient } from '@core/wallet/actions'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -23,10 +23,10 @@
 
     let metadata: IIrc30Metadata | undefined
     $: metadata = getMetadata($mintTokenDetails)
-    $: isTransferring = $selectedAccount?.isTransferring
+    $: isTransferring = $selectedWallet?.isTransferring
 
     async function prepareFoundryOutput(): Promise<void> {
-        if ($mintTokenDetails && $selectedAccount && metadata) {
+        if ($mintTokenDetails && $selectedWallet && metadata) {
             const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
             const outputData = await buildFoundryOutputData(
                 Number(totalSupply),

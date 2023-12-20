@@ -1,14 +1,10 @@
-import { get } from 'svelte/store'
-
-import { api } from '@core/profile-manager/api'
-import { getSecretManagerPath } from '@core/profile-manager/utils'
 import { StrongholdVersion } from '@core/stronghold/enums'
-
-import { getStorageDirectoryOfProfile } from '../../utils'
-import { activeProfile, updateActiveProfile } from '../../stores'
+import { getSecretManagerPath, getStorageDirectoryOfProfile } from '../../utils'
+import { getActiveProfile, updateActiveProfile } from '../../stores'
+import { api } from '@core/api'
 
 export async function migrateStrongholdFromActiveProfile(password: string): Promise<void> {
-    const profile = get(activeProfile)
+    const profile = getActiveProfile()
     const profileDirectory = await getStorageDirectoryOfProfile(profile?.id)
     const secretManagerPath = getSecretManagerPath(profileDirectory)
 

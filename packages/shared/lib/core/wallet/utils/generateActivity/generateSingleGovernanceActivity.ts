@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { GovernanceActivity } from '@core/wallet/types'
 import { ActivityType } from '../../enums'
@@ -14,7 +14,7 @@ import {
 import { BasicOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleGovernanceActivity(
-    account: IAccountState,
+    wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<GovernanceActivity> {
     const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction

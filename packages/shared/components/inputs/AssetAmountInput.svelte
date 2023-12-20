@@ -10,7 +10,7 @@
         formatTokenAmountDefault,
         getRequiredStorageDepositForMinimalBasicOutput,
         getUnitFromTokenMetadata,
-        visibleSelectedAccountAssets,
+        visibleSelectedWalletAssets,
     } from '@core/wallet'
     import Big from 'big.js'
     import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
@@ -21,7 +21,7 @@
     export let disabled = false
     export let isFocused = false
     export let votingPower: number = 0
-    export let asset: IAsset = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
+    export let asset: IAsset = $visibleSelectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     export let rawAmount: string = undefined
     export let unit: string = undefined
     export let containsSlider: boolean = false

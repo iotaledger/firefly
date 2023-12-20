@@ -5,7 +5,7 @@
         ClaimShimmerRewardsError,
         FindShimmerRewardsError,
         RestoreProfileType,
-        ShimmerClaimingAccountState,
+        ShimmerClaimingWalletState,
         canUserClaimRewards,
         canUserRecoverFromShimmerClaiming,
         claimShimmerRewards,
@@ -31,11 +31,11 @@
         pollLedgerNanoStatus,
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
-    import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/profile-manager'
     import { Animation, Button, ShimmerClaimingAccountTile, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/wallet/actions'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -46,7 +46,7 @@
     let hasTriedClaimingRewards = false
 
     $: isClaimingRewards = shimmerClaimingAccounts.some(
-        (shimmerClaimingAccount) => shimmerClaimingAccount.state === ShimmerClaimingAccountState.Claiming
+        (shimmerClaimingAccount) => shimmerClaimingAccount.state === ShimmerClaimingWalletState.Claiming
     )
 
     $: shouldSearchForRewardsButtonBeEnabled =

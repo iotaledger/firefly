@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
-import { getLedgerNanoStatus } from '@lib/core/profile-manager/api'
 import { closePopup, popupState } from '@auxiliary/popup'
 import { ledgerNanoStatus, updateLedgerNanoStatus } from '../stores'
+import { getLedgerNanoStatus } from '@core/secret-manager'
 
 export async function getLedgerDeviceStatus(
     onConnected = (): void => {},

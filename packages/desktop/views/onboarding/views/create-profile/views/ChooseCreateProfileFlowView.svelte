@@ -1,18 +1,18 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import {
-        CreateProfileType,
-        initialiseProfileManagerFromOnboardingProfile,
-        onboardingProfile,
-        updateOnboardingProfile,
-    } from '@contexts/onboarding'
+    import { CreateProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { ProfileType, removeProfileFolder } from '@core/profile'
+    import {
+        ProfileType,
+        clearProfileFromMemory,
+        getSecretManagerFromProfileType,
+        getStorageDirectoryOfProfile,
+        removeProfileFolder,
+    } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
     import { createProfileRouter } from '../create-profile-router'
-    import { destroyProfileManager } from '@core/profile-manager/actions'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
 
@@ -28,8 +28,9 @@
     async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
         isBusy = { ...isBusy, [createProfileType]: true }
         const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        updateOnboardingProfile({ createProfileType, type })
-        await initialiseProfileManagerFromOnboardingProfile()
+        const storagePath = await getStorageDirectoryOfProfile($onboardingProfile.id)
+        const secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
+        updateOnboardingProfile({ createProfileType, type, secretManagerOptions })
         $createProfileRouter.next()
     }
 
@@ -40,7 +41,7 @@
     onMount(async () => {
         // Clean up if user has navigated back to this view
         if ($onboardingProfile.hasInitialisedProfileManager) {
-            await destroyProfileManager()
+            await clearProfileFromMemory()
             await removeProfileFolder($onboardingProfile.id)
         }
         updateOnboardingProfile({ type: undefined, createProfileType: undefined, hasInitialisedProfileManager: false })

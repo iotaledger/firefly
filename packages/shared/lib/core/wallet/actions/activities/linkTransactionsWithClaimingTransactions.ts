@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfileId } from '@core/profile'
 import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
@@ -8,13 +8,13 @@ import { addClaimedActivity, claimedActivities } from '../../stores'
 /**
  * It takes a list of transactions and links the transactions that are claiming async transactions
  * @param {IProcessedTransaction[]} transactions - IProcessedTransaction[]
- * @param {IAccountState} account - IAccountState - the account for which we are processing
+ * @param {IWalletState} account - IWalletState - the account for which we are processing
  * transactions
  * @returns An array of processed transactions
  */
 export function linkTransactionsWithClaimingTransactions(
     transactions: IProcessedTransaction[],
-    account: IAccountState
+    account: IWalletState
 ): IProcessedTransaction[] {
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []

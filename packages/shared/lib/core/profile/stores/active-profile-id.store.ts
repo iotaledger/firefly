@@ -1,3 +1,3 @@
 import { persistent } from '@core/utils/store'
 
-export const activeProfileId = persistent<string>('activeProfileId', null)
+export const activeProfileId = persistent<string | null>('activeProfileId', null)

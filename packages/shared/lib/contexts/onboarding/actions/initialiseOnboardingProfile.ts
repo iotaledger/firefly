@@ -1,28 +1,26 @@
-import { stopPollingLedgerNanoStatus } from '@core/ledger'
-import { destroyProfileManager, profileManager } from '@core/profile-manager'
-import { get } from 'svelte/store'
-import { OnboardingProfileManagerAlreadyInitializedError } from '../errors'
 import { buildInitialOnboardingProfile } from '../helpers'
-import { isOnboardingLedgerProfile, onboardingProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 
 /**
  * Builds a new onboarding profile and sets the Svelte store accordingly.
  */
-export async function initialiseOnboardingProfile(
-    isDeveloperProfile: boolean,
-    destroyPreviousManager = false
+export function initialiseOnboardingProfile(
+    isDeveloperProfile: boolean
+    /* destroyPreviousManager = false*/
 ): Promise<void> {
-    if (get(profileManager)) {
-        if (destroyPreviousManager) {
-            if (get(isOnboardingLedgerProfile)) {
-                stopPollingLedgerNanoStatus()
-            }
-            await destroyProfileManager()
-        } else {
-            throw new OnboardingProfileManagerAlreadyInitializedError()
-        }
-    }
+    // TODO(2.0) Profile manager is gone, we should maybe check onboarding SecretManager insteadd
+    // if (get(profileManager)) {
+    //     if (destroyPreviousManager) {
+    //         if (get(isOnboardingLedgerProfile)) {
+    //             stopPollingLedgerNanoStatus()
+    //         }
+    //         await clearProfileFromMemory()
+    //     } else {
+    //         throw new OnboardingProfileManagerAlreadyInitializedError()
+    //     }
+    // }
 
     const _newProfile = buildInitialOnboardingProfile(isDeveloperProfile)
     onboardingProfile.set(_newProfile)
+    return new Promise(() => {}) // TODO(2.0) This is a temporal promise
 }

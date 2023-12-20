@@ -1,4 +1,4 @@
-import { IAccountState } from '@core/account'
+import { IWalletState } from '@core/wallet/interfaces'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { VestingActivity } from '@core/wallet/types'
 import { ActivityType } from '../../enums'
@@ -16,7 +16,7 @@ import { BasicOutput } from '@iota/sdk/out/types'
 import { getCoinType } from '@core/profile'
 
 export async function generateVestingActivity(
-    account: IAccountState,
+    wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<VestingActivity> {
     const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction

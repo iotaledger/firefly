@@ -1,19 +1,20 @@
 import { get } from 'svelte/store'
-import { selectedAccount } from '@core/account/stores'
-import { api } from '@core/profile-manager'
-import { AliasOutput } from '@iota/sdk/out/types'
+import { api } from '@core/api'
+import { AccountOutput } from '@iota/sdk/out/types'
+import { selectedWallet } from '../../stores'
 
-export async function getSerialNumberFromAliasOutput(aliasAddress: string): Promise<number> {
-    const account = get(selectedAccount)
-    if (!account) {
-        throw new Error('Account is undefined')
+// TODO(2.0) Alias output is gone now
+export async function getSerialNumberFromAliasOutput(accountAddress: string): Promise<number> {
+    const wallet = get(selectedWallet)
+    if (!wallet) {
+        throw new Error('Wallet is undefined')
     }
-    const aliasId = api.bech32ToHex(aliasAddress)
+    const accountId = api.bech32ToHex(accountAddress)
 
-    const [aliasOutput] = await account.unspentOutputs({ aliasIds: [aliasId] })
+    const [accountOutput] = await wallet.unspentOutputs({ accountIds: [accountId] })
 
-    // If it's the first state transition of the alias address, the aliasId is 0x0.
+    // If it's the first state transition of the account address, the accountId is 0x0.
     // So we set the foundry counter to 0.
-    const foundryCounter = aliasOutput ? (aliasOutput.output as AliasOutput).foundryCounter : 0
+    const foundryCounter = accountOutput ? (accountOutput.output as AccountOutput).foundryCounter : 0
     return foundryCounter + 1
 }

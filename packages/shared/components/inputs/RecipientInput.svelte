@@ -1,14 +1,12 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
-    import { selectedAccountIndex } from '@core/account/stores'
-    import { getAccountColorById } from '@core/account/utils'
     import { localize } from '@core/i18n'
-    import { visibleActiveAccounts } from '@core/profile/stores'
     import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
     import { Subject } from '@core/wallet/types'
     import { getSubjectFromAddress } from '@core/wallet/utils'
     import { Layer1RecipientError } from '@core/layer-2/errors'
-    import { getNetworkHrp } from '@core/profile'
+    import { getNetworkHrp, getWalletColorById, visibleActiveWallets } from '@core/profile'
+    import { selectedWalletId } from '@core/wallet/stores'
 
     export let recipient: Subject
     export let disabled = false
@@ -47,7 +45,7 @@
                 throw new Error(localize('error.send.recipientRequired'))
             }
 
-            Promise.resolve()
+            return Promise.resolve()
         } catch (err) {
             error = err?.message ?? err
             return Promise.reject(error)
@@ -55,12 +53,12 @@
     }
 
     function getLayer1AccountOptions(): IOption[] {
-        return $visibleActiveAccounts
-            .filter((account) => account.index !== $selectedAccountIndex)
-            .map((account) => ({
-                id: account.index,
-                key: account.name,
-                value: account.depositAddress,
+        return $visibleActiveWallets
+            .filter((wallet) => wallet.id !== $selectedWalletId)
+            .map((wallet) => ({
+                id: wallet.id,
+                key: wallet.name,
+                value: wallet.depositAddress,
             }))
     }
 </script>
@@ -78,6 +76,6 @@
     let:option
 >
     {#if option?.id}
-        <ColoredCircle color={getAccountColorById(option?.id)} />
+        <ColoredCircle color={getWalletColorById(option?.id)} />
     {/if}
 </SelectorInput>

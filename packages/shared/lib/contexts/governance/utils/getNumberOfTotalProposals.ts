@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
-import { registeredProposalsForSelectedAccount } from '../stores'
+import { registeredProposalsForSelectedWallet } from '../stores'
 
 export function getNumberOfTotalProposals(): number {
-    const proposals = get(registeredProposalsForSelectedAccount)
+    const proposals = get(registeredProposalsForSelectedWallet)
     return Object.keys(proposals ?? {}).length
 }

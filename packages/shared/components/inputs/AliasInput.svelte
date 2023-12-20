@@ -1,11 +1,13 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from 'shared/components'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
     import { ADDRESS_TYPE_ALIAS } from '@core/wallet/constants'
     import { getNetworkHrp } from '@core/profile/actions'
-    import { api } from '@core/profile-manager'
+    import { api } from '@core/api'
+
+    // TODO(2.0) Alias are gone.
 
     export let alias: string = ''
     export let error: string = ''
@@ -14,8 +16,8 @@
     let modal: Modal = undefined
 
     const aliasOptions: IOption[] =
-        $selectedAccount.balances?.aliases.map((hexAliasId, index) => {
-            const aliasId = api.aliasIdToBech32(hexAliasId, getNetworkHrp())
+        $selectedWallet.balances?.aliases.map((hexAliasId, index) => {
+            const aliasId = api.accountIdToBech32(hexAliasId, getNetworkHrp())
             return { key: 'Alias ' + (index + 1), value: aliasId }
         }) ?? []
 

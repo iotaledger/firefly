@@ -1,6 +1,5 @@
 import { get } from 'svelte/store'
 
-import { resetSelectedAccountIndex } from '@core/account/actions'
 import {
     clearSelectedParticipationEventStatus,
     resetProposalOverviews,
@@ -11,15 +10,13 @@ import { isPollingLedgerDeviceStatus } from '@core/ledger/stores'
 import { clearMarketPricesPoll } from '@core/market/actions'
 import { clearNetworkPoll } from '@core/network/actions'
 import { stopDownloadingNftMediaFromQueue } from '@core/nfts/actions'
-import { lockStronghold, resetActiveProfile } from '@core/profile/actions'
-import { activeAccounts, activeProfile, isSoftwareProfile, isDestroyingManager } from '@core/profile/stores'
+import { clearProfileFromMemory, lockStronghold, resetActiveProfile } from '@core/profile/actions'
+import { activeProfile, isSoftwareProfile, isDestroyingWallets, activeWallets } from '@core/profile/stores'
 import { isLedgerProfile } from '@core/profile/utils'
-import { destroyProfileManager, unsubscribeFromWalletApiEvents } from '@core/profile-manager/actions'
-import { IProfileManager } from '@core/profile-manager/interfaces'
-import { profileManager } from '@core/profile-manager/stores'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
 import { Platform } from '@core/app'
+import { unsubscribeFromWalletApiEvents, resetSelectedWalletId } from '@core/wallet'
 
 /**
  * Logout from active profile
@@ -37,8 +34,7 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
-        const manager = get(profileManager)
-        await destroyWalletRsObjects(manager)
+        await logOutProfile()
     }
 
     cleanupProfileState(clearActiveProfile)
@@ -50,7 +46,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     loggedIn.set(false)
     lastActiveAt.set(new Date())
     hasLoadedAccounts.set(false)
-    resetSelectedAccountIndex()
+    resetSelectedWalletId()
 
     void stopDownloadingNftMediaFromQueue()
 
@@ -59,7 +55,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     resetProposalOverviews()
     clearSelectedParticipationEventStatus()
 
-    activeAccounts.set([])
+    activeWallets.set([])
     if (clearActiveProfile) {
         resetActiveProfile()
     }
@@ -67,10 +63,9 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     get(routerManager).resetRouters()
 }
 
-async function destroyWalletRsObjects(manager: IProfileManager): Promise<void> {
-    isDestroyingManager.set(true)
-    await manager?.stopBackgroundSync()
+async function logOutProfile(): Promise<void> {
+    isDestroyingWallets.set(true)
     await unsubscribeFromWalletApiEvents()
-    await destroyProfileManager()
-    isDestroyingManager.set(false)
+    await clearProfileFromMemory()
+    isDestroyingWallets.set(false)
 }

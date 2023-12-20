@@ -1,11 +1,11 @@
 <script lang="ts">
     import { QR, Text, FontWeight, AddressBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { selectedAccount } from '@core/account'
+    import { selectedWallet } from '@core/wallet'
 
     export let title: string = localize('general.receiveFunds')
 
-    $: receiveAddress = $selectedAccount.depositAddress
+    $: receiveAddress = $selectedWallet.depositAddress
 </script>
 
 <receive-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">

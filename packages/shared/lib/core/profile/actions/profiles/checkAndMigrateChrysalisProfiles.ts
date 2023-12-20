@@ -1,4 +1,4 @@
-import { IPersistedAccountData } from '@core/account/interfaces'
+import { IPersistedWalletData } from '@core/wallet/interfaces'
 import { MarketCurrency } from '@core/market'
 import { NetworkId, getDefaultClientOptions, getDefaultPersistedNetwork } from '@core/network'
 import { INode } from '@core/network/interfaces'
@@ -26,7 +26,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                     chrysalisProfile.lastStrongholdBackupTime ??
                     DEFAULT_PERSISTED_PROFILE_OBJECT.lastStrongholdBackupTime,
                 settings: DEFAULT_PERSISTED_PROFILE_OBJECT.settings,
-                accountPersistedData: DEFAULT_PERSISTED_PROFILE_OBJECT.accountPersistedData,
+                walletPersistedData: DEFAULT_PERSISTED_PROFILE_OBJECT.walletPersistedData,
                 isDeveloperProfile:
                     chrysalisProfile.isDeveloperProfile ?? DEFAULT_PERSISTED_PROFILE_OBJECT.isDeveloperProfile,
                 hasVisitedDashboard: chrysalisProfile.hasVisitedDashboard ?? undefined,
@@ -37,13 +37,13 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                 needsChrysalisToStardustDbMigration: true,
             }
 
-            // accountPersistedData
+            // walletPersistedData
             if (chrysalisProfile.accounts) {
-                const accountPersistedData: {
-                    [accountId: string]: IPersistedAccountData
+                const walletPersistedData: {
+                    [walletId: string]: IPersistedWalletData
                 } = {}
                 chrysalisProfile.accounts.forEach((account, index) => {
-                    accountPersistedData[index] = {
+                    walletPersistedData[index] = {
                         name: `Wallet ${index + 1}`,
                         color: account.color,
                         hidden: chrysalisProfile.hiddenAccounts?.includes(account.id) ?? false,
@@ -54,7 +54,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                         migratedProfile.lastUsedAccountIndex = index
                     }
                 })
-                migratedProfile.accountPersistedData = accountPersistedData
+                migratedProfile.walletPersistedData = walletPersistedData
             }
 
             // settings

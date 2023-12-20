@@ -1,31 +1,31 @@
-import { IAccountState } from '@core/account/interfaces'
-import { activeAccounts } from '@core/profile/stores'
+import { IWalletState } from '@core/wallet/interfaces'
+import { activeWallets } from '@core/profile/stores'
 import { getNftId } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { INft } from '../interfaces'
 import { buildNftFromNftOutput } from '../utils'
-import { setAccountNftsInAllAccountNfts } from './setAccountNftsInAllAccountNfts'
 import { NftOutput, OutputType } from '@iota/sdk/out/types'
+import { setWalletNftsInAllWalletNfts } from './setWalletNftsInAllWalletNfts'
 
 export async function loadNftsForActiveProfile(): Promise<void> {
-    const allAccounts = get(activeAccounts)
-    for (const account of allAccounts) {
-        await loadNftsForAccount(account)
+    const allWallets = get(activeWallets)
+    for (const wallet of allWallets) {
+        await loadNftsForWallet(wallet)
     }
 }
 
-async function loadNftsForAccount(account: IAccountState): Promise<void> {
-    const accountNfts: INft[] = []
-    const unspentOutputs = await account.unspentOutputs()
+async function loadNftsForWallet(wallet: IWalletState): Promise<void> {
+    const walletNfts: INft[] = []
+    const unspentOutputs = await wallet.unspentOutputs()
     for (const outputData of unspentOutputs) {
         if (outputData.output.type === OutputType.Nft) {
-            const nft = buildNftFromNftOutput(outputData as IWrappedOutput, account.depositAddress)
-            accountNfts.push(nft)
+            const nft = buildNftFromNftOutput(outputData as IWrappedOutput, wallet.depositAddress)
+            walletNfts.push(nft)
         }
     }
 
-    const allOutputs = await account.outputs()
+    const allOutputs = await wallet.outputs()
     const sortedNftOutputs = allOutputs
         .filter((output) => output.output.type === OutputType.Nft)
         .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
@@ -33,11 +33,11 @@ async function loadNftsForAccount(account: IAccountState): Promise<void> {
         if (outputData.output.type === OutputType.Nft) {
             const nftOutput = outputData.output as NftOutput
             const nftId = getNftId(nftOutput.nftId, outputData.outputId)
-            if (!accountNfts.some((nft) => nft.id === nftId)) {
-                const nft = buildNftFromNftOutput(outputData as IWrappedOutput, account.depositAddress, false)
-                accountNfts.push(nft)
+            if (!walletNfts.some((nft) => nft.id === nftId)) {
+                const nft = buildNftFromNftOutput(outputData as IWrappedOutput, wallet.depositAddress, false)
+                walletNfts.push(nft)
             }
         }
     }
-    setAccountNftsInAllAccountNfts(account.index, accountNfts)
+    setWalletNftsInAllWalletNfts(wallet.id, walletNfts)
 }

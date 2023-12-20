@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
-    import { AccountColors } from '@core/account'
+    import { WalletColors } from '@core/wallet/enums'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, convertHexToRgba } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
@@ -9,28 +9,28 @@
     export let active: string = ''
     export let isCustomColorEnabled: boolean = false
 
-    const accountColors = Object.values(AccountColors).filter((c) => /[#]/.test(c as string))
-    const activeAccountColorIndex = accountColors.findIndex((_, i) => accountColors[i] === active)
+    const walletColors = Object.values(WalletColors).filter((c) => /[#]/.test(c as string))
+    const activeWalletColorIndex = walletColors.findIndex((_, i) => walletColors[i] === active)
 
-    let indexOfActiveElement = activeAccountColorIndex >= 0 ? activeAccountColorIndex : accountColors.length
+    let indexOfActiveElement = activeWalletColorIndex >= 0 ? activeWalletColorIndex : walletColors.length
     let cachedColor = '#000000'
-    let inputValue: string = activeAccountColorIndex >= 0 ? cachedColor : active
+    let inputValue: string = activeWalletColorIndex >= 0 ? cachedColor : active
     let iconColor = ''
     let isTooltipVisible = false
     let tooltipAnchor: HTMLElement
 
     $: inputValue = `#${/[0-9|a-f|A-F]+/.exec(inputValue) || ''}`
-    $: isSelectedCustomElement = indexOfActiveElement === accountColors.length
+    $: isSelectedCustomElement = indexOfActiveElement === walletColors.length
 
     $: {
-        if (indexOfActiveElement === accountColors.length) {
+        if (indexOfActiveElement === walletColors.length) {
             active === cachedColor
         }
 
-        if (indexOfActiveElement === accountColors.length) {
+        if (indexOfActiveElement === walletColors.length) {
             active = inputValue.length === 7 || inputValue.length === 4 ? inputValue : cachedColor
         } else {
-            active = accountColors?.[indexOfActiveElement]?.toString()
+            active = walletColors?.[indexOfActiveElement]?.toString()
         }
 
         if (inputValue.length) {
@@ -52,7 +52,7 @@
 
     function onColorClick(index: number): void {
         indexOfActiveElement = index
-        if (index !== accountColors.length) {
+        if (index !== walletColors.length) {
             isTooltipVisible = false
         }
     }
@@ -68,15 +68,15 @@
     function activeCustomColor(event: KeyboardEvent | MouseEvent): void {
         const isEnterKeyPressed = event.type === 'keypress' && (event as KeyboardEvent).key === 'Enter'
         if (event.type === 'click' || isEnterKeyPressed) {
-            indexOfActiveElement = accountColors.length
+            indexOfActiveElement = walletColors.length
         }
     }
 
-    function getAccountColors(): string[] {
-        return Object.keys(AccountColors)
+    function getWalletColors(): string[] {
+        return Object.keys(WalletColors)
             .filter((key) => key.startsWith('#'))
             .map((key) => {
-                const color = AccountColors[key as keyof typeof AccountColors].toString().toLowerCase()
+                const color = WalletColors[key as keyof typeof WalletColors].toString().toLowerCase()
                 return `bg-${color}-500 hover:bg-${color}-600`
             })
     }
@@ -92,7 +92,7 @@
         </title-container>
     {/if}
     <ul class="flex flex-row flex-wrap gap-3.5">
-        {#each getAccountColors() as color, i}
+        {#each getWalletColors() as color, i}
             <button
                 on:click={() => onColorClick(i)}
                 on:keypress={(event) => onKeyPress(event, i)}

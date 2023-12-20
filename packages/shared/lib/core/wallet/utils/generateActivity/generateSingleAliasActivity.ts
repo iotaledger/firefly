@@ -1,9 +1,7 @@
-import { IAccountState } from '@core/account'
 import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
-import { IActivityGenerationParameters } from '@core/wallet/interfaces'
+import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { AliasActivity } from '@core/wallet/types'
-import { api } from '@core/profile-manager'
 import { getNetworkHrp } from '@core/profile'
 import {
     getAmountFromOutput,
@@ -15,23 +13,25 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AliasOutput } from '@iota/sdk/out/types'
+import { AccountOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
+import { api } from '@core/api'
 
+// TODO(2.0) Alias outputs are gone
 export async function generateSingleAliasActivity(
-    account: IAccountState,
+    wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<AliasActivity> {
     const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
-    const output = wrappedOutput.output as AliasOutput
+    const output = wrappedOutput.output as AccountOutput
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
+    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const governorAddress = getGovernorAddressFromAliasOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
-    const aliasId = getAliasId(output, outputId)
+    const accountId = getAccountId(output, outputId)
 
     const isHidden = false
     const isAssetHidden = false
@@ -39,8 +39,8 @@ export async function generateSingleAliasActivity(
 
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
-    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
+    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
     return {
         type: ActivityType.Alias,
@@ -49,7 +49,7 @@ export async function generateSingleAliasActivity(
         transactionId,
         direction,
         action,
-        aliasId,
+        accountId,
         storageDeposit,
         giftedStorageDeposit,
         governorAddress,
@@ -66,8 +66,8 @@ export async function generateSingleAliasActivity(
     }
 }
 
-function getAliasId(output: AliasOutput, outputId: string): string {
-    const isNewAlias = output.aliasId === EMPTY_HEX_ID
-    const aliasId = isNewAlias ? api.computeAliasId(outputId) : output.aliasId
-    return api.aliasIdToBech32(aliasId, getNetworkHrp())
+function getAccountId(output: AccountOutput, outputId: string): string {
+    const isNewAccount = output.accountId === EMPTY_HEX_ID
+    const accountId = isNewAccount ? api.computeAccountId(outputId) : output.accountId
+    return api.accountIdToBech32(accountId, getNetworkHrp())
 }

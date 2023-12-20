@@ -1,7 +1,7 @@
 import { logAndNotifyError } from '@core/error/actions'
-import { api } from '@core/profile-manager'
 import { updateProfile } from '@core/profile/stores'
 import { getStorageDirectoryOfProfile } from '@core/profile/utils'
+import { api } from '@core/api'
 
 /**
  * Updates the profile underlying DB from chrysalis model to stardust.

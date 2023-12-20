@@ -5,7 +5,7 @@ export function getTimelockDateFromOutput(output: CommonOutput): Date | undefine
     for (const unlockCondition of output.unlockConditions) {
         if (unlockCondition?.type === UnlockConditionType.Timelock) {
             const timelockUnlockCondition = unlockCondition as TimelockUnlockCondition
-            const unixTime = timelockUnlockCondition?.unixTime
+            const unixTime = timelockUnlockCondition?.unixTime // TODO(2.0) Unix time is gone, we now have slots
             return unixTime ? new Date(unixTime * MILLISECONDS_PER_SECOND) : undefined
         }
     }

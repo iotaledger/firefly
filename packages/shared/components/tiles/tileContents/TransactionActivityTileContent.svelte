@@ -7,7 +7,7 @@
         getFormattedAmountFromActivity,
         getSubjectLocaleFromActivity,
         IPersistedAsset,
-        selectedAccountAssets,
+        selectedWalletAssets,
         TransactionActivity,
     } from '@core/wallet'
     import { ActivityTileContent, AssetIcon } from 'shared/components'
@@ -15,7 +15,7 @@
     export let activity: TransactionActivity
 
     let asset: IPersistedAsset
-    $: $selectedAccountAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
+    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
     $: action = localize(getActivityTileTitle(activity))
     $: subject =
         activity.direction === ActivityDirection.SelfTransaction

@@ -1,8 +1,6 @@
-import { IAccountState } from '@core/account'
 import { getCoinType, getNetworkHrp } from '@core/profile'
-import { api } from '@core/profile-manager'
 import { ActivityType } from '@core/wallet/enums'
-import { IActivityGenerationParameters } from '@core/wallet/interfaces'
+import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
 import { getNativeTokenFromOutput } from '..'
 import {
@@ -13,15 +11,17 @@ import {
     getTagFromOutput,
 } from './helper'
 import {
-    AliasAddress,
+    AccountAddress,
     FoundryOutput,
-    ImmutableAliasAddressUnlockCondition,
+    ImmutableAccountAddressUnlockCondition,
     SimpleTokenScheme,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
+import { api } from '@core/api'
 
+// TODO(2.0) Alias outputs are gone
 export async function generateSingleFoundryActivity(
-    account: IAccountState,
+    wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<FoundryActivity> {
     const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
@@ -34,10 +34,10 @@ export async function generateSingleFoundryActivity(
     const maximumSupply = tokenScheme.maximumSupply.toString()
 
     const addressUnlockCondition = output.unlockConditions.find(
-        (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAliasAddress
-    ) as ImmutableAliasAddressUnlockCondition
-    const aliasId = (addressUnlockCondition?.address as AliasAddress)?.aliasId
-    const aliasAddress = aliasId ? api.aliasIdToBech32(aliasId, getNetworkHrp()) : undefined
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
+    ) as ImmutableAccountAddressUnlockCondition
+    const accountId = (addressUnlockCondition?.address as AccountAddress)?.accountId
+    const accountAddress = accountId ? api.accountIdToBech32(accountId, getNetworkHrp()) : undefined
 
     const isHidden = false
     const isAssetHidden = false
@@ -53,8 +53,8 @@ export async function generateSingleFoundryActivity(
     const metadata = getMetadataFromOutput(output)
     const tag = getTagFromOutput(output)
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
     return {
         type: ActivityType.Foundry,
@@ -64,7 +64,7 @@ export async function generateSingleFoundryActivity(
         direction,
         action,
         assetId,
-        aliasAddress,
+        accountAddress,
         mintedTokens,
         meltedTokens,
         maximumSupply,

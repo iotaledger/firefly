@@ -63,7 +63,7 @@ classDiagram
     class Subject {
         - type: "address" | "account"
         - address?: string
-        - account?: IAccountState
+        - account?: IWalletState
     }
     class Activity Direction {
         <<Enum>>

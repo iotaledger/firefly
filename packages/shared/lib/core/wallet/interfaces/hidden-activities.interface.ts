@@ -1,5 +1,5 @@
 export interface IHiddenActivities {
     [profileId: string]: {
-        [accountIndex: string]: string[]
+        [walletId: string]: string[]
     }
 }

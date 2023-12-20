@@ -1,8 +1,6 @@
-import { profileManager as _profileManager } from '@core/profile-manager'
-import { getLedgerNanoStatus } from '@lib/core/profile-manager/api'
-
 import { resetLedgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 
+// TODO(2.0) Fix this, profile manager is gone
 export async function getAndUpdateLedgerNanoStatus(
     profileManager = _profileManager,
     forwardErrors = false

@@ -1,9 +1,12 @@
 import { showAppNotification } from '@auxiliary/notification'
-import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { updateLedgerNanoStatus } from '@core/ledger'
-import { AccountRecoveryProfileConfiguration, ProfileType, UnableToFindProfileTypeError } from '@core/profile'
-import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
+import {
+    AccountRecoveryProfileConfiguration,
+    ProfileType,
+    RecoverAccountsPayload,
+    UnableToFindProfileTypeError,
+} from '@core/profile'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { get } from 'svelte/store'
@@ -92,6 +95,7 @@ async function depthSearchAndRecoverAccounts(): Promise<void> {
             addressStartIndexInternal: depthSearchAddressStartIndex,
         },
     }
+    // TODO(2.0) Fix this
     const depthSearchAccounts = await recoverAccounts(recoverAccountsPayload, shimmerClaimingProfileManager)
 
     await updateRecoveredAccounts(depthSearchAccounts)
@@ -139,6 +143,7 @@ function updateRewardsFinderParameters(): void {
     currentSearchRound++
 }
 
+// TODO(2.0) Fix this
 async function updateRecoveredAccounts(accounts: IAccount[]): Promise<void> {
     const boundAccounts = await getSortedRenamedBoundAccounts(accounts, shimmerClaimingProfileManager)
     const updatedTotalUnclaimedShimmerRewards = await sumTotalUnclaimedRewards(boundAccounts)

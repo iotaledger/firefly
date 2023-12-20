@@ -1,4 +1,4 @@
 export enum SubjectType {
-    Account = 'account',
+    Wallet = 'wallet', // TODO(2.0) This should be Wallet?
     Address = 'address',
 }

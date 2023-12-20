@@ -4,10 +4,6 @@
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
-    import { initialiseProfileManager } from '@core/profile-manager/actions'
-    import { changeStrongholdPassword } from '@core/profile-manager/api'
-    import { profileManager } from '@core/profile-manager/stores'
-    import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
@@ -18,6 +14,7 @@
     import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import { changeStrongholdPassword } from '@core/secret-manager'
 
     export let oldPassword: string
     export let newPassword: string
@@ -100,16 +97,18 @@
     }
 
     onMount(async () => {
+        // TODO(2.0) Profile manager is gone
         if (!isRecovery && !$profileManager) {
             const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
             const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
             updateActiveProfile({ clientOptions })
+            // TODO(2.0): Update initialiseProfileManager to new logic
             const manager = await initialiseProfileManager(
+                $activeProfile?.id,
                 storagePath,
                 coinType,
                 clientOptions,
-                secretManager,
-                $activeProfile?.id
+                secretManager
             )
             profileManager.set(manager)
         }

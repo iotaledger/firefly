@@ -8,7 +8,7 @@
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
-    import AccountSwitcherPopup from './AccountSwitcherPopup.svelte'
+    import WalletSwitcherPopup from './WalletSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
     import AddProposalPopup from './AddProposalPopup.svelte'
@@ -19,7 +19,7 @@
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
     import ConfirmationPopup from './ConfirmationPopup.svelte'
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
-    import CreateAccountPopup from './CreateAccountPopup.svelte'
+    import createWalletPopup from './CreateWalletPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
     import DeleteAccountPopup from './DeleteAccountPopup.svelte'
     import DeleteProfilePopup from './DeleteProfilePopup.svelte'
@@ -30,7 +30,7 @@
     import LedgerAppGuidePopup from './LedgerAppGuidePopup.svelte'
     import LedgerConnectionGuidePopup from './LedgerConnectionGuidePopup.svelte'
     import LegalUpdatePopup from './LegalUpdatePopup.svelte'
-    import ManageAccountPopup from './ManageAccountPopup.svelte'
+    import ManageWalletPopup from './ManageWalletPopup.svelte'
     import ManageVotingPowerPopup from './ManageVotingPowerPopup.svelte'
     import MintNativeTokenConfirmationPopup from './MintNativeTokenConfirmationPopup.svelte'
     import MintNativeTokenFormPopup from './MintNativeTokenFormPopup.svelte'
@@ -78,8 +78,8 @@
 
     $: switch (id) {
         case PopupId.ConnectLedger:
-        case PopupId.CreateAccount:
-        case PopupId.ManageAccount:
+        case PopupId.createWallet:
+        case PopupId.ManageWallet:
             size = PopupSize.Small
             break
         case PopupId.LedgerAppGuide:
@@ -94,7 +94,7 @@
     let popupContent
 
     const POPUP_MAP: PopupComponentMap = {
-        [PopupId.AccountSwitcher]: AccountSwitcherPopup,
+        [PopupId.WalletSwitcher]: WalletSwitcherPopup,
         [PopupId.ActivityDetails]: ActivityDetailsPopup,
         [PopupId.AddNode]: AddNodePopup,
         [PopupId.AddProposal]: AddProposalPopup,
@@ -105,7 +105,7 @@
         [PopupId.BurnNativeTokensConfirmation]: BurnNativeTokensConfirmationPopup,
         [PopupId.Confirmation]: ConfirmationPopup,
         [PopupId.ConnectLedger]: ConnectLedgerPopup,
-        [PopupId.CreateAccount]: CreateAccountPopup,
+        [PopupId.createWallet]: createWalletPopup,
         [PopupId.DeepLinkError]: DeepLinkErrorPopup,
         [PopupId.DeleteAccount]: DeleteAccountPopup,
         [PopupId.DeleteProfile]: DeleteProfilePopup,
@@ -116,7 +116,7 @@
         [PopupId.LedgerAppGuide]: LedgerAppGuidePopup,
         [PopupId.LedgerConnection]: LedgerConnectionGuidePopup,
         [PopupId.LegalUpdate]: LegalUpdatePopup,
-        [PopupId.ManageAccount]: ManageAccountPopup,
+        [PopupId.ManageWallet]: ManageWalletPopup,
         [PopupId.ManageVotingPower]: ManageVotingPowerPopup,
         [PopupId.MetricSystemInfo]: MetricSystemInfoPopup,
         [PopupId.MintNativeTokenConfirmation]: MintNativeTokenConfirmationPopup,

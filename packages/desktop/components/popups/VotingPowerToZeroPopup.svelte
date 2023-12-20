@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button, Text, TextHint } from 'shared/components'
     import { HTMLButtonType, TextHintVariant, TextType } from 'shared/components/enums'
-    import { selectedAccount } from '@core/account/stores'
+    import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'
     import { localize } from '@core/i18n'
@@ -11,7 +11,7 @@
     const ZERO_VOTING_POWER = '0'
 
     $: isTransferring =
-        $selectedAccount?.hasVotingPowerTransactionInProgress || $selectedAccount?.hasVotingTransactionInProgress
+        $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress
 
     function onCancelClick(): void {
         closePopup()

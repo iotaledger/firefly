@@ -1,4 +1,3 @@
-import { getClient } from '@core/profile-manager/api/getClient'
 import { EMPTY_HEX_ID } from '@core/wallet'
 import {
     AddressType,
@@ -8,6 +7,7 @@ import {
     UnlockConditionType,
 } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
+import { getClient } from '../../actions/getClient'
 
 const MOCK_BASIC_OUTPUT_AMOUNT = '10'
 

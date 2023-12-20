@@ -5,12 +5,12 @@
     import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
     import { ClientError } from '@core/error/enums'
     import { localize } from '@core/i18n'
-    import { restoreBackup } from '@core/profile-manager/api'
     import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
     import { StrongholdVersion } from '@core/stronghold/enums'
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '../../restore-from-stronghold/restore-from-stronghold-router'
+    import { restoreBackup } from '@core/wallet/actions'
 
     interface FileWithPath extends File {
         path?: string

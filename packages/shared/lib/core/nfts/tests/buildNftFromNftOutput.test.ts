@@ -69,7 +69,7 @@ jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts
         switch (address.type) {
             case AddressType.Ed25519:
                 return accountAddress
-            case AddressType.Alias:
+            case AddressType.Alias: // TODO(2.0) Alias outputs are gone
                 return undefined
             case AddressType.Nft:
                 return undefined

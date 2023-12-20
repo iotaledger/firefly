@@ -4,12 +4,12 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import {
         addNftsToDownloadQueue,
-        selectedAccountNfts,
+        selectedWalletNfts,
         stopDownloadingNftMediaFromQueue,
         updateNftInAllAccountNfts,
     } from '@core/nfts'
     import { Platform } from '@core/app'
-    import { selectedAccountIndex } from '@core/account'
+    import { selectedWalletId } from '@core/wallet'
 
     let isLoading = false
 
@@ -32,14 +32,14 @@
         try {
             await stopDownloadingNftMediaFromQueue()
             await Promise.all(
-                $selectedAccountNfts.map(async (nft) => {
+                $selectedWalletNfts.map(async (nft) => {
                     await Platform.deleteFile(nft.filePath)
-                    updateNftInAllAccountNfts($selectedAccountIndex, nft.id, {
+                    updateNftInAllAccountNfts($selectedWalletId, nft.id, {
                         downloadMetadata: { isLoaded: false },
                     })
                 })
             )
-            addNftsToDownloadQueue($selectedAccountIndex, $selectedAccountNfts, true)
+            addNftsToDownloadQueue($selectedWalletId, $selectedWalletNfts, true)
         } finally {
             isLoading = false
         }

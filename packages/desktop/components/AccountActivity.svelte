@@ -5,7 +5,7 @@
         activityFilter,
         activitySearchTerm,
         queriedActivities,
-        selectedAccountActivities,
+        selectedWalletActivities,
         setAsyncStatusOfAccountActivities,
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton, FontWeight } from '@ui'
@@ -22,7 +22,7 @@
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
     $: setAsyncStatusOfAccountActivities($time)
-    $: if (searchActive && $selectedAccountActivities) {
+    $: if (searchActive && $selectedWalletActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue
         })()
@@ -46,7 +46,7 @@
 
     $: $activityFilter, $activitySearchTerm, scrollToTop()
     $: isEmptyBecauseOfFilter =
-        $selectedAccountActivities.filter((_activity) => !_activity.isHidden).length > 0 &&
+        $selectedWalletActivities.filter((_activity) => !_activity.isHidden).length > 0 &&
         activityListWithTitles.length === 0
 
     function scrollToTop(): void {
