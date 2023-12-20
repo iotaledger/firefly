@@ -19,6 +19,13 @@ export function checkNodeUrlValidity(
         return 'error.node.invalid'
     }
 
+    // Check if it's HTTP and localhost
+    const isHttpLocalhost = newUrl.toLowerCase().startsWith('http://localhost') || newUrl.startsWith('http://127.0.0.1')
+    if (isHttpLocalhost && allowInsecure) {
+        // Allow HTTP connections to localhost without checking further
+        return undefined
+    }
+
     if (!allowInsecure && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
