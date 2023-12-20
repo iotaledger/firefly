@@ -56,7 +56,7 @@ jest.mock('../stores/persisted-assets.store', () => ({
     getAssetById: jest.fn((id) => (id === PERSISTED_ASSET_SHIMMER.id ? PERSISTED_ASSET_SHIMMER : nativeTokenAsset)),
 }))
 
-jest.mock('../../profile-manager/api', () => ({
+jest.mock('../../api/api', () => ({
     api: {
         bech32ToHex: jest.fn((_) => '0x676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e3109020'),
     },
