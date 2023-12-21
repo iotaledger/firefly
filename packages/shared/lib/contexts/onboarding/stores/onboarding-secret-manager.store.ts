@@ -1,8 +1,6 @@
 import { onboardingProfile } from '@contexts/onboarding/stores'
 import { api } from '@core/api'
-import { SecretManager, SecretManagerType } from '@iota/sdk'
-import { USE_LEDGER_SIMULATOR } from 'shared/lib/core/ledger'
-import { getStorageDirectoryOfProfile, ProfileType } from 'shared/lib/core/profile'
+import { SecretManager } from '@iota/sdk'
 import { get, writable, Writable } from 'svelte/store'
 
 export const onboardingProfileSecretManager: Writable<SecretManager | null> = writable(null)
@@ -10,15 +8,17 @@ export const onboardingProfileSecretManager: Writable<SecretManager | null> = wr
 export async function buildOnboardingSecretManager(): Promise<void> {
     const profile = get(onboardingProfile)
     if (profile) {
-        const { id, type, strongholdPassword } = profile
+        const { strongholdPassword, secretManagerOptions } = profile
+        console.log(secretManagerOptions, strongholdPassword)
+        // Create secret manager with persisted options
+        const secretManager = await api.createSecretManager(secretManagerOptions!)
 
-        const storagePath = await getStorageDirectoryOfProfile(id)
-        const secretManagerOptions = getSecretManagerFromProfileType(type, {
-            storagePath,
-            strongholdPassword,
-        })
-
-        const secretManager = await api.createSecretManager(secretManagerOptions)
+        console.log(secretManager)
+        // Load the stronghold password specified in the onboarding if necessary
+        if(strongholdPassword){
+            await secretManager.setStrongholdPassword(strongholdPassword);
+            console.log("setted strongholdPassword")
+        }
 
         onboardingProfileSecretManager.set(secretManager)
     } else {
@@ -28,30 +28,4 @@ export async function buildOnboardingSecretManager(): Promise<void> {
 
 export function isOnboardingSecretManagerInitialized(): boolean {
     return !!get(onboardingProfileSecretManager)
-}
-
-export function getSecretManagerFromProfileType(
-    type?: ProfileType,
-    {
-        storagePath,
-        strongholdPassword,
-    }: {
-        storagePath?: string
-        strongholdPassword?: string
-    } = {}
-): SecretManagerType {
-    const strongholdSecretManager = {
-        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password: strongholdPassword },
-    }
-    const ledgerSecretManager = {
-        ledgerNano: USE_LEDGER_SIMULATOR,
-    }
-
-    switch (type) {
-        case ProfileType.Ledger:
-            return ledgerSecretManager
-        case ProfileType.Software:
-        default:
-            return strongholdSecretManager
-    }
 }

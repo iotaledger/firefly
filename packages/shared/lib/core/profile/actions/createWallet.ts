@@ -33,11 +33,13 @@ export async function createWallet(activeProfile = get(activeProfileStore)): Pro
     const storagePath = await getStorageDirectoryOfProfile(id)
 
     const walletOptions = getWalletOptions(activeProfile, storagePath)
-
+    console.log("CREATING WALLET", walletOptions);
     const wallet = await api.createWallet(id, {
         ...walletOptions,
         storagePath,
     })
+
+    console.log("CREATED WALLET");
 
     // TODO(2.0): Fix
     selectedWalletId.set(id)

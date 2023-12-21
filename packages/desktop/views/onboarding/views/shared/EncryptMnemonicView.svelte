@@ -44,7 +44,6 @@
         } else {
             try {
                 busy = true
-                await setStrongholdPassword(strongholdPassword)
                 updateOnboardingProfile({ strongholdPassword, hasStoredMnemonic: true })
                 await buildOnboardingSecretManager()
                 await verifyAndStoreMnemonic()

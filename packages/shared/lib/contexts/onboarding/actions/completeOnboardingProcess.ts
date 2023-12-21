@@ -27,34 +27,36 @@ export async function completeOnboardingProcess(): Promise<void> {
         createNewProfileFromOnboardingProfile()
     }
 
-    const onboardingType = get(onboardingProfile)?.onboardingType
+    const { onboardingType, strongholdPassword } = get(onboardingProfile)!
+
     const shouldRecoverWallets = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverWallets)
 
-    await createOnboardingWallet()
+    await initWallet(strongholdPassword)
     void login({ isFromOnboardingFlow: true, shouldRecoverWallets })
 
     onboardingProfile.set(undefined)
 }
 
-export async function createOnboardingWallet(name?: string, color?: string): Promise<IWalletState> {
+export async function initWallet(strongholdPassword?: string): Promise<IWalletState> {
     // 1. Get the wallet name
-    const walletName = name || `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
+    const walletName = `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
-    const wallet = await createWallet() // TODO(2.0) Not sure about this, I think this should be createWallet instead
+    const wallet = await createWallet() 
+
+    console.log(strongholdPassword)
+    if(strongholdPassword){
+        await wallet.setStrongholdPassword(strongholdPassword)
+    }
 
     // 3. Sync the wallet with the Node
-    // TODO(2.0): test & fix sync when we have iota2.0 nodes
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
     // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
+    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName)
 
-    // TODO(2.0) Fix
     addWalletToActiveWallets(walletState)
-    addWalletPersistedDataToOnboardingProfile(walletState.id, walletPersistedData)
-    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData) // TODO(2.0) Not sure about this,
-    // TODO(2.0) Fix
+    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)
     addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
 
     return walletState
