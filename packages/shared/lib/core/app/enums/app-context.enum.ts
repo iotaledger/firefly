@@ -3,4 +3,5 @@ export enum AppContext {
     Dashboard = 'dashboard',
     Settings = 'settings',
     Onboarding = 'wallet',
+    Account = 'account',
 }

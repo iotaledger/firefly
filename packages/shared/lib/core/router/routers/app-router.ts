@@ -10,6 +10,9 @@ import { loginRoute } from '../subrouters'
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
 
+// TODO: Replace this hardcoded variable when we have a proper way to check if the user has an implicit account
+const hasImplicitAccount = false
+
 export class AppRouter extends Router<AppRoute> {
     constructor() {
         super(AppRoute.Onboarding, appRoute)
@@ -35,9 +38,15 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Onboarding
-                } else {
+                } else if (hasImplicitAccount) {
                     nextRoute = AppRoute.Dashboard
+                } else {
+                    nextRoute = AppRoute.Account
                 }
+                break
+            }
+            case AppRoute.Account: {
+                nextRoute = AppRoute.Dashboard
                 break
             }
             case AppRoute.Dashboard: {
