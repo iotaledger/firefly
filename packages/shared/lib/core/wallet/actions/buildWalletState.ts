@@ -3,13 +3,14 @@ import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interf
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
 import { getAddressesWithOutputs } from './getAddressesWithOutputs'
+import { getDepositAddress } from '../utils'
 
 // TODO(2.0): Fix usages of buildAccountState
 export async function buildWalletState(
     wallet: IWallet,
     walletPersistedData: IPersistedWalletData
 ): Promise<IWalletState> {
-    const balances: Balance = {
+    let balances: Balance = {
         baseCoin: {
             total: BigInt(0),
             available: BigInt(0),
@@ -30,17 +31,16 @@ export async function buildWalletState(
         delegations: [],
     }
 
-    const depositAddress = ''
-    const votingPower = ''
+    let depositAddress = ''
+    let votingPower = ''
 
-    // TODO(2.0) Fix
-    // try {
-    //     balances = await wallet.getBalance()
-    //     depositAddress = await getDepositAddress(wallet)
-    //     votingPower = balances.baseCoin.votingPower
-    // } catch (err) {
-    //     console.error(err)
-    // }
+    try {
+        balances = await wallet.getBalance()
+        depositAddress = await getDepositAddress(wallet)
+        votingPower = balances.baseCoin.votingPower
+    } catch (err) {
+        console.error(err)
+    }
     const addressesWithOutputs = await getAddressesWithOutputs(wallet)
 
     return {

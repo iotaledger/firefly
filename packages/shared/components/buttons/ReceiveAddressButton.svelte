@@ -6,7 +6,7 @@
 
     let addressBoxElement: AddressBox
 
-    $: receiveAddress = $selectedWallet.depositAddress
+    $: receiveAddress = $selectedWallet?.depositAddress
     $: darkModeEnabled = $appSettings.darkMode
 
     function onReceiveClick(): void {
