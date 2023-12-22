@@ -5,7 +5,7 @@ import { onboardingProfile } from '../stores'
  * Builds a new onboarding profile and sets the Svelte store accordingly.
  */
 export function initialiseOnboardingProfile(
-    isDeveloperProfile: boolean
+    isDeveloperProfile = false
     /* destroyPreviousManager = false*/
 ): Promise<void> {
     // TODO(2.0) Profile manager is gone, we should maybe check onboarding SecretManager insteadd

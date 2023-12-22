@@ -1,6 +1,11 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { RestoreProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        RestoreProfileType,
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { ProfileType, clearProfileFromMemory, removeProfileFolder } from '@core/profile'
@@ -25,8 +30,7 @@
         isBusy = { ...isBusy, [restoreProfileType]: true }
         const type = restoreProfileType === RestoreProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         updateOnboardingProfile({ type, restoreProfileType })
-        // TODO(2.0) This is gone
-        await initialiseProfileManagerFromOnboardingProfile()
+        await initialiseOnboardingProfile()
         $restoreProfileRouter.next()
     }
 

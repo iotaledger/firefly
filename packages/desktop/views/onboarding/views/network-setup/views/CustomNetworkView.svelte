@@ -2,8 +2,8 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
     import {
-        cleanupOnboardingProfileManager,
-        initialiseProfileManagerFromOnboardingProfile,
+        cleanupOnboardingProfile,
+        initialiseOnboardingProfile,
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
@@ -41,7 +41,7 @@
                 validateClientOptions: false,
             })
             updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
-            await initialiseProfileManagerFromOnboardingProfile(true)
+            await initialiseOnboardingProfile(true)
 
             // The API request to check if a node is reachable requires an existing account manager.
             const nodeInfoResponse = await getNodeInfo(node.url)
@@ -55,13 +55,13 @@
             const customCoinType = networkId === NetworkId.Custom ? Number(coinType) : undefined
             const network = buildPersistedNetworkFromNodeInfoResponse(nodeInfoResponse, customCoinType)
             updateOnboardingProfile({ network })
-            await cleanupOnboardingProfileManager()
+            await cleanupOnboardingProfile()
             $networkSetupRouter.next()
         } catch (err) {
             console.error(err)
 
             updateOnboardingProfile({ clientOptions: undefined, network: undefined })
-            await cleanupOnboardingProfileManager()
+            await cleanupOnboardingProfile()
 
             if (err?.error?.includes('error sending request for url')) {
                 formError = localize('error.node.unabledToConnect')
