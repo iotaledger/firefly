@@ -3,12 +3,12 @@ import { get } from 'svelte/store'
 
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
-import { initialiseOnboardingProfileWithSeretManager } from './initialiseProfileManagerFromOnboardingProfile'
+import { initialiseOnboardingProfileWithSecretManager } from './initialiseOnboardingProfileWithSecretManager'
 import { resetOnboardingProfile } from './resetOnboardingProfile'
 
 export async function resetOnboardingProfileWithAlreadyStoredMnemonic(): Promise<void> {
     await resetOnboardingProfile()
-    await initialiseOnboardingProfileWithSeretManager()
+    await initialiseOnboardingProfileWithSecretManager()
     await setStrongholdPassword(get(onboardingProfile)?.strongholdPassword)
     updateOnboardingProfile({ hasStoredMnemonic: false })
 }
