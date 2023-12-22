@@ -17,6 +17,9 @@ const analyticsFeatures: IAnalyticsFeatures = {
     strongholdMigration: {
         enabled: true,
     },
+    accountRoute: {
+        enabled: true,
+    },
 }
 
 export default analyticsFeatures
