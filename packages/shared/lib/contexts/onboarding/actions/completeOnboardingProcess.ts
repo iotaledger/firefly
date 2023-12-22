@@ -29,7 +29,10 @@ export async function completeOnboardingProcess(): Promise<void> {
         createNewProfileFromOnboardingProfile()
     }
 
-    const profile = get(onboardingProfile)!;
+    const profile = get(onboardingProfile)
+    if (!profile) {
+        return
+    }
     const { onboardingType, strongholdPassword } = profile
 
     const shouldRecoverWallets = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
@@ -48,17 +51,17 @@ export async function initWallet(profile: IOnboardingProfile, strongholdPassword
     // 2. Create the wallet instance
     const wallet = await createWallet({
         address: profile.address,
-        profile: profile as IPersistedProfile
-    }) 
+        profile: profile as IPersistedProfile,
+    })
 
     // 3. Load the stronghold password if necessary
-    if(strongholdPassword){
+    if (strongholdPassword) {
         await wallet.setStrongholdPassword(strongholdPassword)
     }
 
     // 4. Sync the wallet with the Node
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
-    
+
     // 5. Create a wrapper over the wallet instance and the persisted data
     const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName)
 

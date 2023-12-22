@@ -12,25 +12,29 @@ export async function buildOnboardingSecretManager(): Promise<void> {
         const { strongholdPassword, secretManagerOptions, mnemonic } = profile
         const mnemonicStringified = mnemonic?.join(' ') ?? ''
 
-        // 1. Create SecretManager
-        const secretManager = await api.createSecretManager(secretManagerOptions!)
-        
-        // 2. Load the stronghold password specified in the onboarding if necessary
-        if(strongholdPassword){
-            await secretManager.setStrongholdPassword(strongholdPassword);
+        if (!strongholdPassword || !secretManagerOptions || !mnemonic) {
+            return
         }
-      
+
+        // 1. Create SecretManager
+        const secretManager = await api.createSecretManager(secretManagerOptions)
+
+        // 2. Load the stronghold password specified in the onboarding if necessary
+        if (strongholdPassword) {
+            await secretManager.setStrongholdPassword(strongholdPassword)
+        }
+
         // 3. Verify Mnemonic
-        await verifyMnemonic(mnemonicStringified);
+        await verifyMnemonic(mnemonicStringified)
 
         // 4. Store Mnemonic
         await secretManager.storeMnemonic(mnemonicStringified)
 
         // 5. Generate address
-        const address = (await secretManager.generateEd25519Addresses({}))[0];
+        const address = (await secretManager.generateEd25519Addresses({}))[0]
 
         updateOnboardingProfile({
-            address
+            address,
         })
         onboardingProfileSecretManager.set(secretManager)
     } else {
