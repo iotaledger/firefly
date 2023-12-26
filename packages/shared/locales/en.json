@@ -655,6 +655,24 @@
                 "title": "Vesting of tokens",
                 "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
             }
+        },
+        "implicit-account":{
+            "title": "Activate Account",
+            "steps" : {
+                "step1": {
+                    "title": "Step 1",
+                    "body": "One-time deposit"
+                },
+                "step2": {
+                    "title": "Step 2",
+                    "body": "Fund confirmation"
+                },
+                "step3": {
+                    "title": "Step 3",
+                    "body": "Account creation"
+                }
+            },
+            "action": "Start"
         }
     },
     "popups": {

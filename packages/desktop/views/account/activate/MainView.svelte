@@ -1,54 +1,69 @@
 <script lang="ts">
     import { Button, FontWeight, Text, TextType } from 'shared/components'
-    import Multistep from '../multistep.svelte'
+    import { MultiStep } from '../multi-step'
+    import { localize } from '@core/i18n'
 
-    let startProccess = false
+    interface IStep {
+        title: string
+        description: string
+        image: string
+    }
 
-    const steps = [
+    const MAIN_VIEW_STEPS: IStep[] = [
         {
-            title: 'Step 1',
-            description: 'One-time deposit',
+            title: localize('views.implicit-account.steps.step1.title'),
+            description: localize('views.implicit-account.steps.step1.body'),
             image: 'assets/illustrations/implicit-account/show-one-time-address.svg',
         },
         {
-            title: 'Step 2',
-            description: 'Fund confirmation',
+            title: localize('views.implicit-account.steps.step2.title'),
+            description: localize('views.implicit-account.steps.step2.body'),
             image: 'assets/illustrations/implicit-account/generate-mana.svg',
         },
         {
-            title: 'Step 3',
-            description: 'Account creation',
+            title: localize('views.implicit-account.steps.step3.title'),
+            description: localize('views.implicit-account.steps.step3.body'),
             image: 'assets/illustrations/implicit-account/sign-transaction.svg',
         },
     ]
+
+    let startProccess = false
 
     function startMultiStepProccess(): void {
         startProccess = true
     }
 </script>
 
-<div class="flex flex-col w-full h-full pt-16 px-28 pb-24 items-center justify-between">
-    <Text type={TextType.h2}>Activate Account</Text>
-    {#if !startProccess}
-        <steps-wrapper class="flex space-x-4">
-            {#each steps as step}
-                <step-content class="flex flex-col items-center space-y-8">
-                    <img src={step.image} alt={step.title} />
-                    <div class="flex flex-col text-center px-4 space-y-2">
-                        <Text
-                            type={TextType.h5}
-                            fontSize="15"
-                            color="blue-700"
-                            darkColor="blue-700"
-                            fontWeight={FontWeight.semibold}>{step.title}</Text
-                        >
-                        <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{step.description}</Text>
-                    </div>
-                </step-content>
-            {/each}
-        </steps-wrapper>
-        <Button onClick={startMultiStepProccess}>Start</Button>
-    {:else}
-        <Multistep />
-    {/if}
-</div>
+<section class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">
+    <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
+        <Text type={TextType.h2}>{localize('views.implicit-account.title')}</Text>
+        {#if !startProccess}
+            <steps-wrapper class="flex space-x-4">
+                {#each MAIN_VIEW_STEPS as step}
+                    <step-content class="flex flex-col items-center space-y-8">
+                        <img src={step.image} alt={step.title} />
+                        <div class="flex flex-col text-center px-4 space-y-2">
+                            <Text
+                                type={TextType.h5}
+                                fontSize="15"
+                                color="blue-700"
+                                darkColor="blue-700"
+                                fontWeight={FontWeight.semibold}>{step.title}</Text
+                            >
+                            <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{step.description}</Text>
+                        </div>
+                    </step-content>
+                {/each}
+            </steps-wrapper>
+            <Button onClick={startMultiStepProccess}>{localize('views.implicit-account.action')}</Button>
+        {:else}
+            <MultiStep />
+        {/if}
+    </box-content>
+</section>
+
+<style lang="scss">
+    box-content {
+        box-shadow: 0px 1px 4px 0px rgba(23, 27, 37, 0.04);
+    }
+</style>
