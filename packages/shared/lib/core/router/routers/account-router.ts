@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store'
-
 import { Router } from '../classes'
 import { AccountRoute } from '../enums'
 

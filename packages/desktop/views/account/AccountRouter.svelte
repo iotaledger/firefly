@@ -3,6 +3,7 @@
     import { AccountRoute, accountRoute } from '@core/router'
     import features from '@features/features'
     import { Transition } from 'shared/components'
+    import { MainView } from './activate'
 
     $: if (features.analytics.accountRoute.enabled && $accountRoute)
         Platform.trackEvent('account-route', { route: $accountRoute })
@@ -10,8 +11,6 @@
 
 {#if $accountRoute === AccountRoute.Activate}
     <Transition>
-        <div class="flex w-full h-full p-12">
-            <h1 class="text-white">ACCOUNT ROUTE</h1>
-        </div>
+        <MainView />
     </Transition>
 {/if}
