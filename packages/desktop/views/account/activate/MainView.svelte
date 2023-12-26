@@ -34,15 +34,15 @@
             {#each steps as step}
                 <step-content class="flex flex-col items-center space-y-8">
                     <img src={step.image} alt={step.title} />
-                    <div class="flex flex-col text-center px-4">
+                    <div class="flex flex-col text-center px-4 space-y-2">
                         <Text
-                            type={TextType.p}
+                            type={TextType.h5}
                             fontSize="15"
                             color="blue-700"
                             darkColor="blue-700"
                             fontWeight={FontWeight.semibold}>{step.title}</Text
                         >
-                        <Text type={TextType.p} fontSize="18" fontWeight={FontWeight.semibold}>{step.description}</Text>
+                        <Text type={TextType.h3} fontWeight={FontWeight.semibold}>{step.description}</Text>
                     </div>
                 </step-content>
             {/each}
