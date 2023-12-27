@@ -27,6 +27,7 @@
     <!-- Dots to show progress -->
     <div class="flex flex-row justify-center space-x-2.5">
         {#each IMPLICIT_ACCOUNT_STEPS as step, index}
+            <!-- TODO: Remove onClick from div, it's just to allow continue to next step -->
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
                 on:click={handleNext}
