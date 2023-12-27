@@ -25,21 +25,24 @@
                 alt={localize('views.implicit-account.steps.step1.title')}
             />
         </div>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold}>One-time deposit</Text>
+        <Text type={TextType.h3} fontWeight={FontWeight.semibold}
+            >{localize('views.implicit-account.steps.step1.view.title')}</Text
+        >
         <Text type={TextType.h5} fontSize="15" color="blue-700" darkColor="blue-700" fontWeight={FontWeight.semibold}
-            >3$ - 15$ recommended</Text
+            >{localize('views.implicit-account.steps.step1.view.subtitle')}</Text
         >
         <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-700" darkColor="gray-500"
-            >Send enough funds to using your one-time address so the account can be generated with low waiting times.
-            The funds are your to use after the account has been created.</Text
+            >{localize('views.implicit-account.steps.step1.view.body')}</Text
         >
     </div>
     {#if !isAddressShown}
         <div class="flex flex-row items-center space-x-24 bg-yellow-200 rounded-lg px-6 py-7 max-w-lg mb-5">
             <Text type={TextType.h4} fontWeight={FontWeight.medium} color="yellow-900" darkColor="yellow-900"
-                >Do not send funds to the address more than once</Text
+                >{localize('views.implicit-account.steps.step1.view.hiddenAddress.description')}</Text
             >
-            <Button onClick={showAddress} classes="shrink-0">Show Address</Button>
+            <Button onClick={showAddress} classes="shrink-0"
+                >{localize('views.implicit-account.steps.step1.view.hiddenAddress.action')}</Button
+            >
         </div>
     {:else}
         <div class="flex flex-col justify-center items-center space-y-3">
@@ -47,15 +50,19 @@
                 class="flex flex-row items-center space-x-20 bg-gray-100 dark:bg-gray-800 rounded-lg px-6 py-4 max-w-lg"
             >
                 <div class="flex flex-col space-y-1">
-                    <Text type={TextType.h5} fontWeight={FontWeight.normal} darkColor="gray-400">One-time Address</Text>
+                    <Text type={TextType.h5} fontWeight={FontWeight.normal} darkColor="gray-400"
+                        >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.title')}</Text
+                    >
                     <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} color="gray-50"
                         >{DUMMY_ADDRESS}</Text
                     >
                 </div>
-                <Button outline onClick={onCopyClick} classes="shrink-0">Copy</Button>
+                <Button outline onClick={onCopyClick} classes="shrink-0"
+                    >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.action')}</Button
+                >
             </div>
             <Text type={TextType.h5} fontWeight={FontWeight.normal} color="red-600" darkColor="red-600"
-                >Do not sent fund to this address more than once</Text
+                >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.tip')}</Text
             >
         </div>
     {/if}
