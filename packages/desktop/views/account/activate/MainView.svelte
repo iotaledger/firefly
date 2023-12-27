@@ -35,7 +35,7 @@
 </script>
 
 <section class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">
-    <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
+    <box-content class="flex flex-col w-full h-full pt-9 px-8 items-center justify-between rounded-2xl">
         <Text type={TextType.h2}>{localize('views.implicit-account.title')}</Text>
         {#if !startProccess}
             <steps-wrapper class="flex space-x-4">
@@ -55,7 +55,8 @@
                     </step-content>
                 {/each}
             </steps-wrapper>
-            <Button onClick={startMultiStepProccess}>{localize('views.implicit-account.action')}</Button>
+            <Button onClick={startMultiStepProccess} classes="mb-12">{localize('views.implicit-account.action')}</Button
+            >
         {:else}
             <MultiStep />
         {/if}
