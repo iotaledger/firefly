@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Historia adresów",
-            "disclaimer": "Lista adresów ze środkami lub adresów znanych przez ten profil",
             "indexAndType": "{internal, select, true {Adres wewnętrzny} other {Adres odbiorcy}} {index}",
-            "internal": "Transfer wewnętrzny"
+            "internal": "Transfer wewnętrzny",
+            "errorNoChronicle": "Serwer Chronicle nie jest skonfigurowany",
+            "errorFailedFetch": "Nie można pobrać historii adresu",
+            "errorFailedGenerate": "Nie można wygenerować nowego adresu"
         }
     },
     "charts": {

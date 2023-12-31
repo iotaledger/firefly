@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Adressverlauf",
-            "disclaimer": "Liste der Adressen mit Guthaben bzw. die diesem Profil bekannt sind",
             "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
-            "internal": "Intern"
+            "internal": "Intern",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
