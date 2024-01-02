@@ -37,13 +37,13 @@ export async function generateSingleNftActivity(
     const { subject, isInternal } = sendingInfo
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
-    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
+    const gasFee = Number(parsedLayer2Metadata?.gasFee ?? '0')
 
     const storageDepositData = await getStorageDepositFromOutput(account, output)
     const { storageDeposit } = storageDepositData
     let { giftedStorageDeposit } = storageDepositData
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
-    giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
+    giftedStorageDeposit = gasFee === 0 ? giftedStorageDeposit : 0
 
     let surplus: number | undefined = undefined
     try {

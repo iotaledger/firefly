@@ -71,7 +71,7 @@ export function rebuildActivity(
                 ethereumAddress: getAddressFromSubject(recipient),
                 targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
                 contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: (layer2Parameters?.gasBudget ?? 0).toString(),
+                gasFee: (layer2Parameters?.gasFee ?? 0).toString(),
             },
         }),
     }

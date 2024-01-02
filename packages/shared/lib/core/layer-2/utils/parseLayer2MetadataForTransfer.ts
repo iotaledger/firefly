@@ -10,7 +10,7 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     const senderContract = readStream.readUInt8('senderContract')
     const targetContract = readStream.readUInt32('targetContract')
     const contractFunction = readStream.readUInt32('contractFunction')
-    const gasBudget = parseGasBudget(readStream)
+    const gasFee = parseGasFee(readStream)
     const ethereumAddress = parseEvmAddressFromAgentId(readStream)
     const allowance = parseAssetAllowance(readStream)
 
@@ -18,7 +18,7 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
         senderContract: Converter.decimalToHex(senderContract),
         targetContract: TARGET_CONTRACTS[targetContract] ?? Converter.decimalToHex(targetContract),
         contractFunction: CONTRACT_FUNCTIONS[contractFunction] ?? Converter.decimalToHex(contractFunction),
-        gasBudget: gasBudget.toString(),
+        gasFee: gasFee.toString(),
         ethereumAddress,
         baseTokens: allowance?.baseTokens,
         nativeTokens: allowance?.nativeTokens,
@@ -26,8 +26,8 @@ export function parseLayer2MetadataForTransfer(metadata: Uint8Array): ILayer2Tra
     }
 }
 
-function parseGasBudget(readStream: ReadSpecialStream): bigint | number {
-    const [value, error] = readStream.readUInt64SpecialEncodingWithError('gasBudget')
+function parseGasFee(readStream: ReadSpecialStream): bigint | number {
+    const [value, error] = readStream.readUInt64SpecialEncodingWithError('gasFee')
     if (!error) {
         return value - BigInt(1)
     }

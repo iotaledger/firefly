@@ -24,11 +24,11 @@ function validate(data: Layer2Metadata): void {
         throw new Error('Invalid contractFunction')
     }
 
-    if (data.gasBudget) {
+    if (data.gasFee) {
         try {
-            parseInt(data.gasBudget, 10)
+            parseInt(data.gasFee, 10)
         } catch (error) {
-            throw new Error('Invalid gasBudget')
+            throw new Error('Invalid gasFee')
         }
     }
 

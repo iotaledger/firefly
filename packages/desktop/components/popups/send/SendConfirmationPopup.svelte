@@ -268,10 +268,10 @@
             onClick={onConfirmClick}
             disabled={isTransferring ||
                 isPreparingOutput ||
-                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasFee)}
             isBusy={isTransferring ||
                 isPreparingOutput ||
-                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
+                (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasFee)}
             busyMessage={isPreparingOutput ? 'Preparing' : ''}
         >
             {localize('actions.send')}

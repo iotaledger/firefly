@@ -1,4 +1,4 @@
-export * from './addGasBudget'
+export * from './addGasFee'
 export * from './evmAddressToAgentID'
 export * from './getAgentBalanceParameters'
 export * from './getDestinationNetworkFromAddress'

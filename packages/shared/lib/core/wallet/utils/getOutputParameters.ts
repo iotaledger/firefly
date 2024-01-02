@@ -126,9 +126,7 @@ async function buildOutputParametersForLayer2(
             // Now that we have the gasFeeCharged, update the amount & the tx details
             newTransactionDetails.update((state) => {
                 if (state?.layer2Parameters) {
-                    state.layer2Parameters.gasBudget = BigInteger(
-                        estimatedData.gasEstimatePayload.gasFeeCharged as number
-                    )
+                    state.layer2Parameters.gasFee = BigInteger(estimatedData.gasEstimatePayload.gasFeeCharged as number)
                 }
                 return state
             })
