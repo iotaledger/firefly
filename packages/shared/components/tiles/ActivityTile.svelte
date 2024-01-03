@@ -33,7 +33,9 @@
                 ? getTokenFromSelectedAccount(activity.assetId)
                 : undefined)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
-    $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
+    $: shouldShowAsyncFooter =
+        (activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed) ||
+        activity.inclusionState === InclusionState.Conflicting
 
     function onTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
