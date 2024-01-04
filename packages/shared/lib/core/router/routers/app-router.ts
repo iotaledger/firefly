@@ -6,12 +6,10 @@ import { Router } from '../classes'
 import { AppRoute, LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { loginRoute } from '../subrouters'
+import { selectedWallet } from '../../wallet'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
-
-// TODO: Replace this hardcoded variable when we have a proper way to check if the user has an implicit account
-const hasImplicitAccount = false
 
 export class AppRouter extends Router<AppRoute> {
     constructor() {
@@ -38,10 +36,14 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Onboarding
-                } else if (hasImplicitAccount) {
-                    nextRoute = AppRoute.Dashboard
                 } else {
-                    nextRoute = AppRoute.Account
+                    const _selectedWallet = get(selectedWallet)
+                    const hasImplicitAccount = _selectedWallet?.implicitAccountsOutput.length !== 0
+                    if (hasImplicitAccount) {
+                        nextRoute = AppRoute.Dashboard
+                    } else {
+                        nextRoute = AppRoute.Account
+                    }
                 }
                 break
             }

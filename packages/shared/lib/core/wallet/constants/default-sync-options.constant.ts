@@ -5,6 +5,11 @@ export const DEFAULT_SYNC_OPTIONS: SyncOptions = {
         basicOutputs: true,
         accountOutputs: true,
         nftOutputs: true,
+        foundryOutputs: true,
+    },
+    wallet: {
+        basicOutputs: true,
+        accountOutputs: true,
     },
     nft: {
         accountOutputs: false,
