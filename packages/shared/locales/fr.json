@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Historique de l'adresse",
-            "disclaimer": "Liste des adresses avec des fonds ou connues par ce profil",
             "indexAndType": "{internal, select, true {Adresse interne} other {Adresse de dépôt}} {index}",
-            "internal": "Interne"
+            "internal": "Interne",
+            "errorNoChronicle": "Chronicle non configuré",
+            "errorFailedFetch": "Impossible de récupérer l'historique des adresses",
+            "errorFailedGenerate": "Impossible de générer une nouvelle adresse"
         }
     },
     "charts": {
