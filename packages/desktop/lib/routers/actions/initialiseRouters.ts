@@ -1,6 +1,6 @@
 import {
-    AccountRouter,
-    accountRouter,
+    ImplicitAccountCreationRouter,
+    implicitAccountCreationRouter,
     appRouter,
     AppRouter,
     collectiblesRouter,
@@ -32,7 +32,7 @@ export function initialiseOnboardingRouters(): void {
 function initialiseBaseRouters(): void {
     appRouter.set(new AppRouter())
     dashboardRouter.set(new DashboardRouter())
-    accountRouter.set(new AccountRouter())
+    implicitAccountCreationRouter.set(new ImplicitAccountCreationRouter())
     settingsRouter.set(new SettingsRouter())
     collectiblesRouter.set(new CollectiblesRouter())
     governanceRouter.set(new GovernanceRouter())
