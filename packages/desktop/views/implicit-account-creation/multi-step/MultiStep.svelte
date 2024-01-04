@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { AccountState } from '@contexts/account'
+    import { ImplicitAccountCreationState } from '@contexts/implicit-account-creation'
 
-    const IMPLICIT_ACCOUNT_STEPS: AccountState[] = Object.values(AccountState)
+    const IMPLICIT_ACCOUNT_STEPS: ImplicitAccountCreationState[] = Object.values(ImplicitAccountCreationState)
 
-    let activeState: AccountState | null = null
+    let activeState: ImplicitAccountCreationState | null = null
     let onNext: () => Promise<boolean>
     let currentStep: number = 0
     let activeComponent
@@ -14,6 +14,7 @@
         activeComponent = component.default
     }
 
+    // TODO: Remove this once we have proper routing
     async function handleNext() {
         currentStep += 1
         await loadComponent()
