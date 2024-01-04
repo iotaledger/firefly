@@ -45,11 +45,12 @@ export async function generateSingleBasicActivity(
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const layer2Allowance = Number(parsedLayer2Metadata?.baseTokens ?? '0')
+    const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
     const gasFee = layer2Allowance > 0 ? amount - layer2Allowance : 0
 
     let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
-    giftedStorageDeposit = gasFee === 0 ? giftedStorageDeposit : 0
+    giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 
     const baseTokenAmount = amount - storageDeposit - gasFee
 

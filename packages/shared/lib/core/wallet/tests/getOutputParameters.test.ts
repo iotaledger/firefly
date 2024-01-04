@@ -1,7 +1,7 @@
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
 import { NetworkId } from '@core/network/enums'
 
-import { GAS_BUDGET } from '@core/layer-2/constants'
+import { GAS_FEE } from '@core/layer-2/constants'
 
 import { getOutputParameters } from '../utils'
 import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
@@ -78,7 +78,7 @@ jest.mock('../../profile/actions/active-profile/getCoinType', () => ({
 }))
 
 jest.mock('../../layer-2/utils/getEstimatedGasForTransferFromTransactionDetails', () => ({
-    getEstimatedGasForTransferFromTransactionDetails: jest.fn(() => GAS_BUDGET.toJSNumber()),
+    getEstimatedGasForTransferFromTransactionDetails: jest.fn(() => GAS_FEE.toJSNumber()),
 }))
 
 describe('File: getOutputParameters.ts', () => {
@@ -195,7 +195,7 @@ describe('File: getOutputParameters.ts', () => {
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
-            amount: (Number(GAS_BUDGET) + Number(amount)).toString(),
+            amount: (Number(GAS_FEE) + Number(amount)).toString(),
             features: {
                 metadata:
                     '0x00025e4b3ca1e3f423a0c21e0101614003676642585b5148b14639782bf0c83960ff465b9aa7c161d5aad08910e310902000010000070c000c30680e00000090000f0ea000060009000d300000000000808094ebdc03',
@@ -218,7 +218,7 @@ describe('File: getOutputParameters.ts', () => {
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
-            amount: GAS_BUDGET.toString(),
+            amount: GAS_FEE.toString(),
             assets: {
                 nativeTokens: [
                     {
@@ -249,7 +249,7 @@ describe('File: getOutputParameters.ts', () => {
 
         const expectedOutput = {
             recipientAddress: layer2Parameters.networkAddress,
-            amount: GAS_BUDGET.toString(),
+            amount: GAS_FEE.toString(),
             assets: {
                 nftId,
             },
