@@ -5,6 +5,7 @@
 
     let isAddressShown: boolean = false
 
+    // TODO: Replace with proper address
     const DUMMY_ADDRESS = 'iota1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98'
 
     function showAddress() {
@@ -12,7 +13,6 @@
     }
 
     function onCopyClick(): void {
-        // TODO: Replace with proper address
         setClipboard(DUMMY_ADDRESS)
     }
 </script>
