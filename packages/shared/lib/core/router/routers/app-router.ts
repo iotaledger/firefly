@@ -41,11 +41,11 @@ export class AppRouter extends Router<AppRoute> {
                 } else if (hasImplicitAccount) {
                     nextRoute = AppRoute.Dashboard
                 } else {
-                    nextRoute = AppRoute.Account
+                    nextRoute = AppRoute.ImplicitAccountCreation
                 }
                 break
             }
-            case AppRoute.Account: {
+            case AppRoute.ImplicitAccountCreation: {
                 nextRoute = AppRoute.Dashboard
                 break
             }
