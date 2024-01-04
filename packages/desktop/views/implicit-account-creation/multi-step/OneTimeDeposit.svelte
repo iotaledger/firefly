@@ -5,6 +5,7 @@
 
     let isAddressShown: boolean = false
 
+    // TODO: Replace with proper address
     const DUMMY_ADDRESS = 'iota1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98'
 
     function showAddress() {
@@ -12,7 +13,6 @@
     }
 
     function onCopyClick(): void {
-        // TODO: Replace with proper address
         setClipboard(DUMMY_ADDRESS)
     }
 </script>
@@ -21,27 +21,27 @@
     <div class="flex flex-col text-center px-4 space-y-4 max-w-md">
         <div class="flex items-center justify-center">
             <img
-                src="assets/illustrations/implicit-account/show-one-time-address.svg"
-                alt={localize('views.implicit-account.steps.step1.title')}
+                src="assets/illustrations/implicit-account-creation/step1.svg"
+                alt={localize('views.implicit-account-creation.steps.step1.title')}
             />
         </div>
         <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-            >{localize('views.implicit-account.steps.step1.view.title')}</Text
+            >{localize('views.implicit-account-creation.steps.step1.view.title')}</Text
         >
         <Text type={TextType.h5} fontSize="15" color="blue-700" darkColor="blue-700" fontWeight={FontWeight.semibold}
-            >{localize('views.implicit-account.steps.step1.view.subtitle')}</Text
+            >{localize('views.implicit-account-creation.steps.step1.view.subtitle')}</Text
         >
         <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-700" darkColor="gray-500"
-            >{localize('views.implicit-account.steps.step1.view.body')}</Text
+            >{localize('views.implicit-account-creation.steps.step1.view.body')}</Text
         >
     </div>
     {#if !isAddressShown}
         <div class="flex flex-row items-center space-x-24 bg-yellow-200 rounded-lg px-6 py-7 max-w-lg mb-5">
             <Text type={TextType.h4} fontWeight={FontWeight.medium} color="yellow-900" darkColor="yellow-900"
-                >{localize('views.implicit-account.steps.step1.view.hiddenAddress.description')}</Text
+                >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.description')}</Text
             >
             <Button onClick={showAddress} classes="shrink-0"
-                >{localize('views.implicit-account.steps.step1.view.hiddenAddress.action')}</Button
+                >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.action')}</Button
             >
         </div>
     {:else}
@@ -51,18 +51,18 @@
             >
                 <div class="flex flex-col space-y-1">
                     <Text type={TextType.h5} fontWeight={FontWeight.normal} darkColor="gray-400"
-                        >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.title')}</Text
+                        >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.title')}</Text
                     >
                     <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} color="gray-50"
                         >{DUMMY_ADDRESS}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
-                    >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.action')}</Button
+                    >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.action')}</Button
                 >
             </div>
             <Text type={TextType.h5} fontWeight={FontWeight.normal} color="red-600" darkColor="red-600"
-                >{localize('views.implicit-account.steps.step1.view.oneTimeAddress.tip')}</Text
+                >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.tip')}</Text
             >
         </div>
     {/if}

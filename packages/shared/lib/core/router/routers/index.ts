@@ -1,4 +1,4 @@
-export * from './account-router'
+export * from './implicit-account-creation-router'
 export * from './app-router'
 export * from './collectibles-router'
 export * from './dashboard-router'

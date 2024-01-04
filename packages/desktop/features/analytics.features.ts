@@ -17,7 +17,7 @@ const analyticsFeatures: IAnalyticsFeatures = {
     strongholdMigration: {
         enabled: true,
     },
-    accountRoute: {
+    implicitAccountCreationRoute: {
         enabled: true,
     },
 }
