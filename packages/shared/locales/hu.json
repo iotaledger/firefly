@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Címek előzményei",
-            "disclaimer": "A pénzeszközökkel rendelkező vagy a jelen profil által ismert címek listája",
             "indexAndType": "{internal, select, true {Tárcán belüli cím} other {Letéti cím}} {index}",
-            "internal": "Tárcán belüli"
+            "internal": "Tárcán belüli",
+            "errorNoChronicle": "Chronicle nincs beállítva",
+            "errorFailedFetch": "Címelőzmények letöltése sikertelen",
+            "errorFailedGenerate": "Új cím létrehozása sikertelen"
         }
     },
     "charts": {

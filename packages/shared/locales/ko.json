@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "주소 이력",
-            "disclaimer": "자금이 있거나 이 프로필로 알려진 주소 목록",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "내부"
+            "internal": "내부",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
