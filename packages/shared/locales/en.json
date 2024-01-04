@@ -656,7 +656,7 @@
                 "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
             }
         },
-        "implicit-account":{
+        "implicit-account-creation":{
             "title": "Activate Account",
             "steps" : {
                 "step1": {
