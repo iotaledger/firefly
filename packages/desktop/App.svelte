@@ -41,8 +41,7 @@
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import features from '@features/features'
-    import { OnboardingRouterView } from '@views/onboarding'
-    import AccountRouter from '@views/account/AccountRouter.svelte'
+    import { OnboardingRouterView, ImplicitAccountCreationRouterView } from '@views'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
@@ -195,8 +194,8 @@
                 <LoginRouter />
             {:else if $appRoute === AppRoute.Onboarding}
                 <OnboardingRouterView />
-            {:else if $appRoute === AppRoute.Account}
-                <AccountRouter />
+            {:else if $appRoute === AppRoute.ImplicitAccountCreation}
+                <ImplicitAccountCreationRouterView />
             {/if}
             {#if settings}
                 <Settings handleClose={onCloseSettingsClick} />
