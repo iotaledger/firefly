@@ -2,18 +2,19 @@
     import { Button, FontWeight, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
+    import { selectedWallet } from '@core/wallet'
 
     let isAddressShown: boolean = false
+    let depositAddress: string = ''
 
-    // TODO: Replace with proper address
-    const DUMMY_ADDRESS = 'iota1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98'
+    $: depositAddress = $selectedWallet?.depositAddress
 
     function showAddress() {
         isAddressShown = true
     }
 
     function onCopyClick(): void {
-        setClipboard(DUMMY_ADDRESS)
+        setClipboard(depositAddress)
     }
 </script>
 
@@ -54,7 +55,7 @@
                         >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.title')}</Text
                     >
                     <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} color="gray-50"
-                        >{DUMMY_ADDRESS}</Text
+                        >{depositAddress}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
