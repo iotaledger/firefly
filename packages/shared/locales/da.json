@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Adressehistorik",
-            "disclaimer": "Liste over adresser med midler eller kendt af denne profil",
             "indexAndType": "{internal, select, true {Intern adresse} other {Indbetalingsadresse}} {index}",
-            "internal": "Intern"
+            "internal": "Intern",
+            "errorNoChronicle": "Historik ikke opsat",
+            "errorFailedFetch": "Kunne ikke hente adressehistorik",
+            "errorFailedGenerate": "Kunne ikke generere en ny adresse"
         }
     },
     "charts": {

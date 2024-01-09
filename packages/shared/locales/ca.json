@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Historial de l'adreça",
-            "disclaimer": "Llista d'adreces amb fons o reconegudes per aquest perfil",
             "indexAndType": "{internal, select, true {Adreça interna} other {Adreça de dipòsit}}{index}",
-            "internal": "Interna"
+            "internal": "Interna",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
