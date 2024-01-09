@@ -10,12 +10,8 @@
     $: if (features.analytics.implicitAccountCreationRoute.enabled && $implicitAccountCreationRoute)
         Platform.trackEvent('account-route', { route: $implicitAccountCreationRoute })
 
-    onMount(() => {
-        subscribeToWalletApiEventsForImplicitAccountCreation()
-    })
-    onDestroy(() => {
-        unsubscribeFromWalletApiEvents()
-    })
+    onMount(() => subscribeToWalletApiEventsForImplicitAccountCreation())
+    onDestroy(() => unsubscribeFromWalletApiEvents())
 </script>
 
 {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Activate}

@@ -1,3 +1,5 @@
+import { get } from 'svelte/store'
+import { activeProfile } from '../../profile'
 import { localize } from '@core/i18n'
 
 import { Event, WalletEventType } from '@iota/sdk/out/types'
@@ -13,8 +15,9 @@ export function validateWalletApiEvent(
     if (error) {
         throw new WalletApiEventError(error)
     } else {
-        /* eslint-disable-next-line prefer-const */
-        const { walletId, event } = rawEvent
+        const { accountIndex, event } = rawEvent
+        const profile = get(activeProfile)
+        const walletId = Object.keys(profile.walletPersistedData)[accountIndex]
 
         if (Number.isNaN(walletId)) {
             throw new WalletApiEventValidationError(
@@ -30,7 +33,7 @@ export function validateWalletApiEvent(
         }
 
         return {
-            accountIndex,
+            walletId,
             payload,
         }
     }
