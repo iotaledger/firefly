@@ -10,10 +10,27 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             senderContract: '0x0',
             targetContract: 'Accounts',
             contractFunction: 'transferAllowanceTo',
-            gasBudget: '10001',
-            ethereumAddress:
-                '0x42f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f',
+            gasBudget: '10000',
+            ethereumAddress: '0xb82a77d6f89dae4611b81eac279fbf96d322001f',
             baseTokens: '900000000',
+            nativeTokens: [],
+            nfts: [],
+        }
+        const parsedMetadata = parseLayer2MetadataForTransfer(metadataByteArray)
+        expect(parsedMetadata).toEqual(expected)
+    })
+
+    it('should correctly parse metadata with long base token', () => {
+        const metadata =
+            '0x00025e4b3ca1e3f423914e010161350342f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f80ff9f94a58d1d'
+        const metadataByteArray = Converter.hexToBytes(metadata)
+        const expected = {
+            senderContract: '0x0',
+            targetContract: 'Accounts',
+            contractFunction: 'transferAllowanceTo',
+            gasBudget: '10000',
+            ethereumAddress: '0xb82a77d6f89dae4611b81eac279fbf96d322001f',
+            baseTokens: '999999999999',
             nativeTokens: [],
             nfts: [],
         }
@@ -29,9 +46,8 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             senderContract: '0x0',
             targetContract: 'Accounts',
             contractFunction: 'transferAllowanceTo',
-            gasBudget: '10001',
-            ethereumAddress:
-                '0x42f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f',
+            gasBudget: '10000',
+            ethereumAddress: '0xb82a77d6f89dae4611b81eac279fbf96d322001f',
             baseTokens: '0',
             nativeTokens: [
                 {
@@ -53,9 +69,8 @@ describe('Function: parseLayer2MetadataForTransfer.ts', () => {
             senderContract: '0x0',
             targetContract: 'Accounts',
             contractFunction: 'transferAllowanceTo',
-            gasBudget: '26345',
-            ethereumAddress:
-                '0x42f7da9bdb55b3ec87e5ac1a1e6d88e16768663fde5eca3429eb6f579cc538acb82a77d6f89dae4611b81eac279fbf96d322001f',
+            gasBudget: '26344',
+            ethereumAddress: '0xb82a77d6f89dae4611b81eac279fbf96d322001f',
             baseTokens: '0',
             nativeTokens: [],
             nfts: ['0xbf5b7cd4e8ac582e246c25b6a89b4ab4ef0646d3291aa03d9a5313154b714a06'],

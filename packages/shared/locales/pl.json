@@ -812,12 +812,6 @@
             "errorBody2": "Obecnie posiadasz {balance} na tym portfelu. Przenieś te środki na inny portfel i spróbuj ponownie.",
             "errorBody3": "Nie możesz ukryć tego portfela. Co najmniej jeden portfel musi pozostać aktywny."
         },
-        "addressHistory": {
-            "title": "Historia adresów dla {name}",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Adres wewnętrzny",
-            "external": "Adres odbiorcy"
-        },
         "excludeNode": {
             "title": "Wyklucz serwer",
             "body": "Czy na pewno chcesz wykluczyć {url} z dostępnej puli serwerów?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Wymagane uwierzytelnienie",
             "body": "Ten serwer wymaga dodatkowego uwierzytelnienia. Proszę wypełnić odpowiednie informacje."
+        },
+        "addressHistory": {
+            "title": "Historia adresów",
+            "indexAndType": "{internal, select, true {Adres wewnętrzny} other {Adres odbiorcy}} {index}",
+            "internal": "Transfer wewnętrzny",
+            "errorNoChronicle": "Serwer Chronicle nie jest skonfigurowany",
+            "errorFailedFetch": "Nie można pobrać historii adresu",
+            "errorFailedGenerate": "Nie można wygenerować nowego adresu"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Zapisz",
         "importSeed": "Importuj istniejący klucz seed",
         "restoreWallet": {
-            "iota": "Migruj lub przywróć portfel",
+            "iota": "Przywróć profil IOTA",
             "iotaAlphanet": "Przywróć profil IOTA Alphanet",
             "shimmer": "Przywróć profil Shimmer",
             "testnet": "Przywróć profil Testnet",
             "custom": "Przywróć profil niestandardowej sieci"
         },
         "restoreWalletDescription": {
-            "iota": "Migracja do sieci Chrysalis lub przywrócenie istniejącego portfela",
+            "iota": "Przywróć istniejący profil IOTA",
             "iotaAlphanet": "Przywróć istniejący profil IOTA Alphanet",
             "shimmer": "Przywróć istniejący profil Shimmer",
             "testnet": "Przywróć istniejący profil Testnet",
@@ -1338,8 +1340,9 @@
         "visitFaq": "Odwiedź FAQ",
         "viewDownloads": "Aktualizacja ręczna",
         "viewStatus": "Pokaż status",
+        "viewAddressHistory": "Pokaż historię adresów",
         "viewBalanceBreakdown": "Zestawienie środków",
-        "verifyDepositAddress": "Zweryfikuj adres depozytu",
+        "verifyDepositAddress": "Zweryfikuj adres odbiorcy",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
         "hideNetworkStatistics": "Ukryj statystyki sieci",
@@ -1597,7 +1600,7 @@
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
         "storageDepositPerNft": "Depozyt magazynowy na NFT",
         "totalStorageDeposit": "Całkowity depozyt magazynowy",
-        "expirationTime": "Czas wygaśnięcia",
+        "expirationTime": "Termin ważności",
         "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
@@ -1667,7 +1670,7 @@
         "internalTransaction": "Transakcja wewnętrzna",
         "coinType": "Typ tokena",
         "custom": "Niestandardowe",
-        "verifyLedgerDepositAddress": "Sprawdź czy adres depozytu jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
+        "verifyLedgerDepositAddress": "Sprawdź czy adres odbiorcy jest zgodny z adresem wyświetlanym na urządzeniu Ledger"
     },
     "filters": {
         "title": "Filtry",
@@ -1952,7 +1955,7 @@
             "leavingDust": "Nie możesz pozostawić na swoim adresie mniej niż ({minRequiredStorageDeposit}). Jest to minimalny wymagany depozyt magazynowy.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
-            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy.",
             "noInputs": "Nie znaleziono danych wejściowych.",
             "notEnoughBalance": "Brak wystarczających środków.",
             "missingTransactionId": "Brak ID transakcji",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Nie można użyć zarezerwowanego słowa kluczowego tagu"
         },
         "layer2": {
-            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1."
+            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1.",
+            "estimatedGas": "Nie udało się oszacować opłaty gas."
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -2104,7 +2108,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Wybrana data wygaśnięcia jest nieprawidłowa."
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy."
         },
         "node": {
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
@@ -2362,13 +2366,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Brak czasu wygaśnięcia",
+            "none": "Brak terminu ważności",
             "1hour": "Za godzinę",
             "1day": "Za 1 dzień",
             "1week": "Za tydzień",
             "customDate": {
                 "title": "Niestandardowa data",
-                "subtitle": "Ustaw własny czas wygaśnięcia"
+                "subtitle": "Ustaw własny termin ważności"
             }
         }
     }

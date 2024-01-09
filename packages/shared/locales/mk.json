@@ -812,12 +812,6 @@
             "errorBody2": "Моментално имате преостанати {balance} на овој паричник. Ве молиме преместете ги овие средства во друг паричник и пробајте повторно.",
             "errorBody3": "Не можете да го скриете овој паричник, морате да имате барем еден."
         },
-        "addressHistory": {
-            "title": "Историја на адресата на {name}",
-            "currentBalance": "Balance: {balance}",
-            "internal": "Internal Address",
-            "external": "Deposit Address"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Зачувај",
         "importSeed": "Импортирање на постоечки seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Посети ЧПП",
         "viewDownloads": "View downloads",
         "viewStatus": "Погледни го статусот",
+        "viewAddressHistory": "Погледни ја историјата на адресата",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Прикажи скриени паричници",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Ве молиме внесете валиден URL.",

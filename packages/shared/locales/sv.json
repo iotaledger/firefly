@@ -812,12 +812,6 @@
             "errorBody2": "Du har för närvarande {balance} kvar i denna plånbok. Vänligen flytta dessa tillgångar till en annan plånbok och försök igen.",
             "errorBody3": "Du kan inte dölja denna plånbok, du måste ha minst en."
         },
-        "addressHistory": {
-            "title": "{name} adresshistorik",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adress",
-            "external": "Insättningsadress"
-        },
         "excludeNode": {
             "title": "Exkludera nod",
             "body": "Är du säker på att du vill exkludera {url} från den tillgängliga nodpoolen?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Autentisering krävs",
             "body": "Den här noden kräver ytterligare autentisering. Vänligen fyll i lämplig information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Spara",
         "importSeed": "Importera en befintlig seed",
         "restoreWallet": {
-            "iota": "Migrera eller återställ en plånbok",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Återställ Shimmer-profil",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrera till Chrysalis eller återställ en befintlig plånbok",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Återställ en befintlig Shimmer-profil",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Besök FAQ",
         "viewDownloads": "View downloads",
         "viewStatus": "Visa status",
+        "viewAddressHistory": "Visa adresshistorik",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Visa dolda plånböcker",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Ange en giltig URL.",
