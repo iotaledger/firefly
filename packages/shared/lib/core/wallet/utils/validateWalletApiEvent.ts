@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { activeProfile } from '../../profile'
+import { activeProfile } from '@core/profile'
 import { localize } from '@core/i18n'
 
 import { Event, WalletEventType } from '@iota/sdk/out/types'

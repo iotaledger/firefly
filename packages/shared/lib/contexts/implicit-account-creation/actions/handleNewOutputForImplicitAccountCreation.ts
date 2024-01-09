@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
-import { Event, NewOutputWalletEvent, WalletEventType } from '@iota/sdk'
-import { activeWallets } from 'shared/lib/core/profile'
-import { loadWallet, validateWalletApiEvent } from 'shared/lib/core/wallet'
+import { Event, NewOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { activeWallets } from '@core/profile'
+import { loadWallet, validateWalletApiEvent } from '@core/wallet'
 
 export function handleNewOutputForImplicitAccountCreation(error: Error, rawEvent: Event): void {
     const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
