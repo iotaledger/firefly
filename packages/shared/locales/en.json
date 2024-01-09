@@ -440,8 +440,7 @@
             "loginSteps": {
                 "buildProfileManager": "Initialising profile manager",
                 "updateNodeInfo": "Checking node health",
-                "recoverAccounts": "Generating accounts",
-                "loadAccounts": "Syncing accounts",
+                "buildWallets": "Building wallets",
                 "loadAssets": "Loading native assets" ,
                 "loadActivities": "Building activity history",
                 "setStrongholdStatus": "Securing stronghold",
@@ -2008,7 +2007,7 @@
             "phraseUnrecognizedWord": "Unrecognized word \"{word}\" in your recovery phrase",
             "phraseCaseWord": "The word \"{word}\" should be lower case",
             "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToRestoreForWallet": "Unable to restore Stronghold backup for wallet"
         },
         "ledger": {
             "appNotOpen": "You must open the {network} app on your Ledger device.",

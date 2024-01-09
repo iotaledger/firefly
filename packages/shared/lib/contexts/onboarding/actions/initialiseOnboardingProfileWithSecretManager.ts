@@ -1,11 +1,8 @@
 import { get } from 'svelte/store'
-
 import { onboardingProfileSecretManager } from '../stores'
-
 import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile, removeProfileFolder } from '@core/profile'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
-// TODO(2.0) Fix this, profile manager is gone
 export async function initialiseOnboardingProfileWithSecretManager(
     checkForExistingSecretManager?: boolean
 ): Promise<void> {
@@ -28,5 +25,5 @@ export async function initialiseOnboardingProfileWithSecretManager(
 
     const secretManagerOptions = getSecretManagerFromProfileType(activeOnboardingProfile.type, storagePath)
 
-    updateOnboardingProfile({ secretManagerOptions, hasInitialisedProfileManager: true })
+    updateOnboardingProfile({ secretManagerOptions })
 }

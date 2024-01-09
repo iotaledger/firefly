@@ -40,11 +40,11 @@
 
     onMount(async () => {
         // Clean up if user has navigated back to this view
-        if ($onboardingProfile.hasInitialisedProfileManager) {
+        if ($onboardingProfile.secretManagerOptions) {
             await clearProfileFromMemory()
             await removeProfileFolder($onboardingProfile.id)
         }
-        updateOnboardingProfile({ type: undefined, restoreProfileType: undefined, hasInitialisedProfileManager: false })
+        updateOnboardingProfile({ type: undefined, restoreProfileType: undefined, secretManagerOptions: undefined })
     })
 </script>
 
