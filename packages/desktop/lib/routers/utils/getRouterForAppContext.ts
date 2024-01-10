@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 
 import { AppContext } from '@core/app/enums'
 import { IRouter } from '@core/router/interfaces'
-import { implicitAccountCreationRouter, dashboardRouter, settingsRouter } from '@core/router/routers'
+import { dashboardRouter, settingsRouter } from '@core/router/routers'
 import { loginRouter } from '@core/router/subrouters'
 import { onboardingRouter } from '@views/onboarding'
 
@@ -16,8 +16,6 @@ export function getRouterForAppContext(context: AppContext): IRouter {
             return get(onboardingRouter)
         case AppContext.Settings:
             return get(settingsRouter)
-        case AppContext.ImplicitAccountCreation:
-            return get(implicitAccountCreationRouter)
         default:
             return undefined
     }
