@@ -5,7 +5,7 @@ import { WalletOptions } from '@iota/sdk'
 import { selectedWalletId } from '../../wallet'
 
 export function getWalletOptions(profile: IPersistedProfile, storagePath: string, address: string): WalletOptions {
-    return  {
+    return {
         address,
         clientOptions: profile.clientOptions,
         storagePath,
@@ -27,7 +27,7 @@ export function getWalletOptions(profile: IPersistedProfile, storagePath: string
 */
 
 interface CreateWalletOptions {
-    profile: IPersistedProfile, 
+    profile: IPersistedProfile
     address: string
 }
 
