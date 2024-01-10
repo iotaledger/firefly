@@ -1,7 +1,5 @@
 import { get, writable } from 'svelte/store'
-
 import { profiles } from '@core/profile'
-
 import { Router } from '../classes'
 import { AppRoute, LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
@@ -9,9 +7,6 @@ import { loginRoute } from '../subrouters'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
-
-// TODO: Replace this hardcoded variable when we have a proper way to check if the user has an implicit account
-const hasImplicitAccount = false
 
 export class AppRouter extends Router<AppRoute> {
     constructor() {
@@ -38,15 +33,9 @@ export class AppRouter extends Router<AppRoute> {
             case AppRoute.Login: {
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Onboarding
-                } else if (hasImplicitAccount) {
-                    nextRoute = AppRoute.Dashboard
                 } else {
-                    nextRoute = AppRoute.ImplicitAccountCreation
+                    nextRoute = AppRoute.Dashboard
                 }
-                break
-            }
-            case AppRoute.ImplicitAccountCreation: {
-                nextRoute = AppRoute.Dashboard
                 break
             }
             case AppRoute.Dashboard: {
