@@ -2,5 +2,4 @@ export enum AppRoute {
     Dashboard = 'dashboard',
     Login = 'login',
     Onboarding = 'onboarding',
-    ImplicitAccountCreation = 'implicitAccountCreation',
 }
