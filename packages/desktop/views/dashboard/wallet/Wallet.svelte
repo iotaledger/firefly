@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { Wallet } from './subviews/'
+    import { WalletMainView } from './views'
 
     const hasImplicitAccount: boolean = false
 </script>
 
 {#if hasImplicitAccount}
-    <Wallet />
+    <WalletMainView />
 {:else}
     <div class="flex w-full h-full p-12">
         <h1>IMPLICIT ACCOUNT</h1>
