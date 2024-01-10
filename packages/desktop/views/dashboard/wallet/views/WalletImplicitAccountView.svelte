@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Button, FontWeight, Text, TextType } from 'shared/components'
-    import { MultiStep } from '../../multi-step'
+    import { MultiStep } from './multi-step'
     import { localize } from '@core/i18n'
 
     interface IStep {
