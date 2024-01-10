@@ -1,10 +1,10 @@
 <script lang="ts">
     import { WalletImplicitAccountView, WalletMainView } from './views'
 
-    const hasImplicitAccount: boolean = false
+    const hasAccount: boolean = false
 </script>
 
-{#if hasImplicitAccount}
+{#if hasAccount}
     <WalletMainView />
 {:else}
     <WalletImplicitAccountView />
