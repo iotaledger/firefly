@@ -8,11 +8,11 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
 
-    const { hasLoadedAccounts } = $activeProfile
+    const { hasLoadedWallets } = $activeProfile
 
     let isMaximized = false
 
-    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
+    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedWallets && $popupState.id !== 'busy'
     $: isWindows = $platform === PlatformOption.Windows
 
     async function onResize(): Promise<void> {

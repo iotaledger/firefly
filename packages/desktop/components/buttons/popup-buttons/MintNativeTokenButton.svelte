@@ -8,7 +8,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { TextHintVariant } from 'shared/components/enums'
 
-    // TODO(2.0) Should this be checking if it has accounts?
+    // TODO(2.0) This should check if it has account outputs now.
     $: hasAccounts = $selectedWallet.balances?.accounts.length > 0
 
     function onMintNativeTokenClick(): void {
