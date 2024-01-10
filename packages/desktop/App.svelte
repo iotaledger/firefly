@@ -29,14 +29,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { NotificationManager, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
-    import {
-        Dashboard,
-        LoginRouter,
-        Settings,
-        Splash,
-        OnboardingRouterView,
-        ImplicitAccountCreationRouterView,
-    } from '@views'
+    import { Dashboard, LoginRouter, Settings, Splash, OnboardingRouterView } from '@views'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -200,8 +193,6 @@
                 <LoginRouter />
             {:else if $appRoute === AppRoute.Onboarding}
                 <OnboardingRouterView />
-            {:else if $appRoute === AppRoute.ImplicitAccountCreation}
-                <ImplicitAccountCreationRouterView />
             {/if}
             {#if settings}
                 <Settings handleClose={onCloseSettingsClick} />
