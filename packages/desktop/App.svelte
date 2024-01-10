@@ -29,7 +29,7 @@
     import { getLocalisedMenuItems } from './lib/helpers'
     import { NotificationManager, Transition } from '@ui'
     import { TitleBar, Popup } from '@components'
-    import { Dashboard, LoginRouter, Settings, Splash } from '@views'
+    import { Dashboard, LoginRouter, Settings, Splash, OnboardingRouterView } from '@views'
     import {
         getAppRouter,
         getRouterForAppContext,
@@ -41,7 +41,6 @@
     } from '@desktop/routers'
     import { downloadNextNftInQueue, nftDownloadQueue } from '@core/nfts'
     import features from '@features/features'
-    import { OnboardingRouterView } from '@views/onboarding'
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
