@@ -1,7 +1,7 @@
 <script lang="ts">
     import { WalletMainView } from './views'
 
-    const hasImplicitAccount: boolean = false
+    const hasAccount: boolean = false
 </script>
 
 {#if hasImplicitAccount}
