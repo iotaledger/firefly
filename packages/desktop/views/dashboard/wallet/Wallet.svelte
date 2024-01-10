@@ -4,7 +4,7 @@
     const hasAccount: boolean = false
 </script>
 
-{#if hasImplicitAccount}
+{#if hasAccount}
     <WalletMainView />
 {:else}
     <div class="flex w-full h-full p-12">
