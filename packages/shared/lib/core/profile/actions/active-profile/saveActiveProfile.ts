@@ -16,9 +16,10 @@ export function saveActiveProfile(): void {
             isDeveloperProfile: _activeProfile.isDeveloperProfile,
             clientOptions: _activeProfile.clientOptions,
             forceAssetRefresh: _activeProfile.forceAssetRefresh,
+            secretManagerOptions: _activeProfile.secretManagerOptions, // TODO(2.0) This should be persisted, right?
             ...(_activeProfile.strongholdVersion && { strongholdVersion: _activeProfile.strongholdVersion }),
             ...(_activeProfile.hasVisitedDashboard && { hasVisitedDashboard: _activeProfile.hasVisitedDashboard }),
-            ...(_activeProfile.lastUsedAccountIndex && { lastUsedAccountIndex: _activeProfile.lastUsedAccountIndex }),
+            ...(_activeProfile.lastUsedWalletId && { lastUsedWalletId: _activeProfile.lastUsedWalletId }),
             ...(_activeProfile.walletPersistedData && { walletPersistedData: _activeProfile.walletPersistedData }),
             ...(_activeProfile.pfp && { pfp: _activeProfile.pfp }),
         }

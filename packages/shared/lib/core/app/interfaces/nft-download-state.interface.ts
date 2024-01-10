@@ -1,5 +1,5 @@
 export type INFTDownloadState = {
     nftId: string
-    accountIndex: number
+    walletId: string
     state: string
 }
