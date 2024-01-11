@@ -34,18 +34,17 @@ function initialiseBaseRouters(): void {
     settingsRouter.set(new SettingsRouter())
     collectiblesRouter.set(new CollectiblesRouter())
     governanceRouter.set(new GovernanceRouter())
-    implicitAccountCreationRouter.set(new ImplicitAccountCreationRouter())
     initialiseBaseOnboardingRouters()
-    // initialiseBaseImplicitAccountCreationRouters()
+    initialiseBaseImplicitAccountCreationRouters()
 }
 
 function initialiseBaseOnboardingRouters(): void {
     onboardingRouter.set(new OnboardingRouter())
 }
 
-// function initialiseBaseImplicitAccountCreationRouters(): void {
-//     implicitAccountCreationRouter.set(new ImplicitAccountCreationRouter())
-// }
+function initialiseBaseImplicitAccountCreationRouters(): void {
+    implicitAccountCreationRouter.set(new ImplicitAccountCreationRouter())
+}
 
 function initialiseSubrouters(): void {
     loginRouter.set(new LoginRouter())
