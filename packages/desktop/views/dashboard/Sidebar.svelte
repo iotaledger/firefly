@@ -9,6 +9,7 @@
     import { ISidebarTab } from '@desktop/routers'
     import features from '@features/features'
     import { Icon, Modal, NotificationBadge, ProfileActionsModal, ProfilePicture, Size } from '@ui'
+    import { implicitAccountCreationRouter } from './wallet'
 
     let profileModal: Modal
 
@@ -102,6 +103,7 @@
         $collectiblesRouter.reset()
         $settingsRouter.reset()
         $governanceRouter.reset()
+        $implicitAccountCreationRouter.reset()
     }
 </script>
 
