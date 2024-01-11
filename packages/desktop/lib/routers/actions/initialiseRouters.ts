@@ -12,6 +12,7 @@ import {
 } from '@core/router/routers'
 import { loginRouter, LoginRouter } from '@core/router/subrouters'
 import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
+import { implicitAccountCreationRouter, ImplicitAccountCreationRouter } from '@views/dashboard/wallet'
 
 export function initialiseRouters(): void {
     /**
@@ -34,10 +35,15 @@ function initialiseBaseRouters(): void {
     collectiblesRouter.set(new CollectiblesRouter())
     governanceRouter.set(new GovernanceRouter())
     initialiseBaseOnboardingRouters()
+    initialiseBaseImplicitAccountCreationRouters()
 }
 
 function initialiseBaseOnboardingRouters(): void {
     onboardingRouter.set(new OnboardingRouter())
+}
+
+function initialiseBaseImplicitAccountCreationRouters(): void {
+    implicitAccountCreationRouter.set(new ImplicitAccountCreationRouter())
 }
 
 function initialiseSubrouters(): void {
