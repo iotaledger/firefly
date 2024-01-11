@@ -1,7 +1,6 @@
 export * from './onboarding'
 export * from './settings'
 
-export * from './implicit-account-creation-route.enum'
 export * from './app-route.enum'
 export * from './collectibles-route.enum'
 export * from './dashboard-route.enum'
