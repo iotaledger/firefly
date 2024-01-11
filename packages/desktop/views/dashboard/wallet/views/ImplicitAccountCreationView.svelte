@@ -1,6 +1,6 @@
 <script lang="ts">
     import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '../index'
-    import { InitView, AccountCreation, FundConfirmation, OneTimeDeposit } from '.'
+    import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
 
@@ -13,11 +13,11 @@
         {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Init}
             <InitView />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.OneTimeDeposit}
-            <OneTimeDeposit />
+            <OneTimeDepositView />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.FundConfirmation}
-            <FundConfirmation />
+            <FundConfirmationView />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.AccountCreation}
-            <AccountCreation />
+            <AccountCreationView />
         {/if}
     </box-content>
     {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init}
