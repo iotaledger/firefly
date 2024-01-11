@@ -55,8 +55,12 @@
                     <Text type={TextType.h5} fontWeight={FontWeight.normal} darkColor="gray-400"
                         >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.title')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} darkColor="gray-50"
-                        >{DUMMY_ADDRESS}</Text
+                    <Text
+                        type={TextType.pre}
+                        fontSize="14"
+                        fontWeight={FontWeight.medium}
+                        color="gray-900"
+                        darkColor="white">{DUMMY_ADDRESS}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
