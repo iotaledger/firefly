@@ -1,7 +1,5 @@
 import { get, writable } from 'svelte/store'
-
 import { profiles } from '@core/profile'
-
 import { Router } from '../classes'
 import { AppRoute, LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
