@@ -26,5 +26,8 @@ export function convertOnboardingProfileToPersistedProfile(
             lastUsedWalletId: onboardingProfile.lastUsedWalletId,
         }),
         ...(onboardingProfile?.clientOptions && { clientOptions: onboardingProfile.clientOptions }),
+        ...(onboardingProfile?.secretManagerOptions && {
+            secretManagerOptions: onboardingProfile.secretManagerOptions,
+        }),
     }
 }
