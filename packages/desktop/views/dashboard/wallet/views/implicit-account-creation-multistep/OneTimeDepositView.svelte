@@ -3,11 +3,14 @@
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
     import { selectedWallet } from '@core/wallet'
+    import { onMount } from 'svelte'
 
     let isVisibleAddress: boolean = false
     let depositAddress: string = ''
 
-    $: depositAddress = $selectedWallet?.depositAddress
+    onMount(async () => {
+        depositAddress = await $selectedWallet?.implicitAccountCreationAddress()
+    })
 
     function showAddress() {
         isVisibleAddress = true
