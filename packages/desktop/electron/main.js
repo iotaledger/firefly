@@ -178,7 +178,7 @@ if (app.isPackaged) {
  * Handles url navigation events
  */
 const handleNavigation = (e, url) => {
-    if (url === 'http://localhost:8080/') {
+    if (url === 'http://localhost:3333/') {
         // if localhost would be opened on the build versions, we need to block it to prevent errors
         if (app.isPackaged) {
             e.preventDefault()
@@ -244,7 +244,7 @@ function createWindow() {
         // Enable dev tools only in developer mode
         windows.main.webContents.openDevTools()
 
-        windows.main.loadURL('http://localhost:8080')
+        windows.main.loadURL('http://localhost:3333')
     } else {
         initAutoUpdate()
 
