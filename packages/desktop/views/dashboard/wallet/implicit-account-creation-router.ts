@@ -1,7 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { Router } from '../../../../shared/lib/core/router/classes'
 import { ImplicitAccountCreationRoute } from './implicit-account-creation.enum'
-import { appRouter } from '@core/router'
 
 export const implicitAccountCreationRouter = writable<ImplicitAccountCreationRouter>(null)
 export const implicitAccountCreationRoute = writable<ImplicitAccountCreationRoute>(null)
@@ -29,7 +28,7 @@ export class ImplicitAccountCreationRouter extends Router<ImplicitAccountCreatio
                 break
             }
             case ImplicitAccountCreationRoute.AccountCreation: {
-                get(appRouter).next()
+                get(implicitAccountCreationRouter).reset()
                 return
             }
         }
