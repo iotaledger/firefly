@@ -8,7 +8,7 @@
     const DUMMY_AMOUNT = '5$'
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-40 pb-10">
+<step-content class="flex flex-col items-center justify-between h-full pt-28">
     <div class="flex flex-col text-center px-4 space-y-2 max-w-md">
         <div class="flex items-center justify-center mb-7">
             <img
