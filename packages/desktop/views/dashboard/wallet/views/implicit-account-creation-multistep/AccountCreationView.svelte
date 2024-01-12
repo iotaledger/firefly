@@ -17,7 +17,7 @@
     }
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-40 pb-10 w-full">
+<step-content class="flex flex-col items-center justify-between h-full pt-28 w-full">
     <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md w-full">
         <div class="flex items-center justify-center">
             <img
