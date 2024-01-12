@@ -6,6 +6,7 @@ import {
     loginRouter,
     settingsRouter,
 } from '@core/router'
+import { implicitAccountCreationRouter } from '@views/dashboard/wallet'
 import { onboardingRouter } from '@views/onboarding'
 import { get } from 'svelte/store'
 
@@ -25,4 +26,5 @@ function resetBaseRouters(): void {
     get(settingsRouter).reset()
     get(collectiblesRouter).reset()
     get(governanceRouter).reset()
+    get(implicitAccountCreationRouter).reset()
 }

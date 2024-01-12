@@ -4,13 +4,13 @@
     import { setClipboard } from '@core/utils'
     import { selectedWallet } from '@core/wallet'
 
-    let isAddressShown: boolean = false
+    let isVisibleAddress: boolean = false
     let depositAddress: string = ''
 
     $: depositAddress = $selectedWallet?.depositAddress
 
     function showAddress() {
-        isAddressShown = true
+        isVisibleAddress = true
     }
 
     function onCopyClick(): void {
@@ -18,7 +18,7 @@
     }
 </script>
 
-<step-content class="flex flex-col items-center justify-center space-y-20 h-full">
+<step-content class="flex flex-col items-center justify-between h-full pt-12">
     <div class="flex flex-col text-center px-4 space-y-4 max-w-md">
         <div class="flex items-center justify-center">
             <img
@@ -36,14 +36,16 @@
             >{localize('views.implicit-account-creation.steps.step1.view.body')}</Text
         >
     </div>
-    {#if !isAddressShown}
-        <div class="flex flex-row items-center space-x-24 bg-yellow-200 rounded-lg px-6 py-7 max-w-lg mb-5">
-            <Text type={TextType.h4} fontWeight={FontWeight.medium} color="yellow-900" darkColor="yellow-900"
-                >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.description')}</Text
-            >
-            <Button onClick={showAddress} classes="shrink-0"
-                >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.action')}</Button
-            >
+    {#if !isVisibleAddress}
+        <div class="pb-5">
+            <div class="flex flex-row items-center space-x-24 bg-yellow-200 rounded-lg px-6 py-7 max-w-lg">
+                <Text type={TextType.h4} fontWeight={FontWeight.medium} color="yellow-900" darkColor="yellow-900"
+                    >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.description')}</Text
+                >
+                <Button onClick={showAddress} classes="shrink-0"
+                    >{localize('views.implicit-account-creation.steps.step1.view.hiddenAddress.action')}</Button
+                >
+            </div>
         </div>
     {:else}
         <div class="flex flex-col justify-center items-center space-y-3">
@@ -54,8 +56,12 @@
                     <Text type={TextType.h5} fontWeight={FontWeight.normal} darkColor="gray-400"
                         >{localize('views.implicit-account-creation.steps.step1.view.oneTimeAddress.title')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} color="gray-50"
-                        >{depositAddress}</Text
+                    <Text
+                        type={TextType.pre}
+                        fontSize="14"
+                        fontWeight={FontWeight.medium}
+                        color="gray-900"
+                        darkColor="white">{depositAddress}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
