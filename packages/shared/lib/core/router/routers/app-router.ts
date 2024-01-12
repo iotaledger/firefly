@@ -1,12 +1,9 @@
 import { get, writable } from 'svelte/store'
-
 import { profiles } from '@core/profile'
-
 import { Router } from '../classes'
 import { AppRoute, LoginRoute } from '../enums'
 import { IRouterEvent } from '../interfaces'
 import { loginRoute } from '../subrouters'
-import { selectedWallet } from '../../wallet'
 
 export const appRoute = writable<AppRoute>(null)
 export const appRouter = writable<AppRouter>(null)
@@ -37,18 +34,8 @@ export class AppRouter extends Router<AppRoute> {
                 if (params.shouldAddProfile) {
                     nextRoute = AppRoute.Onboarding
                 } else {
-                    const _selectedWallet = get(selectedWallet)
-                    const hasImplicitAccount = _selectedWallet?.implicitAccountsOutput.length !== 0
-                    if (hasImplicitAccount) {
-                        nextRoute = AppRoute.Dashboard
-                    } else {
-                        nextRoute = AppRoute.ImplicitAccountCreation
-                    }
+                    nextRoute = AppRoute.Dashboard
                 }
-                break
-            }
-            case AppRoute.ImplicitAccountCreation: {
-                nextRoute = AppRoute.Dashboard
                 break
             }
             case AppRoute.Dashboard: {
