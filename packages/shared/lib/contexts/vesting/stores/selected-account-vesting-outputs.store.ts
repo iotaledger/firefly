@@ -3,27 +3,26 @@ import { Readable, derived } from 'svelte/store'
 import { AddressWithVestingOutputs } from '../interfaces'
 import { getVestingType, isVestingOutput, mapBasicOutputToVestingOutput, sortVestingOutputs } from '../utils'
 
-// TODO(2.0) Fix this and all usages
 export const selectedWalletVestingOutputs: Readable<AddressWithVestingOutputs[]> = derived(
     selectedWallet,
     ($selectedWallet) => {
-        const addressesWithVestingOutputs =
-            $selectedWallet?.addressesWithOutputs?.filter((addressWithOutputs) =>
-                addressWithOutputs.outputs?.find(isVestingOutput)
-            ) ?? []
-        return addressesWithVestingOutputs.map((addressWithOutputs) => {
-            const outputs = addressWithOutputs.outputs
-                .filter(isVestingOutput)
-                .map(mapBasicOutputToVestingOutput)
-                .sort(sortVestingOutputs)
-            const type = getVestingType(outputs)
-            const lastOutput = outputs[outputs.length - 1]
-            return {
-                address: addressWithOutputs.address,
+        const vestingOutputs = $selectedWallet?.walletOutputs?.filter(isVestingOutput) ?? []
+        const outputs = vestingOutputs
+            .filter(isVestingOutput)
+            .map(mapBasicOutputToVestingOutput)
+            .sort(sortVestingOutputs)
+        const type = getVestingType(outputs)
+        const lastOutput = outputs[outputs.length - 1]
+        const address = $selectedWallet?.depositAddress || ''
+
+        // TODO(2.0) It would be better to not return an array but this way we don't need to refactor more code for now
+        return [
+            {
+                address,
                 outputs,
                 type,
                 lastOutput,
-            }
-        })
+            },
+        ]
     }
 )

@@ -2046,7 +2046,6 @@
             "missingAccount": "Unable to find Shimmer claiming account"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
             "invalidPayload": "Invalid payload for {eventName} event"
         },
         "aliasMinting": {

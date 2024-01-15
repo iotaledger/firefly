@@ -22,7 +22,7 @@ export async function generateActivitiesFromBasicOutputs(
 
     const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
         processedTransaction.outputs,
-        account.addressesWithOutputs,
+        account.depositAddress,
         processedTransaction.direction
     )
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)

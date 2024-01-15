@@ -1,4 +1,4 @@
-import { Event, NewOutputWalletEvent, OutputType, WalletEventType } from '@iota/sdk/out/types'
+import { NewOutputWalletEvent, OutputType, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
@@ -9,21 +9,22 @@ import {
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
     allWalletActivities,
-    getAddressesWithOutputs,
     syncBalance,
     validateWalletApiEvent,
     getBech32AddressFromAddressTypes,
     preprocessGroupedOutputs,
     addActivitiesToWalletActivitiesInAllWalletActivities,
+    WalletApiEventHandler,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
 
-export function handleNewOutputEvent(error: Error, rawEvent: Event): void {
-    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
-    const type = payload.type
-    if (type === WalletEventType.NewOutput) {
-        void handleNewOutputEventInternal(walletId, payload as NewOutputWalletEvent)
+export function handleNewOutputEvent(walletId: string): WalletApiEventHandler {
+    return (error: Error, rawEvent: WalletEvent) => {
+        validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
+        if (rawEvent.type === WalletEventType.NewOutput) {
+            void handleNewOutputEventInternal(walletId, rawEvent as NewOutputWalletEvent)
+        }
     }
 }
 
@@ -44,10 +45,10 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
-        const addressesWithOutputs = await getAddressesWithOutputs(wallet)
-        updateActiveWallet(wallet.id, { addressesWithOutputs })
+        const walletOutputs = await wallet.outputs()
+        updateActiveWallet(wallet.id, { walletOutputs })
 
-        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], account)
+        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
         const activities = await generateActivities(processedOutput, wallet)
         for (const activity of activities) {

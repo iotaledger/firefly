@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 import {
-    Event,
     TransactionProgressWalletEvent,
     PreparedTransactionSigningHashProgress,
     WalletEventType,
     TransactionProgressType,
     TransactionProgress,
+    WalletEvent,
 } from '@iota/sdk/out/types'
 
 import { ledgerNanoStatus } from '@core/ledger'
@@ -16,13 +16,16 @@ import { deconstructLedgerVerificationProps } from '@core/ledger/helpers'
 import { validateWalletApiEvent } from '../../utils'
 import { selectedWalletId } from '../../stores'
 import { MissingTransactionProgressEventPayloadError } from '../../errors'
+import { WalletApiEventHandler } from '../../types'
 
-export function handleTransactionProgressEvent(error: Error, rawEvent: Event): void {
-    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
-    const type = payload.type
-    if (type === WalletEventType.TransactionProgress) {
-        const progress = (payload as TransactionProgressWalletEvent).progress
-        handleTransactionProgressEventInternal(walletId, progress)
+export function handleTransactionProgressEvent(walletId: string): WalletApiEventHandler {
+    return (error: Error, rawEvent: WalletEvent) => {
+        validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionProgress)
+        const type = rawEvent.type
+        if (type === WalletEventType.TransactionProgress) {
+            const progress = (rawEvent as TransactionProgressWalletEvent).progress
+            handleTransactionProgressEventInternal(walletId, progress)
+        }
     }
 }
 

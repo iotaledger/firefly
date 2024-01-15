@@ -7,7 +7,6 @@ import {
     NewTransactionType,
     NewTokenTransactionDetails,
     SubjectType,
-    getDepositAddress,
 } from '@core/wallet'
 import { logAndNotifyError } from '@core/error/actions'
 
@@ -64,7 +63,7 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingWallet
 ): Promise<void> {
-    const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
+    const recipientAddress = await shimmerClaimingAccount?.twinAccount.address()
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
 
     const newTransactionDetails: NewTokenTransactionDetails = {
