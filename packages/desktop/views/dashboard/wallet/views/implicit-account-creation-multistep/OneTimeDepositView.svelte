@@ -3,21 +3,17 @@
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
     import { selectedWallet } from '@core/wallet'
-    import { onMount } from 'svelte'
 
     let isVisibleAddress: boolean = false
-    let depositAddress: string = ''
+    let implicitAccountCreationAddress: string = ''
 
-    onMount(async () => {
-        depositAddress = await $selectedWallet?.implicitAccountCreationAddress()
-    })
-
-    function showAddress() {
+    async function showAddress() {
+        implicitAccountCreationAddress = await $selectedWallet?.implicitAccountCreationAddress()
         isVisibleAddress = true
     }
 
     function onCopyClick(): void {
-        setClipboard(depositAddress)
+        setClipboard(implicitAccountCreationAddress)
     }
 </script>
 
@@ -64,7 +60,7 @@
                         fontSize="14"
                         fontWeight={FontWeight.medium}
                         color="gray-900"
-                        darkColor="white">{depositAddress}</Text
+                        darkColor="white">{implicitAccountCreationAddress}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
