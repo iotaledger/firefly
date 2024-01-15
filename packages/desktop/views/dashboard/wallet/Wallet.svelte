@@ -2,7 +2,7 @@
     import { selectedWallet } from '@core/wallet'
     import { ImplicitAccountCreationView, WalletView } from './views'
 
-    const hasAccount: boolean = false
+    const hasAccount: boolean = $selectedWallet.accountsOutput.length !== 0
 </script>
 
 {#if $selectedWallet}
