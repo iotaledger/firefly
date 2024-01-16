@@ -688,7 +688,11 @@
                 },
                 "step3": {
                     "title": "Step 3",
-                    "body": "Account creation"
+                    "body": "Account creation",
+                    "view":{
+                        "title": "Confirm Something",
+                        "placeholder": "Stronghold Password"
+                    }
                 }
             },
             "action": "Start"
