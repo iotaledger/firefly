@@ -36,5 +36,5 @@
             placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
         />
     </div>
-    <Button onClick={activeAccount}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
+    <Button onClick={unlockWalletAndCreateAccount}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
 </step-content>
