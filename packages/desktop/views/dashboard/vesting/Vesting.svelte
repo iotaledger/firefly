@@ -17,7 +17,11 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { activeProfile } from '@core/profile'
     import { getBestTimeDuration } from '@core/utils'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        getRequiredStorageDepositForMinimalBasicOutput,
+        selectedAccountAssets,
+    } from '@core/wallet'
     import {
         Button,
         FontWeight,
@@ -31,12 +35,16 @@
         MeatballMenuButton,
         TooltipIcon,
     } from '@ui'
+    import { onMount } from 'svelte'
 
     const DEFAULT_EMPTY_VALUE_STRING = '----'
-    $: hasTransactionInProgress =
-        $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
+    let modal: Modal
+    let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
+    let minRequiredStorageDeposit: number | null
 
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
+    $: hasTransactionInProgress =
+        $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
     $: vestingOverview = [
         {
             title: localize('views.vesting.overview.unlocked'),
@@ -56,10 +64,22 @@
                     : undefined,
         },
     ]
-
-    let modal: Modal
-    let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
     $: $selectedAccountVestingPayouts, (timeUntilNextPayout = getTimeUntilNextPayout())
+    $: canCollect =
+        $selectedAccountVestingUnclaimedFunds > 0 &&
+        !hasTransactionInProgress &&
+        minRequiredStorageDeposit !== null &&
+        $selectedAccount?.balances?.baseCoin?.available > minRequiredStorageDeposit
+
+    onMount(() => {
+        getMinRequiredStorageDeposit()
+    })
+
+    function getMinRequiredStorageDeposit() {
+        getRequiredStorageDepositForMinimalBasicOutput()
+            .then((deposit) => (minRequiredStorageDeposit = deposit))
+            .catch(() => (minRequiredStorageDeposit = null))
+    }
 
     function getFiatAmount(amount: number): string {
         return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
@@ -156,7 +176,7 @@
                                 <Button
                                     onClick={onCollectClick}
                                     classes="w-full"
-                                    disabled={$selectedAccountVestingUnclaimedFunds === 0 || hasTransactionInProgress}
+                                    disabled={!canCollect}
                                     isBusy={hasTransactionInProgress}
                                 >
                                     {localize('views.vesting.collect')}

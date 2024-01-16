@@ -812,12 +812,6 @@
             "errorBody2": "Al momento hai {balance} rimanenti in questo wallet. Per favore sposta questi fondi in un wallet diverso e riprova.",
             "errorBody3": "Non puoi nascondere questo wallet, è necessario averne almeno uno."
         },
-        "addressHistory": {
-            "title": "cronologia degli indirizzi di {name}",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Indirizzi interni",
-            "external": "Indirizzo di deposito"
-        },
         "excludeNode": {
             "title": "Escludi il nodo",
             "body": "Sei sicuro di voler escludere {url} dal pool di nodi disponibile?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Autenticazione richiesta",
             "body": "Questo nodo richiede ulteriore autenticazione. Si prega di compilare le informazioni appropriate."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Salva",
         "importSeed": "Importa un seed esistente",
         "restoreWallet": {
-            "iota": "Migra o ripristina un wallet",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Ripristina profilo Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrare a Chrysalis o ripristinare un portafoglio esistente",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Ripristina un profilo Shimmer esistente",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Visita le Domande Frequenti",
         "viewDownloads": "View downloads",
         "viewStatus": "Visualizza stato",
+        "viewAddressHistory": "Visualizza cronologia indirizzi",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostra wallet nascosti",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Impossibile usare la parola chiave riservata al tag"
         },
         "layer2": {
-            "layer1Recipient": "Una transazione layer 2 non può essere inviata a un account layer 1."
+            "layer1Recipient": "Una transazione layer 2 non può essere inviata a un account layer 1.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Per favore, inserisci un URL valido.",

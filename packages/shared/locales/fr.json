@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Create a hardware profile",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus ou Nano X requis"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Use Stronghold backup",
                     "importFileDescription": "Import your Stronghold backup file",
                     "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Restaurer depuis votre Ledger Nano S, Nano S Plus ou X"
                 },
                 "setupClaimed": {
                     "title": "Claim Shimmer staking rewards",
@@ -812,12 +812,6 @@
             "errorBody2": "Il vous reste actuellement {balance} sur ce portefeuille. Veuillez déplacer ces fonds vers un portefeuille différent et réessayez.",
             "errorBody3": "Vous ne pouvez pas cacher ce portefeuille, vous devez en posséder au moins un."
         },
-        "addressHistory": {
-            "title": "Historique de l'adresse {name}",
-            "currentBalance": "Solde: {balance}",
-            "internal": "Adresse Interne",
-            "external": "Adresse de Dépôt"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -925,7 +919,7 @@
             "addressesFound": "Adresses trouvées",
             "totalAddressBalance": "Balance totale",
             "searchAgainHint": "Votre solde ou le nombre de portefeuilles sont incorrects ? Appuyez à nouveau sur la recherche jusqu'à ce que votre solde complet soit affiché.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Rechercher uniquement dans le portefeuille actuel"
         },
         "balanceOverview": {
             "title": "Aperçu du solde",
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Historique de l'adresse",
+            "indexAndType": "{internal, select, true {Adresse interne} other {Adresse de dépôt}} {index}",
+            "internal": "Interne",
+            "errorNoChronicle": "Chronicle non configuré",
+            "errorFailedFetch": "Impossible de récupérer l'historique des adresses",
+            "errorFailedGenerate": "Impossible de générer une nouvelle adresse"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Sauvegarder",
         "importSeed": "Importer une seed existante",
         "restoreWallet": {
-            "iota": "Transférer ou restaurer un portefeuille",
+            "iota": "Restaurer le profil IOTA",
             "iotaAlphanet": "Restaurer le profil IOTA Alphanet",
             "shimmer": "Récupérer le profil Shimmer",
             "testnet": "Restaurer le profil Testnet",
             "custom": "Restaurer le profil réseau personnalisé"
         },
         "restoreWalletDescription": {
-            "iota": "Migrer vers Chrysalis ou restaurer un portefeuille existant",
+            "iota": "Restaurer un profil IOTA existant",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restaurer un profil Shimmer existant",
             "testnet": "Restaurer un profil Testnet existant",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Visitez la FAQ",
         "viewDownloads": "Afficher les téléchargements",
         "viewStatus": "Voir le statut",
+        "viewAddressHistory": "Voir l'historique des adresses",
         "viewBalanceBreakdown": "Voir la répartition du solde",
         "verifyDepositAddress": "Vérifier l'adresse du dépôt",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Impossible d'utiliser le mot-clé réservé"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Veuillez saisir une URL valide.",

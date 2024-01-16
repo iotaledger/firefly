@@ -66,7 +66,7 @@
                     },
                     "ledgerAccount": {
                         "title": "Opret en hardwareprofil",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "description": "Ledger Nano S, Nano S Plus eller Nano X kræves"
                     }
                 },
                 "setupRecovered": {
@@ -77,7 +77,7 @@
                     "importFile": "Benyt Stronghold-sikkerhedskopi",
                     "importFileDescription": "Importér Stronghold-sikkerhedskopien",
                     "importLedger": "Benyt Ledger-enhed",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "importLedgerDescription": "Gendan fra Ledger Nano S-, Nano S Plus- eller X-enhed"
                 },
                 "setupClaimed": {
                     "title": "Gør krav på Shimmer-staking belønninger",
@@ -812,12 +812,6 @@
             "errorBody2": "Du har i øjeblikket {balance} tilbage på denne wallet. Flyt disse midler til en anden wallet og prøv igen.",
             "errorBody3": "Du kan ikke skjule denne wallet, du skal have mindst en."
         },
-        "addressHistory": {
-            "title": "{name} adresse historik",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adresse",
-            "external": "Deponeringsadresse"
-        },
         "excludeNode": {
             "title": "Udeluk node",
             "body": "Sikker på, at {url} skal udelukkes fra den tilgængelige nodepulje?"
@@ -925,7 +919,7 @@
             "addressesFound": "Addresses found",
             "totalAddressBalance": "Total balance",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
-            "currentWallet": "Search only in the current wallet"
+            "currentWallet": "Søg kun i den aktuelle wallet"
         },
         "balanceOverview": {
             "title": "Balance overview",
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Adressehistorik",
+            "indexAndType": "{internal, select, true {Intern adresse} other {Indbetalingsadresse}} {index}",
+            "internal": "Intern",
+            "errorNoChronicle": "Historik ikke opsat",
+            "errorFailedFetch": "Kunne ikke hente adressehistorik",
+            "errorFailedGenerate": "Kunne ikke generere en ny adresse"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Gem",
         "importSeed": "Importer et eksisterende seed",
         "restoreWallet": {
-            "iota": "Migrate or restore a wallet",
+            "iota": "Gendan IOTA-profil",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrate to Chrysalis or restore an existing wallet",
+            "iota": "Gendan en eksisterende IOTA-profil",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Besøg FAQ",
         "viewDownloads": "Se downloads",
         "viewStatus": "Vis Status",
+        "viewAddressHistory": "Se historik for addresse",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Bekræft indbetalingsadresse",
         "showHiddenAccounts": "Vis skjulte wallets",
@@ -1964,7 +1967,8 @@
             "reservedTagKeyword": "Reserveret tagnøgleord kan ikke burges"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Kunne ikke estimere gas."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
