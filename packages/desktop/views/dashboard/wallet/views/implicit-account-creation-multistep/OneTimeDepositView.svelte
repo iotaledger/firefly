@@ -17,6 +17,8 @@
     function onCopyClick(): void {
         setClipboard(implicitAccountCreationAddress)
     }
+
+    // TODO: When #7895 will be merged, we could add $implicitAccountCreationRouter.next() to handleNewOutputForImplicitAccountCreation()
     function getImplicitAccountsFromSelectedWallet() {
         // let implicitAccounts = await $selectedWallet?.implicitAccounts()
         // if(implicitAccounts.length) {
