@@ -196,7 +196,6 @@ const sentryPlugins = [
         release: {
             name: `${getAppName(prod)}@${NETWORK}-${version}`,
             finalize: false,
-
             deploy: {
                 env: STAGE,
             },
