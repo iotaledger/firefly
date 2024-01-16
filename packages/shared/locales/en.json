@@ -661,7 +661,21 @@
             "steps" : {
                 "step1": {
                     "title": "Step 1",
-                    "body": "One-time deposit"
+                    "body": "One-time deposit",
+                    "view": {
+                        "title": "One-time deposit",
+                        "subtitle": "3$ - 15$ recommended",
+                        "body": "Send enough funds to using your one-time address so the account can be generated with low waiting times. The funds are your to use after the account has been created.",
+                        "hiddenAddress": {
+                            "description": "Do not send funds to the address more than once",
+                            "action": "Show Address"
+                        },
+                        "oneTimeAddress": {
+                            "title": "One-time Address",
+                            "action": "Copy",
+                            "tip": "Do not sent fund to this address more than once"
+                        }
+                    }
                 },
                 "step2": {
                     "title": "Step 2",
