@@ -1,9 +1,7 @@
 <script lang="ts">
-    import { onDestroy } from 'svelte'
     import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification'
-    import { unsubscribeFromWalletApiEvents } from '@core/wallet'
 
     let error = ''
     let strongholdPassword = ''
@@ -17,8 +15,6 @@
             message: localize('error.global.generic'),
         })
     }
-
-    onDestroy(unsubscribeFromWalletApiEvents)
 </script>
 
 <step-content class="flex flex-col items-center justify-between h-full pt-28 w-full">
