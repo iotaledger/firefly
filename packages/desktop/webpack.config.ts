@@ -3,7 +3,7 @@ import CopyPlugin from 'copy-webpack-plugin'
 import { DefinePlugin } from 'webpack'
 import path from 'path'
 import sveltePreprocess from 'svelte-preprocess'
-import SentryWebpackPlugin from '@sentry/webpack-plugin'
+import { sentryWebpackPlugin } from '@sentry/webpack-plugin'
 import { version } from './package.json'
 import features from './features/features'
 import { Configuration as WebpackConfiguration } from 'webpack'
@@ -189,16 +189,20 @@ const preloadPlugins = [
 ]
 
 const sentryPlugins = [
-    new SentryWebpackPlugin({
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        include: '.',
-        release: `${getAppName(prod)}@${NETWORK}-${version}`,
-        ignoreFile: '.sentrycliignore',
+    sentryWebpackPlugin({
         org: 'iota-foundation-h4',
         project: 'firefly-desktop',
-        finalize: false,
-        deploy: {
-            env: STAGE,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        release: {
+            name: `${getAppName(prod)}@${NETWORK}-${version}`,
+            finalize: false,
+            deploy: {
+                env: STAGE,
+            },
+        },
+        sourcemaps: {
+            assets: '.',
+            ignore: ['node_modules', 'scripts', 'postcss.config.js', 'webpack.config.js', 'electron-builder-config.js'],
         },
     }),
 ]

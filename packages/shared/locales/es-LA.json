@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Historial no configurado",
+            "errorFailedFetch": "No se pudo obtener el historial de direcciones",
+            "errorFailedGenerate": "No se pudo generar una nueva dirección"
         }
     },
     "charts": {
@@ -1966,7 +1968,7 @@
         },
         "layer2": {
             "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Falló al estimarse el gas."
+            "estimatedGas": "Error al estimar el gas."
         },
         "node": {
             "invalid": "Por favor, introduzca una URL válida.",

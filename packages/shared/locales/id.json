@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Alamat sejarah",
-            "disclaimer": "Daftar alamat dengan dana atau dikenal dengan profil ini",
             "indexAndType": "{internal, pilih, benar {Internal address} other {Deposit address} } {index}",
-            "internal": "Intern"
+            "internal": "Intern",
+            "errorNoChronicle": "Chronicle tidak dikonfigurasi",
+            "errorFailedFetch": "Tidak dapat mengambil riwayat alamat",
+            "errorFailedGenerate": "Tidak dapat membuat alamat baru"
         }
     },
     "charts": {
@@ -1419,14 +1421,14 @@
         "increasing": "Meningkatkan hak suara",
         "decreased": "Kekuatan suara menurun",
         "decreasing": "Mengurangi hak suara",
-        "voted": "Voted",
-        "voting": "Voting",
+        "voted": "Telah memilih",
+        "voting": "Pemungutan suara",
         "changedVote": "Suara diubah",
         "changingVote": "Mengubah suara",
         "revoted": "Dicabut kembali",
         "revoting": "Membatalkan",
-        "unvoted": "Unvoted",
-        "unvoting": "Unvoting",
+        "unvoted": "Tidak dipilih",
+        "unvoting": "Tidak memberikan suara",
         "sentNft": "NFT terkirim",
         "sendingNft": "Mengirim NFT",
         "receivedNft": "NFT diterima",
@@ -1503,7 +1505,7 @@
         "profiles": "Profil",
         "dev": "Pengembang",
         "createAccount": "Buat dompet",
-        "addAWallet": "Add a wallet",
+        "addAWallet": "Tambahkan dompet",
         "accountName": "Nama Dompet",
         "latestTransactions": "Transaksi terbaru",
         "transactions": "Transaksi",
@@ -1575,8 +1577,8 @@
         "unstakedFor": "Tidak dipertaruhkan untuk {account}",
         "votedFor": "Memberi suara untuk {account}",
         "unvotedFor": "Tidak diberi suara untuk {account}",
-        "stakingTransaction": "Staking Transaction",
-        "unstakingTransaction": "Unstaking Transaction",
+        "stakingTransaction": "Transaksi Staking",
+        "unstakingTransaction": "Transaksi yang Tidak Dipertaruhkan",
         "legacyNetwork": "Jaringan Legacy",
         "capsLock": "Caps Lock menyala",
         "version": "Versi {version}",
@@ -1589,7 +1591,7 @@
         "staking": "Staking",
         "unstaking": "Di-Unstake",
         "notStaked": "Tidak di-stake",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Dana yang di-stake",
         "unstakedFunds": "Dana yang tidak di-stake",
         "accountColor": "Warna dompet",
         "transactionTime": "Waktu transaksi",
@@ -1825,7 +1827,7 @@
                 "unrecognizedOperation": "Operasi dompet tidak dikenal: {operation}"
             }
         },
-        "syncing": "Please wait until synchronization is finished to change wallets.",
+        "syncing": "Harap tunggu hingga sinkronisasi selesai untuk mengganti dompet.",
         "transferring": "Mohon tunggu sampai semua transaksi selesai.",
         "participating": "Harap tunggu hingga semua transaksi staking/voting selesai untuk mengganti dompet.",
         "claimed": {
@@ -1914,7 +1916,7 @@
         "account": {
             "addressNotFound": "Alamatnya tidak dapat ditemukan di akun Anda.",
             "length": "Nama dompet Anda tidak dapat lebih panjang dari {length, plural, one {# character} other {# characters}}.",
-            "emptyName": "A profile name must contain at least 1 character.",
+            "emptyName": "Nama profil harus terdiri dari setidaknya 1 karakter.",
             "notEmpty": "Anda harus mentransfer saldo Anda sebelum menghapus dompet/akun ini.",
             "duplicate": "Dompet/akun dengan nama ini sudah ada.",
             "tilde": "Nama profil tidak boleh dimulai dengan karakter '~'.",
@@ -2017,7 +2019,7 @@
             "mnemonicMismatch": "Anda telah terhubung dengan perangkat Ledger yang salah atau mnemoniknya telah diubah.",
             "notConnected": "Tidak ada perangkat Ledger yang terdeteksi.",
             "notFound": "Perangkat Ledger tidak ditemukan.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
+            "otherConnected": "Aplikasi yang salah telah terbuka pada perangkat Ledger Anda.",
             "generateAddress": "Terjadi kesalahan saat membuat alamat.",
             "timeout": "Perangkat Ledger Anda kehabisan waktu.",
             "disconnected": "Perangkat Ledger Anda tidak terhubung.",
@@ -2038,8 +2040,8 @@
             "cannotVisitAirdropWebsite": "Tidak dapat membuka halaman web {airdrop}.",
             "invalidStakingEventId": "ID staking event tidak sesuai."
         },
-        "invalidDate": "INVALID DATE",
-        "invalidTime": "INVALID TIME",
+        "invalidDate": "TANGGAL TIDAK VALID",
+        "invalidTime": "WAKTU TIDAK VALID",
         "shimmerClaiming": {
             "missingProfileManager": "Tidak dapat menemukan Shimmer yang mengklaim pengelola profil",
             "cannotInitialiseAccount": "Tidak dapat menginisialisasi akun klaim Shimmer",
@@ -2127,7 +2129,7 @@
         "partiallyStakedFunds": {
             "title": "Dana unstake terkini: {amount}",
             "titleNoFunds": "Dana unstake terkini",
-            "preBody": "You have received tokens that are not staked.",
+            "preBody": "Anda telah menerima token yang tidak di-staking.",
             "body": "Anda perlu meng-stake dana baru ini secara manual untuk menerima hadiah airdrop."
         },
         "stakingMinRewards": {
@@ -2211,7 +2213,7 @@
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
+            "messageId": "ID Pesan",
             "internal": "Internal",
             "rawValue": "Nilai mentah",
             "formattedValue": "Nilai terformat",
