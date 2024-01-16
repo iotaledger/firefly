@@ -7,7 +7,7 @@
     let strongholdPassword = ''
     $: strongholdPassword, (error = '')
 
-    function activeAccount(): void {
+    function unlockWalletAndCreateAccount(): void {
         // TODO: add logic to active account
         showAppNotification({
             type: 'error',
