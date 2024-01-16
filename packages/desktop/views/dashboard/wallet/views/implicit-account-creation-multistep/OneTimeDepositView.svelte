@@ -21,7 +21,7 @@
     <div class="flex flex-col text-center px-4 space-y-4 max-w-md">
         <div class="flex items-center justify-center">
             <img
-                src="assets/illustrations/implicit-account/show-one-time-address.svg"
+                src="assets/illustrations/implicit-account-creation/step1.svg"
                 alt={localize('views.implicit-account-creation.steps.step1.title')}
             />
         </div>
