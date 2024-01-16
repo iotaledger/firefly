@@ -11,6 +11,7 @@
 
     function onReceiveClick(): void {
         addressBoxElement.copyAddress()
+        reportError('abcde123456789')
     }
 </script>
 
