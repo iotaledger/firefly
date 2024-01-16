@@ -3,9 +3,11 @@
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
     import { selectedWallet } from '@core/wallet'
+    import { implicitAccountCreationRouter } from '../../implicit-account-creation-router'
 
     let isVisibleAddress: boolean = false
     let implicitAccountCreationAddress: string = ''
+    let implicitAccountCreationAddressHasOutputs: boolean = false
 
     async function showAddress() {
         implicitAccountCreationAddress = await $selectedWallet?.implicitAccountCreationAddress()
@@ -15,6 +17,24 @@
     function onCopyClick(): void {
         setClipboard(implicitAccountCreationAddress)
     }
+    function getImplicitAccountsFromSelectedWallet() {
+        // let implicitAccounts = await $selectedWallet?.implicitAccounts()
+        // if(implicitAccounts.length) {
+        //     implicitAccountCreationAddressHasOutputs = true
+        // }
+        setTimeout(() => {
+            implicitAccountCreationAddressHasOutputs = true
+        }, 3000)
+    }
+
+    function onContinueClick(): void {
+        if (implicitAccountCreationAddressHasOutputs) {
+            $implicitAccountCreationRouter.next()
+        }
+    }
+
+    $: getImplicitAccountsFromSelectedWallet()
+    $: implicitAccountCreationAddressHasOutputs, onContinueClick()
 </script>
 
 <step-content class="flex flex-col items-center justify-between h-full pt-12">
