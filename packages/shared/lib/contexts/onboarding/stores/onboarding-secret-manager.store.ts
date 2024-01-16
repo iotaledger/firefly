@@ -1,4 +1,4 @@
-import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding/stores'
+import { onboardingProfile } from '@contexts/onboarding/stores'
 import { api } from '@core/api'
 import { SecretManager } from '@iota/sdk'
 import { verifyMnemonic } from 'shared/lib/core/secret-manager'
@@ -30,12 +30,6 @@ export async function buildOnboardingSecretManager(): Promise<void> {
         // 4. Store Mnemonic
         await secretManager.storeMnemonic(mnemonicStringified)
 
-        // 5. Generate address
-        const address = (await secretManager.generateEd25519Addresses({}))[0]
-
-        updateOnboardingProfile({
-            address,
-        })
         onboardingProfileSecretManager.set(secretManager)
     } else {
         onboardingProfileSecretManager.set(null)

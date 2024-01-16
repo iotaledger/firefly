@@ -49,20 +49,12 @@ export async function initWallet(profile: IOnboardingProfile, strongholdPassword
     const walletName = `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
-    const wallet = await createWallet({
-        address: profile.address,
-        profile: profile as IPersistedProfile,
-    })
+    const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
-    // 3. Load the stronghold password if necessary
-    if (strongholdPassword) {
-        await wallet.setStrongholdPassword(strongholdPassword)
-    }
-
-    // 4. Sync the wallet with the Node
+    // 3. Sync the wallet with the Node
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
 
-    // 5. Create a wrapper over the wallet instance and the persisted data
+    // 4. Create a wrapper over the wallet instance and the persisted data
     const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName)
 
     addWalletToActiveWallets(walletState)

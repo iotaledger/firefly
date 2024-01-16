@@ -4,9 +4,13 @@ import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 import { ProfileType } from '@core/profile'
 
 // TODO(2.0) Fix all usages
-export function getSecretManagerFromProfileType(type?: ProfileType, storagePath?: string): SecretManagerType {
+export function getSecretManagerFromProfileType(
+    type?: ProfileType,
+    storagePath?: string,
+    password?: string
+): SecretManagerType {
     const strongholdSecretManager = {
-        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold` },
+        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password },
     }
     const ledgerSecretManager = {
         ledgerNano: USE_LEDGER_SIMULATOR,
