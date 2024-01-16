@@ -1,16 +1,10 @@
 <script lang="ts">
-    import { onMount, onDestroy } from 'svelte'
     import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '../index'
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { subscribeToWalletApiEventsForImplicitAccountCreation } from '@contexts/wallet/implicit-account-creation'
-    import { unsubscribeFromWalletApiEvents } from '@core/wallet'
 
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
-
-    onMount(subscribeToWalletApiEventsForImplicitAccountCreation)
-    onDestroy(unsubscribeFromWalletApiEvents)
 </script>
 
 <implicit-account-creation-view class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">

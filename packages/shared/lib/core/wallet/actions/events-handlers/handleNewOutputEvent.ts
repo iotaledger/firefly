@@ -16,6 +16,7 @@ import {
     preprocessGroupedOutputs,
     addActivitiesToWalletActivitiesInAllWalletActivities,
     WalletApiEventHandler,
+    updateSelectedWallet,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -44,6 +45,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
 
+    const implicitAccounts = await wallet.implicitAccounts()
+    const accounts = await wallet.accounts()
+    const isImplicitAccountOutput =
+        OutputType.Basic &&
+        implicitAccounts.find((implicitAccOutput) => implicitAccOutput.outputId === outputData.outputId)
+    const isAccountOutput =
+        OutputType.Account && accounts.find((accOutput) => accOutput.outputId === outputData.outputId)
+
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
         const addressesWithOutputs = await getAddressesWithOutputs(wallet)
@@ -70,5 +79,17 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()
+    }
+
+    if (isImplicitAccountOutput) {
+        updateSelectedWallet({
+            implicitAccountOutputs: implicitAccounts,
+        })
+    }
+
+    if (isAccountOutput) {
+        updateSelectedWallet({
+            accountOutputs: accounts,
+        })
     }
 }
