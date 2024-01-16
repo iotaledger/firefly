@@ -679,7 +679,12 @@
                 },
                 "step2": {
                     "title": "Step 2",
-                    "body": "Fund confirmation"
+                    "body": "Fund confirmation",
+                    "view": {
+                        "title": "Fund arrived",
+                        "subtitle": "Generating mana...",
+                        "action": "Activate Account"
+                    }
                 },
                 "step3": {
                     "title": "Step 3",
