@@ -6,7 +6,7 @@ import { handleNewOutputForImplicitAccountCreation } from './handleNewOutputForI
 export function subscribeToWalletApiEventsForImplicitAccountCreation(): void {
     const wallet = getSelectedWallet()
     const eventMap: WalletApiEventMap = {
-        [WalletEventType.NewOutput]: handleNewOutputForImplicitAccountCreation,
+        [WalletEventType.NewOutput]: handleNewOutputForImplicitAccountCreation(wallet.id),
     }
 
     subscribeToWalletApiEvents({

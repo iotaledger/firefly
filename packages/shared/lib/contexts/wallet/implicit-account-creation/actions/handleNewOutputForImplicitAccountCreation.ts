@@ -1,13 +1,14 @@
 import { get } from 'svelte/store'
-import { Event, NewOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { WalletEvent, NewOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 import { activeWallets } from '@core/profile'
-import { loadWallet, validateWalletApiEvent } from '@core/wallet'
+import { WalletApiEventHandler, loadWallet, validateWalletApiEvent } from '@core/wallet'
 
-export function handleNewOutputForImplicitAccountCreation(error: Error, rawEvent: Event): void {
-    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
-    const type = payload.type
-    if (type === WalletEventType.TransactionInclusion) {
-        handleNewOutputForImplicitAccountCreationInternal(walletId, payload as NewOutputWalletEvent)
+export function handleNewOutputForImplicitAccountCreation(walletId: string): WalletApiEventHandler {
+    return (error: Error, rawEvent: WalletEvent) => {
+        validateWalletApiEvent(error, rawEvent, WalletEventType.NewOutput)
+        if (rawEvent.type === WalletEventType.TransactionInclusion) {
+            handleNewOutputForImplicitAccountCreationInternal(walletId, rawEvent as NewOutputWalletEvent)
+        }
     }
 }
 
