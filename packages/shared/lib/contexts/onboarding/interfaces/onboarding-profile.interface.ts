@@ -26,6 +26,4 @@ export interface IOnboardingProfile extends Omit<Partial<IPersistedProfile>, 'id
 
     // Shimmer claiming data
     shimmerClaimingAccounts?: IShimmerClaimingWallet[]
-
-    address: string
 }
