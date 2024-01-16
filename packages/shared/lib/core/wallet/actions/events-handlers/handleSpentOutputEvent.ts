@@ -1,6 +1,6 @@
 // TODO(2.0) Fix all of events code, blocked by https://github.com/iotaledger/iota-sdk/issues/1708
 
-import { Event, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { WalletEvent, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { getNftByIdFromAllAccountNfts, updateNftInAllWalletNfts } from '@core/nfts'
 import {
@@ -10,15 +10,17 @@ import {
     validateWalletApiEvent,
     updateAsyncDataByTransactionId,
     allWalletActivities,
+    WalletApiEventHandler,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
 
-export async function handleSpentOutputEvent(error: Error, rawEvent: Event): Promise<void> {
-    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
-    const type = payload.type
-    if (type === WalletEventType.SpentOutput) {
-        await handleSpentOutputEventInternal(walletId, payload as SpentOutputWalletEvent)
+export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
+    return async (error: Error, rawEvent: WalletEvent) => {
+        validateWalletApiEvent(error, rawEvent, WalletEventType.SpentOutput)
+        if (rawEvent.type === WalletEventType.SpentOutput) {
+            await handleSpentOutputEventInternal(walletId, rawEvent as SpentOutputWalletEvent)
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { WalletEvent, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from 'shared/lib/contexts/governance/utils/isWalletVoting'
@@ -16,15 +16,18 @@ import {
     ActivityType,
     GovernanceActivity,
     InclusionState,
+    WalletApiEventHandler,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from 'shared/lib/core/profile'
 
-export function handleTransactionInclusionEvent(error: Error, rawEvent: Event): void {
-    const { walletId, payload } = validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
-    const type = payload?.type
-    if (type === WalletEventType.TransactionInclusion) {
-        handleTransactionInclusionEventInternal(walletId, payload as TransactionInclusionWalletEvent)
+export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
+    return (error: Error, rawEvent: WalletEvent) => {
+        validateWalletApiEvent(error, rawEvent, WalletEventType.TransactionInclusion)
+        const type = rawEvent?.type
+        if (type === WalletEventType.TransactionInclusion) {
+            handleTransactionInclusionEventInternal(walletId, rawEvent as TransactionInclusionWalletEvent)
+        }
     }
 }
 
