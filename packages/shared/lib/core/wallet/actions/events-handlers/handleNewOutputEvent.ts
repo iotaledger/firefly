@@ -1,4 +1,11 @@
-import { WalletEvent, NewOutputWalletEvent, OutputType, WalletEventType } from '@iota/sdk/out/types'
+import {
+    WalletEvent,
+    NewOutputWalletEvent,
+    OutputType,
+    WalletEventType,
+    CommonOutput,
+    UnlockConditionType,
+} from '@iota/sdk/out/types'
 
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
@@ -45,13 +52,11 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
 
-    const implicitAccounts = await wallet.implicitAccounts()
-    const accounts = await wallet.accounts()
     const isImplicitAccountOutput =
-        OutputType.Basic &&
-        implicitAccounts.find((implicitAccOutput) => implicitAccOutput.outputId === outputData.outputId)
-    const isAccountOutput =
-        OutputType.Account && accounts.find((accOutput) => accOutput.outputId === outputData.outputId)
+        output.type === OutputType.Basic &&
+        (output as CommonOutput).unlockConditions.length === 1 &&
+        (output as CommonOutput).unlockConditions.find((cmnOutput) => cmnOutput.type === UnlockConditionType.Address)
+    const isAccountOutput = output.type === OutputType.Account
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
@@ -82,12 +87,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     }
 
     if (isImplicitAccountOutput) {
+        const implicitAccounts = await wallet.implicitAccounts()
         updateSelectedWallet({
             implicitAccountOutputs: implicitAccounts,
         })
     }
 
     if (isAccountOutput) {
+        const accounts = await wallet.accounts()
         updateSelectedWallet({
             accountOutputs: accounts,
         })
