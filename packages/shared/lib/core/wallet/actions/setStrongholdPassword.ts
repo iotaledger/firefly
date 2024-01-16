@@ -11,5 +11,5 @@ export async function setStrongholdPassword(password: string): Promise<void> {
     // Set in SecretManager
     const secretManager = getSecretManager()
     await secretManager?.clearStrongholdPassword()
-    await secretManager.setStrongholdPassword(password)
+    await secretManager?.setStrongholdPassword(password)
 }
