@@ -29,6 +29,8 @@ export async function createWallet(profile: IPersistedProfile, password?: string
     const storagePath = await getStorageDirectoryOfProfile(profile.id)
 
     const walletOptions = getWalletOptions(profile, storagePath, password)
+    // TODO(2.0) It is weird to use the profile ID as the wallet ID,
+    // we should probably have one for wallet and another one for the profile
     const wallet = await api.createWallet(profile.id, {
         ...walletOptions,
         storagePath,
