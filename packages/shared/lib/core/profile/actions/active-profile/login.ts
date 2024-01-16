@@ -52,10 +52,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 1: create profile manager if its doesn't exist
             incrementLoginProgress()
             await waitForPreviousManagerToBeDestroyed()
-            // if (!isOnboardingSecretManagerInitialized()) {
-            //     // TODO(2.0) Not sure about this
-            //     await initialiseOnboardingProfileWithSecretManager(true)
-            // }
 
             // Step 3: load and build all the profile data
             incrementLoginProgress()
