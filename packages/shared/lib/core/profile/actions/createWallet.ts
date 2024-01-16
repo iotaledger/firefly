@@ -1,24 +1,20 @@
 import { api } from '@core/api'
-import { get } from 'svelte/store'
-import { IProfile, IWallet } from '../interfaces'
-import { activeProfile as activeProfileStore } from '../stores'
+import { IPersistedProfile, IWallet } from '../interfaces'
 import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile } from '../utils'
 import { WalletOptions } from '@iota/sdk'
 import { selectedWalletId } from '../../wallet'
 
-export function getWalletOptions(profile: IProfile, storagePath: string): WalletOptions {
-    const walletOptions: WalletOptions = {
+export function getWalletOptions(profile: IPersistedProfile, storagePath: string, password?: string): WalletOptions {
+    return {
         clientOptions: profile.clientOptions,
         storagePath,
-        secretManager: getSecretManagerFromProfileType(profile.type, storagePath),
+        secretManager: getSecretManagerFromProfileType(profile.type, storagePath, password),
         bipPath: {
             coinType: profile.network.coinType,
             account: 0,
             addressIndex: 0,
         },
     }
-
-    return walletOptions
 }
 
 // TODO(2.0): Fix and finish this method
@@ -28,18 +24,18 @@ export function getWalletOptions(profile: IProfile, storagePath: string): Wallet
         - __wallet1__/
         - __wallet2__/
 */
-export async function createWallet(activeProfile = get(activeProfileStore)): Promise<IWallet> {
-    const id = activeProfile.id
-    const storagePath = await getStorageDirectoryOfProfile(id)
 
-    const walletOptions = getWalletOptions(activeProfile, storagePath)
+export async function createWallet(profile: IPersistedProfile, password?: string): Promise<IWallet> {
+    const storagePath = await getStorageDirectoryOfProfile(profile.id)
 
-    const wallet = await api.createWallet(id, {
+    const walletOptions = getWalletOptions(profile, storagePath, password)
+    // TODO(2.0) It is weird to use the profile ID as the wallet ID,
+    // we should probably have one for wallet and another one for the profile
+    const wallet = await api.createWallet(profile.id, {
         ...walletOptions,
         storagePath,
     })
 
-    // TODO(2.0): Fix
-    selectedWalletId.set(id)
+    selectedWalletId.set(profile.id)
     return wallet
 }
