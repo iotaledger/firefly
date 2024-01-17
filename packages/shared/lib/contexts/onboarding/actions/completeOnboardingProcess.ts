@@ -4,11 +4,12 @@ import {
     addWalletPersistedDataToActiveProfile,
     addWalletToActiveWallets,
     createWallet,
+    IPersistedProfile,
     login,
 } from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingType } from '../enums'
-import { addWalletPersistedDataToOnboardingProfile, onboardingProfile } from '../stores'
+import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
 import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 import {
@@ -18,6 +19,7 @@ import {
 } from '@core/wallet'
 import { DEFAULT_SYNC_OPTIONS } from '@core/wallet/constants'
 import { localize } from '@core/i18n'
+import { IOnboardingProfile } from '../interfaces'
 
 export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
@@ -27,34 +29,36 @@ export async function completeOnboardingProcess(): Promise<void> {
         createNewProfileFromOnboardingProfile()
     }
 
-    const onboardingType = get(onboardingProfile)?.onboardingType
+    const profile = get(onboardingProfile)
+    if (!profile) {
+        return
+    }
+    const { onboardingType, strongholdPassword } = profile
+
     const shouldRecoverWallets = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverWallets)
 
-    await createOnboardingWallet()
+    await initWallet(profile, strongholdPassword)
     void login({ isFromOnboardingFlow: true, shouldRecoverWallets })
 
     onboardingProfile.set(undefined)
 }
 
-export async function createOnboardingWallet(name?: string, color?: string): Promise<IWalletState> {
+export async function initWallet(profile: IOnboardingProfile, strongholdPassword?: string): Promise<IWalletState> {
     // 1. Get the wallet name
-    const walletName = name || `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
+    const walletName = `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
-    const wallet = await createWallet() // TODO(2.0) Not sure about this, I think this should be createWallet instead
+    const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
     // 3. Sync the wallet with the Node
-    // TODO(2.0): test & fix sync when we have iota2.0 nodes
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
-    // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
 
-    // TODO(2.0) Fix
+    // 4. Create a wrapper over the wallet instance and the persisted data
+    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName)
+
     addWalletToActiveWallets(walletState)
-    addWalletPersistedDataToOnboardingProfile(walletState.id, walletPersistedData)
-    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData) // TODO(2.0) Not sure about this,
-    // TODO(2.0) Fix
+    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)
     addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
 
     return walletState
