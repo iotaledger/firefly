@@ -1,5 +1,4 @@
 import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
-import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
 import { IWalletState } from '@core/wallet/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
@@ -31,7 +30,7 @@ export function preprocessGroupedOutputs(
         outputs: wrappedOutputs,
         transactionId: transactionMetadata?.transactionId,
         direction,
-        time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
+        time: new Date(), // TODO(2.0): new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
         inclusionState: InclusionState.Confirmed,
         utxoInputs,
         wrappedInputs,

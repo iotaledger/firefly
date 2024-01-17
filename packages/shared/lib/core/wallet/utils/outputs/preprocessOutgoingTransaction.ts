@@ -7,7 +7,7 @@ import { IWalletState } from '@core/wallet/interfaces'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<IProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.essence as RegularTransactionEssence
 
@@ -16,7 +16,7 @@ export async function preprocessOutgoingTransaction(
         regularTransactionEssence.outputs
     )
 
-    const direction = getDirectionFromOutgoingTransaction(outputs, account.depositAddress)
+    const direction = getDirectionFromOutgoingTransaction(outputs, wallet.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = await Promise.all(
         utxoInputs.map((input) => {
@@ -26,7 +26,7 @@ export async function preprocessOutgoingTransaction(
         })
     )
 
-    const inputs = await Promise.all(inputIds.map((inputId) => account.getOutput(inputId)))
+    const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
     return {
         outputs: outputs,

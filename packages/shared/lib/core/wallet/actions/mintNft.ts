@@ -1,6 +1,6 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
+import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
 import { Converter } from '@core/utils'
 import { MintNftParams, OutputType, PreparedTransaction } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
@@ -54,7 +54,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
 
                 // Store NFT metadata for each minted NFT
                 const nft = buildNftFromNftOutput(output, wallet.depositAddress, false)
-                addOrUpdateNftInAllAccountNfts(wallet.id, nft)
+                addOrUpdateNftInAllWalletNfts(wallet.id, nft)
             }
         }
     } catch (err) {

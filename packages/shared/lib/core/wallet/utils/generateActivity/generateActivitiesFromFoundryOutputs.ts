@@ -6,7 +6,7 @@ import { OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromFoundryOutputs(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const outputs = processedTransaction.outputs
     const activities = []
@@ -14,7 +14,7 @@ export async function generateActivitiesFromFoundryOutputs(
     const foundryOutputs = outputs.filter((output) => output.output.type === OutputType.Foundry)
     for (const foundryOutput of foundryOutputs) {
         activities.push(
-            await generateSingleFoundryActivity(account, {
+            await generateSingleFoundryActivity(wallet, {
                 action: ActivityAction.Mint,
                 processedTransaction,
                 wrappedOutput: foundryOutput,

@@ -27,7 +27,7 @@ export async function generateSingleBasicActivity(
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
+    const containsValue = await activityOutputContainsValue(wallet, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -41,15 +41,15 @@ export async function generateSingleBasicActivity(
     const metadata = getMetadataFromOutput(output)
     const publicNote = ''
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
     const layer2Allowance = Number(parsedLayer2Metadata?.baseTokens ?? '0')
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
     const gasFee = layer2Allowance > 0 ? amount - layer2Allowance : 0
 
-    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
+    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 

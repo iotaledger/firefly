@@ -1,5 +1,5 @@
 import { IWalletState } from '@core/wallet/interfaces'
-import { addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
+import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
 import {
     ActivityAction,
     ActivityDirection,
@@ -16,13 +16,13 @@ import { CommonOutput, NftOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const activities = []
 
     const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
         processedTransaction.outputs,
-        account.depositAddress,
+        wallet.depositAddress,
         processedTransaction.direction
     )
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)
@@ -39,7 +39,7 @@ export async function generateActivitiesFromBasicOutputs(
             const wrappedInput = burnedNftInputs[burnedNftInputIndex]
             const nftInput = wrappedInput.output as NftOutput
             activity = await generateSingleNftActivity(
-                account,
+                wallet,
                 {
                     action: ActivityAction.Burn,
                     processedTransaction,
@@ -48,12 +48,12 @@ export async function generateActivitiesFromBasicOutputs(
                 getNftId(nftInput.nftId, wrappedInput.outputId)
             )
             const nft = buildNftFromNftOutput(wrappedInput, account.depositAddress, false)
-            addOrUpdateNftInAllAccountNfts(account.index, nft)
+            addOrUpdateNftInAllWalletNfts(wallet.id, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
         } else if (isSelfTransaction && burnedNativeToken) {
             activity = await generateSingleBasicActivity(
-                account,
+                wallet,
                 {
                     action: ActivityAction.Burn,
                     processedTransaction,

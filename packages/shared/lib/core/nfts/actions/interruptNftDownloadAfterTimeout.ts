@@ -3,7 +3,7 @@ import { MILLISECONDS_PER_SECOND, sleep } from '@core/utils'
 import { get } from 'svelte/store'
 import { DownloadWarningType } from '../enums'
 import { downloadingNftId } from '../stores'
-import { updateNftInAllWalletNfts } from './updateNftInAllAccountNfts'
+import { updateNftInAllWalletNfts } from './updateNftInAllWalletNfts'
 import { activeProfile } from '@core/profile/stores'
 
 export async function interruptNftDownloadAfterTimeout(walletId: string): Promise<void> {

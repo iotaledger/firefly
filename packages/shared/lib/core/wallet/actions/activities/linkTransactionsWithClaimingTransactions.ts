@@ -8,18 +8,18 @@ import { addClaimedActivity, claimedActivities } from '../../stores'
 /**
  * It takes a list of transactions and links the transactions that are claiming async transactions
  * @param {IProcessedTransaction[]} transactions - IProcessedTransaction[]
- * @param {IWalletState} account - IWalletState - the account for which we are processing
+ * @param {IWalletState} wallet - IWalletState - the wallet for which we are processing
  * transactions
  * @returns An array of processed transactions
  */
 export function linkTransactionsWithClaimingTransactions(
     transactions: IProcessedTransaction[],
-    account: IWalletState
+    wallet: IWalletState
 ): IProcessedTransaction[] {
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
-    const claimedAccountActivities = get(claimedActivities)?.[get(activeProfileId)]?.[account.index]
+    const claimedAccountActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -62,7 +62,7 @@ export function linkTransactionsWithClaimingTransactions(
                     claimingTransactionId: transaction?.transactionId,
                 }
 
-                addClaimedActivity(account.index, claimedTransaction?.transactionId, {
+                addClaimedActivity(wallet.id, claimedTransaction?.transactionId, {
                     id: claimedTransaction?.transactionId,
                     claimedTimestamp: transaction.time.getTime(),
                     claimingTransactionId: transaction.transactionId,

@@ -5,7 +5,7 @@ import { addActivitiesToWalletActivitiesInAllWalletActivities } from '../stores'
 import { generateActivities, preprocessOutgoingTransaction } from '.'
 import { IWalletState } from '../interfaces'
 
-// We pass the account as a parameter,
+// We pass the wallet as a parameter,
 // because logging out while transaction is pending,
 // clears the the selectedWallet store at this point.
 export async function processAndAddToActivities(transaction: Transaction, wallet: IWalletState): Promise<void> {

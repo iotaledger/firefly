@@ -31,11 +31,15 @@ export async function buildWalletState(
     let depositAddress = ''
     let votingPower = ''
     let walletOutputs: OutputData[] = []
+    let accountOutputs: OutputData[] = []
+    let implicitAccountOutputs: OutputData[] = []
 
     try {
         balances = await wallet.getBalance()
         depositAddress = await wallet.address()
         votingPower = balances.baseCoin.votingPower
+        accountOutputs = await wallet.accounts()
+        implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
     } catch (err) {
         console.error(err)
@@ -52,5 +56,7 @@ export async function buildWalletState(
         isTransferring: false,
         votingPower,
         walletOutputs,
+        accountOutputs,
+        implicitAccountOutputs,
     } as IWalletState
 }
