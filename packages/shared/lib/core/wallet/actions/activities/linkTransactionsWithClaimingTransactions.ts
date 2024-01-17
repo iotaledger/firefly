@@ -19,7 +19,7 @@ export function linkTransactionsWithClaimingTransactions(
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
-    const claimedAccountActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
+    const claimedWalletActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -33,7 +33,7 @@ export function linkTransactionsWithClaimingTransactions(
             continue
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
-            const claimedActivity = claimedAccountActivities?.[transaction?.transactionId]
+            const claimedActivity = claimedWalletActivities?.[transaction?.transactionId]
             if (claimedActivity && claimedActivity.claimingTransactionId === transaction?.transactionId) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
