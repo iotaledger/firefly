@@ -21,7 +21,6 @@ export async function createNewWallet(name?: string, color?: string): Promise<IW
     const wallet = await createWallet()
 
     // 3. Sync the wallet with the Node
-    // TODO(2.0): test & fix sync when we have iota2.0 nodes
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
 
     // 4. Create a wrapper over the wallet instance and the persisted data
