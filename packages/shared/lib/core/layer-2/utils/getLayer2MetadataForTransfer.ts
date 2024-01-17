@@ -16,7 +16,7 @@ export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionD
     metadataStream.writeUInt32('targetContract', ACCOUNTS_CONTRACT)
     metadataStream.writeUInt32('contractFunction', TRANSFER_ALLOWANCE)
     metadataStream.writeUInt64SpecialEncoding(
-        'gasFee',
+        'gasBudget',
         estimatedGas ? BigInteger(estimatedGas) : BigInteger(Number.MAX_SAFE_INTEGER)
     )
 
