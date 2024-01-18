@@ -96,7 +96,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     if (isAccountOutput) {
         const accounts = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet)
+        const depositAddress = await getDepositAddress()
         updateSelectedWallet({
             accountOutputs: accounts,
             depositAddress,

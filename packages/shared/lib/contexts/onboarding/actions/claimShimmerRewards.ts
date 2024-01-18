@@ -64,7 +64,8 @@ async function claimShimmerRewardsForShimmerClaimingAccounts(
 async function claimShimmerRewardsForShimmerClaimingAccount(
     shimmerClaimingAccount: IShimmerClaimingWallet
 ): Promise<void> {
-    const recipientAddress = await getDepositAddress(shimmerClaimingAccount?.twinAccount)
+    // TODO(2.0) Fix because getDepositAddress no longer needs to be passed an argument
+    const recipientAddress = await getDepositAddress(/* shimmerClaimingAccount?.twinAccount*/)
     const rawAmount = shimmerClaimingAccount?.unclaimedRewards
 
     const newTransactionDetails: NewTokenTransactionDetails = {
