@@ -66,7 +66,7 @@
     $: isBaseTokenTransfer =
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
-    $: isInternal = recipient.type === 'account'
+    $: isInternal = recipient.type === 'wallet'
     $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedWallet.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)

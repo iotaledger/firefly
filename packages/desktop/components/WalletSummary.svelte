@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AccountActionsButton } from '@components'
+    import { WalletActionsButton } from '@components'
     import { Text, TogglableAssetBalanceLabel } from '@ui'
     import { TextType } from '@ui/enums'
 
@@ -16,14 +16,14 @@
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 </script>
 
-<account-summary class="block relative space-y-4">
+<wallet-summary class="block relative space-y-4">
     <div class="flex flex-row items-center justify-between">
         <Text type={TextType.h5} classes="text-left">
             {localize('general.balanceWithNetwork', { values: { network: fomattedNetworkName } })}
         </Text>
-        <AccountActionsButton />
+        <WalletActionsButton />
     </div>
     <div class="flex flex-col flex-wrap items-start space-y-1">
         <TogglableAssetBalanceLabel asset={baseCoin} />
     </div>
-</account-summary>
+</wallet-summary>

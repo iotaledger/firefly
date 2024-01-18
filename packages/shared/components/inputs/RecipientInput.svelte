@@ -17,11 +17,11 @@
 
     let error: string
     let selected: IOption =
-        recipient?.type === 'account'
-            ? { key: recipient.account.name, value: recipient.account.depositAddress }
+        recipient?.type === 'wallet'
+            ? { key: recipient.wallet.name, value: recipient.wallet.depositAddress }
             : { value: recipient?.address }
 
-    $: accountOptions = isLayer2 ? <IOption[]>[] : getLayer1AccountOptions()
+    $: walletOptions = isLayer2 ? <IOption[]>[] : getLayer1WalletOptions()
     $: recipient = getSubjectFromAddress(selected?.value)
     $: isLayer2, (error = '')
 
@@ -37,7 +37,7 @@
                 } else {
                     validateBech32Address(getNetworkHrp(), recipient?.address)
                 }
-            } else if (recipient?.type === 'account') {
+            } else if (recipient?.type === 'wallet') {
                 if (isLayer2) {
                     throw new Layer1RecipientError()
                 }
@@ -52,7 +52,7 @@
         }
     }
 
-    function getLayer1AccountOptions(): IOption[] {
+    function getLayer1WalletOptions(): IOption[] {
         return $visibleActiveWallets
             .filter((wallet) => wallet.id !== $selectedWalletId)
             .map((wallet) => ({
@@ -70,7 +70,7 @@
     bind:modal
     bind:error
     {disabled}
-    options={accountOptions}
+    options={walletOptions}
     pickerHeight="max-h-48"
     {...$$restProps}
     let:option

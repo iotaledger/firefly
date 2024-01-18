@@ -348,7 +348,7 @@
                 "title": "Balance finder",
                 "description": "Perform an extended search of your balance"
             },
-            "hiddenAccounts": {
+            "hiddenWallets": {
                 "title": "Hidden wallets",
                 "description": "Selecting this options will show wallets that were previously hidden"
             },
@@ -818,7 +818,7 @@
             "title": "Backup your stronghold file",
             "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
         },
-        "deeplinkAccountSwitch": {
+        "deeplinkWalletSwitch": {
             "title": "Select a wallet",
             "body": "You just followed a deep link. Please select the wallet with which you want to continue."
         },
@@ -826,7 +826,7 @@
             "title": "Failed link",
             "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
-        "deleteAccount": {
+        "showDeleteWallet": {
             "title": "Delete {name}?",
             "body": "Are you sure you want to delete this wallet?",
             "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
@@ -1191,7 +1191,7 @@
         "addProposal": {
             "title": "Add proposal",
             "body": "Please provide the information listed below to add a proposal.",
-            "addToAllAccounts": "Add the proposal to all accounts"
+            "addToAllWallets": "Add the proposal to all accounts"
         },
         "editProposal": {
             "title": "Edit proposal",
@@ -1343,7 +1343,7 @@
         "customizeAcount": "Customise wallet",
         "hideAccount": "Hide wallet",
         "showAccount": "Unhide wallet",
-        "deleteAccount": "Delete wallet",
+        "showDeleteWallet": "Delete wallet",
         "max": "Max",
         "addNode": "Add node",
         "addingNode": "Adding node",
@@ -1383,7 +1383,7 @@
         "viewAddressHistory": "View address history",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
-        "showHiddenAccounts": "Show hidden wallets",
+        "showHiddenWallets": "Show hidden wallets",
         "confirm": "Confirm",
         "hideNetworkStatistics": "Hide network statistics",
         "findWallets": "Find wallets",
@@ -1610,12 +1610,8 @@
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
         "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
-        "fromAddress": "from {account}",
-        "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "fromAddress": "from {address}",
+        "toAddress": "to {address}",
         "stakingTransaction": "Staking Transaction",
         "unstakingTransaction": "Unstaking Transaction",
         "legacyNetwork": "Legacy Network",

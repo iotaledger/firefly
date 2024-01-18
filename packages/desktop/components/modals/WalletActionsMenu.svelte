@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { MenuItem, MenuItemVariant, Modal, ToggleHiddenAccountMenuItem } from '@ui'
+    import { MenuItem, MenuItemVariant, Modal, ToggleHiddenWalletMenuItem } from '@ui'
 
     import { localize } from '@core/i18n'
     import { activeProfile, isActiveLedgerProfile } from '@core/profile/stores'
@@ -16,10 +16,10 @@
 
     export let modal: Modal = undefined
 
-    const showDeleteAccount = true // TODO(2.0) Is there anything preventing us from deleting any account ?
+    const showDeleteWallet = true // TODO(2.0) Is there anything preventing us from deleting any account ?
     // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
 
-    function onCustomiseAccountClick(): void {
+    function onCustomiseWalletClick(): void {
         openPopup({ id: PopupId.ManageWallet })
         modal?.close()
     }
@@ -60,11 +60,11 @@
         })
     }
 
-    function onDeleteAccountClick(): void {
+    function onDeleteWalletClick(): void {
         openPopup({
-            id: PopupId.DeleteAccount,
+            id: PopupId.DeleteWallet,
             props: {
-                account: selectedWallet,
+                wallet: selectedWallet,
                 deleteWallet,
             },
         })
@@ -73,7 +73,7 @@
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
-    <account-actions-menu class="flex flex-col">
+    <wallet-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
         {#if $activeProfile?.network?.id === NetworkId.Iota || $activeProfile?.network?.id === NetworkId.IotaAlphanet}
             <MenuItem
@@ -82,7 +82,7 @@
                 onClick={onViewAddressHistoryClick}
             />
         {/if}
-        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
+        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseWalletClick} />
         {#if $isActiveLedgerProfile}
             <MenuItem
                 icon={Icon.Ledger}
@@ -90,15 +90,15 @@
                 onClick={onVerifyAddressClick}
             />
         {/if}
-        <ToggleHiddenAccountMenuItem onClick={modal?.close} />
+        <ToggleHiddenWalletMenuItem onClick={modal?.close} />
         <hr />
-        {#if showDeleteAccount}
+        {#if showDeleteWallet}
             <MenuItem
                 icon={Icon.Delete}
-                title={localize('actions.deleteAccount')}
-                onClick={onDeleteAccountClick}
+                title={localize('actions.showDeleteWallet')}
+                onClick={onDeleteWalletClick}
                 variant={MenuItemVariant.Error}
             />
         {/if}
-    </account-actions-menu>
+    </wallet-actions-menu>
 </Modal>
