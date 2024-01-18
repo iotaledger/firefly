@@ -3,7 +3,7 @@ import type { Ed25519BlockIssuerKey } from '@iota/sdk/out/types/block/output/blo
 import { selectedWallet } from '../stores'
 import { get } from 'svelte/store'
 
-// TODO(2.0): the implementation is incorrect, the deposit address should be the address of the selected block issuer account output , not the ed25519 address
+// TODO(2.0): Update the implementation to handle multiple accounts and use the selected account's address.
 export async function getDepositAddress(): Promise<string> {
     const wallet = get(selectedWallet)
     const accounts = await wallet?.accounts()
