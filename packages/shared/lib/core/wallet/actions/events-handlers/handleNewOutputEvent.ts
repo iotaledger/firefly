@@ -24,6 +24,7 @@ import {
     addActivitiesToWalletActivitiesInAllWalletActivities,
     WalletApiEventHandler,
     updateSelectedWallet,
+    getDepositAddress,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -95,8 +96,10 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     if (isAccountOutput) {
         const accounts = await wallet.accounts()
+        const depositAddress = await getDepositAddress(wallet)
         updateSelectedWallet({
             accountOutputs: accounts,
+            depositAddress,
         })
     }
 }
