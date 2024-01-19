@@ -18,7 +18,6 @@
 
     export let password: string
     export let withdrawableAmount: number
-    export let nonce: string
 
     const bip44Chain: Bip44 = {
         coinType: Number(getCoinType()),
@@ -31,7 +30,7 @@
     let isWithdrawing = false
     const { isStrongholdLocked } = $activeProfile
 
-    $: password && nonce && !$isStrongholdLocked && withdrawFromL2()
+    $: password && address && !$isStrongholdLocked && withdrawFromL2()
 
     function onCancelClick(): void {
         closePopup()
@@ -42,11 +41,19 @@
     }
 
     async function withdrawFromL2(): Promise<void> {
+        isWithdrawing = true
         if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
+            isWithdrawing = false
             displayNotificationForLedgerProfile('warning')
             return
         }
-        isWithdrawing = true
+
+        const nonce = await getNonceForWithdrawRequest(address)
+        if (!nonce) {
+            isWithdrawing = false
+            displayNotificationForLedgerProfile('warning')
+            return
+        }
         let withdrawRequest = await getLayer2WithdrawRequest(password, withdrawableAmount.toString(), nonce, bip44Chain)
         // get gas estimate for request with hardcoded amounts
         const gasEstimatePayload = await getEstimatedGasForOffLedgerRequest(withdrawRequest.request)
@@ -63,6 +70,7 @@
                 gasEstimate.toString()
             )
         } else {
+            isWithdrawing = false
             showErrorNotification(localize('error.send.notEnoughBalance'))
             return
         }
@@ -123,8 +131,9 @@
 
     onMount(async () => {
         address = getSelectedAccount().depositAddress
-        nonce = await getNonceForWithdrawRequest(address)
-        withdrawableAmount = await getArchivedBaseTokens(address)
+        if (!withdrawableAmount) {
+            withdrawableAmount = await getArchivedBaseTokens(address)
+        }
     })
 </script>
 
@@ -151,7 +160,7 @@
         <Button
             classes="w-full"
             onClick={onWithdrawFromL2Click}
-            disabled={!withdrawableAmount}
+            disabled={!withdrawableAmount || isWithdrawing}
             isBusy={isWithdrawing}
             busyMessage={localize('popups.withdrawFromL2.withdrawing')}
         >
