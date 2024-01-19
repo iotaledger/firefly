@@ -5,8 +5,9 @@ import {
     WalletEventType,
     CommonOutput,
     UnlockConditionType,
+    AddressType,
+    AddressUnlockCondition,
 } from '@iota/sdk/out/types'
-
 import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import {
@@ -47,16 +48,29 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
 
+    const isImplicitAccountOutput =
+        output.type === OutputType.Basic &&
+        (output as CommonOutput).unlockConditions.length === 1 &&
+        (
+            (output as CommonOutput).unlockConditions.find(
+                (cmnOutput) => cmnOutput.type === UnlockConditionType.Address
+            ) as AddressUnlockCondition
+        )?.address.type === AddressType.ImplicitAccountCreation
+
+    if (isImplicitAccountOutput) {
+        const implicitAccounts = await wallet.implicitAccounts()
+        updateSelectedWallet({
+            implicitAccountOutputs: implicitAccounts,
+        })
+        return
+    }
+
     const address = getBech32AddressFromAddressTypes(outputData.address)
     const isNewAliasOutput =
         output.type === OutputType.Account &&
         !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
 
-    const isImplicitAccountOutput =
-        output.type === OutputType.Basic &&
-        (output as CommonOutput).unlockConditions.length === 1 &&
-        (output as CommonOutput).unlockConditions.find((cmnOutput) => cmnOutput.type === UnlockConditionType.Address)
     const isAccountOutput = output.type === OutputType.Account
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
