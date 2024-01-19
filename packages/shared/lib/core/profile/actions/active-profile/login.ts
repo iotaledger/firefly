@@ -41,6 +41,7 @@ import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfil
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { checkActiveProfileAuth, getWallets } from '@core/profile'
 import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
+import { selectedWallet } from 'shared/lib/core/wallet'
 
 // TODO(2.0) Remove usage of profile manager
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
@@ -149,7 +150,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 8: start background sync
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
-            await startBackgroundSync({ syncIncomingTransactions: true })
+            if (get(selectedWallet)?.accountOutputs.length === 0) {
+                await startBackgroundSync({ syncIncomingTransactions: true, syncImplicitAccounts: true })
+            } else {
+                await startBackgroundSync({ syncIncomingTransactions: true })
+            }
 
             // Step 9: finish login
             incrementLoginProgress()
