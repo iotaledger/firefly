@@ -2,18 +2,18 @@
     import { Button, FontWeight, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
+    import { selectedWallet } from '@core/wallet'
 
     let isVisibleAddress: boolean = false
+    let implicitAccountCreationAddress: string = ''
 
-    // TODO: Replace with proper address
-    const DUMMY_ADDRESS = 'iota1q9f0mlq8yxpx2nck8a0slxnzr4ef2ek8f5gqxlzd0wasgp73utryjtzcp98'
-
-    function showAddress() {
+    async function showAddress() {
+        implicitAccountCreationAddress = await $selectedWallet?.implicitAccountCreationAddress()
         isVisibleAddress = true
     }
 
     function onCopyClick(): void {
-        setClipboard(DUMMY_ADDRESS)
+        setClipboard(implicitAccountCreationAddress)
     }
 </script>
 
@@ -60,7 +60,7 @@
                         fontSize="14"
                         fontWeight={FontWeight.medium}
                         color="gray-900"
-                        darkColor="white">{DUMMY_ADDRESS}</Text
+                        darkColor="white">{implicitAccountCreationAddress}</Text
                     >
                 </div>
                 <Button outline onClick={onCopyClick} classes="shrink-0"
