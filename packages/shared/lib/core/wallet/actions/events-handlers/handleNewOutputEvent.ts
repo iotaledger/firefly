@@ -101,13 +101,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         checkAndRemoveProfilePicture()
     }
 
-    if (isImplicitAccountOutput) {
-        const implicitAccounts = await wallet.implicitAccounts()
-        updateSelectedWallet({
-            implicitAccountOutputs: implicitAccounts,
-        })
-    }
-
     if (isAccountOutput) {
         const accounts = await wallet.accounts()
         const depositAddress = await getDepositAddress()
