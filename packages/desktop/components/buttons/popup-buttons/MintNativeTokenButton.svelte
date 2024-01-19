@@ -8,8 +8,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { TextHintVariant } from 'shared/components/enums'
 
-    // TODO(2.0) This should check if it has account outputs now.
-    $: hasAccounts = $selectedWallet.balances?.accounts.length > 0
+    $: hasAccounts = $selectedWallet?.accountOutputs.length > 0
 
     function onMintNativeTokenClick(): void {
         resetMintTokenDetails()

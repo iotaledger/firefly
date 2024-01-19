@@ -36,7 +36,6 @@ import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfil
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
 
-// TODO(2.0) Remove usage of profile manager
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
     try {
