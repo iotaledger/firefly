@@ -7,9 +7,7 @@ export async function getDepositAddress(): Promise<string> {
     const wallet = get(selectedWallet)
     const accounts = await wallet?.accounts()
     if (accounts?.length) {
-        // TODO: when we have selectedAccount in the store,  we need to find the account with the blockIssuer feature
-        const depositAddress = (accounts[0]?.output as AccountOutput).accountId ?? ''
-        return depositAddress
+        return (accounts[0]?.output as AccountOutput).accountId ?? ''
     } else {
         return ''
     }
