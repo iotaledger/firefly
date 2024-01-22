@@ -38,7 +38,7 @@ export async function buildWalletState(
 
     try {
         balances = await wallet.getBalance()
-        depositAddress = await getDepositAddress()
+        depositAddress = await getDepositAddress(wallet)
         votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
