@@ -1,5 +1,13 @@
-import { NewOutputWalletEvent, OutputType, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
-
+import {
+    WalletEvent,
+    NewOutputWalletEvent,
+    OutputType,
+    WalletEventType,
+    CommonOutput,
+    UnlockConditionType,
+    AddressType,
+    AddressUnlockCondition,
+} from '@iota/sdk/out/types'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import {
@@ -15,6 +23,8 @@ import {
     preprocessGroupedOutputs,
     addActivitiesToWalletActivitiesInAllWalletActivities,
     WalletApiEventHandler,
+    updateSelectedWallet,
+    getDepositAddress,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -36,11 +46,30 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
 
+    const isImplicitAccountOutput =
+        output.type === OutputType.Basic &&
+        (output as CommonOutput).unlockConditions.length === 1 &&
+        (
+            (output as CommonOutput).unlockConditions.find(
+                (cmnOutput) => cmnOutput.type === UnlockConditionType.Address
+            ) as AddressUnlockCondition
+        )?.address.type === AddressType.ImplicitAccountCreation
+
+    if (isImplicitAccountOutput) {
+        const implicitAccounts = await wallet.implicitAccounts()
+        updateSelectedWallet({
+            implicitAccountOutputs: implicitAccounts,
+        })
+        return
+    }
+
     const address = getBech32AddressFromAddressTypes(outputData.address)
     const isNewAliasOutput =
         output.type === OutputType.Account &&
         !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
+
+    const isAccountOutput = output.type === OutputType.Account
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
@@ -68,5 +97,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()
+    }
+
+    if (isAccountOutput) {
+        const accounts = await wallet.accounts()
+        const depositAddress = await getDepositAddress(wallet)
+        updateSelectedWallet({
+            accountOutputs: accounts,
+            depositAddress,
+        })
     }
 }

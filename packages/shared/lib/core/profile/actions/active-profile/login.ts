@@ -35,6 +35,7 @@ import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletA
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
+import { selectedWallet } from 'shared/lib/core/wallet'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -94,7 +95,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 7: start background sync
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
-            await startBackgroundSync({ syncIncomingTransactions: true })
+            if (get(selectedWallet)?.accountOutputs.length === 0) {
+                await startBackgroundSync({ syncIncomingTransactions: true, syncImplicitAccounts: true })
+            } else {
+                await startBackgroundSync({ syncIncomingTransactions: true })
+            }
 
             // Step 8: finish login
             incrementLoginProgress()
