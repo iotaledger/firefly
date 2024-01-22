@@ -1,10 +1,20 @@
 <script lang="ts">
-    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '../index'
+    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute, implicitAccountCreationRouter } from '../index'
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { selectedWallet } from '@core/wallet'
 
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
+
+    $: {
+        if (
+            $implicitAccountCreationRoute === ImplicitAccountCreationRoute.OneTimeDeposit &&
+            $selectedWallet?.implicitAccountOutputs?.length > 0
+        ) {
+            $implicitAccountCreationRouter.next()
+        }
+    }
 </script>
 
 <implicit-account-creation-view class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">
