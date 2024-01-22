@@ -1734,10 +1734,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/marked@^4.0.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-4.3.1.tgz#45fb6dfd47afb595766c71ed7749ead23f137de3"
-  integrity sha512-vSSbKZFbNktrQ15v7o1EaH78EbWV+sPQbPjHG+Cp8CaNcPFUEfjZ0Iml/V0bFDwsTlYe8o6XC5Hfdp91cqPV2g==
+"@types/marked@^5.0.1":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-5.0.2.tgz#ca6b0cd7a5c8799c8cd0963df0b3e1a9021dcdfa"
+  integrity sha512-OucS4KMHhFzhz27KxmWg7J+kIYqyqoW5kdIEI319hqARQQUTqhao3M/F+uFnDXD0Rg72iDDZxZNxq5gvctmLlg==
 
 "@types/mime@*":
   version "3.0.1"
@@ -6037,10 +6037,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-marked@^4.0.10:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.3.0.tgz#796362821b019f734054582038b116481b456cf3"
-  integrity sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==
+marked@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-5.1.2.tgz#62b5ccfc75adf72ca3b64b2879b551d89e77677f"
+  integrity sha512-ahRPGXJpjMjwSOlBoTMZAK7ATXkli5qCPxZ21TG44rx1KEo44bii4ekgTDQPNRQ4Kh7JMb9Ub1PVk1NxRSsorg==
 
 matcher@^3.0.0:
   version "3.0.0"
@@ -8143,13 +8143,13 @@ svelte-loader@^3.1.9:
     svelte-dev-helper "^1.1.9"
     svelte-hmr "^0.14.2"
 
-svelte-markdown@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/svelte-markdown/-/svelte-markdown-0.2.3.tgz#16c6db61605512100cf25c3e18f8e4105837895c"
-  integrity sha512-2h680NzTXnAD0CXhxe3GeHl6W+ayG4iKQRl+BIDRw+R0mUE0OiNxP1Vt8Rn+aWevB/LBiBIPCAwvL+0BkG057A==
+svelte-markdown@0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/svelte-markdown/-/svelte-markdown-0.4.1.tgz#ddf13cfd6e0f29a02a82854b48766b527ec90f8d"
+  integrity sha512-pOlLY6EruKJaWI9my/2bKX8PdTeP5CM0s4VMmwmC2prlOkjAf+AOmTM4wW/l19Y6WZ87YmP8+ZCJCCwBChWjYw==
   dependencies:
-    "@types/marked" "^4.0.1"
-    marked "^4.0.10"
+    "@types/marked" "^5.0.1"
+    marked "^5.1.2"
 
 svelte-preprocess@^5.0.4:
   version "5.0.4"
