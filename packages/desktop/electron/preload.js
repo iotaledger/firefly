@@ -163,6 +163,13 @@ try {
 
             return client
         },
+        async getSecretManager(managerId) {
+            const manager = profileManagers[managerId]
+            const secretManager = await manager.getSecretManager()
+            bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, secretManager)
+
+            return secretManager
+        },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'
             const snapshotRoundsV2 = 100
@@ -177,11 +184,6 @@ try {
         },
         async migrateDbChrysalisToStardust(path, pinCode) {
             return IotaSdk.migrateDbChrysalisToStardust(path, pinCode)
-        },
-        async signEd25519(secretManagerOptions, message, chain) {
-            const secretManager = new IotaSdk.SecretManager(secretManagerOptions)
-            const signature = await secretManager.signEd25519(message, chain)
-            return signature
         },
     })
     contextBridge.exposeInMainWorld('__ELECTRON__', ElectronApi)

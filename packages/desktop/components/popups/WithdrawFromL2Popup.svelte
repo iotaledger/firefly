@@ -3,7 +3,7 @@
     import { getSelectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
     import { getArchivedBaseTokens } from '@core/layer-2/helpers/getArchivedBaseTokens'
-    import { getBaseToken, getCoinType, activeProfile, isActiveLedgerProfile } from '@core/profile'
+    import { getBaseToken, getCoinType, activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { truncateString } from '@core/utils'
     import { formatTokenAmountPrecise, getRequiredStorageDepositForMinimalBasicOutput } from '@core/wallet'
     import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
@@ -16,7 +16,7 @@
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { getEstimatedGasForOffLedgerRequest, getNonceForWithdrawRequest } from '@core/layer-2/helpers'
 
-    export let password: string
+    export let withdrawOnLoad = false
     export let withdrawableAmount: number
 
     const bip44Chain: Bip44 = {
@@ -26,18 +26,47 @@
         addressIndex: 0,
     }
 
+    let error = ''
     let address: string | undefined = undefined
     let isWithdrawing = false
     const { isStrongholdLocked } = $activeProfile
 
-    $: password && address && !$isStrongholdLocked && withdrawFromL2()
+    $: withdrawOnLoad && address && !$isStrongholdLocked && withdrawFromL2()
 
     function onCancelClick(): void {
         closePopup()
     }
 
-    function onWithdrawFromL2Click(): void {
-        openUnlockStrongholdPopup()
+    async function onWithdrawFromL2Click(): Promise<void> {
+        if ($isSoftwareProfile && $isStrongholdLocked) {
+            openUnlockStrongholdPopup()
+        } else {
+            await handleAction(withdrawFromL2)
+        }
+    }
+
+    async function handleAction(callback: () => Promise<void>): Promise<void> {
+        try {
+            error = ''
+
+            if ($isActiveLedgerProfile && !$ledgerNanoStatus.connected) {
+                displayNotificationForLedgerProfile('warning')
+                return
+            }
+
+            await callback()
+        } catch (err) {
+            error = localize(err.error)
+
+            if ($isActiveLedgerProfile) {
+                displayNotificationForLedgerProfile('error', true, true, err)
+            } else {
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+            }
+        }
     }
 
     async function withdrawFromL2(): Promise<void> {
@@ -54,7 +83,7 @@
             displayNotificationForLedgerProfile('warning')
             return
         }
-        let withdrawRequest = await getLayer2WithdrawRequest(password, withdrawableAmount.toString(), nonce, bip44Chain)
+        let withdrawRequest = await getLayer2WithdrawRequest(withdrawableAmount.toString(), nonce, bip44Chain)
         // get gas estimate for request with hardcoded amounts
         const gasEstimatePayload = await getEstimatedGasForOffLedgerRequest(withdrawRequest.request)
         const minRequiredStorageDeposit: number = await getRequiredStorageDepositForMinimalBasicOutput()
@@ -63,7 +92,6 @@
         if (withdrawableAmount > Number(minRequiredStorageDeposit) + Number(gasEstimate)) {
             // Create new withdraw request with correct gas budget
             withdrawRequest = await getLayer2WithdrawRequest(
-                password,
                 (withdrawableAmount - gasEstimate).toString(),
                 nonce,
                 bip44Chain,
@@ -95,16 +123,16 @@
         openPopup({
             id: PopupId.UnlockStronghold,
             props: {
-                onSuccess: (password: string) => {
+                onSuccess: () => {
                     openPopup({
                         id: PopupId.WithdrawFromL2,
                         props: {
-                            password,
+                            withdrawOnLoad: true,
                             withdrawableAmount,
                         },
                     })
                 },
-                onCancelled: function () {
+                onCancelled: () => {
                     openPopup({
                         id: PopupId.WithdrawFromL2,
                         props: {
@@ -112,7 +140,6 @@
                         },
                     })
                 },
-                returnPassword: true,
                 subtitle: localize('popups.password.backup'),
             },
         })

@@ -1,16 +1,5 @@
 import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/sdk/out/types'
-import {
-    AliasId,
-    Bip44,
-    Client,
-    Ed25519Signature,
-    FoundryId,
-    HexEncodedString,
-    NftId,
-    Output,
-    SecretManagerMethodHandler,
-    SecretManagerType,
-} from '@iota/sdk'
+import { AliasId, Client, FoundryId, HexEncodedString, NftId, Output, SecretManager } from '@iota/sdk'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -27,6 +16,7 @@ export interface IApi {
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
     getAccounts(profileManagerId: string): Promise<IAccount[]>
     getClient(profileManagerId: string): Promise<Client>
+    getSecretManager(profileManagerId: string): Promise<SecretManager>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,
@@ -48,10 +38,4 @@ export interface IApi {
     nftIdToBech32(nftId: string, bech32Hrp: string): string
     computeOutputId(id: TransactionId, index: number): Promise<OutputId>
     outputHexBytes(output: Output): Promise<HexEncodedString>
-    // Mapped from SecretManager
-    signEd25519(
-        options: SecretManagerType | SecretManagerMethodHandler,
-        message: HexEncodedString,
-        chain: Bip44
-    ): Promise<Ed25519Signature>
 }

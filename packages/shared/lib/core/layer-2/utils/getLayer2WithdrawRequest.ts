@@ -3,12 +3,12 @@ import BigInteger from 'big-integer'
 import { SpecialStream } from '../classes'
 import { ACCOUNTS_CONTRACT, WITHDRAW } from '../constants'
 import { Blake2b } from '@iota/crypto.js'
-import { api, getSecretManagerFromProfileType } from '../../profile-manager'
-import { ProfileType, activeProfile, getStorageDirectoryOfProfile } from '../../profile'
+import { api, profileManager } from '../../profile-manager'
+import { activeProfile } from '../../profile'
 import { DEFAULT_CHAIN_CONFIGURATIONS } from '../../network'
 import { Converter } from '@iota/util.js'
 import { Bip44 } from '@iota/sdk/out/types'
-import type { HexEncodedString, StrongholdSecretManager } from '@iota/sdk'
+import { HexEncodedString } from '@iota/sdk'
 
 interface WithdrawRequest {
     request: HexEncodedString
@@ -16,7 +16,6 @@ interface WithdrawRequest {
 }
 
 export async function getLayer2WithdrawRequest(
-    password: string,
     allowance: string,
     nonce: string,
     bip44: Bip44,
@@ -43,17 +42,8 @@ export async function getLayer2WithdrawRequest(
 
     // Signing
     const essenceBytes = Converter.bytesToHex(Blake2b.sum256(metadataStream.finalBytes(), undefined), true) // Hashes the buffer that has been constructed so far (It is called the Tx Essence)
-
-    const profile = get(activeProfile)
-    const { id, type } = profile
-    const storagePath = await getStorageDirectoryOfProfile(id)
-
-    let secretManagerOptions = getSecretManagerFromProfileType(type, storagePath)
-    if (type !== ProfileType.Ledger) {
-        secretManagerOptions = secretManagerOptions as StrongholdSecretManager
-        secretManagerOptions.stronghold.password = password
-    }
-    const signed = await api.signEd25519(secretManagerOptions, essenceBytes, bip44) // Sign the essence with the secretManager and the Bip44 options set above.
+    const secretManager = await api.getSecretManager(get(profileManager).id)
+    const signed = await secretManager.signEd25519(essenceBytes, bip44) // Sign the essence with the secretManager and the Bip44 options set above.
     const publicKey = Converter.hexToBytes(signed.publicKey)
     const signature = Converter.hexToBytes(signed.signature)
 
