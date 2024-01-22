@@ -12,7 +12,7 @@ const prodConfig = () => ({
     afterSign: async () => {
         // eslint-disable-next-line no-useless-catch
         try {
-            await notarize(APP_ID, getAppName())
+            await notarize(getAppName())
         } catch (err) {
             // This catch is necessary or the promise rejection is swallowed
             throw err
