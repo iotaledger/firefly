@@ -1,7 +1,7 @@
-import { Writable } from 'svelte/store'
+import { SecretManager } from '@iota/sdk'
+import { Readable } from 'svelte/store'
 
-// TODO(2.0) Fix this
 export interface ILedgerNanoStatusPollingConfiguration {
     pollInterval?: number
-    profileManager?: Writable<IProfileManager>
+    secretManager?: Readable<SecretManager>
 }

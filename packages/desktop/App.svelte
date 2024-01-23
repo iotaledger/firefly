@@ -44,7 +44,7 @@
 
     appStage.set(AppStage[process.env.STAGE.toUpperCase()] ?? AppStage.ALPHA)
 
-    const { loggedIn, hasLoadedAccounts } = $activeProfile
+    const { loggedIn, hasLoadedWallets } = $activeProfile
 
     $: if ($activeProfile && !$loggedIn) {
         closePopup(true)
@@ -68,7 +68,7 @@
         document.dir = $localeDirection
     }
 
-    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedAccounts && $popupState.id !== 'busy'
+    $: isDashboardVisible = $appRoute === AppRoute.Dashboard && $hasLoadedWallets && $popupState.id !== 'busy'
 
     $: $nftDownloadQueue, downloadNextNftInQueue()
 

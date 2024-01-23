@@ -1,15 +1,15 @@
 import { onboardingProfile } from '../stores'
 import { deleteOnboardingProfile } from './deleteOnboardingProfile'
-import { destroyShimmerClaimingProfileManager } from './destroyShimmerClaimingProfileManager'
+import { destroyShimmerClaimingWallet } from './destroyShimmerClaimingWallet'
 
 export async function cleanupOnboarding(deleteProfile: boolean = false): Promise<void> {
     onboardingProfile.set(null)
-    await cleanupExtraProfileManagers()
+    await cleanupExtraWallets()
     if (deleteProfile) {
         await deleteOnboardingProfile()
     }
 }
 
-async function cleanupExtraProfileManagers(): Promise<void> {
-    await destroyShimmerClaimingProfileManager()
+async function cleanupExtraWallets(): Promise<void> {
+    await destroyShimmerClaimingWallet()
 }

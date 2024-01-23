@@ -3,22 +3,18 @@
     import { OnboardingLayout } from '@components'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { MAX_STRONGHOLD_PASSWORD_LENGTH, unlockStronghold } from '@core/profile'
-    import { activeProfile, updateActiveProfile } from '@core/profile/stores'
+    import { MAX_STRONGHOLD_PASSWORD_LENGTH, changePasswordAndUnlockStronghold, unlockStronghold } from '@core/profile'
     import { PASSWORD_REASON_MAP } from '@core/stronghold'
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-    import { onMount } from 'svelte'
     import zxcvbn from 'zxcvbn'
     import { updateStrongholdRouter } from '../update-stronghold-router'
     import { TextHintVariant } from 'shared/components/enums'
     import { AnimationEnum } from '@auxiliary/animation'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
-    import { changeStrongholdPassword } from '@core/secret-manager'
 
     export let oldPassword: string
     export let newPassword: string
-    export let isRecovery: boolean
 
     let passwordError: string = ''
     let confirmPassword: string = ''
@@ -63,7 +59,7 @@
         if (isPasswordValid) {
             try {
                 isSubmitBusy = true
-                await changeStrongholdPassword(oldPassword, newPassword)
+                await changePasswordAndUnlockStronghold(oldPassword, newPassword)
                 if ($onboardingProfile) {
                     updateOnboardingProfile({ strongholdPassword: newPassword })
                 }
@@ -95,24 +91,6 @@
             isSkipBusy = false
         }
     }
-
-    onMount(async () => {
-        // TODO(2.0) Profile manager is gone
-        if (!isRecovery && !$profileManager) {
-            const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
-            const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-            updateActiveProfile({ clientOptions })
-            // TODO(2.0): Update initialiseProfileManager to new logic
-            const manager = await initialiseProfileManager(
-                $activeProfile?.id,
-                storagePath,
-                coinType,
-                clientOptions,
-                secretManager
-            )
-            profileManager.set(manager)
-        }
-    })
 </script>
 
 <OnboardingLayout allowBack={false}>

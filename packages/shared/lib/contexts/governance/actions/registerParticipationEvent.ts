@@ -11,17 +11,17 @@ import { createProposalFromEvent } from '@contexts/governance'
 export async function registerParticipationEvent(
     eventId: ParticipationEventId,
     node: INode,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<ParticipationEventWithNodes> {
     const options: ParticipationEventRegistrationOptions = {
         node,
         eventsToRegister: [eventId],
     }
-    const eventMap = await account.registerParticipationEvents(options)
+    const eventMap = await wallet.registerParticipationEvents(options)
     const event = eventMap[eventId]
 
     const proposal = createProposalFromEvent(event)
-    addOrUpdateProposalToRegisteredProposals(proposal, account.id)
+    addOrUpdateProposalToRegisteredProposals(proposal, wallet.id)
 
     return event
 }

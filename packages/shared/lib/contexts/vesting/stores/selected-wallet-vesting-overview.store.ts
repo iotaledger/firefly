@@ -2,7 +2,7 @@ import { Readable, derived } from 'svelte/store'
 import NEW_SUPPLY_IOTA_STARDUST from '../assets/new_supply_iota_stardust.json'
 import { VestingOutputStatus } from '../enums'
 import { IRewardsPerAddresses, IVestingOverview } from '../interfaces'
-import { selectedWalletVestingOutputs, selectedWalletVestingPayouts } from './'
+import { selectedWalletVestingOutputs, selectedWalletVestingPayouts } from '.'
 
 export const selectedWalletVestingOverview: Readable<IVestingOverview> = derived(
     [selectedWalletVestingPayouts, selectedWalletVestingOutputs],

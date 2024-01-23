@@ -1,6 +1,5 @@
 import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
-import { MILLISECONDS_PER_SECOND } from '@core/utils/constants'
-import { AddressWithOutputs, IWalletState } from '@core/wallet/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
@@ -11,7 +10,7 @@ import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransacti
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     transactionInputs: OutputResponse[],
-    account: IWalletState
+    wallet: IWalletState
 ): IProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
@@ -19,10 +18,11 @@ export function preprocessGroupedOutputs(
         transactionInputs
     )
     const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
-    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, account.addressesWithOutputs)
+    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, wallet.depositAddress)
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         remainder: outputData.remainder,
+        // TODO(2.0) Treasure variant is gone
         output: outputData.output.type !== OutputType.Treasury ? outputData.output : undefined,
     }))
 
@@ -30,7 +30,7 @@ export function preprocessGroupedOutputs(
         outputs: wrappedOutputs,
         transactionId: transactionMetadata?.transactionId,
         direction,
-        time: new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
+        time: new Date(), // TODO(2.0): new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
         inclusionState: InclusionState.Confirmed,
         utxoInputs,
         wrappedInputs,
@@ -41,7 +41,7 @@ export function preprocessGroupedOutputs(
 function getDirectionForOutputs(
     outputs: OutputData[],
     wrappedInputs: IWrappedOutput[],
-    accountAddressesWithOutputs: AddressWithOutputs[]
+    depositAddress: string
 ): ActivityDirection {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
     if (nonRemainderOutputs.length === 0) {
@@ -49,11 +49,10 @@ function getDirectionForOutputs(
     }
     const output =
         nonRemainderOutputs[0].output.type !== OutputType.Treasury ? nonRemainderOutputs[0].output : undefined
-    const accountAddresses = accountAddressesWithOutputs.map((addressWithOutputs) => addressWithOutputs.address)
     const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
-    const isRecipientOneOfAccountAddresses = accountAddresses.includes(recipientAddress)
-    const isSenderOneOfAccountAddresses = accountAddresses.includes(senderAddress)
+    const isRecipientOneOfAccountAddresses = depositAddress === recipientAddress
+    const isSenderOneOfAccountAddresses = depositAddress === senderAddress
     const isSelfTransaction = isRecipientOneOfAccountAddresses && isSenderOneOfAccountAddresses
 
     if (isSelfTransaction) {

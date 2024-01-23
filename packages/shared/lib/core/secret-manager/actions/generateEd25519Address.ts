@@ -1,20 +1,18 @@
 import { GenerateAddressOptions } from '@iota/sdk/out/types'
-import { activeSecretManager } from '../stores'
 import { get } from 'svelte/store'
+import { activeProfileSecretManager } from '../stores'
 
-// TODO(2.0): Fix all usages
 export async function generateEd25519Address(
-    accountIndex: number,
+    accountIndex: number, // TODO(2.0) account indexes are gone
     options: GenerateAddressOptions,
     bech32Hrp: string
 ): Promise<string | undefined> {
-    const secretManager = get(activeSecretManager)
+    const secretManager = get(activeProfileSecretManager)
 
     if (!secretManager) {
         return undefined
     }
 
-    // TODO(2.0) Ledger secret manager doesn't support this
     return (
         await secretManager.generateEd25519Addresses({
             accountIndex,

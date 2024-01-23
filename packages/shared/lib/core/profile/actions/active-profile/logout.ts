@@ -41,11 +41,11 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
 }
 
 function cleanupProfileState(clearActiveProfile: boolean): void {
-    const { lastActiveAt, loggedIn, hasLoadedAccounts } = get(activeProfile)
+    const { lastActiveAt, loggedIn, hasLoadedWallets } = get(activeProfile)
 
     loggedIn.set(false)
     lastActiveAt.set(new Date())
-    hasLoadedAccounts.set(false)
+    hasLoadedWallets.set(false)
     resetSelectedWalletId()
 
     void stopDownloadingNftMediaFromQueue()

@@ -2,10 +2,8 @@ import { Balance, OutputData } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
-import { getAddressesWithOutputs } from './getAddressesWithOutputs'
-import { getDepositAddress } from '../utils'
+import { getDepositAddress } from '../utils/getDepositAddress'
 
-// TODO(2.0): Fix usages of buildAccountState
 export async function buildWalletState(
     wallet: IWallet,
     walletPersistedData: IPersistedWalletData
@@ -33,6 +31,7 @@ export async function buildWalletState(
 
     let depositAddress = ''
     let votingPower = ''
+    let walletOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
     let implicitAccountOutputs: OutputData[] = []
 
@@ -42,12 +41,10 @@ export async function buildWalletState(
         votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
+        walletOutputs = await wallet.outputs()
     } catch (err) {
         console.error(err)
     }
-
-    // TODO(2.0) Fix
-    const addressesWithOutputs = await getAddressesWithOutputs(wallet)
 
     return {
         ...wallet,
@@ -59,7 +56,7 @@ export async function buildWalletState(
         hasConsolidatingOutputsTransactionInProgress: false,
         isTransferring: false,
         votingPower,
-        addressesWithOutputs,
+        walletOutputs,
         accountOutputs,
         implicitAccountOutputs,
     } as IWalletState

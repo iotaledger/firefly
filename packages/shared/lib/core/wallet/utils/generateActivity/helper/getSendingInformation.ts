@@ -11,14 +11,14 @@ import { CommonOutput } from '@iota/sdk/out/types'
 export function getSendingInformation(
     processedTransaction: IProcessedTransaction,
     output: CommonOutput,
-    account: IWalletState
+    wallet: IWalletState
 ): SenderInfo {
     const { direction, wrappedInputs } = processedTransaction
 
     const recipient = getRecipientFromOutput(output)
     const sender = wrappedInputs?.length
         ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs))
-        : getSenderFromTransaction(direction === ActivityDirection.Incoming, account.depositAddress, output)
+        : getSenderFromTransaction(direction === ActivityDirection.Incoming, wallet.depositAddress, output)
 
     const subject = direction === ActivityDirection.Incoming ? sender : recipient
     const isInternal = isSubjectInternal(subject)

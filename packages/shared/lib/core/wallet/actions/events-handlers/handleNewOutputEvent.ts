@@ -8,7 +8,7 @@ import {
     AddressType,
     AddressUnlockCondition,
 } from '@iota/sdk/out/types'
-import { addNftsToDownloadQueue, addOrUpdateNftInAllAccountNfts, buildNftFromNftOutput } from '@core/nfts'
+import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
 import { checkAndRemoveProfilePicture } from '@core/profile/actions'
 import {
     ActivityType,
@@ -17,7 +17,6 @@ import {
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
     allWalletActivities,
-    getAddressesWithOutputs,
     syncBalance,
     validateWalletApiEvent,
     getBech32AddressFromAddressTypes,
@@ -39,7 +38,6 @@ export function handleNewOutputEvent(walletId: string): WalletApiEventHandler {
     }
 }
 
-// TODO(2.0) Use wallet instead of accounts and fix all usages
 export async function handleNewOutputEventInternal(walletId: string, payload: NewOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const outputData = payload.output
@@ -75,10 +73,10 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
-        const addressesWithOutputs = await getAddressesWithOutputs(wallet)
-        updateActiveWallet(wallet.id, { addressesWithOutputs })
+        const walletOutputs = await wallet.outputs()
+        updateActiveWallet(wallet.id, { walletOutputs })
 
-        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], account)
+        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
         const activities = await generateActivities(processedOutput, wallet)
         for (const activity of activities) {
@@ -95,7 +93,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
         const nft = buildNftFromNftOutput(wrappedOutput, wallet.depositAddress)
-        addOrUpdateNftInAllAccountNfts(wallet.id, nft)
+        addOrUpdateNftInAllWalletNfts(wallet.id, nft)
         void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()

@@ -8,7 +8,7 @@ const downloadItems = {}
 
 export function initNftDownloadHandlers() {
     ipcMain.removeHandler('nft-download')
-    ipcMain.handle('nft-download', async (event, url, destination, nftId, accountIndex) => {
+    ipcMain.handle('nft-download', async (event, url, destination, nftId, walletId) => {
         const userPath = app.getPath('userData')
         const directory = app.isPackaged ? userPath : __dirname
 
@@ -20,11 +20,11 @@ export function initNftDownloadHandlers() {
             showProgressBar: true,
             onCompleted: () => {
                 delete downloadItems[nftId]
-                getOrInitWindow('main').webContents.send('nft-download-done', { nftId, accountIndex })
+                getOrInitWindow('main').webContents.send('nft-download-done', { nftId, walletId })
             },
             onCancel: () => {
                 delete downloadItems[nftId]
-                getOrInitWindow('main').webContents.send('nft-download-interrupted', { nftId, accountIndex })
+                getOrInitWindow('main').webContents.send('nft-download-interrupted', { nftId, walletId })
             },
             onStarted: (item) => (downloadItems[nftId] = item),
         })

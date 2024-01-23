@@ -5,7 +5,7 @@ import { allWalletActivities } from '../../stores'
 import { refreshWalletAssetsForActiveProfile } from '../refreshWalletAssetsForActiveProfile'
 import { getAsyncStatus } from '@core/wallet/utils/generateActivity/helper'
 
-export function setAsyncStatusOfAccountActivities(time: Date): void {
+export function setAsyncStatusOfWalletActivities(time: Date): void {
     const balancesToUpdate: string[] = []
     allWalletActivities.update((state) => {
         Object.entries(state).forEach(([walletId, walletActivies]) => {

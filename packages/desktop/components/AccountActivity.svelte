@@ -6,7 +6,7 @@
         activitySearchTerm,
         queriedActivities,
         selectedWalletActivities,
-        setAsyncStatusOfAccountActivities,
+        setAsyncStatusOfWalletActivities,
     } from '@core/wallet'
     import { ActivityTile, Text, TextInput, TogglableButton, FontWeight } from '@ui'
     import { Filter } from '@components'
@@ -21,7 +21,7 @@
 
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
-    $: setAsyncStatusOfAccountActivities($time)
+    $: setAsyncStatusOfWalletActivities($time)
     $: if (searchActive && $selectedWalletActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue

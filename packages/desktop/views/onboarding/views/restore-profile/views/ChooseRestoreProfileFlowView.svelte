@@ -1,6 +1,11 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { RestoreProfileType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        RestoreProfileType,
+        initialiseOnboardingProfile,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { ProfileType, clearProfileFromMemory, removeProfileFolder } from '@core/profile'
@@ -25,8 +30,7 @@
         isBusy = { ...isBusy, [restoreProfileType]: true }
         const type = restoreProfileType === RestoreProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
         updateOnboardingProfile({ type, restoreProfileType })
-        // TODO(2.0) This is gone
-        await initialiseProfileManagerFromOnboardingProfile()
+        await initialiseOnboardingProfile()
         $restoreProfileRouter.next()
     }
 
@@ -36,11 +40,11 @@
 
     onMount(async () => {
         // Clean up if user has navigated back to this view
-        if ($onboardingProfile.hasInitialisedProfileManager) {
+        if ($onboardingProfile.secretManagerOptions) {
             await clearProfileFromMemory()
             await removeProfileFolder($onboardingProfile.id)
         }
-        updateOnboardingProfile({ type: undefined, restoreProfileType: undefined, hasInitialisedProfileManager: false })
+        updateOnboardingProfile({ type: undefined, restoreProfileType: undefined, secretManagerOptions: undefined })
     })
 </script>
 

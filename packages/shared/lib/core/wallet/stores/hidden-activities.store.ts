@@ -12,7 +12,7 @@ export function isActivityHiddenForWalletId(walletId: string, activityId: string
     return activities ? activities.includes(activityId) : false
 }
 
-export function removeActivityFromHiddenActivities(walletId: number, activityId: string): void {
+export function removeActivityFromHiddenActivities(walletId: string, activityId: string): void {
     const activities = get(hiddenActivities)?.[get(activeProfileId)]?.[walletId]
     if (activities) {
         hiddenActivities.update((state) => {
