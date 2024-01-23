@@ -7,6 +7,8 @@ export const activeProfileSecretManager = writable<SecretManager | null>(null)
 
 // Required to check if there is already a created instance of secretManager
 let oldSecretManagerOptions: SecretManagerType | null = null
+// subscribe is needed because a derived store is only subscribed when used in a svelte component
+// activeProfileSecretManager is used outside of svelte components too
 activeProfile.subscribe((profile) => {
     // Dont create a new instance of secretManager when it is already initialized
     if (profile.secretManagerOptions && oldSecretManagerOptions !== profile.secretManagerOptions) {
