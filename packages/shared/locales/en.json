@@ -438,7 +438,7 @@
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Initialising profile manager",
+                "prepareWallet": "Initialising profile",
                 "updateNodeInfo": "Checking node health",
                 "buildWallets": "Building wallets",
                 "loadAssets": "Loading native assets" ,
