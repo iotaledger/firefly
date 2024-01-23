@@ -16,7 +16,6 @@ import {
     addPersistedAsset,
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
-    allWalletActivities,
     syncBalance,
     validateWalletApiEvent,
     getBech32AddressFromAddressTypes,
@@ -63,15 +62,23 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         return
     }
 
-    const address = getBech32AddressFromAddressTypes(outputData.address)
-    const isNewAliasOutput =
-        output.type === OutputType.Account &&
-        !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
-    const isNftOutput = output.type === OutputType.Nft
-
     const isAccountOutput = output.type === OutputType.Account
 
-    if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
+    if (isAccountOutput) {
+        const accounts = await wallet.accounts()
+        const depositAddress = await getDepositAddress(wallet)
+        updateSelectedWallet({
+            accountOutputs: accounts,
+            depositAddress,
+        })
+        return
+    }
+
+    const address = getBech32AddressFromAddressTypes(outputData.address)
+
+    const isNftOutput = output.type === OutputType.Nft
+
+    if (wallet?.depositAddress === address && !outputData?.remainder) {
         await syncBalance(wallet.id)
         const walletOutputs = await wallet.outputs()
         updateActiveWallet(wallet.id, { walletOutputs })
@@ -97,14 +104,5 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()
-    }
-
-    if (isAccountOutput) {
-        const accounts = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet)
-        updateSelectedWallet({
-            accountOutputs: accounts,
-            depositAddress,
-        })
     }
 }
