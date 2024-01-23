@@ -19,15 +19,11 @@
             isStrongholdLocked.set(true)
 
             await unlockStronghold(strongholdPassword)
-
-            // TODO: uncomment when it doesn't break the application
-            // const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
-            // const prepareTransition = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
-            // const transition = await $selectedWallet?.implicitAccountTransition(outputId)
+            const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
+            await $selectedWallet?.implicitAccountTransition(outputId)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)
-        } finally {
             isBusy = false
         }
     }
@@ -55,6 +51,6 @@
     <Button
         onClick={unlockWalletAndCreateAccount}
         disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
-        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+        {isBusy}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>

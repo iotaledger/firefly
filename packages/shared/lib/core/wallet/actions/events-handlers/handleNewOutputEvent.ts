@@ -63,13 +63,23 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         return
     }
 
+    const isAccountOutput = output.type === OutputType.Account
+
+    if (isAccountOutput) {
+        const accounts = await wallet.accounts()
+        const depositAddress = await getDepositAddress(wallet)
+        updateSelectedWallet({
+            accountOutputs: accounts,
+            depositAddress,
+        })
+        return
+    }
+
     const address = getBech32AddressFromAddressTypes(outputData.address)
     const isNewAliasOutput =
         output.type === OutputType.Account &&
         !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
     const isNftOutput = output.type === OutputType.Nft
-
-    const isAccountOutput = output.type === OutputType.Account
 
     if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
         await syncBalance(wallet.id)
@@ -97,14 +107,5 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         void addNftsToDownloadQueue(walletId, [nft])
 
         checkAndRemoveProfilePicture()
-    }
-
-    if (isAccountOutput) {
-        const accounts = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet)
-        updateSelectedWallet({
-            accountOutputs: accounts,
-            depositAddress,
-        })
     }
 }
