@@ -45,7 +45,7 @@
     onMount(async () => {
         // Clean up if user has navigated back to this view from onboarding
         if ($onboardingProfile) {
-            if ($onboardingProfile.hasInitialisedProfileManager) {
+            if ($onboardingProfile.secretManagerOptions) {
                 await clearProfileFromMemory()
                 await removeProfileFolder($onboardingProfile.id)
             }

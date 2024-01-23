@@ -1,8 +1,6 @@
 import { get, writable } from 'svelte/store'
 import { Activity, AsyncData, BaseActivity } from '../types'
 
-// TODO(2.0) Rename file
-
 export const allWalletActivities = writable<Record<string, Activity[]>>({})
 
 export function addEmptyWalletActivitiesToAllWalletActivities(walletId: string): void {

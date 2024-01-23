@@ -1,24 +1,27 @@
+import { stopPollingLedgerNanoStatus } from 'shared/lib/core/ledger'
+import { clearProfileFromMemory } from 'shared/lib/core/profile'
+import { get } from 'svelte/store'
+import { OnboardingSecretManagerAlreadyInitializedError } from '../errors'
 import { buildInitialOnboardingProfile } from '../helpers'
-import { onboardingProfile } from '../stores'
+import { isOnboardingLedgerProfile, onboardingProfile, onboardingProfileSecretManager } from '../stores'
 
 /**
  * Builds a new onboarding profile and sets the Svelte store accordingly.
  */
-export function initialiseOnboardingProfile(
-    isDeveloperProfile: boolean
-    /* destroyPreviousManager = false*/
+export async function initialiseOnboardingProfile(
+    isDeveloperProfile = false,
+    destroyPreviousSecretManager = false
 ): Promise<void> {
-    // TODO(2.0) Profile manager is gone, we should maybe check onboarding SecretManager insteadd
-    // if (get(profileManager)) {
-    //     if (destroyPreviousManager) {
-    //         if (get(isOnboardingLedgerProfile)) {
-    //             stopPollingLedgerNanoStatus()
-    //         }
-    //         await clearProfileFromMemory()
-    //     } else {
-    //         throw new OnboardingProfileManagerAlreadyInitializedError()
-    //     }
-    // }
+    if (get(onboardingProfileSecretManager)) {
+        if (destroyPreviousSecretManager) {
+            if (get(isOnboardingLedgerProfile)) {
+                stopPollingLedgerNanoStatus()
+            }
+            await clearProfileFromMemory()
+        } else {
+            throw new OnboardingSecretManagerAlreadyInitializedError()
+        }
+    }
 
     const _newProfile = buildInitialOnboardingProfile(isDeveloperProfile)
     onboardingProfile.set(_newProfile)

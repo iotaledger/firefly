@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
     import { ownedNfts } from '@core/nfts'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { time } from '@core/app'
@@ -12,7 +12,7 @@
 
     let inputElement: HTMLInputElement | undefined = undefined
     let modal: Modal = undefined
-    const selectedNft = getNftByIdFromAllAccountNfts($selectedWalletId, nftId)
+    const selectedNft = getNftByIdFromAllWalletNfts($selectedWalletId, nftId)
     let selected: IOption | undefined = selectedNft
         ? { key: selectedNft.name, value: selectedNft.id }
         : { value: nftId }
@@ -54,7 +54,7 @@
     let:option
 >
     <NftImageOrIconBox
-        nft={getNftByIdFromAllAccountNfts($selectedWalletId, String(option?.value))}
+        nft={getNftByIdFromAllWalletNfts($selectedWalletId, String(option?.value))}
         size={NftSize.Small}
     />
 </SelectorInput>

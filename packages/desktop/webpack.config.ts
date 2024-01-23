@@ -233,6 +233,7 @@ const webpackConfig: Configuration[] = [
                     warnings: false,
                 },
             },
+            port: 3333,
         },
     },
     {

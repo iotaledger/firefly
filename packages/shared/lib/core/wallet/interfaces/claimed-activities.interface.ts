@@ -1,6 +1,6 @@
 export interface IClaimedActivitiesPerProfile {
     [profileId: string]: {
-        [accountIndex: string]: {
+        [walletId: string]: {
             [transactionId: string]: IClaimedActivities
         }
     }

@@ -61,7 +61,7 @@
     }
 
     function handleDeepLinkRequest(data: string): void {
-        if ($activeProfile?.hasLoadedAccounts) {
+        if ($activeProfile?.hasLoadedWallets) {
             handleDeepLink(data)
         }
     }

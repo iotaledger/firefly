@@ -5,12 +5,12 @@ import { generateActivities } from '@core/wallet/utils'
 
 export async function generateActivitiesFromProcessedTransactions(
     processedTransactions: IProcessedTransaction[],
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const activities: Activity[] = []
     for (const _preparedActivity of processedTransactions) {
         try {
-            const activitiesToAdd = await generateActivities(_preparedActivity, account)
+            const activitiesToAdd = await generateActivities(_preparedActivity, wallet)
             activities.push(...activitiesToAdd)
         } catch (err) {
             console.error(err)

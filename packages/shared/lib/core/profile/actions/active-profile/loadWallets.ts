@@ -4,15 +4,15 @@ import { activeWallets, activeProfile } from '../../stores'
 import { getWallets } from '../getWallets'
 
 export async function loadWallets(): Promise<void> {
-    const { hasLoadedAccounts } = get(activeProfile)
-    const walletResponse = await getWallets()
-    if (walletResponse.length === 0) {
-        hasLoadedAccounts.set(true)
+    const { hasLoadedWallets } = get(activeProfile)
+    const walletsResponse = await getWallets()
+    if (walletsResponse.length === 0) {
+        hasLoadedWallets.set(true)
         return
     }
-    if (walletResponse) {
-        const loadedWallets = await Promise.all(walletResponse?.map((accountResponse) => loadWallet(accountResponse)))
-        activeWallets.set(loadedWallets) // TODO(2.0) We can't sort this like this: sort((a, b) => a.getMetadata().index - b.getMetadata().index)
-        hasLoadedAccounts.set(true)
+    if (walletsResponse) {
+        const loadedWallets = await Promise.all(walletsResponse?.map((walletResponse) => loadWallet(walletResponse)))
+        activeWallets.set(loadedWallets)
+        hasLoadedWallets.set(true)
     }
 }

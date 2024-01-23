@@ -15,41 +15,40 @@ import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasi
 import { OutputType } from '@iota/sdk/out/types'
 import { generateVestingActivity } from './generateVestingActivity'
 
-// TODO(2.0) Use wallets instead of account
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     if (processedTransaction.wrappedInputs?.length > 0) {
-        return generateActivitiesFromProcessedTransactionsWithInputs(processedTransaction, account)
+        return generateActivitiesFromProcessedTransactionsWithInputs(processedTransaction, wallet)
     } else {
-        return generateActivitiesFromProcessedTransactionsWithoutInputs(processedTransaction, account)
+        return generateActivitiesFromProcessedTransactionsWithoutInputs(processedTransaction, wallet)
     }
 }
 
 async function generateActivitiesFromProcessedTransactionsWithInputs(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const { outputs, wrappedInputs } = processedTransaction
     const activities: Activity[] = []
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
     if (containsFoundryActivity) {
-        const foundryActivities = await generateActivitiesFromFoundryOutputs(processedTransaction, account)
+        const foundryActivities = await generateActivitiesFromFoundryOutputs(processedTransaction, wallet)
         activities.push(...foundryActivities)
     }
 
     const containsNftActivity = outputs.some((output) => output.output.type === OutputType.Nft)
     if (containsNftActivity) {
-        const nftActivities = await generateActivitiesFromNftOutputs(processedTransaction, account)
+        const nftActivities = await generateActivitiesFromNftOutputs(processedTransaction, wallet)
         activities.push(...nftActivities)
     }
 
     const containsAliasActivity =
         outputs.some((output) => output.output.type === OutputType.Alias) && !containsFoundryActivity
     if (containsAliasActivity) {
-        const aliasActivities = await generateActivitiesFromAliasOutputs(processedTransaction, account)
+        const aliasActivities = await generateActivitiesFromAliasOutputs(processedTransaction, wallet)
         activities.push(...aliasActivities)
     }
 
@@ -58,7 +57,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         ? processedTransaction?.outputs[0]
         : outputs.find((output) => isParticipationOutput(output.output))
     if (governanceOutput) {
-        const governanceActivity = await generateSingleGovernanceActivity(account, {
+        const governanceActivity = await generateSingleGovernanceActivity(wallet, {
             processedTransaction,
             wrappedOutput: governanceOutput,
             action: null,
@@ -67,7 +66,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     }
 
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity && !governanceOutput) {
-        const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, account)
+        const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }
 
@@ -80,7 +79,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
  */
 async function generateActivitiesFromProcessedTransactionsWithoutInputs(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
     const activities = await Promise.all(
@@ -93,17 +92,17 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
             }
             switch (params.type) {
                 case ActivityType.Basic:
-                    return generateSingleBasicActivity(account, params)
+                    return generateSingleBasicActivity(wallet, params)
                 case ActivityType.Governance:
-                    return generateSingleGovernanceActivity(account, params)
+                    return generateSingleGovernanceActivity(wallet, params)
                 case ActivityType.Foundry:
-                    return generateSingleFoundryActivity(account, params)
+                    return generateSingleFoundryActivity(wallet, params)
                 case ActivityType.Alias:
-                    return generateSingleAliasActivity(account, params)
+                    return generateSingleAliasActivity(wallet, params)
                 case ActivityType.Nft:
-                    return generateSingleNftActivity(account, params)
+                    return generateSingleNftActivity(wallet, params)
                 case ActivityType.Vesting:
-                    return generateVestingActivity(account, params)
+                    return generateVestingActivity(wallet, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }

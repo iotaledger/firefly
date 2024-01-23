@@ -1,8 +1,6 @@
-// TODO(2.0) Fix all of events code, blocked by https://github.com/iotaledger/iota-sdk/issues/1708
+import { SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
-import { WalletEvent, SpentOutputWalletEvent, WalletEventType } from '@iota/sdk/out/types'
-
-import { getNftByIdFromAllAccountNfts, updateNftInAllWalletNfts } from '@core/nfts'
+import { getNftByIdFromAllWalletNfts, updateNftInAllWalletNfts } from '@core/nfts'
 import {
     syncBalance,
     ActivityAsyncStatus,
@@ -30,9 +28,8 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     const output = payload.output
     await syncBalance(walletId)
     if (wallet) {
-        // TODO(2.0) Fix getAddressesWithOutputs is missing
-        const addressesWithOutputs = await getAddressesWithOutputs(wallet)
-        updateActiveWallet(walletId, { addressesWithOutputs })
+        const walletOutputs = await wallet.outputs()
+        updateActiveWallet(walletId, { walletOutputs })
     }
     const outputId = output?.outputId
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)
@@ -45,7 +42,7 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     }
 
     if (activity?.type === ActivityType.Nft) {
-        const previousOutputId = getNftByIdFromAllAccountNfts(walletId, activity.nftId)?.latestOutputId
+        const previousOutputId = getNftByIdFromAllWalletNfts(walletId, activity.nftId)?.latestOutputId
         const previousOutput = await wallet.getOutput(previousOutputId)
         if (output.metadata.milestoneTimestampBooked > previousOutput.metadata.milestoneTimestampBooked) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })

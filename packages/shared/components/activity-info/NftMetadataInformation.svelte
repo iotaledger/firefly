@@ -1,7 +1,7 @@
 <script lang="ts">
     import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { convertAndFormatNftMetadata, getNftByIdFromAllAccountNfts, IIrc27Metadata } from '@core/nfts'
+    import { convertAndFormatNftMetadata, getNftByIdFromAllWalletNfts, IIrc27Metadata } from '@core/nfts'
     import { NftActivity } from '@core/wallet'
     import { KeyValueBox } from 'shared/components'
 
@@ -18,7 +18,7 @@
         }
     }
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedWalletId, activity?.nftId)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity?.nftId)
     $: nftMetadataDetailsList = nft?.parsedMetadata
         ? createIrc27NftMetadataDetailsList(nft?.parsedMetadata)
         : createNftMetadataDetailsList(nft?.metadata)

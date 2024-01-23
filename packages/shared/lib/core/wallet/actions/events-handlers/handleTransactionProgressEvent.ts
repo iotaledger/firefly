@@ -1,11 +1,11 @@
 import { get } from 'svelte/store'
 import {
-    WalletEvent,
     TransactionProgressWalletEvent,
     PreparedTransactionSigningHashProgress,
     WalletEventType,
     TransactionProgressType,
     TransactionProgress,
+    WalletEvent,
 } from '@iota/sdk/out/types'
 
 import { ledgerNanoStatus } from '@core/ledger'

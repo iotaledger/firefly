@@ -10,7 +10,7 @@
         NftDownloadMetadata,
         allWalletNfts,
         convertAndFormatNftMetadata,
-        getNftByIdFromAllAccountNfts,
+        getNftByIdFromAllWalletNfts,
         selectedNftId,
     } from '@core/nfts'
     import { getBaseToken } from '@core/profile/actions'
@@ -43,7 +43,7 @@
     let modal: Modal
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
-    const nft: INft = getNftByIdFromAllAccountNfts($selectedWalletId, $selectedNftId)
+    const nft: INft = getNftByIdFromAllWalletNfts($selectedWalletId, $selectedNftId)
 
     const { id, name, issuer, address, metadata, downloadMetadata, storageDeposit } = nft ?? {}
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =

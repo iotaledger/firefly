@@ -3,7 +3,7 @@
     import { selectedWalletId } from '@core/wallet/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts, ownedNfts, selectedNftId } from '@core/nfts'
+    import { getNftByIdFromAllWalletNfts, ownedNfts, selectedNftId } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
     import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
@@ -22,7 +22,7 @@
 
     export let activity: NftActivity
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedWalletId, activity.nftId)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId)
     $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)

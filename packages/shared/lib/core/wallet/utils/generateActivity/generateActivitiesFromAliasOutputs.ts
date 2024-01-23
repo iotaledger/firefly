@@ -6,7 +6,7 @@ import { AliasOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromAliasOutputs(
     processedTransaction: IProcessedTransaction,
-    account: IWalletState
+    wallet: IWalletState
 ): Promise<Activity[]> {
     const outputs = processedTransaction.outputs
     const activities: AliasActivity[] = []
@@ -14,7 +14,7 @@ export async function generateActivitiesFromAliasOutputs(
     const aliasOutputs = outputs.filter((output) => output.output.type === OutputType.Alias)
     for (const aliasOutput of aliasOutputs) {
         const output = aliasOutput.output as AliasOutput
-        const activity = await generateSingleAliasActivity(account, {
+        const activity = await generateSingleAliasActivity(wallet, {
             action: output.aliasId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
             processedTransaction,
             wrappedOutput: aliasOutput,

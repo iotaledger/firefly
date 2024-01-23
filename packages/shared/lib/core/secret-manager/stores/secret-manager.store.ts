@@ -1,22 +1,22 @@
 import { api } from '@core/api'
-import { activeProfile } from '@core/profile/stores'
-import { SecretManager } from '@iota/sdk'
-import { Readable, derived } from 'svelte/store'
+import { activeProfile } from '@core/profile/stores/active-profile.store'
+import { SecretManager, SecretManagerType } from '@iota/sdk'
+import { writable } from 'svelte/store'
 
-const activeProfileSecretManagerOptions = derived(
-    activeProfile,
-    ($activeProfile) => $activeProfile.secretManagerOptions
-)
+export const activeProfileSecretManager = writable<SecretManager | null>(null)
 
-export const activeProfileSecretManager: Readable<SecretManager | null> = derived(
-    activeProfileSecretManagerOptions,
-    (activeProfileSecretManagerOptions, set) => {
-        if (activeProfileSecretManagerOptions) {
-            api.createSecretManager(activeProfileSecretManagerOptions).then((secretManager) => {
-                set(secretManager)
-            })
-        } else {
-            set(null)
-        }
+// Required to check if there is already a created instance of secretManager
+let oldSecretManagerOptions: SecretManagerType | null = null
+// subscribe is needed because a derived store is only subscribed when used in a svelte component
+// activeProfileSecretManager is used outside of svelte components too
+activeProfile.subscribe((profile) => {
+    // Dont create a new instance of secretManager when it is already initialized
+    if (profile.secretManagerOptions && oldSecretManagerOptions !== profile.secretManagerOptions) {
+        api.createSecretManager(profile.secretManagerOptions).then((secretManager) => {
+            activeProfileSecretManager.set(secretManager)
+        })
+        oldSecretManagerOptions = profile.secretManagerOptions
+    } else {
+        activeProfileSecretManager.set(null)
     }
-)
+})
