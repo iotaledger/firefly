@@ -7,9 +7,10 @@ import {
     UnlockConditionType,
     AddressType,
     AddressUnlockCondition,
+    AccountOutput,
 } from '@iota/sdk/out/types'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
-import { checkAndRemoveProfilePicture } from '@core/profile/actions'
+import { checkAndRemoveProfilePicture, updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
     ActivityType,
     IWrappedOutput,
@@ -25,6 +26,9 @@ import {
     WalletApiEventHandler,
     updateSelectedWallet,
     getDepositAddress,
+    mainAccountId,
+    selectedWalletId,
+    updateMainAccountId,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -68,6 +72,13 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (isAccountOutput) {
         const accounts = await wallet.accounts()
         const depositAddress = await getDepositAddress(wallet)
+        const accountId = (accounts[0]?.output as AccountOutput).accountId
+        if (accountId) {
+            updateMainAccountId(accountId)
+            updateActiveWalletPersistedData(get(selectedWalletId), {
+                mainAccountId: get(mainAccountId),
+            })
+        }
         updateSelectedWallet({
             accountOutputs: accounts,
             depositAddress,

@@ -1,16 +1,8 @@
 <script lang="ts">
     import { AssetList, Overflow, Pane, ReceiveAddressButton } from '@ui'
     import { AccountSummary, AccountActivity, SendButton } from '@components'
-    import { mainAccountId, selectedWalletId, selectedWalletAssets } from '@core/wallet'
+    import { selectedWalletAssets } from '@core/wallet'
     import features from '@features/features'
-    import { onMount } from 'svelte'
-    import { updateActiveWalletPersistedData } from '@core/profile'
-
-    onMount(() => {
-        updateActiveWalletPersistedData($selectedWalletId, {
-            mainAccountId: $mainAccountId,
-        })
-    })
 </script>
 
 <wallet-container
