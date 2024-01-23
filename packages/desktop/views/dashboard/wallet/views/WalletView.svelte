@@ -1,13 +1,13 @@
 <script lang="ts">
     import { AssetList, Overflow, Pane, ReceiveAddressButton } from '@ui'
     import { AccountSummary, AccountActivity, SendButton } from '@components'
-    import { mainAccountId, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { mainAccountId, selectedWalletId, selectedWalletAssets } from '@core/wallet'
     import features from '@features/features'
     import { onMount } from 'svelte'
     import { updateActiveWalletPersistedData } from '@core/profile'
 
     onMount(() => {
-        updateActiveWalletPersistedData($selectedWallet.id, {
+        updateActiveWalletPersistedData($selectedWalletId, {
             mainAccountId: $mainAccountId,
         })
     })
