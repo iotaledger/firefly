@@ -143,10 +143,12 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
     for (const output of outputs) {
         if (output.output.type !== OutputType.Treasury) {
             const commonOutput = output.output as CommonOutput
-            for (const nativeToken of commonOutput.nativeTokens ?? []) {
+            const nativeToken = commonOutput.getNativeToken()
+            if (nativeToken) {
                 if (!nativeTokens[nativeToken.id]) {
                     nativeTokens[nativeToken.id] = 0
                 }
+
                 nativeTokens[nativeToken.id] += Number(nativeToken.amount)
             }
         }
