@@ -2,6 +2,7 @@ import { Balance, OutputData } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
+import { getDepositAddress } from '../utils/getDepositAddress'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -36,7 +37,7 @@ export async function buildWalletState(
 
     try {
         balances = await wallet.getBalance()
-        depositAddress = await wallet.address()
+        depositAddress = await getDepositAddress(wallet)
         votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()

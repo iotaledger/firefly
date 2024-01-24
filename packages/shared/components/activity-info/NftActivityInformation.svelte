@@ -1,7 +1,7 @@
 <script lang="ts">
     import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts } from '@core/nfts'
+    import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { IKeyValueBoxList } from '@core/utils'
     import {
         ADDRESS_TYPE_ALIAS,
@@ -15,7 +15,7 @@
 
     export let activity: NftActivity
 
-    $: nft = getNftByIdFromAllAccountNfts($selectedWalletId, activity.nftId)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId)
     $: issuerAddress = nft?.issuer && getBech32AddressFromAddressTypes(nft.issuer)
     $: collectionId = nft?.issuer && getHexAddressFromAddressTypes(nft.issuer)
 
