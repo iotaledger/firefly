@@ -46,7 +46,7 @@ export async function buildWalletState(
         walletOutputs = await wallet.outputs()
         if (accountOutputs.length && !get(mainAccountId)) {
             const accountId = (accountOutputs[0]?.output as AccountOutput).accountId
-            updateMainAccountId(accountId)
+            updateMainAccountId(accountId, wallet.id)
         }
     } catch (err) {
         console.error(err)
