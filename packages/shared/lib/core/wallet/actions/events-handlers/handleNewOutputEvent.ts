@@ -17,7 +17,6 @@ import {
     addPersistedAsset,
     generateActivities,
     getOrRequestAssetFromPersistedAssets,
-    allWalletActivities,
     syncBalance,
     validateWalletApiEvent,
     getBech32AddressFromAddressTypes,
@@ -86,12 +85,10 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     }
 
     const address = getBech32AddressFromAddressTypes(outputData.address)
-    const isNewAliasOutput =
-        output.type === OutputType.Account &&
-        !get(allWalletActivities)[walletId].find((_activity) => _activity.id === outputData.outputId)
+
     const isNftOutput = output.type === OutputType.Nft
 
-    if ((wallet?.depositAddress === address && !outputData?.remainder) || isNewAliasOutput) {
+    if (wallet?.depositAddress === address && !outputData?.remainder) {
         await syncBalance(wallet.id)
         const walletOutputs = await wallet.outputs()
         updateActiveWallet(wallet.id, { walletOutputs })
