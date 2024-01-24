@@ -141,7 +141,7 @@ function getBurnedNativeTokens(
 function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
     const nativeTokens: { [key: string]: number } = {}
     for (const output of outputs) {
-        if (output.output.type !== OutputType.Treasury) {
+        if (output.output.type === OutputType.Foundry || output.output.type === OutputType.Basic) {
             const commonOutput = output.output as CommonOutput
             const nativeToken = commonOutput.getNativeToken()
             if (nativeToken) {
