@@ -1,15 +1,16 @@
 import { AccountAddress, AccountOutput } from '@iota/sdk/out/types'
 import { IWallet } from '../../profile/interfaces'
 import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
+import { get } from 'svelte/store'
+import { mainAccountId } from '../stores'
 
-// TODO(2.0): Update the implementation to handle multiple accounts and use the selected account's address.
 export async function getDepositAddress(wallet: IWallet): Promise<string> {
     const accounts = await wallet?.accounts()
-    if (accounts?.length) {
+    if (accounts?.length && !get(mainAccountId)) {
         const accountId = (accounts[0]?.output as AccountOutput).accountId
         const accountAddress = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
         return accountAddress ?? ''
     } else {
-        return ''
+        return get(mainAccountId) ?? ''
     }
 }
