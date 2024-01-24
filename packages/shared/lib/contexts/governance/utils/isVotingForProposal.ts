@@ -1,7 +1,7 @@
 import { get } from 'svelte/store'
 import type { TrackedParticipationOverview } from '@iota/sdk/out/types'
 import { getParticipationsForProposal } from './getParticipationsForProposal'
-import { selectedWalletId } from 'shared/lib/core/wallet'
+import { selectedWalletId } from '@core/wallet'
 
 export function isVotingForProposal(proposalId: string, walletId = get(selectedWalletId)): boolean {
     const participations = getParticipationsForProposal(proposalId, walletId) ?? {}
