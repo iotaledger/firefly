@@ -69,15 +69,19 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     if (isAccountOutput) {
         const accounts = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet)
-        const accountId = (accounts[0]?.output as AccountOutput).accountId
-        if (accounts) {
+        if (accounts.length === 1) {
+            const accountId = (accounts[0]?.output as AccountOutput).accountId
             updateMainAccountId(accountId)
+            const depositAddress = await getDepositAddress(wallet)
+            updateSelectedWallet({
+                accountOutputs: accounts,
+                depositAddress,
+            })
+        } else {
+            updateSelectedWallet({
+                accountOutputs: accounts,
+            })
         }
-        updateSelectedWallet({
-            accountOutputs: accounts,
-            depositAddress,
-        })
         return
     }
 

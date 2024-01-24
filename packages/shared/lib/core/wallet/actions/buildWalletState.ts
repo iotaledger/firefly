@@ -3,7 +3,8 @@ import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interf
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
 import { getDepositAddress } from '../utils/getDepositAddress'
-import { updateMainAccountId } from '../stores'
+import { mainAccountId, updateMainAccountId } from '../stores'
+import { get } from 'svelte/store'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -43,8 +44,8 @@ export async function buildWalletState(
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
-        const accountId = (accountOutputs[0]?.output as AccountOutput).accountId
-        if (accountOutputs.length) {
+        if (accountOutputs.length && !get(mainAccountId)) {
+            const accountId = (accountOutputs[0]?.output as AccountOutput).accountId
             updateMainAccountId(accountId)
         }
     } catch (err) {
