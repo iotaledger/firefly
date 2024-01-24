@@ -5,9 +5,9 @@ import {
     isRecentDate,
     isValidDate,
     diffDates,
-    milestoneToDate,
+    slotToDate,
 } from '../date'
-import { SECONDS_PER_MILESTONE } from '../../network/constants'
+import { SECONDS_PER_SLOT } from '../../network/constants'
 import { MILLISECONDS_PER_SECOND } from '../constants'
 
 describe('datesOnSameDay', () => {
@@ -151,16 +151,15 @@ describe('diffDates', () => {
     })
 })
 
-describe('milestoneToDate', () => {
+describe('slotToDate', () => {
     test('returns the correct date for a past milestone based on the current milestone', () => {
         const baseMilestone = 10
         const milestone = 5
         const currentMillis = Date.now()
-        const expectedMillis =
-            currentMillis - (baseMilestone - milestone) * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+        const expectedMillis = currentMillis - (baseMilestone - milestone) * SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
         const expectedDate = new Date(expectedMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseMilestone, milestone)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
     test('returns the correct date for the current milestone', () => {
@@ -169,18 +168,17 @@ describe('milestoneToDate', () => {
         const currentMillis = Date.now()
         const expectedDate = new Date(currentMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseMilestone, milestone)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
     test('returns the correct date for a future milestone based on the current milestone', () => {
         const baseMilestone = 10
         const milestone = 15
         const currentMillis = Date.now()
-        const expectedMillis =
-            currentMillis + (milestone - baseMilestone) * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+        const expectedMillis = currentMillis + (milestone - baseMilestone) * SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
         const expectedDate = new Date(expectedMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseMilestone, milestone)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
 })

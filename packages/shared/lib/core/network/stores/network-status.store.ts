@@ -1,5 +1,5 @@
 import { derived } from 'svelte/store'
-import { MILESTONE_NOT_FOUND } from '../constants'
+import { SLOT_NOT_FOUND } from '../constants'
 import { NetworkHealth } from '../enums/network-health.enum'
 import { getNetworkStatusFromNodeInfo } from '../helpers'
 import { nodeInfo } from './node-info.store'
@@ -10,9 +10,9 @@ export const networkStatus = derived([nodeInfo], ([$nodeInfo]) => {
     } else {
         return {
             messagesPerSecond: 0,
-            referencedRate: 0,
+            confirmationRate: '0',
             health: NetworkHealth.Disconnected,
-            currentMilestone: MILESTONE_NOT_FOUND,
+            currentSlot: SLOT_NOT_FOUND,
         }
     }
 })

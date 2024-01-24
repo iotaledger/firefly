@@ -1,4 +1,4 @@
-import { SECONDS_PER_MILESTONE } from '../network/constants'
+import { SECONDS_PER_SLOT } from '../network/constants'
 
 import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY, MILLISECONDS_PER_SECOND, MONTHS_PER_YEAR } from './constants'
 import { PastTimeUnit } from './enums'
@@ -79,13 +79,13 @@ export function diffDates(firstDate: Date | null, secondDate: Date): IDateDiffer
 }
 
 /**
- * Converts milestone to date based on current milestone
- * @param {number} baseMilestone - Milestone to start from, generally the current milestone
- * @param {number} milestone
+ * Converts slot to date based on current slot
+ * @param {number} baseSlot - Slot to start from, generally the current slot
+ * @param {number} slot
  */
-export function milestoneToDate(baseMilestone: number, milestone: number): Date {
-    const millisecondsPerMilestone = SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
-    const firstMilestoneMillis = Date.now() - baseMilestone * millisecondsPerMilestone
-    const milestoneMillis = firstMilestoneMillis + milestone * millisecondsPerMilestone
-    return new Date(milestoneMillis)
+export function slotToDate(baseSlot: number, slot: number): Date {
+    const millisecondsPerSlot = SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
+    const firstSlotMillis = Date.now() - baseSlot * millisecondsPerSlot
+    const slotMillis = firstSlotMillis + slot * millisecondsPerSlot
+    return new Date(slotMillis)
 }

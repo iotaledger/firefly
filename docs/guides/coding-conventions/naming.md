@@ -43,7 +43,7 @@ The following are some general rules about code naming that we follow:
         mps?: number
         health?: number
         healthTxt?: NetworkStsHealthTxt
-        curMilestone?: number
+        curSlot?: number
     }
     ```
 
@@ -54,7 +54,7 @@ The following are some general rules about code naming that we follow:
         messagesPerSecond?: number
         health?: number
         healthText?: NetworkStatusHealthText
-        currentMilestone?: number
+        currentSlot?: number
     }
     ```
 

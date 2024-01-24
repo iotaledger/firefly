@@ -456,7 +456,7 @@
                 "disconnected": "Disconnected from node",
                 "status": "Status",
                 "messagesPerSecond": "Messages per second",
-                "referencedRate": "Referenced rate"
+                "confirmationRate": "Confirmation rate"
             },
             "profileModal": {
                 "allSettings": "All settings",
@@ -882,18 +882,18 @@
                     "name": "Name",
                     "url": "URL",
                     "version": "Version",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone",
+                    "latestSlot": "Latest slot",
+                    "confirmedSlot": "Confirmed slot",
                     "pruningIndex": "Pruning index",
                     "features": "Features"
                 },
                 "metrics": {
                     "tab": "Metrics",
                     "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone"
+                    "confirmedBlocksPerSecond": "Confirmed blocks per second",
+                    "confirmationRate": "Confirmation rate",
+                    "latestSlot": "Latest slot",
+                    "confirmedSlot": "Confirmed slot"
                 },
                 "protocol": {
                     "tab": "Protocol",

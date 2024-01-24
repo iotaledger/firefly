@@ -14,14 +14,18 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
         const { output, metadata } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions
 
-        const spentDate = metadata?.milestoneTimestampSpent
+        // TODO(2.0): modify this
+
+        //         To calculate the slot index of a timestamp, `genesisTimestamp` and the duration of a slot are needed.
+        //  * The slot index of timestamp `ts` is `(ts - genesisTimestamp)/duration + 1`.
+        const spentDate = calculateSlotIndexBySlotCommitmentId(metadata?.commitmentIdSpent)
 
         if (spentDate) {
             // A transaction with an expiration unlock condition is included if the transaction expired
             const expirationUnlockCondition = unlockConditions.find(
                 (unlockCondition) =>
                     unlockCondition.type === UnlockConditionType.Expiration &&
-                    (unlockCondition as ExpirationUnlockCondition).unixTime < spentDate
+                    (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
             ) as ExpirationUnlockCondition
 
             if (expirationUnlockCondition) {

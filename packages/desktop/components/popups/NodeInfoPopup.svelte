@@ -36,11 +36,11 @@
                 localeKey: 'metrics.referencedBlocksPerSecond',
                 nodeInfoPath: 'metrics.referencedBlocksPerSecond',
             },
-            referencedRate: { localeKey: 'metrics.referencedRate', nodeInfoPath: 'metrics.referencedRate' },
-            latestMilestone: { localeKey: 'metrics.latestMilestone', nodeInfoPath: 'status.latestMilestone.index' },
-            confirmedMilestone: {
-                localeKey: 'metrics.confirmedMilestone',
-                nodeInfoPath: 'status.confirmedMilestone.index',
+            confirmationRate: { localeKey: 'metrics.confirmationRate', nodeInfoPath: 'metrics.confirmationRate' },
+            latestSlot: { localeKey: 'metrics.latestSlot', nodeInfoPath: 'status.latestSlot.index' },
+            confirmedSlot: {
+                localeKey: 'metrics.confirmedSlot',
+                nodeInfoPath: 'status.confirmedSlot.index',
             },
         },
         [NodeInfoTab.Protocol]: {
@@ -80,10 +80,10 @@
             nodeInfoValue = node.url
         } else {
             nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
-            if (key === 'referencedRate' || key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
+            if (key === 'confirmationRate' || key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
                 const numberValue = Number(nodeInfoValue)
                 if (numberValue >= 0) {
-                    if (key === 'referencedRate') {
+                    if (key === 'confirmationRate') {
                         nodeInfoValue = `${formatNumber(Math.min(numberValue, 100), 1, 1)}%`
                     } else {
                         nodeInfoValue = formatNumber(numberValue, 1, 1)
