@@ -15,16 +15,18 @@ export function checkNodeUrlValidity(
     newUrl: string,
     allowInsecure: boolean
 ): string | undefined {
+    const isHttpLocalhost =
+        newUrl.toLowerCase().startsWith('http://localhost') || newUrl.toLowerCase().startsWith('http://127.0.0.1')
+
     if (!isValidUrl(newUrl)) {
         return 'error.node.invalid'
     }
-
-    if (!allowInsecure && !isValidHttpsUrl(newUrl)) {
+    if (!allowInsecure && !isHttpLocalhost && !isValidHttpsUrl(newUrl)) {
         return 'error.node.https'
     }
 
     const hasDefaultHttpsPort = newUrl.endsWith(':443')
-    if (hasDefaultHttpsPort) {
+    if (hasDefaultHttpsPort && !isHttpLocalhost) {
         newUrl = newUrl.slice(0, -4)
     }
 
