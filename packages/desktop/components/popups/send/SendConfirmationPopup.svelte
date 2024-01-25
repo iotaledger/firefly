@@ -60,7 +60,6 @@
     let visibleSurplus: number | undefined = undefined
 
     let isPreparingOutput = false
-
     $: expirationTimePicker?.setNull(giftStorageDeposit)
 
     $: isBaseTokenTransfer =
