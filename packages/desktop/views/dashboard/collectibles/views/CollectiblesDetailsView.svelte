@@ -18,7 +18,7 @@
     import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
-        ADDRESS_TYPE_ALIAS,
+        ADDRESS_TYPE_ACCOUNT,
         ADDRESS_TYPE_ED25519,
         ADDRESS_TYPE_NFT,
         formatTokenAmountPrecise,
@@ -94,7 +94,7 @@
         ...(collectionName && {
             collection: { data: collectionName },
         }),
-        ...((issuer?.type === ADDRESS_TYPE_NFT || issuer?.type === ADDRESS_TYPE_ALIAS) && {
+        ...((issuer?.type === ADDRESS_TYPE_NFT || issuer?.type === ADDRESS_TYPE_ACCOUNT) && {
             collectionId: { data: truncateString(collectionId, 20, 20), copyValue: collectionId, isCopyable: true },
         }),
         ...(!nft?.parsedMetadata &&

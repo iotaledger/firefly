@@ -1,26 +1,23 @@
 import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
-import { AliasActivity } from '@core/wallet/types'
+import { AccountActivity } from '@core/wallet/types'
 import { getNetworkHrp } from '@core/profile'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
-    getGovernorAddressFromAliasOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStateControllerAddressFromAliasOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
 import { AccountOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone
-export async function generateSingleAliasActivity(
+export async function generateSingleAccountActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): Promise<AliasActivity> {
+): Promise<AccountActivity> {
     const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as AccountOutput
@@ -29,8 +26,6 @@ export async function generateSingleAliasActivity(
 
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
-    const governorAddress = getGovernorAddressFromAliasOutput(output)
-    const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
     const accountId = getAccountId(output, outputId)
 
     const isHidden = false
@@ -43,7 +38,7 @@ export async function generateSingleAliasActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
     return {
-        type: ActivityType.Alias,
+        type: ActivityType.Account,
         id,
         outputId,
         transactionId,
@@ -52,8 +47,6 @@ export async function generateSingleAliasActivity(
         accountId,
         storageDeposit,
         giftedStorageDeposit,
-        governorAddress,
-        stateControllerAddress,
         isHidden,
         isAssetHidden,
         time,

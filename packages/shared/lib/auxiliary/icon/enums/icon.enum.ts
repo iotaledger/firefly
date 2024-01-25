@@ -3,7 +3,7 @@
  */
 export enum Icon {
     Activity = 'activity',
-    Alias = 'alias',
+    Account = 'account',
     ArrowLeft = 'arrow-left',
     ArrowRight = 'arrow-right',
     Assembly = 'assembly',

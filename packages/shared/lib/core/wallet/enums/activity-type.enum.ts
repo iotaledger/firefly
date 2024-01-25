@@ -1,5 +1,5 @@
 export enum ActivityType {
-    Alias = 'alias',
+    Account = 'account',
     Basic = 'basic',
     Foundry = 'foundry',
     Consolidation = 'consolidation',

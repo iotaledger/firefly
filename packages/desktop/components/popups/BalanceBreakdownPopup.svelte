@@ -111,7 +111,7 @@
         const subBreakdown = {
             basicOutputs: { amount: Number(storageDeposits?.basic ?? 0) },
             nftOutputs: { amount: Number(storageDeposits?.nft ?? 0) },
-            aliasOutputs: { amount: Number(storageDeposits?.alias ?? 0) },
+            accountOutputs: { amount: Number(storageDeposits?.account ?? 0) },
             foundryOutputs: { amount: Number(storageDeposits?.foundry ?? 0) },
         }
 

@@ -37,7 +37,7 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
             return getBech32AddressFromAddressTypes(addressUnlockCondition.address)
         }
 
-        // TODO: if additional metadata is added to an aliasOutput, we could use it to determine the EVM Sender.
+        // TODO: if additional metadata is added to an accountOutput, we could use it to determine the EVM Sender.
         const accountId = (output as AccountOutput)?.accountId
 
         if (accountId) {

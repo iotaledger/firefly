@@ -11,7 +11,7 @@
         TextInput,
         OptionalInput,
         FontWeight,
-        AliasInput,
+        AccountInput,
     } from 'shared/components'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
@@ -28,7 +28,7 @@
         description: undefined,
         url: undefined,
         logoUrl: undefined,
-        aliasId: undefined,
+        accountId: undefined,
     }
 
     let {
@@ -40,7 +40,7 @@
         description,
         url,
         logoUrl,
-        aliasId,
+        accountId,
     } = $mintTokenDetails ?? DEFAULT
 
     let nameError: string = ''
@@ -51,12 +51,12 @@
     $: circulatingSupply, (circulatingSupplyError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
-    let aliasIdError: string
-    $: aliasId, (aliasIdError = '')
+    let accountIdError: string
+    $: accountId, (accountIdError = '')
 
     let error: BaseError
     let decimalsInput: OptionalInput
-    let aliasInput: AliasInput
+    let accountInput: AccountInput
 
     function onCancelClick(): void {
         closePopup()
@@ -73,7 +73,7 @@
             description,
             url,
             logoUrl,
-            aliasId,
+            accountId,
         }
         if (valid && isEverythingDefined(tokenDetailsForm)) {
             setMintTokenDetails(tokenDetailsForm)
@@ -91,7 +91,7 @@
             form.circulatingSupply !== undefined &&
             form.decimals !== undefined &&
             form.symbol !== undefined &&
-            form.aliasId !== undefined
+            form.accountId !== undefined
         )
     }
 
@@ -99,7 +99,7 @@
         try {
             await Promise.all([
                 isNameValid(),
-                aliasInput.validate(),
+                accountInput.validate(),
                 isTotalSupplyValid(),
                 isCirculatingSupplyValid(),
                 decimalsInput?.validate(isDecimalsValid()),
@@ -184,7 +184,7 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <AliasInput bind:this={aliasInput} bind:alias={aliasId} bind:error={aliasIdError} />
+        <AccountInput bind:this={accountInput} bind:account={accountId} bind:error={accountIdError} />
         <TextInput
             bind:value={tokenName}
             label={localize('popups.nativeToken.property.tokenName')}

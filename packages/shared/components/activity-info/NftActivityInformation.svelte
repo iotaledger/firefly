@@ -4,7 +4,7 @@
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { IKeyValueBoxList } from '@core/utils'
     import {
-        ADDRESS_TYPE_ALIAS,
+        ADDRESS_TYPE_ACCOUNT,
         ADDRESS_TYPE_ED25519,
         ADDRESS_TYPE_NFT,
         getBech32AddressFromAddressTypes,
@@ -25,7 +25,7 @@
         ...(nft?.issuer?.type === ADDRESS_TYPE_ED25519 && {
             issuerAddress: { data: issuerAddress, isCopyable: true },
         }),
-        ...((nft?.issuer?.type === ADDRESS_TYPE_NFT || nft?.issuer?.type === ADDRESS_TYPE_ALIAS) && {
+        ...((nft?.issuer?.type === ADDRESS_TYPE_NFT || nft?.issuer?.type === ADDRESS_TYPE_ACCOUNT) && {
             collectionId: { data: collectionId, isCopyable: true },
         }),
     }

@@ -28,8 +28,8 @@ export function getActivityTileTitle(activity: Activity): string {
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'
     } else if (action === ActivityAction.Mint) {
-        if (type === ActivityType.Alias) {
-            return isConfirmed ? 'general.aliasCreated' : 'general.creatingAlias'
+        if (type === ActivityType.Account) {
+            return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
     } else if (action === ActivityAction.Burn) {

@@ -1,14 +1,14 @@
 import type { SyncOptions } from '@iota/sdk/out/types'
 
 export const SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS: SyncOptions = {
-    alias: {
-        aliasOutputs: false,
+    account: {
+        accountOutputs: false,
         basicOutputs: false,
         nftOutputs: false,
         foundryOutputs: false,
     },
     nft: {
-        aliasOutputs: false,
+        accountOutputs: false,
         basicOutputs: false,
         nftOutputs: false,
     },

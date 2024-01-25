@@ -11,7 +11,7 @@
         selectedWalletAssets,
     } from '@core/wallet'
     import {
-        AliasActivityTileContent,
+        AccountActivityTileContent,
         AsyncActivityTileFooter,
         ClickableTile,
         ConsolidationActivityTileContent,
@@ -62,8 +62,8 @@
         <tile-content class="flex flex-row items-center text-left space-x-4">
             {#if activity.type === ActivityType.Basic}
                 <TransactionActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Alias}
-                <AliasActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Account}
+                <AccountActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Governance}

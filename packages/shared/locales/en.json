@@ -755,9 +755,9 @@
                 "title": "NFTs",
                 "subtitle": "Reserved for NFT storage"
             },
-            "aliasOutputs": {
-                "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+            "accountOutputs": {
+                "title": "Accounts",
+                "subtitle": "Reserved for Accounts storage"
             },
             "foundryOutputs": {
                 "title": "Foundries",
@@ -790,8 +790,8 @@
             "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
             "confirmButton": "Consolidate"
         },
-        "alias": {
-            "title": "Confirm alias creation"
+        "account": {
+            "title": "Confirm account creation"
         },
         "password": {
             "title": "Password required",
@@ -1138,7 +1138,7 @@
                 "mintedTokens": "Minted tokens",
                 "meltedTokens": "Melted tokens",
                 "circulatingSupply": "Circulating supply",
-                "aliasAddress": "Alias controller address",
+                "accountAddress": "Account controller address",
                 "standard": "Standard",
                 "tokenName": "Name",
                 "unit": "Unit",
@@ -1150,13 +1150,13 @@
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
-                "alias": "Alias",
+                "account": "Account",
                 "assetId": "Asset Id"
             }
         },
-        "noAlias": {
+        "noAccountOuput": {
             "title": "Unable to mint",
-            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+            "description": "You must own an account output to mint native tokens. To continue, please create an account first"
         },
         "mintNftForm": {
             "title": "Mint simple NFT",
@@ -1297,8 +1297,8 @@
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
-        "createAlias": "Create alias",
-        "createAliasDescription": "Create alias output",
+        "createAccount": "Create account",
+        "createAccountDescription": "Create account output",
         "savePassword": "Save password",
         "useBiometric": "Use biometric security",
         "setupPinCode": "Setup PIN code",
@@ -1490,8 +1490,8 @@
         "burning": "Burning",
         "consolidated": "Outputs consolidated",
         "consolidating": "Consolidating outputs",
-        "aliasCreated": "Alias created",
-        "creatingAlias": "Creating Alias",
+        "accountCreated": "Account created",
+        "creatingAnAccount": "Creating Account",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -1645,7 +1645,7 @@
         "nftAddress": "NFT Address",
         "nftId": "NFT ID",
         "nftMetadata": "NFT Metadata",
-        "aliasId": "Alias ID",
+        "accountId": "Account ID",
         "governorAddress": "Governor Address",
         "stateControllerAddress": "State Controller Address",
         "copiedToClipboard": "Copied to clipboard",
@@ -1782,7 +1782,7 @@
             "label": "Type",
             "basic": "Basic",
             "nft": "NFT",
-            "alias": "Alias",
+            "account": "Account",
             "foundry": "Foundry",
             "governance": "Governance",
             "consolidation": "Consolidation",
@@ -2089,9 +2089,9 @@
         "walletApiEvent": {
             "invalidPayload": "Invalid payload for {eventName} event"
         },
-        "aliasMinting": {
-            "aliasRequired": "Alias is required",
-            "aliasNotInPossession": "Alias not in possession"
+        "accountMinting": {
+            "accountRequired": "Account is required",
+            "accountNotInPossession": "Account not in possession"
         },
         "noOutputsToConsolidate": "Not enough outputs to consolidate",
         "eventId": {
@@ -2382,11 +2382,11 @@
                 "resultsNotAvailable": "Results not available"
             }
         },
-        "alias": {
+        "account": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "creating account",
+                "Confirmed": "account created",
+                "Failed": "Failed to create account"
             }
         },
         "networkHealth": {
