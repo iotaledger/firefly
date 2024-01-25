@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-root" content="/firefly">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.758713158749">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.759513460025">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -34,11 +34,11 @@
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="../../static/icon_firefly.png" rel="icon">
-    <link href="../../resources/css/retype.css?v=3.5.0.758713158749" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=3.5.0.759513460025" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.758713158749" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=3.5.0.759513460025" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.758713158749" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=3.5.0.759513460025" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -419,7 +419,7 @@ confirmation on behalf of the user.</p>
 </div>
 <p>The deep link structure is as follows:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">firefly://wallet/sendConfirmation?address=&lt;address&gt;&amp;amount=&lt;amount&gt;[&amp;unit=&lt;unit&gt;][&amp;assetId=&lt;assetId&gt;][&amp;metadata=&lt;metadata&gt;][&amp;tag=&lt;tag&gt;][&amp;giftStorageDeposit=&lt;true|false&gt;][&amp;disableToggleGift=&lt;true|false&gt;][&amp;disableChangeExpiration=&lt;true|false&gt;][&amp;surplus=&lt;surplus&gt;]</code></pre>
+<pre class="language-none"><code v-pre class="language-none">firefly://wallet/sendConfirmation?address=&lt;address&gt;&amp;amount=&lt;amount&gt;[&amp;unit=&lt;unit&gt;][&amp;assetId=&lt;assetId&gt;][&amp;metadata=&lt;metadata&gt;][&amp;tag=&lt;tag&gt;][&amp;giftStorageDeposit=&lt;true|false&gt;][&amp;disableToggleGift=&lt;true|false&gt;][&amp;disableChangeExpiration=&lt;true|false&gt;][&amp;surplus=&lt;surplus&gt;][&amp;expiration=&lt;expiration&gt;]</code></pre>
 </doc-codeblock></div>
 <p>The following parameters are <strong>required</strong>:</p>
 <ul>
@@ -444,14 +444,15 @@ confirmation on behalf of the user.</p>
 <li><code v-pre>disableToggleGift</code> - prevents the user from being able to toggle the option to gift the storage deposit</li>
 <li><code v-pre>disableChangeExpiration</code> - prevents the user from being able to change the expiration time of the transaction</li>
 <li><code v-pre>surplus</code> - send additional amounts of the base token when transferring native tokens</li>
+<li><code v-pre>expiration</code> - the expiration time of the transaction, e.g. <code v-pre>1w</code>, <code v-pre>2d</code>, <code v-pre>5h</code> or <code v-pre>10m</code>. Also accepts a UNIX timestamp in milliseconds.</li>
 </ul>
 <p>Example:</p>
-<p><a href="firefly://wallet/sendForm?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amp;amount=10&amp;unit=Gi&amp;giftStorageDeposit=true&amp;surplus=1&amp;metadata=Take%20my%20money" class="no-link inline-flex align-middle items-center font-medium cursor-pointer transition-colors duration-200 ease-out focus:outline-none bg-blue-500 hover:bg-blue-700 text-white px-4 h-10 text-sm rounded-md">
+<p><a href="firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amp;amount=10&amp;unit=Gi&amp;giftStorageDeposit=true&amp;surplus=1&amp;metadata=Take%20my%20money&amp;expiration=1h" class="no-link inline-flex align-middle items-center font-medium cursor-pointer transition-colors duration-200 ease-out focus:outline-none bg-blue-500 hover:bg-blue-700 text-white px-4 h-10 text-sm rounded-md">
     <span>Click me!</span>
 </a></p>
 <p>Source:</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-none"><code v-pre class="language-none">firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amp;amount=10&amp;unit=Gi&amp;giftStorageDeposit=true&amp;disableToggleGift=true&amp;surplus=1&amp;metadata=Take%20my%20money</code></pre>
+<pre class="language-none"><code v-pre class="language-none">firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amp;amount=10&amp;unit=Gi&amp;giftStorageDeposit=true&amp;disableToggleGift=true&amp;surplus=1&amp;metadata=Take%20my%20money&amp;expiration=1h</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="collectibles">
     <h3>
