@@ -6,7 +6,6 @@
         rejectActivity,
         getTimeDifference,
         Activity,
-        InclusionState,
     } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
@@ -16,7 +15,6 @@
         TileFooter,
         FontWeight,
         ButtonSize,
-        ActivityInclusionStatusPill,
     } from 'shared/components'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
@@ -112,15 +110,7 @@
                 {localize('actions.claim')}
             </Button>
         {:else}
-            <pills-wrapper class="flex gap-2 flex-wrap shrink-0">
-                {#if activity?.inclusionState === InclusionState.Conflicting}
-                    <ActivityInclusionStatusPill
-                        inclusionState={activity.inclusionState}
-                        localizationKey="external.outgoing"
-                    />
-                {/if}
-                <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
-            </pills-wrapper>
+            <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
         {/if}
     </svelte:fragment>
 </TileFooter>
