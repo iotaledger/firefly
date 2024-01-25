@@ -27,28 +27,31 @@
             url: { localeKey: 'general.url', nodeInfoPath: undefined },
             name: { localeKey: 'general.name', nodeInfoPath: 'name' },
             version: { localeKey: 'general.version', nodeInfoPath: 'version' },
-            pruningIndex: { localeKey: 'general.pruningIndex', nodeInfoPath: 'status.pruningIndex' },
-            features: { localeKey: 'general.features', nodeInfoPath: 'features' },
+            pruningEpoch: { localeKey: 'general.pruningEpoch', nodeInfoPath: 'status.pruningEpoch' },
+            // features: { localeKey: 'general.features', nodeInfoPath: 'features' },
         },
         [NodeInfoTab.Metrics]: {
             blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
-            referencedBlocksPerSecond: {
-                localeKey: 'metrics.referencedBlocksPerSecond',
-                nodeInfoPath: 'metrics.referencedBlocksPerSecond',
+            confirmedBlocksPerSecond: {
+                localeKey: 'metrics.confirmedBlocksPerSecond',
+                nodeInfoPath: 'metrics.confirmedBlocksPerSecond',
             },
             confirmationRate: { localeKey: 'metrics.confirmationRate', nodeInfoPath: 'metrics.confirmationRate' },
-            latestSlot: { localeKey: 'metrics.latestSlot', nodeInfoPath: 'status.latestSlot.index' },
-            confirmedSlot: {
-                localeKey: 'metrics.confirmedSlot',
-                nodeInfoPath: 'status.confirmedSlot.index',
-            },
+            // latestSlot: { localeKey: 'metrics.latestSlot', nodeInfoPath: 'status.latestSlot.index' },
+            // confirmedSlot: {
+            //     localeKey: 'metrics.confirmedSlot',
+            //     nodeInfoPath: 'status.confirmedSlot.index',
+            // },
         },
         [NodeInfoTab.Protocol]: {
-            network: { localeKey: 'protocol.network', nodeInfoPath: 'protocol.networkName' },
-            bech32Hrp: { localeKey: 'protocol.bech32Hrp', nodeInfoPath: 'protocol.bech32Hrp' },
-            tokenSupply: { localeKey: 'protocol.tokenSupply', nodeInfoPath: 'protocol.tokenSupply' },
-            version: { localeKey: 'protocol.version', nodeInfoPath: 'protocol.version' },
-            minPowScore: { localeKey: 'protocol.minPowScore', nodeInfoPath: 'protocol.minPowScore' },
+            network: { localeKey: 'protocol.network', nodeInfoPath: 'protocolParameters[0].parameters.networkName' },
+            bech32Hrp: { localeKey: 'protocol.bech32Hrp', nodeInfoPath: 'protocolParameters[0].parameters.bech32Hrp' },
+            tokenSupply: {
+                localeKey: 'protocol.tokenSupply',
+                nodeInfoPath: 'protocolParameters[0].parameters.tokenSupply',
+            },
+            version: { localeKey: 'protocol.version', nodeInfoPath: 'protocolParameters[0].parameters.version' },
+            // minPowScore: { localeKey: 'protocol.minPowScore', nodeInfoPath: 'protocol.minPowScore' },
         },
         [NodeInfoTab.BaseToken]: {
             token: { localeKey: 'baseToken.token', nodeInfoPath: 'baseToken.name' },
@@ -80,7 +83,7 @@
             nodeInfoValue = node.url
         } else {
             nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
-            if (key === 'confirmationRate' || key === 'blocksPerSecond' || key === 'referencedBlocksPerSecond') {
+            if (key === 'confirmationRate' || key === 'blocksPerSecond' || key === 'confirmedBlocksPerSecond') {
                 const numberValue = Number(nodeInfoValue)
                 if (numberValue >= 0) {
                     if (key === 'confirmationRate') {
@@ -111,7 +114,7 @@
     }
 
     onMount(() => {
-        getNodeInfo(node?.url, node?.auth)
+        getNodeInfo(node.url, node.auth)
             .then((nodeInfoResponse) => {
                 nodeInfo = nodeInfoResponse.nodeInfo
             })
@@ -119,7 +122,7 @@
                 closePopup()
                 showAppNotification({
                     type: 'error',
-                    message: localize(err?.error),
+                    message: localize(err.error),
                 })
             })
     })

@@ -884,7 +884,7 @@
                     "version": "Version",
                     "latestSlot": "Latest slot",
                     "confirmedSlot": "Confirmed slot",
-                    "pruningIndex": "Pruning index",
+                    "pruningEpoch": "Pruning epoch",
                     "features": "Features"
                 },
                 "metrics": {
