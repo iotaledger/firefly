@@ -1,12 +1,27 @@
-import { IWalletState } from '@core/wallet/interfaces'
+import { IOutputMetadataResponseTemp, IWalletState } from '@core/wallet/interfaces'
 import { activeWallets } from '@core/profile/stores'
 import { getNftId } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { INft } from '../interfaces'
 import { buildNftFromNftOutput } from '../utils'
-import { NftOutput, OutputType } from '@iota/sdk/out/types'
+import { NftOutput, OutputData, OutputType } from '@iota/sdk/out/types'
 import { setWalletNftsInAllWalletNfts } from './setWalletNftsInAllWalletNfts'
+import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '../../network'
+
+function sortNfts(outputA: OutputData, outputB: OutputData): number {
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    if (!nodeProtocolParameters) return 0
+    const timestampA = getTimestampFromNodeInfoAndSlotIndex(
+        nodeProtocolParameters,
+        (outputA.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+    )
+    const timestampB = getTimestampFromNodeInfoAndSlotIndex(
+        nodeProtocolParameters,
+        (outputB.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+    )
+    return timestampB - timestampA
+}
 
 export async function loadNftsForActiveProfile(): Promise<void> {
     const allWallets = get(activeWallets)
@@ -26,9 +41,7 @@ async function loadNftsForWallet(wallet: IWalletState): Promise<void> {
     }
 
     const allOutputs = await wallet.outputs()
-    const sortedNftOutputs = allOutputs
-        .filter((output) => output.output.type === OutputType.Nft)
-        .sort((a, b) => b.metadata.milestoneTimestampBooked - a.metadata.milestoneTimestampBooked)
+    const sortedNftOutputs = allOutputs.filter((output) => output.output.type === OutputType.Nft).sort(sortNfts)
     for (const outputData of sortedNftOutputs) {
         if (outputData.output.type === OutputType.Nft) {
             const nftOutput = outputData.output as NftOutput

@@ -1,7 +1,5 @@
-import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { CommonOutput, TimelockUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
-import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
-import { getTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
+import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
 import { get } from 'svelte/store'
 
 export function getTimelockDateFromOutput(output: CommonOutput): Date | undefined {
@@ -10,11 +8,11 @@ export function getTimelockDateFromOutput(output: CommonOutput): Date | undefine
             const timelockUnlockCondition = unlockCondition as TimelockUnlockCondition
             const nodeProtocolParameters = get(nodeInfoProtocolParameters)
             if (!nodeProtocolParameters) return
-            const unixTime = getTimestampFromNodeInfoAndSlotIndex(
+            const timestamp = getTimestampFromNodeInfoAndSlotIndex(
                 nodeProtocolParameters,
                 timelockUnlockCondition?.slotIndex
             )
-            return unixTime ? new Date(unixTime * MILLISECONDS_PER_SECOND) : undefined
+            return timestamp ? new Date(timestamp) : undefined
         }
     }
 }

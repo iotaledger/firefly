@@ -1,8 +1,10 @@
-import { SECONDS_PER_SLOT } from '../network/constants'
+import { get } from 'svelte/store'
+import { DEFAULT_SECONDS_PER_SLOT } from '../network/constants'
 
 import { DAYS_PER_WEEK, MILLISECONDS_PER_DAY, MILLISECONDS_PER_SECOND, MONTHS_PER_YEAR } from './constants'
 import { PastTimeUnit } from './enums'
 import { IDateDifference } from './interfaces'
+import { nodeInfoSecondsPerSlot } from '../network'
 
 export function datesOnSameDay(first: Date, second: Date): boolean {
     return first.toDateString() === second.toDateString()
@@ -84,7 +86,8 @@ export function diffDates(firstDate: Date | null, secondDate: Date): IDateDiffer
  * @param {number} slot
  */
 export function slotToDate(baseSlot: number, slot: number): Date {
-    const millisecondsPerSlot = SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
+    const secondsPerSlot = get(nodeInfoSecondsPerSlot) || DEFAULT_SECONDS_PER_SLOT
+    const millisecondsPerSlot = secondsPerSlot * MILLISECONDS_PER_SECOND
     const firstSlotMillis = Date.now() - baseSlot * millisecondsPerSlot
     const slotMillis = firstSlotMillis + slot * millisecondsPerSlot
     return new Date(slotMillis)

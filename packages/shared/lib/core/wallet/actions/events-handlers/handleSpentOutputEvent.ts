@@ -9,9 +9,12 @@ import {
     updateAsyncDataByTransactionId,
     allWalletActivities,
     WalletApiEventHandler,
+    IOutputMetadataResponseTemp,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
+import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
     return async (error: Error, rawEvent: WalletEvent) => {
@@ -43,8 +46,18 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
 
     if (activity?.type === ActivityType.Nft) {
         const previousOutputId = getNftByIdFromAllWalletNfts(walletId, activity.nftId)?.latestOutputId
+        const protocolParameters = get(nodeInfoProtocolParameters)
+        if (!wallet || !previousOutputId || !protocolParameters) return
         const previousOutput = await wallet.getOutput(previousOutputId)
-        if (output.metadata.milestoneTimestampBooked > previousOutput.metadata.milestoneTimestampBooked) {
+        const timestampOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
+            protocolParameters,
+            (output.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+        )
+        const timestampPreviousOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
+            protocolParameters,
+            (previousOutput.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+        )
+        if (timestampOutputMetadata > timestampPreviousOutputMetadata) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })
         }
     }

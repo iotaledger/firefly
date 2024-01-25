@@ -6,7 +6,7 @@
     },
     // files included below should have no ts-errors
     "files": [
-        "lib/core/network/constants/seconds-per-slot.constant.ts",
+        "lib/core/network/constants/default-seconds-per-slot.constant.ts",
         "./lib/core/network/utils/buildChainFromNetwork.ts",
         "./lib/core/network/utils/buildPersistedNetworkFromNodeInfoResponse.ts",
         "./lib/core/network/utils/checkNetworkId.ts",

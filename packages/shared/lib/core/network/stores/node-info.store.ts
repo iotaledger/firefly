@@ -13,3 +13,7 @@ export const nodeInfoNetworkName = derived(
 )
 
 export const nodeInfoProtocolParameters = derived(nodeInfo, ($nodeInfo) => $nodeInfo?.protocolParameters[0]?.parameters)
+export const nodeInfoSecondsPerSlot = derived(
+    nodeInfo,
+    ($nodeInfo) => $nodeInfo?.protocolParameters[0]?.parameters?.slotDurationInSeconds
+)

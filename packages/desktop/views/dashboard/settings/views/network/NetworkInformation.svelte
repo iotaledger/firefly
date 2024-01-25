@@ -15,7 +15,7 @@
                 <Text secondary>
                     {localize('views.settings.networkInformation.connectedTo')}:
                 </Text>
-                <Text highlighted>{$nodeInfo.protocol.networkName}</Text>
+                <Text highlighted>{$nodeInfo?.protocolParameters?.[0]?.parameters?.networkName}</Text>
             </div>
             <div class="flex flex-col space-y-1">
                 <Text secondary>{localize('views.dashboard.network.status')}:</Text>
