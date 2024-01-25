@@ -22,10 +22,19 @@ confirmation on behalf of the user.
 
 ## Scheme
 
-The Firefly deep link scheme can be broken down to the following (simple) syntax:
+Our system incorporates two specific deeplink schemes—namely IOTA and SHIMMER. Breaking down the Firefly deep link scheme reveals the following simple syntax:
+
+
+**IOTA**
 
 ```
 iota[-<stage>]://<context>/<operation>[?param=<param>]
+```
+
+**Shimmer**
+
+```
+firefly[-<stage>]://<context>/<operation>[?param=<param>]
 ```
 
 The parameters are as follows:
@@ -40,15 +49,14 @@ The parameters are as follows:
 -   `operation` - an operation within a specific context (see below for more detail)
 -   `param` - query parameter(s) relevant for the specified operation
 
-If you wish to target the production version, simply omit this from the prefix:
+To target the production version simply don't specify any stages, example for Shimmer:
 
 ```
 firefly://
 ```
 
-:::caution
-This deep link scheme is **NOT** compatible with Firefly V1, as that version of the application is in maintenance mode.
-:::
+This prefix is specifically meant for the production version of Firefly. You don't need to add anything else after ``firefly://``
+
 
 ## Contexts
 
@@ -115,7 +123,7 @@ The following parameters are **required**:
 
 The following parameters are **optional**:
 
--   `unit` - a specified denomination of the token to use, if applicable (default for IOTA is `Mi`, SMR is `SMR`)
+-   `unit` - a specified denomination of the token to use, if applicable (default for IOTA is `micro`, SMR is `glow`)
 -   `assetId` - the identifier of the asset to send, e.g. `4218` (IOTA), `4219` (SMR), or a native token ID (default is base token of the network, i.e. IOTA or SMR)
 -   `metadata` - a string of text to embed as metadata in the transaction
 -   `tag` - a string to tag the transaction for indexing purposes
