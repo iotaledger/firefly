@@ -85,7 +85,7 @@
     onMount(async () => {
         await updateStorageDeposit()
 
-        if (isSendAndClosePopup) {
+        if (isSendAndClosePopup || expirationDate) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
             initialExpirationDate = getInitialExpirationDate(
                 expirationDate,
