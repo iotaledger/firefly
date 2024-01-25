@@ -33,15 +33,9 @@
     let amountInputElement: HTMLInputElement
     let error: string
 
-    $: baseCoinBalanceAvailable =
-        $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin?.balance?.available
-    $: assetAvailableBalance = asset?.balance?.available
     $: isFocused && (error = '')
     $: allowedDecimals = getMaxDecimalsFromTokenMetadata(asset?.metadata, unit)
-    $: availableBalance =
-        baseCoinBalanceAvailable < assetAvailableBalance + votingPower
-            ? baseCoinBalanceAvailable
-            : assetAvailableBalance + votingPower
+    $: availableBalance = asset?.balance?.available + votingPower
     $: bigAmount = convertToRawAmount(amount, asset?.metadata, unit)
     $: marketAmount = getMarketAmountFromAssetValue(bigAmount, asset)
     $: max = parseCurrency(formatTokenAmountDefault(availableBalance, asset?.metadata, unit, false))
