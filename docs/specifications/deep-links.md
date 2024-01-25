@@ -103,7 +103,7 @@ This operation brings the user to the send confirmation popup:
 The deep link structure is as follows:
 
 ```
-firefly://wallet/sendConfirmation?address=<address>&amount=<amount>[&unit=<unit>][&assetId=<assetId>][&metadata=<metadata>][&tag=<tag>][&giftStorageDeposit=<true|false>][&disableToggleGift=<true|false>][&disableChangeExpiration=<true|false>][&surplus=<surplus>]
+firefly://wallet/sendConfirmation?address=<address>&amount=<amount>[&unit=<unit>][&assetId=<assetId>][&metadata=<metadata>][&tag=<tag>][&giftStorageDeposit=<true|false>][&disableToggleGift=<true|false>][&disableChangeExpiration=<true|false>][&surplus=<surplus>][&expiration=<expiration>]
 ```
 
 The following parameters are **required**:
@@ -123,15 +123,16 @@ The following parameters are **optional**:
 -   `disableToggleGift` - prevents the user from being able to toggle the option to gift the storage deposit
 -   `disableChangeExpiration` - prevents the user from being able to change the expiration time of the transaction
 -   `surplus` - send additional amounts of the base token when transferring native tokens
+-   `expiration` - the expiration time of the transaction, e.g. `1w`, `2d`, `5h` or `10m`. Also accepts a UNIX timestamp in milliseconds.
 
 Example:
 
-[!button Click me!](firefly://wallet/sendForm?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&surplus=1&metadata=Take%20my%20money)
+[!button Click me!](firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&surplus=1&metadata=Take%20my%20money&expiration=1h)
 
 Source:
 
 ```
-firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&disableToggleGift=true&surplus=1&metadata=Take%20my%20money
+firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&disableToggleGift=true&surplus=1&metadata=Take%20my%20money&expiration=1h
 ```
 
 ### Collectibles
