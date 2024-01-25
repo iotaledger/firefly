@@ -8,7 +8,7 @@
     import { formatTokenAmountPrecise, getRequiredStorageDepositForMinimalBasicOutput } from '@core/wallet'
     import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
-    import { getLayer2WithdrawRequest } from '@core/layer-2/utils'
+    import { WithdrawRequest, getLayer2WithdrawRequest, getMockLayer2WithdrawRequest } from '@core/layer-2/utils'
     import { withdrawL2Funds } from '@core/layer-2/helpers/widthdrawL2Funds'
     import { getL2ReceiptByRequestId } from '@core/layer-2/helpers/getL2ReceiptByRequestId'
     import { showAppNotification } from '@auxiliary/notification'
@@ -18,6 +18,7 @@
 
     export let withdrawOnLoad = false
     export let withdrawableAmount: number
+    const WASP_ISC_OPTIMIZATION_AMOUNT = 386
 
     const bip44Chain: Bip44 = {
         coinType: Number(getCoinType()),
@@ -83,27 +84,30 @@
             displayNotificationForLedgerProfile('warning')
             return
         }
-        let withdrawRequest = await getLayer2WithdrawRequest(withdrawableAmount.toString(), nonce, bip44Chain)
-        // get gas estimate for request with hardcoded amounts
-        const gasEstimatePayload = await getEstimatedGasForOffLedgerRequest(withdrawRequest.request)
+        // generate a mock withdraw request to use for gas estimate.
+        const mockWithdrawRequest = getMockLayer2WithdrawRequest(withdrawableAmount.toString())
+        const gasEstimatePayload = await getEstimatedGasForOffLedgerRequest(mockWithdrawRequest)
         const minRequiredStorageDeposit: number = await getRequiredStorageDepositForMinimalBasicOutput()
-        //  The "+1" is due to an optimization in WASP nodes.
-        const gasEstimate = gasEstimatePayload.gasFeeCharged + 1
-        if (withdrawableAmount > Number(minRequiredStorageDeposit) + Number(gasEstimate)) {
-            // Create new withdraw request with correct gas budget
-            withdrawRequest = await getLayer2WithdrawRequest(
-                (withdrawableAmount - gasEstimate).toString(),
-                nonce,
-                bip44Chain,
-                gasEstimate.toString()
-            )
-        } else {
-            isWithdrawing = false
-            showErrorNotification(localize('error.send.notEnoughBalance'))
-            return
-        }
+        //  The "+WASP_ISC_OPTIMIZATION_AMOUNT" is due to an optimization in WASP nodes.
+        const gasEstimate = gasEstimatePayload.gasFeeCharged + WASP_ISC_OPTIMIZATION_AMOUNT
 
+        let withdrawRequest: WithdrawRequest | undefined
+        const withdrawAmount = withdrawableAmount - gasEstimate
         try {
+            if (withdrawableAmount > Number(minRequiredStorageDeposit) + Number(gasEstimate)) {
+                // Create new withdraw request with correct gas budget
+                withdrawRequest = await getLayer2WithdrawRequest(
+                    withdrawAmount.toString(),
+                    nonce,
+                    bip44Chain,
+                    gasEstimate.toString()
+                )
+            } else {
+                isWithdrawing = false
+                showErrorNotification(localize('error.send.notEnoughBalance'))
+                return
+            }
+
             await withdrawL2Funds(withdrawRequest.request)
             const receipt = await getL2ReceiptByRequestId(withdrawRequest.requestId)
 
@@ -113,7 +117,20 @@
             } else {
                 closePopup()
             }
-        } catch (error) {
+        } catch (err) {
+            // if withdawing fails refresh the withdrawable amount because gas was used for the withdraw attempt
+            withdrawableAmount = await getArchivedBaseTokens(address)
+            let error = err
+            // TODO: check error object when user cancels transaction.
+            // parse the error because ledger simulator returns error as a string.
+            if (typeof err === 'string') {
+                try {
+                    const parsedError = JSON.parse(err)
+                    error = parsedError?.payload ? parsedError.payload : parsedError
+                } catch (e) {
+                    console.error(e)
+                }
+            }
             isWithdrawing = false
             showErrorNotification(error)
         }
@@ -146,7 +163,7 @@
     }
     function showErrorNotification(error): void {
         if ($isActiveLedgerProfile) {
-            displayNotificationForLedgerProfile('error', true, true, error)
+            displayNotificationForLedgerProfile('error', true, false, error)
         } else {
             showAppNotification({
                 type: 'error',
