@@ -12,7 +12,7 @@
     let assetList: IAsset[] = []
 
     $: isReadonly = readonly || $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.nativeTokens.length === 0
-    $: $visibleSelectedAccountAssets, (assetList = getAssetList())
+    $: $visibleSelectedAccountAssets, (assetList = getAssetList()), updateSelectedAsset()
 
     function getAssetList(): IAsset[] {
         const list = []
@@ -38,6 +38,12 @@
 
     function onOutsideClick(): void {
         isDropdownOpen = false
+    }
+
+    function updateSelectedAsset(): void {
+        asset =
+            assetList.find((a) => a.id === asset?.id) ??
+            $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin
     }
 </script>
 
