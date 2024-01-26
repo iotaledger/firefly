@@ -6,12 +6,15 @@
     import { activeProfile } from '@core/profile'
 
     import { openPopup, PopupId } from '@auxiliary/popup'
+    import { selectedWallet } from '@core/wallet'
 
     function onGetTokensClick(): void {
         openPopup({
             id: PopupId.FaucetRequest,
         })
     }
+
+    $: hasDepositAddress = !!$selectedWallet.depositAddress
 </script>
 
 {#if FAUCET_URLS?.[$activeProfile?.network?.id] && $nodeInfo}
@@ -23,5 +26,6 @@
             values: { network: $nodeInfo.protocol.networkName },
         })}
         onClick={onGetTokensClick}
+        disabled={!hasDepositAddress}
     />
 {/if}
