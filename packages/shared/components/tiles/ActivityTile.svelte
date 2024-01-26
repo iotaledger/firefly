@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import { time } from '@core/app'
     import {
         Activity,
@@ -11,6 +12,7 @@
         selectedAccountAssets,
     } from '@core/wallet'
     import {
+        ActivityInclusionStatusPill,
         AliasActivityTileContent,
         AsyncActivityTileFooter,
         ClickableTile,
@@ -18,11 +20,11 @@
         FoundryActivityTileContent,
         GovernanceActivityTileContent,
         NftActivityTileContent,
+        TileFooter,
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
         VestingActivityTileContent,
     } from 'shared/components'
-    import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let activity: Activity
 
@@ -32,8 +34,10 @@
             activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
                 ? getTokenFromSelectedAccount(activity.assetId)
                 : undefined)
-    $: isTimelocked = activity?.asyncData?.timelockDate > $time
-    $: shouldShowAsyncFooter = activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
+    $: isConflicting = activity.inclusionState === InclusionState.Conflicting
+    $: isTimelocked = !isConflicting && activity?.asyncData?.timelockDate > $time
+    $: shouldShowAsyncFooter =
+        !isConflicting && activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
 
     function onTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -76,7 +80,16 @@
                 <FoundryActivityTileContent {activity} />
             {/if}
         </tile-content>
-        {#if isTimelocked}
+        {#if isConflicting}
+            <TileFooter>
+                <svelte:fragment slot="right">
+                    <ActivityInclusionStatusPill
+                        inclusionState={activity.inclusionState}
+                        localizationKey="external.outgoing"
+                    />
+                </svelte:fragment>
+            </TileFooter>
+        {:else if isTimelocked}
             <TimelockActivityTileFooter {activity} />
         {:else if shouldShowAsyncFooter}
             <AsyncActivityTileFooter {activity} />
