@@ -45,12 +45,18 @@ export async function buildWalletState(
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
-        if (accountOutputs.length && !get(mainAccountId)) {
-            const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
-            if (blockIssuerAccounts.length > 0) {
-                const accountId = (blockIssuerAccounts[0]?.output as AccountOutput).accountId
-                updateMainAccountId(accountId, wallet.id)
-            }
+
+        // initialize mainAccountId if there is none set so the wallet can be used
+        // TODO: check that mainAccountId is still an owned account
+        const _mainAccountId = get(mainAccountId)
+        const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
+
+        // check if the current mainAccountId is still owned by the wallet
+        if (
+            _mainAccountId &&
+            !blockIssuerAccounts.find((account) => (account?.output as AccountOutput)?.accountId === _mainAccountId)
+        ) {
+            updateMainAccountId(undefined)
         }
     } catch (err) {
         console.error(err)
@@ -64,6 +70,7 @@ export async function buildWalletState(
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
         hasConsolidatingOutputsTransactionInProgress: false,
+        hasImplicitAccountCreationTransactionInProgress: false,
         isTransferring: false,
         votingPower,
         walletOutputs,

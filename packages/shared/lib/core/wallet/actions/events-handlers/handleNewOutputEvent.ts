@@ -24,9 +24,9 @@ import {
     addActivitiesToWalletActivitiesInAllWalletActivities,
     WalletApiEventHandler,
     updateSelectedWallet,
-    getDepositAddress,
     updateMainAccountId,
-    getBlockIssuerAccounts,
+    mainAccountId,
+    hasBlockIssuerFeature,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -68,20 +68,27 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     const isAccountOutput = output.type === OutputType.Account
 
     if (isAccountOutput) {
-        const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
-        if (blockIssuerAccounts.length === 1) {
-            const accountId = (blockIssuerAccounts[0]?.output as AccountOutput).accountId
-            updateMainAccountId(accountId)
-            const depositAddress = await getDepositAddress(wallet)
-            updateSelectedWallet({
-                accountOutputs: blockIssuerAccounts,
-                depositAddress,
-            })
-        } else {
-            updateSelectedWallet({
-                accountOutputs: blockIssuerAccounts,
+        const accountOutput = output as AccountOutput
+        const accountOutputs = await wallet.accounts()
+        updateSelectedWallet({
+            accountOutputs,
+        })
+
+        // if we receive the first account output, we set it as the mainAccountId
+        // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
+        // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
+        if (
+            !get(mainAccountId) &&
+            wallet?.hasImplicitAccountCreationTransactionInProgress &&
+            hasBlockIssuerFeature(accountOutput)
+        ) {
+            updateMainAccountId(accountOutput.accountId)
+            updateActiveWallet(walletId, {
+                hasImplicitAccountCreationTransactionInProgress: false,
+                isTransferring: false,
             })
         }
+
         return
     }
 

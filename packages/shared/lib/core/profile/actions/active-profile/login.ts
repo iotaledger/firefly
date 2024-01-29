@@ -95,6 +95,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             // Step 7: start background sync
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
+            // TODO: sync always implicit accounts, not only if there are no account outputs
             if (get(selectedWallet)?.accountOutputs.length === 0) {
                 await startBackgroundSync({ syncIncomingTransactions: true, syncImplicitAccounts: true })
             } else {
