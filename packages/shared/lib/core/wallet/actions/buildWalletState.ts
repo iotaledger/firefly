@@ -3,7 +3,7 @@ import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interf
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
 import { getDepositAddress } from '../utils/getDepositAddress'
-import { mainAccountId, updateMainAccountId } from '../stores'
+import { selectedWalletMainAccountId, updateSelectedWalletMainAccountId } from '../stores'
 import { get } from 'svelte/store'
 import { getBlockIssuerAccounts } from '../utils'
 
@@ -46,17 +46,19 @@ export async function buildWalletState(
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
 
-        // initialize mainAccountId if there is none set so the wallet can be used
-        // TODO: check that mainAccountId is still an owned account
-        const _mainAccountId = get(mainAccountId)
+        // initialize selectedWalletMainAccountId if there is none set so the wallet can be used
+        // TODO: check that selectedWalletMainAccountId is still an owned account
+        const _selectedWalletMainAccountId = get(selectedWalletMainAccountId)
         const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
 
-        // check if the current mainAccountId is still owned by the wallet
+        // check if the current selectedWalletMainAccountId is still owned by the wallet
         if (
-            _mainAccountId &&
-            !blockIssuerAccounts.find((account) => (account?.output as AccountOutput)?.accountId === _mainAccountId)
+            _selectedWalletMainAccountId &&
+            !blockIssuerAccounts.find(
+                (account) => (account?.output as AccountOutput)?.accountId === _selectedWalletMainAccountId
+            )
         ) {
-            updateMainAccountId(undefined)
+            updateSelectedWalletMainAccountId(undefined)
         }
     } catch (err) {
         console.error(err)

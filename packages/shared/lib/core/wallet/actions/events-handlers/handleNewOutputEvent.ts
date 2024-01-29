@@ -24,8 +24,8 @@ import {
     addActivitiesToWalletActivitiesInAllWalletActivities,
     WalletApiEventHandler,
     updateSelectedWallet,
-    updateMainAccountId,
-    mainAccountId,
+    updateSelectedWalletMainAccountId,
+    selectedWalletMainAccountId,
     hasBlockIssuerFeature,
 } from '@core/wallet'
 import { get } from 'svelte/store'
@@ -74,15 +74,15 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             accountOutputs,
         })
 
-        // if we receive the first account output, we set it as the mainAccountId
+        // if we receive the first account output, we set it as the selectedWalletMainAccountId
         // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
         // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
         if (
-            !get(mainAccountId) &&
+            !get(selectedWalletMainAccountId) &&
             wallet?.hasImplicitAccountCreationTransactionInProgress &&
             hasBlockIssuerFeature(accountOutput)
         ) {
-            updateMainAccountId(accountOutput.accountId)
+            updateSelectedWalletMainAccountId(accountOutput.accountId)
             updateActiveWallet(walletId, {
                 hasImplicitAccountCreationTransactionInProgress: false,
                 isTransferring: false,
