@@ -27,7 +27,7 @@ export const nonHiddenActiveWallets: Readable<IWalletState[]> = derived([activeW
         return []
     }
     const unsortedNonHiddenwallets = $activeWallets?.filter((wallet) => !wallet?.hidden)
-    return unsortedNonHiddenwallets // TODO(2.0): Sort them: .sort((a, b) => a.index - b.index)
+    return unsortedNonHiddenwallets
 })
 
 export const visibleActiveWallets: Readable<IWalletState[]> = derived(
@@ -40,6 +40,6 @@ export const visibleActiveWallets: Readable<IWalletState[]> = derived(
             $activeProfile?.showHiddenWallets ?? false
                 ? $activeWallets
                 : $activeWallets?.filter((wallet) => !wallet?.hidden)
-        return unsortedVisiblewallets // TODO(2.0): Sort them: .sort((a, b) => a.index - b.index)
+        return unsortedVisiblewallets
     }
 )
