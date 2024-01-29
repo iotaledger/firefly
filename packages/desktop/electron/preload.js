@@ -132,7 +132,6 @@ try {
             }
             return wallet
         },
-        // TODO(2.0): also remove from file system? Does it make sense? file system != memoery
         async deleteWallet(id) {
             if (id && id in wallets) {
                 const wallet = wallets[id]
