@@ -5,6 +5,7 @@ import { IWallet } from '@core/profile/interfaces'
 import { getDepositAddress } from '../utils/getDepositAddress'
 import { mainAccountId, updateMainAccountId } from '../stores'
 import { get } from 'svelte/store'
+import { getBlockIssuerAccounts } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -45,8 +46,11 @@ export async function buildWalletState(
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
         if (accountOutputs.length && !get(mainAccountId)) {
-            const accountId = (accountOutputs[0]?.output as AccountOutput).accountId
-            updateMainAccountId(accountId, wallet.id)
+            const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
+            if (blockIssuerAccounts.length > 0) {
+                const accountId = (blockIssuerAccounts[0]?.output as AccountOutput).accountId
+                updateMainAccountId(accountId, wallet.id)
+            }
         }
     } catch (err) {
         console.error(err)
