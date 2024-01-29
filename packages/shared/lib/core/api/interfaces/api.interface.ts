@@ -13,7 +13,6 @@ import {
 } from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
-// TODO(2.0): Every method should return a promise (maybe except Utils, needs research)
 export interface IApi {
     getClientFromWallet(id: string): Promise<Client>
     createSecretManager(options: SecretManagerType): Promise<SecretManager>

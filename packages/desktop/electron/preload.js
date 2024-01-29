@@ -122,8 +122,7 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
             return client
         },
-        // TODO(2.0): Is there a difference between this and getWallet? They both really make the same thing
-        async createWallet(id, walletOptions) {
+        async getWallet(id, walletOptions) {
             let wallet = wallets[id]
             if (!wallet) {
                 wallet = await IotaSdk.Wallet.create(walletOptions)
@@ -141,24 +140,6 @@ try {
                 await wallet.destroy()
                 delete wallets[id]
             }
-        },
-        // TODO(2.0): Rename this to getWallet and fix all usages
-        async getWallet(id, walletOptions) {
-            let wallet = wallets[id]
-            if (!wallet) {
-                wallet = await IotaSdk.Wallet.create(walletOptions)
-                wallet.id = id
-                wallets[id] = wallet
-                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
-            }
-            return wallet
-        },
-        // TODO(2.0): remove this method from here and move to new profile
-        async recoverAccounts(managerId, payload) {
-            const manager = wallets[managerId]
-            const accounts = await manager.recoverAccounts(...Object.values(payload))
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, account))
-            return accounts
         },
         async clearWalletsFromMemory() {
             for (const [id, wallet] of Object.entries(wallets)) {
