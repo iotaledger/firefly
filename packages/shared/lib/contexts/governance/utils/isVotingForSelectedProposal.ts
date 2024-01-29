@@ -1,5 +1,4 @@
 import { get } from 'svelte/store'
-
 import { selectedProposalId } from '../stores'
 import { isVotingForProposal } from './isVotingForProposal'
 

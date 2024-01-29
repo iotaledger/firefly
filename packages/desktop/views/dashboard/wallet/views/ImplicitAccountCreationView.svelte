@@ -3,8 +3,16 @@
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { selectedWallet } from '@core/wallet'
 
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
+
+    // TODO: Update this when we have enough mana to route to the next step
+    $: {
+        if ($selectedWallet?.implicitAccountOutputs?.length > 0) {
+            $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+        }
+    }
 </script>
 
 <implicit-account-creation-view class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">

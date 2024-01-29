@@ -1,19 +1,31 @@
 <script lang="ts">
     import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { showAppNotification } from '@auxiliary/notification'
+    import { selectedWallet } from '@core/wallet'
+    import { activeProfile, unlockStronghold } from '@core/profile'
+    import { get } from 'svelte/store'
 
     let error = ''
+    let isBusy = false
     let strongholdPassword = ''
-    $: strongholdPassword, (error = '')
 
-    function unlockWalletAndCreateAccount(): void {
-        // TODO: add logic to active account
-        showAppNotification({
-            type: 'error',
-            alert: true,
-            message: localize('error.global.generic'),
-        })
+    async function unlockWalletAndCreateAccount(): Promise<void> {
+        isBusy = true
+        error = ''
+        try {
+            if (!strongholdPassword || $selectedWallet?.implicitAccountOutputs.length === 0) return
+            // TODO(2.0): patch because it comes unlocked by default
+            const { isStrongholdLocked } = get(activeProfile)
+            isStrongholdLocked.set(true)
+
+            await unlockStronghold(strongholdPassword)
+            const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
+            await $selectedWallet?.implicitAccountTransition(outputId)
+        } catch (err) {
+            console.error('err', err)
+            error = localize(err?.message ?? err)
+            isBusy = false
+        }
     }
 </script>
 
@@ -29,14 +41,16 @@
             >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
         >
         <PasswordInput
-            {error}
+            bind:error
             bind:value={strongholdPassword}
             autofocus
             submitHandler={unlockWalletAndCreateAccount}
             placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
         />
     </div>
-    <Button onClick={unlockWalletAndCreateAccount}
-        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+    <Button
+        onClick={unlockWalletAndCreateAccount}
+        disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
+        {isBusy}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>

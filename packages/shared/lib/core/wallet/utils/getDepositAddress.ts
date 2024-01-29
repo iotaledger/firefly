@@ -1,6 +1,15 @@
-import { IWallet } from '@core/profile/interfaces'
+import { AccountAddress, AccountOutput } from '@iota/sdk/out/types'
+import { IWallet } from '../../profile/interfaces'
+import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
 
-// TODO(2.0): the implementation is incorrect, the deposit address should be the address of the selected block issuer account output , not the ed25519 address
-export function getDepositAddress(wallet: IWallet): Promise<string> {
-    return wallet.address()
+// TODO(2.0): Update the implementation to handle multiple accounts and use the selected account's address.
+export async function getDepositAddress(wallet: IWallet): Promise<string> {
+    const accounts = await wallet?.accounts()
+    if (accounts?.length) {
+        const accountId = (accounts[0]?.output as AccountOutput).accountId
+        const accountAddress = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+        return accountAddress ?? ''
+    } else {
+        return ''
+    }
 }

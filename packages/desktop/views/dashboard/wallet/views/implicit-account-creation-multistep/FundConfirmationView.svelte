@@ -1,11 +1,42 @@
 <script lang="ts">
     import { Button, FontWeight, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { implicitAccountCreationRouter } from '../../implicit-account-creation-router'
+    import { onMount, onDestroy } from 'svelte'
 
-    // TODO: Replace this with proper time remaining
-    const DUMMY_TIME_REMAINING = '5min 32s remaining'
     // TODO: Replace this with proper amount
     const DUMMY_AMOUNT = '5$'
+
+    // TODO: Replace this with proper time remaining
+    // ----------------------------------------------------------------
+    let seconds: number = 10
+    let countdownInterval: NodeJS.Timeout
+    let timeRemaining: string
+
+    const startCountdown = () => {
+        countdownInterval = setInterval(() => {
+            seconds -= 1
+
+            if (seconds <= 0) {
+                clearInterval(countdownInterval)
+                onTimeout()
+            }
+        }, 1000)
+    }
+
+    const onTimeout = () => {
+        $implicitAccountCreationRouter.next()
+    }
+
+    onMount(() => {
+        startCountdown()
+    })
+
+    onDestroy(() => {
+        clearInterval(countdownInterval)
+    })
+    $: timeRemaining = `${seconds}s remaining`
+    // ----------------------------------------------------------------
 </script>
 
 <step-content class="flex flex-col items-center justify-between h-full pt-28">
@@ -23,7 +54,7 @@
             >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
         >
         <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400"
-            >{DUMMY_TIME_REMAINING}</Text
+            >{timeRemaining}</Text
         >
     </div>
     <Button disabled>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>

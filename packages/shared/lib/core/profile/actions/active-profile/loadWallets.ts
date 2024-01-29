@@ -5,13 +5,13 @@ import { getWallets } from '../getWallets'
 
 export async function loadWallets(): Promise<void> {
     const { hasLoadedWallets } = get(activeProfile)
-    const walletResponse = await getWallets()
-    if (walletResponse.length === 0) {
+    const walletsResponse = await getWallets()
+    if (walletsResponse.length === 0) {
         hasLoadedWallets.set(true)
         return
     }
-    if (walletResponse) {
-        const loadedWallets = await Promise.all(walletResponse?.map((accountResponse) => loadWallet(accountResponse)))
+    if (walletsResponse) {
+        const loadedWallets = await Promise.all(walletsResponse?.map((walletResponse) => loadWallet(walletResponse)))
         activeWallets.set(loadedWallets)
         hasLoadedWallets.set(true)
     }

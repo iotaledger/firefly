@@ -16,8 +16,8 @@
 
     export let modal: Modal = undefined
 
-    const showDeleteWallet = true // TODO(2.0) Is there anything preventing us from deleting any account ?
-    // $selectedWallet?.id === $activeWallets?.length - 1 && $visibleActiveWallets?.length > 1
+    const showDeleteWallet = false // TODO(2.0) It doesn't make sense to allow removing
+    // the wallet as there is only one for each profile at the moment
 
     function onCustomiseWalletClick(): void {
         openPopup({ id: PopupId.ManageWallet })
