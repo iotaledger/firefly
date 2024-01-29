@@ -32,8 +32,12 @@ export async function getEstimatedGasForOffLedgerRequest(requestHex: HexEncodedS
                 throw new Error(`Message: ${err.Message}, Error: ${err.Error}`)
             })
         }
+
         if (response.status === 200) {
             const data = await response.json()
+            if (data.errorMessage) {
+                throw new Error(data.errorMessage)
+            }
             const gasBurned = BigInteger(data.gasBurned as string).toJSNumber()
             const gasFeeCharged = BigInteger(data.gasFeeCharged as string).toJSNumber()
 
