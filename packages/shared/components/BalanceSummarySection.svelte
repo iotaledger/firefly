@@ -11,6 +11,7 @@
     export let subBreakdown: { [key: string]: { amount: number } } = {}
     export let amount: number
     export let bold: boolean = false
+    export let isAsset: boolean = true
 
     let expanded: boolean = false
 
@@ -48,8 +49,8 @@
         <BalanceSummaryRow
             title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
             subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
-            amount={getAmount(amount)}
-            convertedAmount={getCurrencyAmount(amount)}
+            amount={isAsset ? getAmount(amount) : String(amount + ' MANA')}
+            convertedAmount={isAsset ? getCurrencyAmount(amount) : String(amount + ' MANA')}
             {bold}
         />
     </div>
@@ -59,8 +60,12 @@
                 <BalanceSummaryRow
                     title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
                     subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
-                    amount={getAmount(subBreakdown[breakdownKey].amount)}
-                    convertedAmount={getCurrencyAmount(subBreakdown[breakdownKey].amount)}
+                    amount={isAsset
+                        ? getAmount(subBreakdown[breakdownKey].amount)
+                        : String(subBreakdown[breakdownKey].amount + ' MANA')}
+                    convertedAmount={isAsset
+                        ? getCurrencyAmount(subBreakdown[breakdownKey].amount)
+                        : String(subBreakdown[breakdownKey].amount + ' MANA')}
                 />
             </balance-summary-row-expanded>
         {/each}

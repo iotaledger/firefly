@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Text, FontWeight, TextType } from 'shared/components'
-    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
+    import { formatTokenAmountBestMatch, IAsset, selectedWallet } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
 
@@ -9,6 +9,7 @@
     $: availableMarketValue = getMarketAmountFromAssetValue(asset?.balance?.available, asset)
     $: totalMarketValue = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
     $: disabled = Number.isNaN(totalMarketValue) || Number.isNaN(availableMarketValue)
+    $: mana = $selectedWallet?.balances?.mana
 
     let isToggled = false
     function toggle(): void {
@@ -33,6 +34,15 @@
                     },
                 })}
             </Text>
+            {#if mana}
+                <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600" darkColor="gray-500">
+                    {localize('general.availableManaWithValue', {
+                        values: {
+                            mana: Number(mana.available.stored),
+                        },
+                    })}
+                </Text>
+            {/if}
         </div>
     </button>
 {/if}

@@ -13,6 +13,7 @@
 
     interface BalanceBreakdown {
         amount: number
+        isAsset?: boolean
         subBreakdown?: { [key: string]: { amount: number } }
     }
 
@@ -33,18 +34,29 @@
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
         const vestingBreakdown = getVestingBreakdown()
+        const manaBreakdown = getManaBreakdown()
 
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
+            mana: manaBreakdown,
             ...(features.vesting.enabled && { vesting: vestingBreakdown }),
         }
     }
 
     function getAvailableBreakdown(): BalanceBreakdown {
         return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
+    }
+
+    function getManaBreakdown(): BalanceBreakdown {
+        const subBreakdown = {
+            potentialTotalMana: { amount: Number($selectedWallet?.balances?.mana?.total?.potential) },
+            storedAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.stored) },
+            potentialAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.potential) },
+        }
+        return { amount: Number($selectedWallet?.balances?.mana?.total?.stored ?? 0), subBreakdown, isAsset: false }
     }
 
     async function getPendingBreakdown(): Promise<BalanceBreakdown> {
@@ -159,6 +171,7 @@
                 subtitleKey={breakdownKey}
                 amount={breakdown[breakdownKey].amount}
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
+                isAsset={breakdown[breakdownKey].isAsset}
             />
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
