@@ -4,10 +4,10 @@ import { AnchorActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
-    getGovernorAddressFromAliasOutput,
+    getGovernorAddressFromAnchorOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStateControllerAddressFromAliasOutput,
+    getStateControllerAddressFromAnchorOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
@@ -25,8 +25,8 @@ export async function generateSingleAnchorActivity(
 
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
-    const governorAddress = getGovernorAddressFromAliasOutput(output)
-    const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
+    const governorAddress = getGovernorAddressFromAnchorOutput(output)
+    const stateControllerAddress = getStateControllerAddressFromAnchorOutput(output)
 
     const isHidden = false
     const isAssetHidden = false
