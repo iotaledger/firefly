@@ -35,6 +35,7 @@ import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletA
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
 import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
+import { getDepositAddress, selectedWallet, updateSelectedWallet } from 'shared/lib/core/wallet'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -55,6 +56,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                 initialSelectedWalletId = lastUsedWalletId
             }
             setSelectedWallet(initialSelectedWalletId)
+            const _selectedWallet = get(selectedWallet)
+            if (_selectedWallet) {
+                const depositAddress = await getDepositAddress(_selectedWallet)
+                updateSelectedWallet({ depositAddress })
+            }
 
             // Step 3: get node info to check we have a synced node
             incrementLoginProgress()

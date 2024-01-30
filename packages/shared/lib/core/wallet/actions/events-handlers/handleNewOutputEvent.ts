@@ -27,6 +27,7 @@ import {
     updateSelectedWalletMainAccountId,
     selectedWalletMainAccountId,
     hasBlockIssuerFeature,
+    getDepositAddress,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -70,8 +71,10 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (isAccountOutput) {
         const accountOutput = output as AccountOutput
         const accountOutputs = await wallet.accounts()
+        const depositAddress = await getDepositAddress(wallet)
         updateSelectedWallet({
             accountOutputs,
+            depositAddress,
         })
 
         // if we receive the first account output, we set it as the selectedWalletMainAccountId
@@ -88,7 +91,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 isTransferring: false,
             })
         }
-
         return
     }
 

@@ -2,7 +2,6 @@ import { AccountOutput, Balance, OutputData } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
-import { getDepositAddress } from '../utils/getDepositAddress'
 import { selectedWalletMainAccountId, updateSelectedWalletMainAccountId } from '../stores'
 import { get } from 'svelte/store'
 import { getBlockIssuerAccounts } from '../utils'
@@ -32,7 +31,6 @@ export async function buildWalletState(
         delegations: [],
     }
 
-    let depositAddress = ''
     let votingPower = ''
     let walletOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
@@ -40,7 +38,6 @@ export async function buildWalletState(
 
     try {
         balances = await wallet.getBalance()
-        depositAddress = await getDepositAddress(wallet)
         votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
@@ -67,7 +64,6 @@ export async function buildWalletState(
     return {
         ...wallet,
         ...walletPersistedData,
-        depositAddress,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
