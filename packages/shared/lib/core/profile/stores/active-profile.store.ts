@@ -34,6 +34,13 @@ export function addWalletPersistedDataToActiveProfile(
     })
 }
 
+export function removeWalletPersistedDataFromActiveProfile(walletId: string): void {
+    activeProfile?.update((state) => {
+        delete state.walletPersistedData[walletId]
+        return state
+    })
+}
+
 export function getActiveProfilePersistedWalletData(walletId: string): IPersistedWalletData | undefined {
     return get(activeProfile)?.walletPersistedData?.[walletId]
 }

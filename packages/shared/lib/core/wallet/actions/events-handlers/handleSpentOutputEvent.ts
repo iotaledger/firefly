@@ -22,7 +22,6 @@ export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler 
     }
 }
 
-// TODO(2.0) Fix all usages
 export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
