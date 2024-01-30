@@ -9,7 +9,6 @@ import {
     updateAsyncDataByTransactionId,
     allWalletActivities,
     WalletApiEventHandler,
-    IOutputMetadataResponseTemp,
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
@@ -38,7 +37,7 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)
 
     if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
-        const transactionId = output?.metadata?.transactionId
+        const transactionId = output?.metadata?.included.transactionId
         updateAsyncDataByTransactionId(walletId, transactionId, {
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
@@ -51,11 +50,11 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
         const previousOutput = await wallet.getOutput(previousOutputId)
         const timestampOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
             protocolParameters,
-            (output.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+            output.metadata.included.slot
         )
         const timestampPreviousOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
             protocolParameters,
-            (previousOutput.metadata as unknown as IOutputMetadataResponseTemp).included.slot
+            previousOutput.metadata.included.slot
         )
         if (timestampOutputMetadata > timestampPreviousOutputMetadata) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })

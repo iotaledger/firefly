@@ -1,5 +1,5 @@
 import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
-import { IOutputMetadataResponseTemp, IWalletState } from '@core/wallet/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
@@ -15,7 +15,7 @@ export function preprocessGroupedOutputs(
     transactionInputs: OutputResponse[],
     wallet: IWalletState
 ): IProcessedTransaction {
-    const transactionMetadata = outputDatas[0]?.metadata as unknown as IOutputMetadataResponseTemp
+    const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
         transactionMetadata?.included.transactionId,
         transactionInputs

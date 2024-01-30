@@ -1,4 +1,4 @@
-import { IOutputMetadataResponseTemp, IWalletState } from '@core/wallet/interfaces'
+import { IWalletState } from '@core/wallet/interfaces'
 import { activeWallets } from '@core/profile/stores'
 import { getNftId } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
@@ -12,14 +12,8 @@ import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from
 function sortNfts(outputA: OutputData, outputB: OutputData): number {
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     if (!nodeProtocolParameters) return 0
-    const timestampA = getTimestampFromNodeInfoAndSlotIndex(
-        nodeProtocolParameters,
-        (outputA.metadata as unknown as IOutputMetadataResponseTemp).included.slot
-    )
-    const timestampB = getTimestampFromNodeInfoAndSlotIndex(
-        nodeProtocolParameters,
-        (outputB.metadata as unknown as IOutputMetadataResponseTemp).included.slot
-    )
+    const timestampA = getTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputA.metadata.included.slot)
+    const timestampB = getTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputB.metadata.included.slot)
     return timestampB - timestampA
 }
 
