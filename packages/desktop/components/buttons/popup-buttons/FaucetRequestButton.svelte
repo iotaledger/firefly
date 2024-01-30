@@ -23,7 +23,7 @@
             values: { token: $nodeInfo.baseToken.name },
         })}
         secondaryText={localize('general.faucetRequestDescription', {
-            values: { network: $nodeInfo.protocol.networkName },
+            values: { network: $nodeInfo.protocolParameters?.[0]?.parameters?.networkName },
         })}
         onClick={onGetTokensClick}
         disabled={!hasDepositAddress}
