@@ -17,9 +17,9 @@ export interface IApi {
     getClientFromWallet(id: string): Promise<Client>
     createSecretManager(options: SecretManagerType): Promise<SecretManager>
     createWallet(id: string, payload: WalletOptions): Promise<IWallet>
-    deleteWallet(id: string): void
+    deleteWallet(id: string): Promise<void>
     getWallet(id: string, walletOptions: WalletOptions): Promise<IWallet>
-    clearWalletsFromMemory(): void
+    clearWalletsFromMemory(): Promise<void>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,
         currentPassword: string,
@@ -28,16 +28,16 @@ export interface IApi {
     ): Promise<void>
     migrateDbChrysalisToStardust(path: string, pinCode: string): Promise<Record<string, unknown>>
     // Mapped from sdk#Utils
-    generateMnemonic(): Promise<string>
-    verifyMnemonic(mnemonic: string): Promise<void>
+    generateMnemonic(): string
+    verifyMnemonic(mnemonic: string): void
     hexToBech32(hex: HexEncodedString, bech32Hrp: string): Bech32Address
     bech32ToHex(bech32: Bech32Address): HexEncodedString
     computeAccountId(outputId: string): AccountId
-    computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): Promise<FoundryId>
+    computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): FoundryId
     computeNftId(outputId: string): NftId
     hexPublicKeyToBech32Address(hex: HexEncodedString, bech32Hrp: string): Bech32Address
     accountIdToBech32(accountId: AccountId, bech32Hrp: string): Bech32Address
     nftIdToBech32(nftId: string, bech32Hrp: string): Bech32Address
-    computeOutputId(id: TransactionId, index: number): Promise<OutputId>
-    outputHexBytes(output: Output): Promise<HexEncodedString>
+    computeOutputId(id: TransactionId, index: number): OutputId
+    outputHexBytes(output: Output): HexEncodedString
 }
