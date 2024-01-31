@@ -4,8 +4,8 @@ import { ParticipationEventMap /* ParticipationEventRegistrationOptions*/ } from
 
 // TODO: https://github.com/iotaledger/firefly/issues/7947
 export async function registerParticipationEvents(): Promise<ParticipationEventMap> {
-// registrationOptions: ParticipationEventRegistrationOptions,
-// wallet: IWalletState
+    // registrationOptions: ParticipationEventRegistrationOptions,
+    // wallet: IWalletState
     // let newRegistrationOptions = registrationOptions
     // const { removedProposalIds } = getSelectedWallet() ?? {}
     // if (removedProposalIds?.length > 0) {
