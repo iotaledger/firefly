@@ -26,10 +26,8 @@ export async function createNewWallet(name?: string, color?: string): Promise<IW
     // 4. Create a wrapper over the wallet instance and the persisted data
     const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName, color)
 
-    // TODO(2.0) Fix
     addWalletToActiveWallets(walletState)
     addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)
-    // TODO(2.0) Fix
     addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
 
     return walletState
