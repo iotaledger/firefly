@@ -1648,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Contratto di destinazione",
         "contractFunction": "Funzione del contratto",
-        "gasBudget": "Gas budget\n",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Emittente",
@@ -1944,6 +1944,8 @@
             "wrongAddressPrefix": "Gli indirizzi iniziano con il prefisso {prefix}.",
             "wrongAddressFormat": "L'indirizzo non è formattato correttamente.",
             "invalidAddress": "L'indirizzo non è valido.",
+            "invalidExpirationDate": "La data di scadenza non è valida.",
+            "pastExpirationDate": "Il data di scadenza è passata.",
             "invalidAssetId": "L'id dell'asset non è valido.",
             "unknownAsset": "L'asset non è noto a questo conto.",
             "insufficientFunds": "Questo wallet non ha fondi sufficienti.",
@@ -1977,7 +1979,7 @@
             "refused": "La connessione è stata rifiutata.",
             "handshake": "Impossibile completare l' handshake con il nodo.",
             "invalidCertificate": "Impossibile connettersi con un certificato non valido.",
-            "https": "HTTPS è richiesto; connessioni non sicure tramite HTTP non sono supportate in questo momento.",
+            "https": "Le connessioni esterne devono utilizzare HTTPS; le connessioni a localhost possono essere effettuate utilizzando HTTP. Non sono supportate connessioni HTTP esterne non sicure.",
             "duplicate": "Questo nodo è già stato aggiunto.",
             "noSyncedNode": "Nessun nodo sincronizzato disponibile.",
             "timeNotSynced": "Il tempo del dispositivo non è corretto, impossibile sincronizzare il nodo.",
@@ -2160,7 +2162,7 @@
                 "timelockDate": "Il mittente ha impostato un timelock su questi fondi. Sarai in grado di spenderli una volta scaduto il timeloce.",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
                 "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
-                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Un deposito è un importo rimborsabile necessario per memorizzare la transazione sul Tangle.",
@@ -2169,7 +2171,7 @@
                 "timelockDate": "Hai aggiunto un timelock a questa transazione. Il destinatario non sarà in grado di spendere questi fondi fino alla scadenza del timelock .",
                 "metadata": "Campo di dati opzionale per memorizzare i dati in modo persistente sul Tangle.",
                 "tag": "Breve campo di dati opzionale. I gruppi di transazioni possono facilitarne la ricerca.",
-                "gasBudget": "Il budget di gas è necessario per condurre una transazione o eseguire la funzione di un contatto intelligente sull'EVM di Shimmer."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "Lo standard del NFT, es. IRC27.",
