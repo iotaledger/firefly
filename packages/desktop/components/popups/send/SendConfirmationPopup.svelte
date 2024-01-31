@@ -7,7 +7,7 @@
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { TimePeriod } from '@core/utils'
     import { sendOutput } from '@core/wallet/actions'
-    import { TokenStandard } from '@core/wallet/enums'
+    import { SubjectType, TokenStandard } from '@core/wallet/enums'
     import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
     import { NewTokenTransactionDetails, NftActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
     import {
@@ -66,7 +66,7 @@
     $: isBaseTokenTransfer =
         transactionDetails.type === NewTransactionType.TokenTransfer &&
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
-    $: isInternal = recipient.type === 'wallet'
+    $: isInternal = recipient.type === SubjectType.Wallet
     $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedWallet.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)

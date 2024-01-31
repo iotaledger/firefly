@@ -1,1 +1,0 @@
-export const TEMPORARY_WALLET_DIRECTORY_NAME = 'temp'
