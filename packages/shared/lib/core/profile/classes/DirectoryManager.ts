@@ -5,7 +5,9 @@ class DirectoryManagerBase {
     profilePathResolver: Promise<string>
 
     constructor() {
-        this.profilePathResolver = Platform.getUserDataPath().then((profilesPath) => `${profilesPath}/${PROFILE_STORAGE_DIRECTORY}`)
+        this.profilePathResolver = Platform.getUserDataPath().then(
+            (profilesPath) => `${profilesPath}/${PROFILE_STORAGE_DIRECTORY}`
+        )
     }
 
     forProfiles(): Promise<string> {
