@@ -33,10 +33,10 @@ export async function refreshWalletAssetsForActiveProfile(
     const assets: IPersistedAsset[] = []
     const wallets = get(activeWallets)
     for (const wallet of wallets) {
-        const tokens = wallet?.balances?.nativeTokens ?? []
-        for (const token of tokens) {
+        const tokens = wallet?.balances?.nativeTokens ?? {}
+        for (const tokenId of Object.keys(tokens)) {
             try {
-                const persistedAsset = await getOrRequestAssetFromPersistedAssets(token.tokenId)
+                const persistedAsset = await getOrRequestAssetFromPersistedAssets(tokenId)
                 if (persistedAsset) {
                     if (keepVerificationStatus) {
                         const verificationStatus = storedVerificationStates[persistedAsset.id]
