@@ -1,6 +1,5 @@
 export * from './default-stronghold-password.constant'
 export * from './shimmer-claiming-account-recovery-configuration.constant'
 export * from './shimmer-claiming-account-sync-options.constant'
-export * from './temporary-wallet-directory-name.constant'
 export * from './stronghold-regex.constant'
 export * from './shimmer-claim-default-transaction-options.constant'

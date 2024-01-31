@@ -6,7 +6,6 @@
         ProfileType,
         clearProfileFromMemory,
         getSecretManagerFromProfileType,
-        getStorageDirectoryOfSecretManager,
         removeProfileFolder,
     } from '@core/profile'
     import features from '@features/features'
@@ -15,6 +14,7 @@
     import { createProfileRouter } from '../create-profile-router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { DirectoryManager } from '@core/profile/classes'
 
     let isBusy = {
         [CreateProfileType.Mnemonic]: false,
@@ -28,7 +28,7 @@
     async function onProfileTypeClick(createProfileType: CreateProfileType): Promise<void> {
         isBusy = { ...isBusy, [createProfileType]: true }
         const type = createProfileType === CreateProfileType.Ledger ? ProfileType.Ledger : ProfileType.Software
-        const secretManagerPath = await getStorageDirectoryOfSecretManager($onboardingProfile.id)
+        const secretManagerPath = await DirectoryManager.forSecretManager($onboardingProfile.id)
         const secretManagerOptions = getSecretManagerFromProfileType(type, secretManagerPath)
         updateOnboardingProfile({ createProfileType, type, secretManagerOptions })
         $createProfileRouter.next()
