@@ -1191,7 +1191,7 @@
         "addProposal": {
             "title": "Add proposal",
             "body": "Please provide the information listed below to add a proposal.",
-            "addToAllWallets": "Add the proposal to all accounts"
+            "addToAllWallets": "Add the proposal to all wallets"
         },
         "editProposal": {
             "title": "Edit proposal",
@@ -1341,8 +1341,8 @@
         "refresh": "Refresh",
         "saveBackup": "Save Stronghold backup",
         "customizeAcount": "Customise wallet",
-        "hideAccount": "Hide wallet",
-        "showAccount": "Unhide wallet",
+        "hideWallet": "Hide wallet",
+        "showWallet": "Unhide wallet",
         "showDeleteWallet": "Delete wallet",
         "max": "Max",
         "addNode": "Add node",
@@ -1628,7 +1628,7 @@
         "notStaked": "Not staked",
         "stakedFunds": "Staked funds",
         "unstakedFunds": "Unstaked funds",
-        "accountColor": "Wallet color",
+        "walletColor": "Wallet color",
         "transactionTime": "Transaction time",
         "surplus": "Surplus",
         "storageDeposit": "Storage deposit",

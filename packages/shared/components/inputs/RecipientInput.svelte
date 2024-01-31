@@ -7,6 +7,7 @@
     import { Layer1RecipientError } from '@core/layer-2/errors'
     import { getNetworkHrp, getWalletColorById, visibleActiveWallets } from '@core/profile'
     import { selectedWalletId } from '@core/wallet/stores'
+    import { SubjectType } from 'shared/lib/core/wallet'
 
     export let recipient: Subject
     export let disabled = false
@@ -17,7 +18,7 @@
 
     let error: string
     let selected: IOption =
-        recipient?.type === 'wallet'
+        recipient?.type === SubjectType.Wallet
             ? { key: recipient.wallet.name, value: recipient.wallet.depositAddress }
             : { value: recipient?.address }
 
@@ -37,7 +38,7 @@
                 } else {
                     validateBech32Address(getNetworkHrp(), recipient?.address)
                 }
-            } else if (recipient?.type === 'wallet') {
+            } else if (recipient?.type === SubjectType.Wallet) {
                 if (isLayer2) {
                     throw new Layer1RecipientError()
                 }
