@@ -1,10 +1,7 @@
-import { AccountOutput, Balance, OutputData } from '@iota/sdk/out/types'
+import { Balance, OutputData } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IWallet } from '@core/profile/interfaces'
-import { selectedWalletMainAccountId, updateSelectedWalletMainAccountId } from '../stores'
-import { get } from 'svelte/store'
-import { getBlockIssuerAccounts } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -42,21 +39,6 @@ export async function buildWalletState(
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
-
-        // initialize selectedWalletMainAccountId if there is none set so the wallet can be used
-        // TODO: check that selectedWalletMainAccountId is still an owned account
-        const _selectedWalletMainAccountId = get(selectedWalletMainAccountId)
-        const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
-
-        // check if the current selectedWalletMainAccountId is still owned by the wallet
-        if (
-            _selectedWalletMainAccountId &&
-            !blockIssuerAccounts.find(
-                (account) => (account?.output as AccountOutput)?.accountId === _selectedWalletMainAccountId
-            )
-        ) {
-            updateSelectedWalletMainAccountId(undefined)
-        }
     } catch (err) {
         console.error(err)
     }

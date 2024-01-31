@@ -10,12 +10,12 @@ export async function getDepositAddress(wallet: IWallet): Promise<string> {
     const _selectedWalletMainAccountId = get(selectedWalletMainAccountId)
     if (_selectedWalletMainAccountId) {
         const accountAddress = getBech32AddressFromAddressTypes(new AccountAddress(_selectedWalletMainAccountId))
-        return accountAddress ?? ''
+        return accountAddress
     } else if (accountOutputsWithBlockIssuerFeature?.length > 0) {
         const accountId = (accountOutputsWithBlockIssuerFeature[0]?.output as AccountOutput).accountId
         const accountAddress = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
         updateSelectedWalletMainAccountId(accountId)
-        return accountAddress ?? ''
+        return accountAddress
     } else {
         return ''
     }
