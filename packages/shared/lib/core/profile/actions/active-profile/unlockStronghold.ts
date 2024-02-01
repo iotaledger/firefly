@@ -5,14 +5,12 @@ import { setStrongholdPassword } from '@core/wallet/actions'
 
 export async function unlockStronghold(password: string, profile: IProfile = get(activeProfile)): Promise<void> {
     const { isStrongholdLocked } = profile
-    if (get(isStrongholdLocked)) {
-        try {
-            await setStrongholdPassword(password)
-            isStrongholdLocked.set(false)
-            setTimeStrongholdLastUnlocked()
-        } catch (err) {
-            console.error(err)
-            throw new Error('error.password.incorrect')
-        }
+    try {
+        await setStrongholdPassword(password)
+        isStrongholdLocked.set(false)
+        setTimeStrongholdLastUnlocked()
+    } catch (err) {
+        console.error(err)
+        throw new Error('error.password.incorrect')
     }
 }
