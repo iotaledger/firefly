@@ -7,14 +7,20 @@ import { INft } from '../interfaces'
 import { buildNftFromNftOutput } from '../utils'
 import { NftOutput, OutputData, OutputType } from '@iota/sdk/out/types'
 import { setWalletNftsInAllWalletNfts } from './setWalletNftsInAllWalletNfts'
-import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '../../network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '../../network'
 
 function sortNfts(outputA: OutputData, outputB: OutputData): number {
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     if (!nodeProtocolParameters) return 0
-    const timestampA = getTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputA.metadata.included.slot)
-    const timestampB = getTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputB.metadata.included.slot)
-    return timestampB - timestampA
+    const unixTimestampA = getUnixTimestampFromNodeInfoAndSlotIndex(
+        nodeProtocolParameters,
+        outputA.metadata.included.slot
+    )
+    const unixTimestampB = getUnixTimestampFromNodeInfoAndSlotIndex(
+        nodeProtocolParameters,
+        outputB.metadata.included.slot
+    )
+    return unixTimestampB - unixTimestampA
 }
 
 export async function loadNftsForActiveProfile(): Promise<void> {

@@ -1,7 +1,7 @@
 import { InvalidExpirationDateTimeError } from '@contexts/wallet'
 import { convertUnixTimestampToDate, isValidExpirationDateTime } from '@core/utils'
 import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
-import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
 import { get } from 'svelte/store'
 
 export function validateSendConfirmation(output: CommonOutput): void {
@@ -10,7 +10,7 @@ export function validateSendConfirmation(output: CommonOutput): void {
     ) as ExpirationUnlockCondition
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     if (!nodeProtocolParameters) return
-    const expirationUnixTime = getTimestampFromNodeInfoAndSlotIndex(
+    const expirationUnixTime = getUnixTimestampFromNodeInfoAndSlotIndex(
         nodeProtocolParameters,
         expirationUnlockCondition.slotIndex
     )

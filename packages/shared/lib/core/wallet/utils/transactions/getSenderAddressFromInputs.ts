@@ -8,28 +8,28 @@ import {
     UnlockConditionType,
     AccountAddress,
 } from '@iota/sdk/out/types'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { get } from 'svelte/store'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
     for (const input of inputs) {
         const { output, metadata } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions
 
-        // TODO(2.0): modify this
+        const nodeParamenters = get(nodeInfoProtocolParameters)
+        if (nodeParamenters && metadata?.spent?.slot) {
+            const spentDate = getUnixTimestampFromNodeInfoAndSlotIndex(nodeParamenters, metadata?.spent?.slot)
+            if (spentDate) {
+                // A transaction with an expiration unlock condition is included if the transaction expired
+                const expirationUnlockCondition = unlockConditions.find(
+                    (unlockCondition) =>
+                        unlockCondition.type === UnlockConditionType.Expiration &&
+                        (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
+                ) as ExpirationUnlockCondition
 
-        //         To calculate the slot index of a timestamp, `genesisTimestamp` and the duration of a slot are needed.
-        //  * The slot index of timestamp `ts` is `(ts - genesisTimestamp)/duration + 1`.
-        const spentDate = calculateSlotIndexBySlotCommitmentId(metadata?.commitmentIdSpent)
-
-        if (spentDate) {
-            // A transaction with an expiration unlock condition is included if the transaction expired
-            const expirationUnlockCondition = unlockConditions.find(
-                (unlockCondition) =>
-                    unlockCondition.type === UnlockConditionType.Expiration &&
-                    (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
-            ) as ExpirationUnlockCondition
-
-            if (expirationUnlockCondition) {
-                return getBech32AddressFromAddressTypes(expirationUnlockCondition.returnAddress)
+                if (expirationUnlockCondition) {
+                    return getBech32AddressFromAddressTypes(expirationUnlockCondition.returnAddress)
+                }
             }
         }
 

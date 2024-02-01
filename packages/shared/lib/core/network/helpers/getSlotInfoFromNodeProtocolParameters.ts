@@ -2,12 +2,6 @@ import { ProtocolParameters } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { convertDateToUnixTimestamp } from '../../utils'
 
-// TODO(2.0): It is necessary to test later because the data regarding genesis is not yet known
-export function getElapsedTimeFromNodeInfo(protocolParameters: ProtocolParameters): number {
-    const unixTimestamp = convertDateToUnixTimestamp(new Date())
-    return BigInteger(unixTimestamp).minus(protocolParameters.genesisUnixTimestamp).toJSNumber()
-}
-
 export function getSlotIndexFromNodeInfo(protocolParameters: ProtocolParameters): number {
     const elapsedTime = getElapsedTimeFromNodeInfo(protocolParameters)
     if (!elapsedTime) return 0
@@ -19,7 +13,12 @@ export function getSlotIndexFromNodeInfo(protocolParameters: ProtocolParameters)
     return slotIndex
 }
 
-export function getTimestampFromNodeInfoAndSlotIndex(
+function getElapsedTimeFromNodeInfo(protocolParameters: ProtocolParameters): number {
+    const unixTimestamp = convertDateToUnixTimestamp(new Date())
+    return BigInteger(unixTimestamp).minus(protocolParameters.genesisUnixTimestamp).toJSNumber()
+}
+
+export function getUnixTimestampFromNodeInfoAndSlotIndex(
     protocolParameters: ProtocolParameters,
     slotIndex: number
 ): number {

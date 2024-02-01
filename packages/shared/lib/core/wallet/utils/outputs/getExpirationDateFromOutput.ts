@@ -1,6 +1,6 @@
 import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
-import { getTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
 
 export function getExpirationDateFromOutput(output: CommonOutput): Date | undefined {
     const expirationTime = getExpirationUnixTimeFromOutput(output)
@@ -12,11 +12,11 @@ export function getExpirationUnixTimeFromOutput(output: CommonOutput): number | 
         if (unlockCondition?.type === UnlockConditionType.Expiration) {
             const nodeProtocolParameters = get(nodeInfoProtocolParameters)
             if (!nodeProtocolParameters) return
-            const timestamp = getTimestampFromNodeInfoAndSlotIndex(
+            const unixTimestamp = getUnixTimestampFromNodeInfoAndSlotIndex(
                 nodeProtocolParameters,
                 (unlockCondition as ExpirationUnlockCondition).slotIndex
             )
-            return timestamp
+            return unixTimestamp
         }
     }
 }

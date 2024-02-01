@@ -13,7 +13,7 @@ import {
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
 import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
-import { getTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
+import { getUnixTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
     return async (error: Error, rawEvent: WalletEvent) => {
@@ -48,15 +48,15 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
         const protocolParameters = get(nodeInfoProtocolParameters)
         if (!wallet || !previousOutputId || !protocolParameters) return
         const previousOutput = await wallet.getOutput(previousOutputId)
-        const timestampOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
+        const unixTimestampOutputMetadata = getUnixTimestampFromNodeInfoAndSlotIndex(
             protocolParameters,
             output.metadata.included.slot
         )
-        const timestampPreviousOutputMetadata = getTimestampFromNodeInfoAndSlotIndex(
+        const unixTimestampPreviousOutputMetadata = getUnixTimestampFromNodeInfoAndSlotIndex(
             protocolParameters,
             previousOutput.metadata.included.slot
         )
-        if (timestampOutputMetadata > timestampPreviousOutputMetadata) {
+        if (unixTimestampOutputMetadata > unixTimestampPreviousOutputMetadata) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })
         }
     }

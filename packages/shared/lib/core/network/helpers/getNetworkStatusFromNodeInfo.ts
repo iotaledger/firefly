@@ -2,7 +2,7 @@ import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 import { NetworkHealth } from '../enums'
 import { INetworkStatus } from '../interfaces'
 import { INodeInfo } from '@iota/sdk/out/types'
-import { getTimestampFromNodeInfoAndSlotIndex } from './getSlotInfoFromNodeProtocolParameters'
+import { getUnixTimestampFromNodeInfoAndSlotIndex } from './getSlotInfoFromNodeProtocolParameters'
 
 /**
  * Update the network status store from the NodeInfo.
@@ -13,14 +13,14 @@ import { getTimestampFromNodeInfoAndSlotIndex } from './getSlotInfoFromNodeProto
  */
 export function getNetworkStatusFromNodeInfo(nodeInfo: INodeInfo): INetworkStatus {
     let health = NetworkHealth.Down
-    const timestamp = getTimestampFromNodeInfoAndSlotIndex(
+    const unixTimestamp = getUnixTimestampFromNodeInfoAndSlotIndex(
         nodeInfo.protocolParameters[0].parameters,
         nodeInfo.status.latestFinalizedSlot
     )
 
-    if (timestamp) {
+    if (unixTimestamp) {
         const timeSinceLastMsInMinutes =
-            (Date.now() - timestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
+            (Date.now() - unixTimestamp * MILLISECONDS_PER_SECOND) / (MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE)
         if (timeSinceLastMsInMinutes < 2) {
             health = NetworkHealth.Operational
         } else if (timeSinceLastMsInMinutes < 5) {
