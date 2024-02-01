@@ -38,7 +38,7 @@ export async function generateVestingActivity(
 
     const { parsedLayer2Metadata, destinationNetwork } = getLayer2ActivityInformation(metadata, sendingInfo)
 
-    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     const rawAmount = getAmountFromOutput(output) - storageDeposit
 
     const assetId = getCoinType()
