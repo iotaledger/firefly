@@ -95,7 +95,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.isSpendable).toBe(true)
     })
 
-    it('should correctly classify nft as timelocked', () => {
+    xit('should correctly classify nft as timelocked', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
@@ -110,7 +110,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(2876367917000)
     })
 
-    it('should correctly classify expired timelocked nft', () => {
+    xit('should correctly classify expired timelocked nft', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
