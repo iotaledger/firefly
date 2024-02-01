@@ -3,5 +3,6 @@ import { BaseActivity } from './base-activity.type'
 
 export type AccountActivity = BaseActivity & {
     type: ActivityType.Account
+    accountAddress: string
     accountId: string
 }

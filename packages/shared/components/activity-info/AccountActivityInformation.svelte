@@ -7,7 +7,7 @@
 
     let detailsList: { [key in string]: string }
     $: detailsList = {
-        accountId: activity.accountId,
+        accountId: activity.accountAddress,
     }
 </script>
 

@@ -27,6 +27,7 @@ export async function generateSingleAccountActivity(
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const accountId = getAccountId(output, outputId)
+    const accountAddress = api.bech32ToHex(accountId)
 
     const isHidden = false
     const isAssetHidden = false
@@ -45,6 +46,7 @@ export async function generateSingleAccountActivity(
         direction,
         action,
         accountId,
+        accountAddress,
         storageDeposit,
         giftedStorageDeposit,
         isHidden,
