@@ -6,7 +6,6 @@ import { getProposalStatusForSlot } from '../utils'
 
 export const registeredProposals = writable<{ [walletId: string]: IRegisteredProposals }>({})
 
-// TODO(2.0) Rename this
 export const registeredProposalsForSelectedWallet: Readable<{ [proposalId: string]: IProposal }> = derived(
     [selectedWalletId, registeredProposals, networkStatus],
     ([$selectedWalletId, $registeredProposals, $networkStatus]) => {

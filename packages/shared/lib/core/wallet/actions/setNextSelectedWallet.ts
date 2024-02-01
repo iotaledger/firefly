@@ -3,7 +3,6 @@ import { nonHiddenActiveWallets } from '@core/profile/stores'
 import { selectedWallet } from '../stores/selected-wallet.store'
 import { setSelectedWallet } from './setSelectedWallet'
 
-// TODO(2.0) Fix all usages
 export function setNextSelectedWallet(): void {
     const wallet = get(selectedWallet)
     const otherWallets = get(nonHiddenActiveWallets)

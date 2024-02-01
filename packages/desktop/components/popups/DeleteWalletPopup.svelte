@@ -17,11 +17,11 @@
     async function onDeleteClick(): Promise<void> {
         error = null
         isBusy = true
-        await deleteStrongholdAccount(password)
+        await deleteStrongholdWallet(password)
         isBusy = false
     }
 
-    async function deleteStrongholdAccount(password: string): Promise<void> {
+    async function deleteStrongholdWallet(password: string): Promise<void> {
         try {
             if ($isSoftwareProfile) {
                 await setStrongholdPassword(password)
@@ -41,17 +41,17 @@
 
 <div class="mb-5">
     <Text type={TextType.h4}>
-        {localize('popups.deleteAccount.title', {
+        {localize('popups.deleteWallet.title', {
             values: { name: $selectedWallet?.name },
         })}
     </Text>
 </div>
 <form on:submit|preventDefault={onDeleteClick} class="flex w-full flex-col space-y-5">
-    <Text secondary>{localize('popups.deleteAccount.body')}</Text>
-    <TextHint variant={TextHintVariant.Info} text={localize('popups.deleteAccount.hint')} />
+    <Text secondary>{localize('popups.deleteWallet.body')}</Text>
+    <TextHint variant={TextHintVariant.Info} text={localize('popups.deleteWallet.hint')} />
     <div class="flex w-full flex-col space-y-3">
         {#if $isSoftwareProfile}
-            <Text secondary>{localize('popups.deleteAccount.typePassword')}</Text>
+            <Text secondary>{localize('popups.deleteWallet.typePassword')}</Text>
             <PasswordInput
                 classes="w-full"
                 bind:value={password}
@@ -77,7 +77,7 @@
             disabled={(!password && $isSoftwareProfile) || isBusy}
             {isBusy}
         >
-            {localize('actions.deleteAccount')}
+            {localize('actions.deleteWallet')}
         </Button>
     </div>
 </form>

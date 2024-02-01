@@ -7,6 +7,7 @@
     import { Layer1RecipientError } from '@core/layer-2/errors'
     import { getNetworkHrp, getWalletColorById, visibleActiveWallets } from '@core/profile'
     import { selectedWalletId } from '@core/wallet/stores'
+    import { SubjectType } from 'shared/lib/core/wallet'
 
     export let recipient: Subject
     export let disabled = false
@@ -17,11 +18,11 @@
 
     let error: string
     let selected: IOption =
-        recipient?.type === 'account'
-            ? { key: recipient.account.name, value: recipient.account.depositAddress }
+        recipient?.type === SubjectType.Wallet
+            ? { key: recipient.wallet.name, value: recipient.wallet.depositAddress }
             : { value: recipient?.address }
 
-    $: accountOptions = isLayer2 ? <IOption[]>[] : getLayer1AccountOptions()
+    $: walletOptions = isLayer2 ? <IOption[]>[] : getLayer1WalletOptions()
     $: recipient = getSubjectFromAddress(selected?.value)
     $: isLayer2, (error = '')
 
@@ -37,7 +38,7 @@
                 } else {
                     validateBech32Address(getNetworkHrp(), recipient?.address)
                 }
-            } else if (recipient?.type === 'account') {
+            } else if (recipient?.type === SubjectType.Wallet) {
                 if (isLayer2) {
                     throw new Layer1RecipientError()
                 }
@@ -52,7 +53,7 @@
         }
     }
 
-    function getLayer1AccountOptions(): IOption[] {
+    function getLayer1WalletOptions(): IOption[] {
         return $visibleActiveWallets
             .filter((wallet) => wallet.id !== $selectedWalletId)
             .map((wallet) => ({
@@ -70,7 +71,7 @@
     bind:modal
     bind:error
     {disabled}
-    options={accountOptions}
+    options={walletOptions}
     pickerHeight="max-h-48"
     {...$$restProps}
     let:option

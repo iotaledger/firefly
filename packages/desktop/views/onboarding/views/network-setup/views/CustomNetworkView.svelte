@@ -43,7 +43,7 @@
             updateOnboardingProfile({ clientOptions: { nodes: [node], primaryNode: node } })
             await initialiseOnboardingProfile(true)
 
-            // The API request to check if a node is reachable requires an existing account manager.
+            // The API request to check if a node is reachable requires an existing wallet manager.
             const nodeInfoResponse = await getNodeInfo(node.url)
             // Check network of node matches selected id
             if (

@@ -4,7 +4,7 @@ import { IWalletState } from '../interfaces'
 import { buildWalletStateAndPersistedData } from './buildWalletStateAndPersistedData'
 import { buildWalletState } from './buildWalletState'
 
-export async function loadWallet(wallet: IWallet): Promise<IWalletState> {
+export async function loadWallet(profileId: string, wallet: IWallet): Promise<IWalletState> {
     const walletId = wallet.id
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
     const walletPersistedData = getActiveProfilePersistedWalletData(walletId)
@@ -13,7 +13,7 @@ export async function loadWallet(wallet: IWallet): Promise<IWalletState> {
     if (walletPersistedData) {
         accountState = await buildWalletState(wallet, walletPersistedData)
     } else {
-        const [newAccountState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet)
+        const [newAccountState, walletPersistedData] = await buildWalletStateAndPersistedData(profileId, wallet)
         addWalletPersistedDataToActiveProfile(walletId, walletPersistedData)
         accountState = newAccountState
     }

@@ -55,7 +55,7 @@ export async function initWallet(profile: IOnboardingProfile, strongholdPassword
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
 
     // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(wallet, walletName)
+    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(profile.id, wallet, walletName)
 
     addWalletToActiveWallets(walletState)
     addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)

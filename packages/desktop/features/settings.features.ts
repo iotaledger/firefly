@@ -79,7 +79,7 @@ const settingsFeatures: ISettingsFeatures = {
         balanceFinder: {
             enabled: true,
         },
-        hiddenAccounts: {
+        hiddenWallets: {
             enabled: true,
         },
         developerToggle: {

@@ -1,6 +1,6 @@
 import { get } from 'svelte/store'
 import { onboardingProfileSecretManager } from '../stores'
-import { getSecretManagerFromProfileType, getStorageDirectoryOfProfile, removeProfileFolder } from '@core/profile'
+import { getSecretManagerFromProfileType, getStorageDirectoryOfSecretManager, removeProfileFolder } from '@core/profile'
 import { onboardingProfile, updateOnboardingProfile } from '../stores'
 
 export async function initialiseOnboardingProfileWithSecretManager(
@@ -21,9 +21,8 @@ export async function initialiseOnboardingProfileWithSecretManager(
         }
     }
 
-    const storagePath = await getStorageDirectoryOfProfile(activeOnboardingProfile.id)
-
-    const secretManagerOptions = getSecretManagerFromProfileType(activeOnboardingProfile.type, storagePath)
+    const secretManagerPath = await getStorageDirectoryOfSecretManager(activeOnboardingProfile.id)
+    const secretManagerOptions = getSecretManagerFromProfileType(activeOnboardingProfile.type, secretManagerPath)
 
     updateOnboardingProfile({ secretManagerOptions })
 }

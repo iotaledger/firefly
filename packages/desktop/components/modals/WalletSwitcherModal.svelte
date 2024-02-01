@@ -17,7 +17,7 @@
 
     async function scrollToSelectedWallet(): Promise<void> {
         await tick()
-        const element = document.getElementById(`account-${$selectedWallet.id}`)
+        const element = document.getElementById(`wallet-${$selectedWallet.id}`)
         element?.scrollIntoView({ behavior: 'auto' })
     }
 
@@ -34,13 +34,13 @@
     size="large"
     position={{ top: '30px', left: '50%' }}
 >
-    <account-list-container class="block p-4">
-        <account-list class="flex flex-col space-y-1 max-h-96 scrollable-y">
+    <wallet-list-container class="block p-4">
+        <wallet-list class="flex flex-col space-y-1 max-h-96 scrollable-y">
             {#each $visibleActiveWallets as wallet}
-                <WalletSwitcherMenuItem id="account-{wallet.id}" {wallet} onClick={modal?.close} />
+                <WalletSwitcherMenuItem id="wallet-{wallet.id}" {wallet} onClick={modal?.close} />
             {/each}
-        </account-list>
-    </account-list-container>
+        </wallet-list>
+    </wallet-list-container>
     <hr />
     <button
         type="button"

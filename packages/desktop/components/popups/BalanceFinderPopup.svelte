@@ -18,8 +18,8 @@
     } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
-        generateAndStoreActivitiesForAllAccounts,
-        refreshAccountAssetsForActiveProfile,
+        generateAndStoreActivitiesForAllWallets,
+        refreshWalletAssetsForActiveProfile,
     } from '@core/wallet'
     import {
         Button,
@@ -41,7 +41,7 @@
     export let searchForBalancesOnLoad = false
     export let hasUsedBalanceFinder = false
     export let showConsolidation = false
-    export let consolidateAccountsOnLoad = false
+    export let consolidateWalletsOnLoad = false
     export let title: string
     export let body: string
     export let searchInCurrentWallet: boolean = false
@@ -59,7 +59,7 @@
         ? $visibleActiveWallets?.filter((_wallet) => _wallet.id === $selectedWalletId)
         : $visibleActiveWallets
     $: searchForBalancesOnLoad && !$isStrongholdLocked && onFindBalancesClick()
-    $: consolidateAccountsOnLoad && !$isStrongholdLocked && onConsolidateAccountsClick()
+    $: consolidateWalletsOnLoad && !$isStrongholdLocked && onConsolidateWalletsClick()
     $: totalBalance = sumBalanceForWallets($visibleActiveWallets)
     $: searchInCurrentWallet, (shouldInitSearch = true)
     $: searchAlgorithm = searchInCurrentWallet
@@ -79,11 +79,11 @@
         }
     }
 
-    async function onConsolidateAccountsClick(): Promise<void> {
+    async function onConsolidateWalletsClick(): Promise<void> {
         if ($isSoftwareProfile && $isStrongholdLocked) {
             openUnlockStrongholdPopup(false, true)
         } else {
-            await handleAction(consolidateProfileAccounts)
+            await handleAction(consolidateProfileWallets)
         }
     }
 
@@ -99,7 +99,7 @@
         shouldInitSearch = false
     }
 
-    async function consolidateProfileAccounts(): Promise<void> {
+    async function consolidateProfileWallets(): Promise<void> {
         const consolidationPromises: Promise<void>[] = []
 
         for (const wallet of get(visibleActiveWallets)) {
@@ -134,7 +134,7 @@
         }
     }
 
-    function openUnlockStrongholdPopup(searchForBalancesOnLoad: boolean, consolidateAccountsOnLoad: boolean) {
+    function openUnlockStrongholdPopup(searchForBalancesOnLoad: boolean, consolidateWalletsOnLoad: boolean) {
         openPopup({
             id: PopupId.UnlockStronghold,
             props: {
@@ -143,7 +143,7 @@
                         id: PopupId.BalanceFinder,
                         props: {
                             searchForBalancesOnLoad,
-                            consolidateAccountsOnLoad,
+                            consolidateWalletsOnLoad,
                             showConsolidation,
                             hasUsedBalanceFinder,
                             title,
@@ -172,8 +172,8 @@
 
     onDestroy(async () => {
         if (hasUsedBalanceFinder) {
-            await refreshAccountAssetsForActiveProfile()
-            await generateAndStoreActivitiesForAllAccounts()
+            await refreshWalletAssetsForActiveProfile()
+            await generateAndStoreActivitiesForAllWallets()
             loadNftsForActiveProfile()
         }
     })
@@ -252,7 +252,7 @@
         />
         <Button
             classes="w-full"
-            onClick={onConsolidateAccountsClick}
+            onClick={onConsolidateWalletsClick}
             disabled={isBusy || isTransferring}
             isBusy={isTransferring}
             busyMessage={localize('popups.minimizeStorageDeposit.title')}

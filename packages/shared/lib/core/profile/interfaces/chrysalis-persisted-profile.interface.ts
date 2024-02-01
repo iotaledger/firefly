@@ -18,7 +18,7 @@ export interface IChrysalisPersistedProfile {
     hasVisitedStaking?: boolean
     lastShimmerPeriodVisitedStaking?: number
     lastAssemblyPeriodVisitedStaking?: number
-    lastUsedAccountId?: string
+    lastUsedWalletId?: string
     accounts?: IChrysalisProfileAccount[]
     stakingRewards?: ChrysalisAccountStakingRewards[]
     hasFinishedSingleAccountGuide?: boolean
