@@ -20,7 +20,7 @@ export async function generateSingleConsolidationActivity(
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
+    const containsValue = await activityOutputContainsValue(wallet, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -32,10 +32,10 @@ export async function generateSingleConsolidationActivity(
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
-    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, account)
+    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
+    const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
-    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(account, output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     return {
         type: ActivityType.Consolidation,
         isHidden,

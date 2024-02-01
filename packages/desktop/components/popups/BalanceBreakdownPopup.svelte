@@ -23,8 +23,8 @@
         Timelock = 'timelock',
     }
 
-    $: accountBalance = $selectedWallet?.balances
-    $: accountBalance, void setBreakdown()
+    $: walletBalance = $selectedWallet?.balances
+    $: walletBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
 
@@ -47,7 +47,7 @@
     }
 
     function getAvailableBreakdown(): BalanceBreakdown {
-        return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
+        return { amount: Number(walletBalance?.baseCoin?.available ?? 0) }
     }
 
     function getManaBreakdown(): BalanceBreakdown {
@@ -62,7 +62,7 @@
         let pendingOutputsStorageDeposit = 0
 
         const subBreakdown = {}
-        for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
+        for (const [outputId, unlocked] of Object.entries(walletBalance?.potentiallyLockedOutputs ?? {})) {
             if (!unlocked) {
                 const output = (await $selectedWallet.getOutput(outputId)).output
 
@@ -77,8 +77,7 @@
                         containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedWallet, output as CommonOutput))
-                            ?.storageDeposit
+                        amount = (await getStorageDepositFromOutput(output as CommonOutput))?.storageDeposit
                     } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
@@ -111,9 +110,9 @@
     }
 
     function getStorageDepositBreakdown(): BalanceBreakdown {
-        const storageDeposits = accountBalance?.requiredStorageDeposit
+        const storageDeposits = walletBalance?.requiredStorageDeposit
         const totalStorageDeposit = storageDeposits
-            ? Object.values(accountBalance.requiredStorageDeposit).reduce(
+            ? Object.values(walletBalance.requiredStorageDeposit).reduce(
                   (total: number, value: string): number => total + Number(value ?? 0),
                   0
               )
@@ -173,7 +172,7 @@
                 isAsset={breakdown[breakdownKey].isAsset}
             />
         {/each}
-        <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
+        <BalanceSummarySection titleKey="totalBalance" amount={Number(walletBalance?.baseCoin?.total ?? 0)} bold />
     </div>
     <Button onClick={onConsolidationClick}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}

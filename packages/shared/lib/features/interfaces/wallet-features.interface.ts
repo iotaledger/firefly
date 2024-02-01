@@ -1,7 +1,7 @@
 import { IFeatureFlag } from './feature-flag.interface'
 
 export interface IWalletFeatures extends IFeatureFlag {
-    accountSummary: IFeatureFlag
+    walletSummary: IFeatureFlag
     sendAndReceive: IFeatureFlag & {
         nft: IFeatureFlag
     }

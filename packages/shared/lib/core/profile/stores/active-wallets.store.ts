@@ -1,10 +1,14 @@
-import { derived, Readable, writable } from 'svelte/store'
+import { derived, get, Readable, writable } from 'svelte/store'
 import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfile } from './active-profile.store'
 
 export const activeWallets = writable<IWalletState[]>([])
 
-export function removewalletFromactiveWallets(walletId: string): void {
+export function getActiveWallets(): IWalletState[] {
+    return get(activeWallets)
+}
+
+export function removeWalletFromActiveWallets(walletId: string): void {
     activeWallets?.update((state) => state.filter((wallet) => wallet.id !== walletId))
 }
 
@@ -22,8 +26,7 @@ export const nonHiddenActiveWallets: Readable<IWalletState[]> = derived([activeW
     if (!$activeWallets) {
         return []
     }
-    const unsortedNonHiddenwallets = $activeWallets?.filter((wallet) => !wallet?.hidden)
-    return unsortedNonHiddenwallets // TODO(2.0): Sort them: .sort((a, b) => a.index - b.index)
+    return $activeWallets?.filter((wallet) => !wallet?.hidden)
 })
 
 export const visibleActiveWallets: Readable<IWalletState[]> = derived(
@@ -32,10 +35,10 @@ export const visibleActiveWallets: Readable<IWalletState[]> = derived(
         if (!$activeWallets || !$activeProfile) {
             return []
         }
-        const unsortedVisiblewallets =
-            $activeProfile?.showHiddenAccounts ?? false
+        const visibleWallets =
+            $activeProfile?.showHiddenWallets ?? false
                 ? $activeWallets
                 : $activeWallets?.filter((wallet) => !wallet?.hidden)
-        return unsortedVisiblewallets // TODO(2.0): Sort them: .sort((a, b) => a.index - b.index)
+        return visibleWallets
     }
 )
