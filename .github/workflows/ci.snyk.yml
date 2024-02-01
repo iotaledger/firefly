@@ -11,7 +11,7 @@ jobs:
     # Only run on push events or PRs from iotaledger/firefly, skip on PRs from forks
     # Secret variables cannot be exposed to PRs from forks
     if: github.event_name == 'push'
-    runs-on: ubuntu-20.04
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v2
 
