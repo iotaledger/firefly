@@ -4,6 +4,8 @@ import { participationOverviewForSelectedWallet } from '../stores/participation-
 
 export function getActiveParticipation(proposalId: string): TrackedParticipationOverview {
     const overview = get(participationOverviewForSelectedWallet)
+
+    // TODO(2.0): Update milestone by slot when TrackedParticipationOverview has been updated
     const participationsForProposal: TrackedParticipationOverview[] = Object.values(
         overview?.participations?.[proposalId] ?? {}
     )

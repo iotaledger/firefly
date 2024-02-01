@@ -12,7 +12,8 @@ export function createProposalFromEvent(event: ParticipationEventWithNodes): IPr
     const nodeUrl = event.nodes[0].url
     const isOfficialNetwork = officialNodeUrls.includes(nodeUrl)
 
-    const milestones = {
+    // TODO(2.0): Update ProposalStatus when ParticipationEventData has been updated
+    const slots = {
         [ProposalStatus.Upcoming]: 0, // TODO: fix this
         [ProposalStatus.Commencing]: data.milestoneIndexCommence,
         [ProposalStatus.Holding]: data.milestoneIndexStart,
@@ -25,7 +26,7 @@ export function createProposalFromEvent(event: ParticipationEventWithNodes): IPr
         nodeUrl,
         questions: (data.payload as VotingEventPayload)?.questions,
         additionalInfo: data.additionalInfo,
-        milestones,
+        slots,
         type: isOfficialNetwork ? ProposalType.Official : ProposalType.Custom,
     }
     return proposal

@@ -1,1 +1,0 @@
-export const SECONDS_PER_MILESTONE = 5
