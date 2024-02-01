@@ -35,7 +35,7 @@ export async function generateSingleConsolidationActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
-    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     return {
         type: ActivityType.Consolidation,
         isHidden,

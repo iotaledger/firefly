@@ -33,7 +33,7 @@ export async function generateSingleGovernanceActivity(
 
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
-    const { storageDeposit } = await getStorageDepositFromOutput(wallet, output)
+    const { storageDeposit } = await getStorageDepositFromOutput(output)
     const votingPower = getAmountFromOutput(output)
     const governanceInfo = getGovernanceInfo(output, wrappedInputs, metadata)
 

@@ -138,7 +138,7 @@
     async function updateStorageDeposit(): Promise<void> {
         if (preparedOutput) {
             const { storageDeposit: _storageDeposit, giftedStorageDeposit: _giftedStorageDeposit } =
-                await getStorageDepositFromOutput($selectedWallet, preparedOutput as CommonOutput)
+                await getStorageDepositFromOutput(preparedOutput as CommonOutput)
 
             storageDeposit = minimumStorageDeposit = _storageDeposit > 0 ? _storageDeposit : _giftedStorageDeposit
 
