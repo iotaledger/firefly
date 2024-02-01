@@ -1,8 +1,8 @@
 import { NetworkHealth } from '../enums'
 
 export interface INetworkStatus {
-    messagesPerSecond?: number
-    referencedRate?: number
+    messagesPerSecond?: string
+    confirmationRate?: string
     health?: NetworkHealth
-    currentMilestone?: number
+    currentSlot?: number
 }
