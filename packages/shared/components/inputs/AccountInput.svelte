@@ -3,9 +3,9 @@
     import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
-    import { ADDRESS_TYPE_ACCOUNT } from '@core/wallet/constants'
     import { getNetworkHrp } from '@core/profile/actions'
     import { api } from '@core/api'
+    import { AddressType } from '@iota/sdk/out/types'
 
     export let account: string = ''
     export let error: string = ''
@@ -32,7 +32,7 @@
                 throw new Error(localize('error.accountMinting.accountNotInPossession'))
             }
 
-            validateBech32Address(getNetworkHrp(), account, ADDRESS_TYPE_ACCOUNT)
+            validateBech32Address(getNetworkHrp(), account, AddressType.Account)
         } catch (err) {
             error = err?.message ?? err
             return Promise.reject(error)

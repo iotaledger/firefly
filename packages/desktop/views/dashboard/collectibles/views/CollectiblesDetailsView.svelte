@@ -18,9 +18,6 @@
     import { collectiblesRouter } from '@core/router/routers'
     import { truncateString } from '@core/utils'
     import {
-        ADDRESS_TYPE_ACCOUNT,
-        ADDRESS_TYPE_ED25519,
-        ADDRESS_TYPE_NFT,
         formatTokenAmountPrecise,
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
@@ -39,6 +36,7 @@
         Text,
     } from '@ui'
     import { FontWeight, Height, TextType } from '@ui/enums'
+    import { AddressType } from '@iota/sdk/out/types'
 
     let modal: Modal
 
@@ -88,13 +86,13 @@
         ...(issuerName && {
             issuer: { data: issuerName },
         }),
-        ...(issuer?.type === ADDRESS_TYPE_ED25519 && {
+        ...(issuer?.type === AddressType.Ed25519 && {
             issuerAddress: { data: truncateString(issuerAddress, 20, 20), copyValue: issuerAddress, isCopyable: true },
         }),
         ...(collectionName && {
             collection: { data: collectionName },
         }),
-        ...((issuer?.type === ADDRESS_TYPE_NFT || issuer?.type === ADDRESS_TYPE_ACCOUNT) && {
+        ...((issuer?.type === AddressType.Nft || issuer?.type === AddressType.Account) && {
             collectionId: { data: truncateString(collectionId, 20, 20), copyValue: collectionId, isCopyable: true },
         }),
         ...(!nft?.parsedMetadata &&

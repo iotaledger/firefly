@@ -3,15 +3,9 @@
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { IKeyValueBoxList } from '@core/utils'
-    import {
-        ADDRESS_TYPE_ACCOUNT,
-        ADDRESS_TYPE_ED25519,
-        ADDRESS_TYPE_NFT,
-        getBech32AddressFromAddressTypes,
-        getHexAddressFromAddressTypes,
-        NftActivity,
-    } from '@core/wallet'
+    import { getBech32AddressFromAddressTypes, getHexAddressFromAddressTypes, NftActivity } from '@core/wallet'
     import { KeyValueBox } from 'shared/components'
+    import { AddressType } from '@iota/sdk/out/types'
 
     export let activity: NftActivity
 
@@ -22,10 +16,10 @@
     let detailsList: IKeyValueBoxList
     $: detailsList = {
         nftId: { data: activity?.nftId, isCopyable: true },
-        ...(nft?.issuer?.type === ADDRESS_TYPE_ED25519 && {
+        ...(nft?.issuer?.type === AddressType.Ed25519 && {
             issuerAddress: { data: issuerAddress, isCopyable: true },
         }),
-        ...((nft?.issuer?.type === ADDRESS_TYPE_NFT || nft?.issuer?.type === ADDRESS_TYPE_ACCOUNT) && {
+        ...((nft?.issuer?.type === AddressType.Nft || nft?.issuer?.type === AddressType.Account) && {
             collectionId: { data: collectionId, isCopyable: true },
         }),
     }
