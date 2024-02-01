@@ -10,7 +10,6 @@ import {
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { getSerialNumberFromAccountAddress } from './outputs'
-import { api } from '@core/api'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
@@ -18,9 +17,7 @@ export async function buildFoundryOutputData(
     metadata: IIrc30Metadata,
     accountId: string
 ): Promise<FoundryOutputBuilderParams> {
-    const immutableAccountUnlockCondition = new ImmutableAccountAddressUnlockCondition(
-        new AccountAddress(api.bech32ToHex(accountId))
-    )
+    const immutableAccountUnlockCondition = new ImmutableAccountAddressUnlockCondition(new AccountAddress(accountId))
 
     const unlockConditions: UnlockCondition[] = [immutableAccountUnlockCondition]
 
