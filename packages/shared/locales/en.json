@@ -785,19 +785,15 @@
             },
             "mana": {
                 "title": "Mana",
-                "subtitle": "Stored mana available for spending"
-            },
-            "potentialTotalMana": {
-                "title": "Potential Mana",
-                "subtitle": "Potential total Mana"
+                "subtitle": "Available mana"
             },
             "storedAvailableMana": {
-                "title": "Available Mana",
-                "subtitle": "Stored Available Mana"
+                "title": "Stored Mana",
+                "subtitle": "Stored Mana"
             },
             "potentialAvailableMana": {
-                "title": "Potential Available Mana",
-                "subtitle": "Potential Available Mana"
+                "title": "Potential Mana",
+                "subtitle": "Potential Mana"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1667,7 +1663,7 @@
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
-        "availableManaWithValue": "Available mana: {mana} MANA",
+        "availableManaWithValue": "Available mana: {mana}",
         "availableBalance": "Available balance",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",

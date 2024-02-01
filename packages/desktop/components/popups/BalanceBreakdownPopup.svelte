@@ -52,7 +52,6 @@
 
     function getManaBreakdown(): BalanceBreakdown {
         const subBreakdown = {
-            potentialTotalMana: { amount: Number($selectedWallet?.balances?.mana?.total?.potential) },
             storedAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.stored) },
             potentialAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.potential) },
         }

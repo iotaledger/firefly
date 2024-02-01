@@ -1,5 +1,6 @@
 export * from './coin-type.constant'
 export * from './default-base-token.constant'
+export * from './default-mana.constant'
 export * from './default-chain-configurations.constant'
 export * from './default-max-parallel-api-requests'
 export * from './default-network-metadata.constant'
