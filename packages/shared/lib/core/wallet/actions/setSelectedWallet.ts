@@ -6,7 +6,6 @@ import { clearFilters } from '@core/utils'
 import { resetNftDownloadQueue } from '@core/nfts'
 import { selectedWalletId } from '../stores/selected-wallet-id.store'
 
-// TODO(2.0) Fix all usages
 export function setSelectedWallet(walletId: string): void {
     resetNftDownloadQueue(true)
 
