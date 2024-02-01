@@ -236,17 +236,6 @@
             "title": "Switch Ledger apps",
             "body": "Please switch to the {legacy} app on your Ledger device to continue migration. When ready, press continue."
         },
-        "selectLedgerAccountIndex": {
-            "title": "Choose Ledger account index",
-            "body": "Choose the Ledger account index you used with Trinity. For most users this will be the default index of 0.",
-            "accountIndex": "Account Index",
-            "accountPage": "Account Page",
-            "standard": "Standard",
-            "expert": "Expert",
-            "takingAWhile": "This is taking a while...",
-            "notGeneratingAddresses": "Is your Ledger generating addresses?",
-            "reinstallLegacy": "If not, disconnect the device and try again. If the issue persists, you may need to reinstall the {legacy} app."
-        },
         "settings": {
             "settings": "Settings",
             "general": {
@@ -325,7 +314,7 @@
             },
             "refreshNftMedia": {
                 "title": "Refresh NFT media",
-                "description": "NFT media cached for this account will be deleted and then downloaded again"
+                "description": "NFT media cached for this wallet will be deleted and then downloaded again"
             },
             "changePassword": {
                 "title": "Change password",
@@ -396,10 +385,6 @@
             "diagnostics": {
                 "title": "Diagnostics",
                 "description": "View system and application information"
-            },
-            "migrateLedgerIndex": {
-                "title": "Migrate Ledger index",
-                "description": "Migrate another Trinity account index"
             },
             "troubleshoot": {
                 "title": "Troubleshoot",
@@ -585,7 +570,7 @@
                 "voted": "Voted",
                 "successEdit": "Proposal successfully edited",
                 "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
-                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all wallets",
                 "successRemove": "Proposal successfully removed",
                 "emptyTitle": "No proposals"
             },
@@ -914,13 +899,6 @@
                 }
             }
         },
-        "switchNetwork": {
-            "title": "Switch network",
-            "newNetwork": "New network",
-            "resetWarning": "Changing networks will log you out and reset all accounts, balances, and transaction history for this profile.",
-            "switchingNetwork": "Switching network",
-            "typePassword": "Type your password to switch to:"
-        },
         "errorLog": {
             "title": "Error Log",
             "empty": "The error log is empty."
@@ -1032,25 +1010,6 @@
         "ledgerAddress": {
             "title": "Confirm receive address",
             "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
-        },
-        "ledgerMigrateIndex": {
-            "title": "Do you need to migrate another Trinity account index?",
-            "body": "You can also migrate later in Advanced Settings."
-        },
-        "exportTransactionHistory": {
-            "title": "Export transaction history",
-            "body": "Export the transaction history for the selected wallet. The exported file will be in .csv format.",
-            "profileName": "Profile name:",
-            "accountName": "Wallet name:",
-            "typePassword": "Type your password to allow exporting"
-        },
-        "stakingManager": {
-            "title": "Staking Management",
-            "description": "When you stake a wallet, you send a transaction to yourself marking those funds as \"staked\". You can transfer the tokens at any time, but you won’t continue receiving staking rewards.",
-            "totalFundsStaked": "Total funds staked",
-            "stakedSuccessfully": "Your funds have been staked for {account}.",
-            "unstakedSuccessfully": "Your funds have been unstaked for {account}.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
         },
         "stakingConfirmation": {
             "title": "Confirm Participation",
@@ -1232,19 +1191,6 @@
             "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
-    "charts": {
-        "incomingMi": "Incoming {value}",
-        "outgoingMi": "Outgoing {value}",
-        "portoflio": "Portfolio",
-        "token": "Token",
-        "holdings": "Holdings",
-        "accountValue": "Wallet Value",
-        "accountActivity": "Wallet Activity",
-        "timeframe1Hour": "1 hour",
-        "timeframe1Day": "1 day",
-        "timeframe1Week": "1 week",
-        "timeframe1Month": "1 month"
-    },
     "actions": {
         "apply": "Apply",
         "continue": "Continue",
@@ -1291,7 +1237,7 @@
         },
         "refreshNftMedia": {
             "title": "Refresh NFT media",
-            "description": "Do you want to delete and re-download all NFT media for this account?"
+            "description": "Do you want to delete and re-download all NFT media for this wallet?"
         },
         "createWallet": "Create a new {network} profile",
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
@@ -1539,8 +1485,6 @@
         "outgoing": "Outgoing",
         "totalIn": "Total in",
         "totalOut": "Total out",
-        "accounts": "Wallets",
-        "myAccounts": "My Wallets",
         "profiles": "Profiles",
         "dev": "Dev",
         "createWallet": "Create a Wallet",
@@ -1550,7 +1494,6 @@
         "transactions": "Transactions",
         "activity": "Activity",
         "security": "Security",
-        "accountAddress": "Wallet Address",
         "network": "Network",
         "destinationNetwork": "Destination network",
         "nodes": "Nodes",
@@ -1586,10 +1529,6 @@
         "generatingReceiveAddress": "Generating receive address",
         "broadcasting": "Broadcasting",
         "confirming": "Confirming",
-        "creatingAccount": "Creating wallet, please wait...",
-        "updatingAccount": "Updating wallet, please wait...",
-        "accountSyncing": "Wallet is syncing",
-        "accountSyncComplete": "Wallet sync complete",
         "passwordUpdating": "Updating password...",
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
@@ -1609,7 +1548,6 @@
         "passwordStrength4": "Strong",
         "creatingProfile": "Creating profile, please wait...",
         "fundMigration": "Fund migration",
-        "accountRemoved": "This wallet is hidden. Unhide it to perform transfers.",
         "fromAddress": "from {address}",
         "toAddress": "to {address}",
         "stakingTransaction": "Staking Transaction",
@@ -1827,11 +1765,6 @@
         "year": "{time, plural, one {# year} other {# years}}"
     },
     "notifications": {
-        "valueTx": "Receiving {{value}} to {{account}}",
-        "confirmed": "Outgoing {{value}} from {{account}} has confirmed",
-        "confirmedInternal": "{{value}} from {{senderAccount}} to {{receiverAccount}} has confirmed",
-        "confirmedInternalNoAccounts": "{{value}} internal transfer has confirmed",
-        "failed": "Outgoing {{value}} from {{account}} has failed",
         "downloadingUpdate": "Downloading update",
         "updateReady": "Update ready",
         "updateError": "An error occurred during the update, please try again",
@@ -1839,12 +1772,7 @@
         "calcMinutesRemaining": "Calculating minutes remaining...",
         "minutesRemaining": "{minutes, plural, one {# minute remaining} other {# minutes remaining}}",
         "copiedToClipboard": "Copied to clipboard",
-        "accountsSynchronized": "Wallet synchronization complete",
         "fundsAvailableSoon": "Your funds will become available shortly",
-        "exportTransactionHistory": {
-            "success": "Transaction history for {accountAlias} was successfully saved to {filePath}",
-            "error": "Unable to export transaction history for {accountAlias}"
-        },
         "deepLinkingRequest": {
             "receivedWhileLoggedOut": "Please login to initiate the deep link",
             "notEnabled": "Deep links are not enabled",
@@ -1949,7 +1877,6 @@
             "wrongAddressType": "Wrong address type"
         },
         "wallet": {
-            "addressNotFound": "The address cannot be found in your account.",
             "length": "Your wallet name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "emptyName": "A profile name must contain at least 1 character.",
             "notEmpty": "You must transfer your balance before deleting this wallet.",
@@ -1958,14 +1885,11 @@
             "control": "A profile name can't contain a control character.",
             "startDot": "A profile name can't start with the '.' character.",
             "chars": "A profile name can't contain the following characters <>:\"/\\|?*",
-            "index": "Your account index must be a number between 0 and 2,147,483,647.",
-            "page": "Your account page must be a number between 0 and 2,147,483,647.",
             "syncing": "There was an error syncing your wallets.",
             "cannotRemove": "Unable to remove wallet.",
             "withBalance": "You must transfer all balances before you can delete this wallet.",
             "notLast": "You can only delete your last wallet.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "cannotGetBoundWallet": "Unable to get bound wallet"
         },
         "send": {
             "addressLength": "Addresses should be {length, plural, one {# character} other {# characters}} long.",
@@ -1980,7 +1904,7 @@
             "wrongAddressFormat": "The address is not correctly formatted.",
             "invalidAddress": "The address is not valid.",
             "invalidAssetId": "The asset id is not valid.",
-            "unknownAsset": "The asset is not known to this account.",
+            "unknownAsset": "The asset is not known to this wallet.",
             "insufficientFunds": "This wallet has insufficient funds.",
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
             "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
@@ -2002,7 +1926,7 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 wallet",
             "estimatedGas": "Failed to estimate gas."
         },
         "node": {
@@ -2068,12 +1992,6 @@
         },
         "crypto": {
             "cannotDecodeBech32": "Unable to decode string as Bech32 address."
-        },
-        "participation": {
-            "cannotUseAccount": "Unable to use the specified account.",
-            "cannotFindStakingEvent": "Unable to find staking event.",
-            "cannotVisitAirdropWebsite": "Unable to open the {airdrop} website.",
-            "invalidStakingEventId": "Invalid staking event ID."
         },
         "invalidDate": "INVALID DATE",
         "invalidTime": "INVALID TIME",

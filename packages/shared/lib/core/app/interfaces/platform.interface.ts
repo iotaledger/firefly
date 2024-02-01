@@ -9,7 +9,6 @@ import { AppTheme } from '../enums'
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
     saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
-    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
