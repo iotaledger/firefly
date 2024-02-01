@@ -2,7 +2,7 @@
     import { OnboardingButton } from '@ui'
 
     import { localize } from '@core/i18n'
-    import { FAUCET_URLS, nodeInfo } from '@core/network'
+    import { FAUCET_URLS, nodeInfo, nodeInfoNetworkName } from '@core/network'
     import { activeProfile } from '@core/profile'
 
     import { openPopup, PopupId } from '@auxiliary/popup'
@@ -23,7 +23,7 @@
             values: { token: $nodeInfo.baseToken.name },
         })}
         secondaryText={localize('general.faucetRequestDescription', {
-            values: { network: $nodeInfo.protocolParameters?.[0]?.parameters?.networkName },
+            values: { network: $nodeInfoNetworkName },
         })}
         onClick={onGetTokensClick}
         disabled={!hasDepositAddress}
