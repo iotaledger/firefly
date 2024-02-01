@@ -1648,7 +1648,7 @@
         "smartContract": "Kontrak Cerdas",
         "targetContract": "Kontrak sasaran",
         "contractFunction": "Fungsi kontrak",
-        "gasBudget": "Anggaran gas",
+        "gasFee": "Biaya Gas",
         "standard": "Standar",
         "uri": "URI",
         "issuer": "Penerbit",
@@ -1944,6 +1944,8 @@
             "wrongAddressPrefix": "Alamat dimulai dengan awalan {prefix}.",
             "wrongAddressFormat": "Alamat tidak diformat dengan benar.",
             "invalidAddress": "Alamatnya tidak valid.",
+            "invalidExpirationDate": "Tanggal kedaluwarsa tidak valid.",
+            "pastExpirationDate": "Tanggal kadaluwarsanya sudah lewat.",
             "invalidAssetId": "Id aset tidak valid.",
             "unknownAsset": "Asetnya tidak diketahui akun ini.",
             "insufficientFunds": "Dompet/akun ini tidak mempunyai cukup dana.",
@@ -1977,7 +1979,7 @@
             "refused": "Sambungan ditolak.",
             "handshake": "Tidak dapat menyelesaikan jabat tangan dengan node.",
             "invalidCertificate": "Tidak dapat terhubung dengan sertifikat tidak valid.",
-            "https": "HTTPS diperlukan; koneksi yang tidak aman melalui HTTP tidak didukung saat ini.",
+            "https": "Koneksi eksternal harus menggunakan HTTPS; koneksi localhost dapat dibuat menggunakan HTTP. Koneksi HTTP eksternal yang tidak aman tidak didukung.",
             "duplicate": "Node ini telah ditambahkan.",
             "noSyncedNode": "Tidak ada node yang disinkronkan tersedia.",
             "timeNotSynced": "Waktu perangkat salah, tidak dapat menyinkronkan node.",
@@ -2160,7 +2162,7 @@
                 "timelockDate": "Pengirim menetapkan batas waktu pada dana ini. Anda akan dapat membelanjakannya setelah batas waktu berakhir.",
                 "metadata": "Bidang data opsional untuk menyimpan data secara persisten di Tangle.",
                 "tag": "Bidang data opsional singkat. Memberi tag pada grup transaksi dapat mempermudah pencariannya.",
-                "gasBudget": "Anggaran gas diperlukan untuk melakukan transaksi atau menjalankan fungsi kontrak pintar di Shimmer EVM."
+                "gasFee": "Biaya Gas diperlukan untuk melakukan transaksi atau mengeksekusi sebuah fungsi kontak pintar pada Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Deposit penyimpanan adalah deposit yang dapat dikembalikan yang diperlukan untuk menyimpan transaksi Anda di Tangle.",
@@ -2169,7 +2171,7 @@
                 "timelockDate": "Anda menambahkan timelock ke transaksi ini. Penerima tidak akan dapat membelanjakan dana tersebut hingga batas waktu berakhir.",
                 "metadata": "Bidang data opsional untuk menyimpan data secara persisten di Tangle.",
                 "tag": "Bidang data opsional singkat. Memberi tag pada grup transaksi dapat mempermudah pencariannya.",
-                "gasBudget": "Anggaran gas diperlukan untuk melakukan transaksi atau menjalankan fungsi kontrak pintar di Shimmer EVM."
+                "gasFee": "Biaya Gas diperlukan untuk melakukan transaksi atau mengeksekusi sebuah fungsi kontak pintar pada Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "Standar NFT misalnya IRC27.",
