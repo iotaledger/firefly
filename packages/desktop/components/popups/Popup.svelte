@@ -21,7 +21,7 @@
     import ConnectLedgerPopup from './ConnectLedgerPopup.svelte'
     import createWalletPopup from './CreateWalletPopup.svelte'
     import DeepLinkErrorPopup from './DeepLinkErrorPopup.svelte'
-    import DeleteAccountPopup from './DeleteAccountPopup.svelte'
+    import DeleteWalletPopup from './DeleteWalletPopup.svelte'
     import DeleteProfilePopup from './DeleteProfilePopup.svelte'
     import DiagnosticsPopup from './DiagnosticsPopup.svelte'
     import EnableLedgerBlindSigningPopup from './EnableLedgerBlindSigningPopup.svelte'
@@ -107,7 +107,7 @@
         [PopupId.ConnectLedger]: ConnectLedgerPopup,
         [PopupId.createWallet]: createWalletPopup,
         [PopupId.DeepLinkError]: DeepLinkErrorPopup,
-        [PopupId.DeleteAccount]: DeleteAccountPopup,
+        [PopupId.DeleteWallet]: DeleteWalletPopup,
         [PopupId.DeleteProfile]: DeleteProfilePopup,
         [PopupId.Diagnostics]: DiagnosticsPopup,
         [PopupId.EnableLedgerBlindSigning]: EnableLedgerBlindSigningPopup,
