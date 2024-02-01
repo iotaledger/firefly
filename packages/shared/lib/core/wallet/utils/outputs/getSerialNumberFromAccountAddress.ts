@@ -3,7 +3,7 @@ import { api } from '@core/api'
 import { AccountOutput } from '@iota/sdk/out/types'
 import { selectedWallet } from '../../stores'
 
-export async function getSerialNumberFromAccountOutput(accountAddress: string): Promise<number> {
+export async function getSerialNumberFromAccountAddress(accountAddress: string): Promise<number> {
     const wallet = get(selectedWallet)
     if (!wallet) {
         throw new Error('Wallet is undefined')

@@ -9,7 +9,7 @@ import {
 } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
-import { getSerialNumberFromAccountOutput } from './outputs'
+import { getSerialNumberFromAccountAddress } from './outputs'
 import { api } from '@core/api'
 
 export async function buildFoundryOutputData(
@@ -30,7 +30,7 @@ export async function buildFoundryOutputData(
 
     const immutableFeatures: Feature[] = [metadataFeature]
 
-    const serialNumber = await getSerialNumberFromAccountOutput(accountId)
+    const serialNumber = await getSerialNumberFromAccountAddress(accountId)
 
     return {
         serialNumber,
