@@ -48,12 +48,12 @@
     }
 </script>
 
-<manage-account-popup class="flex flex-col h-full justify-between space-y-4">
+<manage-wallet-popup class="flex flex-col h-full justify-between space-y-4">
     <div>
         <title-container class="flex flex-row mb-6">
             <Text type={TextType.h5}>{localize('general.manageWallet')}</Text>
         </title-container>
-        <manage-account-popup-inputs class="w-full flex flex-col justify-between space-y-4">
+        <manage-wallet-popup-inputs class="w-full flex flex-col justify-between space-y-4">
             <Input
                 {error}
                 bind:value={walletAlias}
@@ -62,10 +62,10 @@
                 submitHandler={onSaveClick}
                 disabled={isBusy}
             />
-            <ColorPicker title={localize('general.accountColor')} bind:active={color} isCustomColorEnabled />
-        </manage-account-popup-inputs>
+            <ColorPicker title={localize('general.walletColor')} bind:active={color} isCustomColorEnabled />
+        </manage-wallet-popup-inputs>
     </div>
-    <manage-account-popup-actions class="flex flex-row justify-between mt-2 px-2">
+    <manage-wallet-popup-actions class="flex flex-row justify-between mt-2 px-2">
         <Button outline classes="-mx-2 w-1/2" onClick={onCancelClick} disabled={isBusy}>
             {localize('actions.cancel')}
         </Button>
@@ -78,5 +78,5 @@
         >
             {localize('actions.save')}
         </Button>
-    </manage-account-popup-actions>
-</manage-account-popup>
+    </manage-wallet-popup-actions>
+</manage-wallet-popup>

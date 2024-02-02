@@ -1,11 +1,11 @@
 import { activeWallets } from 'shared/lib/core/profile'
-import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
+import { getSelectedWallet /* IWalletState*/ } from 'shared/lib/core/wallet'
 import { get } from 'svelte/store'
 
 import { IRegisteredProposals } from '../interfaces'
 import { registeredProposals } from '../stores'
-import { createProposalFromError, createProposalFromEvent } from '../utils'
-import { getWalletsParticipationEventStatusForEvent } from './getWalletsParticipationEventStatusForEvent'
+// import { createProposalFromError, createProposalFromEvent } from '../utils'
+// import { getWalletsParticipationEventStatusForEvent } from './getWalletsParticipationEventStatusForEvent'
 
 export async function initializeRegisteredProposals(): Promise<void> {
     const allProposals: { [walletId: string]: IRegisteredProposals } = {}
@@ -27,20 +27,21 @@ export async function initializeRegisteredProposals(): Promise<void> {
     registeredProposals.set(allProposals)
 }
 
-async function getParticipationEventsAndCreateProposalsForWallet(wallet: IWalletState): Promise<IRegisteredProposals> {
-    const proposals: IRegisteredProposals = {}
-    const events = await wallet.getParticipationEvents()
-    for (const event of Object.values(events)) {
-        const proposal = createProposalFromEvent(event)
-        if (!getSelectedWallet()) {
-            break
-        }
-        try {
-            await getWalletsParticipationEventStatusForEvent(event.id, wallet)
-            proposals[event.id] = proposal
-        } catch (err) {
-            proposals[event.id] = createProposalFromError(proposal, err)
-        }
-    }
-    return proposals
+// TODO: https://github.com/iotaledger/firefly/issues/7947
+async function getParticipationEventsAndCreateProposalsForWallet(/* wallet: IWalletState*/): Promise<IRegisteredProposals> {
+    // const proposals: IRegisteredProposals = {}
+    // const events = await wallet.getParticipationEvents()
+    // for (const event of Object.values(events)) {
+    //     const proposal = createProposalFromEvent(event)
+    //     if (!getSelectedWallet()) {
+    //         break
+    //     }
+    //     try {
+    //         await getWalletsParticipationEventStatusForEvent(event.id, wallet)
+    //         proposals[event.id] = proposal
+    //     } catch (err) {
+    //         proposals[event.id] = createProposalFromError(proposal, err)
+    //     }
+    // }
+    return Promise.resolve({})
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { handleDeepLink } from '@auxiliary/deep-link'
     import { localize } from '@core/i18n'
-    import { nodeInfo, NetworkId } from '@core/network'
+    import { NetworkId, nodeInfoNetworkName } from '@core/network'
     import {
         activeProfile,
         hasStrongholdLocked,
@@ -98,12 +98,12 @@
 
         Platform.DeepLinkManager.checkDeepLinkRequestExists()
 
-        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && $nodeInfo) {
+        if ($activeProfile?.isDeveloperProfile && !developerProfileNotificationId && $nodeInfoNetworkName) {
             // Show developer profile warning
             developerProfileNotificationId = showAppNotification({
                 type: 'warning',
                 message: localize('indicators.developerProfileIndicator.warningText', {
-                    values: { networkName: $nodeInfo.protocolParameters[0].parameters.networkName },
+                    values: { networkName: $nodeInfoNetworkName },
                 }),
             })
         }

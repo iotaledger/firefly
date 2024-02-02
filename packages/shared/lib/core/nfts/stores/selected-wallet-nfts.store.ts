@@ -5,7 +5,6 @@ import { allWalletNfts } from './all-wallet-nfts.store'
 import { time } from '@core/app/stores/time.store'
 import { selectedWalletId } from '@core/wallet/stores/selected-wallet-id.store'
 
-// TODO(2.0) Rename this
 export const selectedWalletNfts: Readable<INft[]> = derived(
     [selectedWalletId, allWalletNfts],
     ([$selectedWalletId, $allWalletNfts]) => {

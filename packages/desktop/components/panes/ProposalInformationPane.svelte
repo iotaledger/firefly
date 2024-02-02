@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Height, KeyValueBox, Pane, Text } from '@ui'
     import { formatDate, localize } from '@core/i18n'
-    import { DATE_FORMAT, IKeyValueBoxList, milestoneToDate, truncateString } from '@core/utils'
+    import { DATE_FORMAT, IKeyValueBoxList, slotToDate, truncateString } from '@core/utils'
     import { networkStatus } from '@core/network/stores'
     import { ProposalStatus } from '@contexts/governance/enums'
     import { selectedProposal } from '@contexts/governance/stores'
@@ -10,7 +10,7 @@
 
     interface IProposalDateData {
         propertyKey: 'votingOpens' | 'countingStarts' | 'countingEnds' | 'countingEnded'
-        milestone: number
+        slot: number
     }
 
     $: proposalDateData = getNextProposalDateData($selectedProposal?.status)
@@ -20,22 +20,22 @@
             case ProposalStatus.Upcoming:
                 return {
                     propertyKey: 'votingOpens',
-                    milestone: $selectedProposal?.milestones?.commencing,
+                    slot: $selectedProposal?.slots?.commencing,
                 }
             case ProposalStatus.Commencing:
                 return {
                     propertyKey: 'countingStarts',
-                    milestone: $selectedProposal?.milestones?.holding,
+                    slot: $selectedProposal?.slots?.holding,
                 }
             case ProposalStatus.Holding:
                 return {
                     propertyKey: 'countingEnds',
-                    milestone: $selectedProposal?.milestones?.ended,
+                    slot: $selectedProposal?.slots?.ended,
                 }
             case ProposalStatus.Ended:
                 return {
                     propertyKey: 'countingEnded',
-                    milestone: $selectedProposal?.milestones?.ended,
+                    slot: $selectedProposal?.slots?.ended,
                 }
             default:
                 return undefined
@@ -46,10 +46,7 @@
     $: proposalInformation = {
         ...(proposalDateData?.propertyKey && {
             [proposalDateData.propertyKey]: {
-                data: formatDate(
-                    milestoneToDate($networkStatus.currentMilestone, proposalDateData.milestone),
-                    DATE_FORMAT
-                ),
+                data: formatDate(slotToDate($networkStatus.currentSlot, proposalDateData.slot), DATE_FORMAT),
             },
         }),
         eventId: {

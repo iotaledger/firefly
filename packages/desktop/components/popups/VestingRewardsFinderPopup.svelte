@@ -20,8 +20,8 @@
     import { truncateString } from '@core/utils'
     import {
         formatTokenAmountBestMatch,
-        generateAndStoreActivitiesForAllAccounts,
-        refreshAccountAssetsForActiveProfile,
+        generateAndStoreActivitiesForAllWallets,
+        refreshWalletAssetsForActiveProfile,
     } from '@core/wallet'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
@@ -97,8 +97,8 @@
 
     onDestroy(async () => {
         if (hasUsedVestingRewardsFinder) {
-            await refreshAccountAssetsForActiveProfile()
-            await generateAndStoreActivitiesForAllAccounts()
+            await refreshWalletAssetsForActiveProfile()
+            await generateAndStoreActivitiesForAllWallets()
             loadNftsForActiveProfile()
         }
     })

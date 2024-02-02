@@ -27,7 +27,7 @@ import {
 } from '@iota/sdk/out/types'
 
 import { IWallet } from '../../core/profile/interfaces'
-import { MOCK_ACCOUNT_BALANCE } from './account-balance.mock'
+import { MOCK_WALLET_BALANCE } from './wallet-balance.mock'
 
 export class WalletMock implements Partial<IWallet> {
     public id: string
@@ -93,7 +93,7 @@ export class WalletMock implements Partial<IWallet> {
     }
 
     getBalance(): Promise<Balance> {
-        return Promise.resolve(MOCK_ACCOUNT_BALANCE)
+        return Promise.resolve(MOCK_WALLET_BALANCE)
     }
 
     getIncomingTransaction(transactionId: string): Promise<TransactionWithMetadata> {
