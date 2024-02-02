@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { activeProfileSecretManager } from '../stores'
 
 export async function generateEd25519Address(
-    accountIndex: number, // TODO(2.0) account indexes are gone
+    walletIndex: number,
     options: GenerateAddressOptions,
     bech32Hrp: string
 ): Promise<string | undefined> {
@@ -15,7 +15,7 @@ export async function generateEd25519Address(
 
     return (
         await secretManager.generateEd25519Addresses({
-            accountIndex,
+            accountIndex: walletIndex,
             options,
             bech32Hrp,
             range: {

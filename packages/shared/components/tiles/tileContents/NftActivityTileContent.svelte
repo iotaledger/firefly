@@ -13,7 +13,7 @@
         activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
     $: action = localize(getActivityTileTitle(activity))
     $: subject = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-        values: { account: subjectLocale },
+        values: { address: subjectLocale },
     })
     $: formattedAsset = {
         text: nft?.name ?? '',

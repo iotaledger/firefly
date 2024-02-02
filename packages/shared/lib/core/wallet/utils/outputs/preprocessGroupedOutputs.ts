@@ -5,6 +5,9 @@ import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { get } from 'svelte/store'
+import { MILLISECONDS_PER_SECOND } from 'shared/lib/core/utils'
 
 // TODO(2.0) Fix all usages
 export function preprocessGroupedOutputs(
@@ -14,7 +17,7 @@ export function preprocessGroupedOutputs(
 ): IProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
-        transactionMetadata?.transactionId,
+        transactionMetadata?.included.transactionId,
         transactionInputs
     )
     const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
@@ -25,11 +28,20 @@ export function preprocessGroupedOutputs(
         output: outputData.output,
     }))
 
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    let slotUnixTimestamp = 0
+    if (nodeProtocolParameters) {
+        slotUnixTimestamp = getUnixTimestampFromNodeInfoAndSlotIndex(
+            nodeProtocolParameters,
+            transactionMetadata?.included?.slot
+        )
+    }
+
     return {
         outputs: wrappedOutputs,
-        transactionId: transactionMetadata?.transactionId,
+        transactionId: transactionMetadata?.included.transactionId,
         direction,
-        time: new Date(), // TODO(2.0): new Date(transactionMetadata.milestoneTimestampBooked * MILLISECONDS_PER_SECOND),
+        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: InclusionState.Confirmed,
         utxoInputs,
         wrappedInputs,

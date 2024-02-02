@@ -3,10 +3,8 @@ import type { ParticipationOverview, TrackedParticipationOverview } from '@iota/
 import { allParticipationOverviews } from '@contexts/governance/stores'
 import { selectedWalletId } from 'shared/lib/core/wallet'
 
-export function getParticipationsForProposal(
-    proposalId: string,
-    walletId = get(selectedWalletId)
-): { [outputId: string]: TrackedParticipationOverview } {
+export function getParticipationsForProposal(proposalId: string): { [outputId: string]: TrackedParticipationOverview } {
+    const walletId = get(selectedWalletId)
     const overview: ParticipationOverview = get(allParticipationOverviews)[walletId]
     return overview?.participations?.[proposalId]
 }

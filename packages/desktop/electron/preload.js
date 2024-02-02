@@ -122,27 +122,6 @@ try {
             bindMethodsAcrossContextBridge(IotaSdk.Client.prototype, client)
             return client
         },
-        // TODO(2.0): Is there a difference between this and getWallet? They both really make the same thing
-        async createWallet(id, walletOptions) {
-            let wallet = wallets[id]
-            if (!wallet) {
-                wallet = await IotaSdk.Wallet.create(walletOptions)
-                wallet.id = id
-                wallets[id] = wallet
-                bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, wallet)
-            }
-            return wallet
-        },
-        // TODO(2.0): also remove from file system? Does it make sense? file system != memoery
-        async deleteWallet(id) {
-            if (id && id in wallets) {
-                const wallet = wallets[id]
-                await wallet.stopBackgroundSync()
-                await wallet.destroy()
-                delete wallets[id]
-            }
-        },
-        // TODO(2.0): Rename this to getWallet and fix all usages
         async getWallet(id, walletOptions) {
             let wallet = wallets[id]
             if (!wallet) {
@@ -153,12 +132,13 @@ try {
             }
             return wallet
         },
-        // TODO(2.0): remove this method from here and move to new profile
-        async recoverAccounts(managerId, payload) {
-            const manager = wallets[managerId]
-            const accounts = await manager.recoverAccounts(...Object.values(payload))
-            accounts.forEach((account) => bindMethodsAcrossContextBridge(IotaSdk.Wallet.prototype, account))
-            return accounts
+        async deleteWallet(id) {
+            if (id && id in wallets) {
+                const wallet = wallets[id]
+                await wallet.stopBackgroundSync()
+                await wallet.destroy()
+                delete wallets[id]
+            }
         },
         async clearWalletsFromMemory() {
             for (const [id, wallet] of Object.entries(wallets)) {

@@ -12,7 +12,7 @@ import { clearProfileFromMemory } from '@core/profile'
 export async function migrateStrongholdFromOnboardingProfile(password: string): Promise<void> {
     const profile = get(onboardingProfile)
     const profileDirectory = await getStorageDirectoryOfProfile(profile?.id)
-    // TODO(2.0) Update getSecretManagerPath
+
     const secretManagerPath = getSecretManagerPath(profileDirectory)
 
     await copyStrongholdFileToProfileDirectory(profileDirectory, profile?.importFilePath ?? '')

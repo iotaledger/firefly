@@ -10,7 +10,6 @@ import { createNewWallet } from './createNewWallet'
 import { setSelectedWallet } from './setSelectedWallet'
 import { IError } from '@core/error/interfaces'
 
-// TODO(2.0) Fix all usages
 export async function tryCreateAdditionalWallet(alias: string, color: string): Promise<void> {
     try {
         const wallet = await createNewWallet(alias, color)

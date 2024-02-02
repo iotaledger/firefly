@@ -139,7 +139,7 @@
             label={localize('views.governance.details.proposalInformation.eventId')}
         />
         {#if !isEditMode}
-            <Checkbox label={localize('popups.addProposal.addToAllAccounts')} bind:checked={isAddingForAllWallets} />
+            <Checkbox label={localize('popups.addProposal.addToAllWallets')} bind:checked={isAddingForAllWallets} />
         {/if}
     </div>
     <div class="flex w-full space-x-4 mt-6">
