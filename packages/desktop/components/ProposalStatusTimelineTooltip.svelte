@@ -4,11 +4,11 @@
 
     import { formatDate, localize } from '@core/i18n'
     import { networkStatus } from '@core/network'
-    import { DATE_FORMAT, milestoneToDate } from '@core/utils'
+    import { DATE_FORMAT, slotToDate } from '@core/utils'
 
     import { ProposalStatus } from '@contexts/governance/enums'
 
-    export let milestones: Record<ProposalStatus, number>
+    export let slots: Record<ProposalStatus, number>
     export let status: string
     export let anchor: HTMLElement
     export let position: Position = Position.Right
@@ -40,10 +40,7 @@
                     overrideColor={eventProgress < index}
                     classes={eventProgress < index ? 'text-gray-400 dark:text-gray-700' : ''}
                 >
-                    {formatDate(
-                        milestoneToDate($networkStatus.currentMilestone, milestones[ProposalStatus[status]]),
-                        DATE_FORMAT
-                    )}
+                    {formatDate(slotToDate($networkStatus.currentSlot, slots[ProposalStatus[status]]), DATE_FORMAT)}
                 </Text>
                 <Text
                     type={TextType.h5}
