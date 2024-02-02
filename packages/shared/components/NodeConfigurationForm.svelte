@@ -3,7 +3,7 @@
     import { NetworkId } from '@core/network'
     import { EMPTY_NODE } from '@core/network/constants'
     import { INode, INodeInfoResponse } from '@core/network/interfaces'
-    import { nodeInfo } from '@core/network/stores'
+    import { nodeInfoNetworkName } from '@core/network/stores'
     import { checkNetworkId, checkNodeUrlValidity, getNetworkNameFromNetworkId } from '@core/network/utils'
     import { activeProfile } from '@core/profile'
     import { IDropdownItem, cleanUrl } from '@core/utils'
@@ -91,10 +91,10 @@
                 return Promise.reject({ type: 'validationError', error: formError })
             }
         }
-        const networkName = nodeInfoResponse?.nodeInfo?.protocol.networkName
+        const networkName = nodeInfoResponse?.nodeInfo?.protocolParameters?.[0]?.parameters?.networkName
 
         if (options.checkSameNetwork) {
-            const isInSameNetwork = !!$nodeInfo && $nodeInfo.protocol.networkName === networkName
+            const isInSameNetwork = !!$nodeInfoNetworkName && $nodeInfoNetworkName === networkName
             if (!isInSameNetwork) {
                 formError = localize('error.node.differentNetwork')
                 return Promise.reject({ type: 'validationError', error: formError })
@@ -109,7 +109,11 @@
         }
 
         if (options.validateClientOptions && currentClientOptions) {
-            const errorNetworkId = checkNetworkId(networkName, currentClientOptions.network, isDeveloperProfile)
+            const errorNetworkId = checkNetworkId(
+                networkName,
+                currentClientOptions.networkInfo?.protocolParameters?.networkName,
+                isDeveloperProfile
+            )
             if (errorNetworkId) {
                 formError = localize(errorNetworkId?.locale, errorNetworkId?.values) ?? ''
                 return Promise.reject({ type: 'validationError', error: formError })

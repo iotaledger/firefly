@@ -38,9 +38,9 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
     }
 
     const nativeTokens: IAsset[] = []
-    const tokens = wallet?.balances?.nativeTokens ?? []
-    for (const token of tokens) {
-        const persistedAsset = getAssetFromPersistedAssets(token.tokenId)
+    const tokens = wallet?.balances?.nativeTokens ?? {}
+    for (const [tokenId, token] of Object.entries(tokens)) {
+        const persistedAsset = getAssetFromPersistedAssets(tokenId)
         if (persistedAsset && persistedAsset?.metadata && isValidIrc30Token(persistedAsset.metadata)) {
             nativeTokens.push({
                 ...persistedAsset,

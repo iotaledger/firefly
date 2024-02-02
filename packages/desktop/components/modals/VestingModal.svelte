@@ -14,11 +14,11 @@
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
-    <account-actions-menu class="flex flex-col">
+    <vesting-modal class="flex flex-col">
         <MenuItem
             icon={Icon.Search}
             title={localize('actions.viewVestingRewardsFinder')}
             onClick={onVestingFinderClick}
         />
-    </account-actions-menu>
+    </vesting-modal>
 </Modal>

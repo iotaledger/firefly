@@ -1,0 +1,1 @@
+export const DEFAULT_SECONDS_PER_SLOT = 10

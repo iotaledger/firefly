@@ -1,1 +1,1 @@
-export { default as AccountActionsButton } from './AccountActionsButton.svelte'
+export { default as WalletActionsButton } from './WalletActionsButton.svelte'

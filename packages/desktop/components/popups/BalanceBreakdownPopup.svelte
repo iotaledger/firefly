@@ -6,7 +6,7 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
+    import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import features from '@features/features'
@@ -22,8 +22,8 @@
         Timelock = 'timelock',
     }
 
-    $: accountBalance = $selectedWallet?.balances
-    $: accountBalance, void setBreakdown()
+    $: walletBalance = $selectedWallet?.balances
+    $: walletBalance, void setBreakdown()
 
     let breakdown: { [key: string]: BalanceBreakdown } = {}
 
@@ -44,20 +44,20 @@
     }
 
     function getAvailableBreakdown(): BalanceBreakdown {
-        return { amount: Number(accountBalance?.baseCoin?.available ?? 0) }
+        return { amount: Number(walletBalance?.baseCoin?.available ?? 0) }
     }
 
     async function getPendingBreakdown(): Promise<BalanceBreakdown> {
         let pendingOutputsStorageDeposit = 0
 
         const subBreakdown = {}
-        for (const [outputId, unlocked] of Object.entries(accountBalance?.potentiallyLockedOutputs ?? {})) {
+        for (const [outputId, unlocked] of Object.entries(walletBalance?.potentiallyLockedOutputs ?? {})) {
             if (!unlocked) {
                 const output = (await $selectedWallet.getOutput(outputId)).output
 
                 let type: string
                 let amount: number
-                if (output.type !== OutputType.Treasury && !isVestingOutputId(outputId)) {
+                if (!isVestingOutputId(outputId)) {
                     const commonOutput = output as CommonOutput
                     if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
@@ -66,8 +66,7 @@
                         containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.StorageDepositReturn)
                     ) {
                         type = PendingFundsType.StorageDepositReturn
-                        amount = (await getStorageDepositFromOutput($selectedWallet, output as CommonOutput))
-                            ?.storageDeposit
+                        amount = (await getStorageDepositFromOutput(output as CommonOutput))?.storageDeposit
                     } else if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Timelock)) {
                         type = PendingFundsType.Timelock
                         amount = Number(output.amount)
@@ -100,9 +99,9 @@
     }
 
     function getStorageDepositBreakdown(): BalanceBreakdown {
-        const storageDeposits = accountBalance?.requiredStorageDeposit
+        const storageDeposits = walletBalance?.requiredStorageDeposit
         const totalStorageDeposit = storageDeposits
-            ? Object.values(accountBalance.requiredStorageDeposit).reduce(
+            ? Object.values(walletBalance.requiredStorageDeposit).reduce(
                   (total: number, value: string): number => total + Number(value ?? 0),
                   0
               )
@@ -161,7 +160,7 @@
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
             />
         {/each}
-        <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
+        <BalanceSummarySection titleKey="totalBalance" amount={Number(walletBalance?.baseCoin?.total ?? 0)} bold />
     </div>
     <Button onClick={onConsolidationClick}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}

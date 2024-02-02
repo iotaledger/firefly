@@ -12,9 +12,6 @@ export async function restoreBackupByCopyingFile(
     try {
         await copyStrongholdFileToProfileDirectory(storageDirectory, importFilePath)
         await secretManager.setStrongholdPassword(strongholdPassword)
-        // TODO(2.0) The secret manager doesn't need the client options, so this is fine to not do anymore
-        // But, we should make sure 100% of it anyway
-        // await secretManager.setClientOptions(clientOptions)
     } catch (err) {
         if (CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)) {
             throw new StrongholdMigrationRequiredError()

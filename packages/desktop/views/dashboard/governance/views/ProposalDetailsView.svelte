@@ -10,7 +10,7 @@
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
     import { networkStatus } from '@core/network/stores'
-    import { getBestTimeDuration, milestoneToDate } from '@core/utils'
+    import { getBestTimeDuration, slotToDate } from '@core/utils'
     import { visibleSelectedWalletAssets } from '@core/wallet/stores'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 
@@ -56,13 +56,13 @@
 
     $: selectedProposalOverview = $participationOverviewForSelectedWallet?.participations?.[$selectedProposal?.id]
     $: trackedParticipations = Object.values(selectedProposalOverview ?? {})
-    $: currentMilestone = $networkStatus.currentMilestone
+    $: currentSlot = $networkStatus.currentSlot
 
     // Reactively start updating votes once component has mounted and participation overview is available.
     $: hasMounted &&
         $selectedParticipationEventStatus &&
         trackedParticipations &&
-        currentMilestone &&
+        currentSlot &&
         setVotedAnswerValuesAndTotalVotes()
     $: hasMounted && selectedProposalOverview && updateIsVoting()
 
@@ -121,6 +121,7 @@
         }
     }
 
+    // TODO(2.0): Update ProposalStatus when ParticipationEventData and TrackedParticipationOverview has been updated
     function setVotedAnswerValuesAndTotalVotes(): void {
         let lastActiveOverview: TrackedParticipationOverview
         switch ($selectedParticipationEventStatus?.status) {
@@ -137,7 +138,7 @@
                 break
             case ProposalStatus.Ended:
                 lastActiveOverview = trackedParticipations?.find(
-                    (overview) => overview.endMilestoneIndex > $selectedProposal.milestones.ended
+                    (overview) => overview.endMilestoneIndex > $selectedProposal.slots.ended
                 )
                 totalVotes = calculateTotalVotesForTrackedParticipations(trackedParticipations)
                 break
@@ -186,10 +187,8 @@
         }
 
         const millis =
-            milestoneToDate(
-                $networkStatus.currentMilestone,
-                $selectedProposal.milestones[ProposalStatus.Commencing]
-            ).getTime() - new Date().getTime()
+            slotToDate($networkStatus.currentSlot, $selectedProposal.milestones[ProposalStatus.Commencing]).getTime() -
+            new Date().getTime()
         const timeString = getBestTimeDuration(millis, 'second')
         return localize('views.governance.details.hintVote', { values: { time: timeString } })
     }

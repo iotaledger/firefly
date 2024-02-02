@@ -3,14 +3,13 @@ import { SecretManagerType } from '@iota/sdk/out/types'
 import { USE_LEDGER_SIMULATOR } from '@core/ledger'
 import { ProfileType } from '@core/profile'
 
-// TODO(2.0) Fix all usages
 export function getSecretManagerFromProfileType(
     type?: ProfileType,
-    storagePath?: string,
+    strongholdPath?: string,
     password?: string
 ): SecretManagerType {
     const strongholdSecretManager = {
-        stronghold: { snapshotPath: `${storagePath}/wallet.stronghold`, password },
+        stronghold: { snapshotPath: `${strongholdPath}/wallet.stronghold`, password },
     }
     const ledgerSecretManager = {
         ledgerNano: USE_LEDGER_SIMULATOR,
