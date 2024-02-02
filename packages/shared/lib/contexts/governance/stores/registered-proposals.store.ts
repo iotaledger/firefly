@@ -2,11 +2,10 @@ import { networkStatus } from '@core/network/stores/network-status.store'
 import { selectedWalletId } from '@core/wallet/stores/selected-wallet-id.store'
 import { derived, Readable, writable } from 'svelte/store'
 import { IProposal, IProposalMetadata, IRegisteredProposals } from '../interfaces'
-import { getProposalStatusForMilestone } from '../utils'
+import { getProposalStatusForSlot } from '../utils'
 
 export const registeredProposals = writable<{ [walletId: string]: IRegisteredProposals }>({})
 
-// TODO(2.0) Rename this
 export const registeredProposalsForSelectedWallet: Readable<{ [proposalId: string]: IProposal }> = derived(
     [selectedWalletId, registeredProposals, networkStatus],
     ([$selectedWalletId, $registeredProposals, $networkStatus]) => {
@@ -14,9 +13,9 @@ export const registeredProposalsForSelectedWallet: Readable<{ [proposalId: strin
             const proposalsForSelectedWallet = $registeredProposals[$selectedWalletId] ?? {}
             const proposals: { [proposalId: string]: IProposal } = {}
             for (const key of Object.keys(proposalsForSelectedWallet)) {
-                const status = getProposalStatusForMilestone(
-                    $networkStatus.currentMilestone,
-                    proposalsForSelectedWallet[key]?.milestones
+                const status = getProposalStatusForSlot(
+                    $networkStatus.currentSlot,
+                    proposalsForSelectedWallet[key]?.slots
                 )
                 proposals[key] = { ...proposalsForSelectedWallet[key], status }
             }

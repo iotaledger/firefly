@@ -5,9 +5,9 @@ import { processAndAddToActivities } from '../utils'
 import { plainToInstance } from 'class-transformer'
 import { updateActiveWallet } from '@core/profile'
 
-export async function consolidateOutputs(accountToConsolidate?: IWalletState): Promise<void> {
-    const wallet = accountToConsolidate || getSelectedWallet()
-    if (!wallet) return Promise.reject('No account selected')
+export async function consolidateOutputs(walletToConsolidate?: IWalletState): Promise<void> {
+    const wallet = walletToConsolidate || getSelectedWallet()
+    if (!wallet) return Promise.reject('No wallet selected')
 
     try {
         updateActiveWallet(wallet.id, { hasConsolidatingOutputsTransactionInProgress: true, isTransferring: true })

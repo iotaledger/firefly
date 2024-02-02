@@ -1,5 +1,5 @@
 export enum AdvancedSettingsRoute {
     BalanceFinder = 'balanceFinder',
-    HiddenAccounts = 'hiddenAccounts',
+    HiddenWallets = 'hiddenWallets',
     DeveloperToggle = 'developerToggle',
 }

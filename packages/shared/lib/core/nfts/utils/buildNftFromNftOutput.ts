@@ -38,6 +38,7 @@ export function buildNftFromNftOutput(
     const composedUrl = composeUrlFromNftUri(parsedMetadata?.uri)
     const filePath = `${get(activeProfileId)}/nfts/${id}`
     const storageDeposit = Number(nftOutput.amount)
+    const mana = Number(nftOutput.mana)
 
     return {
         id,
@@ -58,5 +59,6 @@ export function buildNftFromNftOutput(
             warning: undefined,
             isLoaded: false,
         },
+        mana,
     }
 }

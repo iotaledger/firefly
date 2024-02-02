@@ -13,6 +13,6 @@ export function getDirectionFromOutgoingTransaction(
         return walletDepositAddress !== outputRecipient
     })
 
-    // If there is any output not destined for the account, it's an outgoing transaction.
+    // If there is any output not destined for the wallet, it's an outgoing transaction.
     return containsNonWalletRecipient ? ActivityDirection.Outgoing : ActivityDirection.SelfTransaction
 }
