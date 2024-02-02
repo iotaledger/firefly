@@ -1,7 +1,7 @@
 <script lang="ts">
     import { requestTokensFromFaucet } from '@contexts/developer'
     import { localize } from '@core/i18n'
-    import { nodeInfo } from '@core/network'
+    import { nodeInfo, nodeInfoNetworkName } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
     import { handleError } from '@core/error/handlers/handleError'
@@ -36,7 +36,7 @@
         <div class="w-full flex-col space-y-2">
             <Text type={TextType.p} classes="text-left">
                 {localize('popups.faucetRequest.body', {
-                    values: { token: $nodeInfo.baseToken.name, network: $nodeInfo.protocol.networkName },
+                    values: { token: $nodeInfo.baseToken.name, network: $nodeInfoNetworkName },
                 })}
             </Text>
             {#if error}

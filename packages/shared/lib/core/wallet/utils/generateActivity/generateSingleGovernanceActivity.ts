@@ -21,7 +21,7 @@ export async function generateSingleGovernanceActivity(
 
     const isHidden = false
     const isAssetHidden = false
-    const containsValue = await activityOutputContainsValue(account, wrappedOutput)
+    const containsValue = await activityOutputContainsValue(wallet, wrappedOutput)
 
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
@@ -31,9 +31,9 @@ export async function generateSingleGovernanceActivity(
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
 
-    const sendingInfo = getSendingInformation(processedTransaction, output, account)
+    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
-    const { storageDeposit } = await getStorageDepositFromOutput(account, output)
+    const { storageDeposit } = await getStorageDepositFromOutput(output)
     const votingPower = getAmountFromOutput(output)
     const governanceInfo = getGovernanceInfo(output, wrappedInputs, metadata)
 

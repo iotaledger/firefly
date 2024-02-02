@@ -14,7 +14,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
         updateSelectedWallet({ isTransferring: true })
         const prepareBurnNativeTokenTransaction = await wallet?.prepareBurnNativeToken(
             assetId,
-            // TODO(2.0) Fox this
+            // TODO(2.0) Fix this
             Converter.decimalToHex(Number(rawAmount))
         )
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNativeTokenTransaction)

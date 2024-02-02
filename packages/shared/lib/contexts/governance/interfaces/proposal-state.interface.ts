@@ -18,7 +18,7 @@ export interface IRegisteredProposals {
 
 export interface IProposalMetadata {
     id: string
-    milestones?: Record<ProposalStatus, number>
+    slots?: Record<ProposalStatus, number>
     organization?: IOrganization
     type: ProposalType
     questions: Question[]

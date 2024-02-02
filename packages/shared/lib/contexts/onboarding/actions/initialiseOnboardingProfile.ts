@@ -25,5 +25,4 @@ export async function initialiseOnboardingProfile(
 
     const _newProfile = buildInitialOnboardingProfile(isDeveloperProfile)
     onboardingProfile.set(_newProfile)
-    return Promise.resolve() // TODO(2.0) This is a temporal promise
 }

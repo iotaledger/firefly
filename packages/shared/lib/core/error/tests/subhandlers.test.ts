@@ -40,7 +40,7 @@ describe('Module: subhandlers', () => {
         })
 
         it('should correctly handle time not synced', () => {
-            const error = { error: "`local time 12 doesn't match the time of the latest milestone timestamp: 14`" }
+            const error = { error: "`local time 12 doesn't match the time of the latest slot timestamp: 14`" }
             const expectedError = {
                 ...WALLET_RS_ERROR_PARAMETERS[WalletRsError.Client]?.[ClientError.TimeNotSynced],
                 type: undefined,

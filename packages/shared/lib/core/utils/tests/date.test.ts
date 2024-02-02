@@ -5,9 +5,9 @@ import {
     isRecentDate,
     isValidDate,
     diffDates,
-    milestoneToDate,
+    slotToDate,
 } from '../date'
-import { SECONDS_PER_MILESTONE } from '../../network/constants'
+import { DEFAULT_SECONDS_PER_SLOT } from '../../network/constants'
 import { MILLISECONDS_PER_SECOND } from '../constants'
 
 describe('datesOnSameDay', () => {
@@ -151,36 +151,34 @@ describe('diffDates', () => {
     })
 })
 
-describe('milestoneToDate', () => {
-    test('returns the correct date for a past milestone based on the current milestone', () => {
-        const baseMilestone = 10
-        const milestone = 5
+describe('slotToDate', () => {
+    test('returns the correct date for a past slot based on the current slot', () => {
+        const baseSlot = 10
+        const slot = 5
         const currentMillis = Date.now()
-        const expectedMillis =
-            currentMillis - (baseMilestone - milestone) * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+        const expectedMillis = currentMillis - (baseSlot - slot) * DEFAULT_SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
         const expectedDate = new Date(expectedMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseSlot, slot)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
-    test('returns the correct date for the current milestone', () => {
-        const baseMilestone = 10
-        const milestone = 10
+    test('returns the correct date for the current slot', () => {
+        const baseSlot = 10
+        const slot = 10
         const currentMillis = Date.now()
         const expectedDate = new Date(currentMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseSlot, slot)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
-    test('returns the correct date for a future milestone based on the current milestone', () => {
-        const baseMilestone = 10
-        const milestone = 15
+    test('returns the correct date for a future slot based on the current slot', () => {
+        const baseSlot = 10
+        const slot = 15
         const currentMillis = Date.now()
-        const expectedMillis =
-            currentMillis + (milestone - baseMilestone) * SECONDS_PER_MILESTONE * MILLISECONDS_PER_SECOND
+        const expectedMillis = currentMillis + (slot - baseSlot) * DEFAULT_SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND
         const expectedDate = new Date(expectedMillis)
 
-        const result = milestoneToDate(baseMilestone, milestone)
+        const result = slotToDate(baseSlot, slot)
         expect(result.getTime()).toBeCloseTo(expectedDate.getTime(), -2) // Tolerating a 100ms difference
     })
 })

@@ -12,6 +12,8 @@ import {
 } from '@core/wallet'
 import { get } from 'svelte/store'
 import { activeWallets, updateActiveWallet } from '@core/profile'
+import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
     return async (error: Error, rawEvent: WalletEvent) => {
@@ -22,7 +24,6 @@ export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler 
     }
 }
 
-// TODO(2.0) Fix all usages
 export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
@@ -35,7 +36,7 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)
 
     if (activity && activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed) {
-        const transactionId = output?.metadata?.transactionId
+        const transactionId = output?.metadata?.included.transactionId
         updateAsyncDataByTransactionId(walletId, transactionId, {
             asyncStatus: ActivityAsyncStatus.Claimed,
         })
@@ -43,8 +44,18 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
 
     if (activity?.type === ActivityType.Nft) {
         const previousOutputId = getNftByIdFromAllWalletNfts(walletId, activity.nftId)?.latestOutputId
+        const protocolParameters = get(nodeInfoProtocolParameters)
+        if (!wallet || !previousOutputId || !protocolParameters) return
         const previousOutput = await wallet.getOutput(previousOutputId)
-        if (output.metadata.milestoneTimestampBooked > previousOutput.metadata.milestoneTimestampBooked) {
+        const unixTimestampOutputMetadata = getUnixTimestampFromNodeInfoAndSlotIndex(
+            protocolParameters,
+            output.metadata.included.slot
+        )
+        const unixTimestampPreviousOutputMetadata = getUnixTimestampFromNodeInfoAndSlotIndex(
+            protocolParameters,
+            previousOutput.metadata.included.slot
+        )
+        if (unixTimestampOutputMetadata > unixTimestampPreviousOutputMetadata) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })
         }
     }

@@ -2,7 +2,7 @@ import { IWalletFeatures } from '@lib/features/interfaces'
 
 const walletFeatures: IWalletFeatures = {
     enabled: true,
-    accountSummary: {
+    walletSummary: {
         enabled: true,
     },
     sendAndReceive: {

@@ -7,7 +7,7 @@ import { IProposal, IProposalFilter } from '../interfaces'
 import { getNextProposalPhase } from './getNextProposalPhase'
 
 export function sortProposals(proposals: IProposal[], filter: IProposalFilter): IProposal[] {
-    let orderFunction = sortByPhaseAndMilestoneAndName
+    let orderFunction = sortByPhaseAndSlotAndName
     let isAscending = true
 
     if (filter.order.active) {
@@ -16,7 +16,7 @@ export function sortProposals(proposals: IProposal[], filter: IProposalFilter): 
                 orderFunction = sortByName
                 break
             case ProposalOrderOption.Phase:
-                orderFunction = sortByPhaseAndMilestoneAndName
+                orderFunction = sortByPhaseAndSlotAndName
                 break
         }
         isAscending = filter.order.ascDesc === OrderOption.Asc
@@ -25,10 +25,10 @@ export function sortProposals(proposals: IProposal[], filter: IProposalFilter): 
     return proposals?.sort((proposal1, proposal2) => orderFunction(proposal1, proposal2, isAscending)) ?? []
 }
 
-function sortByPhaseAndMilestoneAndName(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
+function sortByPhaseAndSlotAndName(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
     return (
         sortByPhase(proposal1, proposal2, asc) ||
-        sortByMilestone(proposal1, proposal2, true) ||
+        sortBySlot(proposal1, proposal2, true) ||
         sortByName(proposal1, proposal2, true)
     )
 }
@@ -47,12 +47,12 @@ function sortByPhase(proposal1: IProposal, proposal2: IProposal, asc: boolean): 
     }
 }
 
-function sortByMilestone(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
-    const proposal1Milestone = proposal1.milestones[getNextProposalPhase(proposal1?.status)]
-    const proposal2Milestone = proposal2.milestones[getNextProposalPhase(proposal2?.status)]
-    if (proposal1Milestone === proposal2Milestone) {
+function sortBySlot(proposal1: IProposal, proposal2: IProposal, asc: boolean): number {
+    const proposal1Slot = proposal1?.slots?.[getNextProposalPhase(proposal1?.status)] ?? 0
+    const proposal2Slot = proposal2?.slots?.[getNextProposalPhase(proposal2?.status)] ?? 0
+    if (proposal1Slot === proposal2Slot) {
         return 0
-    } else if (proposal1Milestone > proposal2Milestone) {
+    } else if (proposal1Slot > proposal2Slot) {
         return asc ? 1 : -1
     } else {
         return asc ? -1 : 1
