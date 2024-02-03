@@ -18,7 +18,7 @@
         "lottie-web": "^5.7.8",
         "qrious": "^4.0.2",
         "sha3": "^2.1.4",
-        "svelte": "^3.49.0",
+        "svelte": "^4.2.9",
         "svelte-i18n": "3.7.0",
         "svelte-markdown": "0.4.1",
         "svelty-picker": "^5.0.0",
