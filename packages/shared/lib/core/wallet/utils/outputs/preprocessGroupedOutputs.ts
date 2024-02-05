@@ -1,4 +1,4 @@
-import { CommonOutput, OutputData, OutputResponse, OutputType, UTXOInput } from '@iota/sdk/out/types'
+import { CommonOutput, OutputData, OutputResponse, UTXOInput } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
 import { InclusionState, ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
@@ -25,8 +25,7 @@ export function preprocessGroupedOutputs(
     const wrappedOutputs = outputDatas.map((outputData) => ({
         outputId: outputData.outputId,
         remainder: outputData.remainder,
-        // TODO(2.0) Treasure variant is gone
-        output: outputData.output.type !== OutputType.Treasury ? outputData.output : undefined,
+        output: outputData.output,
     }))
 
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
@@ -59,8 +58,7 @@ function getDirectionForOutputs(
     if (nonRemainderOutputs.length === 0) {
         return ActivityDirection.Outgoing
     }
-    const output =
-        nonRemainderOutputs[0].output.type !== OutputType.Treasury ? nonRemainderOutputs[0].output : undefined
+    const output = nonRemainderOutputs[0].output
     const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
     const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
     const isRecipientOneOfAccountAddresses = depositAddress === recipientAddress
@@ -90,12 +88,8 @@ function convertTransactionOutputResponseToWrappedOutput(
     transactionId: string,
     outputResponse: OutputResponse
 ): IWrappedOutput {
-    if (outputResponse.output.type === OutputType.Treasury) {
-        return undefined
-    } else {
-        const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, outputResponse.metadata.outputIndex)
-        return { outputId, output: outputResponse.output, metadata: outputResponse.metadata }
-    }
+    const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, outputResponse.metadata.outputIndex)
+    return { outputId, output: outputResponse.output, metadata: outputResponse.metadata }
 }
 
 function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): UTXOInput[] {
