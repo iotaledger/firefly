@@ -1,4 +1,4 @@
-import { Platform } from '@core/app'
+import { AppStage, Platform, appStage } from '@core/app'
 import { get } from 'svelte/store'
 import { profiles } from '../../stores'
 import { getStorageDirectoryOfProfiles, removeProfileFolder } from '../../utils'
@@ -9,6 +9,10 @@ import { getStorageDirectoryOfProfiles, removeProfileFolder } from '../../utils'
  * @returns {Promise<void>}
  */
 export async function cleanupEmptyProfiles(): Promise<void> {
+    if (get(appStage) === AppStage.ALPHA) {
+        return
+    }
+
     try {
         const profileDataPath = await getStorageDirectoryOfProfiles()
         const storedProfiles = await Platform.listProfileFolders(profileDataPath)
