@@ -25,7 +25,6 @@ import {
     WalletApiEventHandler,
     updateSelectedWallet,
     updateSelectedWalletMainAccountId,
-    selectedWalletMainAccountId,
     hasBlockIssuerFeature,
     getDepositAddress,
 } from '@core/wallet'
@@ -67,25 +66,23 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     }
 
     const isAccountOutput = output.type === OutputType.Account
-
     if (isAccountOutput) {
         const accountOutput = output as AccountOutput
         const accountOutputs = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet)
-        updateSelectedWallet({
-            accountOutputs,
+        const depositAddress = await getDepositAddress(wallet, accountOutput?.accountId)
+        updateActiveWallet(walletId, {
             depositAddress,
+            accountOutputs,
         })
-
         // if we receive the first account output, we set it as the selectedWalletMainAccountId
         // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
         // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
         if (
-            !get(selectedWalletMainAccountId) &&
+            !wallet.mainAccountId &&
             wallet?.hasImplicitAccountCreationTransactionInProgress &&
             hasBlockIssuerFeature(accountOutput)
         ) {
-            updateSelectedWalletMainAccountId(accountOutput.accountId)
+            updateSelectedWalletMainAccountId(accountOutput.accountId, walletId)
             updateActiveWallet(walletId, {
                 hasImplicitAccountCreationTransactionInProgress: false,
                 isTransferring: false,
