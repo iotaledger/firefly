@@ -1,9 +1,8 @@
-import { AccountOutput, Balance, OutputData } from '@iota/sdk/out/types'
+import { IWallet } from '@core/profile/interfaces'
+import { AccountAddress, Balance, OutputData } from '@iota/sdk/out/types'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
-import { IWallet } from '@core/profile/interfaces'
-import { getDepositAddress, getBlockIssuerAccounts } from '../utils'
-import { updateWalletPersistedDataOnActiveProfile } from '../../profile'
+import { getBech32AddressFromAddressTypes } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -38,21 +37,13 @@ export async function buildWalletState(
 
     try {
         balances = await wallet.getBalance()
+        depositAddress = walletPersistedData.mainAccountId
+            ? getBech32AddressFromAddressTypes(new AccountAddress(walletPersistedData.mainAccountId))
+            : ''
         votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
-
-        if (!walletPersistedData.mainAccountId) {
-            const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
-            if (blockIssuerAccounts.length > 0) {
-                const mainAccountId = (blockIssuerAccounts[0]?.output as AccountOutput)?.accountId
-                updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId })
-                walletPersistedData.mainAccountId = mainAccountId
-            }
-        }
-
-        depositAddress = await getDepositAddress(wallet, walletPersistedData.mainAccountId)
     } catch (err) {
         console.error(err)
     }

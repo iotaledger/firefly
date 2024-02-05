@@ -1,19 +1,18 @@
-import { SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
-
 import { getNftByIdFromAllWalletNfts, updateNftInAllWalletNfts } from '@core/nfts'
+import { activeWallets, updateActiveWallet } from '@core/profile'
 import {
-    syncBalance,
     ActivityAsyncStatus,
     ActivityType,
-    validateWalletApiEvent,
-    updateAsyncDataByTransactionId,
-    allWalletActivities,
     WalletApiEventHandler,
+    allWalletActivities,
+    syncBalance,
+    updateAsyncDataByTransactionId,
+    validateWalletApiEvent,
 } from '@core/wallet'
-import { get } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from '@core/profile'
+import { AccountOutput, OutputType, SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
 import { getUnixTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
+import { get } from 'svelte/store'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
     return async (error: Error, rawEvent: WalletEvent) => {
@@ -30,7 +29,19 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     await syncBalance(walletId)
     if (wallet) {
         const walletOutputs = await wallet.outputs()
-        updateActiveWallet(walletId, { walletOutputs })
+        const accountOutputs = await wallet.accounts()
+        const implicitAccountOutputs = await wallet.implicitAccounts()
+        updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs })
+        if (
+            wallet.mainAccountId &&
+            !walletOutputs.find(
+                (output) =>
+                    output.output.type === OutputType.Account &&
+                    (output as unknown as AccountOutput).accountId === wallet.mainAccountId
+            )
+        ) {
+            updateActiveWallet(walletId, { mainAccountId: '', depositAddress: '' })
+        }
     }
     const outputId = output?.outputId
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)

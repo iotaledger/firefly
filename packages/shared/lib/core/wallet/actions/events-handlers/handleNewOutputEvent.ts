@@ -1,35 +1,29 @@
-import {
-    WalletEvent,
-    NewOutputWalletEvent,
-    OutputType,
-    WalletEventType,
-    CommonOutput,
-    UnlockConditionType,
-    AddressType,
-    AddressUnlockCondition,
-    AccountOutput,
-} from '@iota/sdk/out/types'
 import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
+import { activeWallets, updateActiveWallet } from '@core/profile'
 import { checkAndRemoveProfilePicture, updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
     ActivityType,
     IWrappedOutput,
+    WalletApiEventHandler,
+    addActivitiesToWalletActivitiesInAllWalletActivities,
     addPersistedAsset,
     generateActivities,
+    getBech32AddressFromAddressTypes,
     getOrRequestAssetFromPersistedAssets,
+    hasBlockIssuerFeature,
+    preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
-    getBech32AddressFromAddressTypes,
-    preprocessGroupedOutputs,
-    addActivitiesToWalletActivitiesInAllWalletActivities,
-    WalletApiEventHandler,
-    updateSelectedWallet,
-    hasBlockIssuerFeature,
-    getDepositAddress,
-    IWalletState,
 } from '@core/wallet'
+import {
+    AccountAddress,
+    AccountOutput,
+    NewOutputWalletEvent,
+    OutputType,
+    WalletEvent,
+    WalletEventType,
+} from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from '@core/profile'
 
 export function handleNewOutputEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {
@@ -48,64 +42,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
 
-    const isImplicitAccountOutput =
-        output.type === OutputType.Basic &&
-        (output as CommonOutput).unlockConditions.length === 1 &&
-        (
-            (output as CommonOutput).unlockConditions.find(
-                (cmnOutput) => cmnOutput.type === UnlockConditionType.Address
-            ) as AddressUnlockCondition
-        )?.address.type === AddressType.ImplicitAccountCreation
-
-    if (isImplicitAccountOutput) {
-        const implicitAccounts = await wallet.implicitAccounts()
-        updateSelectedWallet({
-            implicitAccountOutputs: implicitAccounts,
-        })
-        return
-    }
-
-    const isAccountOutput = output.type === OutputType.Account
-    if (isAccountOutput) {
-        const accountOutput = output as AccountOutput
-        let partialwalletUpdate: Partial<IWalletState> = {}
-
-        // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
-        // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
-        // if we receive the first account output, we set it as the mainAccountId of the wallet
-        if (
-            !wallet.mainAccountId &&
-            wallet?.hasImplicitAccountCreationTransactionInProgress &&
-            hasBlockIssuerFeature(accountOutput)
-        ) {
-            wallet.mainAccountId = accountOutput.accountId
-            updateActiveWalletPersistedData(walletId, {
-                mainAccountId: wallet.mainAccountId,
-            })
-            partialwalletUpdate = {
-                hasImplicitAccountCreationTransactionInProgress: false,
-                isTransferring: false,
-            }
-        }
-
-        const accountOutputs = await wallet.accounts()
-        const depositAddress = await getDepositAddress(wallet, wallet.mainAccountId)
-        updateActiveWallet(walletId, {
-            ...partialwalletUpdate,
-            depositAddress,
-            accountOutputs,
-        })
-        return
-    }
-
     const address = getBech32AddressFromAddressTypes(outputData.address)
-
-    const isNftOutput = output.type === OutputType.Nft
 
     if (wallet?.depositAddress === address && !outputData?.remainder) {
         await syncBalance(wallet.id)
         const walletOutputs = await wallet.outputs()
-        updateActiveWallet(wallet.id, { walletOutputs })
+        const accountOutputs = await wallet.accounts()
+        const implicitAccountOutputs = await wallet.implicitAccounts()
+        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, implicitAccountOutputs })
 
         const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
@@ -121,6 +65,31 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
 
+    const isAccountOutput = output.type === OutputType.Account
+    if (isAccountOutput) {
+        const accountOutput = output as AccountOutput
+        // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
+        // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
+
+        // if we receive the first account output, we set it as the mainAccountId of the wallet
+        if (
+            !wallet.mainAccountId &&
+            wallet?.hasImplicitAccountCreationTransactionInProgress &&
+            hasBlockIssuerFeature(accountOutput)
+        ) {
+            wallet.mainAccountId = accountOutput.accountId
+            updateActiveWalletPersistedData(walletId, {
+                mainAccountId: wallet.mainAccountId,
+            })
+            updateActiveWallet(walletId, {
+                hasImplicitAccountCreationTransactionInProgress: false,
+                isTransferring: false,
+                depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(wallet.mainAccountId)),
+            })
+        }
+    }
+
+    const isNftOutput = output.type === OutputType.Nft
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
         const nft = buildNftFromNftOutput(wrappedOutput, wallet.depositAddress)
