@@ -7,5 +7,5 @@ export interface IPersistedWalletData {
     shouldRevote: boolean
     removedProposalIds?: ParticipationEventId[]
     walletOptions: WalletOptions
-    mainAccountId?: string | null
+    mainAccountId?: string | undefined
 }
