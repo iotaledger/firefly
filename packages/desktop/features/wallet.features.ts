@@ -18,12 +18,12 @@ const walletFeatures: IWalletFeatures = {
         },
     },
     activityHistory: {
-        enabled: true,
+        enabled: false,
         sync: {
-            enabled: true,
+            enabled: false,
         },
         search: {
-            enabled: true,
+            enabled: false,
         },
     },
 }

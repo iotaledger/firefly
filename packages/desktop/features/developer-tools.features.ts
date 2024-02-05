@@ -12,7 +12,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     alias: {
-        enabled: true,
+        enabled: false,
     },
     refreshTokens: {
         enabled: true,

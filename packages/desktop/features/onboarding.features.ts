@@ -65,16 +65,16 @@ const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
         },
     },
     claimRewards: {
-        enabled: false,
-        hidden: true,
+        enabled: true,
+        hidden: false,
         recoveryPhrase: {
-            enabled: false,
+            enabled: true,
         },
         strongholdBackup: {
-            enabled: false,
+            enabled: true,
         },
         ledgerBackup: {
-            enabled: false,
+            enabled: true,
         },
     },
 }
@@ -103,16 +103,16 @@ const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
         },
     },
     claimRewards: {
-        enabled: true,
-        hidden: false,
+        enabled: false,
+        hidden: true,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
@@ -141,16 +141,16 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
         },
     },
     claimRewards: {
-        enabled: true,
-        hidden: false,
+        enabled: false,
+        hidden: true,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
@@ -179,16 +179,16 @@ const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
         },
     },
     claimRewards: {
-        enabled: true,
-        hidden: false,
+        enabled: false,
+        hidden: true,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
 }
