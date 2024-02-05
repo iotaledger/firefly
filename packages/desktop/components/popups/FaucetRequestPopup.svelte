@@ -36,7 +36,10 @@
         <div class="w-full flex-col space-y-2">
             <Text type={TextType.p} classes="text-left">
                 {localize('popups.faucetRequest.body', {
-                    values: { token: $nodeInfo.baseToken.name, network: $nodeInfoNetworkName },
+                    values: {
+                        token: $nodeInfo.baseToken.name,
+                        network: $nodeInfoNetworkName,
+                    },
                 })}
             </Text>
             {#if error}

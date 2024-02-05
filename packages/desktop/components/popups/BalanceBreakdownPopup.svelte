@@ -6,7 +6,7 @@
     import { checkActiveProfileAuth } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import { UnlockCondition, UnlockConditionType, OutputType, CommonOutput } from '@iota/sdk/out/types'
+    import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import features from '@features/features'
@@ -68,7 +68,7 @@
 
                 let type: string
                 let amount: number
-                if (output.type !== OutputType.Treasury && !isVestingOutputId(outputId)) {
+                if (!isVestingOutputId(outputId)) {
                     const commonOutput = output as CommonOutput
                     if (containsUnlockCondition(commonOutput.unlockConditions, UnlockConditionType.Expiration)) {
                         type = PendingFundsType.Unclaimed
