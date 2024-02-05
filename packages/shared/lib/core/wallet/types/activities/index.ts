@@ -1,4 +1,5 @@
 export * from './account-activity.type'
+export * from './anchor-activity.type'
 export * from './base-activity.type'
 export * from './consolidation-activity.type'
 export * from './foundry-activity.type'

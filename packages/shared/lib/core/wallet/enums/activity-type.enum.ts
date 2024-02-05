@@ -7,4 +7,5 @@ export enum ActivityType {
     Migrate = 'migrate',
     Nft = 'nft',
     Vesting = 'vesting',
+    Anchor = 'anchor',
 }
