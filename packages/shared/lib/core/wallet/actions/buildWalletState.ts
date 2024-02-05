@@ -1,8 +1,9 @@
 import { IWallet } from '@core/profile/interfaces'
-import { AccountAddress, Balance, OutputData } from '@iota/sdk/out/types'
+import { AccountAddress, AccountOutput, Balance, OutputData, OutputType } from '@iota/sdk/out/types'
+import { updateWalletPersistedDataOnActiveProfile } from '../../profile'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
-import { getBech32AddressFromAddressTypes } from '../utils'
+import { getBech32AddressFromAddressTypes, getBlockIssuerAccounts } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -37,13 +38,33 @@ export async function buildWalletState(
 
     try {
         balances = await wallet.getBalance()
+        accountOutputs = await wallet.accounts()
+        if (!walletPersistedData.mainAccountId) {
+            // if there is no mainAccountId, try to set the first account from the block issuer accounts
+            const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
+            if (blockIssuerAccounts.length > 0) {
+                const mainAccountId = (blockIssuerAccounts[0]?.output as AccountOutput)?.accountId
+                updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId })
+                walletPersistedData.mainAccountId = mainAccountId
+            }
+        } else if (
+            walletPersistedData.mainAccountId &&
+            !walletOutputs.find(
+                (output) =>
+                    output.output.type === OutputType.Account &&
+                    (output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
+            )
+        ) {
+            // check if the mainAccountId is still valid
+            updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId: undefined })
+            walletPersistedData.mainAccountId = undefined
+        }
         depositAddress = walletPersistedData.mainAccountId
             ? getBech32AddressFromAddressTypes(new AccountAddress(walletPersistedData.mainAccountId))
             : ''
-        votingPower = balances.baseCoin.votingPower
-        accountOutputs = await wallet.accounts()
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
+        votingPower = balances.baseCoin.votingPower
     } catch (err) {
         console.error(err)
     }

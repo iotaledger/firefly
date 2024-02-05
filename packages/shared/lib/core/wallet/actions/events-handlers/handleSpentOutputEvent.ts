@@ -40,7 +40,7 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
                     (output as unknown as AccountOutput).accountId === wallet.mainAccountId
             )
         ) {
-            updateActiveWallet(walletId, { mainAccountId: '', depositAddress: '' })
+            updateActiveWallet(walletId, { mainAccountId: undefined, depositAddress: '' })
         }
     }
     const outputId = output?.outputId
