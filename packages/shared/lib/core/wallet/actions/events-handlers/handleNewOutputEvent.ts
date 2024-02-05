@@ -18,8 +18,12 @@ import {
 import {
     AccountAddress,
     AccountOutput,
+    AddressType,
+    AddressUnlockCondition,
+    CommonOutput,
     NewOutputWalletEvent,
     OutputType,
+    UnlockConditionType,
     WalletEvent,
     WalletEventType,
 } from '@iota/sdk/out/types'
@@ -41,15 +45,24 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (!wallet || !outputData) return
 
     const output = outputData.output
+    const isAccountOutput = output.type === OutputType.Account
+    const isImplicitAccountOutput =
+        output.type === OutputType.Basic &&
+        (output as CommonOutput).unlockConditions.length === 1 &&
+        (
+            (output as CommonOutput).unlockConditions.find(
+                (cmnOutput) => cmnOutput.type === UnlockConditionType.Address
+            ) as AddressUnlockCondition
+        )?.address.type === AddressType.ImplicitAccountCreation
+    const isNftOutput = output.type === OutputType.Nft
 
-    const address = getBech32AddressFromAddressTypes(outputData.address)
+    const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if (wallet?.depositAddress === address && !outputData?.remainder) {
+    if (address && wallet?.depositAddress === address && !outputData?.remainder) {
         await syncBalance(wallet.id)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
-        const implicitAccountOutputs = await wallet.implicitAccounts()
-        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, implicitAccountOutputs })
+        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
 
         const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
@@ -64,8 +77,11 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
-
-    const isAccountOutput = output.type === OutputType.Account
+    if (isImplicitAccountOutput) {
+        await syncBalance(wallet.id)
+        const implicitAccountOutputs = await wallet.implicitAccounts()
+        updateActiveWallet(wallet.id, { implicitAccountOutputs })
+    }
     if (isAccountOutput) {
         const accountOutput = output as AccountOutput
         // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
@@ -88,8 +104,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             })
         }
     }
-
-    const isNftOutput = output.type === OutputType.Nft
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
         const nft = buildNftFromNftOutput(wrappedOutput, wallet.depositAddress)
