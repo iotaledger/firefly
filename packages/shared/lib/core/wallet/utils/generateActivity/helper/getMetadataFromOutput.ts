@@ -3,13 +3,9 @@ import { ReadSpecialStream } from '@core/layer-2'
 import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
-import { CommonOutput, FeatureType, MetadataFeature, Output, OutputType } from '@iota/sdk/out/types'
+import { CommonOutput, FeatureType, MetadataFeature, Output } from '@iota/sdk/out/types'
 
 export function getMetadataFromOutput(output: Output): string | undefined {
-    if (output.type === OutputType.Treasury) {
-        return undefined
-    }
-
     const commonOutput = output as CommonOutput
     const feature = commonOutput?.features?.find((feature) => feature.type === FeatureType.Metadata)
     const metadataFeature = feature as MetadataFeature

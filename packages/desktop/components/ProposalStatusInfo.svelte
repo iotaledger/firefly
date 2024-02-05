@@ -54,11 +54,6 @@
             <InformationTooltip {anchor} {position} {title} {body} />
         {/if}
     {:else}
-        <ProposalStatusTimelineTooltip
-            bind:anchor
-            milestones={proposal.milestones}
-            status={proposal?.status}
-            {position}
-        />
+        <ProposalStatusTimelineTooltip bind:anchor slots={proposal.slots} status={proposal?.status} {position} />
     {/if}
 {/if}

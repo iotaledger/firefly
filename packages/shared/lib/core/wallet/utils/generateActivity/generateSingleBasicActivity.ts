@@ -49,7 +49,7 @@ export async function generateSingleBasicActivity(
     const gasBudget = Number(parsedLayer2Metadata?.gasBudget ?? '0')
     const gasFee = layer2Allowance > 0 ? amount - layer2Allowance : 0
 
-    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
+    let { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     giftedStorageDeposit = action === ActivityAction.Burn ? 0 : giftedStorageDeposit
     giftedStorageDeposit = gasBudget === 0 ? giftedStorageDeposit : 0
 

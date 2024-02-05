@@ -11,5 +11,5 @@ export async function getNativeTokenFromOutput(output: CommonOutput): Promise<IN
         }
     }
 
-    return output?.nativeTokens?.[0]
+    return output?.getNativeToken()
 }

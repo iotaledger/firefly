@@ -7,6 +7,7 @@
         clearProfileFromMemory,
         getSecretManagerFromProfileType,
         removeProfileFolder,
+        DirectoryManager,
     } from '@core/profile'
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
@@ -14,7 +15,6 @@
     import { createProfileRouter } from '../create-profile-router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
-    import { DirectoryManager } from '@core/profile/classes'
 
     let isBusy = {
         [CreateProfileType.Mnemonic]: false,

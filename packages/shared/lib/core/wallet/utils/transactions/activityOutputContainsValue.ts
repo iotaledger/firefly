@@ -17,7 +17,7 @@ export async function activityOutputContainsValue(
         const isAsync = isOutputAsync(output)
         const nativeToken = await getNativeTokenFromOutput(output)
 
-        const { storageDeposit } = await getStorageDepositFromOutput(wallet, output)
+        const { storageDeposit } = await getStorageDepositFromOutput(output)
         const rawAmount = getAmountFromOutput(output) - storageDeposit
         return !isAsync || rawAmount > 0 || (!!nativeToken && Number(nativeToken.amount) > 0)
     } else {

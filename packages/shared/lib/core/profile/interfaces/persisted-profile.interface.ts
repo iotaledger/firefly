@@ -18,7 +18,7 @@ export interface IPersistedProfile {
     }
     isDeveloperProfile: boolean
     hasVisitedDashboard?: boolean
-    lastUsedWalletId?: string // Todo(2.0) Fix all usages of lastUsedAccountIndex
+    lastUsedWalletId?: string
     clientOptions: ClientOptions
     secretManagerOptions: SecretManagerType
     forceAssetRefresh: boolean
