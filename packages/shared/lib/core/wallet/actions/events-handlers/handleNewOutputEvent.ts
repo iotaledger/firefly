@@ -77,14 +77,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             wallet?.hasImplicitAccountCreationTransactionInProgress &&
             hasBlockIssuerFeature(accountOutput)
         ) {
-            wallet.mainAccountId = accountOutput.accountId
+            const mainAccountId = accountOutput.accountId
             updateActiveWalletPersistedData(walletId, {
-                mainAccountId: wallet.mainAccountId,
+                mainAccountId: mainAccountId,
             })
             updateActiveWallet(walletId, {
                 hasImplicitAccountCreationTransactionInProgress: false,
                 isTransferring: false,
-                depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(wallet.mainAccountId)),
+                depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
             })
         }
     }
