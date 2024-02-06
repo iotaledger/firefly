@@ -12,23 +12,29 @@ export async function buildOnboardingSecretManager(): Promise<void> {
         const { strongholdPassword, secretManagerOptions, mnemonic } = profile
         const mnemonicStringified = mnemonic?.join(' ') ?? ''
 
-        if (!strongholdPassword || !secretManagerOptions || !mnemonic) {
+        if (!secretManagerOptions) {
             return
         }
 
+        console.log(secretManagerOptions)
+
         // 1. Create SecretManager
         const secretManager = await api.createSecretManager(secretManagerOptions)
+
+        console.log(await secretManager.getLedgerNanoStatus())
 
         // 2. Load the stronghold password specified in the onboarding if necessary
         if (strongholdPassword) {
             await secretManager.setStrongholdPassword(strongholdPassword)
         }
 
-        // 3. Verify Mnemonic
-        await verifyMnemonic(mnemonicStringified)
+        if(mnemonicStringified) {
+            // 3. Verify Mnemonic
+            await verifyMnemonic(mnemonicStringified)
 
-        // 4. Store Mnemonic
-        await secretManager.storeMnemonic(mnemonicStringified)
+            // 4. Store Mnemonic
+            await secretManager.storeMnemonic(mnemonicStringified)
+        }
 
         onboardingProfileSecretManager.set(secretManager)
     } else {

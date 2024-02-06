@@ -8,6 +8,8 @@
     import { createFromLedgerRouter } from '../create-from-ledger-router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { IllustrationEnum } from '@auxiliary/illustration'
+    import { buildOnboardingSecretManager, onboardingProfileSecretManager } from '@contexts/onboarding'
+    import { get } from 'svelte/store'
 
     function onContinueClick(): void {
         $createFromLedgerRouter.next()
@@ -24,8 +26,9 @@
         })
     }
 
-    onMount(() => {
-        pollLedgerNanoStatus()
+    onMount(async () => {
+        await buildOnboardingSecretManager();
+        pollLedgerNanoStatus(get(onboardingProfileSecretManager))
     })
 </script>
 
