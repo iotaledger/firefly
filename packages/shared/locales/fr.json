@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Historique de l'adresse",
-            "disclaimer": "Liste des adresses avec des fonds ou connues par ce profil",
             "indexAndType": "{internal, select, true {Adresse interne} other {Adresse de dépôt}} {index}",
-            "internal": "Interne"
+            "internal": "Interne",
+            "errorNoChronicle": "Chronicle non configuré",
+            "errorFailedFetch": "Impossible de récupérer l'historique des adresses",
+            "errorFailedGenerate": "Impossible de générer une nouvelle adresse"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Frais de gaz",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Les adresses commencent par le préfixe {prefix}.",
             "wrongAddressFormat": "L'adresse n'est pas correctement formatée.",
             "invalidAddress": "Cette adresse n'est pas valide.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "L'identifiant de la ressource n'est pas valide.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Ce portefeuille a des fonds insuffisants.",
@@ -1975,7 +1979,7 @@
             "refused": "La connexion a été refusée.",
             "handshake": "Impossible de terminer le handshake avec le noeud.",
             "invalidCertificate": "Impossible de se connecter en raison d'un certificat invalide.",
-            "https": "HTTPS est requis ; les connexions non sécurisées via HTTP ne sont pas supportées pour le moment.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Ce noeud a déjà été ajouté.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
@@ -2158,7 +2162,7 @@
                 "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Des frais de gaz sont exigés pour effectuer une transaction ou exécuter une fonction de smart contract sur Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
@@ -2167,7 +2171,7 @@
                 "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Des frais de gaz sont exigés pour effectuer une transaction ou exécuter une fonction de smart contract sur Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

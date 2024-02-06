@@ -1,4 +1,3 @@
-const { notarize } = require('electron-notarize')
 const path = require('path')
 
 /**
@@ -6,9 +5,9 @@ const path = require('path')
  * @param {string} appName
  * @returns void
  */
-module.exports = async (appBundleId, appName) => {
+module.exports = async (appName) => {
     if (process.platform !== 'darwin' || process.env.MACOS_SKIP_NOTARIZATION) {
-        return true
+        return undefined
     }
 
     const APPLE_ID = process.env.FIREFLY_APPLE_ID
@@ -22,11 +21,10 @@ module.exports = async (appBundleId, appName) => {
         throw Error('Notarization failed: Environment variable "FIREFLY_APPLE_ID_PASSWORD" is not defined')
     }
 
-    await notarize({
-        appBundleId: appBundleId,
+    return {
         appPath: path.resolve(__dirname, `../out/mac/${appName}.app`),
         appleId: APPLE_ID,
         appleIdPassword: APPLE_ID_PASSWORD,
-        ascProvider: 'UG77RJKZHH',
-    })
+        teamId: 'UG77RJKZHH',
+    }
 }
