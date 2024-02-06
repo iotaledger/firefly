@@ -1,10 +1,10 @@
-import { IBaseToken, IPersistedAsset } from '@core/wallet/interfaces'
+import { IMana, IPersistedAsset } from '@core/wallet/interfaces'
 import { TokenStandard, VerifiedStatus } from '@core/wallet/enums'
 
 export const MANA_ID = 'mana'
 
-export const DEFAULT_MANA: IBaseToken = {
-    standard: TokenStandard.BaseToken,
+export const DEFAULT_MANA: IMana = {
+    standard: TokenStandard.Mana,
     name: 'Mana',
     tickerSymbol: 'Mana',
     unit: 'Mana',
