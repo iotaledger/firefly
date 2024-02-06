@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { INft } from '@core/nfts'
-    import { NftSize } from 'shared/components/enums'
+    import { INft, ParentMimeType } from '@core/nfts'
     import { MediaPlaceholder, NftMedia } from 'shared/components'
-    import { ParentMimeType } from '@core/nfts'
+    import { NftSize } from 'shared/components/enums'
 
     export let nft: INft | null = null
     export let size: NftSize = NftSize.Medium
@@ -18,7 +17,7 @@
     class:medium={size === NftSize.Medium}
     class:large={size === NftSize.Large}
 >
-    {#if parentType === ParentMimeType.Image && nft}
+    {#if (parentType === ParentMimeType.Image && nft) || (parentType === ParentMimeType.Text && nft)}
         <NftMedia {nft} {useCaching}>
             <placeholder-wrapper
                 slot="placeholder"
