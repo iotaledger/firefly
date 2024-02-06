@@ -812,12 +812,6 @@
             "errorBody2": "目前你的这个账户还有 {balance} 余额. 请把这些资金移动到另一个钱包后重试。",
             "errorBody3": "您不能隐藏这个钱包，您必须至少有一个钱包"
         },
-        "addressHistory": {
-            "title": "{name} 地址历史记录",
-            "currentBalance": "余额：{balance}",
-            "internal": "内部地址",
-            "external": "充值地址"
-        },
         "excludeNode": {
             "title": "排除节点",
             "body": "您确定要将 {url} 排除在可用节点池之外吗？"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "需要验证",
             "body": "此节点需要额外的验证。请填写适当的信息。"
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "保存",
         "importSeed": "导入已有的私钥种子",
         "restoreWallet": {
-            "iota": "迁移或恢复钱包",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "恢复 Shimmer 配置文件",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "迁移到 Chrysalis 或恢复一个现有钱包",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "恢复一个Shimmer 配置文件",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "访问常见问题",
         "viewDownloads": "View downloads",
         "viewStatus": "查看状态",
+        "viewAddressHistory": "显示地址历史记录",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "显示隐藏钱包",
@@ -1645,7 +1648,7 @@
         "smartContract": "智能合约",
         "targetContract": "目标合约",
         "contractFunction": "合约功能",
-        "gasBudget": "Gas预算",
+        "gasFee": "Gas fee",
         "standard": "标准",
         "uri": "URI",
         "issuer": "发行者",
@@ -1941,6 +1944,8 @@
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
@@ -1964,7 +1969,8 @@
             "reservedTagKeyword": "无法使用保留标签关键字"
         },
         "layer2": {
-            "layer1Recipient": "L2事务不能发送到L1帐户。"
+            "layer1Recipient": "L2事务不能发送到L1帐户。",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "请输入有效的URL",
@@ -1973,7 +1979,7 @@
             "refused": "连接被拒绝",
             "handshake": "无法完成节点握手。",
             "invalidCertificate": "无法与无效证书连接。",
-            "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "此节点已被添加。",
             "noSyncedNode": "没有可用的同步节点。",
             "timeNotSynced": "设备时间不正确，无法同步节点。",
@@ -2156,7 +2162,7 @@
                 "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
                 "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "存储押金是在Tangle上储存你的交易所需的可退还押金。",
@@ -2165,7 +2171,7 @@
                 "timelockDate": "您为这笔交易添加了一个时间锁。收件人将无法花费这些资金，直到时间锁到期。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
                 "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "NFT 标准，例如 IRC27。",
