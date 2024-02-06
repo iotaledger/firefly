@@ -811,31 +811,12 @@
             "title": "Failed link",
             "body": "This link failed or is invalid. Please try again or double check the source of the link."
         },
-        "showDeleteWallet": {
-            "title": "Delete {name}?",
-            "body": "Are you sure you want to delete this wallet?",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Delete wallet",
-            "errorTitle": "Unable to delete {name}",
-            "errorBody1": "You cannot delete this wallet, you must have at least one."
-        },
         "externalUrl": {
             "title": "Open URL in Browser",
             "body": "Are you sure you want to open \"{url}\" in the browser?",
             "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
             "action": "Open URL",
             "invalidProtocol": "Cannot open URL with invalid protocol"
-        },
-        "hideAccount": {
-            "title": "Hide {name}?",
-            "body": "You can find this wallet later by enabling \"Show hidden wallets\" in Advanced Settings.",
-            "typePassword": "Type your wallet password to confirm.",
-            "hideAccount": "Hide wallet",
-            "errorTitle": "Unable to hide {name}",
-            "errorBody1": "To hide a wallet it must have 0 balance.",
-            "errorBody2": "You currently have {balance} remaining on this wallet. Please move these funds to a different wallet and try again.",
-            "errorBody3": "You cannot hide this wallet, you must have at least one."
         },
         "excludeNode": {
             "title": "Exclude node",
@@ -926,9 +907,7 @@
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
-            "sendingFromStakedAccount": "You are sending a transfer from a wallet that is currently being staked. This may unstake your tokens. Feel free to send the transfer but you may need to restake your remaining tokens afterwards.",
-            "sendingFromStakedAccountBelowMinReward": "You are sending a transfer from a wallet that has not yet reached the minimum staking rewards. This may unstake your tokens and you may lose your staking rewards on this wallet."
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -1052,11 +1031,6 @@
             "tosAndPrivPolicyCheckbox": "I've read and I accept the updated Terms of Service and Privacy Policy",
             "tosCheckbox": "I've read and I accept the updated Terms of Service",
             "privPolicyCheckbox": "I've read and I accept the updated Privacy Policy"
-        },
-        "singleAccountGuide": {
-            "title": "The way you use Firefly has changed",
-            "body": "The content of each tab is now in the context of a single wallet. You can change the selected wallet from anywhere by using the switcher in the title bar.",
-            "hint": "Can't find a wallet? Use the balance finder in the settings to discover previously used wallets."
         },
         "transactionDetails": {
             "title": "Transaction details",
@@ -1309,7 +1283,7 @@
         "copyAllInformation": "Copy all information",
         "paste": "Paste",
         "selectAll": "Select All",
-        "addAccount": "Add Wallet",
+        "addWallet": "Add Wallet",
         "checkForUpdates": "Check for Updates",
         "reportAnIssue": "Report an Issue",
         "restore": "Restore",
@@ -1448,7 +1422,6 @@
         "sendNft": "Send NFT",
         "sendNftToAddress": "Send NFT to an address",
         "scanQrOrPaste": "Scan a QR code or paste an Address",
-        "moveFundsBetweenAccounts": "Move funds between wallets",
         "manageWallet": "Manage Wallet",
         "customizeAcount": "Customize your wallet",
         "sendingToAddress": "Sending to address",
@@ -1508,8 +1481,6 @@
         "status": "Status",
         "confirmed": "Confirmed",
         "pending": "Pending",
-        "noAccounts": "You have no wallets, please create one.",
-        "loadingAccounts": "Loading, please wait...",
         "addProfile": "Add Profile",
         "noRecentHistory": "No recent history",
         "noFilteredActivity": "No matching activities",
@@ -1533,7 +1504,6 @@
         "passwordSuccess": "Updated password successfully",
         "passwordFailed": "Updating password failed",
         "syncing": "Syncing",
-        "syncingAccounts": "Syncing wallets...",
         "exportingStronghold": "Exporting Stronghold...",
         "exportingStrongholdSuccess": "Exported Stronghold successfully",
         "exportingStrongholdFailed": "Exporting Stronghold failed",
@@ -1842,11 +1812,7 @@
         "profile": {
             "length": "Your profile name can't be longer than {length, plural, one {# character} other {# characters}}.",
             "duplicate": "A profile with this name already exists.",
-            "delete": {
-                "nonEmptyAccounts": "You must transfer all balances before you can delete your profile."
-            },
             "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type",
             "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
         },
         "password": {
@@ -1909,7 +1875,6 @@
             "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
             "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
             "cannotClaimTwice": "Output has been already claimed",
-            "noToAccount": "You have not selected a wallet to send the funds to.",
             "sendingDust": "You cannot send less than 1 Mi.",
             "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
             "cancelled": "The transaction was cancelled.",
@@ -1951,8 +1916,7 @@
         "network": {
             "mismatch": "The network ID for this node is \"{networkId}\", which does not match the current network.",
             "notReachable": "The network ID for this node could not be retrieved, unable to add node.",
-            "badNodes": "Unable to connect to the network with current node configuration.",
-            "nonEmptyAccount": "You must transfer all balances before switching networks."
+            "badNodes": "Unable to connect to the network with current node configuration."
         },
         "global": {
             "generic": "Something went wrong."

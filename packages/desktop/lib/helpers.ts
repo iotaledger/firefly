@@ -31,7 +31,7 @@ export const getLocalisedMenuItems = (locale: Locale): unknown => ({
     paste: locale('actions.paste'),
     selectAll: locale('actions.selectAll'),
     wallet: locale('general.wallet'),
-    addAccount: locale('actions.addAccount'),
+    addWallet: locale('actions.addWallet'),
     help: locale('general.help'),
     troubleshoot: locale('views.settings.troubleshoot.title'),
     faq: locale('views.settings.faq.title'),
