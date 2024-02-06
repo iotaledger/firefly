@@ -1,11 +1,12 @@
 <script lang="ts">
     import { Text, FontWeight, TextType } from 'shared/components'
-    import { formatTokenAmountBestMatch, IAsset, selectedWallet } from '@core/wallet'
+    import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { DEFAULT_MANA } from 'shared/lib/core/network'
 
     export let asset: IAsset
+    export let mana: IAsset
 
     $: availableMarketValue = getMarketAmountFromAssetValue(asset?.balance?.available, asset)
     $: totalMarketValue = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
@@ -34,14 +35,11 @@
                     },
                 })}
             </Text>
-            {#if $selectedWallet?.balances?.mana}
+            {#if mana}
                 <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600" darkColor="gray-500">
                     {localize('general.availableManaWithValue', {
                         values: {
-                            mana: formatTokenAmountBestMatch(
-                                Number($selectedWallet.balances.mana.available.stored),
-                                DEFAULT_MANA
-                            ),
+                            mana: formatTokenAmountBestMatch(Number(mana.balance.available), DEFAULT_MANA),
                         },
                     })}
                 </Text>

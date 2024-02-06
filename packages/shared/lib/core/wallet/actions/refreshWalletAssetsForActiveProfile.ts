@@ -8,12 +8,14 @@ import {
     clearPersistedAssetForActiveProfile,
     persistedAssets,
 } from '../stores/persisted-assets.store'
+import { PERSISTED_MANA_ASSET } from '../../network'
+import { AssetVerification } from '../types'
 
 export async function refreshWalletAssetsForActiveProfile(
     clearPersistedAssets = false,
     keepVerificationStatus = false
 ): Promise<void> {
-    const storedVerificationStates = {}
+    const storedVerificationStates: { [id: string]: AssetVerification } = {}
     if (keepVerificationStatus) {
         const assets = get(persistedAssets)?.[get(activeProfile)?.id] ?? {}
         for (const [id, asset] of Object.entries(assets)) {
@@ -49,5 +51,5 @@ export async function refreshWalletAssetsForActiveProfile(
             }
         }
     }
-    addPersistedAsset(persistedBaseCoin, ...assets)
+    addPersistedAsset(persistedBaseCoin, PERSISTED_MANA_ASSET, ...assets)
 }
