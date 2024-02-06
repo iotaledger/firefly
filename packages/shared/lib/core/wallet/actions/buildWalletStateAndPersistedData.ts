@@ -4,9 +4,8 @@ import { IWallet } from '@core/profile/interfaces'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { buildWalletState } from './buildWalletState'
-import { activeProfile, getWalletOptions } from '@core/profile'
+import { activeProfile, getWalletOptions, DirectoryManager } from '@core/profile'
 import { get } from 'svelte/store'
-import { DirectoryManager } from '@core/profile/classes'
 
 export async function buildWalletStateAndPersistedData(
     profileId: string,

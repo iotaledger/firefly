@@ -48,7 +48,10 @@
             // Check network of node matches selected id
             if (
                 networkId !== NetworkId.Custom &&
-                networkId !== getNetworkIdFromNetworkName(nodeInfoResponse?.nodeInfo?.protocol?.networkName)
+                networkId !==
+                    getNetworkIdFromNetworkName(
+                        nodeInfoResponse?.nodeInfo?.protocolParameters?.[0]?.parameters?.networkName
+                    )
             ) {
                 throw new Error('error.node.differentNetwork')
             }

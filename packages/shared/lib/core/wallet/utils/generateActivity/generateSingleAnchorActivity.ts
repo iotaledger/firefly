@@ -1,37 +1,32 @@
-import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
-import { AliasActivity } from '@core/wallet/types'
-import { getNetworkHrp } from '@core/profile'
+import { AnchorActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
-    getGovernorAddressFromAliasOutput,
+    getGovernorAddressFromAnchorOutput,
     getMetadataFromOutput,
     getSendingInformation,
-    getStateControllerAddressFromAliasOutput,
+    getStateControllerAddressFromAnchorOutput,
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AccountOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
-import { api } from '@core/api'
+import { AnchorOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
 
-// TODO(2.0) Alias outputs are gone
-export async function generateSingleAliasActivity(
+export async function generateSingleAnchorActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
-): Promise<AliasActivity> {
+): Promise<AnchorActivity> {
     const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
-    const output = wrappedOutput.output as AccountOutput
+    const output = wrappedOutput.output as AnchorOutput
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
+    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
-    const governorAddress = getGovernorAddressFromAliasOutput(output)
-    const stateControllerAddress = getStateControllerAddressFromAliasOutput(output)
-    const accountId = getAccountId(output, outputId)
+    const governorAddress = getGovernorAddressFromAnchorOutput(output)
+    const stateControllerAddress = getStateControllerAddressFromAnchorOutput(output)
 
     const isHidden = false
     const isAssetHidden = false
@@ -43,13 +38,12 @@ export async function generateSingleAliasActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
     return {
-        type: ActivityType.Alias,
+        type: ActivityType.Anchor,
         id,
         outputId,
         transactionId,
         direction,
         action,
-        accountId,
         storageDeposit,
         giftedStorageDeposit,
         governorAddress,
@@ -64,10 +58,4 @@ export async function generateSingleAliasActivity(
         asyncData,
         ...sendingInfo,
     }
-}
-
-function getAccountId(output: AccountOutput, outputId: string): string {
-    const isNewAccount = output.accountId === EMPTY_HEX_ID
-    const accountId = isNewAccount ? api.computeAccountId(outputId) : output.accountId
-    return api.accountIdToBech32(accountId, getNetworkHrp())
 }

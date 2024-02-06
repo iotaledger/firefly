@@ -1,20 +1,10 @@
 import { CommonOutput, StorageDepositReturnUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { getClient } from '../../../actions/getClient'
-import { IWalletState } from '../../../interfaces'
 
-export async function getStorageDepositFromOutput(
-    wallet: IWalletState,
-    output: CommonOutput
-): Promise<{
+export async function getStorageDepositFromOutput(output: CommonOutput): Promise<{
     storageDeposit: number
     giftedStorageDeposit: number
 }> {
-    // TODO(2.0) Account indexes are gone
-    /*
-    if (!(account?.index >= 0)) {
-        return { storageDeposit: 0, giftedStorageDeposit: 0 }
-    }
-    */
     const storageDepositReturnUnlockCondition = <StorageDepositReturnUnlockCondition>(
         output?.unlockConditions?.find(
             (unlockCondition) => unlockCondition?.type === UnlockConditionType.StorageDepositReturn
