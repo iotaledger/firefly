@@ -58,7 +58,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if (address && wallet?.depositAddress === address && !outputData?.remainder) {
+    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput) {
         await syncBalance(wallet.id)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
