@@ -812,12 +812,6 @@
             "errorBody2": "U hebt momenteel {balance} resterend in deze portemonnee. Verplaats dit tegoed naar een andere portemonnee en probeer het opnieuw.",
             "errorBody3": "U kunt deze portemonnee niet verbergen, u moet ten minste één hebben."
         },
-        "addressHistory": {
-            "title": "{name} adresgeschiedenis",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Intern adres",
-            "external": "Ontvangstadres"
-        },
         "excludeNode": {
             "title": "Exclude node",
             "body": "Are you sure you want to exclude {url} from the available node pool?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Opslaan",
         "importSeed": "Importeer een bestaande seed",
         "restoreWallet": {
-            "iota": "Migreer of herstel een portemonnee",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Herstel Shimmer profiel",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migreren naar Chrysalis of een bestaande portemonnee herstellen",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Een bestaand Shimmer profiel herstellen",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Bezoek veelgestelde vragen",
         "viewDownloads": "View downloads",
         "viewStatus": "Bekijk status",
+        "viewAddressHistory": "Bekijk adresgeschiedenis",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Toon verborgen portemonnees",
@@ -1645,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1941,6 +1944,8 @@
             "wrongAddressPrefix": "Adressen beginnen met het voorvoegsel {prefix}.",
             "wrongAddressFormat": "Het adres is niet correct opgemaakt.",
             "invalidAddress": "Het adres is niet geldig.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Deze portemonnee heeft onvoldoende saldo.",
@@ -1964,7 +1969,8 @@
             "reservedTagKeyword": "Gereserveerd tag trefwoord kan niet worden gebruikt"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Voer een geldige URL in.",
@@ -1973,7 +1979,7 @@
             "refused": "De verbinding werd geweigerd.",
             "handshake": "Handshake met node kon niet worden voltooid.",
             "invalidCertificate": "Kan niet verbinden met ongeldig certificaat.",
-            "https": "HTTPS is vereist; onveilige verbindingen over HTTP worden op dit moment niet ondersteund.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Deze node is reeds toegevoegd.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
@@ -2156,7 +2162,7 @@
                 "timelockDate": "De afzender stelt een tijdslot in voor deze fondsen. U kunt deze besteden zodra het tijdslot verloopt.",
                 "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
                 "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Een opslag-storting is een terugvorderbare storting die nodig is om uw transactie op de Tangle op te slaan.",
@@ -2165,7 +2171,7 @@
                 "timelockDate": "U heeft een tijdslot toegevoegd aan deze transactie. De ontvanger zal deze gelden niet kunnen uitgeven totdat het tijdslot verloopt.",
                 "metadata": "Een optioneel gegevensveld voor het blijvend opslaan van gegevens op de Tangle.",
                 "tag": "Een kort optioneel gegevensveld. Door groepen transacties te taggen zouden deze makkelijker vindbaar kunnen worden.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

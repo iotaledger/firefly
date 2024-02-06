@@ -1,7 +1,8 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
-import { AccountRecoveryProfileConfiguration, UnableToFindProfileTypeError } from '@core/profile'
+import { updateLedgerNanoStatus } from '@core/ledger'
+import { AccountRecoveryProfileConfiguration, ProfileType, UnableToFindProfileTypeError } from '@core/profile'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
@@ -58,12 +59,26 @@ export function initialiseAccountRecoveryConfigurationForShimmerClaiming(): void
 }
 
 export async function findShimmerRewards(): Promise<void> {
-    await depthSearchAndRecoverAccounts()
+    const _isOnboardingLedgerProfile = get(onboardingProfile)?.type === ProfileType.Ledger
+    try {
+        if (_isOnboardingLedgerProfile) {
+            // Note: This is a way to know the ledger is doing heavy work
+            updateLedgerNanoStatus({ busy: true })
+        }
+        await depthSearchAndRecoverAccounts()
 
-    if (hasOnlyDoneDepthSearch()) {
-        await breadthSearchAndRecoverAccounts()
+        if (hasOnlyDoneDepthSearch()) {
+            await breadthSearchAndRecoverAccounts()
+        }
+        updateRewardsFinderParameters()
+    } catch (error) {
+        const message = error?.message ?? error?.error ?? ''
+        throw new Error(message)
+    } finally {
+        if (_isOnboardingLedgerProfile) {
+            updateLedgerNanoStatus({ busy: false })
+        }
     }
-    updateRewardsFinderParameters()
 }
 
 async function depthSearchAndRecoverAccounts(): Promise<void> {

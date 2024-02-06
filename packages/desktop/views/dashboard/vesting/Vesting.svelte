@@ -41,12 +41,10 @@
     let modal: Modal
     let timeUntilNextPayout = DEFAULT_EMPTY_VALUE_STRING
     let minRequiredStorageDeposit: number | null
-    let hasOutputsToConsolidate = false
 
     $: ({ baseCoin } = $selectedAccountAssets[$activeProfile?.network?.id])
     $: hasTransactionInProgress =
         $selectedAccount?.isTransferring || $selectedAccount.hasConsolidatingOutputsTransactionInProgress
-    $: $selectedAccount, areOutputsReadyForConsolidation()
     $: vestingOverview = [
         {
             title: localize('views.vesting.overview.unlocked'),
@@ -71,19 +69,11 @@
         $selectedAccountVestingUnclaimedFunds > 0 &&
         !hasTransactionInProgress &&
         minRequiredStorageDeposit !== null &&
-        $selectedAccount?.balances?.baseCoin?.available > minRequiredStorageDeposit &&
-        hasOutputsToConsolidate
+        $selectedAccount?.balances?.baseCoin?.available > minRequiredStorageDeposit
 
     onMount(() => {
         getMinRequiredStorageDeposit()
     })
-
-    function areOutputsReadyForConsolidation(): void {
-        $selectedAccount
-            .prepareConsolidateOutputs({ force: false, outputThreshold: 2 })
-            .then(() => (hasOutputsToConsolidate = true))
-            .catch(() => (hasOutputsToConsolidate = false))
-    }
 
     function getMinRequiredStorageDeposit() {
         getRequiredStorageDepositForMinimalBasicOutput()

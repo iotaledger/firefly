@@ -812,12 +812,6 @@
             "errorBody2": "Actualmente tienes {balance} restantes en esta cartera. Por favor mueve estos fondos a una cartera distinta y prueba de nuevo.",
             "errorBody3": "No puedes ocultar esta cartera, debes tener al menos una."
         },
-        "addressHistory": {
-            "title": "{name} historial de direcciones",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Dirección interna",
-            "external": "Dirección de depósito"
-        },
         "excludeNode": {
             "title": "Excluir nodo",
             "body": "¿Está seguro que desea excluir a {url} del grupo de nodos disponibles?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Autenticación requerida",
             "body": "Este nodo requiere autenticación adicional. Por favor, rellena la información apropiada."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Guardar",
         "importSeed": "Importar una semilla existente",
         "restoreWallet": {
-            "iota": "Migrar o restaurar una cartera",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar perfil de Shimmer",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Migrar a Chrysalis o restaurar una cartera existente",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar un perfil de Shimmer existente",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Ver las preguntas frecuentes resueltas",
         "viewDownloads": "View downloads",
         "viewStatus": "Ver estado",
+        "viewAddressHistory": "Ver historial de direcciones",
         "viewBalanceBreakdown": "Ver desglose de saldo",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Mostrar carteras ocultas",
@@ -1645,7 +1648,7 @@
         "smartContract": "Contrato inteligente",
         "targetContract": "Contrato de destino",
         "contractFunction": "Función de contrato",
-        "gasBudget": "Presupuesto de gas",
+        "gasFee": "Gas fee",
         "standard": "Estándar",
         "uri": "URI",
         "issuer": "Emisor",
@@ -1941,6 +1944,8 @@
             "wrongAddressPrefix": "Las direcciones comienzan con el prefijo {prefix}.",
             "wrongAddressFormat": "La dirección no tiene el formato correcto.",
             "invalidAddress": "La dirección no es válida.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "El id del activo no es válido.",
             "unknownAsset": "El activo no es conocido por esta cuenta.",
             "insufficientFunds": "Esta cartera tiene fondos insuficientes.",
@@ -1964,7 +1969,8 @@
             "reservedTagKeyword": "No se puede utilizar una palabra clave de etiqueta reservada"
         },
         "layer2": {
-            "layer1Recipient": "Una transacción de capa 2 no puede ser enviada a una cuenta de capa 1."
+            "layer1Recipient": "Una transacción de capa 2 no puede ser enviada a una cuenta de capa 1.",
+            "estimatedGas": "Error al estimar el gas."
         },
         "node": {
             "invalid": "Por favor, introduce una URL válida.",
@@ -1973,7 +1979,7 @@
             "refused": "La conexión fue rechazada.",
             "handshake": "No se pudo completar el \"apretón de manos\" con el nodo.",
             "invalidCertificate": "No se pudo conectar con un certificado inválido.",
-            "https": "HTTPS es necesario; las conexiones inseguras sobre HTTP no están soportadas en este momento.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Este nodo ya ha sido añadido.",
             "noSyncedNode": "No hay nodo sincronizado disponible.",
             "timeNotSynced": "La hora del dispositivo es incorrecta, no se puede sincronizar el nodo.",
@@ -2156,7 +2162,7 @@
                 "timelockDate": "El remitente estableció un bloqueo de tiempo en estos fondos. Podrás gastarlos una vez que el bloqueo de tiempo caduque.",
                 "metadata": "Un campo de datos opcional para almacenar datos persistentemente en el Tangle.",
                 "tag": "Un campo de datos opcional corto. Etiquetar grupos de transacciones puede facilitarles su búsqueda.",
-                "gasBudget": "Se requiere un presupuesto en gas para llevar a cabo una transacción o ejecutar una función de contrato inteligente en la EVM de Shimmer."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Un depósito de almacenamiento es un depósito reembolsable necesario para almacenar su transacción en el Tangle.",
@@ -2165,7 +2171,7 @@
                 "timelockDate": "Ha añadido un tiempo de bloqueo a esta transacción. El destinatario no podrá gastar estos fondos hasta que el tiempo de bloqueo expire.",
                 "metadata": "Un campo de datos opcional para almacenar datos persistentemente en el Tangle.",
                 "tag": "Un campo de datos opcional corto. Etiquetar grupos de transacciones puede facilitarles su búsqueda.",
-                "gasBudget": "Se requiere un presupuesto en gas para llevar a cabo una transacción o ejecutar una función de contrato inteligente en la EVM de Shimmer."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "El estándar del NFT, por ejemplo, IRC27.",

@@ -812,12 +812,6 @@
             "errorBody2": "이 지갑에 잔액이 {balance} 만큼 남아있습니다. 이것을 다른 지갑으로 옮기고 다시 시도하세요.",
             "errorBody3": "이 지갑은 숨길 수 없습니다. 최소한 하나는 있어야합니다."
         },
-        "addressHistory": {
-            "title": "주소 {name} 이력",
-            "currentBalance": "잔액: {balance}",
-            "internal": "내부 주소",
-            "external": "입금 주소"
-        },
         "excludeNode": {
             "title": "노드 제외하기",
             "body": "사용 가능한 노드 풀에서 {url} 을 제외하시겠습니까?"
@@ -1096,15 +1090,15 @@
             }
         },
         "nativeToken": {
-            "formTitle": "Mint native tokens",
-            "confirmationTitle": "Mint native tokens",
+            "formTitle": "기본 토큰 발행",
+            "confirmationTitle": "기본 토큰 발행",
             "property": {
                 "totalSupply": "총 공급량",
                 "maximumSupply": "최대 공급량",
                 "mintedTokens": "생성된 토큰",
                 "meltedTokens": "Melted tokens",
                 "circulatingSupply": "유통량",
-                "aliasAddress": "Alias controller address",
+                "aliasAddress": "별칭 컨트롤러 주소",
                 "standard": "표준",
                 "tokenName": "이름",
                 "unit": "단위",
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "인증이 필요함",
             "body": "이 노드에는 추가 인증이 필요합니다. 해당 정보를 입력해 주세요."
+        },
+        "addressHistory": {
+            "title": "주소 이력",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "내부",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "저장하기",
         "importSeed": "기존 시드 불러오기",
         "restoreWallet": {
-            "iota": "지갑 이전 또는 복원",
+            "iota": "IOTA 프로필 복원",
             "iotaAlphanet": "IOTA 알파넷 프로필 복원",
             "shimmer": "Shimmer 프로필 복원",
             "testnet": "테스트넷 프로필 복원",
             "custom": "사용자 정의 네트워크 프로필 복원"
         },
         "restoreWalletDescription": {
-            "iota": "Chrysalis로 마이그레이션하거나 기존 지갑을 복원합니다.",
+            "iota": "기존 IOTA 프로필 복원",
             "iotaAlphanet": "기존 IOTA 알파넷 프로필을 복원합니다.",
             "shimmer": "기존 Shimmer 프로필을 복원합니다.",
             "testnet": "기존 테스트넷 프로필을 복원합니다.",
@@ -1256,7 +1258,7 @@
         "claimShimmer": "Shimmer 스테이킹 보상 요청하기",
         "claimShimmerDescription": "IOTA 프로필을 가져오고 스테이킹 보상을 요청합니다.",
         "createAlias": "별칭 만들기",
-        "createAliasDescription": "Create alias output",
+        "createAliasDescription": "별칭 출력 생성",
         "savePassword": "비밀번호 저장하기",
         "useBiometric": "생체 인증 사용하기",
         "setupPinCode": "PIN 코드 설정",
@@ -1338,6 +1340,7 @@
         "visitFaq": "자주 묻는 질문들 보기",
         "viewDownloads": "다운로드보기",
         "viewStatus": "상태 보기",
+        "viewAddressHistory": "주소 이력 보기",
         "viewBalanceBreakdown": "잔액 내역 보기",
         "verifyDepositAddress": "입금주소 확인",
         "showHiddenAccounts": "숨김 지갑 표시",
@@ -1438,9 +1441,9 @@
         "mintingNft": "NFT 발행",
         "shimmerClaimed": "받음",
         "shimmerClaiming": "받는 중",
-        "shimmerGenesis": "Shimmer Genesis",
+        "shimmerGenesis": "Shimmer 기원",
         "vestingReward": "Vesting Reward Airdrop",
-        "stardustGenesis": "Stardust Genesis",
+        "stardustGenesis": "Stardust 기원",
         "minted": "발행됨",
         "minting": "발행",
         "burned": "소각됨",
@@ -1457,7 +1460,7 @@
         "sendToAddress": "주소로 보내기",
         "sendToken": "토큰 전송",
         "sendNft": "NFT 전송",
-        "sendNftToAddress": "Send NFT to an address",
+        "sendNftToAddress": "NFT를 주소로 보내기",
         "scanQrOrPaste": "QR 코드를 스캔하거나 주소를 복사해 붙이기",
         "moveFundsBetweenAccounts": "지갑간 자금 이체하기",
         "manageAccount": "지갑 관리",
@@ -1599,13 +1602,13 @@
         "totalStorageDeposit": "총 보관 보증금",
         "expirationTime": "만료 시간",
         "timelockDate": "Timelock",
-        "claimedTime": "Claimed at",
+        "claimedTime": "수령 시각",
         "nftAddress": "NFT 주소",
         "nftId": "NFT ID",
         "nftMetadata": "NFT 메타데이터",
         "aliasId": "별칭 ID",
         "governorAddress": "Governor Address",
-        "stateControllerAddress": "State Controller Address",
+        "stateControllerAddress": "컨트롤러 주소 지정",
         "copiedToClipboard": "클립보드에 복사됨",
         "total": "총액: {balance}",
         "availableBalanceWithValue": "사용가능한 잔액: {balance}",
@@ -1645,7 +1648,7 @@
         "smartContract": "스마트 컨트랙트",
         "targetContract": "대상계약",
         "contractFunction": "계약 기능",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas fee",
         "standard": "표준",
         "uri": "URI",
         "issuer": "발행자",
@@ -1683,8 +1686,8 @@
         },
         "showValueless": {
             "label": "Show valueless",
-            "yes": "Yes",
-            "no": "No"
+            "yes": "네",
+            "no": "아니오"
         },
         "ascDesc": {
             "Asc": "오름차순",
@@ -1747,28 +1750,28 @@
             "vesting": "Vesting"
         },
         "direction": {
-            "label": "Direction",
+            "label": "방향",
             "incoming": "Incoming",
             "outgoing": "Outgoing",
             "selfTransaction": "Self transaction"
         },
         "proposalType": {
-            "label": "Type",
-            "official": "Official",
-            "custom": "Custom"
+            "label": "유형",
+            "official": "공식",
+            "custom": "사용자 지정"
         },
         "phase": {
-            "label": "Phase"
+            "label": "단계"
         },
         "participated": {
-            "label": "Participated",
-            "yes": "Yes",
-            "no": "No"
+            "label": "참여함",
+            "yes": "네",
+            "no": "아니오"
         },
         "proposalOrder": {
-            "label": "Order",
-            "name": "Name",
-            "phase": "Phase"
+            "label": "순서",
+            "name": "이름",
+            "phase": "단계"
         }
     },
     "dates": {
@@ -1941,6 +1944,8 @@
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
+            "invalidExpirationDate": "만료 날짜가 잘못되었습니다.",
+            "pastExpirationDate": "만료 날짜가 과거 시점입니다.",
             "invalidAssetId": "자산 Id가 유효하지 않습니다.",
             "unknownAsset": "이 계정에서는 자산을 알 수 없습니다.",
             "insufficientFunds": "지갑에 자금이 부족합니다.",
@@ -1956,7 +1961,7 @@
             "noInputs": "입력을 찾을 수 없습니다",
             "notEnoughBalance": "잔고가 부족합니다.",
             "missingTransactionId": "거래 ID가 누락되었습니다.",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
+            "missingTransactionProgressEventPayload": "거래 진행 이벤트 페이로드가 누락되었습니다.",
             "recipientRequired": "받는 사람을 입력하세요.",
             "nftRequired": "NFT가 필요합니다.",
             "nftNotInHex": "NFT 주소는 HEX 형식이어야 합니다.",
@@ -1964,16 +1969,17 @@
             "reservedTagKeyword": "예약된 태그 키워드를 사용할 수 없습니다."
         },
         "layer2": {
-            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다."
+            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
-            "dns": "Unable to find DNS resolution for node",
+            "dns": "노드에 대한 DNS 해결방법을 찾을 수 없습니다.",
             "timedOut": "연결 시간이 초과되었습니다.",
             "refused": "연결이 거부되었습니다.",
             "handshake": "노드와의 핸드셰이크를 실패했습니다.",
             "invalidCertificate": "인증서가 유효하지 않아 연결할 수 없습니다.",
-            "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
+            "https": "외부 연결에는 HTTPS를 이용해야 합니다. localhost 연결은 HTTP를 이용해도 됩니다. 안전하지 않은 외부 HTTP 연결은 지원되지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "noSyncedNode": "사용 가능한 동기화된 노드가 없습니다.",
             "timeNotSynced": "장치 시간이 정확하지 않아 노드를 동기화할 수 없습니다.",
@@ -1998,7 +2004,7 @@
             "invalid": "백업 파일이 인식되지 않았습니다.",
             "destination": "백업 장소가 유효하지 않습니다.",
             "mnemonic": "니모닉이 유효하지 않습니다.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Stronghold 이전이 필요합니다.",
             "seedTooShort": "시드의 길이는 81자여야 합니다. 현재 길이는 {length, plural, other {#자}}입니다.",
             "seedCharacters": "시드에는 A부터 Z까지의 알파벳과 숫자 9만 포함되어야 합니다.",
             "phraseWordCount": "복원 문구는 단어 24개로 이루어지며, 현재 단어 {length, plural, other {#}}개를 입력하였습니다.",
@@ -2039,7 +2045,7 @@
         "invalidDate": "잘못된 날짜",
         "invalidTime": "잘못된 시간",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
+            "missingProfileManager": "Shimmer 청구 프로필 관리자를 찾을 수 없습니다.",
             "cannotInitialiseAccount": "Shimmer 청구 계정을 초기화할 수 없습니다.",
             "missingAccount": "Shimmer 청구 계정을 찾을 수 없습니다."
         },
@@ -2156,7 +2162,7 @@
                 "timelockDate": "송금인은 이 자금에 대해 시간 잠금을 설정했습니다. 제한 시간이 만료되면 해당 금액을 사용할 수 있습니다.",
                 "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
                 "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
-                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "보관 보증금은 Tangle에 거래를 저장하는 데 필요한 환불 가능한 보증금입니다.",
@@ -2165,46 +2171,46 @@
                 "timelockDate": "이 거래에 시간 잠금을 추가했습니다. 수령인은 시간 잠금이 만료될 때까지 이 자금을 사용할 수 없습니다.",
                 "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
                 "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
-                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
-                "standard": "The NFT standard e.g. IRC27.",
-                "type": "The MimeType of the NFT. e.g. image/png.",
-                "collectionId": "UTXO string of the collection NFT that minted this NFT",
-                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
-                "issuerName": "The name of the creator",
-                "attributes": "An array of traits and values that define attributes of the NFT"
+                "standard": "NFT 표준(예: IRC27)",
+                "type": "NFT의 Mime유형 (예: image/png)",
+                "collectionId": "이 NFT를 발행한 컬렉션 NFT의 UTXO 문자열",
+                "royalties": "지급 비율에 매핑되는 주소의 키-값 쌍을 포함하는 객체",
+                "issuerName": "창작자의 이름",
+                "attributes": "NFT의 속성을 정의하는 일련의 특성과 값"
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 선택적 매개변수: 토큰이 사용하는 소수 자릿수(사용자 표현을 얻으려면 토큰 금액을 10^소수로 나눕니다).",
+            "description": "IRC30 선택적 매개변수: 사람이 읽을 수 있는 토큰 설명입니다.",
+            "url": "IRC30 선택적 매개변수: 웹사이트나 소셜 미디어 페이지와 같은 토큰에 대한 추가 리소스를 가리키는 URL입니다.",
+            "logoUrl": "IRC30 선택적 매개변수: 토큰 로고의 이미지 리소스를 가리키는 URL입니다."
         },
         "mintNftForm": {
-            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
-            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
-            "issuerName": "Optional parameter: The name of the creator",
-            "description": "Optional parameter: A description of the NFT",
-            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
-            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+            "collectionId": "선택적 매개변수: 이 NFT를 발행한 컬렉션 NFT의 UTXO 문자열",
+            "collectionName": "선택적 매개변수: 컬렉션 이름",
+            "royalties": "선택적 매개변수: 지급 비율에 매핑되는 주소의 키-값 쌍을 포함하는 객체",
+            "issuerName": "선택적 매개변수: 작성자 이름",
+            "description": "선택적 매개변수: NFT에 대한 설명",
+            "attributes": "선택적 매개변수: NFT의 속성을 정의하는 일련의 특성 및 값",
+            "uri": "사용자 정의 미디어를 사용하여 URI를 생성하려면 먼저 스토리지 서비스(예: https://nft.storage/)를 통해 IPFS에 파일을 업로드하세요.",
+            "quantity": "선택적 매개변수: 이 메타데이터로 발행된 사본의 수량"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "removeProposalWarning": "이 제안을 제거하기 전에 해당 제안에 대한 투표를 중단해야 합니다.",
             "outdatedNode": {
-                "title": "Outdated node URL",
-                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+                "title": "오래된 노드 URL",
+                "body": "이 제안의 노드 URL이 오래되었습니다. 최신 투표 결과에 액세스하려면 업데이트하세요."
             },
             "resultsNotAvailable": {
-                "title": "Results not available",
-                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+                "title": "결과를 확인할 수 없음",
+                "body": "이 제안의 해당 노드에서는 더 이상 결과를 사용할 수 없습니다. 결과에 액세스하려면 업데이트하세요."
             }
         },
         "updateStronghold": {
-            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
+            "profileBadge": "당신의 Stronghold는 오래되었습니다. Stronghold를 업데이트하려면 로그인하세요."
         }
     },
     "exports": {
@@ -2222,7 +2228,7 @@
             "warningText": "현재 개발자 프로필을 사용하는 중이며 {networkName} 네트워크에 연결되었습니다"
         },
         "networkIndicator": {
-            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
+            "warningText": "네트워크 성능이 저하되었습니다. 메시지 확인은 평소보다 조금 더 오래 걸릴 수 있습니다."
         }
     },
     "permissions": {
@@ -2233,7 +2239,7 @@
     },
     "tabs": {
         "wallet": "지갑",
-        "collectibles": "Collectibles",
+        "collectibles": "수집품",
         "governance": "거버넌스",
         "developer": "개발자",
         "tokens": "토큰",
@@ -2242,133 +2248,133 @@
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+            "Pending": "스테이킹 중",
+            "Confirmed": "스테이킹됨",
+            "Conflicting": "스테이킹 실패"
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "받는 중",
+                "Confirmed": "수신 완료",
+                "Conflicting": "수신 실패"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "보내는 중",
+                "Confirmed": "발송 완료",
+                "Conflicting": "발송 실패"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "계정에서 이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "계정으로 이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             },
             "selfTransaction": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "이체 중",
+                "Confirmed": "이체 완료",
+                "Conflicting": "전송 실패"
             }
         },
         "mint": {
-            "Pending": "minting",
-            "Confirmed": "minted",
-            "Conflicting": "failed to mint"
+            "Pending": "발행 중",
+            "Confirmed": "발행 완료",
+            "Conflicting": "발행 실패"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "소각 중",
+            "Confirmed": "소각 완료",
+            "Conflicting": "소각 실패"
         },
         "consolidation": {
-            "Pending": "Consolidating outputs",
-            "Confirmed": "Outputs consolidated",
-            "Conflicting": "failed to consolidate outputs"
+            "Pending": "출력 통합 중",
+            "Confirmed": "출력 통합 완료",
+            "Conflicting": "출력 통합 실패"
         },
         "migrate": {
-            "Pending": "migrating for",
-            "Confirmed": "migrated for",
-            "Conflicting": "failed to migrate"
+            "Pending": "이전 중",
+            "Confirmed": "이전 완료",
+            "Conflicting": "이전 실패"
         },
         "asyncStatus": {
-            "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
+            "unclaimed": "미수령",
+            "claimed": "수령 완료",
+            "expired": "만료됨"
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "투표권 높이는 중",
+                "Confirmed": "투표권 증가됨",
+                "Conflicting": "투표권 증가 실패"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "투표권 줄이는 중",
+                "Confirmed": "투표권 감소됨",
+                "Conflicting": "투표권 감소 실패"
             },
             "startVoting": {
-                "Pending": "voting for",
-                "Confirmed": "voted for",
-                "Conflicting": "failed to vote for"
+                "Pending": "투표 중",
+                "Confirmed": "투표 완료",
+                "Conflicting": "투표 실패"
             },
             "stopVoting": {
-                "Pending": "stopping voting for",
-                "Confirmed": "stopped voting for",
-                "Conflicting": "failed to stopped voting for"
+                "Pending": "투표 중지 중",
+                "Confirmed": "투표 중지됨",
+                "Conflicting": "투표 중지 실패"
             },
             "changedVote": {
-                "Pending": "changing vote for",
-                "Confirmed": "changed vote for",
-                "Conflicting": "failed to change vote for"
+                "Pending": "투표 변경 중",
+                "Confirmed": "투표 변경 완료",
+                "Conflicting": "투표 변경 실패"
             },
             "revote": {
-                "Pending": "revoting",
-                "Confirmed": "revote",
-                "Conflicting": "failed to revote"
+                "Pending": "재투표 중",
+                "Confirmed": "재투표 완료",
+                "Conflicting": "재투표 실패"
             },
             "proposalStatus": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting",
-                "ended": "Closed",
-                "nodeOutdated": "Outdated node URL",
-                "resultsNotAvailable": "Results not available"
+                "upcoming": "공지",
+                "commencing": "투표 시작",
+                "holding": "집계 중",
+                "ended": "닫힘",
+                "nodeOutdated": "노드 URL이 오래됨",
+                "resultsNotAvailable": "결과를 확인할 수 없음"
             }
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "별칭 생성 중",
+                "Confirmed": "별칭 생성 완료",
+                "Failed": "별칭 생성 실패"
             }
         },
         "networkHealth": {
-            "down": "Down",
-            "degraded": "Degraded",
-            "operational": "Operational",
-            "disconnected": "Disconnected"
+            "down": "다운됨",
+            "degraded": "열화됨",
+            "operational": "운영",
+            "disconnected": "연결 끊김"
         },
-        "locked": "locked",
-        "smartContract": "smart contract",
+        "locked": "잠김",
+        "smartContract": "스마트 계약",
         "vesting": {
-            "unlocked": "Unlocked",
-            "locked": "Locked"
+            "unlocked": "잠금 해제됨",
+            "locked": "잠김"
         }
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "만료 시간 없음",
+            "1hour": "1시간 후",
+            "1day": "1일 후",
+            "1week": "1주일 후",
             "customDate": {
-                "title": "Custom date",
-                "subtitle": "Set custom expiry date"
+                "title": "사용자 지정 날짜",
+                "subtitle": "만료일을 사용자가 지정합니다."
             }
         }
     }
