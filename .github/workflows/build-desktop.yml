@@ -1,7 +1,7 @@
 name: Build Desktop (v2)
 
 env:
-    NETWORK_CODE: shimmer
+    NETWORK_CODE: iota
 
 on:
     workflow_dispatch:
