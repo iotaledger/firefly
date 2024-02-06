@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "智能合约",
         "targetContract": "目标合约",
         "contractFunction": "合约功能",
-        "gasBudget": "Gas预算",
+        "gasFee": "Gas fee",
         "standard": "标准",
         "uri": "URI",
         "issuer": "发行者",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "地址以前缀 {prefix} 开始。",
             "wrongAddressFormat": "地址格式不正确。",
             "invalidAddress": "地址无效的",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "该资产在这个账户中未知。",
             "insufficientFunds": "该账户资金不足。",
@@ -1975,7 +1979,7 @@
             "refused": "连接被拒绝",
             "handshake": "无法完成节点握手。",
             "invalidCertificate": "无法与无效证书连接。",
-            "https": "需要HTTPS。目前不支持通过 HTTP 进行不安全的连接。",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "此节点已被添加。",
             "noSyncedNode": "没有可用的同步节点。",
             "timeNotSynced": "设备时间不正确，无法同步节点。",
@@ -2158,7 +2162,7 @@
                 "timelockDate": "发送者在这些资金上设置了一个时间锁。您将能够在到期后使用它们。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
                 "tag": "一个简短的可选数据字段。对交易组进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "存储押金是在Tangle上储存你的交易所需的可退还押金。",
@@ -2167,7 +2171,7 @@
                 "timelockDate": "您为这笔交易添加了一个时间锁。收件人将无法花费这些资金，直到时间锁到期。",
                 "metadata": "一个可选的数据字段，用于在Tangle上持久性地存储数据。",
                 "tag": "一个简短的可选数据字段。对各组交易分别进行标记可以使它们更容易被搜索到。",
-                "gasBudget": "为了在Shimmer EVM上进行交易或执行智能合约功能，需要有Gas预算。"
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "NFT 标准，例如 IRC27。",

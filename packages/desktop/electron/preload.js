@@ -163,6 +163,13 @@ try {
 
             return client
         },
+        async getSecretManager(managerId) {
+            const manager = profileManagers[managerId]
+            const secretManager = await manager.getSecretManager()
+            bindMethodsAcrossContextBridge(IotaSdk.SecretManager.prototype, secretManager)
+
+            return secretManager
+        },
         async migrateStrongholdSnapshotV2ToV3(currentPath, newPath, currentPassword, newPassword) {
             const snapshotSaltV2 = 'wallet.rs'
             const snapshotRoundsV2 = 100
