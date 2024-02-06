@@ -72,7 +72,7 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
-        {#if $activeProfile?.network?.id === NetworkId.Iota}
+        {#if $activeProfile?.network?.id === NetworkId.Iota || $activeProfile?.network?.id === NetworkId.IotaAlphanet}
             <MenuItem
                 icon={Icon.Timer}
                 title={localize('actions.viewAddressHistory')}

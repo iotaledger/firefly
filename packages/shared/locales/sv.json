@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smartkontrakt",
         "targetContract": "Målkontrakt",
         "contractFunction": "Kontraktsfunktion",
-        "gasBudget": "Gas-budget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Utfärdare",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Adresser börjar med prefixet {prefix}.",
             "wrongAddressFormat": "Adressen är inte korrekt formaterad.",
             "invalidAddress": "Adressen är inte giltig.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Tillgången är inte känd för detta konto.",
             "insufficientFunds": "Denna plånbok har inte tillräckligt med tillgångar.",
@@ -1975,7 +1979,7 @@
             "refused": "Anslutningen avvisades.",
             "handshake": "Kunde inte slutföra handskakning med nod.",
             "invalidCertificate": "Kunde inte ansluta med ett ogiltigt certifikat.",
-            "https": "HTTPS krävs; osäkra anslutningar över HTTP stöds inte just nu.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Den här noden har redan lagts till.",
             "noSyncedNode": "Ingen synkroniserad nod är tillgänglig.",
             "timeNotSynced": "Enhetens tid är felaktig, det går inte att synkronisera noden.",
@@ -2158,7 +2162,7 @@
                 "timelockDate": "Avsändaren satte ett tidlås på dessa tillgångar. Du kommer att kunna spendera dem när tidsbegränsningen löpt ut.",
                 "metadata": "Ett valfritt datafält för att lagra data konstant på Tangle.",
                 "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter.",
-                "gasBudget": "Gasbudget krävs för att genomföra en transaktion eller utföra en smartkontrakts-funktion på Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "En lagringsdeposition är en återbetalningsbar insättning som behövs för att lagra din transaktion på Tangle.",
@@ -2167,7 +2171,7 @@
                 "timelockDate": "Du har lagt till en tidsgräns för denna transaktion. Mottagaren kommer inte kunna spendera dessa tillgångar förrän tidsfristen löpt ut.",
                 "metadata": "Ett valfritt datafält för att lagra data konstant på Tangle.",
                 "tag": "Ett kort valfritt datafält. Taggningsgrupper av transaktioner kan göra dem enklare att söka efter.",
-                "gasBudget": "Gasbudget krävs för att genomföra en transaktion eller utföra en smartkontrakts-funktion på Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "NFT-standarden t.ex. IRC27.",
