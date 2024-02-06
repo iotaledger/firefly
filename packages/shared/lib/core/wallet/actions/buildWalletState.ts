@@ -39,25 +39,26 @@ export async function buildWalletState(
     try {
         balances = await wallet.getBalance()
         accountOutputs = await wallet.accounts()
+        // check if the mainAccountId is still valid
+        if (
+            walletPersistedData.mainAccountId &&
+            !accountOutputs.find(
+                (output) =>
+                    output.output.type === OutputType.Account &&
+                    (output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
+            )
+        ) {
+            updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId: undefined })
+            walletPersistedData.mainAccountId = undefined
+        }
+        // if there is no mainAccountId, try to set the first account from the block issuer accounts
         if (!walletPersistedData.mainAccountId) {
-            // if there is no mainAccountId, try to set the first account from the block issuer accounts
             const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
             if (blockIssuerAccounts.length > 0) {
                 const mainAccountId = (blockIssuerAccounts[0]?.output as AccountOutput)?.accountId
                 updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId })
                 walletPersistedData.mainAccountId = mainAccountId
             }
-        } else if (
-            walletPersistedData.mainAccountId &&
-            !walletOutputs.find(
-                (output) =>
-                    output.output.type === OutputType.Account &&
-                    (output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
-            )
-        ) {
-            // check if the mainAccountId is still valid
-            updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId: undefined })
-            walletPersistedData.mainAccountId = undefined
         }
         depositAddress = walletPersistedData.mainAccountId
             ? getBech32AddressFromAddressTypes(new AccountAddress(walletPersistedData.mainAccountId))
