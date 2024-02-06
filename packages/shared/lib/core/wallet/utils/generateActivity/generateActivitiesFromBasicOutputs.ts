@@ -47,7 +47,7 @@ export async function generateActivitiesFromBasicOutputs(
                 },
                 getNftId(nftInput.nftId, wrappedInput.outputId)
             )
-            const nft = buildNftFromNftOutput(wrappedInput, account.depositAddress, false)
+            const nft = buildNftFromNftOutput(wrappedInput, wallet.depositAddress, false)
             addOrUpdateNftInAllWalletNfts(wallet.id, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
@@ -63,13 +63,13 @@ export async function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.amount
             )
         } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
-            activity = await generateSingleConsolidationActivity(account, {
+            activity = await generateSingleConsolidationActivity(wallet, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
             })
         } else {
-            activity = await generateSingleBasicActivity(account, {
+            activity = await generateSingleBasicActivity(wallet, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
