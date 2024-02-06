@@ -1,6 +1,6 @@
 import { logAndNotifyError } from '@core/error/actions'
 import { updateProfile } from '@core/profile/stores'
-import { getStorageDirectoryOfProfile } from '@core/profile/utils'
+import { DirectoryManager } from '@core/profile/classes'
 import { api } from '@core/api'
 
 /**
@@ -10,7 +10,7 @@ import { api } from '@core/api'
  * @returns A boolean indicating the migration outcome.
  */
 export async function migrateDbChrysalisToStardust(profileId: string, pinCode: string): Promise<boolean> {
-    const profileDirectory = await getStorageDirectoryOfProfile(profileId)
+    const profileDirectory = await DirectoryManager.forProfile(profileId)
     const response = await api.migrateDbChrysalisToStardust(profileDirectory, pinCode)
 
     if (response instanceof Error) {

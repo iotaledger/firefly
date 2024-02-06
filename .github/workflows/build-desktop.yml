@@ -1,5 +1,8 @@
 name: Build Desktop (v2)
 
+env:
+    NETWORK_CODE: shimmer
+
 on:
     workflow_dispatch:
         inputs:
@@ -112,8 +115,8 @@ jobs:
               env:
                   CSC_LINK: ${{ secrets.MAC_CERT_BASE64 }}
                   CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
-                  FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
-                  FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
               working-directory: packages/desktop
               if: matrix.os == 'macos-11'
 
@@ -140,31 +143,30 @@ jobs:
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Sign AppImage (Linux)
-              run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-desktop*.AppImage
+              run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-*.AppImage
               working-directory: packages/desktop/out
               env:
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (Linux)
-              run: for i in `ls | grep 'firefly-desktop*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
+              run: for i in `ls | grep 'firefly-*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
               if: matrix.os == 'ubuntu-20.04'
 
             - name: Compute checksums (macOS)
-              run: for i in `ls | grep 'firefly-desktop*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
+              run: for i in `ls | grep 'firefly-*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
               if: matrix.os == 'macos-11'
 
             - name: Compute checksums (Windows)
-              run: Get-ChildItem "." -Filter firefly-desktop* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
+              run: Get-ChildItem "." -Filter firefly-* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
               working-directory: packages/desktop/out
               if: matrix.os == 'windows-2019'
 
             - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
-                  name: firefly-desktop-${{ matrix.os }}
+                  name: firefly-${{ env.NETWORK_CODE }}-desktop-${{ matrix.os }}
                   path: |
-                      packages/desktop/out/firefly-desktop*
-                      packages/desktop/out/shimmer*
+                      packages/desktop/out/firefly-*

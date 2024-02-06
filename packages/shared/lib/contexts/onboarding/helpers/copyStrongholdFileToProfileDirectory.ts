@@ -1,14 +1,11 @@
 import { Platform } from '@core/app'
-import { getSecretManagerPath } from '@core/profile/utils'
 import { UnableToCopyStrongholdBackupFileError } from '../errors'
+import { DirectoryManager } from '@core/profile'
 
-export async function copyStrongholdFileToProfileDirectory(
-    profileDirectory: string,
-    importFilePath: string
-): Promise<void> {
+export async function copyStrongholdFileToProfileDirectory(profileId: string, importFilePath: string): Promise<void> {
     try {
-        const secretManagerPath = getSecretManagerPath(profileDirectory)
-        await Platform.copyFile(importFilePath, secretManagerPath)
+        const strongholdPath = await DirectoryManager.forStronghold(profileId)
+        await Platform.copyFile(importFilePath, strongholdPath)
     } catch (err) {
         console.error(err)
         throw new UnableToCopyStrongholdBackupFileError()
