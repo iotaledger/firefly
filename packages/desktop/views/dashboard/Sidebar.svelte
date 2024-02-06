@@ -65,7 +65,7 @@
         ...(features?.accountManagement?.enabled
             ? [
                   {
-                      icon: IconEnum.Parchment,
+                      icon: IconEnum.Profile,
                       label: localize('tabs.accountManagement'),
                       route: DashboardRoute.AccountManagement,
                       onClick: openAccountManagement,
