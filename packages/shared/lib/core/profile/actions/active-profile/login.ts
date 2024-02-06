@@ -87,7 +87,6 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
                     setTimeStrongholdLastUnlocked()
                 }
             } else {
-                Platform.startLedgerProcess()
                 incrementLoginProgress(2)
             }
 
