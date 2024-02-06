@@ -7,7 +7,7 @@ const electronFeatures: IElectronFeatures = {
     autoUpdate: {
         enabled: true,
         win32: {
-            enabled: false,
+            enabled: true,
         },
         linux: {
             enabled: true,
