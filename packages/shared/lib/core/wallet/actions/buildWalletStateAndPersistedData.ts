@@ -4,12 +4,7 @@ import { IWallet } from '@core/profile/interfaces'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { buildWalletState } from './buildWalletState'
-import {
-    activeProfile,
-    getStorageDirectoryOfSecretManager,
-    getStorageDirectoryOfWallet,
-    getWalletOptions,
-} from '@core/profile'
+import { activeProfile, getWalletOptions, DirectoryManager } from '@core/profile'
 import { get } from 'svelte/store'
 
 export async function buildWalletStateAndPersistedData(
@@ -18,10 +13,10 @@ export async function buildWalletStateAndPersistedData(
     name?: string,
     color?: string
 ): Promise<[IWalletState, IPersistedWalletData]> {
-    const storagePath = await getStorageDirectoryOfWallet(profileId, wallet.id)
-    const secretManagerPath = await getStorageDirectoryOfSecretManager(profileId)
+    const walletPath = await DirectoryManager.forWallet(profileId, wallet.id)
+    const secretManagerPath = await DirectoryManager.forSecretManager(profileId)
 
-    const walletOptions = getWalletOptions(get(activeProfile), storagePath, secretManagerPath)
+    const walletOptions = getWalletOptions(get(activeProfile), walletPath, secretManagerPath)
 
     const persistedWalletData: IPersistedWalletData = {
         name: name || `${localize('general.wallet')}`,

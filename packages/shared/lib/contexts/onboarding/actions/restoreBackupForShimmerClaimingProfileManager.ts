@@ -1,14 +1,14 @@
 import { NetworkId } from '@core/network/enums'
-import { getStorageDirectoryOfProfile } from '@core/profile/utils'
+import { DirectoryManager } from '@core/profile/classes'
 import { get } from 'svelte/store'
-import { getTemporaryWalletStorageDirectory, restoreBackupByCopyingFile, validateStrongholdCoinType } from '../helpers'
+import { restoreBackupByCopyingFile, validateStrongholdCoinType } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
 
 // TODO(2.0) Fix this
 export async function restoreBackupForShimmerClaimingProfileManager(strongholdPassword: string): Promise<void> {
     try {
         const { id, importFilePath, clientOptions } = get(onboardingProfile)
-        const tempProfileDirectory = await getTemporaryWalletStorageDirectory()
+        const tempProfileDirectory = await DirectoryManager.forTemporaryWallet()
         await restoreBackupByCopyingFile(
             importFilePath,
             tempProfileDirectory,
@@ -23,7 +23,7 @@ export async function restoreBackupForShimmerClaimingProfileManager(strongholdPa
          */
         validateStrongholdCoinType(shimmerClaimingProfileManager, NetworkId.Iota)
 
-        const profileDirectory = await getStorageDirectoryOfProfile(id)
+        const profileDirectory = await DirectoryManager.forProfile(id)
         await restoreBackupByCopyingFile(
             importFilePath,
             profileDirectory,
