@@ -97,8 +97,8 @@ jobs:
         env:
           CSC_LINK: ${{ secrets.MAC_CERT_BASE64 }}
           CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
-          FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
-          FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         working-directory: packages/desktop
         if: matrix.os == 'macos-11'
 
