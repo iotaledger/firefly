@@ -34,6 +34,11 @@
         modal?.close()
     }
 
+    function onWithdrawFromL2Click(): void {
+        openPopup({ id: PopupId.WithdrawFromL2 })
+        modal?.close()
+    }
+
     function onVerifyAddressClick(): void {
         const ADDRESS_INDEX = 0
         checkOrConnectLedger(() => {
@@ -72,12 +77,15 @@
 <Modal bind:this={modal} {...$$restProps}>
     <account-actions-menu class="flex flex-col">
         <MenuItem icon={Icon.Doc} title={localize('actions.viewBalanceBreakdown')} onClick={onViewBalanceClick} />
-        {#if $activeProfile?.network?.id === NetworkId.Iota}
+        {#if $activeProfile?.network?.id === NetworkId.Iota || $activeProfile?.network?.id === NetworkId.IotaAlphanet}
             <MenuItem
                 icon={Icon.Timer}
                 title={localize('actions.viewAddressHistory')}
                 onClick={onViewAddressHistoryClick}
             />
+        {/if}
+        {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
+            <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
         {#if $isActiveLedgerProfile}

@@ -48,6 +48,7 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                         color: account.color,
                         hidden: chrysalisProfile.hiddenAccounts?.includes(account.id) ?? false,
                         shouldRevote: false,
+                        knownAddresses: [],
                     }
 
                     if (chrysalisProfile.lastUsedAccountId === account.id) {

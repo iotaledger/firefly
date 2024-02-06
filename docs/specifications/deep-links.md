@@ -22,10 +22,19 @@ confirmation on behalf of the user.
 
 ## Scheme
 
-The Firefly deep link scheme can be broken down to the following (simple) syntax:
+Our system incorporates two specific deeplink schemes—namely IOTA and SHIMMER. Breaking down the Firefly deep link scheme reveals the following simple syntax:
+
+
+**IOTA**
 
 ```
 iota[-<stage>]://<context>/<operation>[?param=<param>]
+```
+
+**Shimmer**
+
+```
+firefly[-<stage>]://<context>/<operation>[?param=<param>]
 ```
 
 The parameters are as follows:
@@ -40,15 +49,14 @@ The parameters are as follows:
 -   `operation` - an operation within a specific context (see below for more detail)
 -   `param` - query parameter(s) relevant for the specified operation
 
-If you wish to target the production version, simply omit this from the prefix:
+To target the production version simply don't specify any stages, example for Shimmer:
 
 ```
 firefly://
 ```
 
-:::caution
-This deep link scheme is **NOT** compatible with Firefly V1, as that version of the application is in maintenance mode.
-:::
+This prefix is specifically meant for the production version of Firefly. You don't need to add anything else after ``firefly://``
+
 
 ## Contexts
 
@@ -103,7 +111,7 @@ This operation brings the user to the send confirmation popup:
 The deep link structure is as follows:
 
 ```
-firefly://wallet/sendConfirmation?address=<address>&amount=<amount>[&unit=<unit>][&assetId=<assetId>][&metadata=<metadata>][&tag=<tag>][&giftStorageDeposit=<true|false>][&disableToggleGift=<true|false>][&disableChangeExpiration=<true|false>][&surplus=<surplus>]
+firefly://wallet/sendConfirmation?address=<address>&amount=<amount>[&unit=<unit>][&assetId=<assetId>][&metadata=<metadata>][&tag=<tag>][&giftStorageDeposit=<true|false>][&disableToggleGift=<true|false>][&disableChangeExpiration=<true|false>][&surplus=<surplus>][&expiration=<expiration>]
 ```
 
 The following parameters are **required**:
@@ -115,7 +123,7 @@ The following parameters are **required**:
 
 The following parameters are **optional**:
 
--   `unit` - a specified denomination of the token to use, if applicable (default for IOTA is `Mi`, SMR is `SMR`)
+-   `unit` - a specified denomination of the token to use, if applicable (default for IOTA is `micro`, SMR is `glow`)
 -   `assetId` - the identifier of the asset to send, e.g. `4218` (IOTA), `4219` (SMR), or a native token ID (default is base token of the network, i.e. IOTA or SMR)
 -   `metadata` - a string of text to embed as metadata in the transaction
 -   `tag` - a string to tag the transaction for indexing purposes
@@ -123,15 +131,16 @@ The following parameters are **optional**:
 -   `disableToggleGift` - prevents the user from being able to toggle the option to gift the storage deposit
 -   `disableChangeExpiration` - prevents the user from being able to change the expiration time of the transaction
 -   `surplus` - send additional amounts of the base token when transferring native tokens
+-   `expiration` - the expiration time of the transaction, e.g. `1w`, `2d`, `5h` or `10m`. Also accepts a UNIX timestamp in milliseconds.
 
 Example:
 
-[!button Click me!](firefly://wallet/sendForm?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&surplus=1&metadata=Take%20my%20money)
+[!button Click me!](firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&surplus=1&metadata=Take%20my%20money&expiration=1h)
 
 Source:
 
 ```
-firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&disableToggleGift=true&surplus=1&metadata=Take%20my%20money
+firefly://wallet/sendConfirmation?address=iota1qrhacyfwlcnzkvzteumekfkrrwks98mpdm37cj4xx3drvmjvnep6xqgyzyx&amount=10&unit=Gi&giftStorageDeposit=true&disableToggleGift=true&surplus=1&metadata=Take%20my%20money&expiration=1h
 ```
 
 ### Collectibles
