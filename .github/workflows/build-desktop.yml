@@ -170,4 +170,3 @@ jobs:
                   name: firefly-${{ env.NETWORK_CODE }}-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-*
-                      packages/desktop/out/shimmer*
