@@ -80,7 +80,7 @@ const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
 }
 
 const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
-    enabled: true,
+    enabled: false,
     newProfile: {
         enabled: true,
         softwareProfile: {
@@ -125,19 +125,19 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
             enabled: true,
         },
         ledgerProfile: {
-            enabled: true,
+            enabled: false,
         },
     },
     restoreProfile: {
-        enabled: true,
+        enabled: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
     claimRewards: {
@@ -163,19 +163,19 @@ const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
             enabled: true,
         },
         ledgerProfile: {
-            enabled: true,
+            enabled: false,
         },
     },
     restoreProfile: {
-        enabled: true,
+        enabled: false,
         recoveryPhrase: {
-            enabled: true,
+            enabled: false,
         },
         strongholdBackup: {
-            enabled: true,
+            enabled: false,
         },
         ledgerBackup: {
-            enabled: true,
+            enabled: false,
         },
     },
     claimRewards: {
