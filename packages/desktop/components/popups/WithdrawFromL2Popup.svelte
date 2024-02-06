@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { getSelectedAccount } from '@core/account'
+    import { getSelectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { getArchivedBaseTokens } from '@core/layer-2/helpers/getArchivedBaseTokens'
     import { getBaseToken, getCoinType, activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
@@ -23,7 +23,7 @@
 
     const bip44Chain: Bip44 = {
         coinType: Number(getCoinType()),
-        account: getSelectedAccount().index,
+        account: getSelectedWallet().index,
         change: 0,
         addressIndex: 0,
     }
@@ -179,7 +179,7 @@
     }
 
     onMount(async () => {
-        address = getSelectedAccount().depositAddress
+        address = getSelectedWallet().depositAddress
         if (!withdrawableAmount) {
             withdrawableAmount = await getArchivedBaseTokens(address)
         }
