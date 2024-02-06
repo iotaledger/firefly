@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "주소 이력",
-            "disclaimer": "자금이 있거나 이 프로필로 알려진 주소 목록",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "내부"
+            "internal": "내부",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1600,7 +1602,7 @@
         "totalStorageDeposit": "총 보관 보증금",
         "expirationTime": "만료 시간",
         "timelockDate": "Timelock",
-        "claimedTime": "Claimed at",
+        "claimedTime": "수령 시각",
         "nftAddress": "NFT 주소",
         "nftId": "NFT ID",
         "nftMetadata": "NFT 메타데이터",
@@ -1646,7 +1648,7 @@
         "smartContract": "스마트 컨트랙트",
         "targetContract": "대상계약",
         "contractFunction": "계약 기능",
-        "gasBudget": "가스 예산",
+        "gasFee": "Gas fee",
         "standard": "표준",
         "uri": "URI",
         "issuer": "발행자",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "주소는 {prefix}로 시작합니다.",
             "wrongAddressFormat": "주소가 형식에 맞지 않습니다.",
             "invalidAddress": "주소가 유효하지 않습니다.",
+            "invalidExpirationDate": "만료 날짜가 잘못되었습니다.",
+            "pastExpirationDate": "만료 날짜가 과거 시점입니다.",
             "invalidAssetId": "자산 Id가 유효하지 않습니다.",
             "unknownAsset": "이 계정에서는 자산을 알 수 없습니다.",
             "insufficientFunds": "지갑에 자금이 부족합니다.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "예약된 태그 키워드를 사용할 수 없습니다."
         },
         "layer2": {
-            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다."
+            "layer1Recipient": "레이어 2 트랜잭션은 레이어 1 계정으로 보내질 수 없습니다.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "유효한 URL을 입력하세요.",
@@ -1974,7 +1979,7 @@
             "refused": "연결이 거부되었습니다.",
             "handshake": "노드와의 핸드셰이크를 실패했습니다.",
             "invalidCertificate": "인증서가 유효하지 않아 연결할 수 없습니다.",
-            "https": "HTTPS 연결이 필요합니다. 현재 HTTP로 안전하지 않은 연결을 하는 것은 지원하지 않습니다.",
+            "https": "외부 연결에는 HTTPS를 이용해야 합니다. localhost 연결은 HTTP를 이용해도 됩니다. 안전하지 않은 외부 HTTP 연결은 지원되지 않습니다.",
             "duplicate": "이미 추가된 노드입니다.",
             "noSyncedNode": "사용 가능한 동기화된 노드가 없습니다.",
             "timeNotSynced": "장치 시간이 정확하지 않아 노드를 동기화할 수 없습니다.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "송금인은 이 자금에 대해 시간 잠금을 설정했습니다. 제한 시간이 만료되면 해당 금액을 사용할 수 있습니다.",
                 "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
                 "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
-                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "보관 보증금은 Tangle에 거래를 저장하는 데 필요한 환불 가능한 보증금입니다.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "이 거래에 시간 잠금을 추가했습니다. 수령인은 시간 잠금이 만료될 때까지 이 자금을 사용할 수 없습니다.",
                 "metadata": "Tangle에 데이터를 지속적으로 저장하기 위한 선택적 데이터 필드입니다.",
                 "tag": "짧은 선택적 데이터 필드입니다. 거래 그룹에 태그를 지정하면 검색이 더 쉬워집니다.",
-                "gasBudget": "Shimmer EVM에서 거래를 수행하거나 스마트 계약 기능을 실행하려면 가스 예산이 필요합니다."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "NFT 표준(예: IRC27)",

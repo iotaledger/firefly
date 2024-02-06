@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Адресите започват с {prefix}.",
             "wrongAddressFormat": "Адресът е в некоректен формат.",
             "invalidAddress": "Адресът е невалиден.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "The asset is not known to this account.",
             "insufficientFunds": "Портфейлът няма достатъчно средства.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Моля, въведете валиден URL адрес.",
@@ -1974,7 +1979,7 @@
             "refused": "Свързването е отказано.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Не възможност за свързване поради невалиден сертификат.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Този Node сървър вече е добавен.",
             "noSyncedNode": "No synced node is available.",
             "timeNotSynced": "Device time is incorrect, unable to sync node.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
                 "metadata": "An optional data field for storing data persistently on the Tangle.",
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

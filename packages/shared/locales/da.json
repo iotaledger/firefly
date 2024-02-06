@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Adressehistorik",
-            "disclaimer": "Liste over adresser med midler eller kendt af denne profil",
             "indexAndType": "{internal, select, true {Intern adresse} other {Indbetalingsadresse}} {index}",
-            "internal": "Intern"
+            "internal": "Intern",
+            "errorNoChronicle": "Historik ikke opsat",
+            "errorFailedFetch": "Kunne ikke hente adressehistorik",
+            "errorFailedGenerate": "Kunne ikke generere en ny adresse"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas-gebyr",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Adresser starter med præfikset {prefix}.",
             "wrongAddressFormat": "Adressen er ikke formateret korrekt.",
             "invalidAddress": "Adressen er ikke gyldig.",
+            "invalidExpirationDate": "Udløbsdatoen er ugyldig.",
+            "pastExpirationDate": "Udløbsdatoen er i fortiden.",
             "invalidAssetId": "Aktivet er ugyldigt.",
             "unknownAsset": "Aktivet kendes ikke af denne konto.",
             "insufficientFunds": "Denne wallet har ikke tilstrækkelige midler.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Reserveret tagnøgleord kan ikke burges"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Kunne ikke estimere gas."
         },
         "node": {
             "invalid": "Indtast venligst en gyldig URL.",
@@ -1974,7 +1979,7 @@
             "refused": "The connection was refused.",
             "handshake": "Could not complete handshake with node.",
             "invalidCertificate": "Could not connect with invalid certificate.",
-            "https": "HTTPS is required; insecure connections over HTTP are not supported at this time.",
+            "https": "Eksterne forbindelser skal bruge HTTPS; localhost-forbindelser kan oprettes vha. HTTP. Usikre eksterne HTTP-forbindelser understøttes ikke.",
             "duplicate": "Denne node er allerede blevet tilføjet.",
             "noSyncedNode": "Ingen synkede noder tilgængelig.",
             "timeNotSynced": "Enhedsklokkeslæt forkert, kan ikke synke node.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "Afsender opsatter en tidslås for disse midler. De vil kunne bruges, når tidslåsen udløber.",
                 "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
                 "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas-gebyr kræves for at foretage en transaktion eller udføre en smartkontraktfunktion på Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Et lagerdepositum, der er refunderbart, kræves for at gemme transaktionen på Tangle.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Tidslås føjet til denne transaktion. Modtageren vil ikke kunne bruge disse midler, før tidslåsen udløber.",
                 "metadata": "Et valgfrit datafelt til at lagre data vedvarende på Tangle.",
                 "tag": "Et kort valgfrit datafelt. Tagning af grupper af transaktioner kan gøre dem lettere at fremsøge.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas-gebyr kræves for at foretage en transaktion eller udføre en smartkontraktfunktion på Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

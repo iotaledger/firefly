@@ -643,7 +643,7 @@
             "collect": "Odbierz",
             "search": "Wyszukaj nagrody z vestingu",
             "payouts": {
-                "title": "Dwutygodniowy harmonogram odblokowywania",
+                "title": "Codwutygodniowy harmonogram odblokowywania",
                 "information": "Informacje o wypłacie",
                 "tooltip": {
                     "title": "Wypłata",
@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Historia adresów",
-            "disclaimer": "Lista adresów ze środkami lub adresów znanych przez ten profil",
             "indexAndType": "{internal, select, true {Adres wewnętrzny} other {Adres odbiorcy}} {index}",
-            "internal": "Transfer wewnętrzny"
+            "internal": "Transfer wewnętrzny",
+            "errorNoChronicle": "Serwer Chronicle nie jest skonfigurowany",
+            "errorFailedFetch": "Nie można pobrać historii adresu",
+            "errorFailedGenerate": "Nie można wygenerować nowego adresu"
         }
     },
     "charts": {
@@ -1598,7 +1600,7 @@
         "giftedStorageDeposit": "Podarowany depozyt magazynowy",
         "storageDepositPerNft": "Depozyt magazynowy na NFT",
         "totalStorageDeposit": "Całkowity depozyt magazynowy",
-        "expirationTime": "Czas wygaśnięcia",
+        "expirationTime": "Termin ważności",
         "timelockDate": "Blokada czasowa",
         "claimedTime": "Odebrano",
         "nftAddress": "Adres NFT",
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart kontrakt",
         "targetContract": "Kontrakt docelowy",
         "contractFunction": "Funkcja kontraktu",
-        "gasBudget": "Budżet gazu",
+        "gasFee": "Opłata gas",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Wydawca",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Adresy zaczynają się od prefiksu {prefix}.",
             "wrongAddressFormat": "Adres nie jest poprawnie sformatowany.",
             "invalidAddress": "Adres jest nieprawidłowy.",
+            "invalidExpirationDate": "Termin ważności jest nieprawidłowy.",
+            "pastExpirationDate": "Termin ważności już minął.",
             "invalidAssetId": "Identyfikator assetu jest nieprawidłowy.",
             "unknownAsset": "Ten asset nie jest znany na tym koncie.",
             "insufficientFunds": "Brak wystarczających środków na tym portfelu.",
@@ -1953,7 +1957,7 @@
             "leavingDust": "Nie możesz pozostawić na swoim adresie mniej niż ({minRequiredStorageDeposit}). Jest to minimalny wymagany depozyt magazynowy.",
             "cancelled": "Transakcja została anulowana.",
             "transaction": "Wystąpił błąd podczas wysyłania transakcji. Spróbuj ponownie.",
-            "invalidExpirationDateTime": "Wybrany czas wygaśnięcia jest nieprawidłowy.",
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy.",
             "noInputs": "Nie znaleziono danych wejściowych.",
             "notEnoughBalance": "Brak wystarczających środków.",
             "missingTransactionId": "Brak ID transakcji",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Nie można użyć zarezerwowanego słowa kluczowego tagu"
         },
         "layer2": {
-            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1."
+            "layer1Recipient": "Transakcja layer 2 nie może zostać wysłana do konta layer 1.",
+            "estimatedGas": "Nie udało się oszacować opłaty gas."
         },
         "node": {
             "invalid": "Wprowadź prawidłowy adres URL.",
@@ -1974,7 +1979,7 @@
             "refused": "Połączenie zostało odrzucone.",
             "handshake": "Nie można uzyskać potwierdzenia z serwera.",
             "invalidCertificate": "Nie można połączyć się z nieprawidłowym certyfikatem.",
-            "https": "HTTPS jest wymagany; niezabezpieczone połączenia przez HTTP nie są obecnie obsługiwane.",
+            "https": "Połączenia zewnętrzne muszą korzystać z protokołu HTTPS; połączenia z hostem lokalnym mogą być nawiązywane przy użyciu protokołu HTTP. Niezabezpieczone zewnętrzne połączenia HTTP nie są obsługiwane.",
             "duplicate": "Ten serwer został już wcześniej dodany.",
             "noSyncedNode": "Brak zsynchronizowanego węzła.",
             "timeNotSynced": "Czas urządzenia jest nieprawidłowy, nie można zsynchronizować z serwerem.",
@@ -2105,7 +2110,7 @@
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "Wybrana data wygaśnięcia jest nieprawidłowa."
+            "invalidExpirationDateTime": "Wybrany termin ważności jest nieprawidłowy."
         },
         "node": {
             "http": "Korzystanie z węzłów przez HTTP powoduje, że ruch jest niezaszyfrowany i może stanowić zagrożenie dla bezpieczeństwa."
@@ -2157,7 +2162,7 @@
                 "timelockDate": "Nadawca ustawił blokadę czasową tych środków. Będziesz mógł je wydać dopiero wtedy, gdy blokada czasowa wygaśnie.",
                 "metadata": "Opcjonalne pole danych do trwałego przechowywania danych w sieci Tangle.",
                 "tag": "Krótkie, opcjonalne pole danych. Oznaczanie grup transakcji może ułatwić ich wyszukiwanie.",
-                "gasBudget": "Budżet gazu jest wymagany do przeprowadzenia transakcji lub wykonania funkcji smart kontraktu na Shimmer EVM."
+                "gasFee": "Opłata gas jest wymagana do przeprowadzenia transakcji lub wykonania funkcji smart kontraktu używając Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Depozyt magazynowy to zwrotna kaucja potrzebna do przechowywania Twojej transakcji w sieci Tangle.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Dodałeś blokadę czasową do tej transakcji. Odbiorca nie będzie mógł wydać tych środków do czasu wygaśnięcia blokady czasowej.",
                 "metadata": "Opcjonalne pole danych do trwałego przechowywania danych w sieci Tangle.",
                 "tag": "Krótkie, opcjonalne pole danych. Oznaczanie grup transakcji może ułatwić ich wyszukiwanie.",
-                "gasBudget": "Budżet gazu jest wymagany do przeprowadzenia transakcji lub wykonania funkcji smart kontraktu na Shimmer EVM."
+                "gasFee": "Opłata gas jest wymagana do przeprowadzenia transakcji lub wykonania funkcji smart kontraktu używając Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "Norma NFT, np. IRC27.",
@@ -2363,13 +2368,13 @@
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "Brak czasu wygaśnięcia",
+            "none": "Brak terminu ważności",
             "1hour": "Za godzinę",
             "1day": "Za 1 dzień",
             "1week": "Za tydzień",
             "customDate": {
                 "title": "Niestandardowa data",
-                "subtitle": "Ustaw własny czas wygaśnięcia"
+                "subtitle": "Ustaw własny termin ważności"
             }
         }
     }

@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Умный контракт",
         "targetContract": "Целевой контракт",
         "contractFunction": "Функция контракта",
-        "gasBudget": "Бюджет газа",
+        "gasFee": "Gas fee",
         "standard": "Стандартный",
         "uri": "URI",
         "issuer": "Эмитент",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Адреса начинаются с префикса {prefix}.",
             "wrongAddressFormat": "Адрес неверно отформатирован.",
             "invalidAddress": "Адрес недействителен.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Актив не известен для данного счета.",
             "insufficientFunds": "На этом кошельке недостаточно средств.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Невозможно использовать зарезервированное ключевое слово метки"
         },
         "layer2": {
-            "layer1Recipient": "Транзакция слоя 2 не может быть отправлена на счет слоя 1."
+            "layer1Recipient": "Транзакция слоя 2 не может быть отправлена на счет слоя 1.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Пожалуйста, введите правильный адрес.",
@@ -1974,7 +1979,7 @@
             "refused": "Соединение было отклонено.",
             "handshake": "Не удалось завершить рукопожатие с узлом.",
             "invalidCertificate": "Не удалось подключиться из-за недействительного сертификата.",
-            "https": "Требуется HTTPS; небезопасные соединения по HTTP в настоящее время не поддерживаются.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Этот узел уже был добавлен.",
             "noSyncedNode": "Не доступен синхронизированный узел.",
             "timeNotSynced": "Время устройства неверно, не удается синхронизировать узел.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "Отправитель установил временную блокировку на эти средства. Вы сможете потратить их по истечении срока блокировки.",
                 "metadata": "Необязательное поле данных для постоянного хранения данных в Tangle.",
                 "tag": "Короткое необязательное поле данных. Пометка групп транзакций может облегчить их поиск.",
-                "gasBudget": "Бюджет газа необходим для проведения транзакции или выполнения функции смарт-контракта на Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Депозит за хранение - это возвращаемый залог, необходимый для хранения вашей транзакции на Tangle.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Вы добавили временную блокировку к этой транзакции. Получатель не сможет потратить эти средства до истечения срока блокировки.",
                 "metadata": "Необязательное поле данных для постоянного хранения данных в Tangle.",
                 "tag": "Короткое необязательное поле данных. Пометка групп транзакций может облегчить их поиск.",
-                "gasBudget": "Бюджет газа необходим для проведения транзакции или выполнения функции смарт-контракта на Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "Стандарт NFT, например, IRC27.",

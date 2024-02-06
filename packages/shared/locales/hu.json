@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Címek előzményei",
-            "disclaimer": "A pénzeszközökkel rendelkező vagy a jelen profil által ismert címek listája",
             "indexAndType": "{internal, select, true {Tárcán belüli cím} other {Letéti cím}} {index}",
-            "internal": "Tárcán belüli"
+            "internal": "Tárcán belüli",
+            "errorNoChronicle": "Chronicle nincs beállítva",
+            "errorFailedFetch": "Címelőzmények letöltése sikertelen",
+            "errorFailedGenerate": "Új cím létrehozása sikertelen"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Okosszerződés",
         "targetContract": "Célszerződés",
         "contractFunction": "A szerződés funkciója",
-        "gasBudget": "Gázköltség",
+        "gasFee": "Gázdíj",
         "standard": "Normál",
         "uri": "URI",
         "issuer": "Kibocsátó",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "A címeknek {prefix} előtaggal kell kezdődniük.",
             "wrongAddressFormat": "A cím nem megfelelő formátumú.",
             "invalidAddress": "Helytelen cím.",
+            "invalidExpirationDate": "A lejárati idő érvénytelen.",
+            "pastExpirationDate": "A lejárati idő múltbéli időpontra esik.",
             "invalidAssetId": "A pénzeszköz azonosítója érvénytelen.",
             "unknownAsset": "A token ezen a számlán nem ismert.",
             "insufficientFunds": "Nincs elég összeg a tárcájában a tranzakció végrehajtásához.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Nem használható fenntartott tag kulcsszó"
         },
         "layer2": {
-            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára."
+            "layer1Recipient": "A 2. rétegbeli tranzakció nem küldhető át egy 1. rétegbeli számlára.",
+            "estimatedGas": "Tranzakciós költség (gáz) becslése sikertelen."
         },
         "node": {
             "invalid": "Kérjük, adjon meg egy érvényes URL címet!",
@@ -1974,7 +1979,7 @@
             "refused": "A kapcsolat felépítését visszautasították.",
             "handshake": "A kézfogás nem sikerült a csomóponttal.",
             "invalidCertificate": "Érvénytelen tanúsítvány miatt a csatlakozás sikertelen.",
-            "https": "HTTPS kapcsolat használata kötelező. Biztonsági okokból a HTTP kapcsolat használata jelenleg nem támogatott.",
+            "https": "A külső kapcsolatoknak HTTPS-t kell használniuk; a helyi (localhost) kapcsolatokat HTTP használatával lehet létrehozni. A nem biztonságos külső HTTP-kapcsolatok nem támogatottak.",
             "duplicate": "Ez a csomópont már korábban hozzá lett adva.",
             "noSyncedNode": "Nincs elérhető szinkronizált csomópont.",
             "timeNotSynced": "Az eszköz órája nem megfelelően jár, nem sikerült a csomóponttal szinkronizálni.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "A küldő egy időzárat tett az összegre. Csak akkor férhet hozzá, ha az időzár lejárt.",
                 "metadata": "Opcionális adatmező, mely a Tangle-ben hosszútávon tárolásra kerül.",
                 "tag": "Rövid opcionális adatmező. Tranzakciók egy csoportjának felcímkézése segíthet könnyebben megtalálni őket.",
-                "gasBudget": "A Shimmer EVM-ben egy tranzakció lebonyolításához vagy egy okosszerződés funkciójának végrehajtásához gázköltség megfizetése szükséges."
+                "gasFee": "A Shimmer EVM-ben egy tranzakció lebonyolításához vagy egy okosszerződés funkciójának végrehajtásához gázdíj megfizetése szükséges."
             },
             "outgoing": {
                 "storageDeposit": "A token letéti díj egy visszatéríthető letéti összeg a tranzakció Tangle-ben történő tárolásához.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Időzárral látta el ezt a tranzakciót. A fogadó fél csak annak lejárta után tudja ezt az összeget felhasználni.",
                 "metadata": "Opcionális adatmező, mely a Tangle-ben hosszútávon tárolásra kerül.",
                 "tag": "Rövid opcionális adatmező. Tranzakciók egy csoportjának felcímkézése segíthet könnyebben megtalálni őket.",
-                "gasBudget": "A Shimmer EVM-ben egy tranzakció lebonyolításához vagy egy okosszerződés funkciójának végrehajtásához gázköltség megfizetése szükséges."
+                "gasFee": "A Shimmer EVM-ben egy tranzakció lebonyolításához vagy egy okosszerződés funkciójának végrehajtásához gázdíj megfizetése szükséges."
             },
             "nftMetadata": {
                 "standard": "Az NFT szabvány, pl.: IRC27",

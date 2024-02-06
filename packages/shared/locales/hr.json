@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Adrese započinju prefiksom {prefix}.",
             "wrongAddressFormat": "Adresa nije u ispravnom formatu.",
             "invalidAddress": "Adresa nije valjana.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Sredstvo nije poznato ovom računu.",
             "insufficientFunds": "Ovaj novčanik nema dovoljno sredstava.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Molimo unesite valjani URL.",
@@ -1974,7 +1979,7 @@
             "refused": "Veza je odbijena.",
             "handshake": "Nije bilo moguće dovršiti rukovanje s nodeom.",
             "invalidCertificate": "Nije bilo moguće povezivanje s nevažećim certifikatom.",
-            "https": "HTTPS je obavezan; nesigurne veze putem HTTP-a trenutno nisu podržane.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Ovaj je node već dodan.",
             "noSyncedNode": "Nema dostupnih sinkroniziranih nodeova.",
             "timeNotSynced": "Neispravno vrijeme uređaja, nije moguće sinkronizirati node.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "Pošiljatelj je postavio vremensko zaključavanje ovih sredstava. Moći ćete ih potrošiti nakon isteka vremenskog zaključavanja.",
                 "metadata": "Neobavezno podatkovno polje za trajno pohranjivanje podataka na Tangle.",
                 "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Depozit za pohranu je povratni depozit potreban za pohranu vaše transakcije na Tangle.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Dodali ste vremensko zaključavanje ovoj transakciji. Primatelj neće moći potrošiti ova sredstva sve dok ne istekne vremenska blokada.",
                 "metadata": "Neobavezno podatkovno polje za trajno pohranjivanje podataka na Tangle.",
                 "tag": "Kratko neobavezno podatkovno polje. Označavanje grupa transakcija može olakšati njihovo traženje.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

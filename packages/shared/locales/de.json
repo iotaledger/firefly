@@ -1185,9 +1185,11 @@
         },
         "addressHistory": {
             "title": "Adressverlauf",
-            "disclaimer": "Liste der Adressen mit Guthaben bzw. die diesem Profil bekannt sind",
             "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
-            "internal": "Intern"
+            "internal": "Intern",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1646,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Zielvertrag",
         "contractFunction": "Vertragsfunktion",
-        "gasBudget": "Gasbudget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Aussteller",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "Adressen beginnen mit dem Präfix {prefix}.",
             "wrongAddressFormat": "Die Adresse ist nicht korrekt formatiert.",
             "invalidAddress": "Die Adresse ist ungültig.",
+            "invalidExpirationDate": "Das Ablaufdatum ist ungültig.",
+            "pastExpirationDate": "Das Ablaufdatum ist in der Vergangenheit.",
             "invalidAssetId": "Die Asset-Id ist nicht gültig.",
             "unknownAsset": "Das Asset ist diesem Konto nicht bekannt.",
             "insufficientFunds": "Diese Wallet hat unzureichendes Guthaben.",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "Reserviertes Schlagwort kann nicht verwendet werden"
         },
         "layer2": {
-            "layer1Recipient": "Eine Layer-2-Transaktion kann nicht an ein Layer-1-Konto gesendet werden."
+            "layer1Recipient": "Eine Layer-2-Transaktion kann nicht an ein Layer-1-Konto gesendet werden.",
+            "estimatedGas": "Gas konnte nicht geschätzt werden."
         },
         "node": {
             "invalid": "Gib eine gültige URL ein.",
@@ -1974,7 +1979,7 @@
             "refused": "Die Verbindung wurde abgelehnt.",
             "handshake": "Handshake mit Node konnte nicht abgeschlossen werden.",
             "invalidCertificate": "Verbindung mit ungültigem Zertifikat konnte nicht hergestellt werden.",
-            "https": "HTTPS wird benötigt; unsichere Verbindungen über HTTP werden derzeit nicht unterstützt.",
+            "https": "Externe Verbindungen müssen HTTPS verwenden; localhost Verbindungen können über HTTP hergestellt werden. Unsichere externe HTTP-Verbindungen werden nicht unterstützt.",
             "duplicate": "Dieser Node wurde bereits hinzugefügt.",
             "noSyncedNode": "Keine synchronisierten Nodes verfügbar.",
             "timeNotSynced": "Gerätezeit ist falsch, Synchronisierung nicht möglich.",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "Der Absender hat eine Zeitsperre für diese Guthaben definiert. Du kannst sie ausgeben sobald die Sperre verfällt.",
                 "metadata": "Ein optionales Datenfeld zur dauerhaften Speicherung von Daten auf dem Tangle.",
                 "tag": "Ein kurzes optionales Datenfeld. Tag Gruppen von Transaktionen können die Suche erleichtern.",
-                "gasBudget": "Gasbudget ist erforderlich, um eine Transaktion durchzuführen oder eine Smart Contract Funktion auf Shimmer EVM auszuführen."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Ein Storage Deposit ist eine rückerstattbare Token Einzahlung, die benötigt wird, um Ihre Transaktion auf dem Tangle zu speichern.",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "Du hast eine Zeitsperre definiert. Der Empfänger ist nicht in der Lage die Guthaben auszugeben, bevor die Zeitsperre verfällt.",
                 "metadata": "Ein optionales Datenfeld zur dauerhaften Speicherung von Daten auf dem Tangle.",
                 "tag": "Ein kurzes optionales Datenfeld. Tag Gruppen von Transaktionen können die Suche erleichtern.",
-                "gasBudget": "Gasbudget ist erforderlich, um eine Transaktion durchzuführen oder eine Smart Contract Funktion auf Shimmer EVM auszuführen."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "Der NFT-Standard z.B. IRC27.",

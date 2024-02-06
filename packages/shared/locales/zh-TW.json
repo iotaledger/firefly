@@ -39,8 +39,8 @@
                         "body": "IOTA 主網"
                     },
                     "iotaAlphanet": {
-                        "title": "IOTA Alphanet",
-                        "body": "IOTA Alphanet"
+                        "title": "IOTA Alpha 先行網",
+                        "body": "IOTA Alpha 先行網"
                     },
                     "custom": {
                         "title": "自訂網路",
@@ -289,7 +289,7 @@
                 "description": ""
             },
             "appName": {
-                "title": "App Name"
+                "title": "應用程式名稱"
             },
             "currency": {
                 "title": "貨幣",
@@ -633,42 +633,42 @@
             }
         },
         "vesting": {
-            "title": "Vesting",
+            "title": "鎖倉",
             "overview": {
-                "unlocked": "Unlocked",
-                "locked": "Locked",
-                "total": "Total"
+                "unlocked": "已解鎖",
+                "locked": "已鎖定",
+                "total": "全部"
             },
-            "timeUntilNextUnlock": "Time until next unlock",
-            "collect": "Collect",
-            "search": "Find vesting rewards",
+            "timeUntilNextUnlock": "下次解鎖前的時間",
+            "collect": "收取",
+            "search": "搜尋鎖倉獎勵",
             "payouts": {
-                "title": "Biweekly Unlock Schedule",
-                "information": "Payout Information",
+                "title": "雙週解鎖時間表",
+                "information": "發放資訊",
                 "tooltip": {
-                    "title": "Payout",
-                    "amount": "Amount",
-                    "unlockDate": "Unlock Date"
+                    "title": "發放獎勵",
+                    "amount": "數量",
+                    "unlockDate": "解鎖日期"
                 }
             },
             "infoTooltip": {
-                "title": "Vesting of tokens",
+                "title": "代幣鎖倉",
                 "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
             }
         }
     },
     "popups": {
         "payoutDetails": {
-            "title": "Payout Details",
-            "amount": "Total amount",
-            "unlockDate": "Unlock date",
-            "status": "Status"
+            "title": "發放獎勵的詳細資料",
+            "amount": "總額",
+            "unlockDate": "解鎖日期",
+            "status": "狀態"
         },
         "vestingCollect": {
-            "title": "Collect",
+            "title": "收取",
             "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
-            "unclaimedFunds": "Unclaimed funds",
-            "button": "Collect"
+            "unclaimedFunds": "未領取的資金",
+            "button": "收取"
         },
         "metricSystemInfo": {
             "title": "Transitioning from metric prefixes",
@@ -740,7 +740,7 @@
                 "subtitle": "保留給表決權"
             },
             "vesting": {
-                "title": "Vesting",
+                "title": "鎖倉",
                 "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
             "minimizeStorageDepositButton": "把存儲空間費用最小化"
@@ -917,18 +917,18 @@
             "body": "Perform a more exhaustive search of balances.",
             "addressesSearched": "Addresses searched",
             "addressesFound": "Addresses found",
-            "totalAddressBalance": "Total balance",
+            "totalAddressBalance": "總餘額",
             "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
             "currentWallet": "Search only in the current wallet"
         },
         "balanceOverview": {
-            "title": "Balance overview",
+            "title": "餘額總覽",
             "body": "Find information about all your wallets and the balance of each."
         },
         "vestingRewards": {
-            "title": "Find vesting rewards",
-            "body": "Perform a more exhaustive search of your rewards.",
-            "totalAddressBalance": "Total rewards",
+            "title": "搜尋鎖倉獎勵",
+            "body": "對您的獎勵進行更全面的搜尋",
+            "totalAddressBalance": "獎勵總額",
             "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
         },
         "riskFunds": {
@@ -1184,10 +1184,12 @@
             "body": "此節點需要額外的認證。請填寫正確的資訊。"
         },
         "addressHistory": {
-            "title": "Address history",
-            "disclaimer": "List of addresses with funds or known by this profile",
+            "title": "位址記錄",
             "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal"
+            "internal": "內部的",
+            "errorNoChronicle": "Chronicle 尚未設定",
+            "errorFailedFetch": "無法取得位址的歷史紀錄",
+            "errorFailedGenerate": "無法產生新位址"
         }
     },
     "charts": {
@@ -1234,15 +1236,15 @@
         "save": "儲存",
         "importSeed": "匯入現有的種子",
         "restoreWallet": {
-            "iota": "Restore IOTA profile",
-            "iotaAlphanet": "Restore IOTA Alphanet profile",
+            "iota": "回復 IOTA 設定檔",
+            "iotaAlphanet": "回復 IOTA Alpha 先行網設定檔",
             "shimmer": "復原Shimmer設定檔",
             "testnet": "恢復測試網設定檔",
             "custom": "恢復自訂網路設定檔"
         },
         "restoreWalletDescription": {
-            "iota": "Restore an existing IOTA profile",
-            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
+            "iota": "恢復既有的 IOTA 設定檔",
+            "iotaAlphanet": "回復既有的 IOTA Alpha 先行網設定檔",
             "shimmer": "復原既有的Shimmer檔",
             "testnet": "恢復既有的測試網設定檔",
             "custom": "恢復既有的自訂網路設定檔"
@@ -1340,7 +1342,7 @@
         "viewStatus": "查看狀態",
         "viewAddressHistory": "檢視地址歷史紀錄",
         "viewBalanceBreakdown": "檢視餘額明細",
-        "verifyDepositAddress": "Verify deposit address",
+        "verifyDepositAddress": "驗證存款位址",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
         "hideNetworkStatistics": "隱藏網路統計數據",
@@ -1397,7 +1399,7 @@
         "revote": "重新投票",
         "skipAndKeep": "跳過並保留舊密碼",
         "addChain": "新增鏈",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "搜尋鎖倉獎勵"
     },
     "general": {
         "recipient": "接收方",
@@ -1440,7 +1442,7 @@
         "shimmerClaimed": "已領取",
         "shimmerClaiming": "領取中",
         "shimmerGenesis": "Shimmer 創世",
-        "vestingReward": "Vesting Reward Airdrop",
+        "vestingReward": "所倉獎勵空投",
         "stardustGenesis": "Stardust Genesis",
         "minted": "已鑄造",
         "minting": "鑄造中",
@@ -1646,7 +1648,7 @@
         "smartContract": "智能合約",
         "targetContract": "目標合約",
         "contractFunction": "合約功能",
-        "gasBudget": "瓦斯預算",
+        "gasFee": "Gas fee",
         "standard": "標準",
         "uri": "URI",
         "issuer": "發行者",
@@ -1745,7 +1747,7 @@
             "foundry": "鑄造廠",
             "governance": "治理",
             "consolidation": "合併",
-            "vesting": "Vesting"
+            "vesting": "鎖倉"
         },
         "direction": {
             "label": "方向",
@@ -1826,7 +1828,7 @@
             }
         },
         "syncing": "請等待同步完成才更換錢包。",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "請等待所有交易完成。",
         "participating": "請等待所有質押/投票交易完成才更換錢包。",
         "claimed": {
             "success": "交易認領",
@@ -1942,6 +1944,8 @@
             "wrongAddressPrefix": "地址必須以 {prefix} 開頭。",
             "wrongAddressFormat": "地址格式不正確。",
             "invalidAddress": "此地址無效。",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "此資產 ID 無效。",
             "unknownAsset": "此帳號不清楚該資產",
             "insufficientFunds": "這個錢包資金不足。",
@@ -1965,7 +1969,8 @@
             "reservedTagKeyword": "無法使用保留的標籤關鍵字"
         },
         "layer2": {
-            "layer1Recipient": "第二層上的交易無法發送到第一層的帳戶。"
+            "layer1Recipient": "第二層上的交易無法發送到第一層的帳戶。",
+            "estimatedGas": "無法估計 gas。"
         },
         "node": {
             "invalid": "請輸入有效的 URL。",
@@ -1974,7 +1979,7 @@
             "refused": "此連線被拒絕。",
             "handshake": "無法與節點進行連線交握。",
             "invalidCertificate": "無法以無效憑證連線。",
-            "https": "必須由 HTTPS 安全連線，目前尚未支援以 HTTP 進行的不安全連線。",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "該節點已被添加。",
             "noSyncedNode": "沒有可用的同步節點。",
             "timeNotSynced": "裝置時間不正確，無法同步結點",
@@ -2157,7 +2162,7 @@
                 "timelockDate": "發件人對這些資金設置了時間鎖。一旦時間鎖定到期，您將能夠使用它們。",
                 "metadata": "用於在 Tangle 上持久存儲數據的可選數據字段。",
                 "tag": "一個簡短的可選數據字段。標記事務組可以使它們更易於搜索。",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "將您的交易存儲在 Tangle 上所需的可退還代幣押金。",
@@ -2166,7 +2171,7 @@
                 "timelockDate": "您為此事務添加了時間鎖。在時間鎖定到期之前，收款人將無法使用這些資金。",
                 "metadata": "用於在 Tangle 上持久存儲數據的可選數據字段。",
                 "tag": "一個簡短的可選數據字段。標記事務組可以使它們更易於搜索。",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "NFT 標準，例如 IRC27。",
@@ -2178,10 +2183,10 @@
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 可選參數：代幣使用的小數位數（代幣數量除以 10^小數位數，以得到其用戶表示）。",
+            "description": "IRC30 可選參數：代幣的人類可讀描述。",
+            "url": "IRC30 可選參數：指向有關代幣的更多資源的 URL，例如網站或社交媒體頁面。",
+            "logoUrl": "IRC30 可選參數：指向代幣標誌圖像資源的URL。"
         },
         "mintNftForm": {
             "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
@@ -2239,7 +2244,7 @@
         "developer": "開發人員",
         "tokens": "代幣",
         "activity": "活動",
-        "vesting": "Vesting"
+        "vesting": "鎖倉"
     },
     "pills": {
         "stake": {
@@ -2357,8 +2362,8 @@
         "locked": "已鎖定",
         "smartContract": "智能合約",
         "vesting": {
-            "unlocked": "Unlocked",
-            "locked": "Locked"
+            "unlocked": "已解鎖",
+            "locked": "已鎖定"
         }
     },
     "menus": {
