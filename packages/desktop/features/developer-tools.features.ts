@@ -6,13 +6,13 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     mintNft: {
-        enabled: true,
+        enabled: false,
     },
     mintNativeTokens: {
-        enabled: true,
+        enabled: false,
     },
     alias: {
-        enabled: true,
+        enabled: false,
     },
     refreshTokens: {
         enabled: true,

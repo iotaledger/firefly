@@ -1,9 +1,9 @@
 import { IGovernanceFeatures } from '@lib/features/interfaces'
 
 const governanceFeatures: IGovernanceFeatures = {
-    enabled: true,
+    enabled: false,
     removeProposals: {
-        enabled: true,
+        enabled: false,
     },
 }
 
