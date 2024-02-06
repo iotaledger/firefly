@@ -1,17 +1,17 @@
 import { IBaseToken, IPersistedAsset } from '@core/wallet/interfaces'
 import { TokenStandard, VerifiedStatus } from '@core/wallet/enums'
 
+export const MANA_ID = 'mana'
+
 export const DEFAULT_MANA: IBaseToken = {
     standard: TokenStandard.BaseToken,
-    name: 'MANA',
-    tickerSymbol: 'mana',
-    unit: 'mana',
+    name: 'Mana',
+    tickerSymbol: 'Mana',
+    unit: 'Mana',
     decimals: 6,
     subunit: 'µmana',
     useMetricPrefix: false,
 }
-
-export const MANA_ID = 'mana'
 
 export const PERSISTED_MANA_ASSET: IPersistedAsset = {
     id: MANA_ID,

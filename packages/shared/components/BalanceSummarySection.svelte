@@ -5,7 +5,7 @@
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
-    import { DEFAULT_MANA } from 'shared/lib/core/network'
+    import { DEFAULT_MANA } from '@core/network'
 
     export let titleKey: string
     export let subtitleKey: string = ''
