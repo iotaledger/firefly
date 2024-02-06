@@ -785,15 +785,15 @@
             },
             "mana": {
                 "title": "Mana",
-                "subtitle": "Available mana"
+                "subtitle": "Total mana"
             },
-            "storedAvailableMana": {
-                "title": "Stored Mana",
-                "subtitle": "Stored Mana"
+            "lockedMana": {
+                "title": "Locked Mana",
+                "subtitle": "Locked Mana"
             },
-            "potentialAvailableMana": {
-                "title": "Potential Mana",
-                "subtitle": "Potential Mana"
+            "availableMana": {
+                "title": "Available Mana",
+                "subtitle": "Available Mana"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },

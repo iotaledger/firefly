@@ -4,6 +4,7 @@
     import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
+    import { getManaBalance } from '@core/network'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
@@ -13,7 +14,7 @@
 
     interface BalanceBreakdown {
         amount: number
-        isAsset?: boolean
+        isBaseToken?: boolean
         subBreakdown?: { [key: string]: { amount: number } }
     }
 
@@ -51,11 +52,14 @@
     }
 
     function getManaBreakdown(): BalanceBreakdown {
+        const totalBalance = getManaBalance(walletBalance?.mana?.total)
+        const availableBalance = getManaBalance(walletBalance?.mana?.available)
+
         const subBreakdown = {
-            storedAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.stored) },
-            potentialAvailableMana: { amount: Number($selectedWallet?.balances?.mana?.available?.potential) },
+            availableMana: { amount: availableBalance },
+            lockedMana: { amount: totalBalance - availableBalance },
         }
-        return { amount: Number($selectedWallet?.balances?.mana?.total?.stored ?? 0), subBreakdown, isAsset: false }
+        return { amount: totalBalance, subBreakdown, isBaseToken: false }
     }
 
     async function getPendingBreakdown(): Promise<BalanceBreakdown> {
@@ -169,7 +173,7 @@
                 subtitleKey={breakdownKey}
                 amount={breakdown[breakdownKey].amount}
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
-                isAsset={breakdown[breakdownKey].isAsset}
+                isBaseToken={breakdown[breakdownKey].isBaseToken}
             />
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(walletBalance?.baseCoin?.total ?? 0)} bold />
