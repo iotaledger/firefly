@@ -1,5 +1,8 @@
 name: Build Desktop (v2)
 
+env:
+    NETWORK_CODE: shimmer
+
 on:
     workflow_dispatch:
         inputs:
@@ -112,8 +115,8 @@ jobs:
               env:
                   CSC_LINK: ${{ secrets.MAC_CERT_BASE64 }}
                   CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
-                  FIREFLY_APPLE_ID: ${{ secrets.APPLE_ID }}
-                  FIREFLY_APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
               working-directory: packages/desktop
               if: matrix.os == 'macos-11'
 
@@ -164,7 +167,6 @@ jobs:
             - name: Upload artifacts
               uses: actions/upload-artifact@v2
               with:
-                  name: firefly-desktop-${{ matrix.os }}
+                  name: firefly-${{ env.NETWORK_CODE }}-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-*
-                      packages/desktop/out/latest*
