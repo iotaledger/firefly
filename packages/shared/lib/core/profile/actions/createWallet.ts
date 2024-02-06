@@ -1,23 +1,20 @@
 import { api } from '@core/api'
 import { IPersistedProfile, IWallet } from '../interfaces'
-import {
-    getSecretManagerFromProfileType,
-    getStorageDirectoryOfSecretManager,
-    getStorageDirectoryOfWallet,
-} from '../utils'
+import { getSecretManagerFromProfileType } from '../utils'
 import { WalletOptions } from '@iota/sdk'
-import { selectedWalletId } from '../../wallet'
-import { generateRandomId } from '../../utils'
+import { selectedWalletId } from '@core/wallet'
+import { generateRandomId } from '@core/utils'
+import { DirectoryManager } from '@core/profile/classes'
 
 export function getWalletOptions(
     profile: IPersistedProfile,
-    storagePath: string,
+    walletPath: string,
     secretManagerPath: string,
     password?: string
 ): WalletOptions {
     return {
         clientOptions: profile.clientOptions,
-        storagePath,
+        storagePath: walletPath,
         secretManager: getSecretManagerFromProfileType(profile.type, secretManagerPath, password),
         bipPath: {
             coinType: profile.network.coinType,
@@ -29,9 +26,9 @@ export function getWalletOptions(
 
 export async function createWallet(profile: IPersistedProfile, password?: string): Promise<IWallet> {
     const walletId = generateRandomId()
-    const walletDBPath = await getStorageDirectoryOfWallet(profile.id, walletId)
-    const secretManagerPath = await getStorageDirectoryOfSecretManager(profile.id)
-    const walletOptions = getWalletOptions(profile, walletDBPath, secretManagerPath, password)
+    const walletPath = await DirectoryManager.forWallet(profile.id, walletId)
+    const secretManagerPath = await DirectoryManager.forSecretManager(profile.id)
+    const walletOptions = getWalletOptions(profile, walletPath, secretManagerPath, password)
 
     const wallet = await api.getWallet(walletId, walletOptions)
 
