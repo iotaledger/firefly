@@ -695,6 +695,18 @@
                 }
             },
             "action": "Start"
+        },
+        "accountManagement":{
+            "list": {
+                "title": "Your Accounts",
+                "tile": {
+                    "title": "Account",
+                    "pill": {
+                        "main" : "Main",
+                        "pending" : "Pending"
+                    }
+                }
+            }
         }
     },
     "popups": {
