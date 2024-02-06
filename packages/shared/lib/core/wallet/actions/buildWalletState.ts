@@ -1,8 +1,9 @@
-import { Balance, OutputData } from '@iota/sdk/out/types'
+import { IWallet } from '@core/profile/interfaces'
+import { AccountAddress, AccountOutput, Balance, OutputData, OutputType } from '@iota/sdk/out/types'
+import { updateWalletPersistedDataOnActiveProfile } from '../../profile'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
-import { IWallet } from '@core/profile/interfaces'
-import { getDepositAddress } from '../utils/getDepositAddress'
+import { getBech32AddressFromAddressTypes, getBlockIssuerAccounts } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -29,19 +30,42 @@ export async function buildWalletState(
         delegations: [],
     }
 
-    let depositAddress = ''
     let votingPower = ''
     let walletOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
     let implicitAccountOutputs: OutputData[] = []
+    let depositAddress = ''
 
     try {
         balances = await wallet.getBalance()
-        depositAddress = await getDepositAddress(wallet)
-        votingPower = balances.baseCoin.votingPower
         accountOutputs = await wallet.accounts()
+        // check if the mainAccountId is still valid
+        if (
+            walletPersistedData.mainAccountId &&
+            !accountOutputs.find(
+                (output) =>
+                    output.output.type === OutputType.Account &&
+                    (output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
+            )
+        ) {
+            updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId: undefined })
+            walletPersistedData.mainAccountId = undefined
+        }
+        // if there is no mainAccountId, try to set the first account from the block issuer accounts
+        if (!walletPersistedData.mainAccountId) {
+            const blockIssuerAccounts = await getBlockIssuerAccounts(wallet)
+            if (blockIssuerAccounts.length > 0) {
+                const mainAccountId = (blockIssuerAccounts[0]?.output as AccountOutput)?.accountId
+                updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId })
+                walletPersistedData.mainAccountId = mainAccountId
+            }
+        }
+        depositAddress = walletPersistedData.mainAccountId
+            ? getBech32AddressFromAddressTypes(new AccountAddress(walletPersistedData.mainAccountId))
+            : ''
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
+        votingPower = balances.baseCoin.votingPower
     } catch (err) {
         console.error(err)
     }
@@ -49,15 +73,16 @@ export async function buildWalletState(
     return {
         ...wallet,
         ...walletPersistedData,
-        depositAddress,
         balances,
         hasVotingPowerTransactionInProgress: false,
         hasVotingTransactionInProgress: false,
         hasConsolidatingOutputsTransactionInProgress: false,
+        hasImplicitAccountCreationTransactionInProgress: false,
         isTransferring: false,
         votingPower,
         walletOutputs,
         accountOutputs,
+        depositAddress,
         implicitAccountOutputs,
     } as IWalletState
 }

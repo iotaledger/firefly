@@ -14,6 +14,8 @@ import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFo
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 import { OutputType } from '@iota/sdk/out/types'
 import { generateVestingActivity } from './generateVestingActivity'
+import { generateSingleAnchorActivity } from './generateSingleAnchorActivity'
+import { generateActivitiesFromAnchorOutputs } from './generateActivitiesFromAnchorOutputs'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
@@ -65,6 +67,12 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(governanceActivity)
     }
 
+    const containsAnchorActivity = outputs.some((output) => output.output.type === OutputType.Anchor)
+    if (containsAnchorActivity) {
+        const anchorActivities = await generateActivitiesFromAnchorOutputs(processedTransaction, wallet)
+        activities.push(...anchorActivities)
+    }
+
     if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity && !governanceOutput) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
@@ -103,6 +111,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateSingleNftActivity(wallet, params)
                 case ActivityType.Vesting:
                     return generateVestingActivity(wallet, params)
+                case ActivityType.Anchor:
+                    return generateSingleAnchorActivity(wallet, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }

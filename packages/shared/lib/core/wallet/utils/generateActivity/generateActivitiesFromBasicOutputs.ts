@@ -47,7 +47,7 @@ export async function generateActivitiesFromBasicOutputs(
                 },
                 getNftId(nftInput.nftId, wrappedInput.outputId)
             )
-            const nft = buildNftFromNftOutput(wrappedInput, account.depositAddress, false)
+            const nft = buildNftFromNftOutput(wrappedInput, wallet.depositAddress, false)
             addOrUpdateNftInAllWalletNfts(wallet.id, nft)
 
             burnedNftInputs.splice(burnedNftInputIndex, 1)
@@ -63,13 +63,13 @@ export async function generateActivitiesFromBasicOutputs(
                 burnedNativeToken.amount
             )
         } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
-            activity = await generateSingleConsolidationActivity(account, {
+            activity = await generateSingleConsolidationActivity(wallet, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
             })
         } else {
-            activity = await generateSingleBasicActivity(account, {
+            activity = await generateSingleBasicActivity(wallet, {
                 action: ActivityAction.Send,
                 processedTransaction,
                 wrappedOutput: basicOutput,
@@ -141,12 +141,14 @@ function getBurnedNativeTokens(
 function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
     const nativeTokens: { [key: string]: number } = {}
     for (const output of outputs) {
-        if (output.output.type !== OutputType.Treasury) {
+        if (output.output.type === OutputType.Foundry || output.output.type === OutputType.Basic) {
             const commonOutput = output.output as CommonOutput
-            for (const nativeToken of commonOutput.nativeTokens ?? []) {
+            const nativeToken = commonOutput.getNativeToken()
+            if (nativeToken) {
                 if (!nativeTokens[nativeToken.id]) {
                     nativeTokens[nativeToken.id] = 0
                 }
+
                 nativeTokens[nativeToken.id] += Number(nativeToken.amount)
             }
         }

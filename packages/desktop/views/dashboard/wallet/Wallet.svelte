@@ -2,15 +2,18 @@
     import { selectedWallet } from '@core/wallet'
     import { ImplicitAccountCreationView, WalletView } from './views'
 
-    $: hasAccount = $selectedWallet?.accountOutputs?.length !== 0
+    // TODO: replace 3 with 1 when the faucet is fixed
+    // https://github.com/iotaledger/inx-faucet/issues/122
+    $: showImplicitAccountFlow =
+        !$selectedWallet?.accountOutputs?.length && $selectedWallet?.implicitAccountOutputs?.length <= 3
 </script>
 
 {#if $selectedWallet}
-    {#key $selectedWallet?.index}
-        {#if hasAccount}
-            <WalletView />
-        {:else}
+    {#key $selectedWallet?.id}
+        {#if showImplicitAccountFlow}
             <ImplicitAccountCreationView />
+        {:else}
+            <WalletView />
         {/if}
     {/key}
 {/if}

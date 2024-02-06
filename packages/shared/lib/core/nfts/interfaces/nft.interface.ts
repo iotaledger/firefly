@@ -16,4 +16,5 @@ export interface INft {
     storageDeposit: number
     filePath: string
     downloadMetadata: NftDownloadMetadata
+    mana: number
 }
