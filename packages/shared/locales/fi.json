@@ -812,12 +812,6 @@
             "errorBody2": "Sinulla on tällä hetkellä {balance} jäljellä tässä lompakossa. Ole hyvä ja siirrä nämä varat toiseen lompakkoon ja yritä uudelleen.",
             "errorBody3": "Et voi piilottaa tätä lompakkoa, sinulla on oltava vähintään yksi."
         },
-        "addressHistory": {
-            "title": "Lompakon {name} osoitehistoria",
-            "currentBalance": "Saldo: {balance}",
-            "internal": "Sisäinen osoite",
-            "external": "Talletusosoite"
-        },
         "excludeNode": {
             "title": "Hylkää solmu",
             "body": "Oletko varma, että haluat sulkea osoitteen {url} pois käytettävissä olevien solmujen joukosta?"
@@ -1188,6 +1182,14 @@
         "nodeAuthRequired": {
             "title": "Authentication required",
             "body": "This node requires additional authentication. Please fill in the appropriate information."
+        },
+        "addressHistory": {
+            "title": "Address history",
+            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
+            "internal": "Internal",
+            "errorNoChronicle": "Chronicle not configured",
+            "errorFailedFetch": "Couldn't fetch address history",
+            "errorFailedGenerate": "Couldn't generate a new address"
         }
     },
     "charts": {
@@ -1234,14 +1236,14 @@
         "save": "Tallenna",
         "importSeed": "Tuo olemassaoleva seed-merkkijono",
         "restoreWallet": {
-            "iota": "Siirrä tai palauta lompakko",
+            "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Palauta Shimmer-profiili",
             "testnet": "Restore Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
-            "iota": "Siirry Chrysalis-verkkoon tai palauta olemassaoleva lompakko",
+            "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Palauta olemassaoleva Shimmer-profiili",
             "testnet": "Restore an existing Testnet profile",
@@ -1338,6 +1340,7 @@
         "visitFaq": "Katso usein kysytyt kysymykset",
         "viewDownloads": "View downloads",
         "viewStatus": "Näytä tila",
+        "viewAddressHistory": "Näytä osoitehistoria",
         "viewBalanceBreakdown": "View balance breakdown",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
@@ -1645,7 +1648,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Target contract",
         "contractFunction": "Contract function",
-        "gasBudget": "Gas budget",
+        "gasFee": "Gas fee",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Issuer",
@@ -1941,6 +1944,8 @@
             "wrongAddressPrefix": "Osoitteet alkavat etuliitteellä {prefix}.",
             "wrongAddressFormat": "Osoite on muotoiltu virheellisesti.",
             "invalidAddress": "Osoite ei ole kelvollinen.",
+            "invalidExpirationDate": "The expiration date is not valid.",
+            "pastExpirationDate": "The expiration date is in the past.",
             "invalidAssetId": "The asset id is not valid.",
             "unknownAsset": "Tämä nimike ei ole tämän tilin tiedossa.",
             "insufficientFunds": "Tässä lompakossa ei ole riittävästi varoja.",
@@ -1964,7 +1969,8 @@
             "reservedTagKeyword": "Unable to use reserved tag keyword"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account."
+            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
+            "estimatedGas": "Failed to estimate gas."
         },
         "node": {
             "invalid": "Syötä kelvollinen URL-osoite.",
@@ -1973,7 +1979,7 @@
             "refused": "Yhteydestä kieltäydyttiin.",
             "handshake": "Kättelyä solmun kanssa ei voitu suorittaa.",
             "invalidCertificate": "Ei voitu yhdistää virheellisellä varmenteella.",
-            "https": "HTTPS on pakollinen; turvattomia yhteyksiä HTTP:n yli ei tueta tällä hetkellä.",
+            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
             "duplicate": "Tämä solmu on jo lisätty.",
             "noSyncedNode": "Synkronoituja solmuja ei ole saatavilla.",
             "timeNotSynced": "Laitteen kellonaika on väärin, solmua ei voi synkronoida.",
@@ -2156,7 +2162,7 @@
                 "timelockDate": "Lähettäjä asetti aikalukon näihin varoihin. Voit käyttää ne, kun aikalukko päättyy.",
                 "metadata": "Valinnainen tietokenttä tietojen pysyvään tallennukseen Tanglessa.",
                 "tag": "Lyhyt valinnainen tietokenttä. Transaktioryhmien merkitseminen voi helpottaa niitten etsimistä.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "outgoing": {
                 "storageDeposit": "Tallennusvakuus on palautettava talletus, joka tarvitaan transaktiosi tallettamiseen Tangleen.",
@@ -2165,7 +2171,7 @@
                 "timelockDate": "Lisäsit aikalukon tähän transaktioon. Vastaanottaja ei voi käyttää näitä varoja ennen kuin aikalukko erääntyy.",
                 "metadata": "Valinnainen tietokenttä tietojen pysyvään tallennukseen Tanglessa.",
                 "tag": "Lyhyt valinnainen tietokenttä. Transaktioryhmien merkitseminen voi helpottaa niitten etsimistä.",
-                "gasBudget": "Gas budget is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
             "nftMetadata": {
                 "standard": "The NFT standard e.g. IRC27.",

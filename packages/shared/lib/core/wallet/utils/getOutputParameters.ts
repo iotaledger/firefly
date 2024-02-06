@@ -1,4 +1,5 @@
 import { getSelectedAccount, prepareOutput } from '@core/account'
+import { ILayer2GasEstimatePayload } from '@core/layer-2/interfaces'
 import {
     getEstimatedGasForTransferFromTransactionDetails,
     getLayer2MetadataForTransfer,
@@ -51,7 +52,9 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
     }
 }
 
-async function buildOutputParametersForLayer2(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
+async function buildOutputParametersForLayer2(
+    transactionDetails: NewTransactionDetails
+): Promise<OutputParams | undefined> {
     const { expirationDate, timelockDate, layer2Parameters } = transactionDetails ?? {}
     const selectedAccount = getSelectedAccount()
 
@@ -87,7 +90,10 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
         },
     }
 
-    async function getEstimateData() {
+    async function getEstimateData(): Promise<{
+        outputForEstimate: BasicOutput | NftOutput
+        gasEstimatePayload: ILayer2GasEstimatePayload
+    }> {
         const outputForEstimate = (await prepareOutput(
             selectedAccount.index,
             outputParams,
@@ -103,7 +109,7 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
 
     let estimatedData = await getEstimateData()
 
-    if (estimatedData.gasEstimatePayload.gasBurned) {
+    if (estimatedData?.gasEstimatePayload?.gasBurned) {
         //  The "+1" is due to an optimization in WASP nodes.
         const metadata = getLayer2MetadataForTransfer(
             transactionDetails,
@@ -113,23 +119,26 @@ async function buildOutputParametersForLayer2(transactionDetails: NewTransaction
             outputParams.features = {}
         }
         outputParams.features.metadata = metadata
+
         estimatedData = await getEstimateData()
-    }
 
-    // Now that we have the gasFeeCharged, update the amount & the tx details
-    if (estimatedData.gasEstimatePayload.gasFeeCharged) {
-        newTransactionDetails.update((state) => {
-            if (state?.layer2Parameters) {
-                state.layer2Parameters.gasBudget = BigInteger(estimatedData.gasEstimatePayload.gasFeeCharged as number)
-            }
-            return state
-        })
-        outputParams.amount = (
-            parseInt(estimatedData.outputForEstimate.amount, 10) + estimatedData.gasEstimatePayload.gasFeeCharged
-        ).toString()
-    }
+        if (estimatedData?.gasEstimatePayload?.gasFeeCharged) {
+            // Now that we have the gasFeeCharged, update the amount & the tx details
+            newTransactionDetails.update((state) => {
+                if (state?.layer2Parameters) {
+                    state.layer2Parameters.gasBudget = BigInteger(
+                        estimatedData.gasEstimatePayload.gasFeeCharged as number
+                    )
+                }
+                return state
+            })
+            outputParams.amount = (
+                parseInt(estimatedData.outputForEstimate.amount, 10) + estimatedData.gasEstimatePayload.gasFeeCharged
+            ).toString()
 
-    return outputParams
+            return outputParams
+        }
+    }
 }
 
 function getAmountFromTransactionDetails(transactionDetails: NewTransactionDetails): string {
