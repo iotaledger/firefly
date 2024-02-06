@@ -11,4 +11,5 @@ export interface IIscpChainMetadata extends IBaseChainMetadata {
     type: ChainType.Iscp
     anchorAddress: string
     iscpEndpoint: string
+    archiveEndpoint: string
 }

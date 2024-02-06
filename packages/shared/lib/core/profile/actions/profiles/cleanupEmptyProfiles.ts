@@ -1,7 +1,8 @@
-import { Platform } from '@core/app'
+import { Platform } from '@core/app/classes'
 import { get } from 'svelte/store'
 import { profiles } from '../../stores'
-import { getStorageDirectoryOfProfiles, removeProfileFolder } from '../../utils'
+import { removeProfileFolder } from '../../utils'
+import { DirectoryManager } from '../../classes'
 
 /**
  * Cleanup profile listed that have nothing stored and stored profiles not in app.
@@ -10,8 +11,8 @@ import { getStorageDirectoryOfProfiles, removeProfileFolder } from '../../utils'
  */
 export async function cleanupEmptyProfiles(): Promise<void> {
     try {
-        const profileDataPath = await getStorageDirectoryOfProfiles()
-        const storedProfiles = await Platform.listProfileFolders(profileDataPath)
+        const profilesPath = await DirectoryManager.forProfiles()
+        const storedProfiles = await Platform.listProfileFolders(profilesPath)
 
         profiles.update((_profiles) => _profiles?.filter((_profile) => storedProfiles.includes(_profile?.id)))
 
