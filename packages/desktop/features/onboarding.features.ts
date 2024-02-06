@@ -129,9 +129,9 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
         },
     },
     restoreProfile: {
-        enabled: false,
+        enabled: true,
         recoveryPhrase: {
-            enabled: false,
+            enabled: true,
         },
         strongholdBackup: {
             enabled: false,
