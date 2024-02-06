@@ -34,6 +34,11 @@
         modal?.close()
     }
 
+    function onWithdrawFromL2Click(): void {
+        openPopup({ id: PopupId.WithdrawFromL2 })
+        modal?.close()
+    }
+
     function onVerifyAddressClick(): void {
         const ADDRESS_INDEX = 0
         checkOrConnectLedger(() => {
@@ -81,6 +86,9 @@
                 title={localize('actions.viewAddressHistory')}
                 onClick={onViewAddressHistoryClick}
             />
+        {/if}
+        {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
+            <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseWalletClick} />
         {#if $isActiveLedgerProfile}

@@ -1,21 +1,21 @@
 diff --git a/node_modules/electron-updater/out/windowsExecutableCodeSignatureVerifier.js b/node_modules/electron-updater/out/windowsExecutableCodeSignatureVerifier.js
-index 9d35ee9..ea445aa 100644
+index a12ba9f..cd2f090 100644
 --- a/node_modules/electron-updater/out/windowsExecutableCodeSignatureVerifier.js
 +++ b/node_modules/electron-updater/out/windowsExecutableCodeSignatureVerifier.js
-@@ -43,8 +43,7 @@ function verifySignature(publisherNames, unescapedTempUpdateFile, logger) {
+@@ -37,8 +37,7 @@ function verifySignature(publisherNames, unescapedTempUpdateFile, logger) {
              try {
                  if (error != null || stderr) {
-                     handleError(logger, error, stderr);
+                     handleError(logger, error, stderr, reject);
 -                    resolve(null);
 -                    return;
 +                    throw error;
                  }
-                 const data = parseOut(Buffer.from(stdout, "base64").toString("utf-8"));
+                 const data = parseOut(stdout);
                  if (data.Status === 0) {
-@@ -75,8 +74,8 @@ function verifySignature(publisherNames, unescapedTempUpdateFile, logger) {
+@@ -69,8 +68,8 @@ function verifySignature(publisherNames, unescapedTempUpdateFile, logger) {
              }
              catch (e) {
-                 handleError(logger, e, null);
+                 handleError(logger, e, null, reject);
 -                resolve(null);
 -                return;
 +                logger.warn(`Cannot execute Get-AuthenticodeSignature: ${e}. Aborting update.`);

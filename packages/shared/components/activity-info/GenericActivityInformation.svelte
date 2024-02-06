@@ -17,14 +17,17 @@
     $: claimedTime = getFormattedTimeStamp(activity?.asyncData?.claimedDate)
     $: hasStorageDeposit =
         activity?.storageDeposit || (activity?.storageDeposit === 0 && activity?.giftedStorageDeposit === 0)
-    $: gasBudget = activity?.parsedLayer2Metadata?.gasBudget
+    // Note: Because this component is used in both confirmation and tx history,
+    // we asume the gas budget is the same as the gas fee,
+    // its true for transactions made with firefly, but it might not be true for other wallets.
+    $: gasFee = activity?.parsedLayer2Metadata?.gasBudget
 
     $: formattedTransactionTime = getFormattedTimeStamp(activity?.time)
     $: formattedTimelockDate = getFormattedTimeStamp(activity?.asyncData?.timelockDate)
     $: formattedStorageDeposit = formatTokenAmountPrecise(activity?.storageDeposit ?? 0, getBaseToken())
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, getBaseToken())
     $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, getBaseToken())
-    $: formattedGasBudget = formatTokenAmountPrecise(Number(gasBudget ?? 0), getBaseToken())
+    $: formattedGasFee = formatTokenAmountPrecise(Number(gasFee ?? 0), getBaseToken())
 
     let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
@@ -49,8 +52,8 @@
         ...(activity?.giftedStorageDeposit && {
             giftedStorageDeposit: { data: formattedGiftedStorageDeposit, isTooltipVisible: true },
         }),
-        ...(gasBudget && {
-            gasBudget: { data: formattedGasBudget, isTooltipVisible: true },
+        ...(gasFee && {
+            gasFee: { data: formattedGasFee, isTooltipVisible: true },
         }),
         ...(expirationTime && {
             expirationTime: { data: expirationTime, isTooltipVisible: true },
