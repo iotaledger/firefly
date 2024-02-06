@@ -10,7 +10,7 @@ import { isOnboardingLedgerProfile, onboardingProfile, onboardingProfileSecretMa
  */
 export async function initialiseOnboardingProfile(
     isDeveloperProfile = false,
-    destroyPreviousSecretManager = false
+    destroyPreviousSecretManager = true
 ): Promise<void> {
     if (get(onboardingProfileSecretManager)) {
         if (destroyPreviousSecretManager) {
