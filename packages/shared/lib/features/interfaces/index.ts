@@ -1,3 +1,4 @@
+export * from './account-management-features.interface'
 export * from './collectibles-features.interface'
 export * from './developer-features.interface'
 export * from './feature-flag.interface'
