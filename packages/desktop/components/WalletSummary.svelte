@@ -13,7 +13,7 @@
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ')
 
-    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+    $: ({ baseCoin, mana } = $selectedWalletAssets[$activeProfile?.network.id])
 </script>
 
 <wallet-summary class="block relative space-y-4">
@@ -24,6 +24,6 @@
         <WalletActionsButton />
     </div>
     <div class="flex flex-col flex-wrap items-start space-y-1">
-        <TogglableAssetBalanceLabel asset={baseCoin} />
+        <TogglableAssetBalanceLabel asset={baseCoin} {mana} />
     </div>
 </wallet-summary>

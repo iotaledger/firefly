@@ -1,4 +1,4 @@
-import { getStorageDirectoryOfProfile } from '@core/profile'
+import { DirectoryManager } from '@core/profile/classes'
 import { restoreBackup } from '@core/wallet'
 import { get } from 'svelte/store'
 import { restoreBackupByCopyingFile } from '../helpers'
@@ -11,7 +11,7 @@ export async function restoreBackupFromStrongholdFile(strongholdPassword: string
         try {
             await restoreBackup(importFilePath, strongholdPassword, network.protocol.bech32Hrp)
         } catch (err) {
-            const storageDirectory = await getStorageDirectoryOfProfile(id)
+            const storageDirectory = await DirectoryManager.forProfile(id)
             const secretManager = get(onboardingProfileSecretManager)
             await restoreBackupByCopyingFile(importFilePath, storageDirectory, strongholdPassword, secretManager)
         }

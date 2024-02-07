@@ -2,7 +2,7 @@
 const { getAppName } = require('./product.js')
 
 /* eslint-disable-next-line no-undef */
-const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/dist/main') : require('@sentry/electron/dist/renderer')
+const Sentry = SENTRY_MAIN_PROCESS ? require('@sentry/electron/main') : require('@sentry/electron/renderer')
 
 const debug = true
 /* eslint-disable no-undef */

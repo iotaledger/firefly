@@ -4,6 +4,7 @@
     import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
+    import { getManaBalance } from '@core/network'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
@@ -13,6 +14,7 @@
 
     interface BalanceBreakdown {
         amount: number
+        isBaseToken?: boolean
         subBreakdown?: { [key: string]: { amount: number } }
     }
 
@@ -33,18 +35,31 @@
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
         const vestingBreakdown = getVestingBreakdown()
+        const manaBreakdown = getManaBreakdown()
 
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
             locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
+            mana: manaBreakdown,
             ...(features.vesting.enabled && { vesting: vestingBreakdown }),
         }
     }
 
     function getAvailableBreakdown(): BalanceBreakdown {
         return { amount: Number(walletBalance?.baseCoin?.available ?? 0) }
+    }
+
+    function getManaBreakdown(): BalanceBreakdown {
+        const totalBalance = getManaBalance(walletBalance?.mana?.total)
+        const availableBalance = getManaBalance(walletBalance?.mana?.available)
+
+        const subBreakdown = {
+            availableMana: { amount: availableBalance },
+            lockedMana: { amount: totalBalance - availableBalance },
+        }
+        return { amount: totalBalance, subBreakdown, isBaseToken: false }
     }
 
     async function getPendingBreakdown(): Promise<BalanceBreakdown> {
@@ -158,6 +173,7 @@
                 subtitleKey={breakdownKey}
                 amount={breakdown[breakdownKey].amount}
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
+                isBaseToken={breakdown[breakdownKey].isBaseToken}
             />
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(walletBalance?.baseCoin?.total ?? 0)} bold />

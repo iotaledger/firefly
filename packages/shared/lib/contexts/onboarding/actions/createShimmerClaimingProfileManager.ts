@@ -4,8 +4,8 @@ import { generateRandomId } from '@core/utils'
 import { getSecretManagerFromProfileType } from '@core/profile'
 import { get } from 'svelte/store'
 import { RestoreProfileType } from '../enums'
-import { getTemporaryWalletStorageDirectory } from '../helpers'
 import { onboardingProfile, shimmerClaimingProfileManager } from '../stores'
+import { DirectoryManager } from '@core/profile/classes'
 
 // TODO(2.0): Fix all shimmer claiming and rename this
 export async function createShimmerClaimingProfileManager(): Promise<void> {
@@ -14,7 +14,7 @@ export async function createShimmerClaimingProfileManager(): Promise<void> {
         return
     }
 
-    const storagePath = await getTemporaryWalletStorageDirectory()
+    const storagePath = await DirectoryManager.forTemporaryWallet()
     const coinType = COIN_TYPE[NetworkId.Iota]
     const clientOptions = $onboardingProfile?.clientOptions
     const secretManager = getSecretManagerFromProfileType($onboardingProfile?.type, storagePath)

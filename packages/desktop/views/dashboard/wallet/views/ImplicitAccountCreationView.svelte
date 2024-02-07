@@ -12,6 +12,9 @@
         if ($selectedWallet?.implicitAccountOutputs?.length > 0) {
             $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
         }
+        if ($selectedWallet?.hasImplicitAccountCreationTransactionInProgress && $selectedWallet?.isTransferring) {
+            $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
+        }
     }
 </script>
 
