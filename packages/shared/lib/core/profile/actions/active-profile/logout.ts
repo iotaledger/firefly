@@ -15,7 +15,6 @@ import { activeProfile, isSoftwareProfile, isDestroyingWallets, activeWallets } 
 import { isLedgerProfile } from '@core/profile/utils'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
-import { Platform } from '@core/app'
 import { unsubscribeFromWalletApiEvents, resetSelectedWalletId } from '@core/wallet'
 
 /**
@@ -25,7 +24,6 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
     if (get(isSoftwareProfile)) {
         _lockStronghold && lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
-        Platform.killLedgerProcess()
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
 

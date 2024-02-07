@@ -1,4 +1,4 @@
-const notarize = require('./scripts/notarize.macos.js')
+const getNotarizeOptions = require('./scripts/notarize.macos.js')
 const merge = require('lodash.merge')
 const { STAGE, getAppName, APP_ID, APP_PROTOCOL, CHANNEL_NAME, APP_ARTIFACT } = require('./product.js')
 
@@ -9,15 +9,6 @@ const prodConfig = () => ({
     directories: { buildResources: './public', output: './out' },
     files: ['public/', 'package.json', '!node_modules/@iota/sdk/target/*'],
     appId: APP_ID,
-    afterSign: async () => {
-        // eslint-disable-next-line no-useless-catch
-        try {
-            await notarize(APP_ID, getAppName())
-        } catch (err) {
-            // This catch is necessary or the promise rejection is swallowed
-            throw err
-        }
-    },
     asar: true,
     protocols: [{ name: `${getAppName()} URL Scheme`, schemes: [APP_PROTOCOL] }],
     dmg: {
@@ -63,6 +54,7 @@ const prodConfig = () => ({
         hardenedRuntime: true,
         gatekeeperAssess: false,
         asarUnpack: ['**/*.node'],
+        notarize: getNotarizeOptions(),
     },
     publish: {
         provider: 'generic',

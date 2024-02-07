@@ -1,5 +1,5 @@
 import { MarketCoinPrices } from '@core/market'
-import { NetworkId } from '@core/network'
+import { PERSISTED_MANA_ASSET, NetworkId, getManaBalance } from '@core/network'
 import { getActiveNetworkId } from '@core/network/utils/getNetworkId'
 import { getCoinType } from '@core/profile'
 import { isValidIrc30Token } from '@core/token'
@@ -37,6 +37,14 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
         ...(shouldCalculateFiatPrice && { marketPrices: marketCoinPrices?.[marketCoinId] }),
     }
 
+    const mana: IAsset = {
+        ...PERSISTED_MANA_ASSET,
+        balance: {
+            total: getManaBalance(wallet?.balances?.mana?.total),
+            available: getManaBalance(wallet?.balances?.mana?.available),
+        },
+    }
+
     const nativeTokens: IAsset[] = []
     const tokens = wallet?.balances?.nativeTokens ?? {}
     for (const [tokenId, token] of Object.entries(tokens)) {
@@ -54,6 +62,7 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
 
     return {
         baseCoin,
+        mana,
         nativeTokens: sortAssets(nativeTokens),
     }
 }

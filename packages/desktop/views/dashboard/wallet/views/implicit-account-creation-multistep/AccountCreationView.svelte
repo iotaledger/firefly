@@ -1,9 +1,8 @@
 <script lang="ts">
     import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { selectedWallet } from '@core/wallet'
-    import { activeProfile, unlockStronghold } from '@core/profile'
-    import { get } from 'svelte/store'
+    import { selectedWallet, selectedWalletId } from '@core/wallet'
+    import { unlockStronghold, updateActiveWallet } from '@core/profile'
 
     let error = ''
     let isBusy = false
@@ -14,12 +13,14 @@
         error = ''
         try {
             if (!strongholdPassword || $selectedWallet?.implicitAccountOutputs.length === 0) return
-            // TODO(2.0): patch because it comes unlocked by default
-            const { isStrongholdLocked } = get(activeProfile)
-            isStrongholdLocked.set(true)
 
             await unlockStronghold(strongholdPassword)
             const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
+
+            updateActiveWallet($selectedWalletId, {
+                hasImplicitAccountCreationTransactionInProgress: true,
+                isTransferring: true,
+            })
             await $selectedWallet?.implicitAccountTransition(outputId)
         } catch (err) {
             console.error('err', err)
