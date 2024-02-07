@@ -14,8 +14,11 @@
         if (bool && value) {
             storedValue = value
             value = null
+            previouslySelectedPeriod = selectedTimePeriod
+            selectedTimePeriod = TimePeriod.None
         } else {
             value = storedValue ?? value
+            selectedTimePeriod = previouslySelectedPeriod
         }
     }
 
