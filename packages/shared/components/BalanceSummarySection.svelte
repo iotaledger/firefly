@@ -5,12 +5,14 @@
     import { BalanceSummaryRow, Icon } from 'shared/components'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
+    import { DEFAULT_MANA } from '@core/network'
 
     export let titleKey: string
     export let subtitleKey: string = ''
     export let subBreakdown: { [key: string]: { amount: number } } = {}
     export let amount: number
     export let bold: boolean = false
+    export let isBaseToken: boolean = true
 
     let expanded: boolean = false
 
@@ -19,6 +21,18 @@
 
     function getAmount(amount: number): string {
         return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
+    }
+
+    function getAmountMana(amount: number): string {
+        return formatTokenAmountBestMatch(amount, DEFAULT_MANA)
+    }
+
+    function handleAmount(isBaseToken: boolean, amount: number) {
+        return isBaseToken ? getAmount(amount) : getAmountMana(amount)
+    }
+
+    function handleCurrencyAmount(isBaseToken: boolean, amount: number) {
+        return isBaseToken ? getCurrencyAmount(amount) : getAmountMana(amount)
     }
 
     function getCurrencyAmount(amount: number): string {
@@ -48,8 +62,8 @@
         <BalanceSummaryRow
             title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
             subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
-            amount={getAmount(amount)}
-            convertedAmount={getCurrencyAmount(amount)}
+            amount={handleAmount(isBaseToken, amount)}
+            convertedAmount={handleCurrencyAmount(isBaseToken, amount)}
             {bold}
         />
     </div>
@@ -59,8 +73,8 @@
                 <BalanceSummaryRow
                     title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
                     subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
-                    amount={getAmount(subBreakdown[breakdownKey].amount)}
-                    convertedAmount={getCurrencyAmount(subBreakdown[breakdownKey].amount)}
+                    amount={handleAmount(isBaseToken, subBreakdown[breakdownKey].amount)}
+                    convertedAmount={handleCurrencyAmount(isBaseToken, subBreakdown[breakdownKey].amount)}
                 />
             </balance-summary-row-expanded>
         {/each}

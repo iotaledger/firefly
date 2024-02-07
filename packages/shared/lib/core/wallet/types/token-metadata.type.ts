@@ -1,3 +1,3 @@
-import { IBaseToken, IIrc30Metadata } from '../interfaces'
+import { IBaseToken, IIrc30Metadata, IMana } from '../interfaces'
 
-export type TokenMetadata = IBaseToken | IIrc30Metadata
+export type TokenMetadata = IBaseToken | IIrc30Metadata | IMana

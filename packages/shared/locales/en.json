@@ -783,6 +783,18 @@
                 "title": "Vesting",
                 "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
             },
+            "mana": {
+                "title": "Mana",
+                "subtitle": "Total mana"
+            },
+            "lockedMana": {
+                "title": "Locked Mana",
+                "subtitle": "Locked Mana"
+            },
+            "availableMana": {
+                "title": "Available Mana",
+                "subtitle": "Available Mana"
+            },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
@@ -1654,6 +1666,7 @@
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
+        "availableManaWithValue": "Available mana: {mana}",
         "availableBalance": "Available balance",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",

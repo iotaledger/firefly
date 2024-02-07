@@ -7,5 +7,6 @@ export type WalletAssets = {
 
 export interface IWalletAssetsPerNetwork {
     baseCoin: IAsset | undefined
+    mana: IAsset | undefined
     nativeTokens: IAsset[]
 }
