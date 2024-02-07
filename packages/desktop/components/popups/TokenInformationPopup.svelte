@@ -25,6 +25,7 @@
         Modal,
     } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
+    import { MANA_ID } from '@core/network'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -138,7 +139,7 @@
                     {localize('popups.tokenInformation.buttons.verifyToken')}
                 </Button>
             {:else}
-                <Button classes="w-full" onClick={onSendClick}>
+                <Button classes="w-full" onClick={onSendClick} disabled={asset.id === MANA_ID}>
                     {localize('actions.send')}
                 </Button>
             {/if}
