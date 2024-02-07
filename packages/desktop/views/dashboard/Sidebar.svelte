@@ -62,6 +62,16 @@
                   },
               ]
             : []),
+        ...(features?.delegation?.enabled
+            ? [
+                  {
+                      icon: IconEnum.Sync,
+                      label: localize('tabs.delegation'),
+                      route: DashboardRoute.Delegation,
+                      onClick: openDelegation,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -97,6 +107,12 @@
         resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Vesting)
     }
+
+    function openDelegation(): void {
+        resetAllRouters()
+        $dashboardRouter.goTo(DashboardRoute.Delegation)
+    }
+
     function resetAllRouters(): void {
         $dashboardRouter.reset()
         $collectiblesRouter.reset()
