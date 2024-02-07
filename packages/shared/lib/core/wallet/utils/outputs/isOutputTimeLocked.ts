@@ -1,9 +1,16 @@
-import { getTimelockDateFromOutput } from '@core/wallet'
-import { CommonOutput, OutputData } from '@iota/sdk/out/types'
+import { CommonOutput, OutputData, TimelockUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
+import { nodeInfoProtocolParameters } from '@core/network'
+import { get } from 'svelte/store'
 
 export function isOutputTimeLocked(outputData: OutputData): boolean {
-    const output = outputData.output
-    const unlockTime = getTimelockDateFromOutput(output as CommonOutput)
-
-    return unlockTime !== undefined && unlockTime.getTime() > Date.now()
+    const output = outputData.output as CommonOutput
+    const timelockUnlockCondition = output.unlockConditions.find(
+        (unlockCondition) => unlockCondition.type === UnlockConditionType.Timelock
+    ) as TimelockUnlockCondition
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    if (!nodeProtocolParameters || !timelockUnlockCondition) {
+        return true
+    } else {
+        return timelockUnlockCondition.slotIndex + nodeProtocolParameters.minCommittableAge < 0
+    }
 }
