@@ -1,10 +1,11 @@
 <script lang="ts">
     import { truncateString } from '@core/utils'
     import { selectedWallet } from '@core/wallet/stores'
-    import { OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
+    import { getBech32AddressFromAddressTypes } from '@core/wallet/utils'
 
     let allAccounts: OutputData[] = []
     let accounts: OutputData[] = []
@@ -23,6 +24,16 @@
 
     function isAnImplicitAccount(output: OutputData) {
         return implicitAccounts.find((account) => account.outputId === output.outputId)
+    }
+
+    function formatAndTruncateAccount(output) {
+        let address: string
+        if ((output as AccountOutput).accountId) {
+            address = getBech32AddressFromAddressTypes(new AccountAddress((output as AccountOutput).accountId))
+        } else {
+            address = output.unlockConditions[0].address.pubKeyHash
+        }
+        return truncateString(address, 7, 5)
     }
 
     function handleAccountClick() {}
@@ -75,7 +86,7 @@
                                                 type={TextType.p}
                                                 fontSize="12"
                                                 lineHeight="leading-140"
-                                                color="gray-600">{truncateString(account?.outputId, 7, 5)}</Text
+                                                color="gray-600">{formatAndTruncateAccount(account.output)}</Text
                                             >
                                         </div>
                                     </ClickableTile>
