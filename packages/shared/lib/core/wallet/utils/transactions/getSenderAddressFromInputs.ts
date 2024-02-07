@@ -8,7 +8,7 @@ import {
     UnlockConditionType,
     AccountAddress,
 } from '@iota/sdk/out/types'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {

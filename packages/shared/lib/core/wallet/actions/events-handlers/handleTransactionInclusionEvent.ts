@@ -19,7 +19,7 @@ import {
     WalletApiEventHandler,
 } from '@core/wallet'
 import { get } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from 'shared/lib/core/profile'
+import { activeWallets, updateActiveWallet } from '@core/profile'
 
 export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {

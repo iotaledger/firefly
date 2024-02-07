@@ -13,7 +13,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AccountOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
+import { AccountOutput } from '@iota/sdk'
 import { api } from '@core/api'
 
 // TODO(2.0) Alias outputs are gone

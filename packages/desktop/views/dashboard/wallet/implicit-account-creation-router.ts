@@ -1,5 +1,5 @@
 import { get, writable } from 'svelte/store'
-import { Router } from '../../../../shared/lib/core/router/classes'
+import { Router } from '@lib/core/router/classes'
 import { ImplicitAccountCreationRoute } from './implicit-account-creation.enum'
 
 export const implicitAccountCreationRouter = writable<ImplicitAccountCreationRouter>(null)
