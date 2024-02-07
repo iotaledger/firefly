@@ -35,7 +35,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     }
     const { onboardingType, strongholdPassword } = profile
 
-    const shouldRecoverWallets = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
+    const shouldRecoverWallets = onboardingType === OnboardingType.Claim
     showBalanceOverviewPopup.set(shouldRecoverWallets)
 
     await initWallet(profile, strongholdPassword)
