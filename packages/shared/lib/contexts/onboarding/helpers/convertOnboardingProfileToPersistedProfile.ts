@@ -7,9 +7,7 @@ export function convertOnboardingProfileToPersistedProfile(
     onboardingProfile: Partial<IOnboardingProfile>
 ): IPersistedProfile {
     return {
-        ...DEFAULT_PERSISTED_PROFILE_OBJECT,
-        walletPersistedData: {},
-        clientOptions: {},
+        ...structuredClone(DEFAULT_PERSISTED_PROFILE_OBJECT),
         ...(onboardingProfile?.id && { id: onboardingProfile.id }),
         ...(onboardingProfile?.name && { name: onboardingProfile.name }),
         ...(onboardingProfile?.type && { type: onboardingProfile.type }),
