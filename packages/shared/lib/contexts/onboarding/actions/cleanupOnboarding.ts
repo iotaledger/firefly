@@ -1,9 +1,10 @@
-import { onboardingProfile } from '../stores'
+import { onboardingProfile, onboardingProfileSecretManager } from '../stores'
 import { deleteOnboardingProfile } from './deleteOnboardingProfile'
 import { destroyShimmerClaimingWallet } from './destroyShimmerClaimingWallet'
 
 export async function cleanupOnboarding(deleteProfile: boolean = false): Promise<void> {
     onboardingProfile.set(null)
+    onboardingProfileSecretManager.set(null)
     await cleanupExtraWallets()
     if (deleteProfile) {
         await deleteOnboardingProfile()
