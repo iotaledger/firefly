@@ -7,7 +7,7 @@
     import { Layer1RecipientError } from '@core/layer-2/errors'
     import { getNetworkHrp, getWalletColorById, visibleActiveWallets } from '@core/profile'
     import { selectedWalletId } from '@core/wallet/stores'
-    import { SubjectType } from 'shared/lib/core/wallet'
+    import { SubjectType } from '@core/wallet'
 
     export let recipient: Subject
     export let disabled = false
