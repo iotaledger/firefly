@@ -8,6 +8,8 @@ export function convertOnboardingProfileToPersistedProfile(
 ): IPersistedProfile {
     return {
         ...DEFAULT_PERSISTED_PROFILE_OBJECT,
+        walletPersistedData: {},
+        clientOptions: {},
         ...(onboardingProfile?.id && { id: onboardingProfile.id }),
         ...(onboardingProfile?.name && { name: onboardingProfile.name }),
         ...(onboardingProfile?.type && { type: onboardingProfile.type }),
@@ -17,14 +19,8 @@ export function convertOnboardingProfileToPersistedProfile(
         }),
         ...(onboardingProfile?.settings && { settings: onboardingProfile.settings }),
         ...(onboardingProfile?.strongholdVersion && { strongholdVersion: onboardingProfile.strongholdVersion }),
-        ...(onboardingProfile?.walletPersistedData && {
-            walletPersistedData: onboardingProfile.walletPersistedData,
-        }),
         ...(onboardingProfile?.isDeveloperProfile && { isDeveloperProfile: onboardingProfile.isDeveloperProfile }),
         ...(onboardingProfile?.hasVisitedDashboard && { hasVisitedDashboard: onboardingProfile.hasVisitedDashboard }),
-        ...(onboardingProfile?.lastUsedWalletId && {
-            lastUsedWalletId: onboardingProfile.lastUsedWalletId,
-        }),
         ...(onboardingProfile?.clientOptions && { clientOptions: onboardingProfile.clientOptions }),
         ...(onboardingProfile?.secretManagerOptions && {
             secretManagerOptions: onboardingProfile.secretManagerOptions,
