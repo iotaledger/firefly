@@ -16,19 +16,15 @@ export async function buildOnboardingSecretManager(): Promise<void> {
             return
         }
 
-        console.log(secretManagerOptions)
-
         // 1. Create SecretManager
         const secretManager = await api.createSecretManager(secretManagerOptions)
-
-        console.log(await secretManager.getLedgerNanoStatus())
 
         // 2. Load the stronghold password specified in the onboarding if necessary
         if (strongholdPassword) {
             await secretManager.setStrongholdPassword(strongholdPassword)
         }
 
-        if(mnemonicStringified) {
+        if (mnemonicStringified) {
             // 3. Verify Mnemonic
             await verifyMnemonic(mnemonicStringified)
 

@@ -2,19 +2,25 @@
     import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
-    import { unlockStronghold, updateActiveWallet } from '@core/profile'
+    import { isSoftwareProfile, unlockStronghold, updateActiveWallet } from '@core/profile'
 
     let error = ''
     let isBusy = false
     let strongholdPassword = ''
+    $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length === 0 : true
+    $: disabledActive = !validStronghold || isBusy
 
     async function unlockWalletAndCreateAccount(): Promise<void> {
         isBusy = true
         error = ''
         try {
-            if (!strongholdPassword || $selectedWallet?.implicitAccountOutputs.length === 0) return
+            if ($selectedWallet?.implicitAccountOutputs.length === 0) return
 
-            await unlockStronghold(strongholdPassword)
+            if ($isSoftwareProfile) {
+                if (!strongholdPassword) return
+                await unlockStronghold(strongholdPassword)
+            }
+
             const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
 
             updateActiveWallet($selectedWalletId, {
@@ -38,20 +44,20 @@
                 alt={localize('views.implicit-account-creation.steps.step3.title')}
             />
         </div>
-        <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-            >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
-        >
-        <PasswordInput
-            bind:error
-            bind:value={strongholdPassword}
-            autofocus
-            submitHandler={unlockWalletAndCreateAccount}
-            placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
-        />
+        {#if $isSoftwareProfile}
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
+                >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
+            >
+            <PasswordInput
+                bind:error
+                bind:value={strongholdPassword}
+                autofocus
+                submitHandler={unlockWalletAndCreateAccount}
+                placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
+            />
+        {/if}
     </div>
-    <Button
-        onClick={unlockWalletAndCreateAccount}
-        disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
-        {isBusy}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+    <Button onClick={unlockWalletAndCreateAccount} disabled={disabledActive} {isBusy}
+        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>
