@@ -1,7 +1,7 @@
 <script lang="ts">
     import { truncateString } from '@core/utils'
     import { selectedWallet } from '@core/wallet/stores'
-    import { AccountAddress, AccountOutput, OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { onMount } from 'svelte'
     import { localize } from '@core/i18n'
@@ -11,11 +11,10 @@
     let accounts: OutputData[] = []
     let implicitAccounts: OutputData[] = []
 
-    async function getAccounts() {
+    async function getAccountData() {
         accounts = await $selectedWallet.accounts()
-    }
-    async function getImplicitAccounts() {
         implicitAccounts = await $selectedWallet.implicitAccounts()
+        allAccounts = [...accounts, ...implicitAccounts]
     }
 
     function isAnAccount(output: OutputData) {
@@ -31,18 +30,20 @@
         if ((output as AccountOutput).accountId) {
             address = getBech32AddressFromAddressTypes(new AccountAddress((output as AccountOutput).accountId))
         } else {
-            address = output.unlockConditions[0].address.pubKeyHash
+            address = getBech32AddressFromAddressTypes(
+                new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
+            )
         }
         return truncateString(address, 7, 5)
     }
 
-    function handleAccountClick() {}
+    function handleAccountClick() {
+        // TODO: Implement account details
+    }
 
     onMount(() => {
-        getAccounts()
-        getImplicitAccounts()
+        getAccountData()
     })
-    $: allAccounts = [...accounts, ...implicitAccounts]
 </script>
 
 {#if $selectedWallet}
