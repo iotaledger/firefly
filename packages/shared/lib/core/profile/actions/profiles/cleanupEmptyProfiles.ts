@@ -1,4 +1,4 @@
-import { Platform } from '@core/app/classes'
+import { AppStage, Platform, appStage } from '@core/app'
 import { get } from 'svelte/store'
 import { profiles } from '../../stores'
 import { removeProfileFolder } from '../../utils'
@@ -10,6 +10,10 @@ import { DirectoryManager } from '../../classes'
  * @returns {Promise<void>}
  */
 export async function cleanupEmptyProfiles(): Promise<void> {
+    if (get(appStage) === AppStage.ALPHA) {
+        return
+    }
+
     try {
         const profilesPath = await DirectoryManager.forProfiles()
         const storedProfiles = await Platform.listProfileFolders(profilesPath)
