@@ -7,6 +7,7 @@ import { ISettingsFeatures } from './settings-features.interface'
 import { IWalletFeatures } from './wallet-features.interface'
 import { IVestingFeatures } from './vesting-features.interface'
 import { IDelegationFeatures } from './delegation-features.interface'
+import { IAccountManagementFeatures } from './account-management-features.interface'
 
 export interface IFeatures {
     collectibles: ICollectiblesFeatures
@@ -18,4 +19,5 @@ export interface IFeatures {
     wallet: IWalletFeatures
     vesting: IVestingFeatures
     delegation: IDelegationFeatures
+    accountManagement: IAccountManagementFeatures
 }

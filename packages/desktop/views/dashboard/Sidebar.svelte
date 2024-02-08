@@ -72,6 +72,16 @@
                   },
               ]
             : []),
+        ...(features?.accountManagement?.enabled
+            ? [
+                  {
+                      icon: IconEnum.Parchment,
+                      label: localize('tabs.accountManagement'),
+                      route: DashboardRoute.AccountManagement,
+                      onClick: openAccountManagement,
+                  },
+              ]
+            : []),
         ...(features?.developerTools?.enabled && $activeProfile?.isDeveloperProfile
             ? [
                   {
@@ -111,6 +121,11 @@
     function openDelegation(): void {
         resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Delegation)
+    }
+
+    function openAccountManagement(): void {
+        resetAllRouters()
+        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
     }
 
     function resetAllRouters(): void {

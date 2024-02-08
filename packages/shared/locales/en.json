@@ -2181,7 +2181,8 @@
         "tokens": "Tokens",
         "activity": "Activity",
         "vesting": "Vesting",
-        "delegation": "Delegation"
+        "delegation": "Delegation",
+        "accountManagement": "Accounts"
     },
     "pills": {
         "stake": {
