@@ -28,6 +28,7 @@ export function getActivityTileTitle(activity: Activity): string {
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'
     } else if (action === ActivityAction.Mint) {
+        // TODO: When we create a new account, we should show mint instead of unknown
         if (type === ActivityType.Account) {
             return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
         }
