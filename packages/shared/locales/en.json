@@ -2180,7 +2180,9 @@
         "developer": "Developer",
         "tokens": "Tokens",
         "activity": "Activity",
-        "vesting": "Vesting"
+        "vesting": "Vesting",
+        "delegation": "Delegation",
+        "accountManagement": "Accounts"
     },
     "pills": {
         "stake": {
