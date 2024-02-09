@@ -9,5 +9,5 @@
     <account-status class="flex flex-row w-full space-x-2 justify-center">
         <ActivityInclusionStatusPill localizationKey={'account.creation'} inclusionState={activity.inclusionState} />
     </account-status>
-    <AddressBox clearBackground clearPadding isCopyable address={activity.accountAddress} />
+    <AddressBox clearBackground clearPadding isCopyable address={activity.transactionId} />
 </main-content>

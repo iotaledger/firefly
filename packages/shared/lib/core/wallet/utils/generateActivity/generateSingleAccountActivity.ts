@@ -27,7 +27,7 @@ export async function generateSingleAccountActivity(
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const accountId = getAccountId(output, outputId)
-    const accountAddress = api.bech32ToHex(accountId)
+    const accountAddress = api.accountIdToBech32(accountId, getNetworkHrp())
 
     const isHidden = false
     const isAssetHidden = false
@@ -63,6 +63,5 @@ export async function generateSingleAccountActivity(
 
 function getAccountId(output: AccountOutput, outputId: string): string {
     const isNewAccount = output.accountId === EMPTY_HEX_ID
-    const accountId = isNewAccount ? api.computeAccountId(outputId) : output.accountId
-    return api.accountIdToBech32(accountId, getNetworkHrp())
+    return isNewAccount ? api.computeAccountId(outputId) : output.accountId
 }
