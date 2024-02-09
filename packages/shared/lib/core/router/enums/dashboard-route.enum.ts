@@ -5,5 +5,6 @@ export enum DashboardRoute {
     Governance = 'governance',
     Settings = 'settings',
     Vesting = 'vesting',
+    Delegation = 'delegation',
     AccountManagement = 'accountManagement',
 }
