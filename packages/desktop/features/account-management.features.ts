@@ -6,7 +6,7 @@ const accountManagementFeatures: IAccountManagementFeatures = {
         enabled: true,
     },
     accountDetails: {
-        enabled: false,
+        enabled: true,
     },
 }
 
