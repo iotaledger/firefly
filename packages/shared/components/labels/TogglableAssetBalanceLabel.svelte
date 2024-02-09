@@ -3,8 +3,10 @@
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
+    import { DEFAULT_MANA } from 'shared/lib/core/network'
 
     export let asset: IAsset
+    export let mana: IAsset
 
     $: availableMarketValue = getMarketAmountFromAssetValue(asset?.balance?.available, asset)
     $: totalMarketValue = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
@@ -33,6 +35,15 @@
                     },
                 })}
             </Text>
+            {#if mana}
+                <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600" darkColor="gray-500">
+                    {localize('general.availableManaWithValue', {
+                        values: {
+                            mana: formatTokenAmountBestMatch(Number(mana.balance.available), DEFAULT_MANA),
+                        },
+                    })}
+                </Text>
+            {/if}
         </div>
     </button>
 {/if}
