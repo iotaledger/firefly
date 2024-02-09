@@ -9,10 +9,10 @@ export function validateSendConfirmation(output: CommonOutput): void {
         (c) => c.type === UnlockConditionType.Expiration
     ) as ExpirationUnlockCondition
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-    if (!nodeProtocolParameters) return
+    if (!nodeProtocolParameters || !expirationUnlockCondition) return
     const expirationUnixTime = getUnixTimestampFromNodeInfoAndSlotIndex(
         nodeProtocolParameters,
-        expirationUnlockCondition.slotIndex
+        expirationUnlockCondition?.slotIndex
     )
     const expirationDateTime = expirationUnixTime ? convertUnixTimestampToDate(expirationUnixTime) : undefined
 

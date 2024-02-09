@@ -1,16 +1,18 @@
-import { Bip44Address, TransactionOptions } from '@iota/sdk/out/types'
+import { AddressType, TransactionOptions } from '@iota/sdk/out/types'
 import { getSelectedWallet } from '../stores'
 
-export function getDefaultTransactionOptions(address?: string): TransactionOptions | undefined {
-    if (!address) {
+export function getDefaultTransactionOptions(accountId?: string): TransactionOptions | undefined {
+    if (!accountId) {
         const wallet = getSelectedWallet()
         if (!wallet) return
-        address = wallet.depositAddress
+        accountId = wallet.mainAccountId
     }
-    const value: Bip44Address = {
-        address: address,
-        keyIndex: 0,
-        internal: false,
+
+    // TODO: update interface when https://github.com/iotaledger/iota-sdk/issues/1975 is merged
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const value: any = {
+        type: AddressType.Account,
+        accountId,
     }
     return {
         remainderValueStrategy: {
