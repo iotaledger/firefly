@@ -15,7 +15,8 @@ export async function generateActivitiesFromAccountOutputs(
     for (const accountOutput of accountOutputs) {
         const output = accountOutput.output as AccountOutput
         const activity = await generateSingleAccountActivity(wallet, {
-            action: output.accountId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+            // TODO: Check if an account is created or minted and set the action accordingly
+            action: output.accountId === EMPTY_HEX_ID ? ActivityAction.Send : ActivityAction.Mint,
             processedTransaction,
             wrappedOutput: accountOutput,
         })
