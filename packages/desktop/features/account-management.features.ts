@@ -1,7 +1,7 @@
 import { IAccountManagementFeatures } from '@lib/features/interfaces'
 
 const accountManagementFeatures: IAccountManagementFeatures = {
-    enabled: false,
+    enabled: true,
     accountList: {
         enabled: true,
     },
