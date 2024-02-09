@@ -24,7 +24,7 @@ export const menuState = {
         paste: 'Paste',
         selectAll: 'Select All',
         wallet: 'Wallet',
-        addAccount: 'Add Account',
+        addWallet: 'Add Account',
         help: 'Help',
         troubleshoot: 'Troubleshoot',
         faq: 'FAQ',

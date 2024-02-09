@@ -28,6 +28,7 @@ export const visibleSelectedWalletAssets: Readable<WalletAssets> = derived(
         for (const networkId of Object.keys($selectedWalletAssets)) {
             const visible = {
                 baseCoin: $selectedWalletAssets[networkId].baseCoin,
+                mana: $selectedWalletAssets[networkId].mana,
                 nativeTokens: $selectedWalletAssets[networkId].nativeTokens.filter((asset) => !asset.hidden),
             }
             visibleAssets[networkId] = visible
