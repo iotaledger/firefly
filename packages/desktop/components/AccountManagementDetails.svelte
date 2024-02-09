@@ -15,31 +15,32 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
+
     let modal: Modal
 
     const DUMMY_ACCOUNT_DATA = {
         id: '1',
         tiles: [
             {
-                title: 'Balance',
+                title: localize('views.accountManagement.details.balance'),
                 amount: '12 Gi',
             },
             {
-                title: 'Staked',
+                title: localize('views.accountManagement.details.staked'),
                 amount: '0i',
             },
         ],
         address: {
-            title: 'Address',
+            title: localize('views.accountManagement.details.address'),
             value: '0xba6a556cfdb7c6a66a45ee520e529c2ea6c526dd27f364865bc0d1167f41c819',
         },
         info: [
             {
-                title: 'Mana',
+                title: localize('views.accountManagement.details.mana'),
                 value: '120000',
             },
             {
-                title: 'Key',
+                title: localize('views.accountManagement.details.key'),
                 value: '7f364865bc0d1167f41c819',
             },
         ],

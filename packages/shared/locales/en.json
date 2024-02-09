@@ -706,6 +706,16 @@
                         "pending" : "Pending"
                     }
                 }
+            },
+            "details": {
+                "balance": "Balance",
+                "address": "Address",
+                "staked": "Staked",
+                "mana": "Mana",
+                "key": "Key",
+                "modal": {
+                    "setMainAccount": "Set as main account"
+                }
             }
         }
     },

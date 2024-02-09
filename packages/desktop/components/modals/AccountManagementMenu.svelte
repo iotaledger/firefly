@@ -13,6 +13,10 @@
 
 <Modal bind:this={modal} {...$$restProps}>
     <account-management-menu class="flex flex-col">
-        <MenuItem icon={Icon.Star} title={localize('actions.viewBalanceBreakdown')} onClick={setAsMainAccount} />
+        <MenuItem
+            icon={Icon.Star}
+            title={localize('views.accountManagement.details.modal.setMainAccount')}
+            onClick={setAsMainAccount}
+        />
     </account-management-menu>
 </Modal>
