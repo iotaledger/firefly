@@ -46,7 +46,7 @@ export const DEFAULT_ACTIVITY_FILTER: ActivityFilter = {
         choices: [
             ActivityType.Basic,
             ActivityType.Nft,
-            ActivityType.Alias,
+            ActivityType.Account,
             ActivityType.Governance,
             ActivityType.Foundry,
             ActivityType.Consolidation,

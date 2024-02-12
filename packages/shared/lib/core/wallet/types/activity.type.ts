@@ -1,5 +1,5 @@
 import {
-    AliasActivity,
+    AccountActivity,
     ConsolidationActivity,
     FoundryActivity,
     GovernanceActivity,
@@ -10,7 +10,7 @@ import {
 
 export type Activity =
     | TransactionActivity
-    | AliasActivity
+    | AccountActivity
     | FoundryActivity
     | NftActivity
     | GovernanceActivity

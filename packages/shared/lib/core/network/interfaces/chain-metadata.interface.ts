@@ -9,7 +9,7 @@ export interface IBaseChainMetadata {
 
 export interface IIscpChainMetadata extends IBaseChainMetadata {
     type: ChainType.Iscp
-    aliasAddress: string
+    anchorAddress: string
     iscpEndpoint: string
     archiveEndpoint: string
 }
