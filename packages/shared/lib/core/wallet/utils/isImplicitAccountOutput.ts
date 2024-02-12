@@ -5,7 +5,7 @@ import {
     UnlockConditionType,
     AddressUnlockCondition,
     AddressType,
-} from '@iota/sdk'
+} from '@iota/sdk/out/types'
 
 export function isImplicitAccountOutput(outputData: OutputData): boolean {
     const output = outputData?.output
