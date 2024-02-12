@@ -6,11 +6,12 @@
     import { localize } from '@core/i18n'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import {
-        INft,
-        NftDownloadMetadata,
         allAccountNfts,
         convertAndFormatNftMetadata,
         getNftByIdFromAllAccountNfts,
+        INft,
+        isFlaggedNft,
+        NftDownloadMetadata,
         selectedNftId,
     } from '@core/nfts'
     import { getBaseToken } from '@core/profile/actions'
@@ -66,6 +67,7 @@
     $: returnIfNftWasSent($allAccountNfts[$selectedAccountIndex], $time)
     $: timeDiff = getTimeDifference(new Date(nft.timelockTime), $time)
     $: alertText = getAlertText(downloadMetadata)
+    $: flaggedNftWarning = nft && isFlaggedNft(nft)
     $: detailsList = {
         ...(id && {
             nftId: { data: truncateString(id, 20, 20), copyValue: id, isCopyable: true },
@@ -177,6 +179,9 @@
                             {description}
                         </Text>
                     </nft-description>
+                {/if}
+                {#if flaggedNftWarning}
+                    <Alert type="warning" message={flaggedNftWarning} />
                 {/if}
                 <div class="overflow-y-scroll h-full flex flex-col space-y-4 pr-2 -mr-4">
                     <nft-details class="flex flex-col space-y-4">
