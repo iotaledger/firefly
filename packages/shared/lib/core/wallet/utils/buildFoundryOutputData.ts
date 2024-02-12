@@ -9,8 +9,7 @@ import {
 } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
-import { getSerialNumberFromAliasOutput } from './outputs/getSerialNumberFromAliasOutput'
-import { api } from '@core/api'
+import { getSerialNumberFromAccountAddress } from './outputs'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
@@ -18,11 +17,9 @@ export async function buildFoundryOutputData(
     metadata: IIrc30Metadata,
     accountId: string
 ): Promise<FoundryOutputBuilderParams> {
-    const immutableAliasUnlockCondition = new ImmutableAccountAddressUnlockCondition(
-        new AccountAddress(api.bech32ToHex(accountId))
-    )
+    const immutableAccountUnlockCondition = new ImmutableAccountAddressUnlockCondition(new AccountAddress(accountId))
 
-    const unlockConditions: UnlockCondition[] = [immutableAliasUnlockCondition]
+    const unlockConditions: UnlockCondition[] = [immutableAccountUnlockCondition]
 
     const tokenScheme = new SimpleTokenScheme(BigInt(circulatingSupply), BigInt(0), BigInt(totalSupply))
 
@@ -30,7 +27,7 @@ export async function buildFoundryOutputData(
 
     const immutableFeatures: Feature[] = [metadataFeature]
 
-    const serialNumber = await getSerialNumberFromAliasOutput(accountId)
+    const serialNumber = await getSerialNumberFromAccountAddress(accountId)
 
     return {
         serialNumber,

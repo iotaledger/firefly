@@ -41,7 +41,7 @@
     }
 
     function getNetworkValue(chainMetadata: ChainMetadata): string | undefined {
-        return chainMetadata?.aliasAddress ?? undefined
+        return chainMetadata?.accountAddress ?? undefined
     }
 
     export function validate(): Promise<void> {

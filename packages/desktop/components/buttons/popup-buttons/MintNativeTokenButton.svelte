@@ -20,14 +20,14 @@
             openPopup({
                 id: PopupId.Confirmation,
                 props: {
-                    title: localize('popups.noAlias.title'),
-                    hint: localize('popups.noAlias.description'),
+                    title: localize('popups.noAccountOuput.title'),
+                    hint: localize('popups.noAccountOuput.description'),
                     variant: TextHintVariant.Warning,
-                    confirmText: localize('actions.createAlias'),
+                    confirmText: localize('actions.createAccount'),
                     onConfirm: () => {
                         closePopup()
                         openPopup({
-                            id: PopupId.AliasConfirmation,
+                            id: PopupId.AccountConfirmation,
                         })
                     },
                 },

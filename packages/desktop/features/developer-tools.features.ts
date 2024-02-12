@@ -11,7 +11,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
     mintNativeTokens: {
         enabled: false,
     },
-    alias: {
+    account: {
         enabled: false,
     },
     refreshTokens: {

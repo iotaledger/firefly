@@ -2,7 +2,7 @@
     import {
         Tabs,
         GenericActivityInformation,
-        AliasActivityInformation,
+        AccountActivityInformation,
         GovernanceActivityInformation,
         NftActivityInformation,
         FoundryActivityInformation,
@@ -40,8 +40,8 @@
             case ActivityType.Consolidation:
                 tabs = [Tab.Transaction]
                 break
-            case ActivityType.Alias:
-                tabs = [Tab.Transaction, Tab.Alias]
+            case ActivityType.Account:
+                tabs = [Tab.Transaction, Tab.Account]
                 break
             case ActivityType.Nft:
                 tabs = [
@@ -70,8 +70,8 @@
         {:else}
             <GenericActivityInformation {activity} />
         {/if}
-    {:else if activeTab === Tab.Alias && activity?.type === ActivityType.Alias}
-        <AliasActivityInformation {activity} />
+    {:else if activeTab === Tab.Account && activity?.type === ActivityType.Account}
+        <AccountActivityInformation {activity} />
     {:else if activeTab === Tab.Nft && activity?.type === ActivityType.Nft}
         <NftActivityInformation {activity} />
     {:else if activeTab === Tab.Foundry}
