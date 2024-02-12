@@ -15,47 +15,50 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
+    import { formatTokenAmountBestMatch, isAnImplicitAccount, selectedWallet } from '@core/wallet'
+    import { onMount } from 'svelte'
+    import { getBaseToken } from '@core/profile'
+
+    export let selectedAccount
+    export let index
 
     let modal: Modal
+    let totalBalance: number = 0
 
-    const DUMMY_ACCOUNT_DATA = {
-        id: '1',
-        tiles: [
-            {
-                title: localize('views.accountManagement.details.balance'),
-                amount: '12 Gi',
-            },
-            {
-                title: localize('views.accountManagement.details.staked'),
-                amount: '0i',
-            },
-        ],
-        address: {
-            title: localize('views.accountManagement.details.address'),
-            value: '0xba6a556cfdb7c6a66a45ee520e529c2ea6c526dd27f364865bc0d1167f41c819',
-        },
-        info: [
-            {
-                title: localize('views.accountManagement.details.mana'),
-                value: '120000',
-            },
-            {
-                title: localize('views.accountManagement.details.key'),
-                value: '7f364865bc0d1167f41c819',
-            },
-        ],
+    async function getTotalBalanceOfAnAccount(accountId: string): Promise<number> {
+        const allOutputs = await $selectedWallet?.outputs({ accountIds: [accountId] })
+        const totalBalance = allOutputs?.reduce((acc, outputObj) => acc + Number(outputObj.output.amount), 0)
+        return totalBalance
     }
+
+    function getAddress(account) {
+        if (account?.output?.accountId) {
+            return account?.output?.accountId
+        } else {
+            return account?.output?.unlockConditions[0]?.address?.pubKeyHash
+        }
+    }
+
+    onMount(async () => {
+        totalBalance = await getTotalBalanceOfAnAccount(selectedAccount?.output?.accountId)
+    })
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
     <Pane height={Height.Full}>
         <right-pane-container class="flex flex-col space-y-10 h-full">
-            <title-container class="flex justify-between w-full">
+            <title-container class="flex justify-between w-full items-center">
                 <title-wrapper class="flex items-center space-x-2">
-                    <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')}</Text>
-                    <Pill backgroundColor="blue-200" textColor="blue-600"
-                        >{localize('views.accountManagement.list.tile.pill.main')}
-                    </Pill>
+                    <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
+                    {#if isAnImplicitAccount(selectedAccount)}
+                        <Pill backgroundColor="yellow-200" textColor="yellow-900"
+                            >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
+                        >
+                    {:else}
+                        <Pill backgroundColor="blue-200" textColor="blue-600"
+                            >{localize('views.accountManagement.list.tile.pill.main')}
+                        </Pill>
+                    {/if}
                 </title-wrapper>
                 <wallet-actions-button class="block relative">
                     <MeatballMenuButton onClick={modal?.toggle} />
@@ -63,44 +66,46 @@
                 </wallet-actions-button>
             </title-container>
             <div class="flex flex-row space-x-2 w-1/2">
-                {#each DUMMY_ACCOUNT_DATA.tiles as tile}
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>{tile.amount}</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{tile.title}</Text
-                            >
-                        </div>
-                    </Tile>
-                {/each}
+                <Tile>
+                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <Text type={TextType.h3}>{formatTokenAmountBestMatch(totalBalance, getBaseToken())}</Text>
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.balance')}</Text
+                        >
+                    </div>
+                </Tile>
+
+                <Tile>
+                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <!-- TODO: Replace this with the actual staked amount -->
+                        <Text type={TextType.h3}>0i</Text>
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.staked')}</Text
+                        >
+                    </div>
+                </Tile>
             </div>
             <div class="flex flex-col space-y-2 w-1/2">
-                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                    >{DUMMY_ACCOUNT_DATA.address.title}</Text
-                >
+                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Address</Text>
                 <CopyableBox
                     clearBackground
                     clearBoxPadding
                     isCopyable
-                    value={DUMMY_ACCOUNT_DATA.address.value}
+                    value={selectedAccount?.output?.accountId}
                     classes="flex space-x-2 items-center"
                 >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{DUMMY_ACCOUNT_DATA.address.value}</Text
+                        >{getAddress(selectedAccount)}</Text
                     >
                     <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
                 </CopyableBox>
             </div>
-            {#each DUMMY_ACCOUNT_DATA.info as info}
-                <div class="flex flex-col space-y-2 w-1/2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                        >{info.title}</Text
-                    >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{info.value}</Text
-                    >
-                </div>
-            {/each}
+            <div class="flex flex-col space-y-2 w-1/2">
+                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Mana</Text>
+                <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                    >{selectedAccount?.output?.mana}</Text
+                >
+            </div>
         </right-pane-container>
     </Pane>
 </right-pane>

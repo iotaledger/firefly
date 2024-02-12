@@ -3,18 +3,15 @@
     import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getBech32AddressFromAddressTypes } from '@core/wallet/utils'
+    import { getBech32AddressFromAddressTypes, isAnImplicitAccount } from '@core/wallet/utils'
 
     export let allAccounts: OutputData[] = []
     export let accounts: OutputData[] = []
-    export let implicitAccounts: OutputData[] = []
+
+    export let onAccountClick: (account: OutputData) => void
 
     function isAnAccount(output: OutputData) {
         return accounts.find((account) => account.outputId === output.outputId)
-    }
-
-    function isAnImplicitAccount(output: OutputData) {
-        return implicitAccounts.find((account) => account.outputId === output.outputId)
     }
 
     function formatAndTruncateAccount(output) {
@@ -28,10 +25,6 @@
         }
         return truncateString(address, 7, 5)
     }
-
-    function handleAccountClick() {
-        // TODO: Implement account details
-    }
 </script>
 
 <left-pane class="flex flex-col w-1/3">
@@ -40,7 +33,7 @@
             <Text type={TextType.h2}>{localize('views.accountManagement.list.title')}</Text>
             <list-wrapper class="flex flex-col space-y-2">
                 {#each allAccounts as account, index}
-                    <ClickableTile onClick={handleAccountClick}>
+                    <ClickableTile onClick={() => onAccountClick(account)}>
                         <div class="flex flex-col space-y-1">
                             <div class="flex space-x-2">
                                 <Text

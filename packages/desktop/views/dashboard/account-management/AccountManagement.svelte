@@ -7,6 +7,16 @@
     const implicitAccounts: OutputData[] = $selectedWallet.implicitAccountOutputs
     const accounts: OutputData[] = $selectedWallet.accountOutputs
     const allAccounts: OutputData[] = [...accounts, ...implicitAccounts]
+
+    let selectedAccount: OutputData = allAccounts[0]
+
+    function handleAccountClick(account: OutputData) {
+        selectedAccount = account
+    }
+
+    function setAccountIndex(account) {
+        return allAccounts.indexOf(account) + 1
+    }
 </script>
 
 {#if $selectedWallet}
@@ -16,10 +26,10 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList {allAccounts} {accounts} {implicitAccounts} />
+                    <AccountManagementList {allAccounts} {accounts} onAccountClick={handleAccountClick} />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
-                    <AccountManagementDetails />
+                    <AccountManagementDetails {selectedAccount} index={setAccountIndex(selectedAccount)} />
                 {/if}
             {/key}
         </div>
