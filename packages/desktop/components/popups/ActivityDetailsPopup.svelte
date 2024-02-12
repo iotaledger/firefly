@@ -16,7 +16,7 @@
     } from '@core/wallet'
     import {
         ActivityInformation,
-        AliasActivityDetails,
+        AccountActivityDetails,
         BasicActivityDetails,
         Button,
         ConsolidationActivityDetails,
@@ -132,8 +132,8 @@
             <ConsolidationActivityDetails {activity} />
         {:else if activity.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Alias}
-            <AliasActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Account}
+            <AccountActivityDetails {activity} />
         {/if}
         <ActivityInformation {activity} />
     </activity-details>

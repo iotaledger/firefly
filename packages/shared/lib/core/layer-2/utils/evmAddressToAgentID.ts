@@ -2,7 +2,7 @@ import { Converter } from '@iota/util.js'
 import { api } from '@core/api'
 import { EXTERNALLY_OWNED_ACCOUNT_TYPE_ID } from '../constants'
 
-export function evmAddressToAgentID(evmStoreAccount: string, aliasAddress: string): Uint8Array {
+export function evmAddressToAgentID(evmStoreAccount: string, accountAddress: string): Uint8Array {
     // This function constructs an AgentID that is required to be used with contracts
     // Wasp understands different AgentID types and each AgentID needs to provide a certain ID that describes it's address type.
     // In the case of EVM addresses it's ID 3.
@@ -12,9 +12,9 @@ export function evmAddressToAgentID(evmStoreAccount: string, aliasAddress: strin
     // otherwise fetching balances using the iscmagic contract will fail,
     // because evm addresses are case-insensitive but hexToBytes is not.
     const receiverAddrBinary = Converter.hexToBytes(evmStoreAccount?.toLowerCase())
-    const aliasAddressInBytes = Converter.hexToBytes(api.bech32ToHex(aliasAddress))
+    const accountAddressInBytes = Converter.hexToBytes(api.bech32ToHex(accountAddress))
 
-    const agentIdBytes = new Uint8Array([agentIDKindEthereumAddress, ...aliasAddressInBytes, ...receiverAddrBinary])
+    const agentIdBytes = new Uint8Array([agentIDKindEthereumAddress, ...accountAddressInBytes, ...receiverAddrBinary])
 
     return agentIdBytes
 }

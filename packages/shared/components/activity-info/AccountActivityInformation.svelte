@@ -1,15 +1,13 @@
 <script lang="ts">
     import { KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
-    import { AliasActivity } from '@core/wallet'
+    import { AccountActivity } from '@core/wallet'
 
-    export let activity: AliasActivity
+    export let activity: AccountActivity
 
     let detailsList: { [key in string]: string }
     $: detailsList = {
-        aliasId: activity.aliasId,
-        governorAddress: activity.governorAddress,
-        stateControllerAddress: activity.stateControllerAddress,
+        accountAddress: activity.accountAddress,
     }
 </script>
 

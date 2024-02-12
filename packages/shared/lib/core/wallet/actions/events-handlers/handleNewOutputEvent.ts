@@ -11,6 +11,7 @@ import {
     getBech32AddressFromAddressTypes,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
+    isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
@@ -18,12 +19,8 @@ import {
 import {
     AccountAddress,
     AccountOutput,
-    AddressType,
-    AddressUnlockCondition,
-    CommonOutput,
     NewOutputWalletEvent,
     OutputType,
-    UnlockConditionType,
     WalletEvent,
     WalletEventType,
 } from '@iota/sdk/out/types'
@@ -46,14 +43,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
     const isAccountOutput = output.type === OutputType.Account
-    const isImplicitAccountOutput =
-        output.type === OutputType.Basic &&
-        (output as CommonOutput).unlockConditions.length === 1 &&
-        (
-            (output as CommonOutput).unlockConditions.find(
-                (cmnOutput) => cmnOutput.type === UnlockConditionType.Address
-            ) as AddressUnlockCondition
-        )?.address.type === AddressType.ImplicitAccountCreation
     const isNftOutput = output.type === OutputType.Nft
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
@@ -77,7 +66,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
-    if (isImplicitAccountOutput) {
+    if (isImplicitAccountOutput(outputData)) {
         await syncBalance(wallet.id)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })

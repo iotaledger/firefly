@@ -1,4 +1,4 @@
-export { default as AliasActivityInformation } from './AliasActivityInformation'
+export { default as AccountActivityInformation } from './AccountActivityInformation'
 export { default as ConsolidationActivityInformation } from './ConsolidationActivityInformation'
 export { default as FoundryActivityInformation } from './FoundryActivityInformation'
 export { default as GenericActivityInformation } from './GenericActivityInformation'
