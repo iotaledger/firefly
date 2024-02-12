@@ -1,6 +1,6 @@
 export enum Tab {
     Transaction = 'general.transaction',
-    Alias = 'general.alias',
+    Account = 'general.account',
     Nft = 'general.nft',
     Foundry = 'general.foundry',
     Token = 'general.token',

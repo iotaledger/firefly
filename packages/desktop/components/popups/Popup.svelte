@@ -13,7 +13,7 @@
     import AddNodePopup from './AddNodePopup.svelte'
     import AddProposalPopup from './AddProposalPopup.svelte'
     import AddressHistoryPopup from './AddressHistoryPopup.svelte'
-    import AliasConfirmationPopup from './AliasConfirmationPopup.svelte'
+    import AccountConfirmationPopup from './AccountConfirmationPopup.svelte'
     import BackupStrongholdPopup from './BackupStrongholdPopup.svelte'
     import BurnNativeTokensPopup from './BurnNativeTokensPopup.svelte'
     import BurnNativeTokensConfirmationPopup from './BurnNativeTokensConfirmationPopup.svelte'
@@ -100,7 +100,7 @@
         [PopupId.AddNode]: AddNodePopup,
         [PopupId.AddProposal]: AddProposalPopup,
         [PopupId.AddressHistory]: AddressHistoryPopup,
-        [PopupId.AliasConfirmation]: AliasConfirmationPopup,
+        [PopupId.AccountConfirmation]: AccountConfirmationPopup,
         [PopupId.BackupStronghold]: BackupStrongholdPopup,
         [PopupId.BurnNativeTokens]: BurnNativeTokensPopup,
         [PopupId.BurnNativeTokensConfirmation]: BurnNativeTokensConfirmationPopup,

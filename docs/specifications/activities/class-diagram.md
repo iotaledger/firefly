@@ -54,11 +54,9 @@ classDiagram
         - rawAmount: number
         - assetId: string
     }
-    class Alias Activity {
-        - type: ActivityType.Alias
-        - aliasId: string
-        - governorAddress: string
-        - stateControllerAddress: string
+    class Account Activity {
+        - type: ActivityType.Account
+        - accountId: string
     }
     class Subject {
         - type: "address" | "account"
