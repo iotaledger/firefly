@@ -1,14 +1,18 @@
 <script lang="ts">
-    import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, LedgerAnimation, PasswordInput, Text, TextType } from 'shared/components'
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { isSoftwareProfile, unlockStronghold, updateActiveWallet } from '@core/profile'
+    import { Icon } from '@auxiliary/icon'
+    import { LedgerAppName, ledgerAppName } from '@core/ledger'
+    import { IllustrationEnum } from '@auxiliary/illustration'
 
     let error = ''
     let isBusy = false
     let strongholdPassword = ''
     $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length === 0 : true
     $: disabledActive = !validStronghold || isBusy
+    $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
 
     async function unlockWalletAndCreateAccount(): Promise<void> {
         isBusy = true
@@ -55,6 +59,8 @@
                 submitHandler={unlockWalletAndCreateAccount}
                 placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
             />
+        {:else}
+            <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
         {/if}
     </div>
     <Button onClick={unlockWalletAndCreateAccount} disabled={disabledActive} {isBusy}
