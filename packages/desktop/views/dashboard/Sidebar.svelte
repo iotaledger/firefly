@@ -62,6 +62,7 @@
                   },
               ]
             : []),
+
         ...(features?.accountManagement?.enabled
             ? [
                   {
@@ -69,6 +70,16 @@
                       label: localize('tabs.accountManagement'),
                       route: DashboardRoute.AccountManagement,
                       onClick: openAccountManagement,
+                  },
+              ]
+            : []),
+        ...(features?.delegation?.enabled
+            ? [
+                  {
+                      icon: IconEnum.Sync,
+                      label: localize('tabs.delegation'),
+                      route: DashboardRoute.Delegation,
+                      onClick: openDelegation,
                   },
               ]
             : []),
@@ -106,6 +117,11 @@
     function openVesting(): void {
         resetAllRouters()
         $dashboardRouter.goTo(DashboardRoute.Vesting)
+    }
+
+    function openDelegation(): void {
+        resetAllRouters()
+        $dashboardRouter.goTo(DashboardRoute.Delegation)
     }
 
     function openAccountManagement(): void {

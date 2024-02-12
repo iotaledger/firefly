@@ -1,23 +1,12 @@
 <script lang="ts">
     import { selectedWallet } from '@core/wallet/stores'
     import { OutputData } from '@iota/sdk/out/types'
-    import { onMount } from 'svelte'
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
 
-    let allAccounts: OutputData[] = []
-    let accounts: OutputData[] = []
-    let implicitAccounts: OutputData[] = []
-
-    async function getAccountData() {
-        accounts = await $selectedWallet.accounts()
-        implicitAccounts = await $selectedWallet.implicitAccounts()
-        allAccounts = [...accounts, ...implicitAccounts]
-    }
-
-    onMount(() => {
-        getAccountData()
-    })
+    const implicitAccounts: OutputData[] = $selectedWallet.implicitAccountOutputs
+    const accounts: OutputData[] = $selectedWallet.accountOutputs
+    const allAccounts: OutputData[] = [...accounts, ...implicitAccounts]
 </script>
 
 {#if $selectedWallet}
