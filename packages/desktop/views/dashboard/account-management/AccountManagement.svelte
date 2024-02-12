@@ -1,19 +1,10 @@
 <script lang="ts">
     import { truncateString } from '@core/utils'
     import { selectedWallet } from '@core/wallet/stores'
-    import {
-        AccountAddress,
-        AccountOutput,
-        AddressType,
-        AddressUnlockCondition,
-        CommonOutput,
-        ImplicitAccountCreationAddress,
-        OutputData,
-        UnlockConditionType,
-    } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getBech32AddressFromAddressTypes } from '@core/wallet/utils'
+    import { getBech32AddressFromAddressTypes, isImplicitAccountOutput } from '@core/wallet/utils'
     import features from '@features/features'
 
     const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
@@ -26,17 +17,17 @@
 
     function formatAndTruncateAccount(output) {
         let address: string = ''
-        const implicitUnlockCondition = (output as CommonOutput).unlockConditions.find(
-            (output) => output.type === UnlockConditionType.Address
-        ) as AddressUnlockCondition
-
-        if ((output as AccountOutput).accountId) {
-            address = getBech32AddressFromAddressTypes(new AccountAddress((output as AccountOutput).accountId))
-        } else if (implicitUnlockCondition.address.type === AddressType.ImplicitAccountCreation) {
+        if (isImplicitAccountOutput(output)) {
             address = getBech32AddressFromAddressTypes(
                 new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
             )
+        } else {
+            const accountId = (output as AccountOutput).accountId
+            if (accountId) {
+                address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+            }
         }
+
         return truncateString(address, 7, 5)
     }
 
