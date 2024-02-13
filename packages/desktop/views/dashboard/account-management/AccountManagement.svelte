@@ -1,10 +1,7 @@
 <script lang="ts">
     import { selectedWallet } from '@core/wallet/stores'
-    import { OutputData } from '@iota/sdk/out/types'
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
-
-    const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 </script>
 
 {#if $selectedWallet}
@@ -14,7 +11,7 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList {allAccounts} />
+                    <AccountManagementList />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails />

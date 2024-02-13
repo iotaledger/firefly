@@ -6,7 +6,7 @@
     import { getBech32AddressFromAddressTypes, isImplicitAccountOutput } from '@core/wallet/utils'
     import { selectedWallet } from '@core/wallet'
 
-    export let allAccounts: OutputData[] = []
+    const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 
     function isAnAccount(output: OutputData) {
         return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
