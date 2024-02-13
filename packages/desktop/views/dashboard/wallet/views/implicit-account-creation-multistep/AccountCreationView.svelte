@@ -47,11 +47,13 @@
             autofocus
             submitHandler={unlockWalletAndCreateAccount}
             placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
+            disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
         />
     </div>
     <Button
         onClick={unlockWalletAndCreateAccount}
         disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
-        {isBusy}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+        isBusy={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
+        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>

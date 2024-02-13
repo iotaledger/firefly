@@ -8,10 +8,8 @@ import {
     login,
 } from '@core/profile'
 import { get } from 'svelte/store'
-import { OnboardingType } from '../enums'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
-import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 import {
     addEmptyWalletActivitiesToAllWalletActivities,
     buildWalletStateAndPersistedData,
@@ -33,13 +31,10 @@ export async function completeOnboardingProcess(): Promise<void> {
     if (!profile) {
         return
     }
-    const { onboardingType, strongholdPassword } = profile
-
-    const shouldRecoverWallets = onboardingType === OnboardingType.Restore || onboardingType === OnboardingType.Claim
-    showBalanceOverviewPopup.set(shouldRecoverWallets)
+    const { strongholdPassword } = profile
 
     await initWallet(profile, strongholdPassword)
-    void login({ isFromOnboardingFlow: true, shouldRecoverWallets })
+    void login({ isFromOnboardingFlow: true })
 
     onboardingProfile.set(undefined)
 }

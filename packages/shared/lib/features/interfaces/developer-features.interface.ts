@@ -4,7 +4,7 @@ export interface IDeveloperFeatures extends IFeatureFlag {
     faucet: IFeatureFlag
     mintNft: IFeatureFlag
     mintNativeTokens: IFeatureFlag
-    alias: IFeatureFlag
+    account: IFeatureFlag
     refreshTokens: IFeatureFlag
     deeplink: IFeatureFlag
 }

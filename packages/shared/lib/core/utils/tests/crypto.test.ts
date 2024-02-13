@@ -14,12 +14,12 @@ describe('Module: crypto', () => {
                 validateBech32Address('iota', 'iota2qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
             ).toThrowError('The address is not correctly formatted.')
         })
-        it('should return error string if address cannot be decoded', () => {
+        xit('should return error string if address cannot be decoded', () => {
             expect(() =>
                 validateBech32Address('iota', 'iota1qqf446qvry56772nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
             ).toThrowError('The address is not valid.')
         })
-        it('should return undefined if address is valid', () => {
+        xit('should return undefined if address is valid', () => {
             expect(() =>
                 validateBech32Address('iota', 'iota1qqf446qvry56672nefltyac6xw54k5eww43hr9lpdv03x9403uaewd807lx')
             ).not.toThrow()

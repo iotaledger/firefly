@@ -21,8 +21,8 @@ export function getLayer2MetadataForTransfer(transactionDetails: NewTransactionD
     )
 
     // transactionDetails.layer2Parameters should never be undefined at this point
-    const aliasAddress = transactionDetails.layer2Parameters?.networkAddress ?? ''
-    const evmAddressToAgentIdBuffer = evmAddressToAgentID(encodedAddress, aliasAddress)
+    const accountAddress = transactionDetails.layer2Parameters?.networkAddress ?? ''
+    const evmAddressToAgentIdBuffer = evmAddressToAgentID(encodedAddress, accountAddress)
 
     const smartContractParameters = Object.entries({ a: evmAddressToAgentIdBuffer })
     const parameters = encodeSmartContractParameters(smartContractParameters)
