@@ -8,15 +8,15 @@
 
     const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 
-    function isAnAccount(output: OutputData) {
+    function isAnAccount(output: OutputData): OutputData {
         return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
     }
 
-    function isAnImplicitAccount(output: OutputData) {
+    function isAnImplicitAccount(output: OutputData): OutputData {
         return $selectedWallet?.implicitAccountOutputs.find((account) => account.outputId === output.outputId)
     }
 
-    function formatAndTruncateAccount(output) {
+    function formatAndTruncateAccount(output): string {
         let address: string = ''
         if (isImplicitAccountOutput(output)) {
             address = getBech32AddressFromAddressTypes(
@@ -30,7 +30,7 @@
         }
         return truncateString(address, 7, 5)
     }
-    function handleAccountClick() {
+    function handleAccountClick(): void {
         // TODO: Implement account details
     }
 </script>
