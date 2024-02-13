@@ -15,16 +15,23 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
-    import { formatTokenAmountBestMatch, isImplicitAccountOutput, selectedWallet } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        getBech32AddressFromAddressTypes,
+        isImplicitAccountOutput,
+        selectedWallet,
+    } from '@core/wallet'
     import { onMount } from 'svelte'
     import { getBaseToken } from '@core/profile'
-    import { AccountOutput, OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
 
     export let selectedAccount: OutputData
     export let index: number
 
     let modal: Modal
     let totalBalance: number = 0
+    let address: string = ''
+    const accountId: string = (selectedAccount?.output as AccountOutput)?.accountId
 
     async function getTotalBalanceOfAnAccount(accountId: string): Promise<number> {
         const allOutputs = await $selectedWallet?.outputs({ accountIds: [accountId] })
@@ -33,16 +40,24 @@
     }
 
     function getAddress(account) {
-        if (account?.output?.accountId) {
-            return account?.output?.accountId
+        const output = account.output
+        if (isImplicitAccountOutput(output)) {
+            address = getBech32AddressFromAddressTypes(
+                new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
+            )
         } else {
-            return account?.output?.unlockConditions[0]?.address?.pubKeyHash
+            const accountId = (output as AccountOutput).accountId
+            if (accountId) {
+                address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+            }
         }
+        return address
     }
 
     onMount(async () => {
         totalBalance = await getTotalBalanceOfAnAccount((selectedAccount?.output as AccountOutput)?.accountId)
     })
+    $: address = getAddress(selectedAccount)
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
@@ -51,7 +66,7 @@
             <title-container class="flex justify-between w-full items-center">
                 <title-wrapper class="flex items-center space-x-2">
                     <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
-                    {#if isImplicitAccountOutput(selectedAccount)}
+                    {#if isImplicitAccountOutput(selectedAccount.output)}
                         <Pill backgroundColor="yellow-200" textColor="yellow-900"
                             >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                         >
@@ -63,7 +78,7 @@
                 </title-wrapper>
                 <wallet-actions-button class="block relative">
                     <MeatballMenuButton onClick={modal?.toggle} />
-                    <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" />
+                    <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
                 </wallet-actions-button>
             </title-container>
             <div class="flex flex-row space-x-2 w-1/2">
@@ -92,11 +107,11 @@
                     clearBackground
                     clearBoxPadding
                     isCopyable
-                    value={selectedAccount?.output?.accountId}
+                    value={address}
                     classes="flex space-x-2 items-center"
                 >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{getAddress(selectedAccount)}</Text
+                        >{address}</Text
                     >
                     <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
                 </CopyableBox>

@@ -53,7 +53,7 @@
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
                                 {/if}
-                                {#if isImplicitAccountOutput(account)}
+                                {#if isImplicitAccountOutput(account.output)}
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                                     >
