@@ -12,10 +12,6 @@
         return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
     }
 
-    function isAnImplicitAccount(output: OutputData): OutputData {
-        return $selectedWallet?.implicitAccountOutputs.find((account) => account.outputId === output.outputId)
-    }
-
     function formatAndTruncateAccount(output): string {
         let address: string = ''
         if (isImplicitAccountOutput(output)) {
@@ -58,7 +54,7 @@
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
                                 {/if}
-                                {#if isAnImplicitAccount(account)}
+                                {#if isImplicitAccountOutput(account.output)}
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                                     >
