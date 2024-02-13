@@ -19,6 +19,7 @@ import {
 import {
     AccountAddress,
     AccountOutput,
+    CommonOutput,
     NewOutputWalletEvent,
     OutputType,
     WalletEvent,
@@ -66,7 +67,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
-    if (isImplicitAccountOutput(outputData)) {
+    if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
         await syncBalance(wallet.id)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })
