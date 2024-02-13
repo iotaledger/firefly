@@ -17,21 +17,23 @@
     import { AccountManagementMenu } from './modals'
     import {
         formatTokenAmountBestMatch,
-        getBech32AddressFromAddressTypes,
+        getAddressFromOutput,
         isImplicitAccountOutput,
         selectedWallet,
     } from '@core/wallet'
     import { onMount } from 'svelte'
     import { getBaseToken } from '@core/profile'
-    import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
+    import { AccountOutput, CommonOutput, OutputData } from '@iota/sdk/out/types'
 
-    export let selectedAccount: OutputData
+    export let selectedAccountOutput: OutputData
     export let index: number
 
     let modal: Modal
     let totalBalance: number = 0
     let address: string = ''
-    const accountId: string = (selectedAccount?.output as AccountOutput)?.accountId
+    const commonOutput = selectedAccountOutput?.output as CommonOutput
+
+    const accountId: string = (selectedAccountOutput?.output as AccountOutput)?.accountId
 
     async function getTotalBalanceOfAnAccount(accountId: string): Promise<number> {
         const allOutputs = await $selectedWallet?.outputs({ accountIds: [accountId] })
@@ -39,25 +41,11 @@
         return totalBalance
     }
 
-    function getAddress(account) {
-        const output = account.output
-        if (isImplicitAccountOutput(output)) {
-            address = getBech32AddressFromAddressTypes(
-                new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
-            )
-        } else {
-            const accountId = (output as AccountOutput).accountId
-            if (accountId) {
-                address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
-            }
-        }
-        return address
-    }
-
     onMount(async () => {
-        totalBalance = await getTotalBalanceOfAnAccount((selectedAccount?.output as AccountOutput)?.accountId)
+        totalBalance = await getTotalBalanceOfAnAccount((selectedAccountOutput?.output as AccountOutput)?.accountId)
     })
-    $: address = getAddress(selectedAccount)
+
+    $: address = getAddressFromOutput(selectedAccountOutput)
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
@@ -66,7 +54,7 @@
             <title-container class="flex justify-between w-full items-center">
                 <title-wrapper class="flex items-center space-x-2">
                     <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
-                    {#if isImplicitAccountOutput(selectedAccount.output)}
+                    {#if isImplicitAccountOutput(commonOutput)}
                         <Pill backgroundColor="yellow-200" textColor="yellow-900"
                             >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                         >
@@ -119,7 +107,7 @@
             <div class="flex flex-col space-y-2 w-1/2">
                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Mana</Text>
                 <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                    >{selectedAccount?.output?.mana}</Text
+                    >{selectedAccountOutput?.output?.mana}</Text
                 >
             </div>
         </right-pane-container>
