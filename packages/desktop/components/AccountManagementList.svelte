@@ -14,7 +14,7 @@
         return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
     }
 
-    function formatAndTruncateAccount(output) {
+    function formatAndTruncateAccount(output): string {
         let address: string = ''
         if (isImplicitAccountOutput(output)) {
             address = getBech32AddressFromAddressTypes(
