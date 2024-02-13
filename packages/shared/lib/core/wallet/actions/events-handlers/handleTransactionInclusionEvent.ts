@@ -1,8 +1,7 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 import { TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
-
 import { updateParticipationOverview } from '@contexts/governance/stores'
-import { isWalletVoting } from 'shared/lib/contexts/governance/utils/isWalletVoting'
+import { isWalletVoting } from '@contexts/governance/utils/isWalletVoting'
 import { updateNftInAllWalletNfts } from '@core/nfts'
 import { updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
