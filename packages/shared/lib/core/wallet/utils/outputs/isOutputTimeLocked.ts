@@ -1,5 +1,5 @@
 import { CommonOutput, OutputData, TimelockUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
-import { nodeInfoProtocolParameters } from '@core/network'
+import { getSlotIndexFromNodeInfo, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 
 export function isOutputTimeLocked(outputData: OutputData): boolean {
@@ -9,8 +9,9 @@ export function isOutputTimeLocked(outputData: OutputData): boolean {
     ) as TimelockUnlockCondition
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     if (!nodeProtocolParameters || !timelockUnlockCondition) {
-        return true
+        return false
     } else {
-        return timelockUnlockCondition.slotIndex + nodeProtocolParameters.minCommittableAge < 0
+        const currentSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
+        return currentSlotIndex + nodeProtocolParameters.minCommittableAge < timelockUnlockCondition.slotIndex
     }
 }
