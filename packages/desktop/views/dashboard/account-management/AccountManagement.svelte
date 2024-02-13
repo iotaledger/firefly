@@ -4,9 +4,7 @@
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
 
-    const implicitAccounts: OutputData[] = $selectedWallet.implicitAccountOutputs
-    const accounts: OutputData[] = $selectedWallet.accountOutputs
-    const allAccounts: OutputData[] = [...accounts, ...implicitAccounts]
+    const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 </script>
 
 {#if $selectedWallet}
