@@ -3,32 +3,33 @@
     import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getBech32AddressFromAddressTypes } from '@core/wallet/utils'
+    import { getBech32AddressFromAddressTypes, isImplicitAccountOutput } from '@core/wallet/utils'
+    import { selectedWallet } from '@core/wallet'
 
     export let allAccounts: OutputData[] = []
-    export let accounts: OutputData[] = []
-    export let implicitAccounts: OutputData[] = []
 
     function isAnAccount(output: OutputData) {
-        return accounts.find((account) => account.outputId === output.outputId)
+        return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
     }
 
     function isAnImplicitAccount(output: OutputData) {
-        return implicitAccounts.find((account) => account.outputId === output.outputId)
+        return $selectedWallet?.implicitAccountOutputs.find((account) => account.outputId === output.outputId)
     }
 
     function formatAndTruncateAccount(output) {
-        let address: string
-        if ((output as AccountOutput).accountId) {
-            address = getBech32AddressFromAddressTypes(new AccountAddress((output as AccountOutput).accountId))
-        } else {
+        let address: string = ''
+        if (isImplicitAccountOutput(output)) {
             address = getBech32AddressFromAddressTypes(
                 new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
             )
+        } else {
+            const accountId = (output as AccountOutput).accountId
+            if (accountId) {
+                address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+            }
         }
         return truncateString(address, 7, 5)
     }
-
     function handleAccountClick() {
         // TODO: Implement account details
     }

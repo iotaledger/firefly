@@ -16,7 +16,7 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList {allAccounts} {accounts} {implicitAccounts} />
+                    <AccountManagementList {allAccounts} />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails />
