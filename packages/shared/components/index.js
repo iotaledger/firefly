@@ -1,6 +1,6 @@
 export { default as ActivityInformation } from './ActivityInformation.svelte'
 export { default as Alert } from './Alert.svelte'
-export { default as AliasActivityDetails } from './AliasActivityDetails.svelte'
+export { default as AccountActivityDetails } from './AccountActivityDetails.svelte'
 export { default as AmountBox } from './AmountBox.svelte'
 export { default as Animation } from './Animation.svelte'
 export { default as AssetIcon } from './AssetIcon.svelte'

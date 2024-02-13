@@ -1,6 +1,6 @@
 <script lang="ts">
     import {
-        CreateAliasButton,
+        CreateAccountButton,
         FaucetRequestButton,
         MintNativeTokenButton,
         MintNftButton,
@@ -26,8 +26,8 @@
                         <Text type={TextType.h5} classes="text-left">
                             {localize('general.assets')}
                         </Text>
-                        {#if features.developerTools.alias.enabled}
-                            <CreateAliasButton />
+                        {#if features.developerTools.account.enabled}
+                            <CreateAccountButton />
                         {/if}
                         {#if features.developerTools.mintNativeTokens.enabled}
                             <MintNativeTokenButton />
