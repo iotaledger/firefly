@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly IOTA",
-    "version": "2.0.6",
+    "version": "2.0.7",
     "description": "Official wallet application of Shimmer",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
