@@ -62,6 +62,17 @@
                   },
               ]
             : []),
+
+        ...(features?.accountManagement?.enabled
+            ? [
+                  {
+                      icon: IconEnum.Profile,
+                      label: localize('tabs.accountManagement'),
+                      route: DashboardRoute.AccountManagement,
+                      onClick: openAccountManagement,
+                  },
+              ]
+            : []),
         ...(features?.delegation?.enabled
             ? [
                   {
@@ -69,16 +80,6 @@
                       label: localize('tabs.delegation'),
                       route: DashboardRoute.Delegation,
                       onClick: openDelegation,
-                  },
-              ]
-            : []),
-        ...(features?.accountManagement?.enabled
-            ? [
-                  {
-                      icon: IconEnum.Parchment,
-                      label: localize('tabs.accountManagement'),
-                      route: DashboardRoute.AccountManagement,
-                      onClick: openAccountManagement,
                   },
               ]
             : []),
