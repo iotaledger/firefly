@@ -26,10 +26,7 @@ export function getSpendableStatusFromUnspentNftOutput(
         )
         if (expirationUnixTime) {
             const isExpirationTimeExpired = isOutputExpired(nftOutput)
-            if (typeof isExpirationTimeExpired === 'undefined') {
-                // The expiration is in the deadzone where it can't be unlocked
-                isSpendable = false
-            } else if (isExpirationTimeExpired) {
+            if (isExpirationTimeExpired) {
                 if (isReturnRecipient) {
                     isSpendable = true
                 } else {

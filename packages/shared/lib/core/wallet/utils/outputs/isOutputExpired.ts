@@ -1,14 +1,14 @@
 import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
-import { getSlotIndexFromNodeInfo, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getSlotIndexFromNodeInfo, nodeInfoProtocolParameters } from '@core/network'
 
-export function isOutputExpired(output: CommonOutput): boolean | undefined {
+export function isOutputExpired(output: CommonOutput): boolean | null {
     const expirationUnlockCondition = output.unlockConditions.find(
         (unlockCondition) => unlockCondition.type === UnlockConditionType.Expiration
     ) as ExpirationUnlockCondition
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     const outputSlotIndex = expirationUnlockCondition?.slotIndex
-    if (!nodeProtocolParameters || !outputSlotIndex) return true
+    if (!nodeProtocolParameters || !outputSlotIndex) return null
 
     const actualSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
     if (actualSlotIndex > outputSlotIndex + nodeProtocolParameters.maxCommittableAge) {
@@ -16,6 +16,7 @@ export function isOutputExpired(output: CommonOutput): boolean | undefined {
     } else if (actualSlotIndex <= outputSlotIndex + nodeProtocolParameters.minCommittableAge) {
         return true
     } else {
-        return
+        // The expiration is in the deadzone where it can't be unlocked
+        return null
     }
 }

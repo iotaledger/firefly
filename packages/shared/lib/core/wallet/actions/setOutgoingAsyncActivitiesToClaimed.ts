@@ -4,7 +4,7 @@ import { get } from 'svelte/store'
 import { ActivityAsyncStatus, ActivityDirection } from '../enums'
 import { allWalletActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '../../network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 
 export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState): Promise<void> {
     const walletActivities = get(allWalletActivities)[wallet.id]
