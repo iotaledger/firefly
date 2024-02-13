@@ -8,19 +8,18 @@ import {
 } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone
 export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
     const unlockCondition = foundry.unlockConditions[0] as ImmutableAccountAddressUnlockCondition
     const isImmutableAccountAddress = unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
 
-    let aliasId = ''
+    let accountId = ''
 
     if (isImmutableAccountAddress) {
         const hasAccountAddress = unlockCondition.address.type === AddressType.Account
         if (hasAccountAddress) {
-            aliasId = (unlockCondition.address as AccountAddress).accountId
+            accountId = (unlockCondition.address as AccountAddress).accountId
         }
     }
 
-    return api.computeFoundryId(aliasId, foundry.serialNumber, foundry.tokenScheme.type)
+    return api.computeFoundryId(accountId, foundry.serialNumber, foundry.tokenScheme.type)
 }

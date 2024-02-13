@@ -2,7 +2,7 @@ import { Icon } from '../enums'
 import { ISvg } from '../interfaces'
 import {
     ACTIVITY_SVG,
-    ALIAS_SVG,
+    ACCOUNT_SVG,
     ARROW_LEFT_SVG,
     ARROW_RIGHT_SVG,
     ASSEMBLY_SVG,
@@ -140,7 +140,7 @@ type IconSvgMap = { [key in Icon]: ISvg }
 
 export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.Activity]: ACTIVITY_SVG,
-    [Icon.Alias]: ALIAS_SVG,
+    [Icon.Account]: ACCOUNT_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
     [Icon.ArrowRight]: ARROW_RIGHT_SVG,
     [Icon.Assembly]: ASSEMBLY_SVG,

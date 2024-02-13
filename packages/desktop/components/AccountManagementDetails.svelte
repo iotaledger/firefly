@@ -15,12 +15,13 @@
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
-    import { formatTokenAmountBestMatch, isAnImplicitAccount, selectedWallet } from '@core/wallet'
+    import { formatTokenAmountBestMatch, isImplicitAccountOutput, selectedWallet } from '@core/wallet'
     import { onMount } from 'svelte'
     import { getBaseToken } from '@core/profile'
+    import { AccountOutput, OutputData } from '@iota/sdk/out/types'
 
-    export let selectedAccount
-    export let index
+    export let selectedAccount: OutputData
+    export let index: number
 
     let modal: Modal
     let totalBalance: number = 0
@@ -40,7 +41,7 @@
     }
 
     onMount(async () => {
-        totalBalance = await getTotalBalanceOfAnAccount(selectedAccount?.output?.accountId)
+        totalBalance = await getTotalBalanceOfAnAccount((selectedAccount?.output as AccountOutput)?.accountId)
     })
 </script>
 
@@ -50,7 +51,7 @@
             <title-container class="flex justify-between w-full items-center">
                 <title-wrapper class="flex items-center space-x-2">
                     <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
-                    {#if isAnImplicitAccount(selectedAccount)}
+                    {#if isImplicitAccountOutput(selectedAccount)}
                         <Pill backgroundColor="yellow-200" textColor="yellow-900"
                             >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                         >

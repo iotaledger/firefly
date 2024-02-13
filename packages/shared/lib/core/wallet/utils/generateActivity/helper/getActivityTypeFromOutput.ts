@@ -8,8 +8,8 @@ export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType 
     switch (output.output.type) {
         case OutputType.Nft:
             return ActivityType.Nft
-        case OutputType.Alias:
-            return ActivityType.Alias
+        case OutputType.Account:
+            return ActivityType.Account
         case OutputType.Foundry:
             return ActivityType.Foundry
         case OutputType.Basic:

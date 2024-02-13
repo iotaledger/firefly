@@ -1,20 +1,18 @@
 <script lang="ts">
     import { selectedWallet } from '@core/wallet/stores'
-    import { OutputData } from '@iota/sdk/out/types'
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
+    import { OutputData } from '@iota/sdk/out/types'
 
-    const implicitAccounts: OutputData[] = $selectedWallet.implicitAccountOutputs
-    const accounts: OutputData[] = $selectedWallet.accountOutputs
-    const allAccounts: OutputData[] = [...accounts, ...implicitAccounts]
+    const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 
     let selectedAccount: OutputData = allAccounts[0]
 
-    function handleAccountClick(account: OutputData) {
+    function handleAccountClick(account: OutputData): void {
         selectedAccount = account
     }
 
-    function setAccountIndex(account) {
+    function setAccountIndex(account: OutputData): number {
         return allAccounts.indexOf(account) + 1
     }
 </script>
@@ -26,7 +24,7 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList {allAccounts} {accounts} onAccountClick={handleAccountClick} />
+                    <AccountManagementList onAccountClick={handleAccountClick} />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails {selectedAccount} index={setAccountIndex(selectedAccount)} />
