@@ -4,7 +4,7 @@ export enum PopupId {
     AddNode = 'addNode',
     AddProposal = 'addProposal',
     AddressHistory = 'addressHistory',
-    AliasConfirmation = 'aliasConfirmation',
+    AccountConfirmation = 'accountConfirmation',
     BackupStronghold = 'backupStronghold',
     BurnNativeTokens = 'burnNativeTokens',
     BurnNativeTokensConfirmation = 'burnNativeTokensConfirmation',
