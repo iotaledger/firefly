@@ -13,7 +13,7 @@ export function getNativeTokenFromOutput(output: CommonOutput): NativeToken | un
 
     if (output.features) {
         for (const feature of output.features) {
-            if (feature instanceof NativeTokenFeature) return (feature ).asNativeToken()
+            if (feature instanceof NativeTokenFeature) return feature.asNativeToken()
         }
     }
     return undefined
