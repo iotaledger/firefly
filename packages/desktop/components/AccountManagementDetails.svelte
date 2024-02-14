@@ -19,14 +19,14 @@
     import { AccountManagementMenu } from './modals'
     import {
         formatTokenAmountBestMatch,
-        getAddressFromOutput,
+        getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
         selectedWallet,
     } from '@core/wallet'
     import { onMount } from 'svelte'
     import { getBaseToken } from '@core/profile'
-    import { AccountOutput, CommonOutput, OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, CommonOutput, OutputData } from '@iota/sdk/out/types'
 
     export let selectedAccountOutput: OutputData
     export let index: number
@@ -48,7 +48,7 @@
     })
     $: isImplicitAccount = isImplicitAccountOutput(selectedAccountOutput.output as CommonOutput)
     $: isAccountOuput = isAccountOutput(selectedAccountOutput)
-    $: address = getAddressFromOutput(selectedAccountOutput)
+    $: address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">

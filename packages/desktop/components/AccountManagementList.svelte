@@ -1,9 +1,9 @@
 <script lang="ts">
     import { truncateString } from '@core/utils'
-    import { OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getAddressFromOutput, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
+    import { getBech32AddressFromAddressTypes, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
     import { selectedWallet } from '@core/wallet'
 
     export let onAccountClick: (account: OutputData) => void
@@ -15,7 +15,7 @@
 
     function formatAndTruncateAccount(account): string {
         let address: string = ''
-        address = getAddressFromOutput(account)
+        address = getBech32AddressFromAddressTypes(new AccountAddress(account.output.accountId))
         return truncateString(address, 7, 5)
     }
 </script>
