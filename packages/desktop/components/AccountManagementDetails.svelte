@@ -42,8 +42,7 @@
     $: address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
 
     function onExplorerClick(): void {
-        let url: string
-        url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
+        const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
     }
 </script>
@@ -73,7 +72,7 @@
                         </wallet-actions-button>
                     {/if}
                     {#if isImplicitAccount}
-                        <Button size={ButtonSize.Small} onClick={() => {}}
+                        <Button size={ButtonSize.Small}
                             >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
                         >
                     {/if}

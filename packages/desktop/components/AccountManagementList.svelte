@@ -23,7 +23,9 @@
             <Text type={TextType.h2}>{localize('views.accountManagement.list.title')}</Text>
             <list-wrapper class="flex flex-col space-y-2">
                 {#each allOutputs as output, index}
-                    <ClickableTile onClick={() => onAccountClick(output)}>
+                    <ClickableTile
+                        onClick={() => onAccountClick(output)}
+                    >
                         <div class="flex flex-col space-y-1">
                             <div class="flex space-x-2">
                                 <Text
