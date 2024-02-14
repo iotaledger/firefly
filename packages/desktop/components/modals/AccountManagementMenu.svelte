@@ -2,11 +2,15 @@
     import { MenuItem, Modal } from '@ui'
     import { localize } from '@core/i18n'
     import { Icon } from '@auxiliary/icon/enums'
+    import { updateActiveWalletPersistedData } from '@core/profile'
+    import { selectedWalletId } from '@core/wallet'
 
     export let modal: Modal = undefined
-
+    export let accountId: string
     function setAsMainAccount(): void {
-        // TODO: Add logic to set the account as the main account
+        updateActiveWalletPersistedData($selectedWalletId, {
+            mainAccountId: accountId,
+        })
         modal?.close()
     }
 </script>
