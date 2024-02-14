@@ -798,6 +798,10 @@
                 "title": "Locked Mana",
                 "subtitle": "Locked Mana"
             },
+            "bicMana": {
+                "title": "BIC Mana",
+                "subtitle": "Block Issuance Credits Mana"
+            },
             "availableMana": {
                 "title": "Available Mana",
                 "subtitle": "Available Mana"
