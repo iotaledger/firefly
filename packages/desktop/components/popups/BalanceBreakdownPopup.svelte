@@ -53,7 +53,9 @@
 
     async function getManaBreakdown(): Promise<BalanceBreakdown> {
         const client = await getClient()
-        const accountCongestionPromises = $selectedWallet.accountOutputs.map((account) => client.getAccountCongestion((account.output as AccountOutput).accountId))
+        const accountCongestionPromises = $selectedWallet.accountOutputs.map((account) =>
+            client.getAccountCongestion((account.output as AccountOutput).accountId)
+        )
 
         const totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
         const availableBalance = getManaBalance(walletBalance?.mana?.available)
