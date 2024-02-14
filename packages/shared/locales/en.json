@@ -699,7 +699,8 @@
                 "mana": "Mana",
                 "key": "Key",
                 "modal": {
-                    "setMainAccount": "Set as main account"
+                    "setMainAccount": "Set as main account",
+                    "manageKeys": "Manage keys"
                 }
             }
         }
