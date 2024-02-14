@@ -9,10 +9,10 @@
         ...$selectedWallet.implicitAccountOutputs,
     ]
 
-    let selectedAccountOutput: OutputData = allAccountOutputs[0]
+    let selectedOutput: OutputData = allAccountOutputs[0]
 
     function handleAccountClick(account: OutputData): void {
-        selectedAccountOutput = account
+        selectedOutput = account
     }
 
     function setAccountOutputIndex(account: OutputData): number {
@@ -30,10 +30,7 @@
                     <AccountManagementList onAccountClick={handleAccountClick} />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
-                    <AccountManagementDetails
-                        {selectedAccountOutput}
-                        index={setAccountOutputIndex(selectedAccountOutput)}
-                    />
+                    <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} />
                 {/if}
             {/key}
         </div>

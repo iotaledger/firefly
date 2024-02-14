@@ -8,10 +8,7 @@
 
     export let onAccountClick: (account: OutputData) => void
 
-    const allAccountOutputs: OutputData[] = [
-        ...$selectedWallet.accountOutputs,
-        ...$selectedWallet.implicitAccountOutputs,
-    ]
+    const allOutputs: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 
     function formatAndTruncateAccount(account): string {
         let address: string = ''
@@ -25,8 +22,8 @@
         <left-pane-container class="flex flex-col space-y-10 h-full">
             <Text type={TextType.h2}>{localize('views.accountManagement.list.title')}</Text>
             <list-wrapper class="flex flex-col space-y-2">
-                {#each allAccountOutputs as account, index}
-                    <ClickableTile onClick={() => onAccountClick(account)}>
+                {#each allOutputs as output, index}
+                    <ClickableTile onClick={() => onAccountClick(output)}>
                         <div class="flex flex-col space-y-1">
                             <div class="flex space-x-2">
                                 <Text
@@ -38,20 +35,20 @@
                                     {localize('views.accountManagement.list.tile.title')}
                                     {index + 1}
                                 </Text>
-                                {#if isAccountOutput(account)}
+                                {#if isAccountOutput(output)}
                                     <Pill backgroundColor="blue-200" textColor="blue-600"
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
                                 {/if}
-                                {#if isImplicitAccountOutput(account.output)}
+                                {#if isImplicitAccountOutput(output.output)}
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                                     >
                                 {/if}
                             </div>
-                            {#if isAccountOutput(account)}
+                            {#if isAccountOutput(output)}
                                 <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
-                                    >{formatAndTruncateAccount(account)}</Text
+                                    >{formatAndTruncateAccount(output)}</Text
                                 >
                             {/if}
                         </div>
