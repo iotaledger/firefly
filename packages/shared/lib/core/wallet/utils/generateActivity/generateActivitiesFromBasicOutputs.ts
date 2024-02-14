@@ -3,6 +3,7 @@ import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts
 import {
     ActivityAction,
     ActivityDirection,
+    getNativeTokenFromOutput,
     getNftId,
     getNonRemainderBasicOutputsFromTransaction,
     IProcessedTransaction,
@@ -143,7 +144,7 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
     for (const output of outputs) {
         if (output.output.type === OutputType.Foundry || output.output.type === OutputType.Basic) {
             const commonOutput = output.output as CommonOutput
-            const nativeToken = commonOutput.getNativeToken()
+            const nativeToken = getNativeTokenFromOutput(commonOutput)
             if (nativeToken) {
                 if (!nativeTokens[nativeToken.id]) {
                     nativeTokens[nativeToken.id] = 0

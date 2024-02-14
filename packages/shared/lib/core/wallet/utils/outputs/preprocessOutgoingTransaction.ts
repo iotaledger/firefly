@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, RegularTransactionEssence, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
@@ -9,12 +9,10 @@ export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
     wallet: IWalletState
 ): Promise<IProcessedTransaction> {
-    const regularTransactionEssence = transaction.payload.essence as RegularTransactionEssence
+    const regularTransactionEssence = transaction.payload.transaction
+    const transactionId = transaction?.transactionId?.toString()
 
-    const outputs = convertTransactionsOutputTypesToWrappedOutputs(
-        transaction?.transactionId,
-        regularTransactionEssence.outputs
-    )
+    const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
     const direction = getDirectionFromOutgoingTransaction(outputs, wallet.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
@@ -30,7 +28,7 @@ export async function preprocessOutgoingTransaction(
 
     return {
         outputs: outputs,
-        transactionId: transaction?.transactionId,
+        transactionId,
         direction,
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,
