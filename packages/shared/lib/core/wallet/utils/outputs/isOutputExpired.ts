@@ -10,10 +10,10 @@ export function isOutputExpired(output: CommonOutput): boolean | null {
     const outputSlotIndex = expirationUnlockCondition?.slotIndex
     if (!nodeProtocolParameters || !outputSlotIndex) return null
 
-    const actualSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
-    if (actualSlotIndex > outputSlotIndex + nodeProtocolParameters.maxCommittableAge) {
+    const currentSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
+    if (outputSlotIndex > currentSlotIndex + nodeProtocolParameters.maxCommittableAge) {
         return false
-    } else if (actualSlotIndex <= outputSlotIndex + nodeProtocolParameters.minCommittableAge) {
+    } else if (outputSlotIndex <= currentSlotIndex + nodeProtocolParameters.minCommittableAge) {
         return true
     } else {
         // The expiration is in the deadzone where it can't be unlocked
