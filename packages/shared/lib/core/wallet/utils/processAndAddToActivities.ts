@@ -1,4 +1,4 @@
-import type { Transaction } from '@iota/sdk/out/types'
+import type { TransactionWithMetadata } from '@iota/sdk/out/types'
 
 import { addActivitiesToWalletActivitiesInAllWalletActivities } from '../stores'
 
@@ -8,7 +8,10 @@ import { IWalletState } from '../interfaces'
 // We pass the wallet as a parameter,
 // because logging out while transaction is pending,
 // clears the the selectedWallet store at this point.
-export async function processAndAddToActivities(transaction: Transaction, wallet: IWalletState): Promise<void> {
+export async function processAndAddToActivities(
+    transaction: TransactionWithMetadata,
+    wallet: IWalletState
+): Promise<void> {
     const preprocessedTransaction = await preprocessOutgoingTransaction(transaction, wallet)
     const activities = await generateActivities(preprocessedTransaction, wallet)
     addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
