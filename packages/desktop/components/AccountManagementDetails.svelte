@@ -12,12 +12,15 @@
         CopyableBox,
         Icon,
         Pill,
+        Button,
+        ButtonSize,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
     import {
         formatTokenAmountBestMatch,
         getAddressFromOutput,
+        isAccountOutput,
         isImplicitAccountOutput,
         selectedWallet,
     } from '@core/wallet'
@@ -31,7 +34,6 @@
     let modal: Modal
     let totalBalance: number = 0
     let address: string = ''
-    const commonOutput = selectedAccountOutput?.output as CommonOutput
 
     const accountId: string = (selectedAccountOutput?.output as AccountOutput)?.accountId
 
@@ -44,7 +46,8 @@
     onMount(async () => {
         totalBalance = await getTotalBalanceOfAnAccount((selectedAccountOutput?.output as AccountOutput)?.accountId)
     })
-
+    $: isImplicitAccount = isImplicitAccountOutput(selectedAccountOutput.output as CommonOutput)
+    $: isAccountOuput = isAccountOutput(selectedAccountOutput)
     $: address = getAddressFromOutput(selectedAccountOutput)
 </script>
 
@@ -52,9 +55,9 @@
     <Pane height={Height.Full}>
         <right-pane-container class="flex flex-col space-y-10 h-full">
             <title-container class="flex justify-between w-full items-center">
-                <title-wrapper class="flex items-center space-x-2">
+                <title-wrapper class="flex items-center space-x-2 py-1">
                     <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
-                    {#if isImplicitAccountOutput(commonOutput)}
+                    {#if isImplicitAccount}
                         <Pill backgroundColor="yellow-200" textColor="yellow-900"
                             >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                         >
@@ -64,10 +67,17 @@
                         </Pill>
                     {/if}
                 </title-wrapper>
-                <wallet-actions-button class="block relative">
-                    <MeatballMenuButton onClick={modal?.toggle} />
-                    <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
-                </wallet-actions-button>
+                {#if isAccountOuput}
+                    <wallet-actions-button class="block relative">
+                        <MeatballMenuButton onClick={modal?.toggle} />
+                        <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
+                    </wallet-actions-button>
+                {/if}
+                {#if isImplicitAccount}
+                    <Button size={ButtonSize.Small} onClick={() => {}}
+                        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+                    >
+                {/if}
             </title-container>
             <div class="flex flex-row space-x-2 w-1/2">
                 <Tile>
@@ -89,21 +99,23 @@
                     </div>
                 </Tile>
             </div>
-            <div class="flex flex-col space-y-2 w-1/2">
-                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Address</Text>
-                <CopyableBox
-                    clearBackground
-                    clearBoxPadding
-                    isCopyable
-                    value={address}
-                    classes="flex space-x-2 items-center"
-                >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{address}</Text
+            {#if isAccountOuput}
+                <div class="flex flex-col space-y-2 w-1/2">
+                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Address</Text>
+                    <CopyableBox
+                        clearBackground
+                        clearBoxPadding
+                        isCopyable
+                        value={address}
+                        classes="flex space-x-2 items-center"
                     >
-                    <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
-                </CopyableBox>
-            </div>
+                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                            >{address}</Text
+                        >
+                        <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
+                    </CopyableBox>
+                </div>
+            {/if}
             <div class="flex flex-col space-y-2 w-1/2">
                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Mana</Text>
                 <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"

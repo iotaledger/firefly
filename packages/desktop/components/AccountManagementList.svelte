@@ -3,7 +3,7 @@
     import { OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getAddressFromOutput, isImplicitAccountOutput } from '@core/wallet/utils'
+    import { getAddressFromOutput, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
     import { selectedWallet } from '@core/wallet'
 
     export let onAccountClick: (account: OutputData) => void
@@ -12,10 +12,6 @@
         ...$selectedWallet.accountOutputs,
         ...$selectedWallet.implicitAccountOutputs,
     ]
-
-    function isAnAccount(output: OutputData) {
-        return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
-    }
 
     function formatAndTruncateAccount(account): string {
         let address: string = ''
@@ -42,7 +38,7 @@
                                     {localize('views.accountManagement.list.tile.title')}
                                     {index + 1}
                                 </Text>
-                                {#if isAnAccount(account)}
+                                {#if isAccountOutput(account)}
                                     <Pill backgroundColor="blue-200" textColor="blue-600"
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
@@ -53,9 +49,11 @@
                                     >
                                 {/if}
                             </div>
-                            <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
-                                >{formatAndTruncateAccount(account)}</Text
-                            >
+                            {#if isAccountOutput(account)}
+                                <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
+                                    >{formatAndTruncateAccount(account)}</Text
+                                >
+                            {/if}
                         </div>
                     </ClickableTile>
                 {/each}
