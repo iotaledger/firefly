@@ -32,14 +32,14 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
         const accountOutputs = await wallet.accounts()
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs })
-        if (
-            wallet.mainAccountId &&
-            !walletOutputs.find(
-                (output) =>
-                    output.output.type === OutputType.Account &&
-                    (output as unknown as AccountOutput).accountId === wallet.mainAccountId
-            )
-        ) {
+        const isSendingTheMainAccount = walletOutputs.find(
+            (output) =>
+                output.output.type === OutputType.Account &&
+                (output as unknown as AccountOutput).accountId === wallet.mainAccountId
+        )
+
+        // Unselect the active account if it's being transferred
+        if (isSendingTheMainAccount) {
             updateActiveWallet(walletId, { mainAccountId: undefined, depositAddress: '' })
         }
     }
