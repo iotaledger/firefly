@@ -8,8 +8,8 @@ import settingsFeatures from './settings.features'
 import walletFeatures from './wallet.features'
 import analyticsFeatures from './analytics.features'
 import vestingFeatures from './vesting.features'
-import delegationFeatures from './delegation.features'
 import accountManagementFeatures from './account-management.features'
+import delegationFeatures from './delegation.features'
 import { IDesktopFeatures } from './interfaces'
 
 const features: IDesktopFeatures = {
@@ -23,8 +23,8 @@ const features: IDesktopFeatures = {
     wallet: walletFeatures,
     analytics: analyticsFeatures,
     vesting: vestingFeatures,
-    delegation: delegationFeatures,
     accountManagement: accountManagementFeatures,
+    delegation: delegationFeatures,
 }
 
 export default features

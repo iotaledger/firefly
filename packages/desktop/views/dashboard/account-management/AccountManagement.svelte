@@ -1,6 +1,7 @@
 <script lang="ts">
     import { selectedWallet } from '@core/wallet/stores'
-    import { Height, Pane } from '@ui'
+    import features from '@features/features'
+    import { AccountManagementDetails, AccountManagementList } from '@components'
 </script>
 
 {#if $selectedWallet}
@@ -9,12 +10,12 @@
     >
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
-                <left-pane class="flex flex-col w-1/3">
-                    <Pane height={Height.Full}>Account List</Pane>
-                </left-pane>
-                <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
-                    <Pane height={Height.Full}>Account Details</Pane>
-                </right-pane>
+                {#if features.accountManagement.accountList.enabled}
+                    <AccountManagementList />
+                {/if}
+                {#if features.accountManagement.accountDetails.enabled}
+                    <AccountManagementDetails />
+                {/if}
             {/key}
         </div>
     </account-management-container>
