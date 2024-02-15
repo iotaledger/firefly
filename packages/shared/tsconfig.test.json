@@ -6,6 +6,7 @@
         "isolatedModules": true,
         "lib": ["DOM", "ESNext"],
         "paths": {
+            "@ui": ["./components"],
             "@auxiliary/*": ["./lib/auxiliary/*"],
             "@contexts/*": ["./lib/contexts/*"],
             "@core/*": ["./lib/core/*"],
