@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '../index'
+    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '@core/router'
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
