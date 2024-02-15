@@ -7,7 +7,7 @@ import { INft } from '../interfaces'
 import { buildNftFromNftOutput } from '../utils'
 import { NftOutput, OutputData, OutputType } from '@iota/sdk/out/types'
 import { setWalletNftsInAllWalletNfts } from './setWalletNftsInAllWalletNfts'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '../../network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 
 function sortNfts(outputA: OutputData, outputB: OutputData): number {
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
