@@ -24,7 +24,12 @@
     }
 
     function getAmountMana(amount: number): string {
-        return formatTokenAmountBestMatch(amount, DEFAULT_MANA)
+        if (amount < 0) {
+            // patch for BIC mana because BIC can be negative
+            return '-' + formatTokenAmountBestMatch(amount * -1, DEFAULT_MANA)
+        } else {
+            return formatTokenAmountBestMatch(amount, DEFAULT_MANA)
+        }
     }
 
     function handleAmount(isBaseToken: boolean, amount: number) {
