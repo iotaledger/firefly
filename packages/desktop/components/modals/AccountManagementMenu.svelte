@@ -4,9 +4,11 @@
     import { Icon } from '@auxiliary/icon/enums'
     import { updateActiveWalletPersistedData } from '@core/profile'
     import { selectedWalletId } from '@core/wallet'
+    import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
     export let accountId: string
+    export let keys: string[] = []
 
     function setAsMainAccount(): void {
         updateActiveWalletPersistedData($selectedWalletId, {
@@ -16,7 +18,7 @@
     }
 
     function manageKeys(): void {
-        // TODO: Implement manage keys
+        openPopup({ id: PopupId.ManageKeys, props: { keys } })
         modal?.close()
     }
 </script>
