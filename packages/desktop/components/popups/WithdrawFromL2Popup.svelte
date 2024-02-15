@@ -6,7 +6,7 @@
     import { getBaseToken, getCoinType, activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { truncateString } from '@core/utils'
     import { formatTokenAmountPrecise, getRequiredStorageDepositForMinimalBasicOutput } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { WithdrawRequest, getLayer2WithdrawRequest } from '@core/layer-2/utils'
     import { withdrawL2Funds } from '@core/layer-2/helpers/widthdrawL2Funds'

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TransactionActivityStatusPill } from 'shared/components'
+    import { TransactionActivityStatusPill } from '@ui'
     import { ConsolidationActivity } from '@core/wallet'
 
     export let activity: ConsolidationActivity

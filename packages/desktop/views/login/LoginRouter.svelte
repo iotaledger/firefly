@@ -3,7 +3,7 @@
     import { LoginRoute, loginRoute } from '@core/router'
     import features from '@features/features'
     import { UpdateStrongholdRouterView } from '@views'
-    import { Transition } from 'shared/components'
+    import { Transition } from '@ui'
     import { EnterPinView, LoadProfileView, SelectProfileView } from './views'
 
     $: if (features.analytics.loginRoute.enabled && $loginRoute)

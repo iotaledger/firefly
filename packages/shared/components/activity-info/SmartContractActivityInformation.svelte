@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
     import { TransactionActivity } from '@core/wallet'
     import { Layer2Metadata } from '@core/layer-2'

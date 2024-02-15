@@ -14,7 +14,7 @@
         visibleSelectedWalletAssets,
     } from '@core/wallet'
     import Big from 'big.js'
-    import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from 'shared/components'
+    import { AmountInput, AssetDropdown, InputContainer, SliderInput, Text, TooltipIcon } from '@ui'
     import UnitInput from './UnitInput.svelte'
 
     export let inputElement: HTMLInputElement = undefined

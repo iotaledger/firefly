@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from 'shared/components'
+    import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from '@ui'
     import { getAssetFromPersistedAssets } from '@core/wallet'
     import { GovernanceActivity } from '@core/wallet'
     import { getCoinType } from '@core/profile'

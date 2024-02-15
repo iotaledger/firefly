@@ -1,14 +1,5 @@
 <script lang="ts">
-    import {
-        Button,
-        Checkbox,
-        PasswordInput,
-        Spinner,
-        Text,
-        TextType,
-        ButtonSize,
-        HTMLButtonType,
-    } from 'shared/components'
+    import { Button, Checkbox, PasswordInput, Spinner, Text, TextType, ButtonSize, HTMLButtonType } from '@ui'
     import { localize } from '@core/i18n'
     import { MAX_STRONGHOLD_PASSWORD_LENGTH } from '@core/profile'
     import zxcvbn from 'zxcvbn'

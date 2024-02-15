@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text } from 'shared/components'
+    import { Text } from '@ui'
     import { english } from '@auxiliary/wordlists'
     import { localize } from '@core/i18n'
     import { debounce } from '@core/utils'

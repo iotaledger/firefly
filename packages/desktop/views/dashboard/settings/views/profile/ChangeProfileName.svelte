@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Input, Text, HTMLButtonType, ButtonSize, TextType } from 'shared/components'
+    import { Button, Input, Text, HTMLButtonType, ButtonSize, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification'
     import { activeProfile, updateActiveProfile, validateProfileName } from '@core/profile'

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
+    import { Modal, SelectorInput, IOption, ColoredCircle } from '@ui'
     import { localize } from '@core/i18n'
     import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
     import { Subject } from '@core/wallet/types'

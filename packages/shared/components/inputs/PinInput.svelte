@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Error, Icon, Text } from 'shared/components'
+    import { Error, Icon, Text } from '@ui'
     import { createEventDispatcher, onMount } from 'svelte'
     import { isValidPin, PIN_LENGTH } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'

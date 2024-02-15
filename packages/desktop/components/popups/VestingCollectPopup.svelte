@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Text, FontWeight, TextType, KeyValueBox } from 'shared/components'
+    import { Button, Text, FontWeight, TextType, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { selectedWalletVestingUnclaimedFunds } from '@contexts/vesting'

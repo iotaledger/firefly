@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, HTMLButtonType, Text, TextInput, TextType } from 'shared/components'
+    import { Button, HTMLButtonType, Text, TextInput, TextType } from '@ui'
     import type { Auth } from '@iota/sdk/out/types'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'

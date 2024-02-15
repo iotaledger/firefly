@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, FontWeight } from 'shared/components'
+    import { Text, FontWeight } from '@ui'
 
     export let data: string = ''
     export let textColor: string = 'gray-800'
