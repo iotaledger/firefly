@@ -49,7 +49,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
     if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput) {
-        await syncBalance(wallet.id)
+        await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
@@ -68,7 +68,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
     if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
-        await syncBalance(wallet.id)
+        await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })
     }
