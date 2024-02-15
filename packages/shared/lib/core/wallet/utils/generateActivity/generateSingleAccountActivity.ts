@@ -11,7 +11,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AccountOutput } from '@iota/sdk'
+import { AccountOutput } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
 export async function generateSingleAccountActivity(
