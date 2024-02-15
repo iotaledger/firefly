@@ -1,6 +1,11 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { OnboardingType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        MIGRATE_FROM_LEGACY_LINK,
+        OnboardingType,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
@@ -24,8 +29,7 @@
     }
 
     function onLegacyMigrationClick(): void {
-        const url = 'https://blog.iota.org/iota-legacy-migration-tool'
-        openUrlInBrowser(url)
+        openUrlInBrowser(MIGRATE_FROM_LEGACY_LINK)
     }
 
     onMount(() => {
