@@ -39,7 +39,7 @@ export function setAsyncStatusOfWalletActivities(time: Date): void {
         return state
     })
     for (const walletId of balancesToUpdate) {
-        syncBalance(walletId)
+        syncBalance(walletId, false)
     }
     if (balancesToUpdate.length) {
         void refreshWalletAssetsForActiveProfile()
