@@ -8,7 +8,7 @@
     import { activeProfile } from '@core/profile'
     import { IDropdownItem, cleanUrl } from '@core/utils'
     import features from '@features/features'
-    import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from 'shared/components'
+    import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from '@ui'
     import { getNodeInfo } from '@core/wallet/actions'
     import { IAuth, IClientOptions } from '@iota/sdk/out/types'
     interface INodeValidationOptions {

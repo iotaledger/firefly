@@ -11,6 +11,7 @@ import {
     getBech32AddressFromAddressTypes,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
+    isAccountOutput,
     isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
@@ -43,13 +44,12 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (!wallet || !outputData) return
 
     const output = outputData.output
-    const isAccountOutput = output.type === OutputType.Account
     const isNftOutput = output.type === OutputType.Nft
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput) {
-        await syncBalance(wallet.id)
+    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput(outputData)) {
+        await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
@@ -68,11 +68,11 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
     if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
-        await syncBalance(wallet.id)
+        await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })
     }
-    if (isAccountOutput) {
+    if (isAccountOutput(outputData)) {
         const accountOutput = output as AccountOutput
         // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
         // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account

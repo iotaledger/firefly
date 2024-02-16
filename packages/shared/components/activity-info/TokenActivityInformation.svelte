@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
     import { FoundryActivity, getAssetFromPersistedAssets, IIrc30Metadata } from '@core/wallet'
     import { IKeyValueBoxList } from '@core/utils'

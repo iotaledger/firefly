@@ -1,11 +1,5 @@
 <script lang="ts">
-    import {
-        TransactionActivityStatusPill,
-        ActivityAsyncStatusPill,
-        Pill,
-        AmountBox,
-        SubjectBox,
-    } from 'shared/components'
+    import { TransactionActivityStatusPill, ActivityAsyncStatusPill, Pill, AmountBox, SubjectBox } from '@ui'
     import { localize } from '@core/i18n'
     import {
         TransactionActivity,

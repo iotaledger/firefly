@@ -3,7 +3,7 @@ import {
     MILLISECONDS_PER_HOUR,
     MILLISECONDS_PER_MINUTE,
     MILLISECONDS_PER_WEEK,
-} from 'shared/lib/core/utils'
+} from '@core/utils'
 import { TimeUnit } from '../enums'
 
 export const TIME_UNIT_MS_MAP: Record<TimeUnit, number> = {

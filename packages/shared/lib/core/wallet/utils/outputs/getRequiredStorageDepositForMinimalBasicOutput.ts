@@ -35,7 +35,7 @@ export async function getRequiredStorageDepositForMinimalBasicOutput(): Promise<
 
     const client = await getClient()
     const basicOutput = await client.buildBasicOutput(params)
-    const minimumRequiredStorageDeposit = await client.minimumRequiredStorageDeposit(basicOutput)
+    const minimumRequiredStorageDeposit = await client.computeMinimumOutputAmount(basicOutput)
 
     return minimumRequiredStorageDeposit
 }

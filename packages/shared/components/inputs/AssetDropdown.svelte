@@ -1,6 +1,6 @@
 <script lang="ts">
     import { IAsset, visibleSelectedWalletAssets } from '@core/wallet'
-    import { AssetTile, Icon, Text, AssetIcon, FontWeight, AssetIconSize } from 'shared/components'
+    import { AssetTile, Icon, Text, AssetIcon, FontWeight, AssetIconSize } from '@ui'
     import { clickOutside } from '@core/utils'
     import { activeProfile } from '@core/profile'
     import { Icon as IconEnum } from '@auxiliary/icon'

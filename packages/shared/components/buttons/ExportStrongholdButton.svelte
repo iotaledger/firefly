@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { showAppNotification } from '@auxiliary/notification'
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, ButtonSize } from 'shared/components'
+    import { Button, ButtonSize } from '@ui'
 
     export let isBusy: boolean = false
     export let message: string = ''

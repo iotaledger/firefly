@@ -1,7 +1,5 @@
-import { OutputData } from '@iota/sdk'
-import { get } from 'svelte/store'
-import { selectedWallet } from '../stores'
+import { OutputData, OutputType } from '@iota/sdk/out/types'
 
 export function isAccountOutput(output: OutputData): boolean {
-    return get(selectedWallet)?.accountOutputs?.find((account) => account.outputId === output.outputId)
+    return output.output.type === OutputType.Account
 }

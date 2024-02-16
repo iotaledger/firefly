@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Text } from 'shared/components'
+    import { Button, Text } from '@ui'
     import { errorLog } from '@core/error'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'

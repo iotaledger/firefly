@@ -4,7 +4,7 @@
     import { addOfficialNodesToClientOptions as onAddOfficialNodesClick, NetworkId } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { NetworkSettingsRoute } from '@core/router'
-    import { Button, ButtonSize, NodeListTable } from 'shared/components'
+    import { Button, ButtonSize, NodeListTable } from '@ui'
     import SettingsSection from '../SettingsSection.svelte'
 
     let nodesContainer: HTMLElement

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Tile } from 'shared/components'
+    import { Tile } from '@ui'
 
     export let disabled = false
     export let classes = ''

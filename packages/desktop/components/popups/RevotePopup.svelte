@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { Button, Text, TextHint, HTMLButtonType, TextType } from 'shared/components'
+    import { Button, Text, TextHint, HTMLButtonType, TextType } from '@ui'
     import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { vote } from '@contexts/governance/actions'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     $: hasGovernanceTransactionInProgress =
         $selectedWallet?.hasVotingPowerTransactionInProgress || $selectedWallet?.hasVotingTransactionInProgress

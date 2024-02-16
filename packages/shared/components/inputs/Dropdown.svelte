@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
-    import { FontWeight, Icon, Text, TextPropTypes, TextType } from 'shared/components'
+    import { FontWeight, Icon, Text, TextPropTypes, TextType } from '@ui'
 
     type T = $$Generic
 

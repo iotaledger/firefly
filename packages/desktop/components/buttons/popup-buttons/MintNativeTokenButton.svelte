@@ -6,7 +6,7 @@
     import { resetMintTokenDetails } from '@core/wallet'
 
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     $: hasAccounts = $selectedWallet?.accountOutputs.length > 0
 

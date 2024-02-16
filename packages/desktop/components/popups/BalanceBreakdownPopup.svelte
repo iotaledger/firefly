@@ -8,8 +8,8 @@
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
-    import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import features from '@features/features'
 
     interface BalanceBreakdown {
@@ -52,12 +52,14 @@
     }
 
     function getManaBreakdown(): BalanceBreakdown {
-        const totalBalance = getManaBalance(walletBalance?.mana?.total)
+        const totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
         const availableBalance = getManaBalance(walletBalance?.mana?.available)
+        const totalBalance = totalBalanceWithoutBic + walletBalance.blockIssuanceCredits
 
         const subBreakdown = {
             availableMana: { amount: availableBalance },
-            lockedMana: { amount: totalBalance - availableBalance },
+            lockedMana: { amount: totalBalanceWithoutBic - availableBalance },
+            bicMana: { amount: walletBalance.blockIssuanceCredits },
         }
         return { amount: totalBalance, subBreakdown, isBaseToken: false }
     }

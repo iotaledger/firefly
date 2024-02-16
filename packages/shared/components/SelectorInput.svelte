@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Modal, TextInput, Text, TextType, FontWeight, IOption } from 'shared/components'
+    import { Modal, TextInput, Text, TextType, FontWeight, IOption } from '@ui'
     import { fade } from 'svelte/transition'
     import { truncateString } from '@core/utils'
 

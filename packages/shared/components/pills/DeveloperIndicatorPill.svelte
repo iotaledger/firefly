@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Pill } from 'shared/components'
+    import { Pill } from '@ui'
 </script>
 
 <Pill

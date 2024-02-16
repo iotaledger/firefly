@@ -33,7 +33,7 @@
     } from '@core/ledger'
     import { Animation, Button, ShimmerClaimingAccountTile, Text } from '@ui'
     import { onDestroy, onMount } from 'svelte'
-    import { restoreProfileRouter } from '../restore-profile-router'
+    import { restoreProfileRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
     import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/wallet/actions'
 

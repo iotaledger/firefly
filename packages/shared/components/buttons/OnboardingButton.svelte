@@ -1,6 +1,6 @@
 <script lang="ts">
     import { appSettings } from '@core/app'
-    import { Icon, Spinner, Text, FontWeight, TextType } from 'shared/components'
+    import { Icon, Spinner, Text, FontWeight, TextType } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let primaryText: string = ''

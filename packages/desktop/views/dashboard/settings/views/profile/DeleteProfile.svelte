@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Button, Text, ButtonVariant, ButtonSize } from 'shared/components'
+    import { Button, Text, ButtonVariant, ButtonSize } from '@ui'
     import { localize } from '@core/i18n'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { deleteProfile } from '@contexts/settings'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     function onDeleteClick(): void {
         openPopup({

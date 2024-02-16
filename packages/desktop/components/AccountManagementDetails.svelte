@@ -41,12 +41,11 @@
     let modal: Modal
     let address: string = ''
 
-    const accountId: string = (selectedOutput?.output as AccountOutput)?.accountId
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
-    $: isAccountOuput = isAccountOutput(selectedOutput)
-    $: address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: hasStakedFeature = hasOutputStakedFeature(selectedOutput)
 
     function onExplorerClick(): void {
@@ -90,7 +89,7 @@
                         {/if}
                     </title-wrapper>
 
-                    {#if isAccountOuput}
+                    {#if accountId}
                         <wallet-actions-button class="block relative">
                             <MeatballMenuButton onClick={modal?.toggle} />
                             <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
@@ -123,6 +122,7 @@
                         >
                     </div>
                 </Tile>
+
                 {#if hasStakedFeature}
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
@@ -134,7 +134,7 @@
                     </Tile>
                 {/if}
             </div>
-            {#if isAccountOuput}
+            {#if accountId}
                 <div class="flex flex-col space-y-2 w-1/2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Address</Text>
                     <CopyableBox

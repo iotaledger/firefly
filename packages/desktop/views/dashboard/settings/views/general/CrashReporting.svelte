@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Checkbox, Text, Icon } from 'shared/components'
+    import { Checkbox, Text, Icon } from '@ui'
     import { appSettings, initAppSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Icon as IconEnum } from '@auxiliary/icon'
