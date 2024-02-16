@@ -3,5 +3,6 @@ import { TokenMetadata } from '../types'
 
 export function getUnitFromTokenMetadata(tokenMetadata: TokenMetadata): string {
     const isBaseToken = tokenMetadata?.standard === TokenStandard.BaseToken
-    return isBaseToken ? tokenMetadata?.unit : tokenMetadata?.symbol
+    const isMana = tokenMetadata?.standard === TokenStandard.Mana
+    return isBaseToken || isMana ? tokenMetadata?.unit : tokenMetadata?.symbol
 }
