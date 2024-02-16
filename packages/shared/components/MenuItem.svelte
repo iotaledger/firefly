@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, Spinner, Position, InformationTooltip } from 'shared/components'
+    import { Icon, Text, Spinner, Position, InformationTooltip } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { MenuItemVariant } from './enums'
 

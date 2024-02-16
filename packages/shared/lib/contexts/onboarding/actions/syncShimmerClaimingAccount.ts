@@ -8,7 +8,7 @@ import { getOnboardingBaseToken, shimmerClaimingProfileManager, updateShimmerCla
 import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { showAppNotification } from '@auxiliary/notification'
-import { getWallet, IWallet } from 'shared/lib/core/profile'
+import { getWallet, IWallet } from '@core/profile'
 
 // TODO(2.0) Fix
 export async function syncShimmerClaimingAccount(wallet: IWallet): Promise<void> {

@@ -8,8 +8,7 @@
         selectedWalletActivities,
         setAsyncStatusOfWalletActivities,
     } from '@core/wallet'
-    import { ActivityTile, Text, TextInput, TogglableButton, FontWeight } from '@ui'
-    import { Filter } from '@components'
+    import { ActivityTile, Text, TextInput, TogglableButton, FontWeight, Filter } from '@ui'
     import features from '@features/features'
     import { debounce, getMonthYear } from '@core/utils'
     import VirtualList from '@sveltejs/svelte-virtual-list'

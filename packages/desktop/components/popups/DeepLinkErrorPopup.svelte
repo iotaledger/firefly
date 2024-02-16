@@ -1,8 +1,8 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Text, Button, TextHint, FontWeight } from 'shared/components'
+    import { Text, Button, TextHint, FontWeight } from '@ui'
     import { closePopup } from '@auxiliary/popup'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     export let error: Error
 </script>

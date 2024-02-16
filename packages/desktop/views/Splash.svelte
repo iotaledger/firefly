@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Animation } from 'shared/components'
+    import { Animation } from '@ui'
     import { appSettings, shouldBeDarkMode } from '@core/app'
     import { AnimationEnum, AnimationRenderer } from '@auxiliary/animation'
 

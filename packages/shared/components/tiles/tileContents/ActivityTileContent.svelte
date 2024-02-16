@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, Icon, FontWeight } from 'shared/components'
+    import { Text, Icon, FontWeight } from '@ui'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let action: string

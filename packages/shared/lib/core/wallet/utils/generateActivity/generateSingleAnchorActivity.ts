@@ -11,7 +11,7 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AnchorOutput } from 'shared/../../../iota-sdk/bindings/nodejs/out'
+import { AnchorOutput } from '@iota/sdk/out/types'
 
 export async function generateSingleAnchorActivity(
     wallet: IWalletState,

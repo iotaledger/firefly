@@ -24,8 +24,8 @@
         refreshWalletAssetsForActiveProfile,
     } from '@core/wallet'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import { onDestroy } from 'svelte'
 
     export let searchForBalancesOnLoad = false

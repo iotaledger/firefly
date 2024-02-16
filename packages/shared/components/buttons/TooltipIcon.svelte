@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, Tooltip, FontWeight, TextType, Position } from 'shared/components'
+    import { Icon, Text, Tooltip, FontWeight, TextType, Position } from '@ui'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let title: string = ''

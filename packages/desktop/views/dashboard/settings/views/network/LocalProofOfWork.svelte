@@ -3,7 +3,7 @@
     import { toggleLocalPowInClientOptions } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { NetworkSettingsRoute } from '@core/router'
-    import { Checkbox } from 'shared/components'
+    import { Checkbox } from '@ui'
     import SettingsSection from '../SettingsSection.svelte'
 
     $: clientOptions = $activeProfile?.clientOptions

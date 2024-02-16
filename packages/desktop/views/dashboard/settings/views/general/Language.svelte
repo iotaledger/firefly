@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown, Text } from 'shared/components'
+    import { Dropdown, Text } from '@ui'
     import { appSettings } from '@core/app'
     import { SUPPORTED_LOCALES, localize, setLanguage } from '@core/i18n'
     import type { IDropdownItem } from '@core/utils'

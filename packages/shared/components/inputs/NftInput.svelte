@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from 'shared/components'
+    import { Modal, SelectorInput, IOption, NftImageOrIconBox, NftSize } from '@ui'
     import { ownedNfts } from '@core/nfts'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { selectedWalletId } from '@core/wallet'

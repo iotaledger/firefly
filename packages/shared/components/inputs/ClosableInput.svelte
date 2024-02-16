@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { NumberInput, TextInput, Icon } from 'shared/components'
+    import { NumberInput, TextInput, Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let value = ''

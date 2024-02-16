@@ -1,5 +1,5 @@
 import { CommonOutput, TimelockUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 
 export function getTimelockDateFromOutput(output: CommonOutput): Date | undefined {

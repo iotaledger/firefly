@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, TextType } from 'shared/components'
+    import { Text, TextType } from '@ui'
 
     export let percent: number = 0
     export let message: string = ''
