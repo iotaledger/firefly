@@ -32,7 +32,7 @@
             <AccountCreationView {outputId} />
         {/if}
     </box-content>
-    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init}
+    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init && !outputId}
         <div class="flex flex-row justify-center space-x-2.5">
             {#each IMPLICIT_ACCOUNT_STEPS as step}
                 <div
