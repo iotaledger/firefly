@@ -3,9 +3,25 @@
     import { localize } from '@core/i18n'
     import { implicitAccountCreationRouter } from '../../implicit-account-creation-router'
     import { onMount, onDestroy } from 'svelte'
+    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { activeProfile } from '@core/profile'
 
-    // TODO: Replace this with proper amount
-    const DUMMY_AMOUNT = '5$'
+    // TODO: use this output to calculate mana
+    export let outputId: string | undefined
+
+    $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
+
+    function getOutputAmount(): string {
+        let amount: string
+        if (outputId) {
+            amount = $selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
+            )?.output.amount
+        } else {
+            amount = $selectedWallet?.implicitAccountOutputs?.[0]?.output.amount
+        }
+        return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin?.metadata) : ''
+    }
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
@@ -48,7 +64,7 @@
             />
         </div>
         <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-            >{localize('views.implicit-account-creation.steps.step2.view.title')} ({DUMMY_AMOUNT})</Text
+            >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
         >
         <Text type={TextType.h5} fontSize="15" color="blue-700" darkColor="blue-700" fontWeight={FontWeight.semibold}
             >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text

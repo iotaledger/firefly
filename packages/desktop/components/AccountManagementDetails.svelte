@@ -22,11 +22,13 @@
         getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
+        selectedWalletMainAccountId,
     } from '@core/wallet'
     import { AccountAddress, AccountOutput, CommonOutput, OutputData } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let selectedOutput: OutputData
     export let index: number
@@ -34,16 +36,25 @@
     let modal: Modal
     let address: string = ''
 
-    const accountId: string = (selectedOutput?.output as AccountOutput)?.accountId
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
-    $: isAccountOuput = isAccountOutput(selectedOutput)
-    $: address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
+    $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
+    $: address =
+        accountId &&
+        getBech32AddressFromAddressTypes(new AccountAddress((selectedOutput?.output as AccountOutput)?.accountId))
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
+    }
+
+    function handleActivateAccount(): void {
+        openPopup({
+            id: PopupId.ActivateAccount,
+            props: { outputId: selectedOutput.outputId },
+        })
     }
 </script>
 
@@ -58,21 +69,21 @@
                             <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                 >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                             >
-                        {:else}
+                        {:else if isMainAccount}
                             <Pill backgroundColor="blue-200" textColor="blue-600"
                                 >{localize('views.accountManagement.list.tile.pill.main')}
                             </Pill>
                         {/if}
                     </title-wrapper>
 
-                    {#if isAccountOuput}
+                    {#if accountId}
                         <wallet-actions-button class="block relative">
                             <MeatballMenuButton onClick={modal?.toggle} />
                             <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
                         </wallet-actions-button>
                     {/if}
                     {#if isImplicitAccount}
-                        <Button size={ButtonSize.Small}
+                        <Button size={ButtonSize.Small} onClick={handleActivateAccount}
                             >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
                         >
                     {/if}

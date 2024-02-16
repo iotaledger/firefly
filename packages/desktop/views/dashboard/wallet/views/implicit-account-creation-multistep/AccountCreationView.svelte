@@ -3,6 +3,9 @@
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { unlockStronghold, updateActiveWallet } from '@core/profile'
+    import { OutputId } from '@iota/sdk/out/types'
+
+    export let outputId: string | undefined
 
     let error = ''
     let isBusy = false
@@ -14,14 +17,21 @@
         try {
             if (!strongholdPassword || $selectedWallet?.implicitAccountOutputs.length === 0) return
 
+            let outputIdTotransition: OutputId
             await unlockStronghold(strongholdPassword)
-            const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
+            if (outputId) {
+                outputIdTotransition = $selectedWallet?.implicitAccountOutputs.find(
+                    (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
+                )?.outputId
+            } else {
+                outputIdTotransition = $selectedWallet?.implicitAccountOutputs[0].outputId
+            }
 
             updateActiveWallet($selectedWalletId, {
                 hasImplicitAccountCreationTransactionInProgress: true,
                 isTransferring: true,
             })
-            await $selectedWallet?.implicitAccountTransition(outputId)
+            await $selectedWallet?.implicitAccountTransition(outputIdTotransition)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)
@@ -30,8 +40,8 @@
     }
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-28 w-full">
-    <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md w-full">
+<step-content class="flex flex-col items-center justify-between h-full pt-28">
+    <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md">
         <div class="flex items-center justify-center">
             <img
                 src="assets/illustrations/implicit-account-creation/step3.svg"

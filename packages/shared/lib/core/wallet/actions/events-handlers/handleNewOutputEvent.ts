@@ -25,6 +25,7 @@ import {
     WalletEvent,
     WalletEventType,
 } from '@iota/sdk/out/types'
+import { closePopup } from 'shared/lib/auxiliary/popup'
 import { get } from 'svelte/store'
 
 export function handleNewOutputEvent(walletId: string): WalletApiEventHandler {
@@ -93,6 +94,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
             })
         }
+        closePopup()
     }
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
