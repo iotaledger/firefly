@@ -2,7 +2,7 @@
     import { localize } from '@core/i18n'
     import { NetworkHealth, networkStatus, NETWORK_HEALTH_COLORS, nodeInfoNetworkName } from '@core/network'
     import { NetworkSettingsRoute } from '@core/router'
-    import { Text } from 'shared/components'
+    import { Text } from '@ui'
     import SettingsSection from '../SettingsSection.svelte'
 
     $: health = $networkStatus.health ?? NetworkHealth.Disconnected

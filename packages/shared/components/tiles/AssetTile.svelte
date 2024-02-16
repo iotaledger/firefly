@@ -5,7 +5,7 @@
     import { formatCurrency } from '@core/i18n/utils'
     import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
     import { getMarketPriceForAsset } from '@core/market/utils'
-    import { AssetIconSize } from 'shared/components/enums'
+    import { AssetIconSize } from '@ui/enums'
 
     export let asset: IAsset | undefined
     export let onClick: () => unknown

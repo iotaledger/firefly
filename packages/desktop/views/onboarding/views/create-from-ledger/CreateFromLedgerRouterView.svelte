@@ -3,8 +3,7 @@
     import { Subrouter } from '@core/router'
     import features from '@features/features'
     import { Transition } from '@ui'
-    import { CreateFromLedgerRoute } from './create-from-ledger-route.enum'
-    import { createFromLedgerRoute } from './create-from-ledger-router'
+    import { CreateFromLedgerRoute, createFromLedgerRoute } from '@core/router'
     import { ConnectLedgerView, InstallLedgerView } from './views'
 
     export let router: Subrouter<unknown>

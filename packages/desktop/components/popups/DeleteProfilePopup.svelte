@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, PasswordInput, Text, ButtonVariant } from 'shared/components'
+    import { Button, PasswordInput, Text, ButtonVariant } from '@ui'
     import { isSoftwareProfile } from '@core/profile'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from 'shared/components'
+    import { Button, Text, TextHint, FontWeight, TextType, AssetAmountInput } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { IAsset } from '@core/wallet'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     export let asset: IAsset
     export let rawAmount: string = '0'

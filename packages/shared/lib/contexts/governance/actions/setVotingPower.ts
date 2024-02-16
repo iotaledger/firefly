@@ -3,7 +3,7 @@ import { plainToInstance } from 'class-transformer'
 import { processAndAddToActivities } from '@core/wallet/utils'
 import { handleError } from '@core/error/handlers'
 import { closePopup } from '@auxiliary/popup'
-import { getSelectedWallet, updateSelectedWallet } from 'shared/lib/core/wallet'
+import { getSelectedWallet, updateSelectedWallet } from '@core/wallet'
 
 export async function setVotingPower(rawAmount: string): Promise<void> {
     const wallet = getSelectedWallet()

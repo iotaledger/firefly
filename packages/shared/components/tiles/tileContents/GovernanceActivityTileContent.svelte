@@ -6,7 +6,7 @@
         getFormattedVotingPowerFromGovernanceActivity,
         GovernanceAction,
     } from '@core/wallet'
-    import { ActivityTileContent } from 'shared/components'
+    import { ActivityTileContent } from '@ui'
     import { Icon } from '@lib/auxiliary/icon'
 
     export let activity: GovernanceActivity

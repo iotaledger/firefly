@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DateInputButton, Dropdown, Icon, Text, NumberInput } from 'shared/components'
+    import { DateInputButton, Dropdown, Icon, Text, NumberInput } from '@ui'
     import { localize } from '@core/i18n'
     import type { IDropdownItem } from '@core/utils'
     import { DateFilterUnit } from '@core/utils/interfaces/filter'

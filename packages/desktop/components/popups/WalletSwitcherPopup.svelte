@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Text, Button, FontWeight, TextType, WalletSelector } from 'shared/components'
+    import { Text, Button, FontWeight, TextType, WalletSelector } from '@ui'
     import { closePopup } from '@auxiliary/popup'
     import { IWalletState, setSelectedWallet } from '@core/wallet'
 

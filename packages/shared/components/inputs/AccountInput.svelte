@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from '@ui'
     import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'

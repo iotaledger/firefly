@@ -2,7 +2,7 @@ import { Writable } from 'svelte/store'
 
 import { localize } from '@core/i18n'
 import { sortAccountsByIndex } from '@core/utils'
-import { IWallet } from 'shared/lib/core/profile'
+import { IWallet } from '@core/profile'
 
 // TODO(2.0) Fix this, account indexes are gone
 export async function getSortedRenamedBoundAccounts(

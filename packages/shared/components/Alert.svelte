@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, FontWeight } from 'shared/components'
+    import { Icon, Text, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import { Icon as IconEnum } from '@auxiliary/icon'

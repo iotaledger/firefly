@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Button, FontWeight, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { implicitAccountCreationRouter } from '../../implicit-account-creation-router'
+    import { implicitAccountCreationRouter } from '@core/router'
     import { onMount, onDestroy } from 'svelte'
 
     // TODO: Replace this with proper amount

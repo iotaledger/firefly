@@ -15,13 +15,12 @@
         profiles,
         removeProfileFolder,
     } from '@core/profile'
-    import { loginRouter, routerManager } from '@core/router'
+    import { loginRouter, routerManager, OnboardingRouter, onboardingRouter } from '@core/router'
     import features from '@features/features'
     import { Icon, Logo, Profile } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
     import { onMount } from 'svelte'
-    import { Logo as LogoEnum } from 'shared/components/enums'
+    import { Logo as LogoEnum } from '@ui/enums'
 
     function onContinueClick(profileId: string): void {
         loadPersistedProfileIntoActiveProfile(profileId)

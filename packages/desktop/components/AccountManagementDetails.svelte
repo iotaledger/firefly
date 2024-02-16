@@ -45,12 +45,11 @@
     let address: string = ''
     let keys: string[] = []
 
-    const accountId: string = (selectedOutput?.output as AccountOutput)?.accountId
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
-    $: isAccountOuput = isAccountOutput(selectedOutput)
-    $: address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
@@ -95,7 +94,7 @@
                         {/if}
                     </title-wrapper>
 
-                    {#if isAccountOuput}
+                    {#if accountId}
                         <wallet-actions-button class="block relative">
                             <MeatballMenuButton onClick={modal?.toggle} />
                             <AccountManagementMenu
@@ -145,7 +144,7 @@
                     </div>
                 </Tile>
             </div>
-            {#if isAccountOuput}
+            {#if accountId}
                 <div class="flex flex-col space-y-2 w-1/2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.address')}</Text

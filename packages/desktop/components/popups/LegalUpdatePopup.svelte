@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Checkbox, Text, Link } from 'shared/components'
+    import { Button, Checkbox, Text, Link } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import {

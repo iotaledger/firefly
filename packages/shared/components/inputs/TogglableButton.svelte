@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let icon: IconEnum

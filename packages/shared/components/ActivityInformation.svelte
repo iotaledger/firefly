@@ -10,8 +10,8 @@
         ConsolidationActivityInformation,
         NftMetadataInformation,
         SmartContractActivityInformation,
-    } from 'shared/components'
-    import { Tab } from 'shared/components/enums'
+    } from '@ui'
+    import { Tab } from '@ui/enums'
     import { ActivityType, Activity } from '@core/wallet'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { selectedWalletId } from '@core/wallet'

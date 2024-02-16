@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Pill } from 'shared/components'
+    import { Icon, Pill } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
     import { ProposalStatus } from '@contexts/governance/enums'

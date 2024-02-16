@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AddressBox, ActivityInclusionStatusPill } from 'shared/components'
+    import { AddressBox, ActivityInclusionStatusPill } from '@ui'
     import { AccountActivity } from '@core/wallet'
 
     export let activity: AccountActivity

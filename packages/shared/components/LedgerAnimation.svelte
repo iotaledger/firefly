@@ -1,7 +1,7 @@
 <script lang="ts">
     import { AnimationEnum } from '@auxiliary/animation'
     import { IllustrationEnum } from '@auxiliary/illustration'
-    import { Animation, Illustration } from 'shared/components'
+    import { Animation, Illustration } from '@ui'
     import { Icon } from '@auxiliary/icon'
 
     export let animation: AnimationEnum | undefined = undefined

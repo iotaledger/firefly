@@ -3,7 +3,7 @@
     import { EMPTY_NODE, INode } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { Pill } from './pills'
-    import { Text, Modal, MeatballMenuButton, MenuItem } from 'shared/components'
+    import { Text, Modal, MeatballMenuButton, MenuItem } from '@ui'
     import { localize } from '@core/i18n'
     import {
         removeNodeFromClientOptions,

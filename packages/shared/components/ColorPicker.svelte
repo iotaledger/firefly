@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, Icon, Tooltip, TextType, Position } from 'shared/components'
+    import { Text, Icon, Tooltip, TextType, Position } from '@ui'
     import { WalletColors } from '@core/wallet/enums'
     import { localize } from '@core/i18n'
     import { clickOutside, isBright, convertHexToRgba } from '@core/utils'

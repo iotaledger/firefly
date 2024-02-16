@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Button, Text, TextHint } from 'shared/components'
-    import { HTMLButtonType, TextHintVariant, TextType } from 'shared/components/enums'
+    import { Button, Text, TextHint } from '@ui'
+    import { HTMLButtonType, TextHintVariant, TextType } from '@ui/enums'
     import { selectedWallet } from '@core/wallet/stores'
     import { handleError } from '@core/error/handlers'
     import { setVotingPower } from '@contexts/governance/actions'

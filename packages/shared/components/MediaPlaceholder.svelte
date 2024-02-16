@@ -1,6 +1,6 @@
 <script lang="ts">
     import { MimeType, ParentMimeType } from '@core/nfts'
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { appSettings } from '@core/app'
 

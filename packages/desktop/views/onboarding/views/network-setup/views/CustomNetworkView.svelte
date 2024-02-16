@@ -17,7 +17,7 @@
     import { getNodeInfo } from '@core/wallet/actions'
     import { Animation, Button, HTMLButtonType, NodeConfigurationForm, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
-    import { networkSetupRouter } from '../network-setup-router'
+    import { networkSetupRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     let nodeConfigurationForm: NodeConfigurationForm

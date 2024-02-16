@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from '@ui'
     import { activeProfile, getNetworkHrp } from '@core/profile'
     import { validateBech32Address } from '@core/utils'
     import type { ChainMetadata } from '@core/network'

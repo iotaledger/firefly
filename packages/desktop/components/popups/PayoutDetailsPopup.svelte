@@ -6,7 +6,7 @@
     import { truncateString } from '@core/utils'
     import { formatTokenAmountBestMatch } from '@core/wallet'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Button, FontWeight, KeyValueBox, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
 
     export let payout: IVestingPayout
 

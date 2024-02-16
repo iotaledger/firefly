@@ -9,7 +9,7 @@ import { IOnboardingInitialisationOptions } from '../interfaces'
 import { updateOnboardingProfile } from '../stores'
 import { deleteOnboardingProfile } from './deleteOnboardingProfile'
 import { initialiseOnboardingProfile } from './initialiseOnboardingProfile'
-import { unsubscribeFromWalletApiEvents } from 'shared/lib/core/wallet'
+import { unsubscribeFromWalletApiEvents } from '@core/wallet'
 
 export async function initialiseOnboardingFlow(options: IOnboardingInitialisationOptions): Promise<void> {
     resetActiveProfile()

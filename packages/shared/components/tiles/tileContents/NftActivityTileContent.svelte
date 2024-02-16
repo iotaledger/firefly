@@ -5,7 +5,7 @@
     import { ActivityDirection } from '@core/wallet/enums'
     import { getActivityTileTitle, getSubjectLocaleFromActivity } from '@core/wallet/utils'
     import { NftActivity } from '@core/wallet/types'
-    import { ActivityTileContent, NftImageOrIconBox } from 'shared/components'
+    import { ActivityTileContent, NftImageOrIconBox } from '@ui'
 
     export let activity: NftActivity
 

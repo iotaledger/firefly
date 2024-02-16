@@ -1,4 +1,4 @@
-import { activeProfileSecretManager } from '../../secret-manager'
+import { activeProfileSecretManager } from '@core/secret-manager'
 import { DEFAULT_LEDGER_NANO_STATUS_POLL_INTERVAL } from '../constants'
 import { ILedgerNanoStatusPollingConfiguration } from '../interfaces'
 

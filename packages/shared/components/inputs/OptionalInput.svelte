@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
-    import { ClosableInput, FontWeight, InformationTooltip, Icon, Text } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+    import { ClosableInput, FontWeight, InformationTooltip, Icon, Text } from '@ui'
+    import { Position } from '@ui/enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let label: string = ''

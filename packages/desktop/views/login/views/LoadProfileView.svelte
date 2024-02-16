@@ -2,7 +2,7 @@
     import { AnimationEnum, AnimationRenderer } from '@auxiliary/animation'
     import { localize } from '@core/i18n'
     import { loginProgress, LOGIN_STEPS } from '@core/profile'
-    import { Animation, ProgressBar } from 'shared/components'
+    import { Animation, ProgressBar } from '@ui'
 
     let percent = 0
     let statusMessage = ''

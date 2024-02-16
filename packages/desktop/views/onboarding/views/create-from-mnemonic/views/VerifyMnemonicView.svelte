@@ -5,7 +5,7 @@
     import { localize } from '@core/i18n'
     import { Button, Icon, RecoveryPhrase, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
-    import { createFromMnemonicRouter } from '../create-from-mnemonic-router'
+    import { createFromMnemonicRouter } from '@core/router'
 
     const verifyRecoveryPhrase: Mnemonic = []
     const wordElements: HTMLButtonElement[] = []
