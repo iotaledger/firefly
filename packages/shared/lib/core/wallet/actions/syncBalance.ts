@@ -6,12 +6,12 @@ import { updateActiveWallet } from '@core/profile/stores'
 import { getBicWalletBalance } from './getBicWalletBalance'
 import { IBalance } from '../interfaces'
 
-export async function syncBalance(walletId: string, syncOngestion: boolean): Promise<void> {
+export async function syncBalance(walletId: string, syncCongestion: boolean): Promise<void> {
     const balances = await getBalance(walletId)
-    const blockIssuanceCredits = syncOngestion ? await getBicWalletBalance(walletId) : 0
+    const blockIssuanceCredits = syncCongestion ? await getBicWalletBalance(walletId) : 0
     const totalBalance: IBalance = {
         ...balances,
-        ...(syncOngestion && !!blockIssuanceCredits && { blockIssuanceCredits }),
+        ...(syncCongestion && !!blockIssuanceCredits && { blockIssuanceCredits }),
     }
     if (get(selectedWalletId) === walletId) {
         updateSelectedWallet({ balances: totalBalance })
