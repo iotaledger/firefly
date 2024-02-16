@@ -60,14 +60,17 @@
         )
     }
 
-    function getStakedAmountFeature(outputData: OutputData): number {
-        const output = outputData.output as AccountOutput
-        if (output.features) {
-            const stakedFeature = output.features.find(
+    function getStakedAmount(): string {
+        let amount = '0'
+        if (isImplicitAccount) return amount + 'i'
+        const accountOutput = selectedOutput.output as AccountOutput
+        if (accountOutput.features) {
+            const stakedFeature = accountOutput.features.find(
                 (feature) => feature.type === FeatureType.Staking
             ) as StakingFeature
-            return Number(stakedFeature.stakedAmount)
+            amount = stakedFeature.stakedAmount.toString()
         }
+        return formatTokenAmountBestMatch(Number(amount), getBaseToken())
     }
 </script>
 
@@ -126,7 +129,7 @@
                 {#if hasStakedFeature}
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>{getStakedAmountFeature(selectedOutput)}</Text>
+                            <Text type={TextType.h3}>{getStakedAmount()}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.accountManagement.details.staked')}</Text
                             >
