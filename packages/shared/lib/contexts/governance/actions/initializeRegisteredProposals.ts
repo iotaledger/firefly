@@ -1,5 +1,5 @@
-import { activeWallets } from 'shared/lib/core/profile'
-import { getSelectedWallet /* IWalletState*/ } from 'shared/lib/core/wallet'
+import { activeWallets } from '@core/profile'
+import { getSelectedWallet /* IWalletState*/ } from '@core/wallet'
 import { get } from 'svelte/store'
 
 import { IRegisteredProposals } from '../interfaces'

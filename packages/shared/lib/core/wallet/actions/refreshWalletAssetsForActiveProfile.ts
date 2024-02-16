@@ -8,7 +8,7 @@ import {
     clearPersistedAssetForActiveProfile,
     persistedAssets,
 } from '../stores/persisted-assets.store'
-import { PERSISTED_MANA_ASSET } from '../../network'
+import { PERSISTED_MANA_ASSET } from '@core/network'
 import { AssetVerification } from '../types'
 
 export async function refreshWalletAssetsForActiveProfile(

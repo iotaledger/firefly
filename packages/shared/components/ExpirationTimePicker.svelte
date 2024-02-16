@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, Icon, Modal, MenuItem, DateTimePicker } from 'shared/components'
+    import { Text, Icon, Modal, MenuItem, DateTimePicker } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { formatDate, localize } from '@core/i18n'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, TimePeriod, isValidExpirationDateTime } from '@core/utils'

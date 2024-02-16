@@ -1,5 +1,5 @@
 import { COIN_TYPE, NetworkId } from '@core/network'
-import { getActiveWallets } from 'shared/lib/core/profile'
+import { getActiveWallets } from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingType } from '../enums'
 import { CannotRestoreWithMismatchedCoinTypeError } from '../errors'

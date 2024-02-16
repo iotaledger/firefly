@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { Animation, Button, HTMLButtonType, ImportTextfield, Text } from '@ui'
     import { onMount } from 'svelte'
-    import { restoreFromMnemonicRouter } from '../restore-from-mnemonic-router'
+    import { restoreFromMnemonicRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     let input = ''

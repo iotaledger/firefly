@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { convertAndFormatNftMetadata, getNftByIdFromAllWalletNfts, IIrc27Metadata } from '@core/nfts'
     import { NftActivity } from '@core/wallet'
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
 
     export let activity: NftActivity
 

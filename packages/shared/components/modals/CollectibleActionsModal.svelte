@@ -8,7 +8,7 @@
     import { burnNft } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let modal: Modal

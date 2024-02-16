@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { LedgerAnimation, Button, Text, TextType } from 'shared/components'
+    import { LedgerAnimation, Button, Text, TextType } from '@ui'
     import { closePopup } from '@auxiliary/popup'
     import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { localize } from '@core/i18n'

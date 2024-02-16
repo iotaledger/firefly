@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, FontWeight, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, PasswordInput, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { unlockStronghold, updateActiveWallet } from '@core/profile'

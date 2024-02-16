@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { isSoftwareProfile } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
     import { selectedWallet } from '@core/wallet/stores'
     import { setStrongholdPassword } from '@core/wallet/actions'
 

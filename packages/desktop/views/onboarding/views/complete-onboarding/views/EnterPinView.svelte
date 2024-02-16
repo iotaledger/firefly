@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { isValidPin } from '@core/utils'
     import { Animation, Button, HTMLButtonType, PinInput, Text } from '@ui'
-    import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { completeOnboardingRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false

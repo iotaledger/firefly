@@ -6,8 +6,8 @@
     import { localize } from '@core/i18n'
     import { login } from '@core/profile/actions'
     import { Animation, Button, Icon, Text, TextHint, TextType } from '@ui'
-    import { updateStrongholdRouter } from '../update-stronghold-router'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { updateStrongholdRouter } from '@core/router'
+    import { TextHintVariant } from '@ui/enums'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let busy = false

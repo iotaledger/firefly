@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, TextHintVariant } from 'shared/components'
+    import { Icon, Text, TextHintVariant } from '@ui'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let variant: TextHintVariant

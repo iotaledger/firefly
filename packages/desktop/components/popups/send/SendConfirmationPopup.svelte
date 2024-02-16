@@ -30,7 +30,7 @@
         Toggle,
     } from '@ui'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
-    import { FontWeight, Tab, TextHintVariant, TextType } from 'shared/components/enums'
+    import { FontWeight, Tab, TextHintVariant, TextType } from '@ui/enums'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
 

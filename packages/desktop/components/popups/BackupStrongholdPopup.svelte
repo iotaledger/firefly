@@ -1,8 +1,8 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { Button, Logo, Text, ExportStrongholdButton, TextType } from 'shared/components'
+    import { Button, Logo, Text, ExportStrongholdButton, TextType } from '@ui'
     import { closePopup } from '@auxiliary/popup'
-    import { Logo as LogoEnum } from 'shared/components/enums'
+    import { Logo as LogoEnum } from '@ui/enums'
 
     const busy = false
 

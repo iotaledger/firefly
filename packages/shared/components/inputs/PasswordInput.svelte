@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { localize } from '@core/i18n'
-    import { Icon, InputType, Text, TextInput } from 'shared/components'
+    import { Icon, InputType, Text, TextInput } from '@ui'
 
     export let value: string
     export let classes: string | undefined = undefined

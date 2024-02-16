@@ -39,11 +39,9 @@
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
-    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: address =
-        accountId &&
-        getBech32AddressFromAddressTypes(new AccountAddress((selectedOutput?.output as AccountOutput)?.accountId))
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`

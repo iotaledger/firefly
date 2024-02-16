@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { Button, FontWeight, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { implicitAccountCreationRouter, ImplicitAccountCreationRoute } from '../../index'
+    import { implicitAccountCreationRouter, ImplicitAccountCreationRoute } from '@core/router'
 
     interface IStep {
         title: string
