@@ -1,13 +1,13 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
-    import { getClient, selectedWallet } from '@core/wallet'
+    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth } from '@core/profile'
     import { getManaBalance } from '@core/network'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import { UnlockCondition, UnlockConditionType, CommonOutput, AccountOutput } from '@iota/sdk/out/types'
+    import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import features from '@features/features'
@@ -35,7 +35,7 @@
         const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
         const vestingBreakdown = getVestingBreakdown()
-        const manaBreakdown = await getManaBreakdown()
+        const manaBreakdown = getManaBreakdown()
 
         breakdown = {
             available: availableBreakdown,
@@ -51,22 +51,15 @@
         return { amount: Number(walletBalance?.baseCoin?.available ?? 0) }
     }
 
-    async function getManaBreakdown(): Promise<BalanceBreakdown> {
-        const client = await getClient()
-        const accountsCongestion = await Promise.all(
-            $selectedWallet.accountOutputs.map((account) =>
-                client.getAccountCongestion((account.output as AccountOutput).accountId)
-            )
-        )
+    function getManaBreakdown(): BalanceBreakdown {
         const totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
         const availableBalance = getManaBalance(walletBalance?.mana?.available)
-        const totalBic = accountsCongestion.reduce((acc, bic) => acc + Number(bic.blockIssuanceCredits), 0)
-        const totalBalance = totalBalanceWithoutBic + totalBic
+        const totalBalance = totalBalanceWithoutBic + walletBalance.blockIssuanceCredits
 
         const subBreakdown = {
             availableMana: { amount: availableBalance },
             lockedMana: { amount: totalBalanceWithoutBic - availableBalance },
-            bicMana: { amount: totalBic },
+            bicMana: { amount: walletBalance.blockIssuanceCredits },
         }
         return { amount: totalBalance, subBreakdown, isBaseToken: false }
     }
