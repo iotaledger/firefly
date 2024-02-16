@@ -3,7 +3,7 @@
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { nftSearchTerm, queriedNfts, ownedNfts } from '@core/nfts'
-    import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from 'shared/components'
+    import { FontWeight, Illustration, Text, SearchInput, NftGalleryItem, Button, ButtonSize } from '@ui'
     import VirtualList from '@sveltejs/svelte-virtual-list'
 
     let windowWidth = window.innerWidth

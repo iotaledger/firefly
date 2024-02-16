@@ -10,7 +10,7 @@
         updateOnboardingProfile,
     } from '@contexts/onboarding'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { createFromMnemonicRouter } from '../create-from-mnemonic-router'
+    import { createFromMnemonicRouter } from '@core/router'
 
     let isHidden: boolean = true
     let hasRevealedRecoveryPhrase: boolean = false

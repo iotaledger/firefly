@@ -1,6 +1,6 @@
 <script lang="ts">
     import { formatDate } from '@core/i18n'
-    import { Text, DateTimePicker, Icon } from 'shared/components'
+    import { Text, DateTimePicker, Icon } from '@ui'
     import { appSettings } from '@core/app'
     import { Icon as IconEnum } from '@auxiliary/icon'
 

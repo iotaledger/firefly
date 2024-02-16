@@ -7,18 +7,10 @@
         getTimeDifference,
         Activity,
     } from '@core/wallet'
-    import {
-        ActivityAsyncStatusPill,
-        TooltipIcon,
-        Text,
-        Button,
-        TileFooter,
-        FontWeight,
-        ButtonSize,
-    } from 'shared/components'
+    import { ActivityAsyncStatusPill, TooltipIcon, Text, Button, TileFooter, FontWeight, ButtonSize } from '@ui'
     import { time } from '@core/app'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
-    import { Position, TextHintVariant } from 'shared/components/enums'
+    import { Position, TextHintVariant } from '@ui/enums'
     import { localize } from '@core/i18n'
     import { showInternalVerificationPopup } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'

@@ -3,16 +3,7 @@
     import { localize } from '@core/i18n'
     import { setMintTokenDetails, mintTokenDetails, IMintTokenDetails } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import {
-        Button,
-        Error,
-        NumberInput,
-        Text,
-        TextInput,
-        OptionalInput,
-        FontWeight,
-        AccountInput,
-    } from 'shared/components'
+    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight, AccountInput } from '@ui'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { handleError } from '@core/error/handlers/handleError'

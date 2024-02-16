@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Checkbox, Text } from 'shared/components'
+    import { Checkbox, Text } from '@ui'
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { Platform } from '@core/app'

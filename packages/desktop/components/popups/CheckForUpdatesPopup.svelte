@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
-    import { Button, KeyValueBox, Text, TextType, TextHint } from 'shared/components'
+    import { Button, KeyValueBox, Text, TextType, TextHint } from '@ui'
     import {
         appUpdateBusy,
         checkForAppUpdate,
@@ -14,7 +14,7 @@
     import { formatDate, localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import features from '@features/features'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     let hasAutoUpdate = false
 

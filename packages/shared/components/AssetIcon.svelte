@@ -5,7 +5,7 @@
     import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
-    import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
+    import { Animation, AssetIconSize, Icon, VerificationBadge } from '@ui'
 
     export let asset: IPersistedAsset
     export let size: AssetIconSize = AssetIconSize.Medium

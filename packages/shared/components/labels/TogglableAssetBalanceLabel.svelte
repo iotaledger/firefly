@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Text, FontWeight, TextType } from 'shared/components'
+    import { Text, FontWeight, TextType } from '@ui'
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { DEFAULT_MANA } from 'shared/lib/core/network'
+    import { DEFAULT_MANA } from '@core/network'
 
     export let asset: IAsset
     export let mana: IAsset

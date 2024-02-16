@@ -11,7 +11,7 @@
         IMintTokenDetails,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown } from 'shared/components'
+    import { Dropdown } from '@ui'
     import { localize } from '@core/i18n'
     import type { IDropdownItem } from '@core/utils'
     import { OrderFilterUnit } from '@core/utils/interfaces/filter'

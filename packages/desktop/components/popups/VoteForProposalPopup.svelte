@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from 'shared/components'
-    import { HTMLButtonType, TextHintVariant } from 'shared/components/enums'
+    import { Button, Text, FontWeight, TextHint, TextType, KeyValueBox } from '@ui'
+    import { HTMLButtonType, TextHintVariant } from '@ui/enums'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { selectedWallet } from '@core/wallet/stores'
     import { localize } from '@core/i18n'

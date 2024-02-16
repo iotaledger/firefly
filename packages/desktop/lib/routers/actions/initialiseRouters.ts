@@ -10,9 +10,14 @@ import {
     SettingsRouter,
     settingsRouter,
 } from '@core/router/routers'
-import { loginRouter, LoginRouter } from '@core/router/subrouters'
-import { OnboardingRouter, onboardingRouter } from '@views/onboarding'
-import { implicitAccountCreationRouter, ImplicitAccountCreationRouter } from '@views/dashboard/wallet'
+import {
+    implicitAccountCreationRouter,
+    ImplicitAccountCreationRouter,
+    OnboardingRouter,
+    onboardingRouter,
+    loginRouter,
+    LoginRouter,
+} from '@core/router/subrouters'
 
 export function initialiseRouters(): void {
     /**

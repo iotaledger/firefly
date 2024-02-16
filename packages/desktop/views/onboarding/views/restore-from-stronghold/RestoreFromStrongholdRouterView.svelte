@@ -2,9 +2,8 @@
     import { Platform } from '@core/app'
     import features from '@features/features'
     import { UpdateStrongholdRouterView } from '@views/update-stronghold'
-    import { Transition } from 'shared/components'
-    import { RestoreFromStrongholdRoute } from './restore-from-stronghold-route.enum'
-    import { restoreFromStrongholdRoute } from './restore-from-stronghold-router'
+    import { Transition } from '@ui'
+    import { RestoreFromStrongholdRoute, restoreFromStrongholdRoute } from '@core/router'
     import { ImportStrongholdView, UnlockStrongholdView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $restoreFromStrongholdRoute) {

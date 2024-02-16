@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption, ColoredCircle } from 'shared/components'
+    import { Modal, SelectorInput, IOption, ColoredCircle } from '@ui'
     import { localize } from '@core/i18n'
     import { validateBech32Address, validateEthereumAddress } from '@core/utils/crypto'
     import { Subject } from '@core/wallet/types'
@@ -7,7 +7,7 @@
     import { Layer1RecipientError } from '@core/layer-2/errors'
     import { getNetworkHrp, getWalletColorById, visibleActiveWallets } from '@core/profile'
     import { selectedWalletId } from '@core/wallet/stores'
-    import { SubjectType } from 'shared/lib/core/wallet'
+    import { SubjectType } from '@core/wallet'
 
     export let recipient: Subject
     export let disabled = false

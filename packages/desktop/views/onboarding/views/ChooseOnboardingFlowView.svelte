@@ -7,7 +7,7 @@
     import features from '@features/features'
     import { Animation, OnboardingButton, Text } from '@ui'
     import { onMount } from 'svelte'
-    import { onboardingRouter } from '../onboarding-router'
+    import { onboardingRouter } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
 

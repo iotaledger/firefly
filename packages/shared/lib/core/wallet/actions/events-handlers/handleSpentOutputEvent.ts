@@ -10,8 +10,8 @@ import {
     validateWalletApiEvent,
 } from '@core/wallet'
 import { AccountOutput, OutputType, SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
-import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
-import { getUnixTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
+import { nodeInfoProtocolParameters } from '@core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex } from '@core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 import { get } from 'svelte/store'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {

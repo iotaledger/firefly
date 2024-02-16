@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from 'shared/components'
+    import { ButtonSize, ButtonVariant, HTMLButtonType, Icon, Spinner } from '@ui'
     import { onMount } from 'svelte'
     import { appSettings } from '@core/app'
     import { debounce } from '@core/utils'

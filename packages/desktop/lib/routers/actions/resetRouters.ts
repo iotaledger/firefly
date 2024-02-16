@@ -5,9 +5,9 @@ import {
     governanceRouter,
     loginRouter,
     settingsRouter,
+    implicitAccountCreationRouter,
+    onboardingRouter,
 } from '@core/router'
-import { implicitAccountCreationRouter } from '@views/dashboard/wallet'
-import { onboardingRouter } from '@views/onboarding'
 import { get } from 'svelte/store'
 
 export function resetRouters(): void {
