@@ -5,8 +5,7 @@
     import { CreateFromLedgerRouterView } from '../create-from-ledger'
     import { RestoreFromMnemonicRouterView } from '../restore-from-mnemonic'
     import { RestoreFromStrongholdRouterView } from '../restore-from-stronghold'
-    import { RestoreProfileRoute } from './restore-profile-route.enum'
-    import { restoreProfileRoute, restoreProfileRouter } from './restore-profile-router'
+    import { restoreProfileRoute, restoreProfileRouter, RestoreProfileRoute } from '@core/router'
     import { ChooseRestoreProfileFlowView, ClaimFinderView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $restoreProfileRoute) {

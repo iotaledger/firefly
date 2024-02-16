@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from 'shared/components'
+    import { Button, Error, FontWeight, OptionalInput, Text, TextInput, TextType, TooltipIcon } from '@ui'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { BaseError } from '@core/error/classes'
     import { handleError } from '@core/error/handlers/handleError'

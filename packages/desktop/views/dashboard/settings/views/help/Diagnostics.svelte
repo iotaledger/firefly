@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, Text, ButtonSize } from 'shared/components'
+    import { Button, Text, ButtonSize } from '@ui'
     import { localize } from '@core/i18n'
     import { openPopup, PopupId } from '@auxiliary/popup'
 

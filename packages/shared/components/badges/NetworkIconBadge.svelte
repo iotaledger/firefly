@@ -1,7 +1,7 @@
 <script lang="ts">
     import { NetworkId } from '@core/network'
-    import { NetworkIcon, InformationTooltip } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+    import { NetworkIcon, InformationTooltip } from '@ui'
+    import { Position } from '@ui/enums'
 
     export let networkId: NetworkId
     export let tooltipText: string = ''

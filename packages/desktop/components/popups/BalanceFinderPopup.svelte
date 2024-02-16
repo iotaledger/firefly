@@ -21,19 +21,8 @@
         generateAndStoreActivitiesForAllWallets,
         refreshWalletAssetsForActiveProfile,
     } from '@core/wallet'
-    import {
-        Button,
-        FontWeight,
-        KeyValueBox,
-        Text,
-        TextHint,
-        TextType,
-        Icon,
-        Tile,
-        Spinner,
-        Checkbox,
-    } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextType, Icon, Tile, Spinner, Checkbox } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import { onDestroy } from 'svelte'
     import VirtualList from '@sveltejs/svelte-virtual-list'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'

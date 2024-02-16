@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, Tooltip } from 'shared/components'
+    import { Text, Tooltip } from '@ui'
     import { TextType } from './enums'
 
     export let title: string = ''

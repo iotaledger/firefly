@@ -17,7 +17,7 @@
         Text,
         TextType,
         TransactionActivityStatusPill,
-    } from 'shared/components'
+    } from '@ui'
     import { tick } from 'svelte'
 
     export let activity: NftActivity

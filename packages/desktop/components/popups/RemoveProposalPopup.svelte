@@ -13,8 +13,8 @@
     import { localize } from '@core/i18n'
     import { updateActiveWalletPersistedData } from '@core/profile/actions'
     import { governanceRouter } from '@core/router'
-    import { Button, Text, TextHint, TextType } from 'shared/components'
-    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
+    import { Button, Text, TextHint, TextType } from '@ui'
+    import { ButtonVariant, TextHintVariant } from '@ui/enums'
 
     function onCancelClick(): void {
         closePopup()

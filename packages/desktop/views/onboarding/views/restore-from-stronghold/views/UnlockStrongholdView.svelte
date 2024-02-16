@@ -6,7 +6,7 @@
     import { localize } from '@core/i18n'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { onMount } from 'svelte'
-    import { restoreFromStrongholdRouter } from '../restore-from-stronghold-router'
+    import { restoreFromStrongholdRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let error = ''

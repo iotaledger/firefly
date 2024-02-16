@@ -2,8 +2,7 @@
     import { Platform } from '@core/app'
     import features from '@features/features'
     import { Transition } from '@ui'
-    import { NetworkSetupRoute } from './network-setup-route.enum'
-    import { networkSetupRoute } from './network-setup-router'
+    import { NetworkSetupRoute, networkSetupRoute } from '@core/router'
     import { ChooseNetworkView, CustomNetworkView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $networkSetupRoute) {

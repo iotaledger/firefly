@@ -1,5 +1,5 @@
 import { ParticipationEventMap /* ParticipationEventRegistrationOptions*/ } from '@iota/sdk/out/types'
-// import { getSelectedWallet, IWalletState } from 'shared/lib/core/wallet'
+// import { getSelectedWallet, IWalletState } from '@core/wallet'
 // import { addProposalsFromParticipationEventMap } from './addProposalsFromParticipationEventMap'
 
 // TODO: https://github.com/iotaledger/firefly/issues/7947

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, FontWeight, ColoredCircle } from 'shared/components/'
+    import { Text, FontWeight, ColoredCircle } from '@ui/'
     import { IWalletState } from '@core/wallet'
 
     export let wallet: IWalletState

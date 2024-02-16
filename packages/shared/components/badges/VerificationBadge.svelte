@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { NotVerifiedStatus, VerifiedStatus } from '@core/wallet'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
