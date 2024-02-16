@@ -1,7 +1,7 @@
 <script lang="ts">
     import { INft } from '@core/nfts'
-    import { NftSize } from 'shared/components/enums'
-    import { MediaPlaceholder, NftMedia } from 'shared/components'
+    import { NftSize } from '@ui/enums'
+    import { MediaPlaceholder, NftMedia } from '@ui'
     import { ParentMimeType } from '@core/nfts'
 
     export let nft: INft | null = null

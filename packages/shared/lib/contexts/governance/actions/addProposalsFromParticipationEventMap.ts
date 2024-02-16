@@ -2,7 +2,7 @@ import { ParticipationEventMap, ParticipationEventWithNodes } from '@iota/sdk/ou
 
 import { addOrUpdateProposalToRegisteredProposals } from '../stores'
 import { createProposalFromEvent } from '../utils'
-import { IWalletState } from 'shared/lib/core/wallet'
+import { IWalletState } from '@core/wallet'
 
 export function addProposalsFromParticipationEventMap(eventMap: ParticipationEventMap, wallet: IWalletState): void {
     Object.values(eventMap).forEach((event: ParticipationEventWithNodes) => {

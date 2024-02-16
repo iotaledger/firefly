@@ -1,13 +1,19 @@
 import { OnboardingType, onboardingProfile } from '@contexts/onboarding'
 import { hasCompletedAppSetup } from '@core/app'
 import { get, writable } from 'svelte/store'
-import { Router } from '../../../shared/lib/core/router/classes'
-import { appRouter } from '../../../shared/lib/core/router/routers/app-router'
+import {
+    Router,
+    appRouter,
+    CompleteOnboardingRouter,
+    completeOnboardingRouter,
+    CreateProfileRouter,
+    createProfileRouter,
+    NetworkSetupRouter,
+    networkSetupRouter,
+    RestoreProfileRouter,
+    restoreProfileRouter,
+} from '@core/router'
 import { OnboardingRoute } from './onboarding-route.enum'
-import { CompleteOnboardingRouter, completeOnboardingRouter } from './views/complete-onboarding'
-import { CreateProfileRouter, createProfileRouter } from './views/create-profile'
-import { NetworkSetupRouter, networkSetupRouter } from './views/network-setup'
-import { RestoreProfileRouter, restoreProfileRouter } from './views/restore-profile'
 
 export const onboardingRoute = writable<OnboardingRoute>(undefined)
 export const onboardingRouter = writable<OnboardingRouter>(undefined)

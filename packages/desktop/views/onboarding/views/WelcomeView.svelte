@@ -11,7 +11,7 @@
     import { localize } from '@core/i18n'
     import { getEnabledNetworkFromFeatureFlags, getNetworkNameFromNetworkId } from '@core/network'
     import { Animation, Button, Checkbox, Link, Text, TextType } from '@ui'
-    import { onboardingRouter } from '../onboarding-router'
+    import { onboardingRouter } from '@core/router'
     import { initialiseOnboardingProfile } from '@contexts/onboarding/actions'
     import { shouldBeDeveloperProfile } from '@contexts/onboarding/utils'
     import { AnimationEnum } from '@auxiliary/animation'

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown, Text } from 'shared/components'
+    import { Dropdown, Text } from '@ui'
     import { localize } from '@core/i18n'
     import { activeProfile, DEFAULT_PERSISTED_PROFILE_OBJECT, updateActiveProfileSettings } from '@core/profile'
     import type { IDropdownItem } from '@core/utils'

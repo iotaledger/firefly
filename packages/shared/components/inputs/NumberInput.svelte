@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TextInput } from 'shared/components'
+    import { TextInput } from '@ui'
     import { localize } from '@core/i18n'
 
     export let inputElement: HTMLInputElement = undefined

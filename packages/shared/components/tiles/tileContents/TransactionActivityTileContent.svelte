@@ -10,7 +10,7 @@
         selectedWalletAssets,
         TransactionActivity,
     } from '@core/wallet'
-    import { ActivityTileContent, AssetIcon } from 'shared/components'
+    import { ActivityTileContent, AssetIcon } from '@ui'
 
     export let activity: TransactionActivity
 

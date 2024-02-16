@@ -7,6 +7,7 @@ const config = {
     },
     moduleFileExtensions: ['ts', 'js'],
     moduleNameMapper: {
+        '@ui/(.*)': '<rootDir>/components/$1',
         '@auxiliary/(.*)': '<rootDir>/lib/auxiliary/$1',
         '@contexts/(.*)': '<rootDir>/lib/contexts/$1',
         '@core/(.*)': '<rootDir>/lib/core/$1',

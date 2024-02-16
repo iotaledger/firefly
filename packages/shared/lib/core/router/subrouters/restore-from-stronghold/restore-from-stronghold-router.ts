@@ -3,7 +3,7 @@ import { get, writable } from 'svelte/store'
 import { RestoreFromStrongholdRoute } from './restore-from-stronghold-route.enum'
 import { onboardingProfile } from '@contexts/onboarding/stores'
 import { isLatestStrongholdVersion } from '@core/app/utils'
-import { UpdateStrongholdRouter, updateStrongholdRouter } from '@views/update-stronghold'
+import { UpdateStrongholdRouter, updateStrongholdRouter } from '@core/router'
 
 export const restoreFromStrongholdRoute = writable<RestoreFromStrongholdRoute>(undefined)
 export const restoreFromStrongholdRouter = writable<RestoreFromStrongholdRouter>(undefined)

@@ -6,7 +6,7 @@
     import { isValidJson } from '@core/utils'
     import { Animation, Button, PasswordInput, Text } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
-    import { updateStrongholdRouter } from '../update-stronghold-router'
+    import { updateStrongholdRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
     import { Platform } from '@core/app'
     import { onboardingProfile } from '@contexts/onboarding'

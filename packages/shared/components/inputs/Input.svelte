@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, createEventDispatcher, tick } from 'svelte'
-    import { Text, InputContainer, TextPropTypes, TextType } from 'shared/components'
+    import { Text, InputContainer, TextPropTypes, TextType } from '@ui'
     import { DECIMAL_SEPARATORS, formatNumber, getDecimalSeparator, parseCurrency } from '@core/i18n'
     import { localize } from '@core/i18n'
 

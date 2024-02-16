@@ -1,6 +1,6 @@
 import { IWallet } from '@core/profile/interfaces'
 import { AccountAddress, AccountOutput, Balance, OutputData, OutputType } from '@iota/sdk/out/types'
-import { updateWalletPersistedDataOnActiveProfile } from '../../profile'
+import { updateWalletPersistedDataOnActiveProfile } from '@core/profile'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { getBech32AddressFromAddressTypes, getBlockIssuerAccounts } from '../utils'

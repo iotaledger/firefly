@@ -8,8 +8,8 @@
     import { Animation, Button, PasswordInput, Text, TextHint } from '@ui'
     import { HTMLButtonType, TextType } from '@ui/enums'
     import zxcvbn from 'zxcvbn'
-    import { updateStrongholdRouter } from '../update-stronghold-router'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { updateStrongholdRouter } from '@core/router'
+    import { TextHintVariant } from '@ui/enums'
     import { AnimationEnum } from '@auxiliary/animation'
     import { onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
 

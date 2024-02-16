@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AmountBox, SubjectBox, TransactionActivityStatusPill } from 'shared/components'
+    import { AmountBox, SubjectBox, TransactionActivityStatusPill } from '@ui'
     import { getAssetFromPersistedAssets } from '@core/wallet'
     import { FoundryActivity } from '@core/wallet'
 

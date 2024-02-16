@@ -23,8 +23,8 @@
         AssetActionsModal,
         MeatballMenuButton,
         Modal,
-    } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import { MANA_ID } from '@core/network'
 
     export let asset: IAsset

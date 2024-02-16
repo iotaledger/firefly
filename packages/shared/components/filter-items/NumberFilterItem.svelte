@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown, Icon, Text, NumberInput } from 'shared/components'
+    import { Dropdown, Icon, Text, NumberInput } from '@ui'
     import { localize } from '@core/i18n'
     import type { IDropdownItem } from '@core/utils'
     import { NumberFilterUnit } from '@core/utils/interfaces/filter'

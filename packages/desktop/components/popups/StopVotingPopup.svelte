@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Button, Text, TextType, TextHint } from 'shared/components'
-    import { ButtonVariant, TextHintVariant } from 'shared/components/enums'
+    import { Button, Text, TextType, TextHint } from '@ui'
+    import { ButtonVariant, TextHintVariant } from '@ui/enums'
     import { closePopup } from '@auxiliary/popup'
     import { stopVotingForProposal } from '@contexts/governance/actions'
     import { selectedProposal } from '@contexts/governance/stores'
