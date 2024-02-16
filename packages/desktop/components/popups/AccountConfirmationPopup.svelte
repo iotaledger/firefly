@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
     import {

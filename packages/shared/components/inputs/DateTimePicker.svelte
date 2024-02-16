@@ -3,7 +3,7 @@
     import SveltyPicker from 'svelty-picker'
     import sveltyPickerTranslations from 'svelty-picker/i18n'
     import { ComponentProps, createEventDispatcher } from 'svelte'
-    import { Tooltip, Button, ButtonSize } from 'shared/components'
+    import { Tooltip, Button, ButtonSize } from '@ui'
     import { localize } from '@core/i18n'
     import { appSettings } from '@core/app'
 

@@ -26,8 +26,8 @@
         NftActivityDetails,
         Text,
         TextType,
-    } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import { onMount } from 'svelte'
 
     export let activityId: string

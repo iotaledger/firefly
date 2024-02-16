@@ -35,6 +35,8 @@ export * from './getIconColorFromString'
 export * from './syncWalletsInSeries'
 export * from './syncWalletsInParallel'
 export * from './validateWalletName'
+export * from './isVisibleAsset'
+export * from './isVisibleActivity'
 
 // Folders
 export * from './generateActivity'

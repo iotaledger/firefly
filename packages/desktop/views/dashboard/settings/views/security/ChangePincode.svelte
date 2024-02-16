@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile'
     import { PIN_LENGTH } from '@core/utils'
-    import { Button, ButtonSize, HTMLButtonType, PinInput, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, HTMLButtonType, PinInput, Text, TextType } from '@ui'
     import { get } from 'svelte/store'
 
     let currentPincode: string = ''

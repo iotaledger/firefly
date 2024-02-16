@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Checkbox, Text } from 'shared/components'
+    import { Checkbox, Text } from '@ui'
     import { localize } from '@core/i18n'
     import { activeProfile, updateActiveProfileSettings } from '@core/profile'
 

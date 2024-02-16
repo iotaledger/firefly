@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { Activity, formatTokenAmountPrecise } from '@core/wallet'

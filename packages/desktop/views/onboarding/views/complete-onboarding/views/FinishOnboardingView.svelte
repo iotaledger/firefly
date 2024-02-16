@@ -14,9 +14,9 @@
     import { ProfileType } from '@core/profile'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { Animation, Button, Icon, Text, TextHint } from '@ui'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
     import { TextType } from '@ui/enums'
-    import { onboardingRouter } from '@views/onboarding/onboarding-router'
+    import { onboardingRouter } from '@core/router'
     import { setStrongholdPassword } from '@core/wallet/actions/setStrongholdPassword'
 
     function onContinueClick(): void {

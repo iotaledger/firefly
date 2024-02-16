@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, WalletLabel, Text, TextType } from 'shared/components'
+    import { Modal, WalletLabel, Text, TextType } from '@ui'
     import { fade } from 'svelte/transition'
     import { visibleActiveWallets, getBaseToken } from '@core/profile'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet } from '@core/wallet'

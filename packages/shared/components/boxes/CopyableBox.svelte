@@ -1,7 +1,7 @@
 <script lang="ts">
     import { setClipboard } from '@core/utils'
     import Box from './Box.svelte'
-    import { InformationTooltip } from 'shared/components'
+    import { InformationTooltip } from '@ui'
     import { localize } from '@core/i18n'
     import { onDestroy } from 'svelte'
 

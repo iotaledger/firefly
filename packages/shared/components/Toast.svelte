@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Alert, Icon, Logo } from 'shared/components'
+    import { Alert, Icon, Logo } from '@ui'
     import { localize } from '@core/i18n'
     import { removeDisplayNotification } from '@auxiliary/notification/stores'
     import { Logo as LogoEnum } from './enums'

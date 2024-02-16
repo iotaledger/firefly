@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text } from 'shared/components'
+    import { Icon, Text } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let message: string = ''

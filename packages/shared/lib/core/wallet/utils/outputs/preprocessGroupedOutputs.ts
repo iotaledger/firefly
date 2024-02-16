@@ -5,9 +5,9 @@ import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
-import { MILLISECONDS_PER_SECOND } from 'shared/lib/core/utils'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 // TODO(2.0) Fix all usages
 export function preprocessGroupedOutputs(

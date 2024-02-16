@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text } from 'shared/components'
+    import { Text } from '@ui'
     export let error: string | null
 </script>
 

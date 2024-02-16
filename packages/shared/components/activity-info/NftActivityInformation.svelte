@@ -4,7 +4,7 @@
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { IKeyValueBoxList } from '@core/utils'
     import { getBech32AddressFromAddressTypes, getHexAddressFromAddressTypes, NftActivity } from '@core/wallet'
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
     import { AddressType } from '@iota/sdk/out/types'
 
     export let activity: NftActivity

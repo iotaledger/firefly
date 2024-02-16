@@ -1,5 +1,5 @@
 import { clearProfileFromMemory, removeProfileFolder } from '@core/profile'
-import { getSelectedWallet } from 'shared/lib/core/wallet'
+import { getSelectedWallet } from '@core/wallet'
 
 export async function cleanupOnboardingProfile(): Promise<void> {
     if (!getSelectedWallet()) {

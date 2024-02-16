@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Icon, Text, Tooltip } from 'shared/components'
-    import { Position } from 'shared/components/enums'
+    import { Icon, Text, Tooltip } from '@ui'
+    import { Position } from '@ui/enums'
 
     import { localize } from '@core/i18n'
 

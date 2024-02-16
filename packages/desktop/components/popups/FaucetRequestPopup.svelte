@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { nodeInfo, nodeInfoNetworkName } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
-    import { Button, Error, Text, FontWeight, TextType } from 'shared/components'
+    import { Button, Error, Text, FontWeight, TextType } from '@ui'
     import { handleError } from '@core/error/handlers/handleError'
 
     let isBusy = false

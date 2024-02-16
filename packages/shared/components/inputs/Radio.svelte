@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon } from 'shared/components'
+    import { Icon } from '@ui'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let value = undefined

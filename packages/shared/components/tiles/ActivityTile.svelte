@@ -24,7 +24,7 @@
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
         VestingActivityTileContent,
-    } from 'shared/components'
+    } from '@ui'
 
     export let activity: Activity
 

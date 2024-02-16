@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from 'shared/components'
+    import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
     import { selectedWallet } from '@core/wallet'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     export let title: string
     export let description: string = ''

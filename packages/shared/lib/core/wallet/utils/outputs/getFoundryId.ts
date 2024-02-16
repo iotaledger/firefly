@@ -8,7 +8,7 @@ import {
 } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
-export function buildFoundryId(foundry: FoundryOutput): Promise<FoundryId> {
+export function buildFoundryId(foundry: FoundryOutput): FoundryId {
     const unlockCondition = foundry.unlockConditions[0] as ImmutableAccountAddressUnlockCondition
     const isImmutableAccountAddress = unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
 

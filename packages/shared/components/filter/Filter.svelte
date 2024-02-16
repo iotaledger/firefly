@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Writable } from 'svelte/store'
-    import { TogglableButton, Modal } from '@ui'
-    import { FilterItem, FilterModal } from '@components'
+    import { TogglableButton, Modal, FilterItem, FilterModal } from '@ui'
     import { Filter } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 

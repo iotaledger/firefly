@@ -3,7 +3,7 @@
 
     import { localize } from '@core/i18n'
     import { closePopup } from '@auxiliary/popup'
-    import { Button, Text, TextInput, FontWeight, TextType } from 'shared/components'
+    import { Button, Text, TextInput, FontWeight, TextType } from '@ui'
 
     const PREFIX = process.env.APP_PROTOCOL + '://'
     let url: string = PREFIX

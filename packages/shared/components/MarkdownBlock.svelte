@@ -1,7 +1,7 @@
 <script lang="ts">
     import SvelteMarkdown from 'svelte-markdown'
     import { SvelteComponent } from 'svelte'
-    import { ParagraphBlock, LinkBlock } from 'shared/components'
+    import { ParagraphBlock, LinkBlock } from '@ui'
     export let text: string
 
     const renderers: Record<string, typeof SvelteComponent | null> = {

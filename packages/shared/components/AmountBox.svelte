@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { AssetIcon, Text, FontWeight, TextType, InformationTooltip } from 'shared/components'
+    import { AssetIcon, Text, FontWeight, TextType, InformationTooltip } from '@ui'
     import { getNthOccurrenceIndex } from '@core/utils'
     import { IPersistedAsset, formatTokenAmountDefault } from '@core/wallet'
     import { getDecimalSeparator, getGroupSeparator } from '@core/i18n'
