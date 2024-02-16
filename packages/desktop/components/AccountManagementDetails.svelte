@@ -55,9 +55,12 @@
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
     }
-    function listBlockKeysFeature(outputData: OutputData): string[] {
-        const output = outputData?.output as AccountOutput
-        const feature = output?.features?.find((f) => f.type === FeatureType.BlockIssuer) as BlockIssuerFeature
+    function listBlockKeysFeature(outputData: OutputData): void {
+        if (isImplicitAccount) return
+        const accountOutput = outputData?.output as AccountOutput
+        const feature = accountOutput?.features?.find(
+            (feature) => feature.type === FeatureType.BlockIssuer
+        ) as BlockIssuerFeature
         const allKeys: string[] = []
 
         if (feature) {
@@ -68,7 +71,6 @@
             })
         }
         keys = allKeys
-        return keys
     }
 
     onMount(() => {

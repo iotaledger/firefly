@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { Icon } from '@auxiliary/icon/enums'
     import { updateActiveWalletPersistedData } from '@core/profile'
-    import { selectedWalletId } from '@core/wallet'
+    import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     export let modal: Modal = undefined
@@ -34,6 +34,7 @@
             icon={Icon.Star}
             title={localize('views.accountManagement.details.modal.setMainAccount')}
             onClick={setAsMainAccount}
+            disabled={accountId === $selectedWallet.mainAccountId}
         />
     </account-management-menu>
 </Modal>

@@ -12,7 +12,8 @@
         modal?.toggle()
     }
 
-    function onTogglePrimaryKeyClick(): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async function onTogglePrimaryKeyClick(): Promise<void> {
         if (isPrimary) {
             // TODO: Implement the logic to set primary key
         }
