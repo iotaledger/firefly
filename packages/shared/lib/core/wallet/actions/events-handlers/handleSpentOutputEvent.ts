@@ -26,7 +26,7 @@ export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler 
 export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
-    await syncBalance(walletId)
+    await syncBalance(walletId, true)
     if (wallet) {
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
