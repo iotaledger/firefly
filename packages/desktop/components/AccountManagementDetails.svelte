@@ -126,7 +126,7 @@
                     </div>
                 </Tile>
 
-                {#if hasStakedFeature}
+                {#if hasStakingFeature}
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
                             <Text type={TextType.h3}>{getStakedAmount()}</Text>
