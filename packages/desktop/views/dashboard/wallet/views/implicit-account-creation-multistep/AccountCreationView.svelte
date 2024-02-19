@@ -17,21 +17,21 @@
         try {
             if (!strongholdPassword || $selectedWallet?.implicitAccountOutputs.length === 0) return
 
-            let outputIdTotransition: OutputId
+            let outputIdForTransition: OutputId
             await unlockStronghold(strongholdPassword)
             if (outputId) {
-                outputIdTotransition = $selectedWallet?.implicitAccountOutputs.find(
+                outputIdForTransition = $selectedWallet?.implicitAccountOutputs.find(
                     (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
                 )?.outputId
             } else {
-                outputIdTotransition = $selectedWallet?.implicitAccountOutputs[0].outputId
+                outputIdForTransition = $selectedWallet?.implicitAccountOutputs[0].outputId
             }
 
             updateActiveWallet($selectedWalletId, {
                 hasImplicitAccountCreationTransactionInProgress: true,
                 isTransferring: true,
             })
-            await $selectedWallet?.implicitAccountTransition(outputIdTotransition)
+            await $selectedWallet?.implicitAccountTransition(outputIdForTransition)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)

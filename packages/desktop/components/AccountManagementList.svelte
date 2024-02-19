@@ -10,8 +10,8 @@
 
     const allOutputs: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
 
-    function isMainAccount(output: OutputData): boolean {
-        return !!isAccountOutput(output) && (output.output as AccountOutput)?.accountId === $selectedWalletMainAccountId
+    function getAccountId(output: OutputData): string | undefined {
+        return isAccountOutput(output) ? (output.output as AccountOutput)?.accountId : undefined
     }
 
     function formatAndTruncateAccount(output: Output): string {
@@ -41,7 +41,7 @@
                                     {localize('views.accountManagement.list.tile.title')}
                                     {index + 1}
                                 </Text>
-                                {#if isMainAccount(output)}
+                                {#if getAccountId(output) === $selectedWalletMainAccountId}
                                     <Pill backgroundColor="blue-200" textColor="blue-600"
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
