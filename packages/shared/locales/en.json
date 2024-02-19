@@ -702,7 +702,8 @@
                     "setMainAccount": "Set as main account",
                     "manageKeys": "Manage keys"
                 }
-            }
+            },
+            "notification": "Choose a main account in Account Management to access the dashboard."
         }
     },
     "popups": {
