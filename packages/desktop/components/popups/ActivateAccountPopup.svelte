@@ -3,6 +3,4 @@
     export let outputId: string | undefined
 </script>
 
-<div class="h-full">
-    <ImplicitAccountCreationView {outputId} />
-</div>
+<ImplicitAccountCreationView {outputId} />
