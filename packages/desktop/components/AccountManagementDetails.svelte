@@ -46,29 +46,29 @@
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
-    $: hasStakedFeature = hasOutputStakedFeature(selectedOutput)
+    $: hasStakedFeature = hasStakingFeature(selectedOutput)
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
     }
 
-    function hasOutputStakedFeature(output: OutputData): boolean {
+    function hasStakingFeature(output: OutputData): boolean {
         return (
             isAccountOutput(output) &&
             (output.output as AccountOutput).features?.some((feature) => feature.type === FeatureType.Staking)
         )
     }
 
-    function getStakedAmount(): string {
+    function getStakedAmount(): string | undefined {
+        if (!hasStakedFeature) return
         let amount = '0'
-        if (isImplicitAccount) return amount + 'i'
         const accountOutput = selectedOutput.output as AccountOutput
         if (accountOutput.features) {
-            const stakedFeature = accountOutput.features.find(
+            const stakingFeature = accountOutput.features.find(
                 (feature) => feature.type === FeatureType.Staking
             ) as StakingFeature
-            amount = stakedFeature.stakedAmount.toString()
+            amount = stakingFeature?.stakedAmount?.toString()
         }
         return formatTokenAmountBestMatch(Number(amount), getBaseToken())
     }
