@@ -46,7 +46,7 @@
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
-    $: hasStakedFeature = hasStakingFeature(selectedOutput)
+    $: hasStakingFeature = hasStakingFeature(selectedOutput)
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
