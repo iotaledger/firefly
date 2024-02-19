@@ -46,31 +46,33 @@
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
-    $: hasStakingFeature = hasStakingFeature(selectedOutput)
+    $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
+    $: rawStakedAmount = getStakedAmount()
+    $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
     }
 
-    function hasStakingFeature(output: OutputData): boolean {
+    function hasOutputStakingFeature(output: OutputData): boolean {
         return (
             isAccountOutput(output) &&
             (output.output as AccountOutput).features?.some((feature) => feature.type === FeatureType.Staking)
         )
     }
 
-    function getStakedAmount(): string | undefined {
+    function getStakedAmount(): number | undefined {
         if (!hasStakingFeature) return
-        let amount = '0'
+        let amount = 0
         const accountOutput = selectedOutput.output as AccountOutput
         if (accountOutput.features) {
             const stakingFeature = accountOutput.features.find(
                 (feature) => feature.type === FeatureType.Staking
             ) as StakingFeature
-            amount = stakingFeature?.stakedAmount?.toString()
+            amount = Number(stakingFeature?.stakedAmount)
         }
-        return formatTokenAmountBestMatch(Number(amount), getBaseToken())
+        return amount
     }
 </script>
 
@@ -129,7 +131,7 @@
                 {#if hasStakingFeature}
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>{getStakedAmount()}</Text>
+                            <Text type={TextType.h3}>{formattedStakedAmount}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.accountManagement.details.staked')}</Text
                             >
