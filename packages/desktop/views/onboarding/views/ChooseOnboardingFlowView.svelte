@@ -96,7 +96,7 @@
             <OnboardingButton
                 primaryText={localize('actions.migrateFromLegacy')}
                 secondaryText={localize('actions.migrateFromLegacyDescription')}
-                icon={IconEnum.Transfer}
+                icon={IconEnum.Sync}
                 hidden={features?.onboarding?.[networkId]?.[networkId]?.migrateFromLegacy?.enabled}
                 onClick={onLegacyMigrationClick}
             />
