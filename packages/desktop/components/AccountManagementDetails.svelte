@@ -47,7 +47,7 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
-    $: rawStakedAmount = getStakedAmount()
+    $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
@@ -62,10 +62,10 @@
         )
     }
 
-    function getStakedAmount(): number | undefined {
+    function getStakedAmount(outputData: OutputData): number | undefined {
         if (!hasStakingFeature) return
         let amount = 0
-        const accountOutput = selectedOutput.output as AccountOutput
+        const accountOutput = outputData.output as AccountOutput
         if (accountOutput.features) {
             const stakingFeature = accountOutput.features.find(
                 (feature) => feature.type === FeatureType.Staking
