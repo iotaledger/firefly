@@ -61,7 +61,7 @@
     }
 
     function getStakedAmount(): string | undefined {
-        if (!hasStakedFeature) return
+        if (!hasStakingFeature) return
         let amount = '0'
         const accountOutput = selectedOutput.output as AccountOutput
         if (accountOutput.features) {
