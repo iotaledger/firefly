@@ -42,7 +42,16 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
+    $: balance = getAccountBalance(selectedOutput)
+    $: formattedBalance = formatTokenAmountBestMatch(balance, getBaseToken())
 
+    function getAccountBalance(outputData: OutputData): number | undefined {
+        if (isImplicitAccount) {
+            return Number(outputData.output.amount)
+        } else {
+            return undefined
+        }
+    }
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
@@ -94,19 +103,18 @@
                 </button>
             </right-pane-title>
             <div class="flex flex-row space-x-2 w-1/2">
-                <Tile>
-                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                        <!-- TODO: Replace this with the actual balance for accountOutputs-->
-                        <Text type={TextType.h3}>
-                            {isImplicitAccount
-                                ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), getBaseToken())
-                                : 0 + ' Gi'}
-                        </Text>
-                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                            >{localize('views.accountManagement.details.balance')}</Text
-                        >
-                    </div>
-                </Tile>
+                {#if balance}
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                            <Text type={TextType.h3}>
+                                {formattedBalance}
+                            </Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.accountManagement.details.balance')}</Text
+                            >
+                        </div>
+                    </Tile>
+                {/if}
 
                 <Tile>
                     <div class="flex flex-col space-y-2 items-center justify-center w-full">

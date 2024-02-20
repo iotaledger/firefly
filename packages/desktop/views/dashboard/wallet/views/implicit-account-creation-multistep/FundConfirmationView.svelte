@@ -5,10 +5,16 @@
     import { onMount, onDestroy } from 'svelte'
     import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { activeProfile } from '@core/profile'
+    import { Balance } from '@iota/sdk/out/types'
 
     // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
+    let walletBalance: Balance | undefined
+
+    $: formattedWalletBalance = walletBalance
+        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin?.available), baseCoin?.metadata)
+        : '-'
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getOutputAmount(): string {
@@ -22,6 +28,11 @@
         }
         return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin?.metadata) : ''
     }
+
+    onMount(async () => {
+        walletBalance = await $selectedWallet.getBalance()
+        startCountdown()
+    })
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
@@ -44,10 +55,6 @@
         $implicitAccountCreationRouter.next()
     }
 
-    onMount(() => {
-        startCountdown()
-    })
-
     onDestroy(() => {
         clearInterval(countdownInterval)
     })
@@ -64,6 +71,9 @@
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
                 />
             </div>
+            <Text type={TextType.p} fontWeight={FontWeight.medium}
+                >{localize('views.implicit-account-creation.steps.step2.view.eyebrow')} {formattedWalletBalance}</Text
+            >
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
             >
