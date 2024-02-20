@@ -2,10 +2,13 @@
     import { Pill } from './pills'
     import { Text, Modal, MeatballMenuButton, MenuItem } from 'shared/components'
     import { localize } from '@core/i18n'
+    import { truncateString } from 'shared/lib/core/utils'
 
     export let key: string
 
     let modal: Modal | undefined
+    const truncatedKey: string = truncateString(key, 12, 12)
+
     const isPrimary: boolean = false
 
     function toggleModal(): void {
@@ -35,7 +38,7 @@
 >
     <div class="flex flex-row items-center space-x-4 overflow-hidden">
         <Text classes="self-start overflow-hidden whitespace-nowrap">
-            {key}
+            {truncatedKey}
         </Text>
         {#if isPrimary}
             <Pill
