@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Icon, Text, Error } from 'shared/components'
+    import { Icon, Text, Error } from '@ui'
     import { IDropdownItem, clickOutside, isNumberLetterOrPunctuation } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
 

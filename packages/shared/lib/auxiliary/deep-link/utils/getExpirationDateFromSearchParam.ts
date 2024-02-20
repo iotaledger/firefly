@@ -1,4 +1,4 @@
-import { convertUnixTimestampToDate } from 'shared/lib/core/utils'
+import { convertUnixTimestampToDate } from '@core/utils'
 import { EXPIRATION_DATE_REGEX, TIME_UNIT_MS_MAP } from '../constants'
 import { TimeUnit } from '../enums'
 import { InvalidExpirationDateError, PastExpirationDateError } from '../errors'

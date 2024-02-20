@@ -2,14 +2,14 @@ import { IWalletState } from '@core/wallet/interfaces'
 import { ActivityAction, ActivityType, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
-import { generateSingleAliasActivity } from './generateSingleAliasActivity'
+import { generateSingleAccountActivity } from './generateSingleAccountActivity'
 import { generateSingleFoundryActivity } from './generateSingleFoundryActivity'
 import { generateSingleGovernanceActivity } from './generateSingleGovernanceActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { getActivityTypeFromOutput } from './helper'
 import { generateActivitiesFromNftOutputs } from './generateActivitiesFromNftOutputs'
-import { generateActivitiesFromAliasOutputs } from './generateActivitiesFromAliasOutputs'
+import { generateActivitiesFromAccountOutputs } from './generateActivitiesFromAccountOutputs'
 import { generateActivitiesFromFoundryOutputs } from './generateActivitiesFromFoundryOutputs'
 import { generateActivitiesFromBasicOutputs } from './generateActivitiesFromBasicOutputs'
 import { OutputType } from '@iota/sdk/out/types'
@@ -47,11 +47,11 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...nftActivities)
     }
 
-    const containsAliasActivity =
-        outputs.some((output) => output.output.type === OutputType.Alias) && !containsFoundryActivity
-    if (containsAliasActivity) {
-        const aliasActivities = await generateActivitiesFromAliasOutputs(processedTransaction, wallet)
-        activities.push(...aliasActivities)
+    const containsAccountActivity =
+        outputs.some((output) => output.output.type === OutputType.Account) && !containsFoundryActivity
+    if (containsAccountActivity) {
+        const accountActivities = await generateActivitiesFromAccountOutputs(processedTransaction, wallet)
+        activities.push(...accountActivities)
     }
 
     const hasParticipationInputs = wrappedInputs?.some((input) => isParticipationOutput(input.output))
@@ -72,8 +72,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         const anchorActivities = await generateActivitiesFromAnchorOutputs(processedTransaction, wallet)
         activities.push(...anchorActivities)
     }
-
-    if (!containsFoundryActivity && !containsNftActivity && !containsAliasActivity && !governanceOutput) {
+    if (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }
@@ -105,8 +104,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateSingleGovernanceActivity(wallet, params)
                 case ActivityType.Foundry:
                     return generateSingleFoundryActivity(wallet, params)
-                case ActivityType.Alias:
-                    return generateSingleAliasActivity(wallet, params)
+                case ActivityType.Account:
+                    return generateSingleAccountActivity(wallet, params)
                 case ActivityType.Nft:
                     return generateSingleNftActivity(wallet, params)
                 case ActivityType.Vesting:

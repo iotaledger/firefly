@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Modal, SelectorInput, IOption } from 'shared/components'
+    import { Modal, SelectorInput, IOption } from '@ui'
     import { activeProfile, getNetworkHrp } from '@core/profile'
     import { validateBech32Address } from '@core/utils'
     import type { ChainMetadata } from '@core/network'
@@ -41,7 +41,7 @@
     }
 
     function getNetworkValue(chainMetadata: ChainMetadata): string | undefined {
-        return chainMetadata?.aliasAddress ?? undefined
+        return chainMetadata?.accountAddress ?? undefined
     }
 
     export function validate(): Promise<void> {

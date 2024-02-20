@@ -8,7 +8,7 @@ import {
     UnlockConditionType,
     AccountAddress,
 } from '@iota/sdk/out/types'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from 'shared/lib/core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
@@ -41,7 +41,7 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
             return getBech32AddressFromAddressTypes(addressUnlockCondition.address)
         }
 
-        // TODO: if additional metadata is added to an aliasOutput, we could use it to determine the EVM Sender.
+        // TODO: if additional metadata is added to an accountOutput, we could use it to determine the EVM Sender.
         const accountId = (output as AccountOutput)?.accountId
 
         if (accountId) {

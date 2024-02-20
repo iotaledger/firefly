@@ -3,7 +3,7 @@
  */
 export enum Icon {
     Activity = 'activity',
-    Alias = 'alias',
+    Account = 'account',
     ArrowLeft = 'arrow-left',
     ArrowRight = 'arrow-right',
     Assembly = 'assembly',
@@ -66,6 +66,7 @@ export enum Icon {
     Info = 'info',
     InfoFilled = 'info-filled',
     Iota = 'iota',
+    Key = 'key',
     Language = 'language',
     Ledger = 'ledger',
     LedgerApp = 'ledger-app',
@@ -107,6 +108,7 @@ export enum Icon {
     SmallChevronUp = 'small-chevron-up',
     Speech = 'speech',
     Staking = 'staking',
+    Star = 'star',
     StatusError = 'status-error',
     StatusSuccess = 'status-success',
     SuccessCheck = 'success-check',

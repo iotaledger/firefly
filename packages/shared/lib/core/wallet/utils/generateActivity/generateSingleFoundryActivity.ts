@@ -19,7 +19,6 @@ import {
 } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 
-// TODO(2.0) Alias outputs are gone
 export async function generateSingleFoundryActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
@@ -44,7 +43,7 @@ export async function generateSingleFoundryActivity(
     const containsValue = true
 
     const id = outputId || transactionId
-    const nativeToken = await getNativeTokenFromOutput(output)
+    const nativeToken = getNativeTokenFromOutput(output)
     const assetId = nativeToken?.id ?? getCoinType()
 
     const storageDeposit = getAmountFromOutput(output)

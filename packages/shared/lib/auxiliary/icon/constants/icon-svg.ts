@@ -2,7 +2,7 @@ import { Icon } from '../enums'
 import { ISvg } from '../interfaces'
 import {
     ACTIVITY_SVG,
-    ALIAS_SVG,
+    ACCOUNT_SVG,
     ARROW_LEFT_SVG,
     ARROW_RIGHT_SVG,
     ASSEMBLY_SVG,
@@ -131,6 +131,8 @@ import {
     NOT_VERIFIED_SVG,
     VERIFICATION_STATUS_SELF,
     VERIFICATION_STATUS_NEW,
+    STAR_SVG,
+    KEY_SVG,
 } from '../svgs'
 import { VERIFICATION_STATUS_OFFICIAL } from '../svgs/verification-status-official.svg'
 
@@ -138,7 +140,7 @@ type IconSvgMap = { [key in Icon]: ISvg }
 
 export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.Activity]: ACTIVITY_SVG,
-    [Icon.Alias]: ALIAS_SVG,
+    [Icon.Account]: ACCOUNT_SVG,
     [Icon.ArrowLeft]: ARROW_LEFT_SVG,
     [Icon.ArrowRight]: ARROW_RIGHT_SVG,
     [Icon.Assembly]: ASSEMBLY_SVG,
@@ -201,6 +203,7 @@ export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.Info]: INFO_SVG,
     [Icon.InfoFilled]: INFO_FILLED_SVG,
     [Icon.Iota]: IOTA_SVG,
+    [Icon.Key]: KEY_SVG,
     [Icon.Language]: LANGUAGE_SVG,
     [Icon.Ledger]: LEDGER_SVG,
     [Icon.LedgerApp]: LEDGER_APP_SVG,
@@ -242,6 +245,7 @@ export const ICON_SVG_MAP: IconSvgMap = {
     [Icon.SmallChevronUp]: SMALL_CHEVRON_UP_SVG,
     [Icon.Speech]: SPEECH_SVG,
     [Icon.Staking]: STAKING_SVG,
+    [Icon.Star]: STAR_SVG,
     [Icon.StatusError]: STATUS_ERROR_SVG,
     [Icon.StatusSuccess]: STATUS_SUCCESS_SVG,
     [Icon.SuccessCheck]: SUCCESS_CHECK_SVG,

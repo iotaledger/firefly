@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { NumberInput, FontWeight } from 'shared/components'
+    import { NumberInput, FontWeight } from '@ui'
 
     export let inputElement: HTMLInputElement | undefined = undefined
     export let fontSize = 24

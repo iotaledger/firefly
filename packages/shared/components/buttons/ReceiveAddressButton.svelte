@@ -2,7 +2,7 @@
     import { selectedWallet } from '@core/wallet'
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
-    import { QR, Text, FontWeight, AddressBox } from 'shared/components'
+    import { QR, Text, FontWeight, AddressBox } from '@ui'
 
     let addressBoxElement: AddressBox
 

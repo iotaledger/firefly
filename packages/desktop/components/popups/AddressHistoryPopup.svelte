@@ -10,7 +10,7 @@
     import { setClipboard, truncateString } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     interface AddressHistory {

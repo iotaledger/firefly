@@ -1,7 +1,7 @@
 import { onboardingProfile } from '@contexts/onboarding/stores'
 import { api } from '@core/api'
 import { SecretManager } from '@iota/sdk'
-import { verifyMnemonic } from 'shared/lib/core/secret-manager'
+import { verifyMnemonic } from '@core/secret-manager'
 import { get, writable, Writable } from 'svelte/store'
 
 export const onboardingProfileSecretManager: Writable<SecretManager | null> = writable(null)

@@ -6,7 +6,7 @@
     import { resetMintTokenDetails } from '@core/wallet'
 
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { TextHintVariant } from '@ui/enums'
 
     $: hasAccounts = $selectedWallet?.accountOutputs.length > 0
 
@@ -20,14 +20,14 @@
             openPopup({
                 id: PopupId.Confirmation,
                 props: {
-                    title: localize('popups.noAlias.title'),
-                    hint: localize('popups.noAlias.description'),
+                    title: localize('popups.noAccountOuput.title'),
+                    hint: localize('popups.noAccountOuput.description'),
                     variant: TextHintVariant.Warning,
-                    confirmText: localize('actions.createAlias'),
+                    confirmText: localize('actions.createAccount'),
                     onConfirm: () => {
                         closePopup()
                         openPopup({
-                            id: PopupId.AliasConfirmation,
+                            id: PopupId.AccountConfirmation,
                         })
                     },
                 },

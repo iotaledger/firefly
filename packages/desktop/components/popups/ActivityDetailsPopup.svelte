@@ -16,7 +16,7 @@
     } from '@core/wallet'
     import {
         ActivityInformation,
-        AliasActivityDetails,
+        AccountActivityDetails,
         BasicActivityDetails,
         Button,
         ConsolidationActivityDetails,
@@ -26,8 +26,8 @@
         NftActivityDetails,
         Text,
         TextType,
-    } from 'shared/components'
-    import { TextHintVariant } from 'shared/components/enums'
+    } from '@ui'
+    import { TextHintVariant } from '@ui/enums'
     import { onMount } from 'svelte'
 
     export let activityId: string
@@ -132,8 +132,8 @@
             <ConsolidationActivityDetails {activity} />
         {:else if activity.type === ActivityType.Nft}
             <NftActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Alias}
-            <AliasActivityDetails {activity} />
+        {:else if activity.type === ActivityType.Account}
+            <AccountActivityDetails {activity} />
         {/if}
         <ActivityInformation {activity} />
     </activity-details>

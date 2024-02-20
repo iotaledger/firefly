@@ -1,5 +1,5 @@
 <script lang="typescript">
-    import { Text, FontWeight, NftMedia, TooltipIcon, Position, TooltipType } from 'shared/components'
+    import { Text, FontWeight, NftMedia, TooltipIcon, Position, TooltipType } from '@ui'
 
     import { time } from '@core/app'
     import { localize } from '@core/i18n'

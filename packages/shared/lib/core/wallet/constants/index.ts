@@ -1,6 +1,5 @@
 export * from './address-letter.constants'
 export * from './address-type-map.constant'
-export * from './address-type.constants'
 export * from './animated-token-ids.constant'
 export * from './default-activity-filter.constant'
 export * from './default-asset-filter.constant'

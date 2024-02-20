@@ -6,6 +6,6 @@ export function getDestinationNetworkFromAddress(networkAddress: string | undefi
         return network?.name
     }
 
-    const foundDestinationNetwork = network?.chains?.find((chain) => chain?.aliasAddress === networkAddress)
+    const foundDestinationNetwork = network?.chains?.find((chain) => chain?.anchorAddress === networkAddress)
     return foundDestinationNetwork?.name ?? networkAddress
 }

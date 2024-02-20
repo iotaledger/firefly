@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Icon, Text, Tile, FontWeight, TextType } from 'shared/components'
+    import { Icon, Text, Tile, FontWeight, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { formatTokenAmountBestMatch } from '@core/wallet/utils'
     import { IShimmerClaimingWallet, ShimmerClaimingWalletState } from '@contexts/onboarding'

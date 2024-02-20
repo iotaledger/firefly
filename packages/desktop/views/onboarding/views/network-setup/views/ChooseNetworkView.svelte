@@ -13,7 +13,7 @@
     import features from '@features/features'
     import { Animation, OnboardingButton, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
-    import { networkSetupRouter } from '../network-setup-router'
+    import { networkSetupRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     const NETWORK_ICON: Record<NetworkId, Icon> = {

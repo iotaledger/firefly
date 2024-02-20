@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { FontWeight, Text } from 'shared/components'
+    import { FontWeight, Text } from '@ui'
 
     export let title: string
     export let subtitle: string | undefined = undefined

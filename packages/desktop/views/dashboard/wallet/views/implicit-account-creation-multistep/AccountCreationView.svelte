@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, FontWeight, LedgerAnimation, PasswordInput, Text, TextType } from 'shared/components'
+    import { Button, FontWeight, PasswordInput, Text, TextType, LedgerAnimation } from '@ui'
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { isSoftwareProfile, unlockStronghold, updateActiveWallet } from '@core/profile'
@@ -48,6 +48,7 @@
                 alt={localize('views.implicit-account-creation.steps.step3.title')}
             />
         </div>
+        HEAD
         {#if $isSoftwareProfile}
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
@@ -58,12 +59,16 @@
                 autofocus
                 submitHandler={unlockWalletAndCreateAccount}
                 placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
+                disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
             />
         {:else}
             <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
         {/if}
     </div>
-    <Button onClick={unlockWalletAndCreateAccount} disabled={disabledActive} {isBusy}
+    <Button
+        onClick={unlockWalletAndCreateAccount}
+        disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
+        isBusy={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
         >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>

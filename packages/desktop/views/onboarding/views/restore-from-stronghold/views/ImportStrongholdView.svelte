@@ -9,7 +9,7 @@
     import { StrongholdVersion } from '@core/stronghold/enums'
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
-    import { restoreFromStrongholdRouter } from '../../restore-from-stronghold/restore-from-stronghold-router'
+    import { restoreFromStrongholdRouter } from '@core/router'
     import { restoreBackup } from '@core/wallet/actions'
 
     interface FileWithPath extends File {

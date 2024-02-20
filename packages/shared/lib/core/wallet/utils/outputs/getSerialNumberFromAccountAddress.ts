@@ -3,8 +3,7 @@ import { api } from '@core/api'
 import { AccountOutput } from '@iota/sdk/out/types'
 import { selectedWallet } from '../../stores'
 
-// TODO(2.0) Alias output is gone now
-export async function getSerialNumberFromAliasOutput(accountAddress: string): Promise<number> {
+export async function getSerialNumberFromAccountAddress(accountAddress: string): Promise<number> {
     const wallet = get(selectedWallet)
     if (!wallet) {
         throw new Error('Wallet is undefined')

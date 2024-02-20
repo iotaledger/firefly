@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { checkActiveProfileAuth, getBaseToken } from '@core/profile'
     import {
@@ -29,7 +29,7 @@
     }
     $: accountOutput = address
         ? {
-              aliasId: EMPTY_HEX_ID,
+              accountId: EMPTY_HEX_ID,
               unlockConditions: [
                   {
                       type: UnlockConditionType.GovernorAddress,
@@ -56,7 +56,7 @@
         }
     }
 
-    async function createAlias(): Promise<void> {
+    async function createAccount(): Promise<void> {
         try {
             updateSelectedWallet({ isTransferring: true })
             const transaction = await $selectedWallet
@@ -72,7 +72,7 @@
     }
 
     async function onConfirmClick(): Promise<void> {
-        await checkActiveProfileAuth(createAlias, { stronghold: true, ledger: false })
+        await checkActiveProfileAuth(createAccount, { stronghold: true, ledger: false })
     }
 
     function onCancelClick(): void {
@@ -89,23 +89,14 @@
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">{localize('popups.alias.title')}</Text
+    <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
+        >{localize('popups.account.title')}</Text
     >
     <div class="w-full flex-col space-y-2">
         <KeyValueBox
             keyText={localize('general.storageDeposit')}
             valueText={storageDeposit}
             tooltipText={localize('tooltips.transactionDetails.incoming.storageDeposit')}
-        />
-        <KeyValueBox
-            keyText={localize('general.governorAddress')}
-            valueText={$selectedWallet.depositAddress}
-            isCopyable
-        />
-        <KeyValueBox
-            keyText={localize('general.stateControllerAddress')}
-            valueText={$selectedWallet.depositAddress}
-            isCopyable
         />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

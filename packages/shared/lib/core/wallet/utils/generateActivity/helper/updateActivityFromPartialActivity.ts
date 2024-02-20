@@ -6,7 +6,7 @@ export function updateActivityFromPartialActivity(activity: Activity, partialDat
         Object.assign(activity, partialData)
     } else if (partialData.type === ActivityType.Foundry && activity.type === ActivityType.Foundry) {
         Object.assign(activity, partialData)
-    } else if (partialData.type === ActivityType.Alias && activity.type === ActivityType.Alias) {
+    } else if (partialData.type === ActivityType.Account && activity.type === ActivityType.Account) {
         Object.assign(activity, partialData)
     } else if (partialData.type === ActivityType.Nft && activity.type === ActivityType.Nft) {
         Object.assign(activity, partialData)

@@ -11,7 +11,7 @@
         IMintTokenDetails,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, KeyValueBox, Text, FontWeight, TextType } from 'shared/components'
+    import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
@@ -27,12 +27,12 @@
 
     async function prepareFoundryOutput(): Promise<void> {
         if ($mintTokenDetails && $selectedWallet && metadata) {
-            const { totalSupply, circulatingSupply, aliasId } = $mintTokenDetails
+            const { totalSupply, circulatingSupply, accountId } = $mintTokenDetails
             const outputData = await buildFoundryOutputData(
                 Number(totalSupply),
                 Number(circulatingSupply),
                 metadata,
-                aliasId
+                accountId
             )
             const client = await getClient()
             const preparedOutput = await client.buildFoundryOutput(outputData)
@@ -47,10 +47,10 @@
         details: IMintTokenDetails | undefined
     ): { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } } | undefined {
         if (details) {
-            const { name: tokenName, symbol, aliasId, url, logoUrl, decimals, totalSupply } = details
+            const { name: tokenName, symbol, accountId, url, logoUrl, decimals, totalSupply } = details
             return {
-                ...(aliasId && {
-                    alias: { data: aliasId, isCopyable: true },
+                ...(accountId && {
+                    account: { data: accountId, isCopyable: true },
                 }),
                 ...(storageDeposit && {
                     storageDeposit: { data: storageDeposit },

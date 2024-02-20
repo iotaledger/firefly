@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Text, CopyableBox, FontWeight, TextType } from 'shared/components'
+    import { Text, CopyableBox, FontWeight, TextType } from '@ui'
 
     export let address: string = ''
     export let isCopyable: boolean = false

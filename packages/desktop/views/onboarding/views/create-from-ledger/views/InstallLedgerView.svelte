@@ -5,7 +5,7 @@
     import { LedgerAppName, ledgerAppName, pollLedgerNanoStatus, stopPollingLedgerNanoStatus } from '@core/ledger'
     import { Button, Icon, LedgerAnimation, Link, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
-    import { createFromLedgerRouter } from '../create-from-ledger-router'
+    import { createFromLedgerRouter } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { IllustrationEnum } from '@auxiliary/illustration'
     import { buildOnboardingSecretManager, onboardingProfileSecretManager } from '@contexts/onboarding'
@@ -27,7 +27,7 @@
     }
 
     onMount(async () => {
-        await buildOnboardingSecretManager();
+        await buildOnboardingSecretManager()
         pollLedgerNanoStatus(get(onboardingProfileSecretManager))
     })
 </script>
