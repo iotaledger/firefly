@@ -30,18 +30,23 @@
         CommonOutput,
         FeatureType,
         OutputData,
+        BlockIssuerFeature,
+        Ed25519PublicKeyHashBlockIssuerKey,
+        BlockIssuerKeyType,
         StakingFeature,
     } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
+    import { onMount } from 'svelte'
 
     export let selectedOutput: OutputData
     export let index: number
 
     let modal: Modal
     let address: string = ''
+    let keys: string[] = []
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
@@ -65,6 +70,24 @@
         })
     }
 
+    function listBlockKeysFeature(outputData: OutputData): void {
+        if (isImplicitAccount) return
+        const accountOutput = outputData?.output as AccountOutput
+        const feature = accountOutput?.features?.find(
+            (feature) => feature.type === FeatureType.BlockIssuer
+        ) as BlockIssuerFeature
+        const allKeys: string[] = []
+
+        if (feature) {
+            feature.blockIssuerKeys.forEach((key) => {
+                if (key.type === BlockIssuerKeyType.Ed25519PublicKeyHash) {
+                    allKeys.push((key as Ed25519PublicKeyHashBlockIssuerKey).pubKeyHash)
+                }
+            })
+        }
+        keys = allKeys
+    }
+
     function hasOutputStakingFeature(output: OutputData): boolean {
         return (
             isAccountOutput(output) &&
@@ -84,6 +107,10 @@
         }
         return amount
     }
+
+    onMount(() => {
+        listBlockKeysFeature(selectedOutput)
+    })
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
@@ -107,7 +134,13 @@
                     {#if accountId}
                         <wallet-actions-button class="block relative">
                             <MeatballMenuButton onClick={modal?.toggle} />
-                            <AccountManagementMenu bind:modal position={{ right: '0' }} classes="mt-1.5" {accountId} />
+                            <AccountManagementMenu
+                                bind:modal
+                                position={{ right: '0' }}
+                                classes="mt-1.5"
+                                {accountId}
+                                {keys}
+                            />
                         </wallet-actions-button>
                     {/if}
                     {#if isImplicitAccount}
@@ -151,7 +184,9 @@
             </div>
             {#if accountId}
                 <div class="flex flex-col space-y-2 w-1/2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Address</Text>
+                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                        >{localize('views.accountManagement.details.address')}</Text
+                    >
                     <CopyableBox
                         clearBackground
                         clearBoxPadding
@@ -168,9 +203,22 @@
             {/if}
             {#if isImplicitAccount}
                 <div class="flex flex-col space-y-2 w-1/2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}>Mana</Text>
+                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                        >{localize('views.accountManagement.details.mana')}</Text
+                    >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
                         >{selectedOutput?.output?.mana}</Text
+                    >
+                </div>
+            {/if}
+            {#if isAccountOutput && keys.length > 0}
+                <div class="flex flex-col space-y-2 w-1/2">
+                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                        >{localize('views.accountManagement.details.key')}</Text
+                    >
+                    <!-- TODO: When we can set a primary key, we will show the primary key here -->
+                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                        >{keys[0]}</Text
                     >
                 </div>
             {/if}
