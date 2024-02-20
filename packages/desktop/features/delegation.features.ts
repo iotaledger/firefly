@@ -1,7 +1,7 @@
 import { IDelegationFeatures } from '@lib/features/interfaces'
 
 const delegationFeatures: IDelegationFeatures = {
-    enabled: false,
+    enabled: true,
     delegationList: {
         enabled: false,
     },

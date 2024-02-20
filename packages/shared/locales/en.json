@@ -703,6 +703,18 @@
                     "manageKeys": "Manage keys"
                 }
             }
+        },
+        "delegation": {
+            "title": "Delegation",
+            "action": {
+                "delegate": "Delegate",
+                "claimRewards": "Claim Rewards"
+            },
+            "info": {
+                "funds": "Total Funds",
+                "delegated": "Delegated",
+                "rewards": "Rewards"
+            }
         }
     },
     "popups": {
