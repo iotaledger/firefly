@@ -51,7 +51,7 @@
             case Header.Name:
                 return {
                     component: Text,
-                    props: { type: TextType.h3 },
+                    props: { type: TextType.h5, fontWeight: FontWeight.semibold },
                     text: value,
                 }
             case Header.DelegatedFunds:
@@ -60,6 +60,9 @@
                     props: {
                         icon: IconEnum.Lock,
                         text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
+                        boxClasses: 'bg-gray-100 w-6 h-6 rounded-full text-blue-500',
+                        width: 20,
+                        height: 20,
                     },
                 }
             case Header.Rewards:
@@ -68,6 +71,9 @@
                     props: {
                         icon: IconEnum.Star,
                         text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
+                        boxClasses: 'bg-orange-100 w-6 h-6 rounded-full text-orange-600',
+                        width: 20,
+                        height: 20,
                     },
                 }
             case Header.Epoch:
@@ -150,8 +156,8 @@
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
         <Pane height={Height.Full}>
-            <div class="flex flex-col space-y-8 max-w-7xl w-full p-8">
-                <div class="flex flex-row justify-between ml-4">
+            <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
+                <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
                 </div>
@@ -198,16 +204,18 @@
                     </thead>
                     <tbody class="flex flex-col w-full space-y-4">
                         {#each MOCKED_DATA as data}
-                            <tr class="flex flex-row items-center w-full border-solid border-b border-gray-200 py-4">
+                            <tr
+                                class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
+                            >
                                 {#each Object.entries(data) as [key, value]}
-                                    {@const prueba = renderCellValue(value, key)}
+                                    {@const renderCell = renderCellValue(value, key)}
                                     <td class="text-start w-60 flex-1">
-                                        {#if prueba.text}
-                                            <svelte:component this={prueba.component} {...prueba.props}>
-                                                {prueba.text}
+                                        {#if renderCell.text}
+                                            <svelte:component this={renderCell.component} {...renderCell.props}>
+                                                {renderCell.text}
                                             </svelte:component>
                                         {:else}
-                                            <svelte:component this={prueba.component} {...prueba.props} />
+                                            <svelte:component this={renderCell.component} {...renderCell.props} />
                                         {/if}
                                     </td>
                                 {/each}
