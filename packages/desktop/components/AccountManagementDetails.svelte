@@ -23,7 +23,14 @@
         isAccountOutput,
         isImplicitAccountOutput,
     } from '@core/wallet'
-    import { AccountAddress, AccountOutput, CommonOutput, OutputData } from '@iota/sdk/out/types'
+    import {
+        AccountAddress,
+        AccountOutput,
+        CommonOutput,
+        FeatureType,
+        OutputData,
+        StakingFeature,
+    } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
@@ -39,10 +46,33 @@
     $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
+    $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
+    $: rawStakedAmount = getStakedAmount(selectedOutput)
+    $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
+    }
+
+    function hasOutputStakingFeature(output: OutputData): boolean {
+        return (
+            isAccountOutput(output) &&
+            (output.output as AccountOutput).features?.some((feature) => feature.type === FeatureType.Staking)
+        )
+    }
+
+    function getStakedAmount(outputData: OutputData): number | undefined {
+        if (!hasStakingFeature) return
+        let amount = 0
+        const accountOutput = outputData.output as AccountOutput
+        if (accountOutput.features) {
+            const stakingFeature = accountOutput.features.find(
+                (feature) => feature.type === FeatureType.Staking
+            ) as StakingFeature
+            amount = Number(stakingFeature?.stakedAmount)
+        }
+        return amount
     }
 </script>
 
@@ -98,15 +128,16 @@
                     </div>
                 </Tile>
 
-                <Tile>
-                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                        <!-- TODO: Replace this with the actual staked amount -->
-                        <Text type={TextType.h3}>0i</Text>
-                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                            >{localize('views.accountManagement.details.staked')}</Text
-                        >
-                    </div>
-                </Tile>
+                {#if hasStakingFeature}
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                            <Text type={TextType.h3}>{formattedStakedAmount}</Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.accountManagement.details.staked')}</Text
+                            >
+                        </div>
+                    </Tile>
+                {/if}
             </div>
             {#if accountId}
                 <div class="flex flex-col space-y-2 w-1/2">
