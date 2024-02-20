@@ -701,6 +701,11 @@
                 "modal": {
                     "setMainAccount": "Set as main account",
                     "manageKeys": "Manage keys"
+                },
+                "manageKeys": {
+                    "primary": "Primary key",
+                    "setAsPrimary": "Set as primary",
+                    "unsetAsPrimary": "Unset as primary"
                 }
             }
         }
@@ -732,6 +737,9 @@
             "step_2": "Open {network} Application",
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
+        "manageKeys":{
+            "title": "Key Management"
         },
         "balanceBreakdown": {
             "title": "Balance breakdown",
