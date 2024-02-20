@@ -11,7 +11,7 @@
     let modal: Modal | undefined
     const truncatedKey: string = truncateString(key, 12, 12)
 
-    let isPrimary: boolean = false
+    let isPrimary: boolean = $selectedWallet?.primaryKey === key
 
     function toggleModal(): void {
         modal?.toggle()
