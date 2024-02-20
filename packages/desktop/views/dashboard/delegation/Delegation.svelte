@@ -22,7 +22,7 @@
 
     enum Header {
         Name = 'name',
-        DelegatedFunds = 'delegated funds',
+        DelegatedFunds = 'delegatedFunds',
         Rewards = 'rewards',
         Epoch = 'epoch',
         Address = 'address',
@@ -145,8 +145,6 @@
             [Header.Action]: handleClaimRewards,
         },
     ]
-
-    const HEADERS = Object.values(Header).map((header) => header.replace(/^\w/, (initial) => initial.toUpperCase()))
 </script>
 
 {#if $selectedWallet}
@@ -186,13 +184,13 @@
                 <table class="flex flex-col w-full space-y-4">
                     <thead class="w-full">
                         <tr class="flex flex-row justify-between align-items w-full">
-                            {#each HEADERS as header}
+                            {#each Object.values(Header) as header}
                                 <th class="text-start w-60 flex-1">
                                     <Text
                                         color="gray-600"
                                         fontWeight={FontWeight.medium}
                                         fontSize="12"
-                                        type={TextType.p}>{header}</Text
+                                        type={TextType.p}>{localize(`views.delegation.table.header.${header}`)}</Text
                                     >
                                 </th>
                             {/each}
