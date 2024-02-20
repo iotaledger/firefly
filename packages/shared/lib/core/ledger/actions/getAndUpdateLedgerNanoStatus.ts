@@ -5,6 +5,7 @@ import { resetLedgerNanoStatus, updateLedgerNanoStatus } from '../stores'
 export async function getAndUpdateLedgerNanoStatus(secretManager?: SecretManager, forwardErrors = false): Promise<void> {
     try {
         const ledgerNanoStatusResponse = await getLedgerNanoStatus(secretManager)
+        console.log(ledgerNanoStatusResponse)
         updateLedgerNanoStatus(ledgerNanoStatusResponse)
     } catch (err) {
         resetLedgerNanoStatus()

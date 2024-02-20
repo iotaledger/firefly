@@ -44,6 +44,7 @@ export function handleTransactionProgressEventInternal(walletId: string, payload
 function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
     if (payload) {
         const type = payload.type
+        console.log(type)
         if (type === TransactionProgressType.PreparedTransaction) {
             openPopup({
                 id: PopupId.VerifyLedgerTransaction,
@@ -70,8 +71,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     preventClose: true,
                 })
             }
-            // TODO(2.0): check if this is still needed (PerformingPow)
-        } else if (type === TransactionProgressType.PerformingPow) {
+        } else if (type === TransactionProgressType.Broadcasting) {
             closePopup(true)
         }
     } else {

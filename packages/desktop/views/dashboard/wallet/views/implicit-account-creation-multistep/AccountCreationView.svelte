@@ -48,7 +48,6 @@
                 alt={localize('views.implicit-account-creation.steps.step3.title')}
             />
         </div>
-        HEAD
         {#if $isSoftwareProfile}
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
@@ -67,8 +66,8 @@
     </div>
     <Button
         onClick={unlockWalletAndCreateAccount}
-        disabled={!strongholdPassword || strongholdPassword.length === 0 || isBusy}
-        isBusy={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
+        disabled={disabledActive}
+        isBusy={isBusy}
         >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
     >
 </step-content>
