@@ -22,6 +22,7 @@
         getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
+        selectedWallet,
         selectedWalletMainAccountId,
     } from '@core/wallet'
     import {
@@ -57,6 +58,7 @@
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
+    $: primaryKey = $selectedWallet?.primaryKey
 
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
@@ -211,14 +213,13 @@
                     >
                 </div>
             {/if}
-            {#if isAccountOutput && keys.length > 0}
+            {#if isAccountOutput && primaryKey}
                 <div class="flex flex-col space-y-2 w-1/2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
                     >
-                    <!-- TODO: When we can set a primary key, we will show the primary key here -->
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{keys[0]}</Text
+                        >{primaryKey}</Text
                     >
                 </div>
             {/if}
