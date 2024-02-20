@@ -26,12 +26,11 @@
             } else {
                 outputIdForTransition = $selectedWallet?.implicitAccountOutputs[0].outputId
             }
-
+            await $selectedWallet?.implicitAccountTransition(outputIdForTransition)
             updateActiveWallet($selectedWalletId, {
                 hasImplicitAccountCreationTransactionInProgress: true,
                 isTransferring: true,
             })
-            await $selectedWallet?.implicitAccountTransition(outputIdForTransition)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)

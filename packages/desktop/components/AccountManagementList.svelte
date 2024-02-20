@@ -4,11 +4,10 @@
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
     import { getBech32AddressFromAddressTypes, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
-    import { selectedWallet, selectedWalletMainAccountId } from '@core/wallet'
+    import { selectedWalletMainAccountId } from '@core/wallet'
 
     export let onAccountClick: (account: OutputData) => void
-
-    const allOutputs: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
+    export let allOutputs: OutputData[] = []
 
     function getAccountId(output: OutputData): string | undefined {
         return isAccountOutput(output) ? (output.output as AccountOutput)?.accountId : undefined
