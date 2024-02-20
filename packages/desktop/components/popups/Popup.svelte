@@ -59,6 +59,7 @@
     import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
     import WithdrawFromL2Popup from './WithdrawFromL2Popup.svelte'
     import ActivateAccountPopup from './ActivateAccountPopup.svelte'
+    import ManageKeysPopup from './ManageKeysPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -87,6 +88,7 @@
         case PopupId.LedgerAppGuide:
         case PopupId.ActivateAccount:
         case PopupId.LedgerConnection:
+        case PopupId.ManageKeys:
             size = PopupSize.Large
             break
         default:
@@ -149,6 +151,7 @@
         [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
         [PopupId.WithdrawFromL2]: WithdrawFromL2Popup,
         [PopupId.ActivateAccount]: ActivateAccountPopup,
+        [PopupId.ManageKeys]: ManageKeysPopup,
     }
 
     function onKey(event: KeyboardEvent): void {
