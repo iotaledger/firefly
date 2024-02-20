@@ -202,7 +202,7 @@
                             {/each}
                         </tr>
                     </thead>
-                    <tbody class="flex flex-col w-full space-y-4">
+                    <tbody class="flex flex-col w-full space-y-4 scrollable-y">
                         {#each MOCKED_DATA as data}
                             <tr
                                 class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
