@@ -50,7 +50,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput?.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
@@ -59,14 +59,14 @@
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
-        const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
+        const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput?.outputId?.toString()}`
         openUrlInBrowser(url)
     }
 
     function handleActivateAccount(): void {
         openPopup({
             id: PopupId.ActivateAccount,
-            props: { outputId: selectedOutput.outputId },
+            props: { outputId: selectedOutput?.outputId },
         })
     }
 
@@ -162,7 +162,7 @@
                         <!-- TODO: Replace this with the actual balance for accountOutputs-->
                         <Text type={TextType.h3}>
                             {isImplicitAccount
-                                ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), getBaseToken())
+                                ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), getBaseToken())
                                 : 0 + ' Gi'}
                         </Text>
                         <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}

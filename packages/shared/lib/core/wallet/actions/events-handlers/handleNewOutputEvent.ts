@@ -79,22 +79,25 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
 
         // if we receive the first account output, we set it as the mainAccountId of the wallet
-        if (
-            !wallet.mainAccountId &&
-            wallet?.hasImplicitAccountCreationTransactionInProgress &&
-            hasBlockIssuerFeature(accountOutput)
-        ) {
-            const mainAccountId = accountOutput.accountId
-            updateActiveWalletPersistedData(walletId, {
-                mainAccountId: mainAccountId,
-            })
-            updateActiveWallet(walletId, {
-                hasImplicitAccountCreationTransactionInProgress: false,
-                isTransferring: false,
-                depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
-            })
+        if (wallet?.hasImplicitAccountCreationTransactionInProgress && hasBlockIssuerFeature(accountOutput)) {
+            if (!wallet.mainAccountId) {
+                const mainAccountId = accountOutput.accountId
+                updateActiveWalletPersistedData(walletId, {
+                    mainAccountId: mainAccountId,
+                })
+                updateActiveWallet(walletId, {
+                    hasImplicitAccountCreationTransactionInProgress: false,
+                    isTransferring: false,
+                    depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
+                })
+            } else {
+                updateActiveWallet(walletId, {
+                    hasImplicitAccountCreationTransactionInProgress: false,
+                    isTransferring: false,
+                })
+            }
+            closePopup() // close ActivateAccountPopup when the account output is created
         }
-        closePopup()
     }
     if (isNftOutput) {
         const wrappedOutput = outputData as unknown as IWrappedOutput
