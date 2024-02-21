@@ -708,7 +708,7 @@
                     "unsetAsPrimary": "Unset as primary"
                 }
             },
-            "notification": "Choose a main account in Account Management to access the dashboard."
+            "notification": "Activate one account to access the dashboard."
         }
     },
     "popups": {
