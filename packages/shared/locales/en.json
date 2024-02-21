@@ -1238,6 +1238,14 @@
             "body": "List of addresses with withdrawable funds",
             "withdraw": "Withdraw",
             "withdrawing": "Withdrawing..."
+        },
+        "createDelegation": {
+            "title": "Create Delegation",
+            "body": "Set the amount and the account of the validator",
+            "account": {
+                "title": "Account Address",
+                "description": "Account Address for the validator"
+            } 
         }
     },
     "actions": {

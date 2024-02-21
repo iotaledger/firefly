@@ -59,6 +59,7 @@
     import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
     import WithdrawFromL2Popup from './WithdrawFromL2Popup.svelte'
     import ManageKeysPopup from './ManageKeysPopup.svelte'
+    import CreateDelegationPopup from './CreateDelegationPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -149,6 +150,7 @@
         [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
         [PopupId.WithdrawFromL2]: WithdrawFromL2Popup,
         [PopupId.ManageKeys]: ManageKeysPopup,
+        [PopupId.CreateDelegation]: CreateDelegationPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

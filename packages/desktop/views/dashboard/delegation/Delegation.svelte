@@ -17,6 +17,7 @@
     import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
@@ -39,7 +40,9 @@
     }
 
     function handleDelegate(): void {
-        // TODO: add logic to delegate an output
+        openPopup({
+            id: PopupId.CreateDelegation,
+        })
     }
 
     function handleClaimRewards(): void {
