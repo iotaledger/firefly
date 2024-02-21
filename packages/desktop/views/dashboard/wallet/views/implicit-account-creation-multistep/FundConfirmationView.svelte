@@ -12,8 +12,8 @@
 
     let walletBalance: Balance | undefined
 
-    $: formattedWalletBalance = walletBalance
-        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin?.available), baseCoin?.metadata)
+    $: formattedWalletBalance = walletBalance.baseCoin?.available
+        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin.available), baseCoin?.metadata)
         : '-'
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
