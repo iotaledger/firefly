@@ -14,11 +14,11 @@
         BoxedIconWithText,
     } from '@ui'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, getClient, selectedWalletAssets } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-
-    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+    import { OutputType, OutputData, DelegationOutput } from '@iota/sdk/out/types'
+    import { onMount } from 'svelte'
 
     enum Header {
         Name = 'name',
@@ -38,6 +38,32 @@
         [Header.Action]: () => void
     }
 
+    let delegationOutputs: OutputData[] = []
+    let outputRewards: number = 0
+
+    onMount(async () => {
+        delegationOutputs = (await $selectedWallet.outputs())?.filter((output) => {
+            output.output.type === OutputType.Delegation
+            getOutputRewards(output.outputId).then((rewards) => (outputRewards = rewards))
+        })
+    })
+
+    const delegationData: IDelegationTable[] = delegationOutputs?.map((output, index) => ({
+        [Header.Name]: `Delegation ${index + 1}`,
+        [Header.DelegatedFunds]: Number((output.output as DelegationOutput).delegatedAmount),
+        [Header.Rewards]: outputRewards,
+        [Header.Epoch]: (output.output as DelegationOutput).endEpoch - (output.output as DelegationOutput).startEpoch,
+        [Header.Address]: (output.output as DelegationOutput).validatorId,
+        [Header.Action]: handleClaimRewards,
+    }))
+
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+
+    async function getOutputRewards(outputId: string): Promise<number> {
+        const client = await getClient()
+        const rewards = (await client.getRewards(outputId)).rewards
+        return Number(rewards)
+    }
     function handleDelegate(): void {
         // TODO: add logic to delegate an output
     }
@@ -46,7 +72,7 @@
         // TODO: add logic to claim reward
     }
 
-    const renderCellValue = (value: any, header: string): { component: any; props: any; text?: string } => {
+    function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
         switch (header as Header) {
             case Header.Name:
                 return {
@@ -108,49 +134,6 @@
                 }
         }
     }
-
-    const MOCKED_DATA: IDelegationTable[] = [
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-    ]
 </script>
 
 {#if $selectedWallet}
@@ -203,7 +186,7 @@
                         </tr>
                     </thead>
                     <tbody class="flex flex-col w-full space-y-4 scrollable-y">
-                        {#each MOCKED_DATA as data}
+                        {#each delegationData as data}
                             <tr
                                 class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
                             >
