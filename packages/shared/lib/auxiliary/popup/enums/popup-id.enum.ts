@@ -22,6 +22,7 @@ export enum PopupId {
     LedgerAppGuide = 'ledgerAppGuide',
     LedgerConnection = 'ledgerConnection',
     LegalUpdate = 'legalUpdate',
+    ManageKeys = 'manageKeys',
     ManageWallet = 'manageWallet',
     ManageVotingPower = 'manageVotingPower',
     MetricSystemInfo = 'metricSystemInfo',
