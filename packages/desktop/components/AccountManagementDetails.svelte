@@ -64,7 +64,7 @@
         if (isImplicitAccount) {
             return Number(outputData.output.amount)
         } else {
-            // TODO: Calculate the balance of an account output
+            // TODO: Calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080
             return undefined
         }
     }
