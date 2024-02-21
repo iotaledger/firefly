@@ -55,7 +55,7 @@
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: balance = getAccountBalance(selectedOutput)
-    $: formattedBalance = formatTokenAmountBestMatch(balance, getBaseToken())
+    $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
@@ -64,9 +64,11 @@
         if (isImplicitAccount) {
             return Number(outputData.output.amount)
         } else {
+            // TODO: Calculate the balance of an account output
             return undefined
         }
     }
+
     function onExplorerClick(): void {
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput?.outputId?.toString()}`
         openUrlInBrowser(url)
@@ -166,18 +168,16 @@
                 </button>
             </right-pane-title>
             <div class="flex flex-row space-x-2 w-1/2">
-                {#if balance}
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>
-                                {formattedBalance}
-                            </Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.accountManagement.details.balance')}</Text
-                            >
-                        </div>
-                    </Tile>
-                {/if}
+                <Tile>
+                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <Text type={TextType.h3}>
+                            {formattedBalance}
+                        </Text>
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.balance')}</Text
+                        >
+                    </div>
+                </Tile>
 
                 {#if hasStakingFeature}
                     <Tile>
