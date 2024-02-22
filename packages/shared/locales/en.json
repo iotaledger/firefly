@@ -707,7 +707,8 @@
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
                 }
-            }
+            },
+            "notification": "Activate one account to access the dashboard."
         }
     },
     "popups": {
