@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Pill } from './pills'
-    import { Text, Modal, MeatballMenuButton, MenuItem, TooltipIcon } from '@ui'
+    import { Pill, Text, Modal, MeatballMenuButton, MenuItem, TooltipIcon } from '@ui'
     import { localize } from '@core/i18n'
     import { truncateString } from '@core/utils'
     import { selectedWalletId, selectedWallet } from '@core/wallet'
