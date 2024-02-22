@@ -4,12 +4,12 @@
     import { AccountManagementDetails, AccountManagementList } from '@components'
     import { OutputData } from '@iota/sdk/out/types'
 
-    const allAccountOutputs: OutputData[] = [
-        ...$selectedWallet.accountOutputs,
-        ...$selectedWallet.implicitAccountOutputs,
+    $: allAccountOutputs = [
+        ...($selectedWallet?.accountOutputs || []),
+        ...($selectedWallet?.implicitAccountOutputs || []),
     ]
 
-    let selectedOutput: OutputData = allAccountOutputs[0]
+    $: selectedOutput = allAccountOutputs?.[0]
 
     function handleAccountClick(account: OutputData): void {
         selectedOutput = account
@@ -27,7 +27,7 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList onAccountClick={handleAccountClick} />
+                    <AccountManagementList onAccountClick={handleAccountClick} allOutputs={allAccountOutputs} />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} />

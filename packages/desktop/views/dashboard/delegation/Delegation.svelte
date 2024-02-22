@@ -190,7 +190,7 @@
                         </div>
                     </Tile>
                 </div>
-                <table class="flex flex-col w-full space-y-4">
+                <table class="flex flex-col w-full space-y-4 h-80">
                     <thead class="w-full">
                         <tr class="flex flex-row justify-between align-items w-full">
                             {#each Object.values(Header) as header}
