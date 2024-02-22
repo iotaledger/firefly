@@ -5,6 +5,7 @@
     import { localize } from '@core/i18n'
     import { selectedWallet } from '@core/wallet'
 
+    export let outputId: string | undefined
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
 
     // TODO: Update this when we have enough mana to route to the next step
@@ -18,7 +19,7 @@
     }
 </script>
 
-<implicit-account-creation-view class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">
+<implicit-account-creation-view class="h-full">
     <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
         <Text type={TextType.h2}>{localize('views.implicit-account-creation.title')}</Text>
         {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Init}
@@ -26,12 +27,12 @@
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.OneTimeDeposit}
             <OneTimeDepositView />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.FundConfirmation}
-            <FundConfirmationView />
+            <FundConfirmationView {outputId} />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.AccountCreation}
-            <AccountCreationView />
+            <AccountCreationView {outputId} />
         {/if}
     </box-content>
-    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init}
+    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init && !outputId}
         <div class="flex flex-row justify-center space-x-2.5">
             {#each IMPLICIT_ACCOUNT_STEPS as step}
                 <div
