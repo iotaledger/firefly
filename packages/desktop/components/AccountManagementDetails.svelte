@@ -59,7 +59,8 @@
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
-        const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput?.outputId?.toString()}`
+        if (!selectedOutput?.outputId) return
+        const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
     }
 
@@ -152,6 +153,7 @@
                 <button
                     class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                     on:click={onExplorerClick}
+                    disabled={!selectedOutput?.outputId}
                 >
                     {localize('general.viewOnExplorer')}
                 </button>
