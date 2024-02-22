@@ -15,4 +15,5 @@ export interface IOnboardingFeaturesForNetwork extends IFeatureFlag {
         strongholdBackup: IFeatureFlag
         ledgerBackup: IFeatureFlag
     }
+    migrateFromLegacy?: IFeatureFlag
 }
