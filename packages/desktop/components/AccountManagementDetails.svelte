@@ -40,6 +40,7 @@
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
+    import { getAccountBalance } from '@core/wallet/utils/getAccountBalance'
 
     export let selectedOutput: OutputData
     export let index: number
@@ -54,18 +55,17 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: balance = getAccountBalance(selectedOutput)
+    $: balance = getBalance(selectedOutput)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
-    function getAccountBalance(outputData: OutputData): number | undefined {
+    function getBalance(outputData: OutputData): number | undefined {
         if (isImplicitAccount) {
             return Number(outputData.output.amount)
         } else {
-            // TODO: Calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080
-            return undefined
+            return isAccountOutput(outputData) ? getAccountBalance(outputData.output as AccountOutput) : undefined
         }
     }
 

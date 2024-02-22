@@ -14,6 +14,7 @@ export interface IWalletState extends IWallet, IPersistedWalletData {
     hasImplicitAccountCreationTransactionInProgress: boolean
     votingPower: string
     walletOutputs: OutputData[]
+    walletUnspentOutputs: OutputData[]
     accountOutputs: OutputData[]
     implicitAccountOutputs: OutputData[]
 }
