@@ -21,8 +21,6 @@
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network.id].baseCoin
     $: hasTransactionInProgress =
-        // $selectedWallet?.hasVotingPowerTransactionInProgress ||
-        // $selectedWallet?.hasVotingTransactionInProgress ||
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
@@ -61,10 +59,10 @@
 </script>
 
 <create-delegation-popup class="flex flex-col space-y-6">
-    <form id="create-delegation" on:submit|preventDefault={onSubmit}>
-        <Text type={TextType.h4} classes="mb-3">{localize('popups.createDelegation.title')}</Text>
-        <Text type={TextType.p} classes="mb-5">{localize('popups.createDelegation.body')}</Text>
-        <div class="space-y-4 mb-6">
+    <Text type={TextType.h4}>{localize('popups.createDelegation.title')}</Text>
+    <form id="create-delegation" on:submit|preventDefault={onSubmit} class="flex flex-col space-y-5">
+        <Text type={TextType.p}>{localize('popups.createDelegation.body')}</Text>
+        <div class="space-y-4">
             <AssetAmountInput
                 bind:this={assetAmountInput}
                 bind:rawAmount

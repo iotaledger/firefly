@@ -22,6 +22,7 @@
         getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
+        selectedWalletMainAccountId,
     } from '@core/wallet'
     import {
         AccountAddress,
@@ -37,6 +38,7 @@
     import { openUrlInBrowser } from '@core/app'
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
 
     export let selectedOutput: OutputData
@@ -48,16 +50,25 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput?.output as CommonOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
+    $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
     function onExplorerClick(): void {
+        if (!selectedOutput?.outputId) return
         const url = `${explorerUrl}/${ExplorerEndpoint.Output}/${selectedOutput.outputId.toString()}`
         openUrlInBrowser(url)
+    }
+
+    function handleActivateAccount(): void {
+        openPopup({
+            id: PopupId.ActivateAccount,
+            props: { outputId: selectedOutput?.outputId },
+        })
     }
 
     function listBlockKeysFeature(outputData: OutputData): void {
@@ -114,7 +125,7 @@
                             <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                 >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                             >
-                        {:else}
+                        {:else if isMainAccount}
                             <Pill backgroundColor="blue-200" textColor="blue-600"
                                 >{localize('views.accountManagement.list.tile.pill.main')}
                             </Pill>
@@ -134,27 +145,29 @@
                         </wallet-actions-button>
                     {/if}
                     {#if isImplicitAccount}
-                        <Button size={ButtonSize.Small}
+                        <Button size={ButtonSize.Small} onClick={handleActivateAccount}
                             >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
                         >
                     {/if}
                 </title-container>
-                <button
-                    class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
-                    on:click={onExplorerClick}
-                >
-                    {localize('general.viewOnExplorer')}
-                </button>
+                {#if selectedOutput?.outputId}
+                    <button
+                        class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                        on:click={onExplorerClick}
+                    >
+                        {localize('general.viewOnExplorer')}
+                    </button>
+                {/if}
             </right-pane-title>
             <div class="flex flex-row space-x-2 w-1/2">
                 <Tile>
                     <div class="flex flex-col space-y-2 items-center justify-center w-full">
                         <!-- TODO: Replace this with the actual balance for accountOutputs-->
-                        <Text type={TextType.h3}
-                            >{isImplicitAccount
-                                ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), getBaseToken())
-                                : 0 + ' Gi'}</Text
-                        >
+                        <Text type={TextType.h3}>
+                            {isImplicitAccount
+                                ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), getBaseToken())
+                                : 0 + ' Gi'}
+                        </Text>
                         <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                             >{localize('views.accountManagement.details.balance')}</Text
                         >
