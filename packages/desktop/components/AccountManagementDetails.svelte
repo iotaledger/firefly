@@ -150,13 +150,14 @@
                         >
                     {/if}
                 </title-container>
-                <button
-                    class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
-                    on:click={onExplorerClick}
-                    disabled={!selectedOutput?.outputId}
-                >
-                    {localize('general.viewOnExplorer')}
-                </button>
+                {#if selectedOutput?.outputId}
+                    <button
+                        class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                        on:click={onExplorerClick}
+                    >
+                        {localize('general.viewOnExplorer')}
+                    </button>
+                {/if}
             </right-pane-title>
             <div class="flex flex-row space-x-2 w-1/2">
                 <Tile>
