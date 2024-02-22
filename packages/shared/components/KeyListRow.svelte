@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Pill } from './pills'
-    import { Text, Modal, MeatballMenuButton, MenuItem, TooltipIcon } from 'shared/components'
+    import { Text, Modal, MeatballMenuButton, MenuItem, TooltipIcon } from '@ui'
     import { localize } from '@core/i18n'
-    import { truncateString } from 'shared/lib/core/utils'
-    import { selectedWalletId, selectedWallet } from 'shared/lib/core/wallet'
-    import { updateActiveWalletPersistedData } from 'shared/lib/core/profile'
+    import { truncateString } from '@core/utils'
+    import { selectedWalletId, selectedWallet } from '@core/wallet'
+    import { updateActiveWalletPersistedData } from '@core/profile'
 
     export let key: string
 
