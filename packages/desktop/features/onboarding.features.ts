@@ -38,6 +38,9 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
             enabled: false,
         },
     },
+    migrateFromLegacy: {
+        enabled: true,
+    },
 }
 
 const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
