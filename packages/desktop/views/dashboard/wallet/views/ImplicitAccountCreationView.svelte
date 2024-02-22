@@ -1,18 +1,43 @@
 <script lang="ts">
-    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '@core/router'
+    import {
+        DashboardRoute,
+        dashboardRouter,
+        implicitAccountCreationRoute,
+        ImplicitAccountCreationRoute,
+    } from '@core/router'
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
     import { Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { selectedWallet } from '@core/wallet'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let outputId: string | undefined
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
 
+    function handleMultipleAccounts() {
+        showAppNotification({
+            type: 'info',
+            message: localize('views.accountManagement.notification'),
+            timeout: 10000,
+            alert: true,
+        })
+        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
+    }
+
     // TODO: Update this when we have enough mana to route to the next step
     $: {
-        if ($selectedWallet?.implicitAccountOutputs?.length > 0) {
+        if (outputId === undefined) {
+            if ($selectedWallet?.implicitAccountOutputs?.length === 1) {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+            } else if ($selectedWallet?.implicitAccountOutputs?.length >= 2) {
+                handleMultipleAccounts()
+            } else if ($selectedWallet?.implicitAccountOutputs?.length === 0) {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.Init
+            }
+        } else {
             $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
         }
+
         if ($selectedWallet?.hasImplicitAccountCreationTransactionInProgress && $selectedWallet?.isTransferring) {
             $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
         }
