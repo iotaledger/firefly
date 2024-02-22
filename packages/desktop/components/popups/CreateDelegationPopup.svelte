@@ -25,7 +25,7 @@
     $: amount, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
-        if (!amount) {
+        if (!amount || !accountId) {
             confirmDisabled = true
             return
         }
