@@ -54,13 +54,13 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: balance = getAccountBalance(selectedOutput)
+    $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
 
-    function getAccountBalance(outputData: OutputData): number | undefined {
+    function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
         if (isImplicitAccount) {
             return Number(outputData.output.amount)
         } else {
