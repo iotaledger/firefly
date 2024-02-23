@@ -3,17 +3,29 @@
     import { localize } from '@core/i18n'
     import { implicitAccountCreationRouter } from '@core/router'
     import { onMount, onDestroy } from 'svelte'
-    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        selectedWallet,
+        selectedWalletId,
+        selectedWalletAssets,
+        getBicWalletBalance,
+    } from '@core/wallet'
     import { activeProfile } from '@core/profile'
     import { Balance } from '@iota/sdk/out/types'
+    import { getManaBalance } from '@core/network'
 
     // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
     let walletBalance: Balance | undefined
+    let bicBalance: number
 
-    $: formattedWalletBalance = walletBalance.baseCoin?.available
-        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin.available), baseCoin?.metadata)
+    $: totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
+    $: availableBalance = getManaBalance(walletBalance?.mana?.available)
+    $: allImplicitAccountsManaExceptThis = availableBalance - totalBalanceWithoutBic
+    $: generatedMana = totalBalanceWithoutBic + bicBalance - allImplicitAccountsManaExceptThis
+    $: formattedWalletBalance = walletBalance?.baseCoin?.available
+        ? formatTokenAmountBestMatch(Number(walletBalance?.baseCoin?.available), baseCoin?.metadata)
         : '-'
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
@@ -31,6 +43,7 @@
 
     onMount(async () => {
         walletBalance = await $selectedWallet.getBalance()
+        bicBalance = await getBicWalletBalance($selectedWalletId)
         startCountdown()
     })
 
@@ -71,12 +84,6 @@
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
                 />
             </div>
-            <Text type={TextType.p} fontWeight={FontWeight.medium}
-                >{localize('views.implicit-account-creation.steps.step2.view.eyebrow')} {formattedWalletBalance}</Text
-            >
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
-            >
             <Text
                 type={TextType.h5}
                 fontSize="15"
@@ -87,6 +94,15 @@
             >
             <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400"
                 >{timeRemaining}</Text
+            >
+            <Text type={TextType.p} fontWeight={FontWeight.medium}
+                >{localize('views.implicit-account-creation.steps.step2.view.eyebrow')} {formattedWalletBalance}</Text
+            >
+            <Text type={TextType.p} fontWeight={FontWeight.medium}
+                >{localize('views.implicit-account-creation.steps.step2.view.generatedMana')} {generatedMana}</Text
+            >
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
+                >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
             >
         </div>
         <Button disabled>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
