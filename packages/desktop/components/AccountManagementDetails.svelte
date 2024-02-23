@@ -22,6 +22,7 @@
         getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
+        selectedWallet,
         selectedWalletMainAccountId,
     } from '@core/wallet'
     import {
@@ -49,8 +50,8 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput?.output as CommonOutput)
-    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
@@ -58,6 +59,7 @@
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
+    $: primaryKey = $selectedWallet?.primaryKey
     $: listBlockKeysFeature(selectedOutput)
 
     function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
@@ -157,7 +159,7 @@
                         >
                     {/if}
                 </title-container>
-                {#if selectedOutput?.outputId}
+                {#if selectedOutput.outputId}
                     <button
                         class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                         on:click={onExplorerClick}
@@ -214,18 +216,17 @@
                         >{localize('views.accountManagement.details.mana')}</Text
                     >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{selectedOutput?.output?.mana}</Text
+                        >{selectedOutput.output?.mana}</Text
                     >
                 </div>
             {/if}
-            {#if isAccountOutput && keys.length > 0}
+            {#if isAccountOutput && primaryKey}
                 <div class="flex flex-col space-y-2 w-1/2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
                     >
-                    <!-- TODO: When we can set a primary key, we will show the primary key here -->
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{keys[0]}</Text
+                        >{primaryKey}</Text
                     >
                 </div>
             {/if}
