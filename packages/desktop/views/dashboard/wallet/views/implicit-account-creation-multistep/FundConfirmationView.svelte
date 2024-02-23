@@ -8,43 +8,49 @@
         selectedWallet,
         selectedWalletId,
         selectedWalletAssets,
-        getBicWalletBalance,
+        syncBalance,
+        getImplicitAccountsTotalManaExceptThis,
     } from '@core/wallet'
     import { activeProfile } from '@core/profile'
-    import { Balance } from '@iota/sdk/out/types'
-    import { getManaBalance } from '@core/network'
+    import { DEFAULT_SECONDS_PER_SLOT, getManaBalance } from '@core/network'
+    import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
     // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
-    let walletBalance: Balance | undefined
-    let bicBalance: number
+    let balanceInterval: NodeJS.Timeout
+    const implicitsAccounts = $selectedWallet?.implicitAccountOutputs
+    let totalImplicitAccountsManaExceptCurrent: number
 
-    $: totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
-    $: availableBalance = getManaBalance(walletBalance?.mana?.available)
-    $: allImplicitAccountsManaExceptThis = availableBalance - totalBalanceWithoutBic
-    $: generatedMana = totalBalanceWithoutBic + bicBalance - allImplicitAccountsManaExceptThis
-    $: formattedWalletBalance = walletBalance?.baseCoin?.available
-        ? formatTokenAmountBestMatch(Number(walletBalance?.baseCoin?.available), baseCoin?.metadata)
+    $: selectedOutput =
+        $selectedWallet?.implicitAccountOutputs.find(
+            (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
+        ) ?? $selectedWallet?.implicitAccountOutputs?.[0]
+
+    $: totalAvailableMana =
+        getManaBalance($selectedWallet?.balances?.mana?.available) + totalImplicitAccountsManaExceptCurrent
+    $: formattedWalletBalance = $selectedWallet.balances?.baseCoin?.available
+        ? formatTokenAmountBestMatch(Number($selectedWallet.balances?.baseCoin?.available), baseCoin?.metadata)
         : '-'
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getOutputAmount(): string {
-        let amount: string
-        if (outputId) {
-            amount = $selectedWallet?.implicitAccountOutputs.find(
-                (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
-            )?.output.amount
-        } else {
-            amount = $selectedWallet?.implicitAccountOutputs?.[0]?.output.amount
-        }
-        return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin?.metadata) : ''
+        return baseCoin ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), baseCoin?.metadata) : ''
+    }
+
+    const startIntervalBalance = () => {
+        balanceInterval = setInterval(() => {
+            syncBalance($selectedWalletId, true)
+        }, DEFAULT_SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND)
     }
 
     onMount(async () => {
-        walletBalance = await $selectedWallet.getBalance()
-        bicBalance = await getBicWalletBalance($selectedWalletId)
+        totalImplicitAccountsManaExceptCurrent = await getImplicitAccountsTotalManaExceptThis(
+            implicitsAccounts,
+            outputId
+        )
         startCountdown()
+        startIntervalBalance()
     })
 
     // TODO: Replace this with proper time remaining
@@ -70,6 +76,7 @@
 
     onDestroy(() => {
         clearInterval(countdownInterval)
+        clearInterval(balanceInterval)
     })
     $: timeRemaining = `${seconds}s remaining`
     // ----------------------------------------------------------------
@@ -105,7 +112,7 @@
                 />
                 <KeyValueBox
                     keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
-                    valueText={generatedMana.toString()}
+                    valueText={totalAvailableMana.toString()}
                 />
             </div>
         </div>
