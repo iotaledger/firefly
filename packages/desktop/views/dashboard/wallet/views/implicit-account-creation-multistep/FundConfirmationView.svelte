@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button, FontWeight, Text, TextType } from '@ui'
+    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { implicitAccountCreationRouter } from '@core/router'
     import { onMount, onDestroy } from 'svelte'
@@ -75,9 +75,9 @@
     // ----------------------------------------------------------------
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-28">
+<step-content class="flex flex-col items-center justify-between h-full pt-20">
     <div class="flex flex-col h-full justify-between space-y-8">
-        <div class="flex flex-col text-center px-4 space-y-2 max-w-md">
+        <div class="flex flex-col text-center space-y-4 max-w-md">
             <div class="flex items-center justify-center mb-7">
                 <img
                     src="assets/illustrations/implicit-account-creation/step2.svg"
@@ -95,15 +95,19 @@
             <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400"
                 >{timeRemaining}</Text
             >
-            <Text type={TextType.p} fontWeight={FontWeight.medium}
-                >{localize('views.implicit-account-creation.steps.step2.view.eyebrow')} {formattedWalletBalance}</Text
-            >
-            <Text type={TextType.p} fontWeight={FontWeight.medium}
-                >{localize('views.implicit-account-creation.steps.step2.view.generatedMana')} {generatedMana}</Text
-            >
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
+                >{localize('views.implicit-account-creation.steps.step2.view.title')} {getOutputAmount()}</Text
             >
+            <div class="flex flex-col space-y-2">
+                <KeyValueBox
+                    keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
+                    valueText={formattedWalletBalance}
+                />
+                <KeyValueBox
+                    keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
+                    valueText={generatedMana.toString()}
+                />
+            </div>
         </div>
         <Button disabled>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
     </div>
