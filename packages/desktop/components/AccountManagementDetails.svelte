@@ -39,7 +39,6 @@
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { onMount } from 'svelte'
     import { getAccountBalance } from '@core/wallet/utils/getAccountBalance'
 
     export let selectedOutput: OutputData
@@ -55,13 +54,14 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: balance = getBalance(selectedOutput)
+    $: balance = getBalance(selectedOutput, isImplicitAccount)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
+    $: listBlockKeysFeature(selectedOutput)
 
-    function getBalance(outputData: OutputData): number | undefined {
+    function getBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
         if (isImplicitAccount) {
             return Number(outputData.output.amount)
         } else {
@@ -119,10 +119,6 @@
         }
         return amount
     }
-
-    onMount(() => {
-        listBlockKeysFeature(selectedOutput)
-    })
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
