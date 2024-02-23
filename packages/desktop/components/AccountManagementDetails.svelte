@@ -39,7 +39,6 @@
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { onMount } from 'svelte'
 
     export let selectedOutput: OutputData
     export let index: number
@@ -59,6 +58,7 @@
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
+    $: listBlockKeysFeature(selectedOutput)
 
     function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
         if (isImplicitAccount) {
@@ -119,10 +119,6 @@
         }
         return amount
     }
-
-    onMount(() => {
-        listBlockKeysFeature(selectedOutput)
-    })
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
