@@ -665,6 +665,7 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
+                        "eyebrow": "Wallet avaible balance:",
                         "title": "Fund arrived",
                         "subtitle": "Generating mana...",
                         "action": "Activate Account"
