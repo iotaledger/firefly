@@ -51,8 +51,8 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput?.output as CommonOutput)
-    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
@@ -152,7 +152,7 @@
                         >
                     {/if}
                 </title-container>
-                {#if selectedOutput?.outputId}
+                {#if selectedOutput.outputId}
                     <button
                         class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                         on:click={onExplorerClick}
@@ -167,7 +167,7 @@
                         <!-- TODO: Replace this with the actual balance for accountOutputs-->
                         <Text type={TextType.h3}>
                             {isImplicitAccount
-                                ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), getBaseToken())
+                                ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), getBaseToken())
                                 : 0 + ' Gi'}
                         </Text>
                         <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
@@ -212,7 +212,7 @@
                         >{localize('views.accountManagement.details.mana')}</Text
                     >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{selectedOutput?.output?.mana}</Text
+                        >{selectedOutput.output?.mana}</Text
                     >
                 </div>
             {/if}
