@@ -1,22 +1,32 @@
 <script lang="ts">
-    import { Pill } from './pills'
-    import { Text, Modal, MeatballMenuButton, MenuItem } from 'shared/components'
+    import { Pill, Text, Modal, MeatballMenuButton, MenuItem, TooltipIcon } from '@ui'
     import { localize } from '@core/i18n'
+    import { truncateString } from '@core/utils'
+    import { selectedWalletId, selectedWallet } from '@core/wallet'
+    import { updateActiveWalletPersistedData } from '@core/profile'
 
     export let key: string
 
     let modal: Modal | undefined
+    const truncatedKey: string = truncateString(key, 12, 12)
 
-    const isPrimary: boolean = false
+    let isPrimary: boolean = $selectedWallet?.primaryKey === key
 
     function toggleModal(): void {
         modal?.toggle()
     }
 
-    // eslint-disable-next-line @typescript-eslint/require-await
-    async function onTogglePrimaryKeyClick(): Promise<void> {
-        if (isPrimary) {
-            // TODO: Implement the logic to set primary key
+    function onTogglePrimaryKeyClick(): void {
+        if (!isPrimary) {
+            isPrimary = true
+            updateActiveWalletPersistedData($selectedWalletId, {
+                primaryKey: key,
+            })
+        } else {
+            isPrimary = false
+            updateActiveWalletPersistedData($selectedWalletId, {
+                primaryKey: undefined,
+            })
         }
         toggleModal()
     }
@@ -24,7 +34,9 @@
     $: MENU_ITEMS = [
         {
             title: localize(
-                `views.accountManagement.details.manageKeys.${isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'}`
+                `views.accountManagement.details.manageKeys.${
+                    $selectedWallet?.primaryKey === key || isPrimary ? 'unsetAsPrimary' : 'setAsPrimary'
+                }`
             ),
             onClick: onTogglePrimaryKeyClick,
         },
@@ -36,10 +48,12 @@
 >
     <div class="flex flex-row items-center space-x-4 overflow-hidden">
         <Text classes="self-start overflow-hidden whitespace-nowrap">
-            {key}
+            {truncatedKey}
         </Text>
-        {#if isPrimary}
+        <TooltipIcon text={key} width={15} height={15} classes="flex break-all" />
+        {#if $selectedWallet?.primaryKey === key}
             <Pill
+                clearPadding
                 data={localize('views.accountManagement.details.manageKeys.primary').toLowerCase()}
                 textColor="blue-500"
             />

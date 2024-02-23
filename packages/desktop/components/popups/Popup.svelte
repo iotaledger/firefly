@@ -88,7 +88,6 @@
         case PopupId.LedgerAppGuide:
         case PopupId.ActivateAccount:
         case PopupId.LedgerConnection:
-        case PopupId.ManageKeys:
             size = PopupSize.Large
             break
         default:
