@@ -165,7 +165,10 @@
                         on:paste={onPaste}
                         on:contextmenu={handleContextMenu}
                         on:focus={() => (hasFocus = true)}
-                        on:blur={() => (hasFocus = false)}
+                        on:blur={() => {
+                            hasFocus = false
+                            dispatch('blur')
+                        }}
                         on:change={() => dispatch('change')}
                         {disabled}
                         {placeholder}

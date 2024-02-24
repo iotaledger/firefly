@@ -3,6 +3,7 @@
     import { Modal, TextInput, Text, TextType, FontWeight, IOption } from 'shared/components'
     import { fade } from 'svelte/transition'
     import { truncateString } from '@core/utils'
+    import { createEventDispatcher } from 'svelte'
 
     export let labelLocale: string
     export let options: IOption[]
@@ -15,6 +16,8 @@
     // HTML checks whether this value is absent to determine whether the field is readonly
     // If the attribute is set to false, HTML interprets it as a readonly field.
     export let readonly: boolean | null = null
+
+    const dispatch = createEventDispatcher()
 
     let value: string = selected?.key ?? selected?.value ?? ''
     let previousValue: string = value
@@ -73,6 +76,7 @@
         placeholder={localize(labelLocale)}
         fontSize="sm"
         {readonly}
+        on:blur={() => dispatch('blur')}
         {...$$restProps}
     >
         <div slot="right">

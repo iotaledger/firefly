@@ -1,5 +1,6 @@
 <script lang="ts">
     import { NumberInput, FontWeight } from 'shared/components'
+    import { createEventDispatcher } from 'svelte'
 
     export let inputElement: HTMLInputElement | undefined = undefined
     export let fontSize = 24
@@ -7,6 +8,8 @@
     export let disabled = false
     export let hasFocus = false
     export let amount: string = ''
+
+    const dispatch = createEventDispatcher()
 
     $: amount, addLeadingZeroToDecimalSeparator()
 
@@ -26,5 +29,6 @@
     {fontSize}
     alignment="right"
     {fontWeight}
+    on:blur={() => dispatch('blur')}
     {...$$restProps}
 />

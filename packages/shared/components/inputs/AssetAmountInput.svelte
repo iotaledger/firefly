@@ -119,6 +119,7 @@
             clearPadding
             clearBorder
             {disabled}
+            on:blur={() => validate()?.catch((err) => console.error(err))}
         />
         {#if getUnitFromTokenMetadata(asset?.metadata)}
             <UnitInput bind:unit bind:isFocused {disabled} tokenMetadata={asset?.metadata} />
