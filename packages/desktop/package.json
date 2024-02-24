@@ -42,7 +42,7 @@
         "url": "^0.11.3"
     },
     "devDependencies": {
-        "@sentry/webpack-plugin": "^2.8.0",
+        "@sentry/webpack-plugin": "^2.14.1",
         "@electron/notarize": "^2.1.0",
         "@tsconfig/svelte": "^5.0.2",
         "@types/webpack": "^5.28.1",
