@@ -711,6 +711,28 @@
                 }
             },
             "notification": "Activate one account to access the dashboard."
+        },
+        "delegation": {
+            "title": "Delegation",
+            "action": {
+                "delegate": "Delegate",
+                "claimRewards": "Claim Rewards"
+            },
+            "info": {
+                "funds": "Total Funds",
+                "delegated": "Delegated",
+                "rewards": "Rewards"
+            },
+            "table": {
+                "header": {
+                    "name": "Name",
+                    "delegatedFunds": "Delegated Funds",
+                    "rewards": "Rewards",
+                    "epoch": "Epoch",
+                    "address": "Address",
+                    "action": "Action"
+                }
+            }
         }
     },
     "popups": {
