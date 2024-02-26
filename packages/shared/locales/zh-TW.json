@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle 尚未設定",
             "errorFailedFetch": "無法取得位址的歷史紀錄",
             "errorFailedGenerate": "無法產生新位址"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "創建一個在 {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 上運行的新設定檔",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "建立別名",
         "createAliasDescription": "建立別名輸出",
         "savePassword": "儲存密碼",
@@ -1342,6 +1350,7 @@
         "viewStatus": "查看狀態",
         "viewAddressHistory": "檢視地址歷史紀錄",
         "viewBalanceBreakdown": "檢視餘額明細",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "驗證存款位址",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
