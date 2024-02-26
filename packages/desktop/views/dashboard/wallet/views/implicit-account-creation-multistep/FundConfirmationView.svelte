@@ -20,7 +20,6 @@
 
     let balanceInterval: NodeJS.Timeout
     const implicitsAccounts = $selectedWallet?.implicitAccountOutputs
-    let totalImplicitAccountsManaExceptCurrent: number
 
     $: selectedOutput =
         $selectedWallet?.implicitAccountOutputs.find(
@@ -28,7 +27,9 @@
         ) ?? $selectedWallet?.implicitAccountOutputs?.[0]
 
     $: totalAvailableMana =
-        getManaBalance($selectedWallet?.balances?.mana?.available) + totalImplicitAccountsManaExceptCurrent
+        getManaBalance($selectedWallet?.balances?.mana?.available) +
+        ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
+        getImplicitAccountsTotalManaExceptThis(implicitsAccounts, outputId)
     $: formattedWalletBalance = $selectedWallet.balances?.baseCoin?.available
         ? formatTokenAmountBestMatch(Number($selectedWallet.balances?.baseCoin?.available), baseCoin?.metadata)
         : '-'
@@ -45,10 +46,7 @@
     }
 
     onMount(async () => {
-        totalImplicitAccountsManaExceptCurrent = await getImplicitAccountsTotalManaExceptThis(
-            implicitsAccounts,
-            outputId
-        )
+        await syncBalance($selectedWalletId, true)
         startCountdown()
         startIntervalBalance()
     })
