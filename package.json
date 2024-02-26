@@ -13,7 +13,7 @@
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "husky": "^7.0.0",
-        "lint-staged": "^12.3.3",
+        "lint-staged": "^15.2.2",
         "patch-package": "^7.0.0",
         "prettier": "^2.3.2",
         "prettier-plugin-svelte": "^2.7.0",
