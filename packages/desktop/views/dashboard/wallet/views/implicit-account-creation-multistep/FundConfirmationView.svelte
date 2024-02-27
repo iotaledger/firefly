@@ -5,17 +5,15 @@
     import { onMount, onDestroy } from 'svelte'
     import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { activeProfile } from '@core/profile'
-    import { Balance } from '@iota/sdk/out/types'
 
     // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
-    let walletBalance: Balance | undefined
-
-    $: formattedWalletBalance = walletBalance.baseCoin?.available
-        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin.available), baseCoin?.metadata)
-        : '-'
-    $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
+    $: formattedWalletBalance =
+        $selectedWallet?.balances?.baseCoin?.available && baseCoin
+            ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
+            : '-'
+    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
     function getOutputAmount(): string {
         let amount: string
@@ -26,11 +24,10 @@
         } else {
             amount = $selectedWallet?.implicitAccountOutputs?.[0]?.output.amount
         }
-        return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin?.metadata) : ''
+        return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin.metadata) : ''
     }
 
-    onMount(async () => {
-        walletBalance = await $selectedWallet.getBalance()
+    onMount(() => {
         startCountdown()
     })
 
