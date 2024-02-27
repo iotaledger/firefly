@@ -3,7 +3,7 @@
     import { getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
-    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk'
     import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
     import { onDestroy, onMount } from 'svelte'
@@ -12,8 +12,7 @@
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
-    let selectedOutput: OutputData
-    $: $selectedWallet, (selectedOutput = getSelectedOutput())
+    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
 
     let totalAvailableMana: number
     $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
@@ -28,11 +27,11 @@
             ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
             : '-'
 
-    function getSelectedOutput(): OutputData {
+    function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
         return (
-            $selectedWallet?.implicitAccountOutputs.find(
-                (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
-            ) ?? $selectedWallet?.implicitAccountOutputs?.[0]
+            _selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === _outputId
+            ) ?? _selectedWallet?.implicitAccountOutputs?.[0]
         )
     }
 
