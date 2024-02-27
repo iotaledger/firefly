@@ -10,6 +10,7 @@
         selectedWallet,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
+    import { Utils } from '@iota/sdk'
     import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
 
@@ -38,13 +39,12 @@
         try {
             await assetAmountInput?.validate(true)
             if (!rawAmount || !accountId) return
+
             const params: CreateDelegationParams = {
                 address: api.accountIdToBech32($selectedWallet.mainAccountId, 'rms'),
                 delegatedAmount: Number(rawAmount), // The interface delegatedAmount is a string but the sdk returns an error if it is not a number
                 // rms1pqrh7456g0xtujtk2crfdvmsrqhr7595enynefpnhl3wurmr0ypnztgqay2 -> account address with staking feature converted to accountId to try it
-                validatorAddress: new AccountAddress(
-                    '0x077f569a43ccbe4976560696b370182e3f50b4ccc93ca433bfe2ee0f63790331'
-                ),
+                validatorAddress: new AccountAddress(Utils.bech32ToHex(accountId)),
             }
 
             await $selectedWallet.createDelegation(params, getDefaultTransactionOptions())
