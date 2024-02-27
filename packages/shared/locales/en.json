@@ -666,7 +666,8 @@
                     "body": "Fund confirmation",
                     "view": {
                         "eyebrow": "Wallet avaible balance:",
-                        "title": "Fund arrived",
+                        "generatedMana": "Generated Mana:",
+                        "title": "Funds arrived:",
                         "subtitle": "Generating mana...",
                         "action": "Activate Account"
                     }
