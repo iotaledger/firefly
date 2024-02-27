@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Historik ikke opsat",
             "errorFailedFetch": "Kunne ikke hente adressehistorik",
             "errorFailedGenerate": "Kunne ikke generere en ny adresse"
+        },
+        "withdrawFromL2": {
+            "title": "Hæv fra L2",
+            "body": "Liste over adresser med udbetalbare midler",
+            "withdraw": "Hævning",
+            "withdrawing": "Hæver..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Tilpasset netværk} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
+        "migrateFromLegacy": "Migrér fra Legacy",
+        "migrateFromLegacyDescription": "Migrér til Stardust",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Gem adgangskode",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Vis Status",
         "viewAddressHistory": "Se historik for addresse",
         "viewBalanceBreakdown": "View balance breakdown",
+        "withdrawFromL2": "Hæv fra L2",
         "verifyDepositAddress": "Bekræft indbetalingsadresse",
         "showHiddenAccounts": "Vis skjulte wallets",
         "confirm": "Bekræft",

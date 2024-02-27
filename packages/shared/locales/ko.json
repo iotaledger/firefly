@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle not configured",
             "errorFailedFetch": "Couldn't fetch address history",
             "errorFailedGenerate": "Couldn't generate a new address"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "{network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 에서 실행되는 새로운 프로필을 생성합니다.",
         "claimShimmer": "Shimmer 스테이킹 보상 요청하기",
         "claimShimmerDescription": "IOTA 프로필을 가져오고 스테이킹 보상을 요청합니다.",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "별칭 만들기",
         "createAliasDescription": "별칭 출력 생성",
         "savePassword": "비밀번호 저장하기",
@@ -1342,6 +1350,7 @@
         "viewStatus": "상태 보기",
         "viewAddressHistory": "주소 이력 보기",
         "viewBalanceBreakdown": "잔액 내역 보기",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "입금주소 확인",
         "showHiddenAccounts": "숨김 지갑 표시",
         "confirm": "확인",

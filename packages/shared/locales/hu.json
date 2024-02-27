@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle nincs beállítva",
             "errorFailedFetch": "Címelőzmények letöltése sikertelen",
             "errorFailedGenerate": "Új cím létrehozása sikertelen"
+        },
+        "withdrawFromL2": {
+            "title": "Kiutalás L2-ről",
+            "body": "Kiutalható összegekkel rendelkező címek listája",
+            "withdraw": "Kiutalás",
+            "withdrawing": "Kiutalás folyamatban..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Hozzon létre egy új profilt {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {teszt hálózat} custom {egyéni hálózat} other {ismeretlen}} protokollon",
         "claimShimmer": "Shimmer jutalom igénylése",
         "claimShimmerDescription": "IOTA profil importálása és Shimmer jutalom igénylése",
+        "migrateFromLegacy": "Költözés korábbi verzióból",
+        "migrateFromLegacyDescription": "Költözés a Sturdust rendszerbe",
         "createAlias": "Álnév létrehozása",
         "createAliasDescription": "Álnév-kimenet létrehozása",
         "savePassword": "Jelszó mentése",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Állapot megtekintése",
         "viewAddressHistory": "Címek előzményeinek megjelenítése",
         "viewBalanceBreakdown": "Egyenleg részletezésének megtekintése",
+        "withdrawFromL2": "Kiutalás L2-ről",
         "verifyDepositAddress": "Letéti cím megerősítése",
         "showHiddenAccounts": "Rejtett tárcák megjelenítése",
         "confirm": "Megerősít",
