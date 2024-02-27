@@ -1,54 +1,62 @@
 <script lang="ts">
-    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { implicitAccountCreationRouter } from '@core/router'
-    import { onMount, onDestroy } from 'svelte'
-    import {
-        formatTokenAmountBestMatch,
-        selectedWallet,
-        selectedWalletId,
-        selectedWalletAssets,
-        syncBalance,
-        getImplicitAccountsTotalManaExceptThis,
-    } from '@core/wallet'
+    import { getManaBalance, getTotalManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { DEFAULT_SECONDS_PER_SLOT, getManaBalance } from '@core/network'
-    import { MILLISECONDS_PER_SECOND } from '@core/utils'
+    import { implicitAccountCreationRouter } from '@core/router'
+    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { OutputData } from '@iota/sdk'
+    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
 
     export let outputId: string | undefined
 
-    let balanceInterval: NodeJS.Timeout
+    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
-    $: selectedOutput =
-        $selectedWallet?.implicitAccountOutputs.find(
-            (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
-        ) ?? $selectedWallet?.implicitAccountOutputs?.[0]
+    let selectedOutput: OutputData
+    $: $selectedWallet, (selectedOutput = getSelectedOutput())
 
-    $: totalAvailableMana =
-        getManaBalance($selectedWallet?.balances?.mana?.available) +
-        ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
-        getImplicitAccountsTotalManaExceptThis($selectedWallet?.implicitAccountOutputs, outputId)
+    let totalAvailableMana: number
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana())
+
+    let formattedSelectedOutputBlance: string
+    $: selectedOutput,
+        (formattedSelectedOutputBlance = baseCoin
+            ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
+            : '-')
     $: formattedWalletBalance =
         $selectedWallet.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
             : '-'
-    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
-    function getOutputAmount(): string {
-        return baseCoin ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), baseCoin.metadata) : ''
+    function getSelectedOutput(): OutputData {
+        return (
+            $selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
+            ) ?? $selectedWallet?.implicitAccountOutputs?.[0]
+        )
     }
 
-    const startIntervalBalance = () => {
-        balanceInterval = setInterval(() => {
-            syncBalance($selectedWalletId, true)
-        }, DEFAULT_SECONDS_PER_SLOT * MILLISECONDS_PER_SECOND)
+    function getTotalAvailableMana(): number {
+        return (
+            getManaBalance($selectedWallet?.balances?.mana?.available) +
+            ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
+            getImplicitAccountsTotalMana($selectedWallet?.implicitAccountOutputs, [outputId])
+        )
     }
 
-    onMount(async () => {
-        await syncBalance($selectedWalletId, true)
-        startCountdown()
-        startIntervalBalance()
-    })
+    function getImplicitAccountsTotalMana(
+        implicitAccountOutputs: OutputData[],
+        excludeIds: string[] | undefined
+    ): number {
+        return implicitAccountOutputs.reduce((acc: number, outputData: OutputData) => {
+            if (excludeIds && excludeIds.includes(outputData.outputId)) {
+                const totalMana = getTotalManaForOutput(outputData)
+                return totalMana ? acc + totalMana : acc
+            } else {
+                return acc
+            }
+        }, 0)
+    }
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
@@ -56,7 +64,9 @@
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
 
-    const startCountdown = () => {
+    $: timeRemaining = `${seconds}s remaining`
+
+    onMount(() => {
         countdownInterval = setInterval(() => {
             seconds -= 1
 
@@ -65,17 +75,15 @@
                 onTimeout()
             }
         }, 1000)
-    }
+    })
+
+    onDestroy(() => {
+        clearInterval(countdownInterval)
+    })
 
     const onTimeout = () => {
         $implicitAccountCreationRouter.next()
     }
-
-    onDestroy(() => {
-        clearInterval(countdownInterval)
-        clearInterval(balanceInterval)
-    })
-    $: timeRemaining = `${seconds}s remaining`
     // ----------------------------------------------------------------
 </script>
 
@@ -96,12 +104,13 @@
                 fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
             >
-            <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400"
-                >{timeRemaining}</Text
-            >
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.title')} {getOutputAmount()}</Text
-            >
+            <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
+                {timeRemaining}
+            </Text>
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold}>
+                {localize('views.implicit-account-creation.steps.step2.view.title')}
+                {formattedSelectedOutputBlance}
+            </Text>
             <div class="flex flex-col space-y-2">
                 <KeyValueBox
                     keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
