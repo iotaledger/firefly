@@ -1,6 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { getManaBalance, getTotalManaForOutput } from '@core/network'
+    import { getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
     import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
@@ -16,7 +16,7 @@
     $: $selectedWallet, (selectedOutput = getSelectedOutput())
 
     let totalAvailableMana: number
-    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana())
+    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
 
     let formattedSelectedOutputBlance: string
     $: selectedOutput,
@@ -40,17 +40,14 @@
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
             ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
-            getImplicitAccountsTotalMana($selectedWallet?.implicitAccountOutputs, [outputId])
+            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
         )
     }
 
-    function getImplicitAccountsTotalMana(
-        implicitAccountOutputs: OutputData[],
-        excludeIds: string[] | undefined
-    ): number {
+    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
         return implicitAccountOutputs.reduce((acc: number, outputData: OutputData) => {
             if (excludeIds && excludeIds.includes(outputData.outputId)) {
-                const totalMana = getTotalManaForOutput(outputData)
+                const totalMana = getPassiveManaForOutput(outputData)
                 return totalMana ? acc + totalMana : acc
             } else {
                 return acc
