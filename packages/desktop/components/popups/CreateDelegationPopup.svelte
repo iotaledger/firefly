@@ -10,7 +10,6 @@
         selectedWallet,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { Utils } from '@iota/sdk'
     import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
 
@@ -23,7 +22,7 @@
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network.id].baseCoin
     $: hasTransactionInProgress =
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
-    $: amount, hasTransactionInProgress, setConfirmDisabled()
+    $: amount, accountId, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
         if (!amount || !accountId) {
@@ -39,12 +38,11 @@
         try {
             await assetAmountInput?.validate(true)
             if (!rawAmount || !accountId) return
-
             const params: CreateDelegationParams = {
                 address: api.accountIdToBech32($selectedWallet.mainAccountId, 'rms'),
                 delegatedAmount: Number(rawAmount), // The interface delegatedAmount is a string but the sdk returns an error if it is not a number
                 // rms1pqrh7456g0xtujtk2crfdvmsrqhr7595enynefpnhl3wurmr0ypnztgqay2 -> account address with staking feature converted to accountId to try it
-                validatorAddress: new AccountAddress(Utils.bech32ToHex(accountId)),
+                validatorAddress: new AccountAddress(api.bech32ToHex(accountId)),
             }
 
             await $selectedWallet.createDelegation(params, getDefaultTransactionOptions())
