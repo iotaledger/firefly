@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { selectedWallet } from '@core/wallet'
+    import { hasBlockIssuerFeature, selectedWallet } from '@core/wallet'
     import { ImplicitAccountCreationView, WalletView } from './views'
+    import { AccountOutput } from '@iota/sdk/out/types'
 
-    // TODO: replace 3 with 1 when the faucet is fixed
-    // https://github.com/iotaledger/inx-faucet/issues/122
     $: showImplicitAccountFlow =
-        !$selectedWallet?.accountOutputs?.length && $selectedWallet?.implicitAccountOutputs?.length <= 3
+        !$selectedWallet?.accountOutputs?.length ||
+        !$selectedWallet.accountOutputs.some((account) => hasBlockIssuerFeature(account.output as AccountOutput))
 </script>
 
 {#if $selectedWallet}

@@ -15,11 +15,9 @@
     import { DEFAULT_SECONDS_PER_SLOT, getManaBalance } from '@core/network'
     import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
-    // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
     let balanceInterval: NodeJS.Timeout
-    const implicitsAccounts = $selectedWallet?.implicitAccountOutputs
 
     $: selectedOutput =
         $selectedWallet?.implicitAccountOutputs.find(
@@ -29,14 +27,15 @@
     $: totalAvailableMana =
         getManaBalance($selectedWallet?.balances?.mana?.available) +
         ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
-        getImplicitAccountsTotalManaExceptThis(implicitsAccounts, outputId)
-    $: formattedWalletBalance = $selectedWallet.balances?.baseCoin?.available
-        ? formatTokenAmountBestMatch(Number($selectedWallet.balances?.baseCoin?.available), baseCoin?.metadata)
-        : '-'
-    $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
+        getImplicitAccountsTotalManaExceptThis($selectedWallet?.implicitAccountOutputs, outputId)
+    $: formattedWalletBalance =
+        $selectedWallet.balances?.baseCoin?.available && baseCoin
+            ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
+            : '-'
+    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
     function getOutputAmount(): string {
-        return baseCoin ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), baseCoin?.metadata) : ''
+        return baseCoin ? formatTokenAmountBestMatch(Number(selectedOutput.output.amount), baseCoin.metadata) : ''
     }
 
     const startIntervalBalance = () => {
