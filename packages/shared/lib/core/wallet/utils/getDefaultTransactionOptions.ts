@@ -11,5 +11,6 @@ export function getDefaultTransactionOptions(
             value: new AccountAddress(accountId),
         },
         allowMicroAmount: true,
+        allowAllottingFromAccountMana: true,
     }
 }

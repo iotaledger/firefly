@@ -1,10 +1,11 @@
 <script lang="ts">
     import { PopupId, closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
-    import { prepareOutput, selectedWallet } from '@core/wallet'
+    import { prepareOutput, selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { ledgerPreparedOutput } from '@core/ledger'
-    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { checkActiveProfileAuth, isActiveLedgerProfile, activeProfile } from '@core/profile'
+    import { getManaBalance } from '@core/network'
     import { TimePeriod } from '@core/utils'
     import { sendOutput } from '@core/wallet/actions'
     import { SubjectType, TokenStandard } from '@core/wallet/enums'
@@ -38,6 +39,7 @@
     export let isSendAndClosePopup: boolean = false
     export let disableBack = false
     export let preparedOutput: Output
+    export let requiredMana: number
 
     const transactionDetails = get(newTransactionDetails)
     const {
@@ -81,6 +83,9 @@
         layer2Parameters
     )
 
+    $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
+    $: availableMana = getManaBalance($selectedWallet.balances.mana.available)
+
     onMount(async () => {
         await updateStorageDeposit()
 
@@ -114,6 +119,12 @@
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
             preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
+            const prepareTx = await $selectedWallet.prepareTransaction([preparedOutput], getDefaultTransactionOptions())
+            requiredMana =
+                prepareTx?._preparedData?.transaction?.allotments?.reduce(
+                    (acc, prev) => acc + Number(prev?.mana || 0),
+                    0
+                ) || 0
             await updateStorageDeposit()
 
             // This potentially triggers a second 'prepareOutput',
@@ -245,6 +256,21 @@
                         disabled={disableChangeExpiration || isTransferring}
                     />
                 </KeyValueBox>
+            {/if}
+            <KeyValueBox
+                keyText={localize('general.manaCost')}
+                valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
+            />
+            <KeyValueBox
+                keyText={localize('general.availableMana')}
+                valueText={formatTokenAmountBestMatch(availableMana, mana.metadata)}
+            />
+
+            <!-- TODO: Update with mana generation -->
+            {#if availableMana < requiredMana}
+                <Text type={TextType.p} error classes="text-center">
+                    {localize('general.insufficientMana')}
+                </Text>
             {/if}
         {/if}
     </div>

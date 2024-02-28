@@ -1702,7 +1702,10 @@
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
         "custom": "Custom",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
+        "manaCost": "Mana cost",
+        "availableMana": "Available mana",
+        "insufficientMana": "Insufficient mana"
     },
     "filters":{
         "title": "Filters",
