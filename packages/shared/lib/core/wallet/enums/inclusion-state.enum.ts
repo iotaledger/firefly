@@ -1,6 +1,7 @@
 export enum InclusionState {
     Pending = 'Pending',
+    Accepted = 'Accepted',
     Confirmed = 'Confirmed',
-    Conflicting = 'Conflicting',
-    UnknownPruned = 'UnknownPruned',
+    Finalized = 'Finalized',
+    Failed = 'Failed'
 }
