@@ -12,6 +12,7 @@ import {
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
+    isDelegationOutput,
     isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
@@ -49,7 +50,11 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput(outputData)) {
+    if (
+        (address && wallet?.depositAddress === address && !outputData?.remainder) ||
+        isAccountOutput(outputData) ||
+        isDelegationOutput(outputData)
+    ) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
@@ -97,6 +102,15 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 })
             }
             closePopup() // close ActivateAccountPopup when the account output is created
+        }
+    }
+    if (isDelegationOutput(outputData)) {
+        if (wallet?.hasDelegationTransactionInProgress) {
+            updateActiveWallet(walletId, {
+                hasDelegationTransactionInProgress: false,
+                isTransferring: false,
+            })
+            closePopup() // close CreateDelegationPopup when the account output is created
         }
     }
     if (isNftOutput) {

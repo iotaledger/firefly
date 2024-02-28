@@ -3,49 +3,74 @@
     import { api } from '@core/api'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
     import {
         convertToRawAmount,
         getDefaultTransactionOptions,
         selectedWallet,
+        selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
+    import { AccountAddress, Bech32Address, CreateDelegationParams } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
+    import { onMount } from 'svelte'
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let assetAmountInput: AssetAmountInput
     let amount: string
-    let accountId: string
-    let rawAmount = $selectedWallet.balances.baseCoin.available.toString()
+    let accountAddress: string
+    let rawAmount = $selectedWallet?.balances?.baseCoin?.available?.toString()
     let confirmDisabled = false
 
-    $: asset = $visibleSelectedWalletAssets[$activeProfile?.network.id].baseCoin
+    $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
     $: hasTransactionInProgress =
-        $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
-    $: amount, accountId, hasTransactionInProgress, setConfirmDisabled()
+        $selectedWallet?.hasConsolidatingOutputsTransactionInProgress ||
+        $selectedWallet?.hasDelegationTransactionInProgress ||
+        $selectedWallet?.isTransferring
+    $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
 
     function setConfirmDisabled(): void {
-        if (!amount || !accountId) {
+        if (!amount || !accountAddress) {
             confirmDisabled = true
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled =
-            convertedSliderAmount === $selectedWallet.balances.baseCoin.available.toString() || hasTransactionInProgress
+        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress
+    }
+
+    // TODO: modify this interface when https://github.com/iotaledger/iota-sdk/issues/2083 is merged
+    interface CreateDelegationParamsTemp {
+        address?: Bech32Address
+        delegatedAmount: number
+        validatorAddress: AccountAddress
     }
 
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
-            if (!rawAmount || !accountId) return
-            const params: CreateDelegationParams = {
-                address: api.accountIdToBech32($selectedWallet.mainAccountId, 'rms'),
-                delegatedAmount: Number(rawAmount), // The interface delegatedAmount is a string but the sdk returns an error if it is not a number
-                // rms1pqrh7456g0xtujtk2crfdvmsrqhr7595enynefpnhl3wurmr0ypnztgqay2 -> account address with staking feature converted to accountId to try it
-                validatorAddress: new AccountAddress(api.bech32ToHex(accountId)),
-            }
+            if (!rawAmount || !accountAddress) return
+            await checkActiveProfileAuth(delegate, { stronghold: true, ledger: false })
+        } catch (err) {
+            handleError(err)
+        }
+    }
 
-            await $selectedWallet.createDelegation(params, getDefaultTransactionOptions())
+    async function delegate(): Promise<void> {
+        try {
+            const params: CreateDelegationParamsTemp = {
+                address: api.accountIdToBech32($selectedWallet.mainAccountId, 'rms'),
+                delegatedAmount: Number(rawAmount),
+                validatorAddress: new AccountAddress(api.bech32ToHex(accountAddress)),
+            }
+            await $selectedWallet.createDelegation(
+                params as unknown as CreateDelegationParams,
+                getDefaultTransactionOptions()
+            )
+            updateActiveWallet($selectedWalletId, {
+                hasDelegationTransactionInProgress: true,
+                isTransferring: true,
+            })
         } catch (err) {
             handleError(err)
         }
@@ -54,6 +79,14 @@
     function onCancelClick(): void {
         closePopup()
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+        } catch (err) {
+            handleError(err.error)
+        }
+    })
 </script>
 
 <create-delegation-popup class="flex flex-col space-y-6">
@@ -71,7 +104,7 @@
                 disabled={hasTransactionInProgress}
             />
             <TextInput
-                bind:value={accountId}
+                bind:value={accountAddress}
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />

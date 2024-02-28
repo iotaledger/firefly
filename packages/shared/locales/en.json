@@ -1246,8 +1246,8 @@
             "title": "Create Delegation",
             "body": "Set the amount and the account of the validator",
             "account": {
-                "title": "Account Id",
-                "description": "Account Id for the validator"
+                "title": "Account Address",
+                "description": "Account Address for the validator"
             } 
         }
     },
