@@ -44,7 +44,6 @@ export function handleTransactionProgressEventInternal(walletId: string, payload
 function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
     if (payload) {
         const type = payload.type
-        console.log(type)
         if (type === TransactionProgressType.PreparedTransaction) {
             openPopup({
                 id: PopupId.VerifyLedgerTransaction,
@@ -61,7 +60,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     hideClose: true,
                     preventClose: true,
                     props: {
-                        hash: (payload as PreparedTransactionSigningHashProgress).hash,
+                        hash: (payload as PreparedTransactionSigningHashProgress).signingHash,
                     },
                 })
             } else {
@@ -72,7 +71,9 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                 })
             }
         } else if (type === TransactionProgressType.Broadcasting) {
-            closePopup()
+            // TODO: We should instead close the popup once we have signed the block, not the tx.
+            //  https://github.com/iotaledger/firefly/issues/8105
+            closePopup(true)
         }
     } else {
         throw new MissingTransactionProgressEventPayloadError()

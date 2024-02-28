@@ -7,7 +7,6 @@
     import { IllustrationEnum } from '@auxiliary/illustration'
     import { unlockStronghold, updateActiveWallet, isSoftwareProfile } from '@core/profile'
     import { OutputId } from '@iota/sdk/out/types'
-    import { closePopup } from '@auxiliary/popup'
 
     export let outputId: string | undefined
 
@@ -42,7 +41,6 @@
                 hasImplicitAccountCreationTransactionInProgress: true,
                 isTransferring: true,
             })
-            closePopup(true)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)
