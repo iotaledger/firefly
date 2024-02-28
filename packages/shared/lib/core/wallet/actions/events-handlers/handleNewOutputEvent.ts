@@ -104,6 +104,8 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             closePopup() // close ActivateAccountPopup when the account output is created
         }
     }
+
+    // TODO: update this logic when available balance is fixed
     if (isDelegationOutput(outputData)) {
         if (wallet?.hasDelegationTransactionInProgress) {
             updateActiveWallet(walletId, {
