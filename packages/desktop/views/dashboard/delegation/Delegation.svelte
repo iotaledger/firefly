@@ -14,11 +14,10 @@
         BoxedIconWithText,
     } from '@ui'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountBestMatch, getClient, selectedWalletAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, getBech32AddressFromAddressTypes, selectedWalletAssets } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, OutputData, DelegationOutput } from '@iota/sdk/out/types'
-    import { onMount } from 'svelte'
+    import { OutputType, DelegationOutput, AccountAddress } from '@iota/sdk/out/types'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
     enum Header {
@@ -30,41 +29,36 @@
         Action = 'action',
     }
 
-    interface IDelegationTable {
-        [Header.Name]: string
-        [Header.DelegatedFunds]: number
-        [Header.Rewards]: number
-        [Header.Epoch]: number
-        [Header.Address]: string
-        [Header.Action]: () => void
+    interface DelegationOutputTemp extends DelegationOutput {
+        validatorAddress: AccountAddress
     }
 
-    let delegationOutputs: OutputData[] = []
-    let outputRewards: number = 0
-
-    onMount(async () => {
-        delegationOutputs = (await $selectedWallet.outputs())?.filter((output) => {
-            output.output.type === OutputType.Delegation
-            getOutputRewards(output.outputId).then((rewards) => (outputRewards = rewards))
-        })
-    })
-
-    const delegationData: IDelegationTable[] = delegationOutputs?.map((output, index) => ({
-        [Header.Name]: `Delegation ${index + 1}`,
-        [Header.DelegatedFunds]: Number((output.output as DelegationOutput).delegatedAmount),
-        [Header.Rewards]: outputRewards,
-        [Header.Epoch]: (output.output as DelegationOutput).endEpoch - (output.output as DelegationOutput).startEpoch,
-        [Header.Address]: (output.output as DelegationOutput).validatorId,
-        [Header.Action]: handleClaimRewards,
-    }))
+    $: delegationOutputs =
+        $selectedWallet.walletOutputs.filter((output) => output?.output?.type === OutputType.Delegation) || []
+    $: delegationData =
+        delegationOutputs?.map((output, index) => {
+            const delegationOutput = output.output as DelegationOutputTemp
+            return {
+                [Header.Name]: `Delegation ${index + 1}`,
+                [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
+                [Header.Rewards]: 0, // TODO: Update rewards
+                [Header.Epoch]:
+                    delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
+                [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
+                [Header.Action]: handleClaimRewards,
+            }
+        }) || []
 
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
-    async function getOutputRewards(outputId: string): Promise<number> {
-        const client = await getClient()
-        const rewards = (await client.getRewards(outputId)).rewards
-        return Number(rewards)
-    }
+    // async function getOutputRewards(outputId: string): Promise<number> {
+    //     const client = await getClient()
+    //     const rewards = (await client.getRewards(outputId))
+    //     console.log("rewards getOutputRewards", rewards);
+
+    //     return Number(12)
+    // }
+
     function handleDelegate(): void {
         openPopup({
             id: PopupId.CreateDelegation,
