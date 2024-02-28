@@ -8,4 +8,5 @@ export interface IPersistedWalletData {
     removedProposalIds?: ParticipationEventId[]
     walletOptions: WalletOptions
     mainAccountId?: string | undefined
+    primaryKey?: string | undefined
 }

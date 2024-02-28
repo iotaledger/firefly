@@ -19,6 +19,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, OutputData, DelegationOutput } from '@iota/sdk/out/types'
     import { onMount } from 'svelte'
+    import { PopupId, openPopup } from '@auxiliary/popup'
 
     enum Header {
         Name = 'name',
@@ -65,7 +66,9 @@
         return Number(rewards)
     }
     function handleDelegate(): void {
-        // TODO: add logic to delegate an output
+        openPopup({
+            id: PopupId.CreateDelegation,
+        })
     }
 
     function handleClaimRewards(): void {

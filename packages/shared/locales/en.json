@@ -665,7 +665,9 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
-                        "title": "Fund arrived",
+                        "eyebrow": "Wallet avaible balance:",
+                        "generatedMana": "Generated Mana:",
+                        "title": "Funds arrived:",
                         "subtitle": "Generating mana...",
                         "action": "Activate Account"
                     }
@@ -1239,6 +1241,14 @@
             "body": "List of addresses with withdrawable funds",
             "withdraw": "Withdraw",
             "withdrawing": "Withdrawing..."
+        },
+        "createDelegation": {
+            "title": "Create Delegation",
+            "body": "Set the amount and the account of the validator",
+            "account": {
+                "title": "Account Address",
+                "description": "Account Address for the validator"
+            } 
         }
     },
     "actions": {

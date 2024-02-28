@@ -22,6 +22,7 @@
         getBech32AddressFromAddressTypes,
         isAccountOutput,
         isImplicitAccountOutput,
+        selectedWallet,
         selectedWalletMainAccountId,
     } from '@core/wallet'
     import {
@@ -39,7 +40,6 @@
     import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
-    import { onMount } from 'svelte'
 
     export let selectedOutput: OutputData
     export let index: number
@@ -50,13 +50,26 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput?.output as CommonOutput)
-    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput?.output as AccountOutput)?.accountId : null
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
+    $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
+    $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
+    $: primaryKey = $selectedWallet?.primaryKey
+    $: listBlockKeysFeature(selectedOutput)
+
+    function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
+        if (isImplicitAccount) {
+            return Number(outputData.output.amount)
+        } else {
+            // TODO: Calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080
+            return undefined
+        }
+    }
 
     function onExplorerClick(): void {
         if (!selectedOutput?.outputId) return
@@ -108,10 +121,6 @@
         }
         return amount
     }
-
-    onMount(() => {
-        listBlockKeysFeature(selectedOutput)
-    })
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
@@ -150,7 +159,7 @@
                         >
                     {/if}
                 </title-container>
-                {#if selectedOutput?.outputId}
+                {#if selectedOutput.outputId}
                     <button
                         class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                         on:click={onExplorerClick}
@@ -162,11 +171,8 @@
             <div class="flex flex-row space-x-2 w-1/2">
                 <Tile>
                     <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                        <!-- TODO: Replace this with the actual balance for accountOutputs-->
                         <Text type={TextType.h3}>
-                            {isImplicitAccount
-                                ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), getBaseToken())
-                                : 0 + ' Gi'}
+                            {formattedBalance}
                         </Text>
                         <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                             >{localize('views.accountManagement.details.balance')}</Text
@@ -210,18 +216,17 @@
                         >{localize('views.accountManagement.details.mana')}</Text
                     >
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{selectedOutput?.output?.mana}</Text
+                        >{selectedOutput.output?.mana}</Text
                     >
                 </div>
             {/if}
-            {#if isAccountOutput && keys.length > 0}
+            {#if isAccountOutput && primaryKey}
                 <div class="flex flex-col space-y-2 w-1/2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
                     >
-                    <!-- TODO: When we can set a primary key, we will show the primary key here -->
                     <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
-                        >{keys[0]}</Text
+                        >{primaryKey}</Text
                     >
                 </div>
             {/if}
