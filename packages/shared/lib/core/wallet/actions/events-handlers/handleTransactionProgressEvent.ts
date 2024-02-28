@@ -72,7 +72,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                 })
             }
         } else if (type === TransactionProgressType.Broadcasting) {
-            closePopup(true)
+            closePopup()
         }
     } else {
         throw new MissingTransactionProgressEventPayloadError()

@@ -665,6 +665,7 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
+                        "eyebrow": "Wallet avaible balance:",
                         "title": "Fund arrived",
                         "subtitle": "Generating mana...",
                         "action": "Activate Account"
@@ -706,6 +707,29 @@
                     "primary": "Primary key",
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
+                }
+            },
+            "notification": "Activate one account to access the dashboard."
+        },
+        "delegation": {
+            "title": "Delegation",
+            "action": {
+                "delegate": "Delegate",
+                "claimRewards": "Claim Rewards"
+            },
+            "info": {
+                "funds": "Total Funds",
+                "delegated": "Delegated",
+                "rewards": "Rewards"
+            },
+            "table": {
+                "header": {
+                    "name": "Name",
+                    "delegatedFunds": "Delegated Funds",
+                    "rewards": "Rewards",
+                    "epoch": "Epoch",
+                    "address": "Address",
+                    "action": "Action"
                 }
             }
         }
@@ -1216,6 +1240,14 @@
             "body": "List of addresses with withdrawable funds",
             "withdraw": "Withdraw",
             "withdrawing": "Withdrawing..."
+        },
+        "createDelegation": {
+            "title": "Create Delegation",
+            "body": "Set the amount and the account of the validator",
+            "account": {
+                "title": "Account Address",
+                "description": "Account Address for the validator"
+            } 
         }
     },
     "actions": {

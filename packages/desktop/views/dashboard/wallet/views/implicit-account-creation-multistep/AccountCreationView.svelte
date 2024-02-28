@@ -2,15 +2,19 @@
     import { Button, FontWeight, PasswordInput, Text, TextType, LedgerAnimation } from '@ui'
     import { localize } from '@core/i18n'
     import { selectedWallet, selectedWalletId } from '@core/wallet'
-    import { isSoftwareProfile, unlockStronghold, updateActiveWallet } from '@core/profile'
     import { Icon } from '@auxiliary/icon'
     import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { IllustrationEnum } from '@auxiliary/illustration'
+    import { unlockStronghold, updateActiveWallet, isSoftwareProfile } from '@core/profile'
+    import { OutputId } from '@iota/sdk/out/types'
+    import { closePopup } from '@auxiliary/popup'
+
+    export let outputId: string | undefined
 
     let error = ''
     let isBusy = false
     let strongholdPassword = ''
-    $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length === 0 : true
+    $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length !== 0 : true
     $: disabledActive = !validStronghold || isBusy
     $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
 
@@ -25,13 +29,20 @@
                 await unlockStronghold(strongholdPassword)
             }
 
-            const outputId = $selectedWallet?.implicitAccountOutputs[0].outputId
-
+            let outputIdForTransition: OutputId
+            if (outputId) {
+                outputIdForTransition = $selectedWallet?.implicitAccountOutputs.find(
+                    (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
+                )?.outputId
+            } else {
+                outputIdForTransition = $selectedWallet?.implicitAccountOutputs[0].outputId
+            }
+            await $selectedWallet?.implicitAccountTransition(outputIdForTransition)
             updateActiveWallet($selectedWalletId, {
                 hasImplicitAccountCreationTransactionInProgress: true,
                 isTransferring: true,
             })
-            await $selectedWallet?.implicitAccountTransition(outputId)
+            closePopup(true)
         } catch (err) {
             console.error('err', err)
             error = localize(err?.message ?? err)
@@ -40,34 +51,35 @@
     }
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-28 w-full">
-    <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md w-full">
-        <div class="flex items-center justify-center">
-            <img
-                src="assets/illustrations/implicit-account-creation/step3.svg"
-                alt={localize('views.implicit-account-creation.steps.step3.title')}
-            />
+<step-content class="flex flex-col items-center justify-between h-full pt-28">
+    <div class="flex flex-col h-full justify-between space-y-8">
+        <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md">
+            {#if $isSoftwareProfile}
+                <div class="flex items-center justify-center">
+                    <img
+                        src="assets/illustrations/implicit-account-creation/step3.svg"
+                        alt={localize('views.implicit-account-creation.steps.step3.title')}
+                    />
+                </div>
+                <Text type={TextType.h3} fontWeight={FontWeight.semibold}
+                    >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
+                >
+                <PasswordInput
+                    bind:error
+                    bind:value={strongholdPassword}
+                    autofocus
+                    submitHandler={unlockWalletAndCreateAccount}
+                    placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
+                    disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
+                />
+            {:else}
+                <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
+            {/if}
+            <button-wrapper class="flex items-center justify-center">
+                <Button onClick={unlockWalletAndCreateAccount} disabled={disabledActive} {isBusy}
+                    >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+                >
+            </button-wrapper>
         </div>
-        {#if $isSoftwareProfile}
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
-            >
-            <PasswordInput
-                bind:error
-                bind:value={strongholdPassword}
-                autofocus
-                submitHandler={unlockWalletAndCreateAccount}
-                placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
-                disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
-            />
-        {:else}
-            <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
-        {/if}
     </div>
-    <Button
-        onClick={unlockWalletAndCreateAccount}
-        disabled={disabledActive}
-        isBusy={isBusy}
-        >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
-    >
 </step-content>
