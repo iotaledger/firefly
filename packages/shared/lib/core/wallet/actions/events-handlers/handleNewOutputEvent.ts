@@ -49,7 +49,13 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput(outputData)) {
+    // The basic outputs of the faucet dont have an address
+    const isBasicOutput = output.type === OutputType.Basic
+    if (
+        (address && wallet?.depositAddress === address && !outputData?.remainder) ||
+        isAccountOutput(outputData) ||
+        isBasicOutput
+    ) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
