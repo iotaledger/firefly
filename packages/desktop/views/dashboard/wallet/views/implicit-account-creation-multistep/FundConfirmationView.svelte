@@ -1,38 +1,58 @@
 <script lang="ts">
-    import { Button, FontWeight, Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { implicitAccountCreationRouter } from '@core/router'
-    import { onMount, onDestroy } from 'svelte'
-    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { Balance } from '@iota/sdk/out/types'
+    import { implicitAccountCreationRouter } from '@core/router'
+    import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import { OutputData } from '@iota/sdk'
+    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import { onDestroy, onMount } from 'svelte'
 
-    // TODO: use this output to calculate mana
     export let outputId: string | undefined
 
-    let walletBalance: Balance | undefined
-
-    $: formattedWalletBalance = (walletBalance?.baseCoin?.available && baseCoin)
-        ? formatTokenAmountBestMatch(Number(walletBalance.baseCoin.available), baseCoin?.metadata)
-        : '-'
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
-    function getOutputAmount(): string {
-        let amount: string
-        if (outputId) {
-            amount = $selectedWallet?.implicitAccountOutputs.find(
-                (implicitAccounts) => implicitAccounts.outputId.toString() === outputId
-            )?.output.amount
-        } else {
-            amount = $selectedWallet?.implicitAccountOutputs?.[0]?.output.amount
-        }
-        return baseCoin ? formatTokenAmountBestMatch(Number(amount), baseCoin?.metadata) : ''
+    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
+
+    let totalAvailableMana: number
+    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
+
+    let formattedSelectedOutputBlance: string
+    $: selectedOutput,
+        (formattedSelectedOutputBlance = baseCoin
+            ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
+            : '-')
+    $: formattedWalletBalance =
+        $selectedWallet.balances?.baseCoin?.available && baseCoin
+            ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
+            : '-'
+
+    function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
+        return (
+            _selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === _outputId
+            ) ?? _selectedWallet?.implicitAccountOutputs?.[0]
+        )
     }
 
-    onMount(async () => {
-        walletBalance = await $selectedWallet.getBalance()
-        startCountdown()
-    })
+    function getTotalAvailableMana(): number {
+        return (
+            getManaBalance($selectedWallet?.balances?.mana?.available) +
+            ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
+            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
+        )
+    }
+
+    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
+        return implicitAccountOutputs.reduce((acc: number, outputData: OutputData) => {
+            if (excludeIds && excludeIds.includes(outputData.outputId)) {
+                const totalMana = getPassiveManaForOutput(outputData)
+                return totalMana ? acc + totalMana : acc
+            } else {
+                return acc
+            }
+        }, 0)
+    }
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
@@ -40,7 +60,9 @@
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
 
-    const startCountdown = () => {
+    $: timeRemaining = `${seconds}s remaining`
+
+    onMount(() => {
         countdownInterval = setInterval(() => {
             seconds -= 1
 
@@ -49,34 +71,27 @@
                 onTimeout()
             }
         }, 1000)
-    }
-
-    const onTimeout = () => {
-        $implicitAccountCreationRouter.next()
-    }
+    })
 
     onDestroy(() => {
         clearInterval(countdownInterval)
     })
-    $: timeRemaining = `${seconds}s remaining`
+
+    const onTimeout = () => {
+        $implicitAccountCreationRouter.next()
+    }
     // ----------------------------------------------------------------
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-28">
+<step-content class="flex flex-col items-center justify-between h-full pt-20">
     <div class="flex flex-col h-full justify-between space-y-8">
-        <div class="flex flex-col text-center px-4 space-y-2 max-w-md">
+        <div class="flex flex-col text-center space-y-4 max-w-md">
             <div class="flex items-center justify-center mb-7">
                 <img
                     src="assets/illustrations/implicit-account-creation/step2.svg"
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
                 />
             </div>
-            <Text type={TextType.p} fontWeight={FontWeight.medium}
-                >{localize('views.implicit-account-creation.steps.step2.view.eyebrow')} {formattedWalletBalance}</Text
-            >
-            <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.title')} ({getOutputAmount()})</Text
-            >
             <Text
                 type={TextType.h5}
                 fontSize="15"
@@ -85,9 +100,23 @@
                 fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
             >
-            <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400"
-                >{timeRemaining}</Text
-            >
+            <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
+                {timeRemaining}
+            </Text>
+            <Text type={TextType.h3} fontWeight={FontWeight.semibold}>
+                {localize('views.implicit-account-creation.steps.step2.view.title')}
+                {formattedSelectedOutputBlance}
+            </Text>
+            <div class="flex flex-col space-y-2">
+                <KeyValueBox
+                    keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
+                    valueText={formattedWalletBalance}
+                />
+                <KeyValueBox
+                    keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
+                    valueText={totalAvailableMana.toString()}
+                />
+            </div>
         </div>
         <Button disabled>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
     </div>

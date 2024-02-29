@@ -6,9 +6,10 @@ import {
     TransactionProgressType,
     TransactionProgress,
     WalletEvent,
+    PreparedBlockSigningHashProgress,
 } from '@iota/sdk/out/types'
 
-import { ledgerNanoStatus } from '@core/ledger'
+import { VerificationPopupMode, ledgerNanoStatus, verificationPopupMode } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
@@ -70,9 +71,20 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     preventClose: true,
                 })
             }
+        } else if (type === TransactionProgressType.PrepareBlockSigningHash) {
+            verificationPopupMode.set(VerificationPopupMode.Block)
+            openPopup(
+                {
+                    id: PopupId.VerifyLedgerTransaction,
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        hash: (payload as PreparedBlockSigningHashProgress).blockSigningHash,
+                    },
+                },
+                true
+            )
         } else if (type === TransactionProgressType.Broadcasting) {
-            // TODO: We should instead close the popup once we have signed the block, not the tx.
-            //  https://github.com/iotaledger/firefly/issues/8105
             closePopup(true)
         }
     } else {

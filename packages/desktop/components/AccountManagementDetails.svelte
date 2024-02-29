@@ -81,7 +81,6 @@
         openPopup({
             id: PopupId.ActivateAccount,
             props: { outputId: selectedOutput?.outputId },
-            preventClose: true
         })
     }
 
