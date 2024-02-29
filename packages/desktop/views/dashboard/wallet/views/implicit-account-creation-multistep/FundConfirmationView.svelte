@@ -5,10 +5,14 @@
     import { implicitAccountCreationRouter } from '@core/router'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk'
-    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
     import { onDestroy, onMount } from 'svelte'
 
     export let outputId: string | undefined
+
+    // TODO: update when mana generation is available
+    const isLowManaGeneration = false
+    let walletAddress: string = ''
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
@@ -44,7 +48,7 @@
     }
 
     function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
-        return implicitAccountOutputs.reduce((acc: number, outputData: OutputData) => {
+        return implicitAccountOutputs?.reduce((acc: number, outputData: OutputData) => {
             if (excludeIds && excludeIds.includes(outputData.outputId)) {
                 const totalMana = getPassiveManaForOutput(outputData)
                 return totalMana ? acc + totalMana : acc
@@ -62,7 +66,8 @@
 
     $: timeRemaining = `${seconds}s remaining`
 
-    onMount(() => {
+    onMount(async () => {
+        walletAddress = await $selectedWallet?.address()
         countdownInterval = setInterval(() => {
             seconds -= 1
 
@@ -77,14 +82,14 @@
         clearInterval(countdownInterval)
     })
 
-    const onTimeout = () => {
+    const onTimeout = (): void => {
         $implicitAccountCreationRouter.next()
     }
     // ----------------------------------------------------------------
 </script>
 
 <step-content class="flex flex-col items-center justify-between h-full pt-20">
-    <div class="flex flex-col h-full justify-between space-y-8">
+    <div class="flex flex-col h-full justify-between space-y-8 items-center">
         <div class="flex flex-col text-center space-y-4 max-w-md">
             <div class="flex items-center justify-center mb-7">
                 <img
@@ -118,6 +123,23 @@
                 />
             </div>
         </div>
+        {#if isLowManaGeneration}
+            <div class="flex flex-col space-y-4 w-2/3">
+                <TextHint
+                    variant={TextHintVariant.Warning}
+                    text={localize('views.implicit-account-creation.steps.step2.view.walletAddress.description')}
+                />
+                <CopyableBox value={walletAddress} isCopyable>
+                    <Text
+                        type={TextType.pre}
+                        fontSize="13"
+                        fontWeight={FontWeight.medium}
+                        color="gray-900"
+                        darkColor="white">{walletAddress}</Text
+                    >
+                </CopyableBox>
+            </div>
+        {/if}
         <Button disabled>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button>
     </div>
 </step-content>
