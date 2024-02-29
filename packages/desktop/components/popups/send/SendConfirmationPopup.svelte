@@ -84,7 +84,8 @@
     )
 
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
-    $: availableMana = getManaBalance($selectedWallet.balances.mana.available)
+    $: availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
+    $: hasEnoughMana = availableMana >= requiredMana
 
     onMount(async () => {
         await updateStorageDeposit()
@@ -261,15 +262,15 @@
                 keyText={localize('general.manaCost')}
                 valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
             />
-            <KeyValueBox
-                keyText={localize('general.availableMana')}
-                valueText={formatTokenAmountBestMatch(availableMana, mana.metadata)}
-            />
 
             <!-- TODO: Update with mana generation -->
-            {#if availableMana < requiredMana}
+            {#if !hasEnoughMana}
                 <Text type={TextType.p} error classes="text-center">
-                    {localize('general.insufficientMana')}
+                    {localize('general.insufficientMana', {
+                        values: {
+                            availableMana,
+                        },
+                    })}
                 </Text>
             {/if}
         {/if}
@@ -293,6 +294,7 @@
             onClick={onConfirmClick}
             disabled={isTransferring ||
                 isPreparingOutput ||
+                !hasEnoughMana ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
             isBusy={isTransferring ||
                 isPreparingOutput ||
