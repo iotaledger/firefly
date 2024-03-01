@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { closePopup } from '@auxiliary/popup'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
     import { api } from '@core/api'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, getNetworkHrp, updateActiveWallet } from '@core/profile'
     import {
         convertToRawAmount,
         getDefaultTransactionOptions,
@@ -11,16 +11,16 @@
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { AccountAddress, Bech32Address, CreateDelegationParams } from '@iota/sdk/out/types'
+    import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
     import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+    export let rawAmount: string = $selectedWallet?.balances?.baseCoin?.available?.toString()
+    export let accountAddress: string
 
     let assetAmountInput: AssetAmountInput
     let amount: string
-    let accountAddress: string
-    let rawAmount = $selectedWallet?.balances?.baseCoin?.available?.toString()
     let confirmDisabled = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
@@ -39,17 +39,11 @@
         confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress
     }
 
-    // TODO: modify this interface when https://github.com/iotaledger/iota-sdk/issues/2083 is merged
-    interface CreateDelegationParamsTemp {
-        address?: Bech32Address
-        delegatedAmount: number
-        validatorAddress: AccountAddress
-    }
-
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
             if (!rawAmount || !accountAddress) return
+            updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(delegate, { stronghold: true, ledger: false })
         } catch (err) {
             handleError(err)
@@ -58,15 +52,12 @@
 
     async function delegate(): Promise<void> {
         try {
-            const params: CreateDelegationParamsTemp = {
-                address: api.accountIdToBech32($selectedWallet.mainAccountId, 'rms'),
-                delegatedAmount: Number(rawAmount),
+            const params: CreateDelegationParams = {
+                address: api.accountIdToBech32($selectedWallet.mainAccountId, getNetworkHrp()),
+                delegatedAmount: rawAmount,
                 validatorAddress: new AccountAddress(api.bech32ToHex(accountAddress)),
             }
-            await $selectedWallet.createDelegation(
-                params as unknown as CreateDelegationParams,
-                getDefaultTransactionOptions()
-            )
+            await $selectedWallet.createDelegation(params, getDefaultTransactionOptions())
             updateActiveWallet($selectedWalletId, {
                 hasDelegationTransactionInProgress: true,
                 isTransferring: true,
