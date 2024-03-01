@@ -1,4 +1,4 @@
-import { syncBalance } from 'shared/lib/core/wallet/actions/syncBalance'
+import { syncBalance } from '@core/wallet/actions/syncBalance'
 import { updateNftInAllWalletNfts } from '@core/nfts'
 import { ActivityAsyncStatus, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { allWalletActivities } from '../../stores'
@@ -39,7 +39,7 @@ export function setAsyncStatusOfWalletActivities(time: Date): void {
         return state
     })
     for (const walletId of balancesToUpdate) {
-        syncBalance(walletId)
+        syncBalance(walletId, false)
     }
     if (balancesToUpdate.length) {
         void refreshWalletAssetsForActiveProfile()

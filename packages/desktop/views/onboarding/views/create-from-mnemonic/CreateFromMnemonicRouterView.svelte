@@ -3,8 +3,7 @@
     import features from '@features/features'
     import { Transition } from '@ui'
     import { EncryptMnemonicView } from '../shared'
-    import { CreateFromMnemonicRoute } from './create-from-mnemonic-route.enum'
-    import { createFromMnemonicRoute, createFromMnemonicRouter } from './create-from-mnemonic-router'
+    import { createFromMnemonicRoute, createFromMnemonicRouter, CreateFromMnemonicRoute } from '@core/router'
     import { VerifyMnemonicView, ViewMnemonicView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $createFromMnemonicRoute) {

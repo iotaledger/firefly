@@ -665,9 +665,16 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
-                        "title": "Fund arrived",
+                        "eyebrow": "Wallet avaible balance:",
+                        "generatedMana": "Generated Mana:",
+                        "title": "Funds arrived:",
                         "subtitle": "Generating mana...",
-                        "action": "Activate Account"
+                        "action": "Activate Account",
+                        "walletAddress": {
+                            "description": "Send funds to your wallet address to speed up the mana generation",
+                            "show": "Show Address",
+                            "copy": "Copy"
+                        }
                     }
                 },
                 "step3": {
@@ -699,7 +706,36 @@
                 "mana": "Mana",
                 "key": "Key",
                 "modal": {
-                    "setMainAccount": "Set as main account"
+                    "setMainAccount": "Set as main account",
+                    "manageKeys": "Manage keys"
+                },
+                "manageKeys": {
+                    "primary": "Primary key",
+                    "setAsPrimary": "Set as primary",
+                    "unsetAsPrimary": "Unset as primary"
+                }
+            },
+            "notification": "Activate one account to access the dashboard."
+        },
+        "delegation": {
+            "title": "Delegation",
+            "action": {
+                "delegate": "Delegate",
+                "claimRewards": "Claim Rewards"
+            },
+            "info": {
+                "funds": "Total Funds",
+                "delegated": "Delegated",
+                "rewards": "Rewards"
+            },
+            "table": {
+                "header": {
+                    "name": "Name",
+                    "delegatedFunds": "Delegated Funds",
+                    "rewards": "Rewards",
+                    "epoch": "Epoch",
+                    "address": "Address",
+                    "action": "Action"
                 }
             }
         }
@@ -731,6 +767,9 @@
             "step_2": "Open {network} Application",
             "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
             "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+        },
+        "manageKeys":{
+            "title": "Key Management"
         },
         "balanceBreakdown": {
             "title": "Balance breakdown",
@@ -804,7 +843,7 @@
             },
             "availableMana": {
                 "title": "Available Mana",
-                "subtitle": "Available Mana"
+                "subtitle": "Mana available to send and issue blocks"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -1207,6 +1246,14 @@
             "body": "List of addresses with withdrawable funds",
             "withdraw": "Withdraw",
             "withdrawing": "Withdrawing..."
+        },
+        "createDelegation": {
+            "title": "Create Delegation",
+            "body": "Set the amount and the account of the validator",
+            "account": {
+                "title": "Account Address",
+                "description": "Account Address for the validator"
+            } 
         }
     },
     "actions": {

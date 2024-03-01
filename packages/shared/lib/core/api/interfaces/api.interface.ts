@@ -10,6 +10,8 @@ import {
     TransactionId,
     WalletOptions,
     Bech32Address,
+    ProtocolParameters,
+    DecayedMana,
 } from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
@@ -28,6 +30,13 @@ export interface IApi {
     ): Promise<void>
     migrateDbChrysalisToStardust(path: string, pinCode: string): Promise<Record<string, unknown>>
     // Mapped from sdk#Utils
+    slotIndexCreated: number
+    outputManaWithDecay(
+        output: Output,
+        slotIndexCreated: number,
+        slotIndexTarget: number,
+        protocolParameters: ProtocolParameters
+    ): DecayedMana
     generateMnemonic(): string
     verifyMnemonic(mnemonic: string): void
     hexToBech32(hex: HexEncodedString, bech32Hrp: string): Bech32Address

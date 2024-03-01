@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown } from 'shared/components'
+    import { Dropdown } from '@ui'
     import type { IDropdownItem } from '@core/utils'
     import { visibleSelectedWalletAssets } from '@core/wallet'
     import { AssetFilterUnit } from '@core/utils/interfaces/filter'

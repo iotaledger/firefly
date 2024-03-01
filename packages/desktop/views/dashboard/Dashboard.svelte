@@ -10,7 +10,7 @@
         reflectLockedStronghold,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Idle } from 'shared/components'
+    import { Idle } from '@ui'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
     import { Platform } from '@core/app'

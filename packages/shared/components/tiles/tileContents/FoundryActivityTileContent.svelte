@@ -8,7 +8,7 @@
         IPersistedAsset,
         selectedWalletAssets,
     } from '@core/wallet'
-    import { AssetIcon, ActivityTileContent } from 'shared/components'
+    import { AssetIcon, ActivityTileContent } from '@ui'
 
     export let activity: FoundryActivity
 

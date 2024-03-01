@@ -5,7 +5,7 @@
     import { getNetworkNameFromNetworkId } from '@core/network'
     import { profiles, validateProfileName } from '@core/profile'
     import { Animation, Button, Input, Text } from '@ui'
-    import { completeOnboardingRouter } from '../complete-onboarding-router'
+    import { completeOnboardingRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
 
     let error = ''

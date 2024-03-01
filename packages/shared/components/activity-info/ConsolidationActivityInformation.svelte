@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { KeyValueBox } from 'shared/components'
+    import { KeyValueBox } from '@ui'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { ConsolidationActivity } from '@core/wallet'
     import { IKeyValueBoxList } from '@core/utils'

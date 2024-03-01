@@ -2,7 +2,7 @@
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
-    import { BalanceSummaryRow, Icon } from 'shared/components'
+    import { BalanceSummaryRow, Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
     import { DEFAULT_MANA } from '@core/network'

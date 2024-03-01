@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { TextInput, Icon, TogglableButton, FontWeight } from 'shared/components'
+    import { TextInput, Icon, TogglableButton, FontWeight } from '@ui'
     import { localize } from '@core/i18n'
     import { debounce } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'

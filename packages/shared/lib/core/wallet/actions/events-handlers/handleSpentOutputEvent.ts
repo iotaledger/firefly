@@ -10,8 +10,8 @@ import {
     validateWalletApiEvent,
 } from '@core/wallet'
 import { AccountOutput, OutputType, SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
-import { nodeInfoProtocolParameters } from 'shared/lib/core/network'
-import { getUnixTimestampFromNodeInfoAndSlotIndex } from 'shared/lib/core/network/helpers/getSlotInfoFromNodeProtocolParameters'
+import { nodeInfoProtocolParameters } from '@core/network'
+import { getUnixTimestampFromNodeInfoAndSlotIndex } from '@core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 import { get } from 'svelte/store'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
@@ -26,7 +26,7 @@ export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler 
 export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
-    await syncBalance(walletId)
+    await syncBalance(walletId, true)
     if (wallet) {
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()

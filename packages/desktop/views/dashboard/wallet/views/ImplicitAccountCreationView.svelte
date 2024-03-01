@@ -1,24 +1,50 @@
 <script lang="ts">
-    import { implicitAccountCreationRoute, ImplicitAccountCreationRoute } from '../index'
+    import {
+        DashboardRoute,
+        dashboardRouter,
+        implicitAccountCreationRoute,
+        ImplicitAccountCreationRoute,
+    } from '@core/router'
     import { InitView, AccountCreationView, FundConfirmationView, OneTimeDepositView } from '.'
-    import { Text, TextType } from 'shared/components'
+    import { Text, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { selectedWallet } from '@core/wallet'
+    import { showAppNotification } from '@auxiliary/notification'
 
+    export let outputId: string | undefined
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
+
+    function handleMultipleAccounts() {
+        showAppNotification({
+            type: 'info',
+            message: localize('views.accountManagement.notification'),
+            timeout: 10000,
+            alert: true,
+        })
+        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
+    }
 
     // TODO: Update this when we have enough mana to route to the next step
     $: {
-        if ($selectedWallet?.implicitAccountOutputs?.length > 0) {
+        if (outputId === undefined) {
+            if ($selectedWallet?.implicitAccountOutputs?.length === 1) {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+            } else if ($selectedWallet?.implicitAccountOutputs?.length >= 2) {
+                handleMultipleAccounts()
+            } else if ($selectedWallet?.implicitAccountOutputs?.length === 0) {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.Init
+            }
+        } else {
             $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
         }
+
         if ($selectedWallet?.hasImplicitAccountCreationTransactionInProgress && $selectedWallet?.isTransferring) {
             $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
         }
     }
 </script>
 
-<implicit-account-creation-view class="flex flex-col w-full h-full pt-5 px-60 pb-12 items-center justify-between">
+<implicit-account-creation-view class="h-full">
     <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
         <Text type={TextType.h2}>{localize('views.implicit-account-creation.title')}</Text>
         {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Init}
@@ -26,12 +52,12 @@
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.OneTimeDeposit}
             <OneTimeDepositView />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.FundConfirmation}
-            <FundConfirmationView />
+            <FundConfirmationView {outputId} />
         {:else if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.AccountCreation}
-            <AccountCreationView />
+            <AccountCreationView {outputId} />
         {/if}
     </box-content>
-    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init}
+    {#if $implicitAccountCreationRoute !== ImplicitAccountCreationRoute.Init && !outputId}
         <div class="flex flex-row justify-center space-x-2.5">
             {#each IMPLICIT_ACCOUNT_STEPS as step}
                 <div

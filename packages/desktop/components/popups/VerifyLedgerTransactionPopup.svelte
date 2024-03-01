@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { KeyValueBox, Text, TextHint, LedgerAnimation } from 'shared/components'
+    import { KeyValueBox, Text, TextHint, LedgerAnimation } from '@ui'
     import { localize } from '@core/i18n'
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
     import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
-    import { TextHintVariant, TextType } from 'shared/components/enums'
+    import { TextHintVariant, TextType } from '@ui/enums'
     import { AnimationEnum } from '@auxiliary/animation'
 
     export let toAddress: string

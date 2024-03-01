@@ -11,6 +11,8 @@ import {
     getBech32AddressFromAddressTypes,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
+    isAccountOutput,
+    isDelegationOutput,
     isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
@@ -25,6 +27,7 @@ import {
     WalletEvent,
     WalletEventType,
 } from '@iota/sdk/out/types'
+import { closePopup } from 'shared/lib/auxiliary/popup'
 import { get } from 'svelte/store'
 
 export function handleNewOutputEvent(walletId: string): WalletApiEventHandler {
@@ -43,13 +46,19 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (!wallet || !outputData) return
 
     const output = outputData.output
-    const isAccountOutput = output.type === OutputType.Account
     const isNftOutput = output.type === OutputType.Nft
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput) {
-        await syncBalance(wallet.id)
+    // The basic outputs of the faucet dont have an address
+    const isBasicOutput = output.type === OutputType.Basic
+    if (
+        (address && wallet?.depositAddress === address && !outputData?.remainder) ||
+        isAccountOutput(outputData) ||
+        isDelegationOutput(outputData) ||
+        isBasicOutput
+    ) {
+        await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
@@ -68,30 +77,45 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
     if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
-        await syncBalance(wallet.id)
+        await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })
     }
-    if (isAccountOutput) {
+    if (isAccountOutput(outputData)) {
         const accountOutput = output as AccountOutput
         // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
         // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
 
         // if we receive the first account output, we set it as the mainAccountId of the wallet
-        if (
-            !wallet.mainAccountId &&
-            wallet?.hasImplicitAccountCreationTransactionInProgress &&
-            hasBlockIssuerFeature(accountOutput)
-        ) {
-            const mainAccountId = accountOutput.accountId
-            updateActiveWalletPersistedData(walletId, {
-                mainAccountId: mainAccountId,
-            })
+        if (wallet?.hasImplicitAccountCreationTransactionInProgress && hasBlockIssuerFeature(accountOutput)) {
+            if (!wallet.mainAccountId) {
+                const mainAccountId = accountOutput.accountId
+                updateActiveWalletPersistedData(walletId, {
+                    mainAccountId: mainAccountId,
+                })
+                updateActiveWallet(walletId, {
+                    hasImplicitAccountCreationTransactionInProgress: false,
+                    isTransferring: false,
+                    depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
+                })
+            } else {
+                updateActiveWallet(walletId, {
+                    hasImplicitAccountCreationTransactionInProgress: false,
+                    isTransferring: false,
+                })
+            }
+            closePopup() // close ActivateAccountPopup when the account output is created
+        }
+    }
+
+    // TODO: update this logic when available balance is fixed
+    if (isDelegationOutput(outputData)) {
+        if (wallet?.hasDelegationTransactionInProgress) {
             updateActiveWallet(walletId, {
-                hasImplicitAccountCreationTransactionInProgress: false,
+                hasDelegationTransactionInProgress: false,
                 isTransferring: false,
-                depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
             })
+            closePopup() // close CreateDelegationPopup when the account output is created
         }
     }
     if (isNftOutput) {

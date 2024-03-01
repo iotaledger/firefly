@@ -3,6 +3,7 @@ import {
     getRecipientAddressFromOutput,
     getRecipientReturnAddressFromOutput,
     isOutputAsync,
+    isOutputExpired,
 } from '@core/wallet/utils'
 import { getTimelockDateFromOutput } from '@core/wallet/utils/generateActivity/helper'
 import { NftOutput, UnlockConditionType } from '@iota/sdk/out/types'
@@ -24,7 +25,7 @@ export function getSpendableStatusFromUnspentNftOutput(
             (unlockCondition) => unlockCondition?.type === UnlockConditionType.StorageDepositReturn
         )
         if (expirationUnixTime) {
-            const isExpirationTimeExpired = expirationUnixTime < Date.now()
+            const isExpirationTimeExpired = isOutputExpired(nftOutput)
             if (isExpirationTimeExpired) {
                 if (isReturnRecipient) {
                     isSpendable = true

@@ -1,5 +1,5 @@
-import { stopPollingLedgerNanoStatus } from 'shared/lib/core/ledger'
-import { clearProfileFromMemory } from 'shared/lib/core/profile'
+import { stopPollingLedgerNanoStatus } from '@core/ledger'
+import { clearProfileFromMemory } from '@core/profile'
 import { get } from 'svelte/store'
 import { OnboardingSecretManagerAlreadyInitializedError } from '../errors'
 import { buildInitialOnboardingProfile } from '../helpers'

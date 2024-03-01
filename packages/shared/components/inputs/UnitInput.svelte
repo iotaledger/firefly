@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Dropdown2 } from 'shared/components'
+    import { Dropdown2 } from '@ui'
     import { TokenMetadata, TokenStandard, getUnitFromTokenMetadata } from '@core/wallet'
     import { IDropdownItem } from '@core/utils'
 

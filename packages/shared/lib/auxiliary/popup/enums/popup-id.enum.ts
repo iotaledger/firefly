@@ -22,6 +22,7 @@ export enum PopupId {
     LedgerAppGuide = 'ledgerAppGuide',
     LedgerConnection = 'ledgerConnection',
     LegalUpdate = 'legalUpdate',
+    ManageKeys = 'manageKeys',
     ManageWallet = 'manageWallet',
     ManageVotingPower = 'manageVotingPower',
     MetricSystemInfo = 'metricSystemInfo',
@@ -50,4 +51,6 @@ export enum PopupId {
     PayoutDetails = 'payoutDetails',
     VestingRewardsFinder = 'vestingRewardsFinder',
     WithdrawFromL2 = 'withdrawFromL2',
+    CreateDelegation = 'createDelegation',
+    ActivateAccount = 'activateAccount',
 }

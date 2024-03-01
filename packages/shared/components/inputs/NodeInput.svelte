@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { SelectorInput, IOption, Modal } from 'shared/components'
+    import { SelectorInput, IOption, Modal } from '@ui'
     import { localize } from '@core/i18n'
     import { activeProfile } from '@core/profile/stores'
     import { isValidUrl, stripTrailingSlash } from '@core/utils'

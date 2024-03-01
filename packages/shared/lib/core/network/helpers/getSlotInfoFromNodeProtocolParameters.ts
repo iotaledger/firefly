@@ -1,6 +1,6 @@
 import { ProtocolParameters } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
-import { convertDateToUnixTimestamp } from '../../utils'
+import { convertDateToUnixTimestamp } from '@core/utils'
 
 export function getSlotIndexFromNodeInfo(protocolParameters: ProtocolParameters): number {
     const elapsedTime = getElapsedTimeFromNodeInfo(protocolParameters)

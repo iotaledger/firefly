@@ -1,33 +1,24 @@
 <script lang="ts">
     import { truncateString } from '@core/utils'
-    import { AccountAddress, AccountOutput, ImplicitAccountCreationAddress, OutputData } from '@iota/sdk/out/types'
+    import { AccountAddress, AccountOutput, Output, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getBech32AddressFromAddressTypes, isImplicitAccountOutput } from '@core/wallet/utils'
-    import { selectedWallet } from '@core/wallet'
+    import { getBech32AddressFromAddressTypes, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
+    import { selectedWalletMainAccountId } from '@core/wallet'
 
-    const allAccounts: OutputData[] = [...$selectedWallet.accountOutputs, ...$selectedWallet.implicitAccountOutputs]
+    export let onAccountClick: (account: OutputData) => void
+    export let allOutputs: OutputData[] = []
 
-    function isAnAccount(output: OutputData): OutputData {
-        return $selectedWallet?.accountOutputs.find((account) => account.outputId === output.outputId)
+    function getAccountId(output: OutputData): string | undefined {
+        return isAccountOutput(output) ? (output.output as AccountOutput)?.accountId : undefined
     }
 
-    function formatAndTruncateAccount(output): string {
+    function formatAndTruncateAccount(output: Output): string {
         let address: string = ''
-        if (isImplicitAccountOutput(output)) {
-            address = getBech32AddressFromAddressTypes(
-                new ImplicitAccountCreationAddress(output.unlockConditions[0].address.pubKeyHash).address()
-            )
-        } else {
-            const accountId = (output as AccountOutput).accountId
-            if (accountId) {
-                address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
-            }
-        }
+        const accountId = (output as AccountOutput)?.accountId
+        if (!accountId) return ''
+        address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
         return truncateString(address, 7, 5)
-    }
-    function handleAccountClick(): void {
-        // TODO: Implement account details
     }
 </script>
 
@@ -36,8 +27,8 @@
         <left-pane-container class="flex flex-col space-y-10 h-full">
             <Text type={TextType.h2}>{localize('views.accountManagement.list.title')}</Text>
             <list-wrapper class="flex flex-col space-y-2">
-                {#each allAccounts as account, index}
-                    <ClickableTile onClick={handleAccountClick}>
+                {#each allOutputs as output, index}
+                    <ClickableTile onClick={() => onAccountClick(output)}>
                         <div class="flex flex-col space-y-1">
                             <div class="flex space-x-2">
                                 <Text
@@ -49,20 +40,22 @@
                                     {localize('views.accountManagement.list.tile.title')}
                                     {index + 1}
                                 </Text>
-                                {#if isAnAccount(account)}
+                                {#if getAccountId(output) === $selectedWalletMainAccountId}
                                     <Pill backgroundColor="blue-200" textColor="blue-600"
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
                                 {/if}
-                                {#if isImplicitAccountOutput(account.output)}
+                                {#if isImplicitAccountOutput(output.output)}
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                                     >
                                 {/if}
                             </div>
-                            <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
-                                >{formatAndTruncateAccount(account.output)}</Text
-                            >
+                            {#if isAccountOutput(output)}
+                                <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
+                                    >{formatAndTruncateAccount(output.output)}</Text
+                                >
+                            {/if}
                         </div>
                     </ClickableTile>
                 {/each}
