@@ -6,7 +6,7 @@ import {
     TransactionProgressType,
     TransactionProgress,
     WalletEvent,
-    PreparedBlockSigningHashProgress,
+    PreparedBlockSigningInputProgress,
 } from '@iota/sdk/out/types'
 
 import { VerificationPopupMode, ledgerNanoStatus, verificationPopupMode } from '@core/ledger'
@@ -79,7 +79,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     hideClose: true,
                     preventClose: true,
                     props: {
-                        hash: (payload as PreparedBlockSigningHashProgress).blockSigningHash,
+                        hash: (payload as PreparedBlockSigningInputProgress).blockSigningInput.join(''),
                     },
                 },
                 true
