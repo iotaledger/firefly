@@ -12,6 +12,7 @@ import {
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
+    isDelegationOutput,
     isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
@@ -54,6 +55,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     if (
         (address && wallet?.depositAddress === address && !outputData?.remainder) ||
         isAccountOutput(outputData) ||
+        isDelegationOutput(outputData) ||
         isBasicOutput
     ) {
         await syncBalance(wallet.id, true)
@@ -103,6 +105,17 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 })
             }
             closePopup() // close ActivateAccountPopup when the account output is created
+        }
+    }
+
+    // TODO: update this logic when available balance is fixed
+    if (isDelegationOutput(outputData)) {
+        if (wallet?.hasDelegationTransactionInProgress) {
+            updateActiveWallet(walletId, {
+                hasDelegationTransactionInProgress: false,
+                isTransferring: false,
+            })
+            closePopup() // close CreateDelegationPopup when the account output is created
         }
     }
     if (isNftOutput) {
