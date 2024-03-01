@@ -12,6 +12,7 @@ import {
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
+    isDelegationOutput,
     isImplicitAccountOutput,
     preprocessGroupedOutputs,
     syncBalance,
@@ -49,7 +50,14 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
 
-    if ((address && wallet?.depositAddress === address && !outputData?.remainder) || isAccountOutput(outputData)) {
+    // The basic outputs of the faucet dont have an address
+    const isBasicOutput = output.type === OutputType.Basic
+    if (
+        (address && wallet?.depositAddress === address && !outputData?.remainder) ||
+        isAccountOutput(outputData) ||
+        isDelegationOutput(outputData) ||
+        isBasicOutput
+    ) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
@@ -96,6 +104,17 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                     isTransferring: false,
                 })
             }
+        }
+    }
+
+    // TODO: update this logic when available balance is fixed
+    if (isDelegationOutput(outputData)) {
+        if (wallet?.hasDelegationTransactionInProgress) {
+            updateActiveWallet(walletId, {
+                hasDelegationTransactionInProgress: false,
+                isTransferring: false,
+            })
+            closePopup() // close CreateDelegationPopup when the account output is created
         }
     }
     if (isNftOutput) {

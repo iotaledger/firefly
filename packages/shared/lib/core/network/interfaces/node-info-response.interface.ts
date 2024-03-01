@@ -1,6 +1,6 @@
-import { INodeInfo } from '@iota/sdk/out/types'
+import { InfoResponse } from '@iota/sdk/out/types'
 
 export interface INodeInfoResponse {
-    nodeInfo: INodeInfo
+    nodeInfo: InfoResponse
     url: string
 }
