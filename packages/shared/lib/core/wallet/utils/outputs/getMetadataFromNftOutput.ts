@@ -1,5 +1,5 @@
 import { FeatureType, MetadataFeature, NftOutput } from '@iota/sdk/out/types'
-import { DEFAULT_NFT_ENTRY_KEY } from 'shared/lib/core/nfts'
+import { DEFAULT_NFT_ENTRY_KEY } from '@core/nfts'
 
 export function getMetadataFromNftOutput(output: NftOutput): string {
     const metadata = output.immutableFeatures?.find(
