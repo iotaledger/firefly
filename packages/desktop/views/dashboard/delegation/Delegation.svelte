@@ -52,7 +52,7 @@
     }
 
     $: delegationOutputs =
-        $selectedWallet.walletOutputs.filter((output) => output?.output?.type === OutputType.Delegation) || []
+        $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
