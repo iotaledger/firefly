@@ -44,6 +44,7 @@
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
+    let requiredMana: number
 
     $: rawAmount,
         asset,
@@ -74,9 +75,14 @@
         try {
             const details = get(newTransactionDetails)
             isPreparingOutput = true
-
             const outputParams = await getOutputParameters(details)
             preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
+            const prepareTx = await $selectedWallet.prepareTransaction([preparedOutput], getDefaultTransactionOptions())
+            requiredMana =
+                prepareTx?._preparedData?.transaction?.allotments?.reduce(
+                    (acc, prev) => acc + Number(prev?.mana || 0),
+                    0
+                ) || 0
         } catch (err) {
             handleError(err)
         } finally {
@@ -113,6 +119,7 @@
                 overflow: true,
                 props: {
                     preparedOutput,
+                    requiredMana,
                 },
             })
         }
