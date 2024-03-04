@@ -78,6 +78,7 @@ export async function buildWalletState(
         hasVotingTransactionInProgress: false,
         hasConsolidatingOutputsTransactionInProgress: false,
         hasImplicitAccountCreationTransactionInProgress: false,
+        hasDelegationTransactionInProgress: false,
         isTransferring: false,
         votingPower,
         walletOutputs,
