@@ -7,7 +7,6 @@ import { SecretManager } from '@iota/sdk'
 let timeoutTimer: ReturnType<typeof setTimeout> | undefined
 
 export function pollLedgerNanoStatus(secretManager?: SecretManager): void {
-
     const defaultPollInterval = DEFAULT_LEDGER_NANO_STATUS_POLL_INTERVAL
     const slowedPollInterval = 10 * defaultPollInterval
 
