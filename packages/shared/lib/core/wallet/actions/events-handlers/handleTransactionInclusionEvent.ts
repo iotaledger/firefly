@@ -17,8 +17,7 @@ import {
     InclusionState,
     WalletApiEventHandler,
 } from '@core/wallet'
-import { get } from 'svelte/store'
-import { activeWallets, getActiveWallets, updateActiveWallet } from '@core/profile'
+import { getActiveWalletById, updateActiveWallet } from '@core/profile'
 
 export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {
@@ -38,8 +37,7 @@ export function handleTransactionInclusionEventInternal(
     updateActivityByTransactionId(walletId, transactionId, { inclusionState })
 
     if (inclusionState === InclusionState.Confirmed) {
-        const wallets = getActiveWallets()
-        const wallet = wallets.find((wallet) => wallet.id === walletId)
+        const wallet = getActiveWalletById(walletId)
         if (wallet) {
             const hasMainAccountOutput = wallet.accountOutputs.find(
                 (output) => (output.output as AccountOutput).accountId === wallet.mainAccountId
@@ -85,7 +83,7 @@ function handleGovernanceTransactionInclusionEvent(
         // TODO: move this
         closePopup(true)
 
-        const wallet = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
+        const wallet = getActiveWalletById(walletId)
         if (!wallet) {
             return
         }
@@ -110,11 +108,11 @@ function handleConsolidationTransactionInclusionEvent(walletId: string, inclusio
         // With output consolidation we wait for the transaction confirmation to improve the UX of the vesting tab
         // we should think about making this consistent in the future
         updateActiveWallet(walletId, { isTransferring: false })
-        const account = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
-        if (!account) {
+        const wallet = getActiveWalletById(walletId)
+        if (!wallet) {
             return
         }
-        if (account?.hasConsolidatingOutputsTransactionInProgress) {
+        if (wallet?.hasConsolidatingOutputsTransactionInProgress) {
             updateActiveWallet(walletId, { hasConsolidatingOutputsTransactionInProgress: false })
         }
     }
