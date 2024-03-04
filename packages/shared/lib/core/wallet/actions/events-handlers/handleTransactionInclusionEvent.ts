@@ -1,5 +1,5 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { AccountOutput, TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from '@contexts/governance/utils/isWalletVoting'
 import { updateNftInAllWalletNfts } from '@core/nfts'
@@ -18,7 +18,7 @@ import {
     WalletApiEventHandler,
 } from '@core/wallet'
 import { get } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from '@core/profile'
+import { activeWallets, getActiveWallets, updateActiveWallet } from '@core/profile'
 
 export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {
@@ -36,6 +36,20 @@ export function handleTransactionInclusionEventInternal(
 ): void {
     const { inclusionState, transactionId } = payload
     updateActivityByTransactionId(walletId, transactionId, { inclusionState })
+
+    if (inclusionState === InclusionState.Confirmed) {
+        const wallets = getActiveWallets()
+        const wallet = wallets.find((wallet) => wallet.id === walletId)
+        if (wallet) {
+            const hasMainAccountOutput = wallet.accountOutputs.find(
+                (output) => (output.output as AccountOutput).accountId === wallet.mainAccountId
+            )
+            // Unselect the active account if it was transferred
+            if (!hasMainAccountOutput) {
+                updateActiveWallet(walletId, { mainAccountId: undefined, depositAddress: '' })
+            }
+        }
+    }
 
     const activity = getActivityByTransactionId(walletId, transactionId)
 
