@@ -71,7 +71,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     preventClose: true,
                 })
             }
-        } else if (type === TransactionProgressType.PrepareBlockSigningHash) {
+        } else if (type === TransactionProgressType.PreparedBlockSigningInput) {
             verificationPopupMode.set(VerificationPopupMode.Block)
             openPopup(
                 {
@@ -79,7 +79,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     hideClose: true,
                     preventClose: true,
                     props: {
-                        hash: (payload as PreparedBlockSigningInputProgress).blockSigningInput.join(''),
+                        hash: (payload as PreparedBlockSigningInputProgress).blockSigningInput,
                     },
                 },
                 true
