@@ -19,7 +19,7 @@ import { NftActivity } from '../types'
 import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 
-// TODO: Modify this temporary interface
+// TODO: Update this temporary interface when fixed in the SDK, linked issue https://github.com/iotaledger/firefly/issues/8134
 interface MintNftParamsTemp {
     issuer: Bech32Address
     address: Bech32Address
