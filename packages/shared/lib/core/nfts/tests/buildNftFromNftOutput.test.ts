@@ -10,7 +10,7 @@ import {
     TimelockUnlockCondition,
 } from '@iota/sdk/out/types'
 import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
-import { DEFAULT_NFT_ENTRY_KEY } from '../constants'
+import { DEFAULT_NFT_FEATURE_ENTRY_KEY } from '../constants'
 
 const accountAddress = 'rms1qr47ee0fhahukrzec088v9lngv7w5k2sn3jjtwvkcpjfgxhhsazlsurxrx9'
 
@@ -22,7 +22,7 @@ function buildImmutableFeatures() {
     return [
         new IssuerFeature(new Ed25519Address('0x20dceb927cfdc2cea642fbf77aed81f42400145b5a4fd906f1aa40af1c31afb1')),
         new MetadataFeature({
-            [DEFAULT_NFT_ENTRY_KEY]:
+            [DEFAULT_NFT_FEATURE_ENTRY_KEY]:
                 '0x7b227374616e64617264223a224952433237222c2276657273696f6e223a2276312e30222c226e616d65223a227364617364222c2274797065223a22696d6167652f706e67222c22757269223a2268747470733a2f2f697066732e696f2f697066732f516d51717a4d546176516754346634543576365057427037584e4b746f506d43396a766e313257505433676b5345227d',
         }),
     ]
