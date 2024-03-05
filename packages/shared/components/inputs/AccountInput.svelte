@@ -14,9 +14,9 @@
     let modal: Modal = undefined
 
     const accountOptions: IOption[] =
-        $selectedWallet.balances?.accounts.map((hexAccountId: string, index: number) => {
-            const accountId = api.accountIdToBech32(hexAccountId, getNetworkHrp())
-            return { key: 'Account' + (index + 1), value: accountId }
+        $selectedWallet?.balances?.accounts.map((hexAccountId: string, index: number) => {
+            const accountAddress = api.accountIdToBech32(hexAccountId, getNetworkHrp())
+            return { key: 'Account ' + (index + 1), value: accountAddress }
         }) ?? []
 
     let selected: IOption = accountOptions.find((option) => option.value === account)

@@ -10,23 +10,23 @@ import {
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { getSerialNumberFromAccountAddress } from './outputs'
+import { DEFAULT_NFT_ENTRY_KEY } from '../../nfts'
+import { api } from '@core/api'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
     circulatingSupply: number,
     metadata: IIrc30Metadata,
-    accountId: string
+    accountAddress: string
 ): Promise<FoundryOutputBuilderParams> {
-    const immutableAccountUnlockCondition = new ImmutableAccountAddressUnlockCondition(new AccountAddress(accountId))
-
-    const unlockConditions: UnlockCondition[] = [immutableAccountUnlockCondition]
-
+    const accountId = api.bech32ToHex(accountAddress)
+    const unlockConditions: UnlockCondition[] = [
+        new ImmutableAccountAddressUnlockCondition(new AccountAddress(accountId)),
+    ]
     const tokenScheme = new SimpleTokenScheme(BigInt(circulatingSupply), BigInt(0), BigInt(totalSupply))
-
-    const metadataFeature = new MetadataFeature(Converter.utf8ToHex(JSON.stringify(metadata)))
-
-    const immutableFeatures: Feature[] = [metadataFeature]
-
+    const immutableFeatures: Feature[] = [
+        new MetadataFeature({ [DEFAULT_NFT_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)) }),
+    ]
     const serialNumber = await getSerialNumberFromAccountAddress(accountId)
 
     return {

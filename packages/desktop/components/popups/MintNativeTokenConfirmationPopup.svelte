@@ -27,12 +27,12 @@
 
     async function prepareFoundryOutput(): Promise<void> {
         if ($mintTokenDetails && $selectedWallet && metadata) {
-            const { totalSupply, circulatingSupply, accountId } = $mintTokenDetails
+            const { totalSupply, circulatingSupply, accountAddress } = $mintTokenDetails
             const outputData = await buildFoundryOutputData(
                 Number(totalSupply),
                 Number(circulatingSupply),
                 metadata,
-                accountId
+                accountAddress
             )
             const client = await getClient()
             const preparedOutput = await client.buildFoundryOutput(outputData)
@@ -47,10 +47,10 @@
         details: IMintTokenDetails | undefined
     ): { [key: string]: { data: string; tooltipText?: string; isCopyable?: boolean } } | undefined {
         if (details) {
-            const { name: tokenName, symbol, accountId, url, logoUrl, decimals, totalSupply } = details
+            const { name: tokenName, symbol, accountAddress, url, logoUrl, decimals, totalSupply } = details
             return {
-                ...(accountId && {
-                    account: { data: accountId, isCopyable: true },
+                ...(accountAddress && {
+                    account: { data: accountAddress, isCopyable: true },
                 }),
                 ...(storageDeposit && {
                     storageDeposit: { data: storageDeposit },

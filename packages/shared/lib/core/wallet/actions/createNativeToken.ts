@@ -1,7 +1,7 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
-import { CreateNativeTokenParams, PreparedTransaction } from '@iota/sdk/out/types'
+import { AccountId, CreateNativeTokenParams, MetadataFeature, PreparedTransaction, u256 } from '@iota/sdk/out/types'
 import { VerifiedStatus } from '../enums'
 import { buildPersistedAssetFromMetadata } from '../helpers'
 import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
@@ -9,6 +9,15 @@ import { getSelectedWallet, resetMintTokenDetails, updateSelectedWallet } from '
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { plainToInstance } from 'class-transformer'
 import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
+import { DEFAULT_NFT_ENTRY_KEY } from '../../nfts'
+
+// TODO: Remove temporary interface
+interface CreateNativeTokenParamsTemp {
+    accountId?: AccountId
+    circulatingSupply: u256
+    maximumSupply: u256
+    foundryMetadata?: MetadataFeature
+}
 
 export async function createNativeToken(
     maximumSupply: number,
@@ -18,14 +27,16 @@ export async function createNativeToken(
     try {
         updateSelectedWallet({ isTransferring: true })
         const wallet = getSelectedWallet()
-        const params: CreateNativeTokenParams = {
+        const params: CreateNativeTokenParamsTemp = {
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),
-            foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
+            foundryMetadata: new MetadataFeature({
+                [DEFAULT_NFT_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+            }),
         }
 
         const preparedNativeTokenTransaction = await wallet?.prepareCreateNativeToken(
-            params,
+            params as CreateNativeTokenParams,
             getDefaultTransactionOptions()
         )
         const preparedTransaction = plainToInstance(PreparedTransaction, preparedNativeTokenTransaction)

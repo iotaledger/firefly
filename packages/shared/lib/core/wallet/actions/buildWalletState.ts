@@ -13,7 +13,17 @@ export async function buildWalletState(
         baseCoin: {
             total: BigInt(0),
             available: BigInt(0),
-            votingPower: '0',
+            votingPower: BigInt(0),
+        },
+        mana: {
+            total: {
+                stored: BigInt(0),
+                potential: BigInt(0),
+            },
+            available: {
+                stored: BigInt(0),
+                potential: BigInt(0),
+            },
         },
         requiredStorageDeposit: {
             account: BigInt(0),
@@ -22,7 +32,7 @@ export async function buildWalletState(
             nft: BigInt(0),
             delegation: BigInt(0),
         },
-        nativeTokens: [],
+        nativeTokens: {},
         nfts: [],
         foundries: [],
         potentiallyLockedOutputs: {},
@@ -30,7 +40,6 @@ export async function buildWalletState(
         delegations: [],
     }
 
-    let votingPower = ''
     let walletOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
     let implicitAccountOutputs: OutputData[] = []
@@ -65,7 +74,6 @@ export async function buildWalletState(
             : ''
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
-        votingPower = balances.baseCoin.votingPower
     } catch (err) {
         console.error(err)
     }
@@ -80,7 +88,6 @@ export async function buildWalletState(
         hasImplicitAccountCreationTransactionInProgress: false,
         hasDelegationTransactionInProgress: false,
         isTransferring: false,
-        votingPower,
         walletOutputs,
         accountOutputs,
         depositAddress,
