@@ -1254,6 +1254,11 @@
                 "title": "Account Address",
                 "description": "Account Address for the validator"
             } 
+        },
+        "claimDelegationRewards": {
+            "title": "Claim Rewards",
+            "description": "Claim the rewards of all epochs of this delegation output {delegationId}",
+            "confirmButton": "Claim"
         }
     },
     "actions": {

@@ -12,8 +12,9 @@
         ButtonSize,
         CopyableBox,
         BoxedIconWithText,
+        TextHintVariant,
     } from '@ui'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
         getBech32AddressFromAddressTypes,
@@ -23,7 +24,7 @@
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
-    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
 
     let delegationData: IDelegationTable[] = []
@@ -43,7 +44,7 @@
         [Header.Rewards]: number
         [Header.Epoch]: number
         [Header.Address]: string
-        [Header.Action]: () => void
+        [Header.Action]: void
     }
 
     // TODO: update interface when available
@@ -67,7 +68,7 @@
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
                     [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
-                    [Header.Action]: handleClaimRewards,
+                    [Header.Action]: handleClaimRewards(delegationOutput.delegationId),
                 }
             }) || []
         delegationData = await Promise.all(result)
@@ -75,7 +76,7 @@
 
     async function getOutputRewards(outputId: string): Promise<number> {
         const client = await getClient()
-        const rewards = await client.getRewards(outputId)
+        const rewards = await client.getOutputManaRewards(outputId)
         return Number(rewards)
     }
 
@@ -85,8 +86,27 @@
         })
     }
 
-    function handleClaimRewards(): void {
-        // TODO: add logic to claim reward
+    function handleClaimRewards(delegationId: string): void {
+        openPopup({
+            id: PopupId.Confirmation,
+            props: {
+                title: localize('popups.claimDelegationRewards.title'),
+                description: localize('popups.claimDelegationRewards.description', {
+                    values: { delegationId },
+                }),
+                confirmText: localize('popups.claimDelegationRewards.confirmButton'),
+                variant: TextHintVariant.Success,
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await $selectedWallet.delayDelegationClaiming(delegationId, false)
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
+                },
+            },
+        })
     }
 
     function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
@@ -141,7 +161,7 @@
                 return {
                     component: Button,
                     props: { size: ButtonSize.Small, onClick: value, outline: true },
-                    text: 'Claim Rewards',
+                    text: localize('popups.claimDelegationRewards.title'),
                 }
             default:
                 return {
