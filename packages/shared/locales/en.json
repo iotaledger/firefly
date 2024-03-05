@@ -669,7 +669,12 @@
                         "generatedMana": "Generated Mana:",
                         "title": "Funds arrived:",
                         "subtitle": "Generating mana...",
-                        "action": "Activate Account"
+                        "action": "Activate Account",
+                        "walletAddress": {
+                            "description": "Send funds to your wallet address to speed up the mana generation",
+                            "show": "Show Address",
+                            "copy": "Copy"
+                        }
                     }
                 },
                 "step3": {
@@ -1702,7 +1707,10 @@
         "internalTransaction": "Internal transaction",
         "coinType":"Coin type",
         "custom": "Custom",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
+        "manaCost": "Mana cost",
+        "availableMana": "Available mana",
+        "insufficientMana": "Insufficient mana {availableMana}"
     },
     "filters":{
         "title": "Filters",

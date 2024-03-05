@@ -3,7 +3,7 @@ import { IDelegationFeatures } from '@lib/features/interfaces'
 const delegationFeatures: IDelegationFeatures = {
     enabled: true,
     delegationList: {
-        enabled: false,
+        enabled: true,
     },
     delegateOutput: {
         enabled: false,

@@ -10,7 +10,7 @@
     import features from '@features/features'
     import { Dropdown, Error, NumberInput, PasswordInput, TextInput } from '@ui'
     import { getNodeInfo } from '@core/wallet/actions'
-    import { IAuth, IClientOptions } from '@iota/sdk/out/types'
+    import { Auth, ClientOptions } from '@iota/sdk/out/types'
     interface INodeValidationOptions {
         checkNodeInfo: boolean
         checkSameNetwork: boolean
@@ -23,7 +23,7 @@
     export let coinType: string = ''
     export let isBusy: boolean = false
     export let formError: string | null = null
-    export let currentClientOptions: IClientOptions | undefined = undefined
+    export let currentClientOptions: ClientOptions | undefined = undefined
     export let isDeveloperProfile: boolean = false
     export let onSubmit: () => void = () => {}
     export let showNetworkFields: boolean = false
@@ -48,8 +48,8 @@
             auth: getAuth(),
         })
 
-    function getAuth(): IAuth {
-        const auth: IAuth = {}
+    function getAuth(): Auth {
+        const auth: Auth = {}
 
         if ([username, password].every((value) => value !== '')) {
             auth.basicAuthNamePwd = [username, password]

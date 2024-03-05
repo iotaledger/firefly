@@ -14,12 +14,19 @@
         BoxedIconWithText,
     } from '@ui'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        getBech32AddressFromAddressTypes,
+        getClient,
+        selectedWalletAssets,
+    } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
+    import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
     import { PopupId, openPopup } from '@auxiliary/popup'
+    import features from '@features/features'
 
-    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+    let delegationData: IDelegationTable[] = []
 
     enum Header {
         Name = 'name',
@@ -39,6 +46,39 @@
         [Header.Action]: () => void
     }
 
+    // TODO: update interface when available
+    interface DelegationOutputTemp extends DelegationOutput {
+        validatorAddress: AccountAddress
+    }
+
+    $: delegationOutputs =
+        $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
+    $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
+    $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+
+    async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
+        const result =
+            delegationOutputs?.map(async (output, index) => {
+                const delegationOutput = output.output as DelegationOutputTemp
+                return {
+                    [Header.Name]: `Delegation ${index + 1}`,
+                    [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
+                    [Header.Rewards]: await getOutputRewards(output.outputId),
+                    [Header.Epoch]:
+                        delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
+                    [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
+                    [Header.Action]: handleClaimRewards,
+                }
+            }) || []
+        delegationData = await Promise.all(result)
+    }
+
+    async function getOutputRewards(outputId: string): Promise<number> {
+        const client = await getClient()
+        const rewards = await client.getRewards(outputId)
+        return Number(rewards)
+    }
+
     function handleDelegate(): void {
         openPopup({
             id: PopupId.CreateDelegation,
@@ -49,7 +89,7 @@
         // TODO: add logic to claim reward
     }
 
-    const renderCellValue = (value: any, header: string): { component: any; props: any; text?: string } => {
+    function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
         switch (header as Header) {
             case Header.Name:
                 return {
@@ -111,49 +151,6 @@
                 }
         }
     }
-
-    const MOCKED_DATA: IDelegationTable[] = [
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-        {
-            [Header.Name]: 'Delegation 1',
-            [Header.DelegatedFunds]: 23000000,
-            [Header.Rewards]: 1000000,
-            [Header.Epoch]: 4,
-            [Header.Address]: 'iota1fcqdsazjzfhdpfv4ls9fazskhykprtat7ps72slsc3m9cfydveaqet3cop',
-            [Header.Action]: handleClaimRewards,
-        },
-    ]
 </script>
 
 {#if $selectedWallet}
@@ -190,42 +187,45 @@
                         </div>
                     </Tile>
                 </div>
-                <table class="flex flex-col w-full space-y-4 h-80">
-                    <thead class="w-full">
-                        <tr class="flex flex-row justify-between align-items w-full">
-                            {#each Object.values(Header) as header}
-                                <th class="text-start w-60 flex-1">
-                                    <Text
-                                        color="gray-600"
-                                        fontWeight={FontWeight.medium}
-                                        fontSize="12"
-                                        type={TextType.p}>{localize(`views.delegation.table.header.${header}`)}</Text
-                                    >
-                                </th>
-                            {/each}
-                        </tr>
-                    </thead>
-                    <tbody class="flex flex-col w-full space-y-4 scrollable-y">
-                        {#each MOCKED_DATA as data}
-                            <tr
-                                class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
-                            >
-                                {#each Object.entries(data) as [key, value]}
-                                    {@const renderCell = renderCellValue(value, key)}
-                                    <td class="text-start w-60 flex-1">
-                                        {#if renderCell.text}
-                                            <svelte:component this={renderCell.component} {...renderCell.props}>
-                                                {renderCell.text}
-                                            </svelte:component>
-                                        {:else}
-                                            <svelte:component this={renderCell.component} {...renderCell.props} />
-                                        {/if}
-                                    </td>
+                {#if features.delegation.delegationList.enabled}
+                    <table class="flex flex-col w-full space-y-4 h-80">
+                        <thead class="w-full">
+                            <tr class="flex flex-row justify-between align-items w-full">
+                                {#each Object.values(Header) as header}
+                                    <th class="text-start w-60 flex-1">
+                                        <Text
+                                            color="gray-600"
+                                            fontWeight={FontWeight.medium}
+                                            fontSize="12"
+                                            type={TextType.p}
+                                            >{localize(`views.delegation.table.header.${header}`)}</Text
+                                        >
+                                    </th>
                                 {/each}
                             </tr>
-                        {/each}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="flex flex-col w-full space-y-4 scrollable-y">
+                            {#each delegationData as data}
+                                <tr
+                                    class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
+                                >
+                                    {#each Object.entries(data) as [key, value]}
+                                        {@const renderCell = renderCellValue(value, key)}
+                                        <td class="text-start w-60 flex-1">
+                                            {#if renderCell.text}
+                                                <svelte:component this={renderCell.component} {...renderCell.props}>
+                                                    {renderCell.text}
+                                                </svelte:component>
+                                            {:else}
+                                                <svelte:component this={renderCell.component} {...renderCell.props} />
+                                            {/if}
+                                        </td>
+                                    {/each}
+                                </tr>
+                            {/each}
+                        </tbody>
+                    </table>
+                {/if}
             </div>
         </Pane>
     </delegation-container>

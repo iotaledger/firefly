@@ -1,7 +1,7 @@
-import { IAuth } from './auth.interface'
+import { Auth } from '@iota/sdk/out/types'
 
 export interface INode {
     url: string
-    auth?: IAuth
+    auth?: Auth
     disabled?: boolean
 }
