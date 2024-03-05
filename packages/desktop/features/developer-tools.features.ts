@@ -6,7 +6,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     mintNft: {
-        enabled: false,
+        enabled: true,
     },
     mintNativeTokens: {
         enabled: false,
