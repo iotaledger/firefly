@@ -254,7 +254,7 @@
     </div>
     <div class="w-3/5">
         <Pane height={Height.Full}>
-            <div class="flex flex-col justify-between">
+            <div class="flex flex-col justify-between flex-1 space-y-4 scrollable-y max-h-full">
                 <proposal-questions
                     class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll"
                     bind:this={proposalQuestions}
