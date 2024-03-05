@@ -10,8 +10,8 @@ import {
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { getSerialNumberFromAccountAddress } from './outputs'
-import { DEFAULT_NFT_ENTRY_KEY } from '../../nfts'
 import { api } from '@core/api'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
@@ -25,7 +25,7 @@ export async function buildFoundryOutputData(
     ]
     const tokenScheme = new SimpleTokenScheme(BigInt(circulatingSupply), BigInt(0), BigInt(totalSupply))
     const immutableFeatures: Feature[] = [
-        new MetadataFeature({ [DEFAULT_NFT_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)) }),
+        new MetadataFeature({ [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)) }),
     ]
     const serialNumber = await getSerialNumberFromAccountAddress(accountId)
 

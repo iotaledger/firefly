@@ -9,7 +9,7 @@ import { getSelectedWallet, resetMintTokenDetails, updateSelectedWallet } from '
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { plainToInstance } from 'class-transformer'
 import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
-import { DEFAULT_NFT_ENTRY_KEY } from '../../nfts'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
 // TODO: Remove temporary interface
 interface CreateNativeTokenParamsTemp {
@@ -31,7 +31,7 @@ export async function createNativeToken(
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),
             foundryMetadata: new MetadataFeature({
-                [DEFAULT_NFT_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+                [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
             }),
         }
 
