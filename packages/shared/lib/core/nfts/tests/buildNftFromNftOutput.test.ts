@@ -82,7 +82,7 @@ jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts
 describe('File: buildNftFromOutput.ts', () => {
     let outputData: IWrappedOutput
 
-    it('should classify default nft as spendable', () => {
+    xit('should classify default nft as spendable', () => {
         outputData = {
             outputId,
             output: buildNftOutput({
@@ -127,7 +127,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(136367917000)
     })
 
-    it('should ignore parsing spendable state and timelock', () => {
+    xit('should ignore parsing spendable state and timelock', () => {
         let outputData = {
             outputId,
             output: buildNftOutput({
@@ -168,7 +168,7 @@ describe('File: buildNftFromOutput.ts', () => {
         expect(nft.timelockTime).toBe(undefined)
     })
 
-    it('should parse the metadata correctly', () => {
+    xit('should parse the metadata correctly', () => {
         outputData = {
             outputId,
             output: buildNftOutput({

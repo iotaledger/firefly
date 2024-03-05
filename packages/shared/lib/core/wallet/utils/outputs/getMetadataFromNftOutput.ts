@@ -6,5 +6,5 @@ export function getMetadataFromNftOutput(output: NftOutput): string {
         (feature) => feature.type === FeatureType.Metadata
     ) as MetadataFeature
     // TODO: update this to return all entries
-    return metadata?.entries[DEFAULT_NFT_FEATURE_ENTRY_KEY]
+    return metadata?.entries?.[DEFAULT_NFT_FEATURE_ENTRY_KEY]
 }
