@@ -1,0 +1,1 @@
+export const DEFAULT_METADATA_FEATURE_ENTRY_KEY = 'data'

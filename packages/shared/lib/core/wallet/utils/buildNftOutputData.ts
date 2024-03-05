@@ -1,7 +1,7 @@
 import { AddressUnlockCondition, Ed25519Address, MetadataFeature, NftOutputBuilderParams } from '@iota/sdk/out/types'
 import { Converter } from '@core/utils'
-import { EMPTY_HEX_ID } from '../constants'
-import { IIrc27Metadata, DEFAULT_NFT_FEATURE_ENTRY_KEY } from '@core/nfts'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY, EMPTY_HEX_ID } from '../constants'
+import { IIrc27Metadata } from '@core/nfts'
 import { api } from '@core/api'
 
 export function buildNftOutputData(metadata: IIrc27Metadata, address: string): NftOutputBuilderParams {
@@ -10,7 +10,7 @@ export function buildNftOutputData(metadata: IIrc27Metadata, address: string): N
     const unlockConditions: AddressUnlockCondition[] = [addressUnlockCondition]
 
     const metadataFeature = new MetadataFeature({
-        [DEFAULT_NFT_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+        [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
     })
 
     const immutableFeatures: MetadataFeature[] = [metadataFeature]
