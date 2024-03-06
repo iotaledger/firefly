@@ -701,6 +701,7 @@
             },
             "details": {
                 "balance": "Balance",
+                "bic": "BIC",
                 "address": "Address",
                 "staked": "Staked",
                 "mana": "Mana",
