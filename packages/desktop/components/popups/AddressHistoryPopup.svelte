@@ -140,7 +140,7 @@
 
 <div class="flex flex-col space-y-6">
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} lineHeight="6">
-        {localize('popups.addressHistory.title')}
+        {localize('popups.addressHistory.title')} [EXPORT]
     </Text>
     {#if knownAddresses}
         {#if knownAddresses.length > 0}
