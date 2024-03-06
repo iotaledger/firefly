@@ -1,8 +1,13 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
-import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
+import {
+    addOrUpdateNftInAllWalletNfts,
+    buildNftFromNftOutput,
+    DEFAULT_NFT_FEATURE_ENTRY_KEY,
+    IIrc27Metadata,
+} from '@core/nfts'
 import { Converter } from '@core/utils'
-import { MintNftParams, OutputType, PreparedTransaction } from '@iota/sdk/out/types'
+import { Bech32Address, MetadataFeature, MintNftParams, OutputType } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
 import {
     addActivityToWalletActivitiesInAllWalletActivities,
@@ -13,7 +18,13 @@ import {
 import { NftActivity } from '../types'
 import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
-import { plainToInstance } from 'class-transformer'
+
+// TODO: Update this temporary interface when fixed in the SDK, linked issue https://github.com/iotaledger/firefly/issues/8134
+interface MintNftParamsTemp {
+    issuer: Bech32Address
+    address: Bech32Address
+    immutableMetadata: MetadataFeature
+}
 
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
@@ -21,16 +32,18 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         updateSelectedWallet({ isTransferring: true })
 
         if (!wallet) return
-        const mintNftParams: MintNftParams = {
+        const mintNftParams: MintNftParamsTemp = {
             issuer: wallet.depositAddress,
-            immutableMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
+            address: wallet.depositAddress,
+            immutableMetadata: new MetadataFeature({
+                [DEFAULT_NFT_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+            }),
         }
+
         const allNftParams: MintNftParams[] = Array(quantity).fill(mintNftParams)
 
         // Mint NFT
-        const mintNftTransaction = await wallet
-            .prepareMintNfts(allNftParams, getDefaultTransactionOptions())
-            .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
+        const mintNftTransaction = await wallet.mintNfts(allNftParams, getDefaultTransactionOptions())
         resetMintNftDetails()
         showAppNotification({
             type: 'success',
