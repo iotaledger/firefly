@@ -37,7 +37,7 @@
         StakingFeature,
     } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
-    import { DEFAULT_MANA, ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
@@ -56,10 +56,6 @@
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
-    $: formattedBicMana =
-        accountId && $selectedWallet?.balances?.blockIssuanceCredits
-            ? formatTokenAmountBestMatch($selectedWallet?.balances?.blockIssuanceCredits?.[accountId], DEFAULT_MANA)
-            : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
@@ -202,10 +198,10 @@
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
                             <Text type={TextType.h3}>
-                                {formattedBicMana}
+                                {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
                             </Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.accountManagement.details.bic')}</Text
+                                >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
                             >
                         </div>
                     </Tile>

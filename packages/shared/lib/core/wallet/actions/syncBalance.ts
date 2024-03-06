@@ -8,10 +8,10 @@ import { IBalance } from '../interfaces'
 
 export async function syncBalance(walletId: string, syncCongestion: boolean): Promise<void> {
     const balances = await getBalance(walletId)
-    const blockIssuanceCredits = syncCongestion ? await getBicWalletBalance(walletId) : []
+    const blockIssuanceCredits = syncCongestion ? await getBicWalletBalance(walletId) : {}
     const totalWalletBic =
         syncCongestion && blockIssuanceCredits.length > 0
-            ? blockIssuanceCredits.reduce((acc, bic) => acc + Number(bic.blockIssuanceCredits), 0)
+            ? Object.values(blockIssuanceCredits).reduce((acc, bic) => acc + Number(bic), 0)
             : 0
 
     const totalBalance: IBalance = {
