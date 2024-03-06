@@ -1,5 +1,5 @@
-import { NftOutput, OutputType } from '@iota/sdk/out/types'
-import { ActivityAsyncStatus, ActivityDirection, InclusionState, ActivityAction } from '../../enums'
+import { NftOutput, OutputType, InclusionState } from '@iota/sdk/out/types'
+import { ActivityAsyncStatus, ActivityDirection, ActivityAction } from '../../enums'
 import { IProcessedTransaction, IWalletState, ProcessedTransaction } from '../../interfaces'
 import { Subject } from '../subject.type'
 import { Layer2Metadata } from '@core/layer-2'
@@ -9,7 +9,7 @@ import { ActivityNft } from './nft-activity.type'
 import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from 'shared/lib/core/nfts' // TODO: Fix imports
 import { generateSingleBasicActivity } from '../../utils/generateActivity/generateSingleBasicActivity'
 import { isConsolidation } from '../../utils/generateActivity/generateActivitiesFromBasicOutputs'
-import { AcitivitySend } from './send-activity.class'
+import { ActivityBasic } from './basic-activity.class'
 
 export type BaseActivity = {
     id: string
@@ -51,22 +51,23 @@ export enum SpecialStatus {
     TimeLocked = "TimeLocked"
 }
 
-export class ActivityBase {
-    constructor(
-        id: string,
-        inclusionState: InclusionState,
-        specialStatus: SpecialStatus,
-        time: number,
-        from: string[],
-        to: string[],
+export interface ActivityBaseOptions {
+    id: string,
+    inclusionState: InclusionState,
+    specialStatus: SpecialStatus,
+    time: Date, // Should this be number, slot index?
+    from: string[],
+    to: string[],
+}
 
-    ) { }
+export class ActivityBase {
+    constructor(options: ActivityBaseOptions) { }
 
     /**
      * Generate a group of activies given a processed transaction
      * @returns 
      */
-    static async generateActiviesFromProcessedTransaction(wallet: IWalletState, processedTransaction: ProcessedTransaction): Promise<Array<ActivityBase>> {
+    static async generateActivitiesFromProcessedTransaction(wallet: IWalletState, processedTransaction: ProcessedTransaction): Promise<Array<ActivityBase>> {
         let activities: Array<ActivityBase> = []
 
         const { wrappedInputs, outputs, direction } = processedTransaction;
@@ -147,18 +148,13 @@ export class ActivityBase {
                         burnedNftInputs.splice(burnedNftInputIndex, 1)
                     }
                     // Burn Activity
-                    // else if (isSelfTransaction && burnedNativeToken) {
-                    //     activity = await generateSingleBasicActivity(
-                    //         wallet,
-                    //         {
-                    //             action: ActivityAction.Burn,
-                    //             processedTransaction,
-                    //             wrappedOutput: basicOutput,
-                    //         },
-                    //         burnedNativeToken.assetId,
-                    //         burnedNativeToken.amount
-                    //     )
-                    // } 
+                    else if (isSelfTransaction && burnedNativeToken) {
+                        activity = await ActivityBasic.fromProcessedTransaction(wallet, {
+                            action: ActivityAction.Burn,
+                            processedTransaction,
+                            wrappedOutput: basicOutput,
+                        })
+                    } 
                     // Consolidation Activity
                     // else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
                     //     activity = await generateSingleConsolidationActivity(wallet, {
@@ -169,7 +165,7 @@ export class ActivityBase {
                     // } 
                     // Send Activity
                     else {
-                        activity = await AcitivitySend.fromProcessedTransaction(wallet, {
+                        activity = await ActivityBasic.fromProcessedTransaction(wallet, {
                             action: ActivityAction.Send,
                             processedTransaction,
                             wrappedOutput: basicOutput,

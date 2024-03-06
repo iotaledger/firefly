@@ -1,6 +1,6 @@
-import { ActivityDirection, InclusionState } from '@core/wallet/enums'
+import { ActivityDirection } from '@core/wallet/enums'
 import { IWrappedOutput } from './wrapped-output.interface'
-import { CommonOutput, NftOutput, OutputType, UTXOInput } from '@iota/sdk/out/types'
+import { CommonOutput, NftOutput, OutputType, UTXOInput, InclusionState } from '@iota/sdk/out/types'
 import { getNativeTokenFromOutput, getNftId, getRecipientFromOutput, getSenderAddressFromInputs, getSenderFromTransaction, getSubjectFromAddress, isSubjectInternal } from '../utils'
 import { IWalletState } from './wallet-state.interface'
 import { SenderInfo } from '../types'

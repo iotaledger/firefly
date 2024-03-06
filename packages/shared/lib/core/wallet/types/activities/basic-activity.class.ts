@@ -2,25 +2,24 @@ import { BasicOutput } from "@iota/sdk/out/types";
 import { ActivityAction, InclusionState } from "../../enums";
 import { IActivityGenerationParameters, IWalletState, ProcessedTransaction } from "../../interfaces";
 import { activityOutputContainsValue, getAmountFromOutput, getAsyncDataFromOutput, getLayer2ActivityInformation, getMetadataFromOutput, getNativeTokenFromOutput, getSendingInformation, getStorageDepositFromOutput, getTagFromOutput } from "../../utils";
-import { ActivityBase, SpecialStatus } from "./base-activity.type";
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from "./base-activity.type";
 import { isShimmerClaimingTransaction } from "shared/lib/contexts/onboarding";
 import { activeProfileId, getCoinType } from "shared/lib/core/profile";
 import { get } from "svelte/store";
 
-export class AcitivitySend extends ActivityBase {
-    constructor(id: string,
-        inclusionState: InclusionState,
-        specialStatus: SpecialStatus,
-        time: number,
-        from: string[],
-        to: string[],) {
-        super(id, inclusionState, specialStatus, time, from, to)
+interface ActivityBasicOptions extends ActivityBaseOptions {
+    
+}
+
+export class ActivityBasic extends ActivityBase {
+    constructor(options: ActivityBasicOptions) {
+        super(options)
     }
 
     static async fromProcessedTransaction(wallet: IWalletState, 
         { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
         fallbackAssetId?: string,
-        fallbackAmount?: number): Promise<AcitivitySend> {
+        fallbackAmount?: number): Promise<ActivityBasic> {
         const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
         const isHidden = false
@@ -76,30 +75,36 @@ export class AcitivitySend extends ActivityBase {
             storageDeposit = giftedStorageDeposit = 0
         }
 
-        return {
+        return new ActivityBasic({
             //type: ActivityType.Basic,
-            isHidden,
+            //isHidden,
             id,
-            transactionId,
-            time,
-            direction,
-            action,
-            isAssetHidden,
             inclusionState,
-            containsValue,
-            outputId,
-            storageDeposit,
-            giftedStorageDeposit,
-            surplus,
-            rawAmount,
-            isShimmerClaiming,
-            publicNote,
-            metadata,
-            tag,
-            assetId,
-            asyncData,
-            destinationNetwork,
-            parsedLayer2Metadata,
+            specialStatus,
+            time,
+            to,
+            from,
+            //transactionId,
+            // time,
+            // direction,
+            // action,
+            // isAssetHidden,
+            // inclusionState,
+            // containsValue,
+            // outputId,
+            // storageDeposit,
+            // giftedStorageDeposit,
+            // surplus,
+            // rawAmount,
+            // isShimmerClaiming,
+            // publicNote,
+            // metadata,
+            // tag,
+            // assetId,
+            // asyncData,
+            // destinationNetwork,
+            // parsedLayer2Metadata,
 
-        }
+        })
     }
+}

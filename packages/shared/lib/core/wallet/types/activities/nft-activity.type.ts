@@ -1,5 +1,5 @@
 import { ActivityAction, ActivityGenerationParameters, ActivityType, IWalletState, InclusionState, getAsyncDataFromOutput, getClient, getLayer2ActivityInformation, getMetadataFromOutput, getNftId, getStorageDepositFromOutput, getTagFromOutput } from '@core/wallet'
-import { ActivityBase, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
 import { NftOutput } from '@iota/sdk/out/types'
 import { handleError } from 'shared/lib/core/error/handlers'
 
@@ -8,14 +8,13 @@ export type NftActivity = BaseActivity & {
     nftId: string
 }
 
+interface ActivityNftOptions extends ActivityBaseOptions {
+    nftId: string
+}
+
 export class ActivityNft extends ActivityBase {
-    constructor(private nftId: string, id: string,
-        inclusionState: InclusionState,
-        specialStatus: SpecialStatus,
-        time: number,
-        from: string[],
-        to: string[],) {
-        super(id, inclusionState, specialStatus, time, from, to)
+    constructor(options: ActivityNftOptions) {
+        super(options)
     }
 
    static async  fromProcessedTransaction(wallet: IWalletState,
@@ -61,6 +60,14 @@ export class ActivityNft extends ActivityBase {
 
         const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
-        return new ActivityNft(nftId, id, inclusionState, specialStatus, time, from, to)
+        return new ActivityNft({
+            nftId, 
+            id, 
+            inclusionState, 
+            specialStatus, 
+            time, 
+            from, 
+            to
+        })
     }
 }

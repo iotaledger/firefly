@@ -1,3 +1,4 @@
+// TODO: Remove this and use the SDK version.
 export enum InclusionState {
     Pending = 'Pending',
     Accepted = 'Accepted',
