@@ -44,7 +44,7 @@
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
-    let requiredMana: number
+    let allotmentManaCost: number
 
     $: rawAmount,
         asset,
@@ -77,8 +77,8 @@
             isPreparingOutput = true
             const outputParams = await getOutputParameters(details)
             preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            const prepareTx = await $selectedWallet.prepareTransaction([preparedOutput], getDefaultTransactionOptions())
-            requiredMana =
+            const prepareTx = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
+            allotmentManaCost =
                 prepareTx?._preparedData?.transaction?.allotments?.reduce(
                     (acc, prev) => acc + Number(prev?.mana || 0),
                     0
@@ -119,7 +119,7 @@
                 overflow: true,
                 props: {
                     preparedOutput,
-                    requiredMana,
+                    allotmentManaCost,
                 },
             })
         }
