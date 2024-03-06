@@ -21,7 +21,6 @@ import {
 import {
     AccountAddress,
     AccountOutput,
-    CommonOutput,
     NewOutputWalletEvent,
     OutputType,
     WalletEvent,
@@ -60,8 +59,9 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     ) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
+        const walletUnspentOutputs = await wallet.unspentOutputs()
         const accountOutputs = await wallet.accounts()
-        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
+        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, walletUnspentOutputs })
 
         const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
@@ -76,7 +76,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
-    if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
+    if (isImplicitAccountOutput(outputData)) {
         await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })

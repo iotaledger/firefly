@@ -1,6 +1,14 @@
-import { OutputType, CommonOutput, UnlockConditionType, AddressUnlockCondition, AddressType } from '@iota/sdk/out/types'
+import {
+    OutputType,
+    CommonOutput,
+    UnlockConditionType,
+    AddressUnlockCondition,
+    AddressType,
+    OutputData,
+} from '@iota/sdk/out/types'
 
-export function isImplicitAccountOutput(output: CommonOutput): boolean {
+export function isImplicitAccountOutput(outputData: OutputData): boolean {
+    const output = outputData.output as CommonOutput
     return (
         output?.type === OutputType.Basic &&
         output.unlockConditions.length === 1 &&
