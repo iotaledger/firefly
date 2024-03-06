@@ -19,6 +19,7 @@
         formatTokenAmountBestMatch,
         getBech32AddressFromAddressTypes,
         getClient,
+        getDefaultTransactionOptions,
         selectedWalletAssets,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
@@ -99,7 +100,7 @@
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {
-                            await $selectedWallet.delayDelegationClaiming(delegationId, false)
+                            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
                             closePopup()
                         },
                         { stronghold: true }
