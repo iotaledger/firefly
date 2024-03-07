@@ -6,12 +6,6 @@ const Platform: IPlatform = {
     NotificationManager: undefined,
     PincodeManager: undefined,
     close(): void {},
-    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null> {
-        return Promise.resolve(null)
-    },
-    getActiveProfile(): string {
-        return ''
-    },
     getDiagnostics(): Promise<{ label: string; value: string }[]> {
         return Promise.resolve([])
     },
@@ -56,7 +50,6 @@ const Platform: IPlatform = {
     unhandledException(title: string, err: IError | unknown): Promise<void> {
         return Promise.resolve(undefined)
     },
-    updateActiveProfile(id: string): void {},
     updateAppSettings(settings: Partial<IAppSettings>): Promise<void> {
         return Promise.resolve(undefined)
     },
@@ -97,5 +90,4 @@ const Platform: IPlatform = {
     updateTheme(): void {},
 }
 
-window['__CAPACITOR__'] = Platform
 window['__ELECTRON__'] = Platform

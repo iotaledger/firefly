@@ -53,7 +53,7 @@
     cursor-pointer dark:border-transparent dark:bg-gray-850"
     class:animate-pulse={isLoading}
 >
-    <button on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center">
+    <button on:click={() => onQuestionClick(questionIndex)} class="flex justify-between items-center text-left">
         <div class="flex flex-col min-w-0">
             {#if questionIndex !== undefined}
                 <Text smaller fontWeight={FontWeight.bold} overrideColor classes="mb-1 text-blue-500">

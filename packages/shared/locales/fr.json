@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle non configuré",
             "errorFailedFetch": "Impossible de récupérer l'historique des adresses",
             "errorFailedGenerate": "Impossible de générer une nouvelle adresse"
+        },
+        "withdrawFromL2": {
+            "title": "Retirer depuis la L2",
+            "body": "Liste des adresses avec des fonds retirables",
+            "withdraw": "Retirer",
+            "withdrawing": "Retrait en cours..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Créez un nouveau profil sur {network, select, iota {Chrysalis} shimmer {Brillant} testnet {Testnet} custom {Réseau personnalisé} other {Inconnu}}",
         "claimShimmer": "Réclamer les récompenses Shimmer de votre placement",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "migrateFromLegacy": "Migrer depuis l'ancien",
+        "migrateFromLegacyDescription": "Migrer vers Stardust",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Sauvegarder le mot de passe",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Voir le statut",
         "viewAddressHistory": "Voir l'historique des adresses",
         "viewBalanceBreakdown": "Voir la répartition du solde",
+        "withdrawFromL2": "Retirer depuis la L2.",
         "verifyDepositAddress": "Vérifier l'adresse du dépôt",
         "showHiddenAccounts": "Afficher les portefeuilles cachés",
         "confirm": "Confirmer",
@@ -1399,7 +1408,8 @@
         "revote": "Voter à nouveau",
         "skipAndKeep": "Ignorer et conserver l'ancien mot de passe",
         "addChain": "Ajouter une chaîne",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Destinataire",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Vous n'avez pas de IOTA."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

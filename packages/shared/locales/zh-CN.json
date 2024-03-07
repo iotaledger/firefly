@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle not configured",
             "errorFailedFetch": "Couldn't fetch address history",
             "errorFailedGenerate": "Couldn't generate a new address"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "认领您的 Shimmer 质押奖励",
         "claimShimmerDescription": "导入您的 IOTA个人资料并领取质押奖励。",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "创建别名",
         "createAliasDescription": "创建别名Output",
         "savePassword": "保存密码",
@@ -1342,6 +1350,7 @@
         "viewStatus": "查看状态",
         "viewAddressHistory": "显示地址历史记录",
         "viewBalanceBreakdown": "View balance breakdown",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "显示隐藏钱包",
         "confirm": "确认",
@@ -1399,7 +1408,8 @@
         "revote": "重新投票",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "接收人",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "您没有IOTA。"
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle not configured",
             "errorFailedFetch": "Couldn't fetch address history",
             "errorFailedGenerate": "Couldn't generate a new address"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Lunasta Shimmer-palkkiosi stakingista",
         "claimShimmerDescription": "Tuo IOTA-profiili ja lunasta staking-palkkiot",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Tallenna salasana",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Näytä tila",
         "viewAddressHistory": "Näytä osoitehistoria",
         "viewBalanceBreakdown": "View balance breakdown",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Näytä piilotetut lompakot",
         "confirm": "Vahvista",
@@ -1399,7 +1408,8 @@
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Vastaanottaja",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Sinulla ei ole yhtään IOTA-tokenia."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

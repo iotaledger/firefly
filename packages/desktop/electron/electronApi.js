@@ -7,18 +7,11 @@ const NotificationManager = require('./lib/notificationManager')
 const { menuState } = require('./lib/menuState')
 const features = require('../features/features').default
 
-let activeProfileId = null
 const eventListeners = {}
 
 const ElectronApi = {
     updateAppSettings(settings) {
         return ipcRenderer.invoke('update-app-settings', settings)
-    },
-    getActiveProfile() {
-        return activeProfileId
-    },
-    updateActiveProfile(id) {
-        activeProfileId = id
     },
     async renameProfileFolder(oldPath, newPath) {
         return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
@@ -80,28 +73,6 @@ const ElectronApi = {
                 }
 
                 return result.filePath
-            })
-    },
-    saveStrongholdBackup: ({ allowAccess }) => null,
-    async exportTransactionHistory(defaultPath, contents) {
-        return ipcRenderer
-            .invoke('show-save-dialog', {
-                properties: ['createDirectory', 'showOverwriteConfirmation'],
-                defaultPath,
-                filters: [{ name: 'CSV Files', extensions: ['csv'] }],
-            })
-            .then((result) => {
-                if (result.canceled) {
-                    return null
-                }
-                return new Promise((resolve, reject) => {
-                    try {
-                        fs.writeFileSync(result.filePath, contents)
-                        resolve(result.filePath)
-                    } catch (err) {
-                        reject(err)
-                    }
-                })
             })
     },
     /**
@@ -336,12 +307,6 @@ const ElectronApi = {
     },
     updateTheme(theme) {
         return ipcRenderer.invoke('update-theme', theme)
-    },
-    startLedgerProcess() {
-        return ipcRenderer.send('start-ledger-process')
-    },
-    killLedgerProcess() {
-        return ipcRenderer.send('kill-ledger-process')
     },
 }
 
