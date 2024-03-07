@@ -733,9 +733,12 @@
                     "name": "Name",
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
-                    "epoch": "Epoch",
+                    "epochs": "Epochs",
                     "delegatedAddress": "Delegated to",
                     "action": "Action"
+                },
+                "body": {
+                    "epochs": "{epochs} epochs"
                 }
             }
         }

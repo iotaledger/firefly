@@ -32,7 +32,7 @@
         DelegationId = 'delegationId',
         DelegatedFunds = 'delegatedFunds',
         Rewards = 'rewards',
-        Epoch = 'epoch',
+        Epochs = 'epochs',
         DelegatedAddress = 'delegatedAddress',
         Action = 'action',
     }
@@ -41,7 +41,7 @@
         [Header.DelegationId]: string
         [Header.DelegatedFunds]: number
         [Header.Rewards]: number
-        [Header.Epoch]: number
+        [Header.Epochs]: number
         [Header.DelegatedAddress]: string
         [Header.Action]: () => void
     }
@@ -64,7 +64,7 @@
                     [Header.DelegationId]: delegationOutput.delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
                     [Header.Rewards]: await getOutputRewards(output.outputId),
-                    [Header.Epoch]:
+                    [Header.Epochs]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
                     [Header.DelegatedAddress]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards,
@@ -125,11 +125,15 @@
                         height: 20,
                     },
                 }
-            case Header.Epoch:
+            case Header.Epochs:
                 return {
                     component: Text,
                     props: { color: 'gray-600', fontWeight: FontWeight.medium, fontSize: '12', type: TextType.p },
-                    text: value + ' epochs',
+                    text: localize('views.delegation.table.body.epochs', {
+                        values: {
+                            epochs: value,
+                        },
+                    }),
                 }
             case Header.DelegatedAddress:
                 return {
