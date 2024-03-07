@@ -1,83 +1,37 @@
-import { COIN_TYPE, DEFAULT_BASE_TOKEN } from '../constants'
-import { NetworkId, TokenSupply } from '../enums'
+import { COIN_TYPE } from '../constants'
+import { NetworkId } from '../enums'
 import { IStardustNetworkMetadata } from '../interfaces'
 import { NetworkMetadata } from '../types'
+import { nodeInfoBaseToken, nodeInfoProtocol } from '../stores/node-info.store'
+import { get } from 'svelte/store'
 
 export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMetadata }> = {
     [NetworkId.Shimmer]: <IStardustNetworkMetadata>{
         id: NetworkId.Shimmer,
         name: 'Shimmer',
         coinType: COIN_TYPE[NetworkId.Shimmer],
-        protocol: {
-            version: 2,
-            networkName: 'shimmer',
-            bech32Hrp: 'smr',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 100,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Shimmer,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
+        protocol: get(nodeInfoProtocol),
+        baseToken: get(nodeInfoBaseToken),
     },
     [NetworkId.Testnet]: <IStardustNetworkMetadata>{
         id: NetworkId.Testnet,
         name: 'Testnet',
         coinType: COIN_TYPE[NetworkId.Testnet],
-        protocol: {
-            version: 2,
-            networkName: 'testnet',
-            bech32Hrp: 'rms',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 100,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Testnet,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
+        protocol: get(nodeInfoProtocol),
+        baseToken: get(nodeInfoBaseToken),
     },
     [NetworkId.Iota]: <IStardustNetworkMetadata>{
         id: NetworkId.Iota,
         name: 'IOTA',
         coinType: COIN_TYPE[NetworkId.Iota],
-        protocol: {
-            version: 2,
-            networkName: 'iota',
-            bech32Hrp: 'iota',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 250,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Iota,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
+        protocol: get(nodeInfoProtocol),
+        baseToken: get(nodeInfoBaseToken),
     },
     [NetworkId.IotaAlphanet]: <IStardustNetworkMetadata>{
         id: NetworkId.IotaAlphanet,
         name: 'IOTA Alphanet',
         coinType: COIN_TYPE[NetworkId.IotaAlphanet],
-        protocol: {
-            version: 2,
-            networkName: 'iota-alphanet-2',
-            bech32Hrp: 'atoi',
-            minPowScore: 1500,
-            belowMaxDepth: 15,
-            rentStructure: {
-                vByteCost: 250,
-                vByteFactorData: 1,
-                vByteFactorKey: 10,
-            },
-            tokenSupply: TokenSupply.Iota,
-        },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.IotaAlphanet],
+        protocol: get(nodeInfoProtocol),
+        baseToken: get(nodeInfoBaseToken),
     },
 }

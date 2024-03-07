@@ -1,11 +1,6 @@
+import { INodeInfoBaseToken } from '@iota/sdk/out/types'
 import { TokenStandard } from '../enums'
 
-export interface IBaseToken {
+export interface IBaseToken extends INodeInfoBaseToken {
     standard: TokenStandard.BaseToken
-    name: string
-    tickerSymbol?: string
-    unit: string
-    subunit?: string | null
-    decimals: number
-    useMetricPrefix?: boolean
 }

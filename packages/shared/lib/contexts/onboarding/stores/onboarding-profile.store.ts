@@ -37,6 +37,6 @@ export function updateShimmerClaimingAccount(shimmerClaimingAccount: IShimmerCla
     updateOnboardingProfile({ shimmerClaimingAccounts })
 }
 
-export function getOnboardingBaseToken(): IBaseToken {
+export function getOnboardingBaseToken(): IBaseToken | undefined {
     return get(onboardingProfile)?.network?.baseToken
 }
