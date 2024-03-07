@@ -27,6 +27,7 @@
     import features from '@features/features'
 
     let delegationData: IDelegationTable[] = []
+    let currentEpoch = 0
 
     enum Header {
         DelegationId = 'delegationId',
@@ -53,7 +54,8 @@
 
     $: delegationOutputs =
         $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
-    $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
+    $: delegationOutputs?.length > 0 && getCurrentEpoch()
+    $: delegationOutputs?.length > 0 && currentEpoch && mappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
@@ -64,8 +66,7 @@
                     [Header.DelegationId]: delegationOutput.delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
                     [Header.Rewards]: await getOutputRewards(output.outputId),
-                    [Header.Epochs]:
-                        delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
+                    [Header.Epochs]: currentEpoch - delegationOutput.startEpoch - 2,
                     [Header.DelegatedAddress]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards,
                 }
@@ -77,6 +78,12 @@
         const client = await getClient()
         const rewards = await client.getRewards(outputId)
         return Number(rewards)
+    }
+
+    async function getCurrentEpoch(): Promise<void> {
+        const client = await getClient()
+        const comittee = await client.getCommittee()
+        currentEpoch = comittee.epoch
     }
 
     function handleDelegate(): void {
