@@ -11,12 +11,15 @@ let oldSecretManagerOptions: SecretManagerType | null = null
 // activeProfileSecretManager is used outside of svelte components too
 activeProfile.subscribe((profile) => {
     // Dont create a new instance of secretManager when it is already initialized
-    if (profile.secretManagerOptions && oldSecretManagerOptions !== profile.secretManagerOptions) {
-        api.createSecretManager(profile.secretManagerOptions).then((secretManager) => {
-            activeProfileSecretManager.set(secretManager)
-        })
-        oldSecretManagerOptions = profile.secretManagerOptions
+    if (profile.secretManagerOptions) {
+        if (oldSecretManagerOptions !== profile.secretManagerOptions) {
+            api.createSecretManager(profile.secretManagerOptions).then((secretManager) => {
+                activeProfileSecretManager.set(secretManager)
+            })
+            oldSecretManagerOptions = profile.secretManagerOptions
+        }
     } else {
         activeProfileSecretManager.set(null)
+        oldSecretManagerOptions = null
     }
 })

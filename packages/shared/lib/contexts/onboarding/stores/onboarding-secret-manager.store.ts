@@ -12,7 +12,7 @@ export async function buildOnboardingSecretManager(): Promise<void> {
         const { strongholdPassword, secretManagerOptions, mnemonic } = profile
         const mnemonicStringified = mnemonic?.join(' ') ?? ''
 
-        if (!strongholdPassword || !secretManagerOptions || !mnemonic) {
+        if (!secretManagerOptions) {
             return
         }
 
@@ -24,11 +24,13 @@ export async function buildOnboardingSecretManager(): Promise<void> {
             await secretManager.setStrongholdPassword(strongholdPassword)
         }
 
-        // 3. Verify Mnemonic
-        await verifyMnemonic(mnemonicStringified)
+        if (mnemonicStringified) {
+            // 3. Verify Mnemonic
+            await verifyMnemonic(mnemonicStringified)
 
-        // 4. Store Mnemonic
-        await secretManager.storeMnemonic(mnemonicStringified)
+            // 4. Store Mnemonic
+            await secretManager.storeMnemonic(mnemonicStringified)
+        }
 
         onboardingProfileSecretManager.set(secretManager)
     } else {

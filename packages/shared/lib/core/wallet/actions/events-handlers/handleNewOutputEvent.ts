@@ -104,7 +104,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                     isTransferring: false,
                 })
             }
-            closePopup() // close ActivateAccountPopup when the account output is created
         }
     }
 
