@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle tidak dikonfigurasi",
             "errorFailedFetch": "Tidak dapat mengambil riwayat alamat",
             "errorFailedGenerate": "Tidak dapat membuat alamat baru"
+        },
+        "withdrawFromL2": {
+            "title": "Tarik dari L2",
+            "body": "Daftar alamat dengan dana yang bisa ditarik",
+            "withdraw": "Tarik",
+            "withdrawing": "Penarikan..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Buat profil baru yang berjalan di {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown} }",
         "claimShimmer": "Klaim hadiah staking Shimmer",
         "claimShimmerDescription": "Impor profil IOTA dan klaim hadiah staking",
+        "migrateFromLegacy": "Bermigrasi dari Legacy",
+        "migrateFromLegacyDescription": "Bermigrasi ke Stardust",
         "createAlias": "Buat alias",
         "createAliasDescription": "Buat keluaran alias",
         "savePassword": "Simpan kata sandi",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Lihat status",
         "viewAddressHistory": "Lihat riwayat alamat",
         "viewBalanceBreakdown": "Lihat rincian saldo",
+        "withdrawFromL2": "Tarik dari L2",
         "verifyDepositAddress": "Verifikasi alamat setoran",
         "showHiddenAccounts": "Tampilkan dompet/akun tersembunyi",
         "confirm": "Konfirmasi",
@@ -1399,7 +1408,8 @@
         "revote": "Pemungutan suara ulang",
         "skipAndKeep": "Lewati dan simpan kata sandi lama",
         "addChain": "Tambahkan rantai",
-        "viewVestingRewardsFinder": "Temukan imbalan vesting"
+        "viewVestingRewardsFinder": "Temukan imbalan vesting",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Penerima",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Anda tidak memiliki IOTA."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

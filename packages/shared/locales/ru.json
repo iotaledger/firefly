@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Chronicle not configured",
             "errorFailedFetch": "Couldn't fetch address history",
             "errorFailedGenerate": "Couldn't generate a new address"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Запросить вознаграждение за ставки в Shimmer",
         "claimShimmerDescription": "Перенести профиль IOTA и востребовать вознаграждение по ставке",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "Создать псевдоним",
         "createAliasDescription": "Создание псевдонимов вывода",
         "savePassword": "Сохранить пароль",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Просмотр статуса",
         "viewAddressHistory": "Просмотр истории адресов",
         "viewBalanceBreakdown": "View balance breakdown",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Показать скрытые кошельки",
         "confirm": "Подтвердить",
@@ -1399,7 +1408,8 @@
         "revote": "Переголосовать",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Получатель",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "У вас нет ни одной IOTA."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

@@ -1190,6 +1190,12 @@
             "errorNoChronicle": "Serwer Chronicle nie jest skonfigurowany",
             "errorFailedFetch": "Nie można pobrać historii adresu",
             "errorFailedGenerate": "Nie można wygenerować nowego adresu"
+        },
+        "withdrawFromL2": {
+            "title": "Wypłać z L2",
+            "body": "Lista adresów z wypłacalnymi środkami",
+            "withdraw": "Wypłać",
+            "withdrawing": "Wypłacanie..."
         }
     },
     "charts": {
@@ -1257,6 +1263,8 @@
         "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {niestandardowej} other {nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
+        "migrateFromLegacy": "Migruj ze starej sieci",
+        "migrateFromLegacyDescription": "Migruj do Stardust",
         "createAlias": "Utwórz alias",
         "createAliasDescription": "Utwórz wyjście aliasu",
         "savePassword": "Zapisz hasło",
@@ -1297,7 +1305,7 @@
         "localProofOfWork": "Lokalny tryb proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
-        "restartNow": "Uruchom ponownie teraz",
+        "restartNow": "Uruchom ponownie",
         "refresh": "Odśwież",
         "saveBackup": "Zapisz kopię Stronghold",
         "customizeAcount": "Dostosuj portfel",
@@ -1342,6 +1350,7 @@
         "viewStatus": "Pokaż status",
         "viewAddressHistory": "Pokaż historię adresów",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "withdrawFromL2": "Wypłać z L2",
         "verifyDepositAddress": "Zweryfikuj adres odbiorcy",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
@@ -1399,7 +1408,8 @@
         "revote": "Odnów głosy",
         "skipAndKeep": "Pomiń i zachowaj stare hasło",
         "addChain": "Dodaj łańcuch",
-        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu"
+        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu",
+        "copyProfileSystemLocation": "Skopiuj lokalizację systemową profilu"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -2117,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Nie posiadasz żadnych tokenów IOTA."
+        },
+        "nft": {
+            "flagged": "Zachowaj ostrożność wchodząc w nieznane linki. Nigdy nie udostępniaj swoich kluczy prywatnych ani nie wpisuj ich do żadnych witryn czy usług."
         }
     },
     "tooltips": {
