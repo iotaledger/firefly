@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { formatHexString } from '@core/utils'
     import { onDestroy } from 'svelte'
-    import { showInternalVerificationPopup, resetShowInternalVerificationPopup } from '@core/ledger'
+    import { verificationPopupMode, resetShowInternalVerificationPopup, VerificationPopupMode } from '@core/ledger'
     import { TextHintVariant, TextType } from '@ui/enums'
     import { AnimationEnum } from '@auxiliary/animation'
 
@@ -12,10 +12,18 @@
     export let hash: string
 
     const hasSendConfirmationProps = (toAddress && toAmount) || hash
-
-    const locale = $showInternalVerificationPopup
-        ? 'popups.verifyInternalLedgerTransaction'
-        : 'popups.verifyLedgerTransaction'
+    let locale
+    $: switch ($verificationPopupMode) {
+        case VerificationPopupMode.Block:
+            locale = 'popups.verifyLedgerBlock'
+            break
+        case VerificationPopupMode.Internal:
+            locale = 'popups.verifyInternalLedgerTransaction'
+            break
+        case VerificationPopupMode.Default:
+            locale = 'popups.verifyLedgerTransaction'
+            break
+    }
 
     onDestroy(() => {
         resetShowInternalVerificationPopup()
@@ -36,7 +44,7 @@
             <KeyValueBox keyText={localize('general.sendTo')} valueText={toAddress} />
             <KeyValueBox keyText={localize('general.amount')} valueText={toAmount} />
         {/if}
-    {:else if $showInternalVerificationPopup}
+    {:else if $verificationPopupMode === VerificationPopupMode.Internal}
         <TextHint variant={TextHintVariant.Info} text={localize('popups.verifyInternalLedgerTransaction.hint')} />
     {/if}
 </div>
