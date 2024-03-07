@@ -33,7 +33,7 @@
         DelegatedFunds = 'delegatedFunds',
         Rewards = 'rewards',
         Epoch = 'epoch',
-        Address = 'address',
+        DelegatedAddress = 'delegatedAddress',
         Action = 'action',
     }
 
@@ -42,7 +42,7 @@
         [Header.DelegatedFunds]: number
         [Header.Rewards]: number
         [Header.Epoch]: number
-        [Header.Address]: string
+        [Header.DelegatedAddress]: string
         [Header.Action]: () => void
     }
 
@@ -66,7 +66,7 @@
                     [Header.Rewards]: await getOutputRewards(output.outputId),
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
-                    [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
+                    [Header.DelegatedAddress]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards,
                 }
             }) || []
@@ -131,7 +131,7 @@
                     props: { color: 'gray-600', fontWeight: FontWeight.medium, fontSize: '12', type: TextType.p },
                     text: value + ' epochs',
                 }
-            case Header.Address:
+            case Header.DelegatedAddress:
                 return {
                     component: CopyableBox,
                     props: {

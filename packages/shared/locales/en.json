@@ -734,7 +734,7 @@
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
                     "epoch": "Epoch",
-                    "address": "Address",
+                    "delegatedAddress": "Delegated to",
                     "action": "Action"
                 }
             }
