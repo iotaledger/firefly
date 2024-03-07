@@ -1,3 +1,4 @@
+import { localize } from '../../i18n'
 import { INft } from '../interfaces'
 
 /**
@@ -10,10 +11,10 @@ export function isFlaggedNft(nft: INft): string | undefined {
     const parsedMetadata = nft.parsedMetadata
     const parsedName = parsedMetadata?.name ?? ''
     const parsedDescription = parsedMetadata?.description ?? ''
-    const urlRegex = /\b\w+\.\w+\b|\b\w*(lottery|congratulations|enter|click|your|www|won|gain)\w*\b/i
+    const urlRegex = new RegExp('\\b(?:https?:\\/\\/)?[\\w-]+(?:\\.[\\w-]+)+(?:\\/[^\\s()<>]*)?', 'i')
     const containsUrl = urlRegex.test(name) || urlRegex.test(parsedName) || urlRegex.test(parsedDescription)
-    // Note: in order to avoid issues with the translations, we are using a hardcoded string here
-    const WARNING_MESSAGE =
-        'Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services.    '
-    return containsUrl ? WARNING_MESSAGE : undefined
+
+    if (containsUrl) {
+        return localize('general.warning.nft.flagged')
+    }
 }
