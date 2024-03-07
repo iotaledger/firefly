@@ -1408,7 +1408,8 @@
         "revote": "Újraszavazás",
         "skipAndKeep": "Kihagyás és a reégi jelszó használata",
         "addChain": "Lánc hozzáadása",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Profil rendszerbeli útvonalának másolása"
     },
     "general": {
         "recipient": "Címzett",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Nincs egyetlen IOTA tokenje sem."
+        },
+        "nft": {
+            "flagged": "Legyen óvatos, ha ismeretlen hivatkozásokra kattint. Soha ne ossza meg a privát kulcsait, és ne adja meg azokat semmilyen weboldalon vagy szolgáltatásban!"
         }
     },
     "tooltips": {
