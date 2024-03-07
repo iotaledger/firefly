@@ -736,7 +736,8 @@
                     "epoch": "Epoch",
                     "address": "Address",
                     "action": "Action"
-                }
+                },
+                "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
             }
         }
     },
