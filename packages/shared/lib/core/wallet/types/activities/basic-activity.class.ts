@@ -1,10 +1,10 @@
 import { BasicOutput } from "@iota/sdk/out/types";
-import { ActivityAction, InclusionState } from "../../enums";
-import { IActivityGenerationParameters, IWalletState, ProcessedTransaction } from "../../interfaces";
+import { ActivityAction } from "../../enums";
+import { IActivityGenerationParameters, IWalletState } from "../../interfaces";
 import { activityOutputContainsValue, getAmountFromOutput, getAsyncDataFromOutput, getLayer2ActivityInformation, getMetadataFromOutput, getNativeTokenFromOutput, getSendingInformation, getStorageDepositFromOutput, getTagFromOutput } from "../../utils";
 import { ActivityBase, ActivityBaseOptions, SpecialStatus } from "./base-activity.type";
-import { isShimmerClaimingTransaction } from "shared/lib/contexts/onboarding";
-import { activeProfileId, getCoinType } from "shared/lib/core/profile";
+import { isShimmerClaimingTransaction } from "@contexts/onboarding";
+import { activeProfileId, getCoinType } from "@core/profile";
 import { get } from "svelte/store";
 
 interface ActivityBasicOptions extends ActivityBaseOptions {
@@ -22,6 +22,7 @@ export class ActivityBasic extends ActivityBase {
         fallbackAmount?: number): Promise<ActivityBasic> {
         const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
+        const specialStatus = SpecialStatus.Unclaimed // TODO: Fix this
         const isHidden = false
         const isAssetHidden = false
         const containsValue = await activityOutputContainsValue(wallet, wrappedOutput)

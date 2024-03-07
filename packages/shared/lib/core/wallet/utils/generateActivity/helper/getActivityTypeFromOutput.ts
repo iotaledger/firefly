@@ -17,8 +17,8 @@ export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType 
                 return ActivityType.Governance
             } else if (isVestingOutputId(output.outputId)) {
                 return ActivityType.Vesting
-            } else {
-                return ActivityType.Basic
             }
     }
+
+    return ActivityType.Basic
 }
