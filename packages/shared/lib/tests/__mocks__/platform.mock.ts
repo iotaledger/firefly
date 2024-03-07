@@ -41,6 +41,9 @@ const Platform: IPlatform = {
     removeProfileFolder(profilePath: string): Promise<void> {
         return Promise.resolve(undefined)
     },
+    renameProfileFolder(oldPath: string, newPath: string): Promise<void> {
+        return Promise.resolve(undefined)
+    },
     saveRecoveryKit(kitData: ArrayBuffer): Promise<void> {
         return Promise.resolve(undefined)
     },
