@@ -8,6 +8,10 @@ export function getActiveWallets(): IWalletState[] {
     return get(activeWallets)
 }
 
+export function getWalletById(walletId: string): IWalletState {
+    return getActiveWallets().find((wallet) => wallet.id === walletId)
+}
+
 export function removeWalletFromActiveWallets(walletId: string): void {
     activeWallets?.update((state) => state.filter((wallet) => wallet.id !== walletId))
 }
