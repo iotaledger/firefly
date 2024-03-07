@@ -10,7 +10,7 @@ export function isFlaggedNft(nft: INft): string | undefined {
     const parsedMetadata = nft.parsedMetadata
     const parsedName = parsedMetadata?.name ?? ''
     const parsedDescription = parsedMetadata?.description ?? ''
-    const urlRegex = /((https?|ftp|file):\/\/)?([\da-z-]+\.)+([a-z]{2,6})([/\w .-]*)*\/?$/gi
+    const urlRegex = /\b\w+\.\w+\b|\b\w*(lottery|congratulations|enter|click|your|www|won|gain)\w*\b/i
     const containsUrl = urlRegex.test(name) || urlRegex.test(parsedName) || urlRegex.test(parsedDescription)
     // Note: in order to avoid issues with the translations, we are using a hardcoded string here
     const WARNING_MESSAGE =
