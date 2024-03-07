@@ -62,7 +62,7 @@
 </script>
 
 <Pane height={Height.Fit}>
-    <Text smaller classes="mb-5">
+    <Text smaller classes="mb-4">
         {localize('views.governance.details.proposalInformation.title')}
     </Text>
     <ul class="space-y-2">
