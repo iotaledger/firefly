@@ -6,9 +6,10 @@ import {
     TransactionProgressType,
     TransactionProgress,
     WalletEvent,
+    PreparedBlockSigningInputProgress,
 } from '@iota/sdk/out/types'
 
-import { ledgerNanoStatus } from '@core/ledger'
+import { VerificationPopupMode, ledgerNanoStatus, verificationPopupMode } from '@core/ledger'
 import { isActiveLedgerProfile } from '@core/profile'
 import { isOnboardingLedgerProfile } from '@contexts/onboarding'
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
@@ -60,7 +61,7 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     hideClose: true,
                     preventClose: true,
                     props: {
-                        hash: (payload as PreparedTransactionSigningHashProgress).hash,
+                        hash: (payload as PreparedTransactionSigningHashProgress).signingHash,
                     },
                 })
             } else {
@@ -70,8 +71,20 @@ function openPopupIfVerificationNeeded(payload: TransactionProgress): void {
                     preventClose: true,
                 })
             }
-            // TODO(2.0): check if this is still needed (PerformingPow)
-        } else if (type === TransactionProgressType.PerformingPow) {
+        } else if (type === TransactionProgressType.PreparedBlockSigningInput) {
+            verificationPopupMode.set(VerificationPopupMode.Block)
+            openPopup(
+                {
+                    id: PopupId.VerifyLedgerTransaction,
+                    hideClose: true,
+                    preventClose: true,
+                    props: {
+                        hash: (payload as PreparedBlockSigningInputProgress).blockSigningInput,
+                    },
+                },
+                true
+            )
+        } else if (type === TransactionProgressType.Broadcasting) {
             closePopup(true)
         }
     } else {
