@@ -15,6 +15,6 @@ export function isFlaggedNft(nft: INft): string | undefined {
     const containsUrl = urlRegex.test(name) || urlRegex.test(parsedName) || urlRegex.test(parsedDescription)
 
     if (containsUrl) {
-        return localize('general.warning.nft.flagged')
+        return localize('warning.nft.flagged')
     }
 }
