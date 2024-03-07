@@ -25,6 +25,7 @@
     import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { DEFAULT_MANA } from '@core/network'
 
     let delegationData: IDelegationTable[] = []
 
@@ -55,6 +56,15 @@
         $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+
+    $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
+    $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
+
+    $: rawUndelegatedAmount = Number($selectedWallet.balances.baseCoin.available) - rawDelegatedAmount
+    $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
+
+    $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
+    $: formattedRewards = formatTokenAmountBestMatch(rawRewardsAmount, DEFAULT_MANA)
 
     async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
@@ -164,15 +174,7 @@
                 <div class="flex flex-row space-x-4 w-1/2">
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>24 Gi</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.funds')}</Text
-                            >
-                        </div>
-                    </Tile>
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>12 Gi</Text>
+                            <Text type={TextType.h3}>{formattedDelegated}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.delegated')}</Text
                             >
@@ -180,7 +182,15 @@
                     </Tile>
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>0i</Text>
+                            <Text type={TextType.h3}>{formattedUndelegated}</Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.delegation.info.undelegated')}</Text
+                            >
+                        </div>
+                    </Tile>
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                            <Text type={TextType.h3}>{formattedRewards}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.rewards')}</Text
                             >
