@@ -1408,7 +1408,8 @@
         "revote": "Odnów głosy",
         "skipAndKeep": "Pomiń i zachowaj stare hasło",
         "addChain": "Dodaj łańcuch",
-        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu"
+        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu",
+        "copyProfileSystemLocation": "Skopiuj lokalizację systemową profilu"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Nie posiadasz żadnych tokenów IOTA."
+        },
+        "nft": {
+            "flagged": "Zachowaj ostrożność wchodząc w nieznane linki. Nigdy nie udostępniaj swoich kluczy prywatnych ani nie wpisuj ich do żadnych witryn czy usług."
         }
     },
     "tooltips": {
