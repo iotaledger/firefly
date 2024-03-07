@@ -1,8 +1,12 @@
 <script lang="ts">
+    import { appSettings } from '@core/app'
+
     export let isGhost = false
     export let fullWidth = true
     export let selected = false
     export let classes = ''
+
+    $: darkmode = $appSettings.darkMode
 </script>
 
 <tile
@@ -15,6 +19,7 @@
         {classes}
     "
     class:selected
+    class:darkmode
     on:click
     {...$$restProps}
 >
@@ -23,7 +28,11 @@
 
 <style lang="scss">
     .selected {
-        @apply border border-solid border-blue-500 bg-blue-100;
-        @apply dark:bg-blue-300 dark:bg-opacity-10;
+        @apply outline outline-1 outline-gray-400 bg-blue-50;
+
+        &.darkmode {
+            @apply outline-blue-500 bg-blue-100;
+            @apply bg-blue-300 bg-opacity-10;
+        }
     }
 </style>
