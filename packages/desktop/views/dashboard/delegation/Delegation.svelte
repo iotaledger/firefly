@@ -29,7 +29,7 @@
     let delegationData: IDelegationTable[] = []
 
     enum Header {
-        Name = 'name',
+        DelegationId = 'delegationId',
         DelegatedFunds = 'delegatedFunds',
         Rewards = 'rewards',
         Epoch = 'epoch',
@@ -38,7 +38,7 @@
     }
 
     interface IDelegationTable {
-        [Header.Name]: string
+        [Header.DelegationId]: string
         [Header.DelegatedFunds]: number
         [Header.Rewards]: number
         [Header.Epoch]: number
@@ -58,10 +58,10 @@
 
     async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
-            delegationOutputs?.map(async (output, index) => {
+            delegationOutputs?.map(async (output) => {
                 const delegationOutput = output.output as DelegationOutputTemp
                 return {
-                    [Header.Name]: `Delegation ${index + 1}`,
+                    [Header.DelegationId]: delegationOutput.delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
                     [Header.Rewards]: await getOutputRewards(output.outputId),
                     [Header.Epoch]:
@@ -91,11 +91,17 @@
 
     function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
         switch (header as Header) {
-            case Header.Name:
+            case Header.DelegationId:
                 return {
-                    component: Text,
-                    props: { type: TextType.h5, fontWeight: FontWeight.semibold },
-                    text: value,
+                    component: CopyableBox,
+                    props: {
+                        value: value,
+                        isCopyable: true,
+                        clearBoxPadding: true,
+                        clearBackground: true,
+                        classes: 'text-gray-600 dark:text-white text-xs font-semibold',
+                    },
+                    text: truncateString(value, 5, 5, 3),
                 }
             case Header.DelegatedFunds:
                 return {
