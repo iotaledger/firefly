@@ -1064,6 +1064,10 @@
             "info": "Please confirm the internal transaction on your ledger.",
             "hint": "All assets will remain on your wallet when sending an internal transaction."
         },
+        "verifyLedgerBlock": {
+            "title": "Verify block",
+            "info": "Compare and confirm the block information displayed on your ledger device against the information below."
+        },
         "ledgerAddress": {
             "title": "Confirm receive address",
             "body": "Confirm that the receive address displayed on your Ledger matches the one displayed below. If they match, press both buttons on your Ledger as prompted."
