@@ -98,14 +98,14 @@
         await updateStorageDeposit()
 
         countdownInterval = setInterval(() => {
-            secondsToRefreshExtraMana = secondsToRefreshExtraMana - 1
+            secondsToRefreshExtraMana -= 1
             if (secondsToRefreshExtraMana <= 0) {
                 $selectedWallet
                     .prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
                     .then((prepareTx) => {
                         allotmentManaCost =
                             prepareTx?._preparedData?.transaction?.allotments?.reduce(
-                                (acc, prev) => acc + Number(prev?.mana || 0),
+                                (acc, { mana }) => acc + mana,
                                 0
                             ) || 0
                         extraMana = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
