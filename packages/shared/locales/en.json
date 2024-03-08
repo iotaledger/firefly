@@ -730,7 +730,7 @@
             },
             "table": {
                 "header": {
-                    "name": "Name",
+                    "delegationId": "Delegation Id",
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
                     "epochs": "Epochs",
