@@ -8,7 +8,7 @@ export function getActiveWallets(): IWalletState[] {
     return get(activeWallets)
 }
 
-export function getWalletById(walletId: string): IWalletState {
+export function getWalletById(walletId: string): IWalletState | undefined {
     return getActiveWallets().find((wallet) => wallet.id === walletId)
 }
 

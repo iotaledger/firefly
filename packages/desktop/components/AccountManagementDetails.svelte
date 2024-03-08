@@ -208,7 +208,7 @@
                 {/if}
             </div>
             {#if accountId}
-                <div class="flex flex-col space-y-2 w-1/2">
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.address')}</Text
                     >
@@ -219,7 +219,7 @@
                         value={address}
                         classes="flex space-x-2 items-center"
                     >
-                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                             >{address}</Text
                         >
                         <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
@@ -227,21 +227,21 @@
                 </div>
             {/if}
             {#if isImplicitAccount}
-                <div class="flex flex-col space-y-2 w-1/2">
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.mana')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                         >{selectedOutput.output?.mana}</Text
                     >
                 </div>
             {/if}
             {#if isAccountOutput && primaryKey}
-                <div class="flex flex-col space-y-2 w-1/2">
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                         >{primaryKey}</Text
                     >
                 </div>
