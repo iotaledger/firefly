@@ -7,7 +7,7 @@ import { INft } from '../interfaces'
 import { parseNftMetadata } from './parseNftMetadata'
 import { composeUrlFromNftUri } from './composeUrlFromNftUri'
 import { getSpendableStatusFromUnspentNftOutput } from './getSpendableStatusFromUnspentNftOutput'
-import { Address, AddressType, NftOutput } from '@iota/sdk/out/types'
+import { NftAddress, NftOutput } from '@iota/sdk/out/types'
 
 export function buildNftFromNftOutput(
     wrappedOutput: IWrappedOutput,
@@ -26,7 +26,7 @@ export function buildNftFromNftOutput(
     }
 
     const id = getNftId(nftOutput.nftId, wrappedOutput.outputId)
-    const address = AddressConverter.addressToBech32({ type: AddressType.Nft, nftId: id } as unknown as Address)
+    const address = AddressConverter.addressToBech32(new NftAddress(id))
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)
