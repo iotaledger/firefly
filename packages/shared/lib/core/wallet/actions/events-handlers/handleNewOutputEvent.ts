@@ -83,15 +83,13 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     }
     if (isAccountOutput(outputData)) {
         const accountOutput = output as AccountOutput
-        // TODO: move to packages/shared/lib/core/wallet/actions/events-handlers/handleTransactionInclusionEvent.ts
-        // when https://github.com/iotaledger/firefly/pull/7926 is merged and we can have ActivityType.Account
 
         // if we receive the first account output, we set it as the mainAccountId of the wallet
         if (wallet?.hasImplicitAccountCreationTransactionInProgress && hasBlockIssuerFeature(accountOutput)) {
             if (!wallet.mainAccountId) {
                 const mainAccountId = accountOutput.accountId
                 updateActiveWalletPersistedData(walletId, {
-                    mainAccountId: mainAccountId,
+                    mainAccountId,
                 })
                 updateActiveWallet(walletId, {
                     hasImplicitAccountCreationTransactionInProgress: false,
@@ -104,7 +102,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                     isTransferring: false,
                 })
             }
-            closePopup() // close ActivateAccountPopup when the account output is created
         }
     }
 

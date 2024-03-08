@@ -31,7 +31,11 @@
         <div class="flex space-x-4 max-w-7xl justify-center w-full">
             {#key $selectedWallet?.id}
                 {#if features.accountManagement.accountList.enabled}
-                    <AccountManagementList onAccountClick={handleAccountClick} allOutputs={allAccountOutputs} />
+                    <AccountManagementList
+                        onAccountClick={handleAccountClick}
+                        allOutputs={allAccountOutputs}
+                        {selectedOutput}
+                    />
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} />

@@ -2,6 +2,7 @@
     import { Tile } from '@ui'
 
     export let disabled = false
+    export let selected = false
     export let classes = ''
     export let onClick: () => void
 </script>
@@ -13,6 +14,7 @@
         {classes}
     "
     on:click={onClick}
+    {selected}
 >
     <slot />
 </Tile>

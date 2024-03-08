@@ -161,7 +161,7 @@
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
                 </div>
-                <div class="flex flex-row space-x-4 w-1/2">
+                <div class="flex flex-row space-x-4 w-2/3">
                     <Tile>
                         <div class="flex flex-col space-y-2 items-center justify-center w-full">
                             <Text type={TextType.h3}>24 Gi</Text>
@@ -188,43 +188,52 @@
                     </Tile>
                 </div>
                 {#if features.delegation.delegationList.enabled}
-                    <table class="flex flex-col w-full space-y-4 h-80">
-                        <thead class="w-full">
-                            <tr class="flex flex-row justify-between align-items w-full">
-                                {#each Object.values(Header) as header}
-                                    <th class="text-start w-60 flex-1">
-                                        <Text
-                                            color="gray-600"
-                                            fontWeight={FontWeight.medium}
-                                            fontSize="12"
-                                            type={TextType.p}
-                                            >{localize(`views.delegation.table.header.${header}`)}</Text
-                                        >
-                                    </th>
-                                {/each}
-                            </tr>
-                        </thead>
-                        <tbody class="flex flex-col w-full space-y-4 scrollable-y">
-                            {#each delegationData as data}
-                                <tr
-                                    class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
-                                >
-                                    {#each Object.entries(data) as [key, value]}
-                                        {@const renderCell = renderCellValue(value, key)}
-                                        <td class="text-start w-60 flex-1">
-                                            {#if renderCell.text}
-                                                <svelte:component this={renderCell.component} {...renderCell.props}>
-                                                    {renderCell.text}
-                                                </svelte:component>
-                                            {:else}
-                                                <svelte:component this={renderCell.component} {...renderCell.props} />
-                                            {/if}
-                                        </td>
+                    {#if delegationData.length > 0}
+                        <table class="flex flex-col w-full space-y-4 h-80">
+                            <thead class="w-full">
+                                <tr class="flex flex-row justify-between align-items w-full">
+                                    {#each Object.values(Header) as header}
+                                        <th class="text-start w-60 flex-1">
+                                            <Text
+                                                color="gray-600"
+                                                fontWeight={FontWeight.medium}
+                                                fontSize="12"
+                                                type={TextType.p}
+                                                >{localize(`views.delegation.table.header.${header}`)}</Text
+                                            >
+                                        </th>
                                     {/each}
                                 </tr>
-                            {/each}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="flex flex-col w-full space-y-4 scrollable-y">
+                                {#each delegationData as data}
+                                    <tr
+                                        class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
+                                    >
+                                        {#each Object.entries(data) as [key, value]}
+                                            {@const renderCell = renderCellValue(value, key)}
+                                            <td class="text-start w-60 flex-1">
+                                                {#if renderCell.text}
+                                                    <svelte:component this={renderCell.component} {...renderCell.props}>
+                                                        {renderCell.text}
+                                                    </svelte:component>
+                                                {:else}
+                                                    <svelte:component
+                                                        this={renderCell.component}
+                                                        {...renderCell.props}
+                                                    />
+                                                {/if}
+                                            </td>
+                                        {/each}
+                                    </tr>
+                                {/each}
+                            </tbody>
+                        </table>
+                    {:else}
+                        <div class="flex flex-col w-full items-center px-40">
+                            <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
+                        </div>
+                    {/if}
                 {/if}
             </div>
         </Pane>
