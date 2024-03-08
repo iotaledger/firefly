@@ -1,10 +1,5 @@
 import { activeProfileId } from '@core/profile/stores/active-profile-id.store'
-import {
-    getBech32AddressFromAddressTypes,
-    getIssuerFromNftOutput,
-    getMetadataFromNftOutput,
-    getNftId,
-} from '@core/wallet/utils'
+import { AddressConverter, getIssuerFromNftOutput, getMetadataFromNftOutput, getNftId } from '@core/wallet/utils'
 import { IWrappedOutput } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { DEFAULT_NFT_NAME } from '../constants'
@@ -31,7 +26,7 @@ export function buildNftFromNftOutput(
     }
 
     const id = getNftId(nftOutput.nftId, wrappedOutput.outputId)
-    const address = getBech32AddressFromAddressTypes({ type: AddressType.Nft, nftId: id } as unknown as Address)
+    const address = AddressConverter.addressToBech32({ type: AddressType.Nft, nftId: id } as unknown as Address)
     const issuer = getIssuerFromNftOutput(nftOutput)
     const metadata = getMetadataFromNftOutput(nftOutput)
     const parsedMetadata = parseNftMetadata(metadata)

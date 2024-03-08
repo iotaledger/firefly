@@ -66,8 +66,8 @@ function buildNftOutput(params: NftOutputBuilderParams) {
 }
 
 // we can't use api (preload) or Utils, so we hardcode the function mock test specific
-jest.mock('../../../../lib/core/wallet/utils/getBech32AddressFromAddressTypes.ts', () => ({
-    getBech32AddressFromAddressTypes: jest.fn((address: Address) => {
+jest.mock('../../../../lib/core/wallet/utils/AddressConverter.ts', () => ({
+    AddressConverter: jest.fn((address: Address) => {
         switch (address.type) {
             case AddressType.Ed25519:
                 return accountAddress
