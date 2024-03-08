@@ -28,7 +28,6 @@
     import {
         AccountAddress,
         AccountOutput,
-        CommonOutput,
         FeatureType,
         OutputData,
         BlockIssuerFeature,
@@ -50,7 +49,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
