@@ -8,6 +8,9 @@
 
     export let onAccountClick: (account: OutputData) => void
     export let allOutputs: OutputData[] = []
+    export let selectedOutput: OutputData
+
+    $: isSelected = (output: OutputData) => output.outputId === selectedOutput.outputId
 
     function getAccountId(output: OutputData): string | undefined {
         return isAccountOutput(output) ? (output.output as AccountOutput)?.accountId : undefined
@@ -28,7 +31,7 @@
             <Text type={TextType.h2}>{localize('views.accountManagement.list.title')}</Text>
             <list-wrapper class="flex flex-col space-y-2">
                 {#each allOutputs as output, index}
-                    <ClickableTile onClick={() => onAccountClick(output)}>
+                    <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
                         <div class="flex flex-col space-y-1">
                             <div class="flex space-x-2">
                                 <Text
