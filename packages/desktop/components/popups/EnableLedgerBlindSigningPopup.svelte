@@ -16,7 +16,7 @@
     const STEPS = [1, 2, 3, 4]
 
     $: if ($ledgerNanoStatus.blindSigningEnabled) {
-        closePopup()
+        closePopup(true)
         checkOrConnectLedger(async () => {
             try {
                 if ($ledgerPreparedOutput) {

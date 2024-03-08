@@ -12,7 +12,7 @@
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
     import { Position, TextHintVariant } from '@ui/enums'
     import { localize } from '@core/i18n'
-    import { showInternalVerificationPopup } from '@core/ledger'
+    import { VerificationPopupMode, verificationPopupMode } from '@core/ledger'
     import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
@@ -45,7 +45,7 @@
 
     function onClaimClick(): void {
         if ($isActiveLedgerProfile) {
-            $showInternalVerificationPopup = true
+            $verificationPopupMode = VerificationPopupMode.Internal
         }
         checkActiveProfileAuth(() => claimActivity(activity))
     }
