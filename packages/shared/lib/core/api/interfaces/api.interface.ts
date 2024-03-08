@@ -39,7 +39,7 @@ export interface IApi {
     ): DecayedMana
     generateMnemonic(): string
     verifyMnemonic(mnemonic: string): void
-    addressToBech32(hex: Address, bech32Hrp: string): Bech32Address
+    addressToBech32(address: Address, bech32Hrp: string): Bech32Address
     parseBech32Address(bech32: Bech32Address): HexEncodedString
     computeAccountId(outputId: string): AccountId
     computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): FoundryId

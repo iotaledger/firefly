@@ -15,6 +15,16 @@ export async function buildWalletState(
             available: BigInt(0),
             votingPower: BigInt(0),
         },
+        mana: {
+            total: {
+                stored: BigInt(0),
+                potential: BigInt(0),
+            },
+            available: {
+                stored: BigInt(0),
+                potential: BigInt(0),
+            },
+        },
         requiredStorageDeposit: {
             account: BigInt(0),
             basic: BigInt(0),
