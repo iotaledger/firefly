@@ -1263,7 +1263,7 @@
         "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {niestandardowej} other {nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
-        "migrateFromLegacy": "Migracja ze starszej wersji",
+        "migrateFromLegacy": "Migruj ze starej sieci",
         "migrateFromLegacyDescription": "Migruj do Stardust",
         "createAlias": "Utwórz alias",
         "createAliasDescription": "Utwórz wyjście aliasu",
@@ -1305,7 +1305,7 @@
         "localProofOfWork": "Lokalny tryb proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
-        "restartNow": "Uruchom ponownie teraz",
+        "restartNow": "Uruchom ponownie",
         "refresh": "Odśwież",
         "saveBackup": "Zapisz kopię Stronghold",
         "customizeAcount": "Dostosuj portfel",
@@ -1408,7 +1408,8 @@
         "revote": "Odnów głosy",
         "skipAndKeep": "Pomiń i zachowaj stare hasło",
         "addChain": "Dodaj łańcuch",
-        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu"
+        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu",
+        "copyProfileSystemLocation": "Skopiuj lokalizację systemową profilu"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Nie posiadasz żadnych tokenów IOTA."
+        },
+        "nft": {
+            "flagged": "Zachowaj ostrożność wchodząc w nieznane linki. Nigdy nie udostępniaj swoich kluczy prywatnych ani nie wpisuj ich do żadnych witryn czy usług."
         }
     },
     "tooltips": {

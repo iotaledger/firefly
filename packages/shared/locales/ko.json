@@ -1408,7 +1408,8 @@
         "revote": "재투표하기",
         "skipAndKeep": "건너뛰고 이전 비밀번호 유지",
         "addChain": "체인 추가",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "수령인",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "IOTA가 없습니다."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

@@ -1408,7 +1408,8 @@
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Vastaanottaja",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Sinulla ei ole yhtään IOTA-tokenia."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

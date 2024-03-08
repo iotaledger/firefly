@@ -1408,7 +1408,8 @@
         "revote": "Pemungutan suara ulang",
         "skipAndKeep": "Lewati dan simpan kata sandi lama",
         "addChain": "Tambahkan rantai",
-        "viewVestingRewardsFinder": "Temukan imbalan vesting"
+        "viewVestingRewardsFinder": "Temukan imbalan vesting",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Penerima",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "Anda tidak memiliki IOTA."
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

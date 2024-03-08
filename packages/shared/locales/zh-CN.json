@@ -1408,7 +1408,8 @@
         "revote": "重新投票",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "接收人",
@@ -2126,6 +2127,9 @@
         },
         "participation": {
             "noFunds": "您没有IOTA。"
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {
