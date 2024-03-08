@@ -55,7 +55,7 @@
     }
 
     $: delegationOutputs =
-        $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
+        $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     // TODO: update this per each epoch
     $: delegationOutputs?.length > 0 && getCurrentEpochAndCommittee()
     $: delegationOutputs?.length > 0 && currentEpoch && mappedDelegationData(delegationOutputs)
