@@ -65,22 +65,6 @@ function buildNftOutput(params: NftOutputBuilderParams) {
     })
 }
 
-// we can't use api (preload) or Utils, so we hardcode the function mock test specific
-jest.mock('../../../../lib/core/wallet/utils/AddressConverter.ts', () => ({
-    AddressConverter: {
-        addressToBech32: jest.fn((address: Address) => {
-            switch (address.type) {
-                case AddressType.Ed25519:
-                    return accountAddress
-                case AddressType.Account:
-                    return undefined
-                case AddressType.Nft:
-                    return undefined
-            }
-        }),
-    },
-}))
-
 describe('File: buildNftFromOutput.ts', () => {
     let outputData: IWrappedOutput
 
