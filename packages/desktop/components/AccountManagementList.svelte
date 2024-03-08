@@ -21,7 +21,7 @@
         const accountId = (output as AccountOutput)?.accountId
         if (!accountId) return ''
         address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
-        return truncateString(address, 7, 5)
+        return truncateString(address, 11, 9)
     }
 </script>
 
@@ -32,7 +32,7 @@
             <list-wrapper class="flex flex-col space-y-2">
                 {#each allOutputs as output, index}
                     <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
-                        <div class="flex flex-col space-y-1">
+                        <div class="flex flex-col space-y-4">
                             <div class="flex space-x-2">
                                 <Text
                                     type={TextType.h5}
@@ -48,14 +48,14 @@
                                         >{localize('views.accountManagement.list.tile.pill.main')}</Pill
                                     >
                                 {/if}
-                                {#if isImplicitAccountOutput(output.output)}
+                                {#if isImplicitAccountOutput(output)}
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
                                     >
                                 {/if}
                             </div>
                             {#if isAccountOutput(output)}
-                                <Text type={TextType.p} fontSize="12" lineHeight="leading-140" color="gray-600"
+                                <Text type={TextType.p} fontSize="13" lineHeight="leading-140" color="gray-600"
                                     >{formatAndTruncateAccount(output.output)}</Text
                                 >
                             {/if}
