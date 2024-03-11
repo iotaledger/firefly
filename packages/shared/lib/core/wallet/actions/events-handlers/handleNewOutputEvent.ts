@@ -8,7 +8,7 @@ import {
     addActivitiesToWalletActivitiesInAllWalletActivities,
     addPersistedAsset,
     generateActivities,
-    getBech32AddressFromAddressTypes,
+    AddressConverter,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
@@ -47,7 +47,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     const output = outputData.output
     const isNftOutput = output.type === OutputType.Nft
 
-    const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
+    const address = outputData.address ? AddressConverter.addressToBech32(outputData.address) : undefined
 
     // The basic outputs of the faucet dont have an address
     const isBasicOutput = output.type === OutputType.Basic
@@ -94,7 +94,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 updateActiveWallet(walletId, {
                     hasImplicitAccountCreationTransactionInProgress: false,
                     isTransferring: false,
-                    depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
+                    depositAddress: AddressConverter.addressToBech32(new AccountAddress(mainAccountId)),
                 })
             } else {
                 updateActiveWallet(walletId, {
