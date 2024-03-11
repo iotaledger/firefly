@@ -80,7 +80,7 @@
 
     async function getOutputRewards(outputId: string): Promise<number> {
         const client = await getClient()
-        const rewards = await client.getRewards(outputId)
+        const rewards = await client.getOutputManaRewards(outputId)
         return Number(rewards)
     }
 
@@ -168,7 +168,7 @@
                 </div>
                 <div class="flex flex-row space-x-4 w-2/3">
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
                             <Text type={TextType.h3}>{formattedDelegated}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.delegated')}</Text
@@ -176,7 +176,7 @@
                         </div>
                     </Tile>
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
                             <Text type={TextType.h3}>{formattedUndelegated}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.undelegated')}</Text
@@ -184,7 +184,7 @@
                         </div>
                     </Tile>
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
                             <Text type={TextType.h3}>{formattedRewards}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.rewards')}</Text
