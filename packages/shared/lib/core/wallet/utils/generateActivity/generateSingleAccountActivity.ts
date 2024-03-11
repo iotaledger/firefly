@@ -2,7 +2,6 @@ import { EMPTY_HEX_ID } from '@core/wallet/constants'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { AccountActivity } from '@core/wallet/types'
-import { getNetworkHrp } from '@core/profile'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
@@ -11,8 +10,9 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { AccountOutput } from '@iota/sdk/out/types'
+import { AccountAddress, AccountOutput } from '@iota/sdk/out/types'
 import { api } from '@core/api'
+import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleAccountActivity(
     wallet: IWalletState,
@@ -27,7 +27,7 @@ export async function generateSingleAccountActivity(
     const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const accountId = getAccountId(output, outputId)
-    const accountAddress = api.accountIdToBech32(accountId, getNetworkHrp())
+    const accountAddress = AddressConverter.addressToBech32(new AccountAddress(accountId))
 
     const isHidden = false
     const isAssetHidden = false

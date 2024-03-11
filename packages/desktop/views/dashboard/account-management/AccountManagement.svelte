@@ -2,14 +2,18 @@
     import { selectedWallet } from '@core/wallet/stores'
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
-    import { OutputData } from '@iota/sdk/out/types'
+    import { AccountOutput, OutputData } from '@iota/sdk/out/types'
+    import { isAccountOutput, isImplicitAccountOutput } from '@core/wallet'
 
-    $: allAccountOutputs = [
-        ...($selectedWallet?.accountOutputs || []),
-        ...($selectedWallet?.implicitAccountOutputs || []),
-    ]
+    $: allAccountOutputs =
+        $selectedWallet?.walletUnspentOutputs?.filter(
+            (output) => isAccountOutput(output) || isImplicitAccountOutput(output)
+        ) || []
 
-    $: selectedOutput = allAccountOutputs?.[0]
+    let selectedOutput =
+        $selectedWallet.walletUnspentOutputs.find(
+            (output) => (output.output as AccountOutput)?.accountId === $selectedWallet.mainAccountId
+        ) || allAccountOutputs?.[0]
 
     function handleAccountClick(account: OutputData): void {
         selectedOutput = account

@@ -17,7 +17,7 @@
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
-        getBech32AddressFromAddressTypes,
+        AddressConverter,
         getClient,
         getDefaultTransactionOptions,
         selectedWalletAssets,
@@ -54,7 +54,7 @@
     }
 
     $: delegationOutputs =
-        $selectedWallet?.walletOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
+        $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
@@ -68,7 +68,7 @@
                     [Header.Rewards]: await getOutputRewards(output.outputId),
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
-                    [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
+                    [Header.Address]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards(delegationOutput.delegationId),
                 }
             }) || []
