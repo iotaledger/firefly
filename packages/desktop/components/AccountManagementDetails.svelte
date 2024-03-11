@@ -41,7 +41,7 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let selectedOutput: OutputData
-    export let index: number
+    // export let index: number
 
     let modal: Modal
     let address: string = ''
@@ -128,7 +128,8 @@
             <right-pane-title class="flex flex-col space-y-1">
                 <title-container class="flex justify-between w-full items-center">
                     <title-wrapper class="flex items-center space-x-2 py-1">
-                        <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
+                        <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')}</Text>
+                        <!-- <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text> -->
                         {#if isImplicitAccount}
                             <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                 >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
