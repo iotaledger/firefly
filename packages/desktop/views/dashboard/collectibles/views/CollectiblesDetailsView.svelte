@@ -19,7 +19,7 @@
     import { truncateString } from '@core/utils'
     import {
         formatTokenAmountPrecise,
-        getBech32AddressFromAddressTypes,
+        AddressConverter,
         getHexAddressFromAddressTypes,
         getTimeDifference,
     } from '@core/wallet'
@@ -47,7 +47,7 @@
     const { standard, version, type, uri, description, issuerName, collectionName, attributes, soonaverseAttributes } =
         nft?.parsedMetadata || {}
 
-    const issuerAddress = issuer ? getBech32AddressFromAddressTypes(issuer) : undefined
+    const issuerAddress = issuer ? AddressConverter.addressToBech32(issuer) : undefined
     const collectionId = issuer ? getHexAddressFromAddressTypes(issuer) : undefined
 
     let detailsList: {
