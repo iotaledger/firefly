@@ -51,7 +51,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const address = outputData.address ? AddressConverter.addressToBech32(outputData.address) : undefined
 
-    // TODO: Improve this logic when the delegation output is received
+    // TODO: Improve this logic when the delegation output is received -> https://github.com/iotaledger/firefly/issues/8187
     if (wallet?.hasDelegationTransactionInProgress) {
         const prevDelegationOutputs = wallet.walletUnspentOutputs?.filter(isDelegationOutput) || []
         await wallet.sync(DEFAULT_SYNC_OPTIONS)
