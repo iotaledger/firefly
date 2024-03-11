@@ -1,5 +1,5 @@
 import { IWrappedOutput } from '@core/wallet/interfaces'
-import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
+import { AddressConverter } from '../AddressConverter'
 import {
     AddressUnlockCondition,
     AccountOutput,
@@ -28,7 +28,7 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
                 ) as ExpirationUnlockCondition
 
                 if (expirationUnlockCondition) {
-                    return getBech32AddressFromAddressTypes(expirationUnlockCondition.returnAddress)
+                    return AddressConverter.addressToBech32(expirationUnlockCondition.returnAddress)
                 }
             }
         }
@@ -38,14 +38,14 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
         ) as AddressUnlockCondition
 
         if (addressUnlockCondition) {
-            return getBech32AddressFromAddressTypes(addressUnlockCondition.address)
+            return AddressConverter.addressToBech32(addressUnlockCondition.address)
         }
 
         // TODO: if additional metadata is added to an accountOutput, we could use it to determine the EVM Sender.
         const accountId = (output as AccountOutput)?.accountId
 
         if (accountId) {
-            return getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+            return AddressConverter.addressToBech32(new AccountAddress(accountId))
         }
     }
 

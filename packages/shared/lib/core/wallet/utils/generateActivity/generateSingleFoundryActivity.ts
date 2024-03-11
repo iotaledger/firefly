@@ -1,4 +1,4 @@
-import { getCoinType, getNetworkHrp } from '@core/profile'
+import { getCoinType } from '@core/profile'
 import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { FoundryActivity } from '@core/wallet/types'
@@ -17,7 +17,7 @@ import {
     SimpleTokenScheme,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
-import { api } from '@core/api'
+import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleFoundryActivity(
     wallet: IWalletState,
@@ -36,7 +36,7 @@ export async function generateSingleFoundryActivity(
         (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
     ) as ImmutableAccountAddressUnlockCondition
     const accountId = (addressUnlockCondition?.address as AccountAddress)?.accountId
-    const accountAddress = accountId ? api.accountIdToBech32(accountId, getNetworkHrp()) : undefined
+    const accountAddress = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : undefined
 
     const isHidden = false
     const isAssetHidden = false
