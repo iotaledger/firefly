@@ -3,6 +3,7 @@
     import { selectedWallet } from '@core/wallet/stores'
     import {
         Height,
+        Width,
         Pane,
         Button,
         Tile,
@@ -55,7 +56,7 @@
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
     $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
 
-    $: rawUndelegatedAmount = Number($selectedWallet.balances.baseCoin.available) - rawDelegatedAmount
+    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount
     $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
 
     $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
@@ -160,7 +161,7 @@
 
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
-        <Pane height={Height.Full}>
+        <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
                 <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
@@ -198,7 +199,7 @@
                             <thead class="w-full">
                                 <tr class="flex flex-row justify-between align-items w-full">
                                     {#each Object.values(Header) as header}
-                                        <th class="text-start w-60 flex-1">
+                                        <th class="text-start flex-1">
                                             <Text
                                                 color="gray-600"
                                                 fontWeight={FontWeight.medium}
@@ -217,7 +218,7 @@
                                     >
                                         {#each Object.entries(data) as [key, value]}
                                             {@const renderCell = renderCellValue(value, key)}
-                                            <td class="text-start w-60 flex-1">
+                                            <td class="text-start flex-1">
                                                 {#if renderCell.text}
                                                     <svelte:component this={renderCell.component} {...renderCell.props}>
                                                         {renderCell.text}
@@ -235,7 +236,7 @@
                             </tbody>
                         </table>
                     {:else}
-                        <div class="flex flex-col w-full items-center px-40">
+                        <div class="flex flex-col w-full items-center">
                             <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
                         </div>
                     {/if}
