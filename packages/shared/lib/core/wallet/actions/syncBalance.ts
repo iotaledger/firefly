@@ -16,8 +16,7 @@ export async function syncBalance(walletId: string, syncCongestion: boolean): Pr
 
     const totalBalance: IBalance = {
         ...balances,
-        ...(syncCongestion && !!blockIssuanceCredits && { blockIssuanceCredits }),
-        ...(syncCongestion && !!totalWalletBic && { totalWalletBic }),
+        ...{ totalWalletBic, blockIssuanceCredits },
     }
     if (get(selectedWalletId) === walletId) {
         updateSelectedWallet({ balances: totalBalance })
