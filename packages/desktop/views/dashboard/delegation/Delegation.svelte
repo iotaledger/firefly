@@ -45,7 +45,7 @@
         [Header.Rewards]: number
         [Header.Epoch]: number
         [Header.Address]: string
-        [Header.Action]: void
+        [Header.Action]: () => void
     }
 
     // TODO: update interface when available
@@ -69,7 +69,7 @@
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
                     [Header.Address]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
-                    [Header.Action]: handleClaimRewards(delegationOutput.delegationId),
+                    [Header.Action]: () => handleClaimRewards(delegationOutput.delegationId),
                 }
             }) || []
         delegationData = await Promise.all(result)
