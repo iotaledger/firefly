@@ -17,7 +17,7 @@
     import { formatTokenAmountBestMatch, AddressConverter, getClient, selectedWalletAssets } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
+    import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
 
@@ -42,11 +42,6 @@
         [Header.Action]: () => void
     }
 
-    // TODO: update interface when available
-    interface DelegationOutputTemp extends DelegationOutput {
-        validatorAddress: AccountAddress
-    }
-
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs?.length > 0 && getCurrentEpoch()
@@ -56,12 +51,14 @@
     async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
             delegationOutputs?.map(async (output) => {
-                const delegationOutput = output.output as DelegationOutputTemp
+                const delegationOutput = output.output as DelegationOutput
+                // Until the first epoch in which it was delegated ends, no rewards are obtained
+                const epochsDelegating = currentEpoch - delegationOutput.startEpoch
                 return {
                     [Header.DelegationId]: delegationOutput.delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
                     [Header.Rewards]: await getOutputRewards(output.outputId),
-                    [Header.Epochs]: currentEpoch - delegationOutput.startEpoch - 2,
+                    [Header.Epochs]: epochsDelegating > 0 ? epochsDelegating : 0,
                     [Header.DelegatedAddress]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards,
                 }
@@ -71,14 +68,14 @@
 
     async function getOutputRewards(outputId: string): Promise<number> {
         const client = await getClient()
-        const rewards = await client.getRewards(outputId)
+        const rewards = await client.getOutputManaRewards(outputId)
         return Number(rewards)
     }
 
     async function getCurrentEpoch(): Promise<void> {
         const client = await getClient()
-        const comittee = await client.getCommittee()
-        currentEpoch = comittee.epoch
+        const committee = await client.getCommittee()
+        currentEpoch = committee.epoch
     }
 
     function handleDelegate(): void {
