@@ -1,5 +1,5 @@
 import { Subject } from '../../types'
-import { getBech32AddressFromAddressTypes } from '../getBech32AddressFromAddressTypes'
+import { AddressConverter } from '../AddressConverter'
 import { getSubjectFromAddress } from '../getSubjectFromAddress'
 import {
     CommonOutput,
@@ -17,7 +17,7 @@ export function getSenderFromOutput(output: CommonOutput): Subject | undefined {
             const storageOrExpirationUnlockCondition = unlockCondition as
                 | StorageDepositReturnUnlockCondition
                 | ExpirationUnlockCondition
-            const address = getBech32AddressFromAddressTypes(storageOrExpirationUnlockCondition.returnAddress)
+            const address = AddressConverter.addressToBech32(storageOrExpirationUnlockCondition.returnAddress)
             if (address) {
                 return getSubjectFromAddress(address)
             }

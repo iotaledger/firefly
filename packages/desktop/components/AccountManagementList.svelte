@@ -3,7 +3,7 @@
     import { AccountAddress, AccountOutput, Output, OutputData } from '@iota/sdk/out/types'
     import { Height, Pane, TextType, Text, ClickableTile, FontWeight, Pill } from '@ui'
     import { localize } from '@core/i18n'
-    import { getBech32AddressFromAddressTypes, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
+    import { AddressConverter, isAccountOutput, isImplicitAccountOutput } from '@core/wallet/utils'
     import { selectedWalletMainAccountId } from '@core/wallet'
 
     export let onAccountClick: (account: OutputData) => void
@@ -20,7 +20,7 @@
         let address: string = ''
         const accountId = (output as AccountOutput)?.accountId
         if (!accountId) return ''
-        address = getBech32AddressFromAddressTypes(new AccountAddress(accountId))
+        address = AddressConverter.addressToBech32(new AccountAddress(accountId))
         return truncateString(address, 11, 9)
     }
 </script>

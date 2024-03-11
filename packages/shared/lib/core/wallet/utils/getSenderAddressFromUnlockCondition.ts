@@ -5,7 +5,7 @@ import {
     StorageDepositReturnUnlockCondition,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
-import { getBech32AddressFromAddressTypes } from './getBech32AddressFromAddressTypes'
+import { AddressConverter } from './AddressConverter'
 
 export function getSenderAddressFromUnlockCondition(
     unlockCondition: StorageDepositReturnUnlockCondition | ExpirationUnlockCondition
@@ -15,7 +15,7 @@ export function getSenderAddressFromUnlockCondition(
             unlockCondition?.type === UnlockConditionType.Expiration) &&
         unlockCondition?.returnAddress?.type === AddressType.Ed25519
     ) {
-        return getBech32AddressFromAddressTypes(
+        return AddressConverter.addressToBech32(
             new Ed25519Address((unlockCondition.returnAddress as Ed25519Address).pubKeyHash)
         )
     } else {

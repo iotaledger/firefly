@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { Icon } from '@auxiliary/icon/enums'
     import { updateActiveWallet, updateActiveWalletPersistedData } from '@core/profile'
-    import { getBech32AddressFromAddressTypes, selectedWallet, selectedWalletId } from '@core/wallet'
+    import { AddressConverter, selectedWallet, selectedWalletId } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { AccountAddress } from '@iota/sdk/out/types'
 
@@ -16,7 +16,7 @@
             mainAccountId: accountId,
         })
         updateActiveWallet($selectedWalletId, {
-            depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(accountId)),
+            depositAddress: AddressConverter.addressToBech32(new AccountAddress(accountId)),
         })
         modal?.close()
     }
