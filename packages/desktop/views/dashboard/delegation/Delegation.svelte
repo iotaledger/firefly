@@ -100,6 +100,7 @@
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {
+                            // TODO: Update the delegationId when https://github.com/iotaledger/firefly/issues/8188 is merged
                             await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
                             closePopup()
                         },
