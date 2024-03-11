@@ -14,12 +14,7 @@
         BoxedIconWithText,
     } from '@ui'
     import { activeProfile } from '@core/profile'
-    import {
-        formatTokenAmountBestMatch,
-        getBech32AddressFromAddressTypes,
-        getClient,
-        selectedWalletAssets,
-    } from '@core/wallet'
+    import { formatTokenAmountBestMatch, AddressConverter, getClient, selectedWalletAssets } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
@@ -66,7 +61,7 @@
                     [Header.Rewards]: await getOutputRewards(output.outputId),
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
-                    [Header.Address]: getBech32AddressFromAddressTypes(delegationOutput.validatorAddress),
+                    [Header.Address]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
                     [Header.Action]: handleClaimRewards,
                 }
             }) || []

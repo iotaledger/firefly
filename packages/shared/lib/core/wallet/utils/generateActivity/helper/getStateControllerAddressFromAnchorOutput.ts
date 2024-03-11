@@ -1,9 +1,9 @@
 import { AnchorOutput, StateControllerAddressUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
-import { getBech32AddressFromAddressTypes } from '../../getBech32AddressFromAddressTypes'
+import { AddressConverter } from '../../AddressConverter'
 
 export function getStateControllerAddressFromAnchorOutput(output: AnchorOutput): string {
     const stateControllerUnlockCondition = output.unlockConditions.find(
         (unlockCondition) => unlockCondition.type === UnlockConditionType.StateControllerAddress
     ) as StateControllerAddressUnlockCondition
-    return getBech32AddressFromAddressTypes(stateControllerUnlockCondition.address)
+    return AddressConverter.addressToBech32(stateControllerUnlockCondition.address)
 }
