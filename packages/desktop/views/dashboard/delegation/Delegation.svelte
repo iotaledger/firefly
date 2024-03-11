@@ -146,8 +146,7 @@
                         isCopyable: true,
                         clearBoxPadding: true,
                         clearBackground: true,
-                        classes:
-                            'flex flex-row justify-start items-center space-x-2 text-gray-600 dark:text-white text-xs font-medium',
+                        classes: 'flex flex-row items-center text-gray-600 dark:text-white text-xs font-medium gap-2',
                     },
                     slot: {
                         component: PingingBadge,
@@ -241,7 +240,12 @@
                                             <td class="text-start w-60 flex-1">
                                                 {#if renderCell.text}
                                                     <svelte:component this={renderCell.component} {...renderCell.props}>
-                                                        {renderCell.slot}
+                                                        {#if renderCell.slot}
+                                                            <svelte:component
+                                                                this={renderCell.slot.component}
+                                                                {...renderCell.slot.props}
+                                                            />
+                                                        {/if}
                                                         {renderCell.text}
                                                     </svelte:component>
                                                 {:else}
