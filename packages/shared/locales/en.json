@@ -725,8 +725,8 @@
                 "claimRewards": "Claim Rewards"
             },
             "info": {
-                "funds": "Total Funds",
                 "delegated": "Delegated",
+                "undelegated": "Undelegated",
                 "rewards": "Rewards"
             },
             "table": {
