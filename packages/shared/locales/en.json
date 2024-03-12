@@ -730,12 +730,15 @@
             },
             "table": {
                 "header": {
-                    "name": "Name",
+                    "delegationId": "Delegation Id",
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
-                    "epoch": "Epoch",
-                    "address": "Address",
+                    "epochs": "Epochs",
+                    "delegatedAddress": "Delegated to",
                     "action": "Action"
+                },
+                "body": {
+                    "epochs": "{epochs} epochs"
                 },
                 "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
             }
