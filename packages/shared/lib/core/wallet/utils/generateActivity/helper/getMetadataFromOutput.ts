@@ -4,6 +4,7 @@ import { EXTERNALLY_OWNED_ACCOUNT } from '@core/layer-2/constants'
 import { parseLayer2MetadataForTransfer } from '@core/layer-2/utils'
 import { containsControlCharacters, Converter } from '@core/utils'
 import { CommonOutput, FeatureType, MetadataFeature, Output } from '@iota/sdk/out/types'
+import { DEFAULT_NFT_FEATURE_ENTRY_KEY } from '@core/nfts'
 
 export function getMetadataFromOutput(output: Output): string | undefined {
     const commonOutput = output as CommonOutput
@@ -11,7 +12,8 @@ export function getMetadataFromOutput(output: Output): string | undefined {
     const metadataFeature = feature as MetadataFeature
 
     if (metadataFeature) {
-        const data = metadataFeature.data ?? undefined
+        // TODO: update this to return all entries, linked issue https://github.com/iotaledger/firefly/issues/8120
+        const data = metadataFeature?.entries?.[DEFAULT_NFT_FEATURE_ENTRY_KEY] ?? undefined
 
         if (data) {
             const isVotingOutput = isParticipationOutput(output)
