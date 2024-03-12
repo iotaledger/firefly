@@ -18,7 +18,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     deeplink: {
-        enabled: true,
+        enabled: false,
     },
 }
 
