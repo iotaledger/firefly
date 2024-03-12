@@ -2,6 +2,6 @@ import { getClient } from './getClient'
 
 export async function getOutputRewards(outputId: string): Promise<number> {
     const client = await getClient()
-    const rewards = await client.getOutputManaRewards(outputId)
-    return Number(rewards)
+    const rewardsResponse = await client.getOutputManaRewards(outputId)
+    return rewardsResponse ? Number(rewardsResponse.rewards) : 0
 }
