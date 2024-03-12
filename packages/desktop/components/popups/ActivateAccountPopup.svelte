@@ -2,14 +2,12 @@
     import { DashboardRoute, dashboardRouter } from '@core/router'
     import { selectedWallet } from '@core/wallet'
     import { ImplicitAccountCreationView } from '@views'
+
     export let outputId: string | undefined
 
-    function handleOutdatedOutput() {
-        $dashboardRouter.goTo(DashboardRoute.Wallet)
-    }
-
-    $: existOutputInUnspentOutputs = $selectedWallet.walletUnspentOutputs.some((output) => outputId === output.outputId)
-    $: !existOutputInUnspentOutputs && handleOutdatedOutput()
+    // Redirect to the dashboard when the output we passed previously has now been consumed
+    $: isAccountActivated = $selectedWallet.walletUnspentOutputs.some((output) => outputId === output.outputId)
+    $: !isAccountActivated && $dashboardRouter.goTo(DashboardRoute.Wallet)
 </script>
 
 <ImplicitAccountCreationView {outputId} />
