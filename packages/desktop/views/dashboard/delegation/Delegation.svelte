@@ -14,7 +14,13 @@
         BoxedIconWithText,
     } from '@ui'
     import { activeProfile } from '@core/profile'
-    import { formatTokenAmountBestMatch, AddressConverter, getClient, selectedWalletAssets } from '@core/wallet'
+    import {
+        formatTokenAmountBestMatch,
+        AddressConverter,
+        selectedWalletAssets,
+        getOutputRewards,
+        getCommitteeInfo,
+    } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
@@ -44,11 +50,11 @@
 
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
-    $: delegationOutputs?.length > 0 && getCurrentEpoch()
-    $: delegationOutputs?.length > 0 && currentEpoch && mappedDelegationData(delegationOutputs)
+    $: delegationOutputs?.length > 0 && setCurrentEpoch()
+    $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
-    async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
+    async function buildMappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
             delegationOutputs?.map(async (output) => {
                 const delegationOutput = output.output as DelegationOutput
@@ -66,15 +72,8 @@
         delegationData = await Promise.all(result)
     }
 
-    async function getOutputRewards(outputId: string): Promise<number> {
-        const client = await getClient()
-        const rewards = await client.getOutputManaRewards(outputId)
-        return Number(rewards)
-    }
-
-    async function getCurrentEpoch(): Promise<void> {
-        const client = await getClient()
-        const committee = await client.getCommittee()
+    async function setCurrentEpoch(): Promise<void> {
+        const committee = await getCommitteeInfo()
         currentEpoch = committee.epoch
     }
 
