@@ -191,7 +191,7 @@ export class WalletMock implements Partial<IWallet> {
         throw new Error('Method not implemented.')
     }
 
-    prepareTransaction(outputs: Output[], options?: TransactionOptions): Promise<PreparedTransaction> {
+    prepareSendOutputs(outputs: Output[], options?: TransactionOptions): Promise<PreparedTransaction> {
         throw new Error('Method not implemented.')
     }
 

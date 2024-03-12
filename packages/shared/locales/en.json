@@ -1263,6 +1263,11 @@
                 "title": "Account Address",
                 "description": "Account Address for the validator"
             } 
+        },
+        "claimDelegationRewards": {
+            "title": "Claim Rewards",
+            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
+            "confirmButton": "Claim"
         }
     },
     "actions": {
