@@ -12,6 +12,7 @@ import {
     Bech32Address,
     ProtocolParameters,
     DecayedMana,
+    DelegationId,
 } from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
@@ -45,5 +46,6 @@ export interface IApi {
     computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): FoundryId
     computeNftId(outputId: string): NftId
     computeOutputId(id: TransactionId, index: number): OutputId
+    computeDelegationId(outputId: OutputId): DelegationId
     outputHexBytes(output: Output): HexEncodedString
 }

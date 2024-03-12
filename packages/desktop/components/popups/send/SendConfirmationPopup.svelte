@@ -120,7 +120,7 @@
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
             preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            const prepareTx = await $selectedWallet.prepareTransaction([preparedOutput], getDefaultTransactionOptions())
+            const prepareTx = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
             requiredMana =
                 prepareTx?._preparedData?.transaction?.allotments?.reduce(
                     (acc, prev) => acc + Number(prev?.mana || 0),

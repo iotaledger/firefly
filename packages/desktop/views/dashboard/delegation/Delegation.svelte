@@ -14,20 +14,24 @@
         CopyableBox,
         BoxedIconWithText,
         PingingBadge,
+        TextHintVariant,
     } from '@ui'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
         AddressConverter,
+        getDefaultTransactionOptions,
         selectedWalletAssets,
+        EMPTY_HEX_ID,
         getOutputRewards,
         getCommitteeInfo,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
-    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
+    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { api } from '@core/api'
     import { DEFAULT_MANA } from '@core/network'
 
     let delegationData: IDelegationTable[] = []
@@ -73,13 +77,18 @@
                 const delegationOutput = output.output as DelegationOutput
                 // Until the first epoch in which it was delegated ends, no rewards are obtained
                 const epochsDelegating = currentEpoch - delegationOutput.startEpoch
+                let delegationId: DelegationId = delegationOutput.delegationId
+                if (delegationId === EMPTY_HEX_ID) {
+                    delegationId = api.computeDelegationId(output.outputId)
+                }
+                const rewards = await getOutputRewards(output.outputId)
                 return {
-                    [Header.DelegationId]: delegationOutput.delegationId,
+                    [Header.DelegationId]: delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
-                    [Header.Rewards]: await getOutputRewards(output.outputId),
+                    [Header.Rewards]: rewards,
                     [Header.Epochs]: epochsDelegating > 0 ? epochsDelegating : 0,
                     [Header.DelegatedAddress]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
-                    [Header.Action]: handleClaimRewards,
+                    [Header.Action]: () => handleClaimRewards(delegationId, rewards),
                 }
             }) || []
         delegationData = await Promise.all(result)
@@ -97,8 +106,27 @@
         })
     }
 
-    function handleClaimRewards(): void {
-        // TODO: add logic to claim reward
+    function handleClaimRewards(delegationId: string, rewards: number): void {
+        openPopup({
+            id: PopupId.Confirmation,
+            props: {
+                title: localize('popups.claimDelegationRewards.title'),
+                description: localize('popups.claimDelegationRewards.description', {
+                    values: { rewards, delegationId },
+                }),
+                confirmText: localize('popups.claimDelegationRewards.confirmButton'),
+                variant: TextHintVariant.Success,
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
+                },
+            },
+        })
     }
 
     function renderCellValue(value: any, header: string): { component: any; props: any; text?: string; slot?: any } {
@@ -175,7 +203,7 @@
                 return {
                     component: Button,
                     props: { size: ButtonSize.Small, onClick: value, outline: true },
-                    text: 'Claim Rewards',
+                    text: localize('popups.claimDelegationRewards.title'),
                 }
             default:
                 return {
