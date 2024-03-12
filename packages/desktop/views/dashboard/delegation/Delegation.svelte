@@ -18,69 +18,67 @@
     import {
         formatTokenAmountBestMatch,
         AddressConverter,
-        getClient,
         getDefaultTransactionOptions,
         selectedWalletAssets,
         EMPTY_HEX_ID,
+        getOutputRewards,
+        getCommitteeInfo,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
+    import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
     import { api } from '@core/api'
 
     let delegationData: IDelegationTable[] = []
+    let currentEpoch = 0
 
     enum Header {
-        Name = 'name',
+        DelegationId = 'delegationId',
         DelegatedFunds = 'delegatedFunds',
         Rewards = 'rewards',
-        Epoch = 'epoch',
-        Address = 'address',
+        Epochs = 'epochs',
+        DelegatedAddress = 'delegatedAddress',
         Action = 'action',
     }
 
     interface IDelegationTable {
-        [Header.Name]: string
+        [Header.DelegationId]: string
         [Header.DelegatedFunds]: number
         [Header.Rewards]: number
-        [Header.Epoch]: number
-        [Header.Address]: string
+        [Header.Epochs]: number
+        [Header.DelegatedAddress]: string
         [Header.Action]: () => void
-    }
-
-    // TODO: update interface when available
-    interface DelegationOutputTemp extends DelegationOutput {
-        validatorAddress: AccountAddress
     }
 
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
-    $: delegationOutputs?.length > 0 && mappedDelegationData(delegationOutputs)
+    $: delegationOutputs?.length > 0 && setCurrentEpoch()
+    $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
-    async function mappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
+    async function buildMappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
-            delegationOutputs?.map(async (output, index) => {
-                const delegationOutput = output.output as DelegationOutputTemp
+            delegationOutputs?.map(async (output) => {
+                const delegationOutput = output.output as DelegationOutput
+                // Until the first epoch in which it was delegated ends, no rewards are obtained
+                const epochsDelegating = currentEpoch - delegationOutput.startEpoch
                 return {
-                    [Header.Name]: `Delegation ${index + 1}`,
+                    [Header.DelegationId]: delegationOutput.delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
                     [Header.Rewards]: await getOutputRewards(output.outputId),
-                    [Header.Epoch]:
-                        delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
-                    [Header.Address]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
+                    [Header.Epochs]: epochsDelegating > 0 ? epochsDelegating : 0,
+                    [Header.DelegatedAddress]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
                     [Header.Action]: () => handleClaimRewards(output.outputId, delegationOutput.delegationId),
                 }
             }) || []
         delegationData = await Promise.all(result)
     }
 
-    async function getOutputRewards(outputId: string): Promise<number> {
-        const client = await getClient()
-        const rewards = await client.getOutputManaRewards(outputId)
-        return Number(rewards)
+    async function setCurrentEpoch(): Promise<void> {
+        const committee = await getCommitteeInfo()
+        currentEpoch = committee.epoch
     }
 
     function handleDelegate(): void {
@@ -117,11 +115,17 @@
 
     function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
         switch (header as Header) {
-            case Header.Name:
+            case Header.DelegationId:
                 return {
-                    component: Text,
-                    props: { type: TextType.h5, fontWeight: FontWeight.semibold },
-                    text: value,
+                    component: CopyableBox,
+                    props: {
+                        value: value,
+                        isCopyable: true,
+                        clearBoxPadding: true,
+                        clearBackground: true,
+                        classes: 'text-gray-600 dark:text-white text-xs font-semibold',
+                    },
+                    text: truncateString(value, 5, 5, 3),
                 }
             case Header.DelegatedFunds:
                 return {
@@ -145,13 +149,17 @@
                         height: 20,
                     },
                 }
-            case Header.Epoch:
+            case Header.Epochs:
                 return {
                     component: Text,
                     props: { color: 'gray-600', fontWeight: FontWeight.medium, fontSize: '12', type: TextType.p },
-                    text: value + ' epochs',
+                    text: localize('views.delegation.table.body.epochs', {
+                        values: {
+                            epochs: value,
+                        },
+                    }),
                 }
-            case Header.Address:
+            case Header.DelegatedAddress:
                 return {
                     component: CopyableBox,
                     props: {
