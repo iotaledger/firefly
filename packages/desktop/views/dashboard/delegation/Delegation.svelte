@@ -91,8 +91,7 @@
 
     function handleClaimRewards(outputId: string, delegationId: string): void {
         if (delegationId === EMPTY_HEX_ID) {
-            // TODO: Update with computeDelegationId when https://github.com/iotaledger/firefly/issues/8188 is merged
-            delegationId = api.computeAccountId(outputId)
+            delegationId = api.computeDelegationId(outputId)
         }
         openPopup({
             id: PopupId.Confirmation,
