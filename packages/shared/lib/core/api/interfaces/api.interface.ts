@@ -41,7 +41,7 @@ export interface IApi {
     generateMnemonic(): string
     verifyMnemonic(mnemonic: string): void
     addressToBech32(address: Address, bech32Hrp: string): Bech32Address
-    parseBech32Address(bech32: Bech32Address): HexEncodedString
+    parseBech32Address(bech32: Bech32Address): Address
     computeAccountId(outputId: string): AccountId
     computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): FoundryId
     computeNftId(outputId: string): NftId
