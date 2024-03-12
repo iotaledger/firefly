@@ -219,7 +219,7 @@
                     >
                 </div>
             {/if}
-            {#if isMainAccount && primaryKey}
+            {#if accountId && primaryKey}
                 <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
