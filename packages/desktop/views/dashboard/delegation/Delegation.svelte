@@ -3,6 +3,7 @@
     import { selectedWallet } from '@core/wallet/stores'
     import {
         Height,
+        Width,
         Pane,
         Button,
         Tile,
@@ -12,20 +13,25 @@
         ButtonSize,
         CopyableBox,
         BoxedIconWithText,
+        TextHintVariant,
     } from '@ui'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
         AddressConverter,
+        getDefaultTransactionOptions,
         selectedWalletAssets,
+        EMPTY_HEX_ID,
         getOutputRewards,
         getCommitteeInfo,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
-    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
+    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { api } from '@core/api'
+    import { DEFAULT_MANA } from '@core/network'
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
@@ -54,19 +60,33 @@
     $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
+    $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
+    $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
+
+    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount
+    $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
+
+    $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
+    $: formattedRewards = formatTokenAmountBestMatch(rawRewardsAmount, DEFAULT_MANA)
+
     async function buildMappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
             delegationOutputs?.map(async (output) => {
                 const delegationOutput = output.output as DelegationOutput
                 // Until the first epoch in which it was delegated ends, no rewards are obtained
                 const epochsDelegating = currentEpoch - delegationOutput.startEpoch
+                let delegationId: DelegationId = delegationOutput.delegationId
+                if (delegationId === EMPTY_HEX_ID) {
+                    delegationId = api.computeDelegationId(output.outputId)
+                }
+                const rewards = await getOutputRewards(output.outputId)
                 return {
-                    [Header.DelegationId]: delegationOutput.delegationId,
+                    [Header.DelegationId]: delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
-                    [Header.Rewards]: await getOutputRewards(output.outputId),
+                    [Header.Rewards]: rewards,
                     [Header.Epochs]: epochsDelegating > 0 ? epochsDelegating : 0,
                     [Header.DelegatedAddress]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
-                    [Header.Action]: handleClaimRewards,
+                    [Header.Action]: () => handleClaimRewards(delegationId, rewards),
                 }
             }) || []
         delegationData = await Promise.all(result)
@@ -83,8 +103,27 @@
         })
     }
 
-    function handleClaimRewards(): void {
-        // TODO: add logic to claim reward
+    function handleClaimRewards(delegationId: string, rewards: number): void {
+        openPopup({
+            id: PopupId.Confirmation,
+            props: {
+                title: localize('popups.claimDelegationRewards.title'),
+                description: localize('popups.claimDelegationRewards.description', {
+                    values: { rewards, delegationId },
+                }),
+                confirmText: localize('popups.claimDelegationRewards.confirmButton'),
+                variant: TextHintVariant.Success,
+                onConfirm: async () => {
+                    await checkActiveProfileAuth(
+                        async () => {
+                            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
+                            closePopup()
+                        },
+                        { stronghold: true }
+                    )
+                },
+            },
+        })
     }
 
     function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
@@ -149,7 +188,7 @@
                 return {
                     component: Button,
                     props: { size: ButtonSize.Small, onClick: value, outline: true },
-                    text: 'Claim Rewards',
+                    text: localize('popups.claimDelegationRewards.title'),
                 }
             default:
                 return {
@@ -163,7 +202,7 @@
 
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
-        <Pane height={Height.Full}>
+        <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
                 <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
@@ -171,24 +210,24 @@
                 </div>
                 <div class="flex flex-row space-x-4 w-2/3">
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>24 Gi</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.funds')}</Text
-                            >
-                        </div>
-                    </Tile>
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>12 Gi</Text>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedDelegated}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.delegated')}</Text
                             >
                         </div>
                     </Tile>
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>0i</Text>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedUndelegated}</Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.delegation.info.undelegated')}</Text
+                            >
+                        </div>
+                    </Tile>
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedRewards}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.rewards')}</Text
                             >
@@ -201,7 +240,7 @@
                             <thead class="w-full">
                                 <tr class="flex flex-row justify-between align-items w-full">
                                     {#each Object.values(Header) as header}
-                                        <th class="text-start w-60 flex-1">
+                                        <th class="text-start flex-1">
                                             <Text
                                                 color="gray-600"
                                                 fontWeight={FontWeight.medium}
@@ -220,7 +259,7 @@
                                     >
                                         {#each Object.entries(data) as [key, value]}
                                             {@const renderCell = renderCellValue(value, key)}
-                                            <td class="text-start w-60 flex-1">
+                                            <td class="text-start flex-1">
                                                 {#if renderCell.text}
                                                     <svelte:component this={renderCell.component} {...renderCell.props}>
                                                         {renderCell.text}
@@ -238,7 +277,7 @@
                             </tbody>
                         </table>
                     {:else}
-                        <div class="flex flex-col w-full items-center px-40">
+                        <div class="flex flex-col w-full items-center">
                             <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
                         </div>
                     {/if}
