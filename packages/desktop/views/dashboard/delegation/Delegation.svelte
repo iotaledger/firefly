@@ -21,12 +21,14 @@
         getClient,
         getDefaultTransactionOptions,
         selectedWalletAssets,
+        EMPTY_HEX_ID,
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, AccountAddress, OutputData } from '@iota/sdk/out/types'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { api } from '@core/api'
 
     let delegationData: IDelegationTable[] = []
 
@@ -69,7 +71,7 @@
                     [Header.Epoch]:
                         delegationOutput.endEpoch === 0 ? 0 : delegationOutput.endEpoch - delegationOutput.startEpoch,
                     [Header.Address]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
-                    [Header.Action]: () => handleClaimRewards(delegationOutput.delegationId),
+                    [Header.Action]: () => handleClaimRewards(output.outputId, delegationOutput.delegationId),
                 }
             }) || []
         delegationData = await Promise.all(result)
@@ -87,7 +89,11 @@
         })
     }
 
-    function handleClaimRewards(delegationId: string): void {
+    function handleClaimRewards(outputId: string, delegationId: string): void {
+        if (delegationId === EMPTY_HEX_ID) {
+            // TODO: Update with computeDelegationId when https://github.com/iotaledger/firefly/issues/8188 is merged
+            delegationId = api.computeAccountId(outputId)
+        }
         openPopup({
             id: PopupId.Confirmation,
             props: {
@@ -100,7 +106,6 @@
                 onConfirm: async () => {
                     await checkActiveProfileAuth(
                         async () => {
-                            // TODO: Update the delegationId when https://github.com/iotaledger/firefly/issues/8188 is merged
                             await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
                             closePopup()
                         },
