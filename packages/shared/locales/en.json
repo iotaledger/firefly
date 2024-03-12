@@ -1265,7 +1265,7 @@
         },
         "claimDelegationRewards": {
             "title": "Claim Rewards",
-            "description": "Claim the rewards of all epochs of this delegation output {delegationId}",
+            "description": "Claim the rewards of all epochs, {rewards} of this delegation output {delegationId}",
             "confirmButton": "Claim"
         }
     },

@@ -27,7 +27,7 @@
     } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
+    import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
     import { api } from '@core/api'
@@ -75,13 +75,18 @@
                 const delegationOutput = output.output as DelegationOutput
                 // Until the first epoch in which it was delegated ends, no rewards are obtained
                 const epochsDelegating = currentEpoch - delegationOutput.startEpoch
+                let delegationId: DelegationId = delegationOutput.delegationId
+                if (delegationId === EMPTY_HEX_ID) {
+                    delegationId = api.computeDelegationId(output.outputId)
+                }
+                const rewards = await getOutputRewards(output.outputId)
                 return {
-                    [Header.DelegationId]: delegationOutput.delegationId,
+                    [Header.DelegationId]: delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
-                    [Header.Rewards]: await getOutputRewards(output.outputId),
+                    [Header.Rewards]: rewards,
                     [Header.Epochs]: epochsDelegating > 0 ? epochsDelegating : 0,
                     [Header.DelegatedAddress]: AddressConverter.addressToBech32(delegationOutput.validatorAddress),
-                    [Header.Action]: () => handleClaimRewards(output.outputId, delegationOutput.delegationId),
+                    [Header.Action]: () => handleClaimRewards(delegationId, rewards),
                 }
             }) || []
         delegationData = await Promise.all(result)
@@ -98,16 +103,13 @@
         })
     }
 
-    function handleClaimRewards(outputId: string, delegationId: string): void {
-        if (delegationId === EMPTY_HEX_ID) {
-            delegationId = api.computeDelegationId(outputId)
-        }
+    function handleClaimRewards(delegationId: string, rewards: number): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
                 title: localize('popups.claimDelegationRewards.title'),
                 description: localize('popups.claimDelegationRewards.description', {
-                    values: { delegationId },
+                    values: { rewards, delegationId },
                 }),
                 confirmText: localize('popups.claimDelegationRewards.confirmButton'),
                 variant: TextHintVariant.Success,
