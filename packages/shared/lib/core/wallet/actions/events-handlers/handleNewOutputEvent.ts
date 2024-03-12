@@ -8,7 +8,7 @@ import {
     addActivitiesToWalletActivitiesInAllWalletActivities,
     addPersistedAsset,
     generateActivities,
-    getBech32AddressFromAddressTypes,
+    AddressConverter,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
@@ -17,11 +17,11 @@ import {
     preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
+    DEFAULT_SYNC_OPTIONS,
 } from '@core/wallet'
 import {
     AccountAddress,
     AccountOutput,
-    CommonOutput,
     NewOutputWalletEvent,
     OutputType,
     WalletEvent,
@@ -47,8 +47,19 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
     const isNftOutput = output.type === OutputType.Nft
+    let _isDelegationOutput = isDelegationOutput(outputData)
 
-    const address = outputData.address ? getBech32AddressFromAddressTypes(outputData.address) : undefined
+    const address = outputData.address ? AddressConverter.addressToBech32(outputData.address) : undefined
+
+    // TODO: Improve this logic when the delegation output is received -> https://github.com/iotaledger/firefly/issues/8187
+    if (wallet?.hasDelegationTransactionInProgress) {
+        const prevDelegationOutputs = wallet.walletUnspentOutputs?.filter(isDelegationOutput) || []
+        await wallet.sync(DEFAULT_SYNC_OPTIONS)
+        const postDelegationOutputs = (await wallet.unspentOutputs())?.filter(isDelegationOutput) || []
+        if (prevDelegationOutputs.length < postDelegationOutputs.length) {
+            _isDelegationOutput = true
+        }
+    }
 
     // The basic outputs of the faucet dont have an address
     const isBasicOutput = output.type === OutputType.Basic
@@ -60,8 +71,9 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     ) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
+        const walletUnspentOutputs = await wallet.unspentOutputs()
         const accountOutputs = await wallet.accounts()
-        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs })
+        updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, walletUnspentOutputs })
 
         const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
@@ -76,7 +88,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
         addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
-    if (isImplicitAccountOutput(outputData.output as CommonOutput)) {
+    if (isImplicitAccountOutput(outputData)) {
         await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })
@@ -94,7 +106,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                 updateActiveWallet(walletId, {
                     hasImplicitAccountCreationTransactionInProgress: false,
                     isTransferring: false,
-                    depositAddress: getBech32AddressFromAddressTypes(new AccountAddress(mainAccountId)),
+                    depositAddress: AddressConverter.addressToBech32(new AccountAddress(mainAccountId)),
                 })
             } else {
                 updateActiveWallet(walletId, {
@@ -102,11 +114,12 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
                     isTransferring: false,
                 })
             }
+            closePopup() // Close ActivateAccountPopup when account is activated
         }
     }
 
     // TODO: update this logic when available balance is fixed
-    if (isDelegationOutput(outputData)) {
+    if (_isDelegationOutput) {
         if (wallet?.hasDelegationTransactionInProgress) {
             updateActiveWallet(walletId, {
                 hasDelegationTransactionInProgress: false,

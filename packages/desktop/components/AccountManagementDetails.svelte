@@ -19,7 +19,7 @@
     import { AccountManagementMenu } from './modals'
     import {
         formatTokenAmountBestMatch,
-        getBech32AddressFromAddressTypes,
+        AddressConverter,
         isAccountOutput,
         isImplicitAccountOutput,
         selectedWallet,
@@ -28,7 +28,6 @@
     import {
         AccountAddress,
         AccountOutput,
-        CommonOutput,
         FeatureType,
         OutputData,
         BlockIssuerFeature,
@@ -50,9 +49,9 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
-    $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
+    $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
@@ -220,7 +219,7 @@
                     >
                 </div>
             {/if}
-            {#if isAccountOutput && primaryKey}
+            {#if accountId && primaryKey}
                 <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text

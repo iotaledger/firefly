@@ -724,18 +724,21 @@
                 "claimRewards": "Claim Rewards"
             },
             "info": {
-                "funds": "Total Funds",
                 "delegated": "Delegated",
+                "undelegated": "Undelegated",
                 "rewards": "Rewards"
             },
             "table": {
                 "header": {
-                    "name": "Name",
+                    "delegationId": "Delegation Id",
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
-                    "epoch": "Epoch",
-                    "address": "Address",
+                    "epochs": "Epochs",
+                    "delegatedAddress": "Delegated to",
                     "action": "Action"
+                },
+                "body": {
+                    "epochs": "{epochs} epochs"
                 },
                 "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
             }
@@ -1259,6 +1262,11 @@
                 "title": "Account Address",
                 "description": "Account Address for the validator"
             } 
+        },
+        "claimDelegationRewards": {
+            "title": "Claim Rewards",
+            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
+            "confirmButton": "Claim"
         }
     },
     "actions": {

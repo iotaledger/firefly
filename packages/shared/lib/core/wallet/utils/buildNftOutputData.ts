@@ -2,10 +2,12 @@ import { AddressUnlockCondition, Ed25519Address, MetadataFeature, NftOutputBuild
 import { Converter } from '@core/utils'
 import { DEFAULT_METADATA_FEATURE_ENTRY_KEY, EMPTY_HEX_ID } from '../constants'
 import { IIrc27Metadata } from '@core/nfts'
-import { api } from '@core/api'
+import { AddressConverter } from './AddressConverter'
 
 export function buildNftOutputData(metadata: IIrc27Metadata, address: string): NftOutputBuilderParams {
-    const addressUnlockCondition = new AddressUnlockCondition(new Ed25519Address(api.bech32ToHex(address)))
+    const addressUnlockCondition = new AddressUnlockCondition(
+        new Ed25519Address(AddressConverter.parseBech32Address(address))
+    )
 
     const unlockConditions: AddressUnlockCondition[] = [addressUnlockCondition]
 

@@ -94,7 +94,11 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
 
-            await startBackgroundSync({ syncIncomingTransactions: true, syncImplicitAccounts: true })
+            await startBackgroundSync({
+                syncIncomingTransactions: true,
+                syncImplicitAccounts: true,
+                account: { nftOutputs: true },
+            })
 
             // Step 8: finish login
             incrementLoginProgress()

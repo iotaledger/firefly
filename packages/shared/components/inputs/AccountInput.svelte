@@ -1,10 +1,9 @@
 <script lang="ts">
     import { Modal, SelectorInput, IOption } from '@ui'
-    import { selectedWallet } from '@core/wallet/stores'
+    import { selectedWallet, AddressConverter } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
     import { getNetworkHrp } from '@core/profile/actions'
-    import { api } from '@core/api'
     import { AddressType } from '@iota/sdk/out/types'
 
     export let account: string = ''
@@ -15,7 +14,7 @@
 
     const accountOptions: IOption[] =
         $selectedWallet?.balances?.accounts.map((hexAccountId: string, index: number) => {
-            const accountAddress = api.accountIdToBech32(hexAccountId, getNetworkHrp())
+            const accountAddress = AddressConverter.addressToBech32(hexAccountId)
             return { key: 'Account ' + (index + 1), value: accountAddress }
         }) ?? []
 

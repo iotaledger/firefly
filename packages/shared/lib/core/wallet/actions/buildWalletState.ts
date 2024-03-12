@@ -3,7 +3,7 @@ import { AccountAddress, AccountOutput, Balance, OutputData, OutputType } from '
 import { updateWalletPersistedDataOnActiveProfile } from '@core/profile'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
-import { getBech32AddressFromAddressTypes, getBlockIssuerAccounts } from '../utils'
+import { AddressConverter, getBlockIssuerAccounts } from '../utils'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -41,6 +41,7 @@ export async function buildWalletState(
     }
 
     let walletOutputs: OutputData[] = []
+    let walletUnspentOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
     let implicitAccountOutputs: OutputData[] = []
     let depositAddress = ''
@@ -70,10 +71,11 @@ export async function buildWalletState(
             }
         }
         depositAddress = walletPersistedData.mainAccountId
-            ? getBech32AddressFromAddressTypes(new AccountAddress(walletPersistedData.mainAccountId))
+            ? AddressConverter.addressToBech32(new AccountAddress(walletPersistedData.mainAccountId))
             : ''
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
+        walletUnspentOutputs = await wallet.unspentOutputs()
     } catch (err) {
         console.error(err)
     }
@@ -89,6 +91,7 @@ export async function buildWalletState(
         hasDelegationTransactionInProgress: false,
         isTransferring: false,
         walletOutputs,
+        walletUnspentOutputs,
         accountOutputs,
         depositAddress,
         implicitAccountOutputs,

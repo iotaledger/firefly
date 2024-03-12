@@ -1,11 +1,11 @@
 <script lang="ts">
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
-    import { api } from '@core/api'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { activeProfile, checkActiveProfileAuth, getNetworkHrp, updateActiveWallet } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
     import {
         convertToRawAmount,
+        AddressConverter,
         getDefaultTransactionOptions,
         selectedWallet,
         selectedWalletId,
@@ -53,9 +53,9 @@
     async function delegate(): Promise<void> {
         try {
             const params: CreateDelegationParams = {
-                address: api.accountIdToBech32($selectedWallet.mainAccountId, getNetworkHrp()),
+                address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet.mainAccountId)),
                 delegatedAmount: rawAmount,
-                validatorAddress: new AccountAddress(api.bech32ToHex(accountAddress)),
+                validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
             }
             await $selectedWallet.createDelegation(params, getDefaultTransactionOptions())
             updateActiveWallet($selectedWalletId, {

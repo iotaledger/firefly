@@ -30,8 +30,9 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     if (wallet) {
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
+        const walletUnspentOutputs = await wallet.unspentOutputs()
         const implicitAccountOutputs = await wallet.implicitAccounts()
-        updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs })
+        updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs, walletUnspentOutputs })
     }
     const outputId = output?.outputId
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)
