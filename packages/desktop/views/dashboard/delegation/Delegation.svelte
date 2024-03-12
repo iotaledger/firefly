@@ -3,6 +3,7 @@
     import { selectedWallet } from '@core/wallet/stores'
     import {
         Height,
+        Width,
         Pane,
         Button,
         Tile,
@@ -27,6 +28,7 @@
     import { OutputType, DelegationOutput, OutputData } from '@iota/sdk/out/types'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
+    import { DEFAULT_MANA } from '@core/network'
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
@@ -55,6 +57,15 @@
     $: delegationOutputs?.length > 0 && setCurrentEpochAndCommittee()
     $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
+
+    $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
+    $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
+
+    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount
+    $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
+
+    $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
+    $: formattedRewards = formatTokenAmountBestMatch(rawRewardsAmount, DEFAULT_MANA)
 
     async function buildMappedDelegationData(delegationOutputs: OutputData[]): Promise<void> {
         const result =
@@ -178,7 +189,7 @@
 
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
-        <Pane height={Height.Full}>
+        <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
                 <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
@@ -186,24 +197,24 @@
                 </div>
                 <div class="flex flex-row space-x-4 w-2/3">
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>24 Gi</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.funds')}</Text
-                            >
-                        </div>
-                    </Tile>
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>12 Gi</Text>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedDelegated}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.delegated')}</Text
                             >
                         </div>
                     </Tile>
                     <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>0i</Text>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedUndelegated}</Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.delegation.info.undelegated')}</Text
+                            >
+                        </div>
+                    </Tile>
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                            <Text type={TextType.h3}>{formattedRewards}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.delegation.info.rewards')}</Text
                             >
@@ -216,7 +227,7 @@
                             <thead class="w-full">
                                 <tr class="flex flex-row justify-between align-items w-full">
                                     {#each Object.values(Header) as header}
-                                        <th class="text-start w-60 flex-1">
+                                        <th class="text-start flex-1">
                                             <Text
                                                 color="gray-600"
                                                 fontWeight={FontWeight.medium}
@@ -235,7 +246,7 @@
                                     >
                                         {#each Object.entries(data) as [key, value]}
                                             {@const renderCell = renderCellValue(value, key)}
-                                            <td class="text-start w-60 flex-1">
+                                            <td class="text-start flex-1">
                                                 {#if renderCell.text}
                                                     <svelte:component this={renderCell.component} {...renderCell.props}>
                                                         {#if renderCell.slot}
@@ -259,7 +270,7 @@
                             </tbody>
                         </table>
                     {:else}
-                        <div class="flex flex-col w-full items-center px-40">
+                        <div class="flex flex-col w-full items-center">
                             <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
                         </div>
                     {/if}
