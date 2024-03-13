@@ -1,14 +1,16 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize } from '@ui'
+    import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize, TextType } from '@ui'
     import { localize } from '@core/i18n'
-    import { getClient } from '@core/wallet/actions'
+    import { getClient, prepareMintNft } from '@core/wallet/actions'
     import { selectedWallet } from '@core/wallet'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
+    import { PreparedTransaction } from '@iota/sdk/out/types'
+    import { ManaBox } from '@components'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -21,6 +23,8 @@
     const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
     let activeTab = Tab.Transaction
 
+    let preparedTransaction: PreparedTransaction
+    let hasEnoughMana = false
     let storageDeposit: number = 0
     let totalStorageDeposit: number = 0
     const { standard, type, uri, name, collectionName, royalties, issuerName, description, attributes, quantity } =
@@ -56,6 +60,7 @@
         const preparedOutput = await client.buildNftOutput(outputData)
         storageDeposit = Number(preparedOutput.amount) ?? 0
         totalStorageDeposit = storageDeposit * quantity
+        preparedTransaction = await prepareMintNft(irc27Metadata, Number(quantity))
     }
 
     async function mintAction(): Promise<void> {
@@ -94,7 +99,7 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('popups.mintNftForm.title')}
     </Text>
     <div class="space-y-2 max-h-100 scrollable-y flex-1">
@@ -134,6 +139,7 @@
                         isPreText
                     />
                 {/if}
+                <ManaBox {preparedTransaction} bind:hasEnoughMana />
             </activity-details>
         </nft-details>
     </div>
@@ -143,7 +149,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet.isTransferring}
+            disabled={$selectedWallet.isTransferring || !hasEnoughMana}
             onClick={onConfirmClick}
             isBusy={$selectedWallet.isTransferring}
         >

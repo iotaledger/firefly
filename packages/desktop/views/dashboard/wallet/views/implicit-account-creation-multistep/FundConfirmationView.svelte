@@ -1,10 +1,11 @@
 <script lang="ts">
+    import { ManaBox } from '@components'
     import { localize } from '@core/i18n'
-    import { getManaBalance, getPassiveManaForOutput } from '@core/network'
+    import { DEFAULT_MANA, getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
-    import { OutputData } from '@iota/sdk'
+    import { OutputData, PreparedTransaction } from '@iota/sdk/out/types'
     import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
     import { onDestroy, onMount } from 'svelte'
 
@@ -13,6 +14,8 @@
     // TODO: update when mana generation is available
     const isLowManaGeneration = false
     let walletAddress: string = ''
+    let preparedTransaction: PreparedTransaction
+    let hasEnoughMana = false
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
@@ -30,6 +33,9 @@
         $selectedWallet.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
             : '-'
+    $: formattedManaBalance = totalAvailableMana
+        ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
+        : '-'
 
     function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
         return (
@@ -68,6 +74,10 @@
 
     onMount(async () => {
         walletAddress = await $selectedWallet?.address()
+        $selectedWallet
+            .prepareImplicitAccountTransition(selectedOutput.outputId)
+            .then((prepareTx) => (preparedTransaction = prepareTx))
+            .catch(() => {})
         countdownInterval = setInterval(() => {
             seconds -= 1
 
@@ -119,8 +129,9 @@
                 />
                 <KeyValueBox
                     keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
-                    valueText={totalAvailableMana.toString()}
+                    valueText={formattedManaBalance}
                 />
+                <ManaBox {preparedTransaction} bind:hasEnoughMana showCountdown={false} />
             </div>
         </div>
         {#if isLowManaGeneration}
