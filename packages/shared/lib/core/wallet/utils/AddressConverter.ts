@@ -22,6 +22,6 @@ export class AddressConverter {
      * @returns A Bech32 address.
      */
     static parseBech32Address(bech32: string): HexEncodedString {
-        return api.parseBech32Address(bech32).toString()
+        return Address.parse(api.parseBech32Address(bech32)).toString()
     }
 }
