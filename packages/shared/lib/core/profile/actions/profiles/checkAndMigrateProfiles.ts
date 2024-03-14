@@ -350,6 +350,6 @@ function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): voi
         newNetwork.bech32Hrp = defaultBech32Hrp
 
         existingProfile.network = newNetwork
-        saveProfile(existingProfile )
+        saveProfile(existingProfile)
     }
 }
