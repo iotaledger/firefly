@@ -12,8 +12,10 @@
         ActivityType,
         claimActivity,
         rejectActivity,
+        selectedWallet,
         selectedWalletActivities,
     } from '@core/wallet'
+    import { PreparedTransaction } from '@iota/sdk/out/types'
     import {
         ActivityInformation,
         AccountActivityDetails,
@@ -29,11 +31,15 @@
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { onMount } from 'svelte'
+    import { ManaBox } from '@components'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+
+    let preparedTransaction: PreparedTransaction
+    let hasEnoughMana = false
 
     $: activity = $selectedWalletActivities.find((_activity) => _activity.id === activityId)
     $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
@@ -69,6 +75,10 @@
         await checkActiveProfileAuth(claim, { stronghold: true, ledger: false })
     }
 
+    async function prepareClaimOutput(): Promise<void> {
+        preparedTransaction = await $selectedWallet.prepareClaimOutputs([activity.outputId])
+    }
+
     function onRejectClick(): void {
         openPopup({
             id: PopupId.Confirmation,
@@ -94,6 +104,9 @@
     onMount(async () => {
         try {
             await _onMount()
+            if (!isTimelocked && isActivityIncomingAndUnclaimed) {
+                await prepareClaimOutput()
+            }
         } catch (err) {
             console.error(err)
         }
@@ -138,23 +151,26 @@
         <ActivityInformation {activity} />
     </activity-details>
     {#if !isTimelocked && isActivityIncomingAndUnclaimed}
-        <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-            <Button
-                outline
-                classes="w-full"
-                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                onClick={onRejectClick}
-            >
-                {localize('actions.reject')}
-            </Button>
-            <Button
-                classes="w-full"
-                disabled={activity.asyncData?.isClaiming}
-                onClick={onClaimClick}
-                isBusy={activity.asyncData?.isClaiming}
-            >
-                {localize('actions.claim')}
-            </Button>
-        </popup-buttons>
+        <div class="lex flex-col space-y-4">
+            <ManaBox {preparedTransaction} bind:hasEnoughMana />
+            <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
+                <Button
+                    outline
+                    classes="w-full"
+                    disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                    onClick={onRejectClick}
+                >
+                    {localize('actions.reject')}
+                </Button>
+                <Button
+                    classes="w-full"
+                    disabled={activity.asyncData?.isClaiming || !hasEnoughMana}
+                    onClick={onClaimClick}
+                    isBusy={activity.asyncData?.isClaiming}
+                >
+                    {localize('actions.claim')}
+                </Button>
+            </popup-buttons>
+        </div>
     {/if}
 </activity-details-popup>
