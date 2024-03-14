@@ -50,27 +50,29 @@
     })
 </script>
 
-<KeyValueBox
-    keyText={localize('general.manaCost')}
-    valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
-/>
+<div class="flex flex-col space-y-2">
+    <KeyValueBox
+        keyText={localize('general.manaCost')}
+        valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
+    />
 
-<!-- TODO: Update with mana generation -->
-{#if !hasEnoughMana}
-    <Text type={TextType.p} error classes="text-center">
-        {localize('general.insufficientMana', {
-            values: {
-                availableMana,
-            },
-        })}
-    </Text>
-{/if}
-{#if showCountdown}
-    <Text type={TextType.p} classes="text-center">
-        {localize('general.secondsToRefreshManaCost', {
-            values: {
-                seconds: secondsToRefreshExtraMana,
-            },
-        })}
-    </Text>
-{/if}
+    <!-- TODO: Update with mana generation -->
+    {#if !hasEnoughMana}
+        <Text type={TextType.p} error classes="text-center">
+            {localize('general.insufficientMana', {
+                values: {
+                    availableMana,
+                },
+            })}
+        </Text>
+    {/if}
+    {#if showCountdown}
+        <Text type={TextType.p} classes="text-center">
+            {localize('general.secondsToRefreshManaCost', {
+                values: {
+                    seconds: secondsToRefreshExtraMana,
+                },
+            })}
+        </Text>
+    {/if}
+</div>
