@@ -14,10 +14,6 @@
     function handleAccountClick(account: OutputData): void {
         selectedOutput = account
     }
-
-    // function setAccountOutputIndex(account: OutputData): number {
-    //     return allAccountOutputs.indexOf(account) + 1
-    // }
 </script>
 
 {#if $selectedWallet}
@@ -31,7 +27,6 @@
                 {/if}
                 {#if features.accountManagement.accountDetails.enabled}
                     <AccountManagementDetails {selectedOutput} />
-                    <!-- <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} /> -->
                 {/if}
             {/key}
         </div>

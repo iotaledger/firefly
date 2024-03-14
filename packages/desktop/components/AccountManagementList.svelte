@@ -36,7 +36,7 @@
             {#if accountsOrdered.length > 0}
                 <Text type={TextType.h2}>{localize('views.accountManagement.list.accountTitle')}</Text>
                 <list-wrapper class="flex flex-col space-y-2">
-                    {#each accountsOrdered as output, index}
+                    {#each accountsOrdered as output}
                         <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
                             <div class="flex flex-col space-y-4">
                                 <div class="flex space-x-2">
@@ -47,7 +47,6 @@
                                         fontWeight={FontWeight.semibold}
                                     >
                                         {localize('views.accountManagement.list.tile.title')}
-                                        {index + 1}
                                     </Text>
                                     {#if iMainAccount(output.output)}
                                         <Pill backgroundColor="blue-200" textColor="blue-600"
@@ -67,7 +66,7 @@
             {#if implicitAccountsOrdered.length > 0}
                 <Text type={TextType.h2}>{localize('views.accountManagement.list.implicitTitle')}</Text>
                 <list-wrapper class="flex flex-col space-y-2">
-                    {#each implicitAccountsOrdered as output, index}
+                    {#each implicitAccountsOrdered as output}
                         <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
                             <div class="flex flex-col space-y-4">
                                 <div class="flex space-x-2">
@@ -78,7 +77,6 @@
                                         fontWeight={FontWeight.semibold}
                                     >
                                         {localize('views.accountManagement.list.tile.title')}
-                                        {index + 1}
                                     </Text>
                                     <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                         >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
