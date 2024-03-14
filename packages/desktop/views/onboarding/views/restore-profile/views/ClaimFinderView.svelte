@@ -36,6 +36,7 @@
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { getBaseToken } from '@core/profile'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -199,10 +200,7 @@
         {#if shimmerClaimingAccounts && shimmerClaimingAccounts?.length > 0}
             <div class="flex-auto overflow-y-auto h-1 space-y-3 w-full scrollable-y">
                 {#each shimmerClaimingAccounts as shimmerClaimingAccount}
-                    <ShimmerClaimingAccountTile
-                        {shimmerClaimingAccount}
-                        baseToken={$onboardingProfile?.network?.baseToken}
-                    />
+                    <ShimmerClaimingAccountTile {shimmerClaimingAccount} baseToken={getBaseToken()} />
                 {/each}
             </div>
         {/if}

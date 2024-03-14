@@ -2,19 +2,19 @@ import { showAppNotification } from '@auxiliary/notification'
 import { IAccount } from '@core/account'
 import { localize } from '@core/i18n'
 import { updateLedgerNanoStatus } from '@core/ledger'
-import { AccountRecoveryProfileConfiguration, ProfileType, UnableToFindProfileTypeError } from '@core/profile'
+import {
+    AccountRecoveryProfileConfiguration,
+    ProfileType,
+    UnableToFindProfileTypeError,
+    getBaseToken,
+} from '@core/profile'
 import { RecoverAccountsPayload, recoverAccounts } from '@core/profile-manager'
 import { zip } from '@core/utils'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { get } from 'svelte/store'
 import { SHIMMER_CLAIMING_ACCOUNT_RECOVERY_CONFIGURATION, SHIMMER_CLAIMING_ACCOUNT_SYNC_OPTIONS } from '../constants'
 import { getSortedRenamedBoundAccounts, prepareShimmerClaimingAccount } from '../helpers'
-import {
-    getOnboardingBaseToken,
-    onboardingProfile,
-    shimmerClaimingProfileManager,
-    updateShimmerClaimingAccount,
-} from '../stores'
+import { onboardingProfile, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { sumTotalUnclaimedRewards } from '../utils'
 
 const DEPTH_SEARCH_ACCOUNT_START_INDEX = 0
@@ -161,7 +161,7 @@ export function setTotalUnclaimedShimmerRewards(_totalUnclaimedShimmerRewards: n
 
 function showRewardsFoundNotification(updatedTotalUnclaimedShimmerRewards: number): void {
     const foundRewardsAmount = updatedTotalUnclaimedShimmerRewards - totalUnclaimedShimmerRewards
-    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getOnboardingBaseToken())
+    const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getBaseToken())
     showAppNotification({
         type: 'success',
         alert: true,
