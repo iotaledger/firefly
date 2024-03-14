@@ -7,7 +7,7 @@ import { onboardingProfile } from '../stores'
 export async function restoreBackupFromStrongholdFile(strongholdPassword: string): Promise<void> {
     const { id, importFilePath, clientOptions, network } = get(onboardingProfile)
     try {
-        await restoreBackup(importFilePath, strongholdPassword, network.protocol.bech32Hrp)
+        await restoreBackup(importFilePath, strongholdPassword, network.bech32Hrp)
     } catch (err) {
         const storageDirectory = await getStorageDirectoryOfProfile(id)
         await restoreBackupByCopyingFile(

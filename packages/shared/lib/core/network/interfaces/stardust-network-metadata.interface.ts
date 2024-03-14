@@ -1,6 +1,4 @@
-import { IBaseToken } from '@core/wallet'
 import { NetworkId } from '../enums'
-import { INodeInfoProtocol } from '@iota/sdk'
 
 /**
  * Holds relevant data
@@ -11,6 +9,5 @@ export interface IStardustNetworkMetadata {
     id: NetworkId
     name: string
     coinType: number
-    protocol: INodeInfoProtocol
-    baseToken: IBaseToken
+    bech32Hrp: string
 }

@@ -3,5 +3,5 @@ import { get } from 'svelte/store'
 
 export function getNetworkHrp(): string {
     const $activeProfile = get(activeProfile)
-    return $activeProfile.network.protocol.bech32Hrp
+    return $activeProfile.network.bech32Hrp
 }

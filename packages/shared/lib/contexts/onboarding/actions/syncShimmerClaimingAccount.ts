@@ -6,10 +6,11 @@ import { getAccount, profileManager } from '@core/profile-manager'
 
 import { MissingShimmerClaimingProfileManagerError } from '../errors'
 import { prepareShimmerClaimingAccount } from '../helpers'
-import { getOnboardingBaseToken, shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
+import { shimmerClaimingProfileManager, updateShimmerClaimingAccount } from '../stores'
 import { setTotalUnclaimedShimmerRewards } from '@contexts/onboarding'
 import { formatTokenAmountBestMatch } from '@core/wallet/utils'
 import { showAppNotification } from '@auxiliary/notification'
+import { getBaseToken } from '@core/profile'
 
 export async function syncShimmerClaimingAccount(account: IAccount): Promise<void> {
     const _shimmerClaimingProfileManager = get(shimmerClaimingProfileManager)
@@ -28,7 +29,7 @@ export async function syncShimmerClaimingAccount(account: IAccount): Promise<voi
 
     if (syncedShimmerClaimingAccount?.unclaimedRewards > 0) {
         const foundRewardsAmount = syncedShimmerClaimingAccount?.unclaimedRewards
-        const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getOnboardingBaseToken())
+        const foundRewardsAmountFormatted = formatTokenAmountBestMatch(foundRewardsAmount, getBaseToken())
 
         showAppNotification({
             type: 'success',
