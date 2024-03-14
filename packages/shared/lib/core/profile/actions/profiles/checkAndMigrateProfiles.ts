@@ -3,6 +3,7 @@ import {
     COIN_TYPE,
     DEFAULT_CHAIN_CONFIGURATIONS,
     DEFAULT_MAX_PARALLEL_API_REQUESTS,
+    DEFAULT_NETWORK_METADATA,
     getDefaultPersistedNetwork,
     IIscpChainMetadata,
     NetworkId,
@@ -73,6 +74,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     14: persistedProfileMigrationToV15,
     15: persistedProfileMigrationToV16,
     16: persistedProfileMigrationToV17,
+    17: persistedProfileMigrationToV18,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -330,4 +332,24 @@ function persistedProfileMigrationToV17(existingProfile: IPersistedProfile): voi
     const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
     existingProfile.network.chains = newChains
     saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): void {
+    if (existingProfile.network) {
+        interface IOldPersistedNetwork {
+            protocol: unknown
+            baseToken: unknown
+        }
+
+        const oldNetwork = existingProfile.network as unknown as IOldPersistedNetwork
+        delete oldNetwork.protocol
+        delete oldNetwork.baseToken
+
+        const newNetwork = oldNetwork as unknown as IPersistedNetwork
+        const defaultBech32Hrp = DEFAULT_NETWORK_METADATA[existingProfile.network.id]?.bech32Hrp || ''
+        newNetwork.bech32Hrp = defaultBech32Hrp
+
+        existingProfile.network = newNetwork
+        saveProfile(existingProfile )
+    }
 }
