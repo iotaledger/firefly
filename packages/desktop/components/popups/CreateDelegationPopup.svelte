@@ -11,8 +11,9 @@
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
+    import { AccountAddress, CreateDelegationParams, PreparedTransaction } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
+    import { ManaBox } from '@components'
     import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -22,6 +23,9 @@
     let assetAmountInput: AssetAmountInput
     let amount: string
     let confirmDisabled = false
+
+    let preparedTransaction: PreparedTransaction
+    let hasEnoughMana = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
     $: hasTransactionInProgress =
@@ -36,7 +40,7 @@
             return
         }
         const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress
+        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress || !hasEnoughMana
     }
 
     async function onSubmit(): Promise<void> {
@@ -67,6 +71,15 @@
         }
     }
 
+    async function prepareDelegationOutput(): Promise<void> {
+        const params: CreateDelegationParams = {
+            address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet.mainAccountId)),
+            delegatedAmount: rawAmount,
+            validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
+        }
+        preparedTransaction = await $selectedWallet.prepareCreateDelegation(params, getDefaultTransactionOptions())
+    }
+
     function onCancelClick(): void {
         closePopup()
     }
@@ -74,6 +87,7 @@
     onMount(async () => {
         try {
             await _onMount()
+            await prepareDelegationOutput()
         } catch (err) {
             handleError(err.error)
         }
@@ -99,6 +113,7 @@
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
+            <ManaBox {preparedTransaction} bind:hasEnoughMana />
         </div>
         <div class="flex flex-row flex-nowrap w-full space-x-4">
             <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>
