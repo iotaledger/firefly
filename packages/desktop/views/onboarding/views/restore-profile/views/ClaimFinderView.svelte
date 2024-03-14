@@ -5,6 +5,7 @@
         ClaimShimmerRewardsError,
         FindShimmerRewardsError,
         RestoreProfileType,
+        SHIMMER_CLAIM_DEFAULT_TRANSACTION_OPTIONS,
         ShimmerClaimingWalletState,
         canUserClaimRewards,
         canUserRecoverFromShimmerClaiming,
@@ -36,6 +37,17 @@
     import { restoreProfileRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
     import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/wallet/actions'
+    import { ManaBox } from '@components'
+    import { Output, PreparedTransaction } from '@iota/sdk/out/types'
+    import { get } from 'svelte/store'
+    import {
+        NewTokenTransactionDetails,
+        NewTransactionType,
+        SubjectType,
+        getDefaultTransactionOptions,
+        getOutputParameters,
+        selectedWallet,
+    } from '@core/wallet'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -44,6 +56,9 @@
     let hasSearchedForRewardsBefore = false
 
     let hasTriedClaimingRewards = false
+
+    let preparedTransaction: PreparedTransaction
+    let hasEnoughMana = false
 
     $: isClaimingRewards = shimmerClaimingAccounts.some(
         (shimmerClaimingAccount) => shimmerClaimingAccount.state === ShimmerClaimingWalletState.Claiming
@@ -172,8 +187,48 @@
         }
     }
 
-    onMount(() => {
+    // TODO(2.0): test this function well when we revisit shimmer claiming
+    async function prepareClaimOutput(): Promise<void> {
+        const shimmerClaimingAccounts = get(onboardingProfile)?.shimmerClaimingAccounts
+        const unclaimedShimmerClaimingAccounts =
+            shimmerClaimingAccounts?.filter((shimmerClaimingAccount) => shimmerClaimingAccount?.unclaimedRewards > 0) ??
+            []
+        const preparedOutputs: Output[] = []
+
+        for (const shimmerClaimingAccount of unclaimedShimmerClaimingAccounts) {
+            try {
+                const recipientAddress = await shimmerClaimingAccount?.twinAccount.address()
+                const rawAmount = shimmerClaimingAccount?.unclaimedRewards
+
+                const newTransactionDetails: NewTokenTransactionDetails = {
+                    recipient: {
+                        type: SubjectType.Address,
+                        address: recipientAddress,
+                    },
+                    type: NewTransactionType.TokenTransfer,
+                    rawAmount: rawAmount.toString(),
+                    unit: '',
+                }
+
+                const outputParams = await getOutputParameters(newTransactionDetails)
+                const preparedOutput = await shimmerClaimingAccount?.prepareOutput(
+                    outputParams,
+                    SHIMMER_CLAIM_DEFAULT_TRANSACTION_OPTIONS
+                )
+                preparedOutputs.push(preparedOutput)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        preparedTransaction = await get(selectedWallet).prepareSendOutputs(
+            preparedOutputs,
+            getDefaultTransactionOptions()
+        )
+    }
+
+    onMount(async () => {
         void ledgerRaceConditionProtectionWrapper(setupShimmerClaiming)
+        await prepareClaimOutput()
     })
 
     async function teardownShimmerClaiming(): Promise<void> {
@@ -225,7 +280,7 @@
         {:else}
             <Button
                 classes="w-full"
-                disabled={!shouldClaimRewardsButtonBeEnabled}
+                disabled={!shouldClaimRewardsButtonBeEnabled || !hasEnoughMana}
                 onClick={onClaimRewardsClick}
                 isBusy={isClaimingRewards}
                 busyMessage={localize('actions.claiming')}
@@ -233,6 +288,7 @@
                 {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
             </Button>
         {/if}
+        <ManaBox {preparedTransaction} bind:hasEnoughMana />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />
