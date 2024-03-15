@@ -8,6 +8,7 @@ let pollInterval: number
  */
 export async function pollNetworkStatus(): Promise<void> {
     await getAndUpdateNodeInfo()
+    await getAndUpdateNodeInfo()
     pollInterval = window.setInterval(() => void getAndUpdateNodeInfo(), NETWORK_STATUS_POLL_INTERVAL)
 }
 

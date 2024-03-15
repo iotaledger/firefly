@@ -30,6 +30,7 @@
             pruningEpoch: { localeKey: 'general.pruningEpoch', nodeInfoPath: 'status.pruningEpoch' },
             // features: { localeKey: 'general.features', nodeInfoPath: 'features' },
         },
+        // TODO: Update this part with new metrics
         [NodeInfoTab.Metrics]: {
             blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
             confirmedBlocksPerSecond: {
