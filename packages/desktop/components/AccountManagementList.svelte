@@ -32,13 +32,13 @@
 
 <left-pane class="flex flex-col w-1/3">
     <Pane height={Height.Full}>
-        <left-pane-container class="flex flex-col space-y-10 h-full">
+        <left-pane-container class="flex flex-col space-y-4 h-full scrollable-y">
             {#if accountsOrdered.length > 0}
                 <Text type={TextType.h2}>{localize('views.accountManagement.list.accountTitle')}</Text>
                 <list-wrapper class="flex flex-col space-y-2">
                     {#each accountsOrdered as output}
                         <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
-                            <div class="flex flex-col space-y-4">
+                            <div class="flex flex-col space-y-2">
                                 <div class="flex space-x-2">
                                     <Text
                                         type={TextType.h5}
