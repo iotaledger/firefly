@@ -42,9 +42,9 @@ export const DEFAULT_ACTIVITY_FILTER: ActivityFilter = {
         active: false,
         type: 'selection',
         localeKey: 'filters.type',
-        selected: ActivityType.Basic,
+        selected: ActivityType.Transaction,
         choices: [
-            ActivityType.Basic,
+            ActivityType.Transaction,
             ActivityType.Nft,
             ActivityType.Account,
             ActivityType.Governance,

@@ -1,7 +1,21 @@
-import { ActivityAction, ActivityGenerationParameters, ActivityType, IWalletState, InclusionState, getAsyncDataFromOutput, getClient, getLayer2ActivityInformation, getMetadataFromOutput, getNftId, getStorageDepositFromOutput, getTagFromOutput } from '@core/wallet'
+import {
+    ActivityAction,
+    ActivityGenerationParameters,
+    ActivityType,
+    EMPTY_HEX_ID,
+    IWalletState,
+    ProcessedTransaction,
+    getAsyncDataFromOutput,
+    getClient,
+    getLayer2ActivityInformation,
+    getMetadataFromOutput,
+    getNftId,
+    getStorageDepositFromOutput,
+    getTagFromOutput,
+} from '@core/wallet'
 import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
-import { NftOutput } from '@iota/sdk/out/types'
-import { handleError } from 'shared/lib/core/error/handlers'
+import { NftOutput, OutputType } from '@iota/sdk/out/types'
+import { handleError } from '@core/error/handlers'
 
 export type NftActivity = BaseActivity & {
     type: ActivityType.Nft
@@ -13,13 +27,39 @@ interface ActivityNftOptions extends ActivityBaseOptions {
 }
 
 export class ActivityNft extends ActivityBase {
-    constructor(options: ActivityNftOptions) {
-        super(options)
+    constructor(private nftOptions: ActivityNftOptions) {
+        super(nftOptions)
     }
 
-   static async  fromProcessedTransaction(wallet: IWalletState,
+    nftId(): string {
+        return this.nftOptions.nftId
+    }
+
+    static async fromOutputs(
+        processedTransaction: ProcessedTransaction,
+        wallet: IWalletState
+    ): Promise<ActivityBase[]> {
+        const outputs = processedTransaction.outputs
+        const activities = []
+
+        const nftOutputs = outputs.filter((output) => output.output.type === OutputType.Nft)
+        for (const nftOutput of nftOutputs) {
+            const output = nftOutput.output as NftOutput
+            const activity = await ActivityNft.fromProcessedTransaction(wallet, {
+                action: output.nftId === EMPTY_HEX_ID ? ActivityAction.Mint : ActivityAction.Send,
+                processedTransaction,
+                wrappedOutput: nftOutput,
+            })
+            activities.push(activity)
+        }
+        return activities
+    }
+
+    static async fromProcessedTransaction(
+        wallet: IWalletState,
         { action, processedTransaction, wrappedOutput }: ActivityGenerationParameters,
-        nftIdFromInput?: string): Promise<ActivityNft> {
+        nftIdFromInput?: string
+    ): Promise<ActivityNft> {
         const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
         const outputId = wrappedOutput.outputId
         const output = wrappedOutput.output as NftOutput
@@ -61,13 +101,28 @@ export class ActivityNft extends ActivityBase {
         const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
         return new ActivityNft({
-            nftId, 
-            id, 
-            inclusionState, 
-            specialStatus, 
-            time, 
-            from, 
-            to
+            specialStatus,
+            id,
+            transactionId,
+            outputId,
+            nftId,
+            time,
+            isHidden,
+            action,
+            giftedStorageDeposit,
+            surplus,
+            isAssetHidden,
+            containsValue,
+            inclusionState,
+            storageDeposit,
+            metadata,
+            tag,
+            asyncData,
+            subject,
+            isInternal,
+            direction,
+            destinationNetwork,
+            parsedLayer2Metadata,
         })
     }
 }

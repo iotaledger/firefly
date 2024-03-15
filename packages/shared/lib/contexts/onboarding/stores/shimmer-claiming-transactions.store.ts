@@ -12,7 +12,7 @@ export const shimmerClaimingTransactions: Writable<IShimmerClaimingTransactionSt
     {}
 )
 
-export function isShimmerClaimingTransaction(transactionId: string, profileId?: string): boolean {
+export function isShimmerClaimingTransaction(transactionId: string, profileId: string | undefined | null): boolean {
     const _shimmerClaimingTransactions = get(shimmerClaimingTransactions)
     profileId = profileId ? profileId : get(onboardingProfile)?.id
     return !!_shimmerClaimingTransactions?.[profileId]?.[transactionId]

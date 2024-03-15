@@ -20,5 +20,5 @@ export function getActivityTypeFromOutput(output: IWrappedOutput): ActivityType 
             }
     }
 
-    return ActivityType.Basic
+    return ActivityType.Transaction
 }

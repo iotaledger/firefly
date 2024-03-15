@@ -42,7 +42,6 @@ classDiagram
         - type: ActivityType.Basic
         - rawAmount: number
         - assetId: string
-        - publicNote: string
         - isShimmerClaiming: boolean
     }
     class Nft Activity {

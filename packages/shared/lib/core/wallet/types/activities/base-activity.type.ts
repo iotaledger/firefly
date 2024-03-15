@@ -1,15 +1,14 @@
 import { NftOutput, OutputType, InclusionState } from '@iota/sdk/out/types'
-import { ActivityAsyncStatus, ActivityDirection, ActivityAction, ActivityType } from '../../enums'
+import { ActivityAsyncStatus, ActivityDirection, ActivityAction, ActivityType, SubjectType } from '../../enums'
 import { IProcessedTransaction, IWalletState, IWrappedOutput, ProcessedTransaction } from '../../interfaces'
 import { Subject } from '../subject.type'
-import { Layer2Metadata } from '@core/layer-2'
+import { Layer2Metadata, getLayer2NetworkFromAddress } from '@core/layer-2'
 import { isParticipationOutput } from '@contexts/governance'
 import { getActivityTypeFromOutput, getNftId, getNonRemainderBasicOutputsFromTransaction } from '../../utils'
-import { ActivityNft } from './nft-activity.type'
 import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts' // TODO: Fix imports
-import { ActivityBasic } from './basic-activity.class'
-import { ActivityConsolidation } from './consolidation-activity.type'
-import { ActivityAccount } from './account-activity.type'
+import * as Activities from './'
+import { localize } from 'shared/lib/core/i18n'
+import { truncateString } from 'shared/lib/core/utils'
 
 export type BaseActivity = {
     id: string
@@ -19,7 +18,7 @@ export type BaseActivity = {
     inclusionState: InclusionState
     isHidden?: boolean
     containsValue: boolean
-    isAssetHidden: boolean
+    isAssetHidden: boolean // TODO: Is `isAssetHidden` even used?
     direction: ActivityDirection
     action: ActivityAction
     isInternal: boolean
@@ -29,7 +28,7 @@ export type BaseActivity = {
     subject: Subject | undefined
     metadata?: string
     tag?: string
-    asyncData: AsyncData
+    asyncData?: AsyncData
     destinationNetwork?: string
     parsedLayer2Metadata?: Partial<Layer2Metadata>
 }
@@ -46,37 +45,197 @@ export type AsyncData = {
 
 // TODO: Move somewhere else.
 export enum SpecialStatus {
-    Unclaimed = "Unclaimed",
-    Claimed = "Claimed",
-    Expired = "Expired",
-    TimeLocked = "TimeLocked"
+    Unclaimed = 'Unclaimed',
+    Claimed = 'Claimed',
+    Expired = 'Expired',
+    TimeLocked = 'TimeLocked',
 }
 
 export interface ActivityBaseOptions {
-    id: string,
-    inclusionState: InclusionState,
-    specialStatus: SpecialStatus,
-    time: Date, // Should this be number, slot index?
-    from: string[],
-    to: string[],
+    id: string
+    inclusionState: InclusionState
+    specialStatus: SpecialStatus
+    time: Date // Should this be number, slot index?
+    //from: string[]
+    //to: string[]
+
+    isHidden: boolean
+    action: ActivityAction
+    direction: ActivityDirection
+    isInternal?: boolean
+
+    outputId: string
+    transactionId: string
+    containsValue: boolean
+    isAssetHidden: boolean // TODO: Is `isAssetHidden` even used?
+    storageDeposit: number
+    giftedStorageDeposit: number
+    surplus?: number
+    subject: Subject | undefined
+    metadata?: string
+    tag?: string
+    asyncData?: AsyncData
+    destinationNetwork?: string
+    parsedLayer2Metadata?: Partial<Layer2Metadata> | null
 }
 
-export class ActivityBase {
-    constructor(options: ActivityBaseOptions) { }
+abstract class ActivityUtils {
+    abstract tileTitle(): string
 
-    id(){
+    abstract subjectLocale(): string
+}
+
+export class ActivityBase implements ActivityUtils {
+    constructor(private options: ActivityBaseOptions) {}
+
+    isIncoming(): boolean {
+        return [ActivityDirection.Incoming, ActivityDirection.Incoming].includes(this.direction())
+    }
+
+    subject(): Subject | undefined {
+        const subject = this.options.subject;
+        if (this.parsedLayer2Metadata() && subject) {
+            return {
+                ...subject,
+                ...(subject?.type === SubjectType.Address && {
+                    address: this.parsedLayer2Metadata()?.ethereumAddress,
+                }),
+            }
+        } else if (subject?.type === SubjectType.Address) {
+            const network = getLayer2NetworkFromAddress(subject.address)
+            return { ...subject, address: network ?? subject.address }
+        } else {
+            return this.subject()
+        }
+    }
+
+    subjectLocale(): string {
+        const subject = this.subject();
+
+         if (subject?.type === SubjectType.Wallet) {
+            return truncateString(subject?.wallet?.name, 13, 0)
+        } else if (subject?.type === SubjectType.Address) {
+            const address = this.parsedLayer2Metadata()?.ethereumAddress ?? subject?.address
+            const network = getLayer2NetworkFromAddress(address)
+
+            return network ?? truncateString(address, 6, 6)
+        } else {
+            return localize('general.unknownAddress')
+        }
+    }
+
+    id() {
         return this.id
     }
-    
-    inclusionState(){
-        return this.inclusionState
+
+    inclusionState() {
+        return this.options.inclusionState
+    }
+
+    specialStatus() {
+        return this.options.specialStatus
+    }
+
+    time() {
+        return this.options.time
+    }
+
+    isHidden() {
+        return this.options.isHidden
+    }
+
+    action() {
+        return this.options.action
+    }
+
+    direction() {
+        return this.options.direction
+    }
+
+    isInternal(): boolean {
+        return this.options.isInternal ?? false
+    }
+
+    outputId() {
+        return this.options.outputId
+    }
+
+    transactionId() {
+        return this.options.transactionId
+    }
+
+    containsValue() {
+        return this.options.containsValue
+    }
+
+    isAssetHidden() {
+        return this.options.isAssetHidden
+    }
+
+    storageDeposit() {
+        return this.options.storageDeposit
+    }
+
+    giftedStorageDeposit() {
+        return this.options.giftedStorageDeposit
+    }
+
+    surplus() {
+        return this.options.surplus
+    }
+
+    metadata() {
+        return this.options.metadata
+    }
+
+    tag() {
+        return this.options.tag
+    }
+
+    asyncData(): AsyncData | undefined {
+        return this.options.asyncData
+    }
+
+    destinationNetwork() {
+        return this.options.destinationNetwork
+    }
+
+    parsedLayer2Metadata() {
+        return this.options.parsedLayer2Metadata
+    }
+
+    tileTitle(): string {
+        const isConfirmed = this.inclusionState() === InclusionState.Confirmed
+        if (this.action() === ActivityAction.Burn) {
+            return isConfirmed ? 'general.burned' : 'general.burning'
+        } else if (this.action() === ActivityAction.Send) {
+            if (this.isInternal()) {
+                return isConfirmed ? 'general.transfer' : 'general.transferring'
+            }
+            if (
+                this.direction() === ActivityDirection.Incoming ||
+                this.direction() === ActivityDirection.SelfTransaction
+            ) {
+                return isConfirmed ? 'general.received' : 'general.receiving'
+            }
+            if (this.direction() === ActivityDirection.Outgoing) {
+                return isConfirmed ? 'general.sent' : 'general.sending'
+            }
+        } else {
+            return 'general.unknown'
+        }
+
+        return ''
     }
 
     /**
      * Generate a group of activies given a processed transaction
      * @returns ActivityBase[]
      */
-    static generateActivitiesFromProcessedTransaction(wallet: IWalletState, processedTransaction: ProcessedTransaction): Promise<Array<ActivityBase>> {
+    static generateActivitiesFromProcessedTransaction(
+        wallet: IWalletState,
+        processedTransaction: ProcessedTransaction
+    ): Promise<Array<ActivityBase>> {
         if (processedTransaction.wrappedInputs?.length > 0) {
             return this.generateActivitiesFromProcessedTransactionsWithInputs(wallet, processedTransaction)
         } else {
@@ -84,28 +243,31 @@ export class ActivityBase {
         }
     }
 
-    static async generateActivitiesFromProcessedTransactionsWithInputs(wallet: IWalletState, processedTransaction: ProcessedTransaction): Promise<Array<ActivityBase>> {
+    static async generateActivitiesFromProcessedTransactionsWithInputs(
+        wallet: IWalletState,
+        processedTransaction: ProcessedTransaction
+    ): Promise<Array<ActivityBase>> {
         let activities: Array<ActivityBase> = []
 
-        const { wrappedInputs, outputs, direction } = processedTransaction;
+        const { wrappedInputs, outputs } = processedTransaction
 
         const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
         if (containsFoundryActivity) {
-            // const foundryActivities = await generateActivitiesFromFoundryOutputs(processedTransaction, wallet)
-            // activities.push(...foundryActivities)
+            const foundryActivities = await Activities.ActivityFoundry.fromOutputs(processedTransaction, wallet)
+            activities.push(...foundryActivities)
         }
 
         const containsNftActivity = outputs.some((output) => output.output.type === OutputType.Nft)
         if (containsNftActivity) {
-            // const nftActivities = await generateActivitiesFromNftOutputs(processedTransaction, wallet)
-            // activities.push(...nftActivities)
+            const nftActivities = await Activities.ActivityNft.fromOutputs(processedTransaction, wallet)
+            activities.push(...nftActivities)
         }
 
         const containsAccountActivity =
             outputs.some((output) => output.output.type === OutputType.Account) && !containsFoundryActivity
         if (containsAccountActivity) {
-            // const accountActivities = await generateActivitiesFromAccountOutputs(processedTransaction, wallet)
-            // activities.push(...accountActivities)
+            const accountActivities = await Activities.ActivityAccount.fromOutputs(processedTransaction, wallet)
+            activities.push(...accountActivities)
         }
 
         const hasParticipationInputs = wrappedInputs?.some((input) => isParticipationOutput(input.output))
@@ -113,114 +275,58 @@ export class ActivityBase {
             ? outputs[0]
             : outputs.find((output) => isParticipationOutput(output.output))
         if (governanceOutput) {
-            // const governanceActivity = await generateSingleGovernanceActivity(wallet, {
-            //     processedTransaction,
-            //     wrappedOutput: governanceOutput,
-            //     action: null,
-            // })
-            // activities.push(governanceActivity)
+            const governanceActivity = await Activities.ActivityGovernance.fromProcessedTransaction(wallet, {
+                processedTransaction,
+                wrappedOutput: governanceOutput,
+                action: ActivityAction.Unknown, // TODO: Maybe this should be optional?
+            })
+            activities.push(governanceActivity)
         }
 
         const containsAnchorActivity = outputs.some((output) => output.output.type === OutputType.Anchor)
         if (containsAnchorActivity) {
-            // const anchorActivities = await generateActivitiesFromAnchorOutputs(processedTransaction, wallet)
-            // activities.push(...anchorActivities)
+            const anchorActivities = await Activities.ActivityAnchor.fromOutputs(processedTransaction, wallet)
+            activities.push(...anchorActivities)
         }
+
         if (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) {
-
-            const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
-                outputs,
-                wallet.depositAddress,
-                direction
-            )
-            const burnedNftInputs = processedTransaction.getBurnedNftInputs();
-            for (const basicOutput of basicOutputs) {
-                let activity: ActivityBase
-
-                const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
-                const burnedNftInputIndex = burnedNftInputs.findIndex(
-                    (input) => input.output.amount === basicOutput.output.amount
-                )
-                const burnedNativeToken = burnedNftInputIndex < 0 ? processedTransaction.getBurnedNativeTokens() : undefined
-
-                // NFT Activity
-                if (isSelfTransaction && burnedNftInputIndex >= 0) {
-                    const wrappedInput = burnedNftInputs[burnedNftInputIndex]
-                    const nftInput = wrappedInput.output as NftOutput
-                    
-                    activity = await ActivityNft.fromProcessedTransaction(
-                        wallet,
-                        {
-                            action: ActivityAction.Burn,
-                            processedTransaction,
-                            wrappedOutput: basicOutput,
-                        },
-                        getNftId(nftInput.nftId, wrappedInput.outputId)
-                    )
-                    const nft = buildNftFromNftOutput(wrappedInput, wallet.depositAddress, false)
-                    addOrUpdateNftInAllWalletNfts(wallet.id, nft)
-
-                    burnedNftInputs.splice(burnedNftInputIndex, 1)
-                }
-                // Burn Activity
-                else if (isSelfTransaction && burnedNativeToken) {
-                    activity = await ActivityBasic.fromProcessedTransaction(wallet, {
-                        action: ActivityAction.Burn,
-                        processedTransaction,
-                        wrappedOutput: basicOutput,
-                    })
-                } 
-                // Consolidation Activity
-                else if (isSelfTransaction && ActivityBase.isConsolidation(basicOutput, processedTransaction)) {
-                    activity = await ActivityConsolidation.fromProcessedTransaction(wallet, {
-                        action: ActivityAction.Send,
-                        processedTransaction,
-                        wrappedOutput: basicOutput,
-                    })
-                } 
-                // Send Activity
-                else {
-                    activity = await ActivityBasic.fromProcessedTransaction(wallet, {
-                        action: ActivityAction.Send,
-                        processedTransaction,
-                        wrappedOutput: basicOutput,
-                    })
-                }
-                activities.push(activity)
-            }
-        } else {
-
+            const basicActivities = await Activities.ActivityTransaction.fromOutputs(processedTransaction, wallet)
+            activities.push(...basicActivities)
         }
+
         return activities
     }
 
-    static async generateActivitiesFromProcessedTransactionsWithoutInputs(wallet: IWalletState, processedTransaction: ProcessedTransaction): Promise<Array<ActivityBase>> {
+    static async generateActivitiesFromProcessedTransactionsWithoutInputs(
+        wallet: IWalletState,
+        processedTransaction: ProcessedTransaction
+    ): Promise<Array<ActivityBase>> {
         const nonRemainderOutputs = processedTransaction.outputs.filter((wrappedOutput) => !wrappedOutput.remainder)
         const activities = await Promise.all(
             nonRemainderOutputs.map(async (wrappedOutput) => {
                 const params = {
-                    type: getActivityTypeFromOutput(wrappedOutput),
                     action: ActivityAction.Unknown,
                     processedTransaction,
                     wrappedOutput,
                 }
-                switch (params.type) {
-                    case ActivityType.Basic:
-                        return ActivityBasic.fromProcessedTransaction(wallet, params)
+                const activityType = getActivityTypeFromOutput(wrappedOutput)
+                switch (activityType) {
+                    case ActivityType.Transaction:
+                        return Activities.ActivityTransaction.fromProcessedTransaction(wallet, params)
                     case ActivityType.Governance:
-                    //    return generateSingleGovernanceActivity(wallet, params)
+                        return Activities.ActivityGovernance.fromProcessedTransaction(wallet, params)
                     case ActivityType.Foundry:
-                    //    return generateSingleFoundryActivity(wallet, params)
+                        return Activities.ActivityFoundry.fromProcessedTransaction(wallet, params)
                     case ActivityType.Account:
-                        return ActivityAccount.fromProcessedTransaction(wallet, params)
+                        return Activities.ActivityAccount.fromProcessedTransaction(wallet, params)
                     case ActivityType.Nft:
-                        return ActivityNft.fromProcessedTransaction(wallet, params)
+                        return Activities.ActivityNft.fromProcessedTransaction(wallet, params)
                     case ActivityType.Vesting:
-                    //    return generateVestingActivity(wallet, params)
+                        return Activities.ActivityVesting.fromProcessedTransaction(wallet, params)
                     case ActivityType.Anchor:
-                    //    return generateSingleAnchorActivity(wallet, params)
+                        return Activities.ActivityAnchor.fromProcessedTransaction(wallet, params)
                     default:
-                        throw new Error(`Unknown activity type: ${params.type}`)
+                        throw new Error(`Unknown activity type: ${activityType}`)
                 }
             })
         )
@@ -228,13 +334,14 @@ export class ActivityBase {
     }
 
     static isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
-        const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OutputType.Basic)
+        const allBasicInputs = processedTransaction.wrappedInputs.every(
+            (input) => input.output.type === OutputType.Basic
+        )
         const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
         const isSameAmount =
             processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===
             Number(output.output.amount)
-    
+
         return allBasicInputs && isSelfTransaction && isSameAmount
-    
     }
 }

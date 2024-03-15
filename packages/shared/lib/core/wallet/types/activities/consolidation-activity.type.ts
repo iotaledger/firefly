@@ -1,6 +1,8 @@
 import { ActivityType } from '@core/wallet/enums'
 import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
-import { IActivityGenerationParameters, IWalletState } from '../../interfaces'
+import { ActivityGenerationParameters, IActivityGenerationParameters, IWalletState, IWrappedOutput } from '../../interfaces'
+import { BasicOutput, InclusionState, OutputType } from '@iota/sdk/out/types'
+import { activityOutputContainsValue, getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
 
 export type ConsolidationActivity = BaseActivity & {
     type: ActivityType.Consolidation
@@ -12,12 +14,22 @@ interface ActivityConsolidationOptions extends ActivityBaseOptions {
 }
 
 export class ActivityConsolidation extends ActivityBase {
-    constructor(options: ActivityConsolidationOptions) {
-        super(options)
+    constructor(private consolidationOptions: ActivityConsolidationOptions) {
+        super(consolidationOptions)
     }
 
-    static async fromProcessedTransaction(wallet: IWalletState,
-        { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
+    amountConsolidatedInputs(): number {
+        return this.consolidationOptions.amountConsolidatedInputs
+    }
+
+    tileTitle(): string {
+        const isConfirmed = this.inclusionState() === InclusionState.Confirmed
+        return isConfirmed ? 'general.consolidated' : 'general.consolidating'
+    }
+
+    static async fromProcessedTransaction(
+        wallet: IWalletState,
+        { action, processedTransaction, wrappedOutput }: ActivityGenerationParameters
     ) {
         const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction
 
@@ -41,13 +53,28 @@ export class ActivityConsolidation extends ActivityBase {
 
         const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
         return new ActivityConsolidation({
-            id,
-            inclusionState,
             specialStatus,
-            amountConsolidatedInputs,
+            isHidden,
+            id,
+            transactionId,
             time,
-            from,
-            to
+            direction,
+            action,
+            isAssetHidden,
+            inclusionState,
+            containsValue,
+            outputId,
+            storageDeposit,
+            giftedStorageDeposit,
+            metadata,
+            tag,
+            asyncData,
+            amountConsolidatedInputs,
+            ...sendingInfo,
         })
     }
+}
+
+function getAmountOfConsolidationInputs(inputs: IWrappedOutput[]): number {
+    return inputs.filter((input) => input.output.type === OutputType.Basic).length
 }

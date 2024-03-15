@@ -98,7 +98,7 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                 wrappedOutput,
             }
             switch (params.type) {
-                case ActivityType.Basic:
+                case ActivityType.Transaction:
                     return generateSingleBasicActivity(wallet, params)
                 case ActivityType.Governance:
                     return generateSingleGovernanceActivity(wallet, params)

@@ -4,5 +4,5 @@ export enum InclusionState {
     Accepted = 'Accepted',
     Confirmed = 'Confirmed',
     Finalized = 'Finalized',
-    Failed = 'Failed'
+    Failed = 'Failed',
 }

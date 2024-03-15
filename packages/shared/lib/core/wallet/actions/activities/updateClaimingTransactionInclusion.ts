@@ -17,7 +17,7 @@ export function updateClaimingTransactionInclusion(
         if (activity) {
             if (inclusionState === InclusionState.Confirmed) {
                 updateActivityFromPartialActivity(activity, {
-                    type: ActivityType.Basic,
+                    type: ActivityType.Transaction,
                     asyncData: {
                         ...activity.asyncData,
                         isClaiming: false,
@@ -36,9 +36,9 @@ export function updateClaimingTransactionInclusion(
                     alert: true,
                     message: localize('notifications.claimed.success'),
                 })
-            } else if (inclusionState === InclusionState.Conflicting) {
+            } else if (inclusionState === InclusionState.Conflicting) { // TODO: Fix this
                 updateActivityFromPartialActivity(activity, {
-                    type: ActivityType.Basic,
+                    type: ActivityType.Transaction,
                     asyncData: {
                         ...activity.asyncData,
                         isClaiming: false,

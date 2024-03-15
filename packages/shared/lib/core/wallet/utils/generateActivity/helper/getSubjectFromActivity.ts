@@ -4,6 +4,7 @@ import { truncateString } from '@core/utils'
 import { ActivityType, SubjectType } from '@core/wallet/enums'
 import type { Activity, Subject } from '@core/wallet/types'
 
+// TODO: Remove this
 export function getSubjectFromActivity(activity: Activity): Subject {
     if (activity.parsedLayer2Metadata) {
         return {
@@ -23,7 +24,7 @@ export function getSubjectFromActivity(activity: Activity): Subject {
 export function getSubjectLocaleFromActivity(activity: Activity): string {
     const { subject } = activity
 
-    if (activity.type === ActivityType.Basic && activity?.isShimmerClaiming) {
+    if (activity.type === ActivityType.Transaction && activity?.isShimmerClaiming) {
         return localize('general.shimmerGenesis')
     } else if (activity.type === ActivityType.Vesting) {
         return localize('general.stardustGenesis')

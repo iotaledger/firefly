@@ -1,4 +1,4 @@
-import { NewTransactionDetails, NftActivity, Subject, TransactionActivity, VestingActivity } from '@core/wallet/types'
+import { NewTransactionDetails, NftActivity, Subject, BaseActivity, VestingActivity } from '@core/wallet/types'
 import { NewTransactionType } from '@core/wallet/stores'
 import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
 import { TimePeriod } from '@core/utils'
@@ -44,9 +44,9 @@ export function rebuildActivity(
     visibleSurplus: number,
     isInternal: boolean,
     layer2Parameters: ILayer2Parameters
-): Partial<TransactionActivity | VestingActivity | NftActivity> {
+): Partial<BaseActivity | VestingActivity | NftActivity> {
     return {
-        ...(transactionDetails as unknown as TransactionActivity | VestingActivity | NftActivity),
+        ...(transactionDetails as unknown as BaseActivity | VestingActivity | NftActivity),
         id: undefined,
         outputId: undefined,
         transactionId: undefined,
@@ -61,7 +61,7 @@ export function rebuildActivity(
         isAssetHidden: false,
         giftedStorageDeposit: 0,
         surplus: visibleSurplus,
-        type: ActivityType.Basic,
+        type: ActivityType.Transaction,
         direction: ActivityDirection.Outgoing,
         inclusionState: InclusionState.Pending,
         action: ActivityAction.Send,

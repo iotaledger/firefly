@@ -10,7 +10,7 @@ export async function activityOutputContainsValue(
     wrappedOutput: IWrappedOutput
 ): Promise<boolean> {
     const type = getActivityTypeFromOutput(wrappedOutput)
-    const typesToCheck = [ActivityType.Basic]
+    const typesToCheck = [ActivityType.Transaction]
     if (typesToCheck.includes(type)) {
         const output = wrappedOutput.output as BasicOutput
 

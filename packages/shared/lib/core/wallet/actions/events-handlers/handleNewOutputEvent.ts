@@ -67,7 +67,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
         const activities = await generateActivities(processedOutput, wallet)
         for (const activity of activities) {
-            if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
+            if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) {
                 const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
                 if (asset) {
                     addPersistedAsset(asset)

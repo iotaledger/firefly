@@ -6,10 +6,11 @@ import { getAsyncStatus } from './getAsyncStatus'
 import { getStorageDepositFromOutput } from './getStorageDepositFromOutput'
 import { CommonOutput, Output } from '@iota/sdk/out/types'
 
+// TODO: REFACTOR THIS
 export async function getAsyncDataFromOutput(
     output: Output,
     outputId: string,
-    claimingData: IClaimData,
+    claimingData: IClaimData | undefined,
     wallet: IWalletState
 ): Promise<AsyncData> {
     const isAsync = isOutputAsync(output)

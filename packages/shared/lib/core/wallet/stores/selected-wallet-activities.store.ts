@@ -28,14 +28,15 @@ export const activitySearchTerm: Writable<string> = writable('')
 export const queriedActivities: Readable<Activity[]> = derived(
     [selectedWalletActivities, activitySearchTerm, activityFilter],
     ([$selectedWalletActivities, $activitySearchTerm]) => {
+        // TODO: Refactor this an clean up.
         let activityList = $selectedWalletActivities.filter((_activity) => {
-            const containsAssets = _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+            const containsAssets = _activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry
             if (!_activity.isHidden && !containsAssets) {
                 return true
             }
 
             const asset =
-                _activity.type === ActivityType.Basic || _activity.type === ActivityType.Foundry
+                _activity.type === ActivityType.Transaction || _activity.type === ActivityType.Foundry
                     ? getAssetFromPersistedAssets(_activity.assetId)
                     : undefined
             const hasValidAsset = asset?.metadata && isValidIrc30Token(asset.metadata)
@@ -64,7 +65,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         fieldsToSearch.push(activity.transactionId)
     }
 
-    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.assetId) {
+    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.assetId) {
         fieldsToSearch.push(activity.assetId)
 
         const assetName = getAssetFromPersistedAssets(activity.assetId)?.metadata?.name
@@ -73,7 +74,7 @@ function getFieldsToSearchFromActivity(activity: Activity): string[] {
         }
     }
 
-    if ((activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) && activity.rawAmount) {
+    if ((activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) && activity.rawAmount) {
         fieldsToSearch.push(activity.rawAmount?.toString())
         fieldsToSearch.push(getFormattedAmountFromActivity(activity, false)?.toLowerCase())
     }
