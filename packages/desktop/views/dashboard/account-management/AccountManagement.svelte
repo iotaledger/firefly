@@ -4,6 +4,8 @@
     import { AccountManagementDetails, AccountManagementList } from '@components'
     import { AccountOutput, OutputData } from '@iota/sdk/out/types'
     import { isAccountOutput, isImplicitAccountOutput } from '@core/wallet'
+    import { Text } from '@ui'
+    import { localize } from '@core/i18n'
 
     $: allAccountOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter(
@@ -28,8 +30,8 @@
     <account-management-container
         class="w-full h-full flex flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900 space-x-4 justify-center"
     >
-        {#if selectedOutput}
-            <div class="flex space-x-4 max-w-7xl justify-center w-full">
+        <div class="flex space-x-4 max-w-7xl justify-center w-full">
+            {#if selectedOutput}
                 {#key $selectedWallet?.id}
                     {#if features.accountManagement.accountList.enabled}
                         <AccountManagementList
@@ -42,7 +44,11 @@
                         <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} />
                     {/if}
                 {/key}
-            </div>
-        {/if}
+            {:else}
+                <div class="flex flex-col w-full h-full justify-center items-center">
+                    <Text secondary>{localize('views.accountManagement.emptyAccounts')}</Text>
+                </div>
+            {/if}
+        </div>
     </account-management-container>
 {/if}
