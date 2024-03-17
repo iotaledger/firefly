@@ -3996,10 +3996,10 @@ electron-updater@6.1.8:
     semver "^7.3.8"
     tiny-typed-emitter "^2.1.0"
 
-electron@29.0.1:
-  version "29.0.1"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-29.0.1.tgz#936c0623a1bbf272dea423305f074de6ac016967"
-  integrity sha512-hsQr9clm8NCAMv4uhHlXThHn52UAgrHgyz3ubBAxZIPuUcpKVDtg4HPmx4hbmHIbYICI5OyLN3Ztp7rS+Dn4Lw==
+electron@29.1.1:
+  version "29.1.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-29.1.1.tgz#e9cb11311324e4b43a3e73667cd2b65a30e8fa34"
+  integrity sha512-cXN15NgCi7MkzGo5/23ZQbii+0UfhmUiDjACunmzcUofYCjF42XhFbL7JZnwgI0qtBCCeJU8qZNZt9lU91gUFw==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^20.9.0"
@@ -4710,9 +4710,9 @@ flatted@^3.1.0:
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
 follow-redirects@^1.0.0:
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.4.tgz#cdc7d308bf6493126b17ea2191ea0ccf3e535adf"
-  integrity sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
+  integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
 for-each@^0.3.3:
   version "0.3.3"
