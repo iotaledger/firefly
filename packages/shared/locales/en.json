@@ -1724,7 +1724,7 @@
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available mana",
         "insufficientMana": "Insufficient mana {availableMana}",
-        "secondsToRefreshManaCost": "Seconds to refresh the mana cost {seconds}"
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
     },
     "filters":{
         "title": "Filters",
