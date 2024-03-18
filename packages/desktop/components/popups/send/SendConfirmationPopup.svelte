@@ -77,7 +77,7 @@
     $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedWallet.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
-    $: requiredMana = allotmentManaCost + extraMana
+    $: requiredMana = Number(allotmentManaCost) + extraMana
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
@@ -105,7 +105,7 @@
                     .then((prepareTx) => {
                         allotmentManaCost =
                             prepareTx?._preparedData?.transaction?.allotments?.reduce(
-                                (acc, { mana }) => acc + mana,
+                                (acc, { mana }) => acc + Number(mana),
                                 0
                             ) || 0
                         extraMana = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
