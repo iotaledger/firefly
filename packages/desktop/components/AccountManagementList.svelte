@@ -35,7 +35,7 @@
         <left-pane-container class="flex flex-col space-y-4 h-full scrollable-y">
             {#if accountsOrdered.length > 0}
                 <Text type={TextType.h2}>{localize('views.accountManagement.list.accountTitle')}</Text>
-                <list-wrapper class="flex flex-col space-y-2">
+                <list-wrapper class="flex flex-col space-y-2 px-2">
                     {#each accountsOrdered as output}
                         <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
                             <div class="flex flex-col space-y-2">
