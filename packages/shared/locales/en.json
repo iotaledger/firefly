@@ -716,7 +716,7 @@
                 }
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There is no account to show, activate one first."
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
