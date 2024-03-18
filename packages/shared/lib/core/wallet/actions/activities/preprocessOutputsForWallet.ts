@@ -3,9 +3,9 @@ import type { OutputData, OutputResponse, TransactionWithMetadata } from '@iota/
 import { IWalletState } from '@core/wallet/interfaces'
 
 import { preprocessGroupedOutputs } from '../../utils/outputs'
-import { IProcessedTransaction } from '../../interfaces'
+import { ProcessedTransaction } from '../../interfaces'
 
-export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<IProcessedTransaction[]> {
+export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<ProcessedTransaction[]> {
     const outputs = await wallet.outputs()
 
     const transactions = await wallet.transactions()
@@ -25,7 +25,7 @@ export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<
         }
     }
 
-    const processedTransactions: IProcessedTransaction[] = []
+    const processedTransactions: ProcessedTransaction[] = []
     for (const transactionId of Object.keys(groupedOutputs)) {
         try {
             const inputs: OutputResponse[] = incomingTransactions[transactionId]?.inputs ?? []

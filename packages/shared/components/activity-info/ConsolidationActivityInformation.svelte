@@ -1,18 +1,18 @@
 <script lang="ts">
     import { KeyValueBox } from '@ui'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
-    import { ConsolidationActivity } from '@core/wallet'
+    import { ActivityConsolidation } from '@core/wallet'
     import { IKeyValueBoxList } from '@core/utils'
 
-    export let activity: ConsolidationActivity
+    export let activity: ActivityConsolidation
 
     let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
         ...(activity.time && {
-            transactionTime: { data: getFormattedTimeStamp(activity.time) },
+            transactionTime: { data: getFormattedTimeStamp(activity.time()) },
         }),
         ...(activity.amountConsolidatedInputs && {
-            amountConsolidatedInputs: { data: String(activity.amountConsolidatedInputs) },
+            amountConsolidatedInputs: { data: String(activity.amountConsolidatedInputs()) },
         }),
     }
 </script>

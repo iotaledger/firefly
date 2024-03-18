@@ -5,7 +5,6 @@
     import {
         formatTokenAmountPrecise,
         EMPTY_HEX_ID,
-        processAndAddToActivities,
         selectedWallet,
         updateSelectedWallet,
     } from '@core/wallet'
@@ -62,7 +61,6 @@
             const transaction = await $selectedWallet
                 .prepareCreateAccountOutput()
                 .then((prepared) => plainToInstance(PreparedTransaction, prepared).send())
-            await processAndAddToActivities(transaction, $selectedWallet)
             closePopup()
         } catch (err) {
             handleError(err)

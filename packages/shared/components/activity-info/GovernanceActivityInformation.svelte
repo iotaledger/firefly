@@ -1,25 +1,25 @@
 <script lang="ts">
     import { KeyValueBox } from '@ui'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, GovernanceAction, GovernanceActivity } from '@core/wallet'
+    import { formatTokenAmountBestMatch, GovernanceAction, ActivityGovernance } from '@core/wallet'
     import { getBaseToken } from '@core/profile'
     import { IKeyValueBoxList } from '@core/utils'
 
-    export let activity: GovernanceActivity
+    export let activity: ActivityGovernance
 
-    $: formattedTransactionTime = getFormattedTimeStamp(activity.time)
+    $: formattedTransactionTime = getFormattedTimeStamp(activity.time())
 
     let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
-        ...(activity.time && {
+        ...(activity.time() && {
             transactionTime: { data: formattedTransactionTime },
         }),
         ...(activity.votingPower !== undefined && {
             votingPower: {
-                data: formatTokenAmountBestMatch(activity.votingPower, getBaseToken()),
+                data: formatTokenAmountBestMatch(activity.votingPower(), getBaseToken()),
                 alternateKey:
-                    activity.governanceAction === GovernanceAction.DecreaseVotingPower ||
-                    activity.governanceAction === GovernanceAction.IncreaseVotingPower
+                    activity.governanceAction() === GovernanceAction.DecreaseVotingPower ||
+                    activity.governanceAction() === GovernanceAction.IncreaseVotingPower
                         ? 'newVotingPower'
                         : 'votingPower',
             },

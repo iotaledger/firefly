@@ -1,13 +1,13 @@
 <script lang="ts">
     import { KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { FoundryActivity, getAssetFromPersistedAssets, IIrc30Metadata } from '@core/wallet'
+    import { ActivityFoundry, getAssetFromPersistedAssets, IIrc30Metadata } from '@core/wallet'
     import { IKeyValueBoxList } from '@core/utils'
 
-    export let activity: FoundryActivity
+    export let activity: ActivityFoundry
 
     let metadata: IIrc30Metadata
-    $: metadata = <IIrc30Metadata>getAssetFromPersistedAssets(activity.assetId)?.metadata
+    $: metadata = <IIrc30Metadata>getAssetFromPersistedAssets(activity.assetId())?.metadata
 
     let detailsList: IKeyValueBoxList
     $: detailsList = {

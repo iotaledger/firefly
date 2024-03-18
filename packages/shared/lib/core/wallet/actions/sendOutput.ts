@@ -1,6 +1,6 @@
 import { updateNftInAllWalletNfts } from '@core/nfts/actions'
 import { getSelectedWallet, resetNewTokenTransactionDetails, updateSelectedWallet } from '../stores'
-import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
+import { getDefaultTransactionOptions } from '../utils'
 import { NftOutput, Output, OutputType } from '@iota/sdk/out/types'
 
 export async function sendOutput(output: Output): Promise<void> {
@@ -17,7 +17,7 @@ export async function sendOutput(output: Output): Promise<void> {
 
         resetNewTokenTransactionDetails()
 
-        await processAndAddToActivities(transaction, wallet)
+        
         updateSelectedWallet({ isTransferring: false })
         return
     } catch (err) {

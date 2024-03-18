@@ -1,13 +1,8 @@
-import { ActivityType } from '@core/wallet/enums'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
-import { ActivityGenerationParameters, IActivityGenerationParameters, IWalletState, IWrappedOutput } from '../../interfaces'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
+import { ActivityGenerationParameters, IWalletState, IWrappedOutput } from '../../interfaces'
 import { BasicOutput, InclusionState, OutputType } from '@iota/sdk/out/types'
 import { activityOutputContainsValue, getAsyncDataFromOutput, getMetadataFromOutput, getSendingInformation, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
-
-export type ConsolidationActivity = BaseActivity & {
-    type: ActivityType.Consolidation
-    amountConsolidatedInputs: number
-}
+import { ActivityType } from '../../enums'
 
 interface ActivityConsolidationOptions extends ActivityBaseOptions {
     amountConsolidatedInputs: number
@@ -16,6 +11,10 @@ interface ActivityConsolidationOptions extends ActivityBaseOptions {
 export class ActivityConsolidation extends ActivityBase {
     constructor(private consolidationOptions: ActivityConsolidationOptions) {
         super(consolidationOptions)
+    }
+
+    type(){
+        return ActivityType.Consolidation
     }
 
     amountConsolidatedInputs(): number {

@@ -2,10 +2,10 @@
     import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { convertAndFormatNftMetadata, getNftByIdFromAllWalletNfts, IIrc27Metadata } from '@core/nfts'
-    import { NftActivity } from '@core/wallet'
+    import { ActivityNft } from '@core/wallet'
     import { KeyValueBox } from '@ui'
 
-    export let activity: NftActivity
+    export let activity: ActivityNft
 
     type NftMetadataDetailsList = {
         [key in keyof IIrc27Metadata]?: {
@@ -18,7 +18,7 @@
         }
     }
 
-    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity?.nftId)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity?.nftId())
     $: nftMetadataDetailsList = nft?.parsedMetadata
         ? createIrc27NftMetadataDetailsList(nft?.parsedMetadata)
         : createNftMetadataDetailsList(nft?.metadata)

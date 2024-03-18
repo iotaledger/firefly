@@ -1,31 +1,21 @@
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import {
     ActivityGenerationParameters,
-    IActivityGenerationParameters,
-    IProcessedTransaction,
     IWalletState,
     ProcessedTransaction,
 } from '../../interfaces'
 import { AccountOutput, InclusionState, OutputType } from '@iota/sdk/out/types'
-import { api } from 'shared/lib/core/api'
-import { getNetworkHrp } from 'shared/lib/core/profile'
+import { api } from '@core/api'
+import { getNetworkHrp } from '@core/profile'
 import {
     getStorageDepositFromOutput,
     getAmountFromOutput,
     getMetadataFromOutput,
     getTagFromOutput,
     getAsyncDataFromOutput,
-    getSendingInformation,
 } from '../../utils'
-import { Activity } from '../activity.type'
 import { EMPTY_HEX_ID } from '../../constants'
-
-export type AccountActivity = BaseActivity & {
-    type: ActivityType.Account
-    accountAddress: string
-    accountId: string
-}
 
 interface ActivityAccountOptions extends ActivityBaseOptions {
     accountAddress: string
@@ -35,6 +25,10 @@ interface ActivityAccountOptions extends ActivityBaseOptions {
 export class ActivityAccount extends ActivityBase {
     constructor(private accountOptions: ActivityAccountOptions) {
         super(accountOptions)
+    }
+
+    type(){
+        return ActivityType.Account
     }
 
     accountId(): string {

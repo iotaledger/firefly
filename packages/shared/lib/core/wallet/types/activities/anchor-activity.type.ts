@@ -1,5 +1,5 @@
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import {
     ActivityGenerationParameters,
     IWalletState,
@@ -9,12 +9,6 @@ import { AnchorOutput, OutputType } from '@iota/sdk/out/types'
 import { EMPTY_HEX_ID } from '../../constants'
 import { getAmountFromOutput, getAsyncDataFromOutput, getGovernorAddressFromAnchorOutput, getMetadataFromOutput, getStateControllerAddressFromAnchorOutput, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
 
-export type AnchorActivity = BaseActivity & {
-    type: ActivityType.Anchor
-    governorAddress: string
-    stateControllerAddress: string
-}
-
 interface ActivityAnchorOptions extends ActivityBaseOptions {
     governorAddress: string
     stateControllerAddress: string
@@ -23,6 +17,10 @@ interface ActivityAnchorOptions extends ActivityBaseOptions {
 export class ActivityAnchor extends ActivityBase {
     constructor(private anchorOptions: ActivityAnchorOptions) {
         super(anchorOptions)
+    }
+
+    type(){
+        return ActivityType.Anchor
     }
 
     governorAddress(): string {

@@ -1,4 +1,3 @@
-export * from './all-wallet-activities.store'
 export * from './claimed-activities.store'
 export * from './hidden-activities.store'
 export * from './mint-nft-details.store'

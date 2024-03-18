@@ -1,20 +1,10 @@
 import { ActivityAction, ActivityType } from '@core/wallet/enums'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import { ActivityGenerationParameters, IWalletState, ProcessedTransaction } from '../../interfaces'
 import { AccountAddress, FoundryOutput, ImmutableAccountAddressUnlockCondition, OutputType, SimpleTokenScheme, UnlockConditionType } from '@iota/sdk/out/types'
 import { getAmountFromOutput, getAsyncDataFromOutput, getMetadataFromOutput, getNativeTokenFromOutput, getTagFromOutput } from '../../utils'
-import { api } from 'shared/lib/core/api'
-import { getCoinType, getNetworkHrp } from 'shared/lib/core/profile'
-
-export type FoundryActivity = BaseActivity & {
-    type: ActivityType.Foundry
-    rawAmount: number
-    assetId: string
-    accountAddress: string
-    mintedTokens: string
-    meltedTokens: string
-    maximumSupply: string
-}
+import { api } from '@core/api'
+import { getCoinType, getNetworkHrp } from '@core/profile'
 
 interface ActivityFoundryOptions extends ActivityBaseOptions {
     rawAmount: number
@@ -28,6 +18,34 @@ interface ActivityFoundryOptions extends ActivityBaseOptions {
 export class ActivityFoundry extends ActivityBase {
     constructor(private foundryOptions: ActivityFoundryOptions) {
         super(foundryOptions)
+    }
+
+    type(){
+        return ActivityType.Foundry
+    }
+
+    rawAmount(){
+        return this.foundryOptions.rawAmount
+    }
+
+    assetId(){
+        return this.foundryOptions.assetId
+    }
+
+    accountAddress(){
+        return this.foundryOptions.accountAddress
+    }
+
+    maximumSupply(){
+        return this.foundryOptions.maximumSupply
+    }
+
+    mintedTokens(){
+        return this.foundryOptions.mintedTokens
+    }
+
+    meltedTokens(){
+        return this.foundryOptions.meltedTokens
     }
 
     static async fromOutputs(

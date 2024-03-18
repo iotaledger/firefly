@@ -1,23 +1,22 @@
 import { derived, Readable, writable, Writable } from 'svelte/store'
 import { isValidIrc30Token } from '@core/token'
-
 import { selectedWalletId } from './selected-wallet-id.store'
-import { Activity } from '../types/activity.type'
 import { ActivityType, SubjectType } from '../enums'
 import { ActivityFilter } from '../interfaces/activity-filter.interface'
 import { getAssetFromPersistedAssets, getFormattedAmountFromActivity } from '../utils'
 import { isVisibleActivity } from '../utils/isVisibleActivity'
-import { allWalletActivities } from './all-wallet-activities.store'
 import { DEFAULT_ACTIVITY_FILTER } from '../constants'
+import { ActivityBase } from '../types'
 
-export const selectedWalletActivities: Readable<Activity[]> = derived(
-    [selectedWalletId, allWalletActivities],
-    ([$selectedWallet, $allWalletActivities]) => {
-        if ($selectedWallet) {
-            return $allWalletActivities[$selectedWallet] ?? []
-        } else {
-            return []
-        }
+export const selectedWalletActivities: Readable<ActivityBase[]> = derived(
+    [selectedWalletId],
+    ([$selectedWallet]) => {
+        // if ($selectedWallet) {
+        //     return $allWalletActivities[$selectedWallet] ?? []
+        // } else {
+        //     return []
+        // }
+        return []
     }
 )
 
@@ -25,7 +24,7 @@ export const activityFilter: Writable<ActivityFilter> = writable(DEFAULT_ACTIVIT
 
 export const activitySearchTerm: Writable<string> = writable('')
 
-export const queriedActivities: Readable<Activity[]> = derived(
+export const queriedActivities: Readable<ActivityBase[]> = derived(
     [selectedWalletActivities, activitySearchTerm, activityFilter],
     ([$selectedWalletActivities, $activitySearchTerm]) => {
         // TODO: Refactor this an clean up.
@@ -58,7 +57,7 @@ export const queriedActivities: Readable<Activity[]> = derived(
     }
 )
 
-function getFieldsToSearchFromActivity(activity: Activity): string[] {
+function getFieldsToSearchFromActivity(activity: ActivityBase): string[] {
     const fieldsToSearch: string[] = []
 
     if (activity?.transactionId) {

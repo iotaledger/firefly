@@ -5,8 +5,7 @@
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllWalletNfts, ownedNfts, selectedNftId } from '@core/nfts'
     import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
-    import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
-    import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
+    import { ActivityAsyncStatus, ActivityNft } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
         FontWeight,
@@ -20,16 +19,16 @@
     } from '@ui'
     import { tick } from 'svelte'
 
-    export let activity: NftActivity
+    export let activity: ActivityNft
 
-    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId)
-    $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId)
-    $: isTimelocked = activity?.asyncData?.timelockDate > $time
-    $: subject = getSubjectFromActivity(activity)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId())
+    $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId())
+    $: isTimelocked = activity?.asyncData()?.timelockDate > $time
+    $: subject = activity.subject()
 
     async function onClick(): Promise<void> {
         closePopup()
-        $selectedNftId = activity.nftId
+        $selectedNftId = activity.nftId()
         $dashboardRouter.goTo(DashboardRoute.Collectibles)
         // ugly hack to make sure router routes correctly
         await tick()
@@ -55,15 +54,15 @@
         <transaction-status class="flex flex-row w-full space-x-2 justify-center">
             {#if activity?.inclusionState && activity?.direction}
                 <TransactionActivityStatusPill
-                    type={activity.type}
-                    action={activity?.action}
-                    direction={activity?.direction}
-                    isInternal={activity?.isInternal}
-                    inclusionState={activity?.inclusionState}
+                    type={activity.type()}
+                    action={activity?.action()}
+                    direction={activity?.direction()}
+                    isInternal={activity?.isInternal()}
+                    inclusionState={activity?.inclusionState()}
                 />
             {/if}
-            {#if activity?.asyncData?.asyncStatus && activity?.asyncData?.asyncStatus !== ActivityAsyncStatus.Timelocked}
-                <ActivityAsyncStatusPill asyncStatus={activity?.asyncData?.asyncStatus} />
+            {#if activity?.asyncData()?.asyncStatus && activity?.asyncData()?.asyncStatus !== ActivityAsyncStatus.Timelocked}
+                <ActivityAsyncStatusPill asyncStatus={activity?.asyncData()?.asyncStatus} />
             {/if}
             {#if isTimelocked}
                 <Pill backgroundColor="gray-200" darkBackgroundColor="gray-200">
@@ -71,7 +70,7 @@
                 </Pill>
             {/if}
         </transaction-status>
-        {#if activity?.subject}
+        {#if activity?.subject()}
             <SubjectBox {subject} />
         {/if}
     </main-content>

@@ -1,7 +1,7 @@
-import { CommonOutput, OutputData, OutputResponse, UTXOInput } from '@iota/sdk/out/types'
+import { CommonOutput, InclusionState, OutputData, OutputResponse, UTXOInput } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
-import { InclusionState, ActivityDirection } from '../../enums'
-import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import { ActivityDirection } from '../../enums'
+import { ProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
@@ -14,7 +14,7 @@ export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
     transactionInputs: OutputResponse[],
     wallet: IWalletState
-): IProcessedTransaction {
+): ProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
     const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
         transactionMetadata?.included.transactionId,
@@ -37,15 +37,15 @@ export function preprocessGroupedOutputs(
         )
     }
 
-    return {
-        outputs: wrappedOutputs,
-        transactionId: transactionMetadata?.included.transactionId,
+    return new ProcessedTransaction(
+        wrappedOutputs,
+        transactionMetadata?.included.transactionId,
         direction,
-        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
-        inclusionState: InclusionState.Confirmed,
+        new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
+        InclusionState.Confirmed,
         utxoInputs,
         wrappedInputs,
-    }
+    )
 }
 
 // TODO(2.0) Fix all usages
@@ -84,6 +84,7 @@ function convertTransactionOutputResponsesToWrappedOutputs(
     )
 }
 
+// TODO: Fix this?
 function convertTransactionOutputResponseToWrappedOutput(
     transactionId: string,
     outputResponse: OutputResponse

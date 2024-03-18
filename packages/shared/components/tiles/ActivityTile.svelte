@@ -31,7 +31,7 @@
     let asset: IAsset | undefined
     $: $selectedWalletAssets,
         (asset =
-            activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry
+            activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Foundry
                 ? getTokenFromSelectedWallet(activity.assetId)
                 : undefined)
     $: isConflicting = activity.inclusionState === InclusionState.Conflicting
@@ -64,17 +64,17 @@
 >
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.type === ActivityType.Basic}
+            {#if activity.type() === ActivityType.Basic}
                 <TransactionActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Account}
+            {:else if activity.type() === ActivityType.Account}
                 <AccountActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Nft}
+            {:else if activity.type() === ActivityType.Nft}
                 <NftActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Governance}
+            {:else if activity.type() === ActivityType.Governance}
                 <GovernanceActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Consolidation}
+            {:else if activity.type() === ActivityType.Consolidation}
                 <ConsolidationActivityTileContent {activity} />
-            {:else if activity.type === ActivityType.Vesting}
+            {:else if activity.type() === ActivityType.Vesting}
                 <VestingActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />

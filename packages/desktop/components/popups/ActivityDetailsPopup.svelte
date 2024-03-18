@@ -35,17 +35,17 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: activity = $selectedWalletActivities.find((_activity) => _activity.id === activityId)
-    $: isTimelocked = activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Timelocked
+    $: activity = $selectedWalletActivities.find((_activity) => _activity.id() === activityId)
+    $: isTimelocked = activity?.asyncData()?.asyncStatus === ActivityAsyncStatus.Timelocked
     $: isActivityIncomingAndUnclaimed =
-        activity?.asyncData &&
-        (activity?.direction === ActivityDirection.Incoming ||
-            activity?.direction === ActivityDirection.SelfTransaction) &&
-        activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+        activity?.asyncData() &&
+        (activity?.direction() === ActivityDirection.Incoming ||
+            activity?.direction() === ActivityDirection.SelfTransaction) &&
+        activity?.asyncData()?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     function onExplorerClick(): void {
         let url: string
-        if (activity?.type === ActivityType.Vesting) {
+        if (activity?.type() === ActivityType.Vesting) {
             url = `${explorerUrl}/${ExplorerEndpoint.Output}/${activity?.outputId}`
         } else {
             url = `${explorerUrl}/${ExplorerEndpoint.Transaction}/${activity?.transactionId}`
@@ -54,7 +54,7 @@
     }
 
     function onTransactionIdClick(): void {
-        setClipboard(activity?.transactionId)
+        setClipboard(activity?.transactionId())
     }
 
     async function claim(): Promise<void> {
@@ -117,22 +117,23 @@
                 class="action w-fit flex justify-start text-center font-medium text-14 text-blue-500"
                 on:click={onTransactionIdClick}
             >
-                {truncateString(activity.transactionId, 12, 12)}
+                {truncateString(activity.transactionId(), 12, 12)}
             </button>
         {/if}
     </div>
     <activity-details class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-        {#if activity.type === ActivityType.Basic || activity.type === ActivityType.Vesting}
+        <!-- Cast activities -->
+        {#if activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Vesting}
             <BasicActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Foundry}
+        {:else if activity.type() === ActivityType.Foundry}
             <FoundryActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Governance}
+        {:else if activity.type() === ActivityType.Governance}
             <GovernanceActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Consolidation}
+        {:else if activity.type() === ActivityType.Consolidation}
             <ConsolidationActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Nft}
+        {:else if activity.type() === ActivityType.Nft}
             <NftActivityDetails {activity} />
-        {:else if activity.type === ActivityType.Account}
+        {:else if activity.type() === ActivityType.Account}
             <AccountActivityDetails {activity} />
         {/if}
         <ActivityInformation {activity} />
@@ -142,16 +143,16 @@
             <Button
                 outline
                 classes="w-full"
-                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                disabled={activity.asyncData()?.isClaiming || activity.asyncData()?.isRejected}
                 onClick={onRejectClick}
             >
                 {localize('actions.reject')}
             </Button>
             <Button
                 classes="w-full"
-                disabled={activity.asyncData?.isClaiming}
+                disabled={activity.asyncData()?.isClaiming}
                 onClick={onClaimClick}
-                isBusy={activity.asyncData?.isClaiming}
+                isBusy={activity.asyncData()?.isClaiming}
             >
                 {localize('actions.claim')}
             </Button>

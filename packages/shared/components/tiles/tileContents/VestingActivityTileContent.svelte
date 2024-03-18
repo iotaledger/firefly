@@ -2,21 +2,19 @@
     import { localize } from '@core/i18n'
     import {
         IPersistedAsset,
-        VestingActivity,
-        getActivityTileTitle,
+        ActivityVesting,
         getAssetFromPersistedAssets,
         getFormattedAmountFromActivity,
-        getSubjectLocaleFromActivity,
         selectedWalletAssets,
     } from '@core/wallet'
     import { ActivityTileContent, AssetIcon } from '@ui'
 
-    export let activity: VestingActivity
+    export let activity: ActivityVesting
 
     let asset: IPersistedAsset
-    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-    $: action = localize(getActivityTileTitle(activity))
-    $: subject = getSubjectLocaleFromActivity(activity)
+    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId()))
+    $: action = localize(activity.tileTitle())
+    $: subject = activity.subjectLocale()
     $: amount = getFormattedAmountFromActivity(activity)
     $: formattedAsset = {
         text: amount,

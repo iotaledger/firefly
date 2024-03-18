@@ -5,14 +5,12 @@ import { Converter } from '@core/utils'
 import { MintNftParams, OutputType, PreparedTransaction } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
 import {
-    addActivityToWalletActivitiesInAllWalletActivities,
     getSelectedWallet,
     resetMintNftDetails,
     updateSelectedWallet,
 } from '../stores'
-import { NftActivity } from '../types'
+import { ActivityNft } from '../types'
 import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
-import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 import { plainToInstance } from 'class-transformer'
 
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
@@ -44,14 +42,6 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
         // Generate Activities
         for (const output of outputs) {
             if (output.output.type === OutputType.Nft) {
-                // For each minted NFT, generate a new activity
-                const activity: NftActivity = (await generateSingleNftActivity(wallet, {
-                    action: ActivityAction.Mint,
-                    processedTransaction,
-                    wrappedOutput: output,
-                })) as NftActivity
-                addActivityToWalletActivitiesInAllWalletActivities(wallet.id, activity)
-
                 // Store NFT metadata for each minted NFT
                 const nft = buildNftFromNftOutput(output, wallet.depositAddress, false)
                 addOrUpdateNftInAllWalletNfts(wallet.id, nft)

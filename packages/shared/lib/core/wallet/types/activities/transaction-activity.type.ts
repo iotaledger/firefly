@@ -1,5 +1,5 @@
 import { BasicOutput, InclusionState, NftOutput } from '@iota/sdk/out/types'
-import { ActivityAction, ActivityDirection } from '../../enums'
+import { ActivityAction, ActivityDirection, ActivityType } from '../../enums'
 import {
     ActivityGenerationParameters,
     IWalletState,
@@ -25,16 +25,6 @@ import { ActivityNft } from './nft-activity.type'
 import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts'
 import { ActivityConsolidation } from './consolidation-activity.type'
 import { localize } from '@core/i18n'
-import { ActivityType } from '@core/wallet/enums'
-import { BaseActivity } from './base-activity.type'
-
-export type TransactionActivity = BaseActivity & {
-    type: ActivityType.Transaction
-    rawAmount: number
-    assetId: string
-    isShimmerClaiming: boolean
-}
-
 
 interface ActivityTransactionOptions extends ActivityBaseOptions {
     rawAmount: number
@@ -45,6 +35,10 @@ interface ActivityTransactionOptions extends ActivityBaseOptions {
 export class ActivityTransaction extends ActivityBase {
     constructor(private basicOptions: ActivityTransactionOptions) {
         super(basicOptions)
+    }
+
+    type(){
+        return ActivityType.Transaction
     }
 
     subjectLocale(): string {

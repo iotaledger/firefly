@@ -1,6 +1,6 @@
-import { IWalletState } from '@core/wallet/interfaces'
+import { IWalletState, ProcessedTransaction } from '@core/wallet/interfaces'
 import { activeProfileId } from '@core/profile'
-import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
+import { ActivityDirection } from '@core/wallet'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
@@ -9,21 +9,21 @@ import { addClaimedActivity, claimedActivities } from '../../stores'
 
 /**
  * It takes a list of transactions and links the transactions that are claiming async transactions
- * @param {IProcessedTransaction[]} transactions - IProcessedTransaction[]
+ * @param {ProcessedTransaction[]} transactions - ProcessedTransaction[]
  * @param {IWalletState} wallet - IWalletState - the wallet for which we are processing
  * transactions
  * @returns An array of processed transactions
  */
 export function linkTransactionsWithClaimingTransactions(
-    transactions: IProcessedTransaction[],
+    transactions: ProcessedTransaction[],
     wallet: IWalletState
-): IProcessedTransaction[] {
+): ProcessedTransaction[] {
     const resultingTransactions = []
     const transactionsIncludedAsClaimingTransactions = []
 
     const claimedWalletActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
-    const incomingAsyncTransactions: IProcessedTransaction[] = []
+    const incomingAsyncTransactions: ProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
         const isClaimingTransaction = transactionsIncludedAsClaimingTransactions.includes(transaction?.transactionId)
         const isIncomingAsyncTransaction =
@@ -79,9 +79,9 @@ export function linkTransactionsWithClaimingTransactions(
 }
 
 function searchClaimedTransactionInIncomingAsyncTransactions(
-    allAsyncTransaction: IProcessedTransaction[],
-    transaction: IProcessedTransaction
-): IProcessedTransaction {
+    allAsyncTransaction: ProcessedTransaction[],
+    transaction: ProcessedTransaction
+): ProcessedTransaction {
     return allAsyncTransaction.find((candidate) =>
         transaction.utxoInputs?.some((input) => input?.transactionId === candidate?.transactionId)
     )

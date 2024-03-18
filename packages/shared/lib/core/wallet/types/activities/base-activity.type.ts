@@ -79,14 +79,10 @@ export interface ActivityBaseOptions {
     parsedLayer2Metadata?: Partial<Layer2Metadata> | null
 }
 
-abstract class ActivityUtils {
-    abstract tileTitle(): string
-
-    abstract subjectLocale(): string
-}
-
-export class ActivityBase implements ActivityUtils {
+export abstract class ActivityBase  {
     constructor(private options: ActivityBaseOptions) {}
+
+    abstract type(): ActivityType;
 
     isIncoming(): boolean {
         return [ActivityDirection.Incoming, ActivityDirection.Incoming].includes(this.direction())
@@ -125,7 +121,7 @@ export class ActivityBase implements ActivityUtils {
     }
 
     id() {
-        return this.id
+        return this.options.id
     }
 
     inclusionState() {

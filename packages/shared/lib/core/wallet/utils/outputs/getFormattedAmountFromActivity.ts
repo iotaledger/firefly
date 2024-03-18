@@ -1,10 +1,11 @@
 import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet/enums'
-import { FoundryActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
+import { ActivityBase } from '@core/wallet/types'
 import { formatTokenAmountBestMatch } from '../formatTokenAmountBestMatch'
 import { getAssetFromPersistedAssets } from '../getAssetFromPersistedAssets'
 
+// TODO: Move into ActivityBase or new abstract class. TransactionActivity | FoundryActivity | VestingActivity,
 export function getFormattedAmountFromActivity(
-    activity: TransactionActivity | FoundryActivity | VestingActivity,
+    activity: ActivityBase,
     signed: boolean = true
 ): string {
     if (!activity) return ''

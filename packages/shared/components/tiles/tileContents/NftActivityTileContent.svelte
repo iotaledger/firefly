@@ -2,16 +2,14 @@
     import { selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
-    import { ActivityDirection } from '@core/wallet/enums'
-    import { getActivityTileTitle, getSubjectLocaleFromActivity } from '@core/wallet/utils'
-    import { NftActivity } from '@core/wallet/types'
+    import { ActivityNft } from '@core/wallet/types'
     import { ActivityTileContent, NftImageOrIconBox } from '@ui'
 
-    export let activity: NftActivity
+    export let activity: ActivityNft
 
     $: isIncoming =
-        activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.SelfTransaction
-    $: action = localize(getActivityTileTitle(activity))
+        activity.isIncoming()
+    $: action = localize(activity.tileTitle())
     $: subject = localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
         values: { address: subjectLocale },
     })
@@ -20,9 +18,9 @@
         color: isIncoming ? 'blue-700' : '',
         classes: 'truncate',
     }
-    $: subjectLocale = getSubjectLocaleFromActivity(activity)
+    $: subjectLocale = activity.subject()
 
-    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId)
+    $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId())
 </script>
 
 <ActivityTileContent {action} {subject} {formattedAsset}>

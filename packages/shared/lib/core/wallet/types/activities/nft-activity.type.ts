@@ -13,14 +13,9 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from '@core/wallet'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import { NftOutput, OutputType } from '@iota/sdk/out/types'
 import { handleError } from '@core/error/handlers'
-
-export type NftActivity = BaseActivity & {
-    type: ActivityType.Nft
-    nftId: string
-}
 
 interface ActivityNftOptions extends ActivityBaseOptions {
     nftId: string
@@ -29,6 +24,10 @@ interface ActivityNftOptions extends ActivityBaseOptions {
 export class ActivityNft extends ActivityBase {
     constructor(private nftOptions: ActivityNftOptions) {
         super(nftOptions)
+    }
+
+    type(){
+        return ActivityType.Nft
     }
 
     nftId(): string {

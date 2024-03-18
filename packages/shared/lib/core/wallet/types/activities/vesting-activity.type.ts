@@ -1,16 +1,10 @@
 import { ActivityType } from '@core/wallet/enums'
 import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
 import { activityOutputContainsValue, getAmountFromOutput, getAsyncDataFromOutput, getLayer2ActivityInformation, getMetadataFromOutput, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
-import { ActivityGenerationParameters, IActivityGenerationParameters, IWalletState } from '../../interfaces'
+import { ActivityGenerationParameters, IWalletState } from '../../interfaces'
 import { BasicOutput } from '@iota/sdk/out/types'
 import { localize } from 'shared/lib/core/i18n'
 import { getCoinType } from 'shared/lib/core/profile'
-
-export type VestingActivity = BaseActivity & {
-    type: ActivityType.Vesting
-    rawAmount: number
-    assetId: string
-}
 
 interface ActivityVestingOptions extends ActivityBaseOptions {
     rawAmount: number
@@ -18,8 +12,16 @@ interface ActivityVestingOptions extends ActivityBaseOptions {
 }
 
 export class ActivityVesting extends ActivityBase {
-    constructor(options: ActivityVestingOptions) {
-        super(options)
+    constructor(private vestingOptions: ActivityVestingOptions) {
+        super(vestingOptions)
+    }
+
+    type(){
+        return ActivityType.Vesting
+    }
+
+    assetId(){
+        return this.vestingOptions.assetId
     }
 
     subjectLocale(): string {

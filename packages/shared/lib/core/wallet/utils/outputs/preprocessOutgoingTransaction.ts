@@ -1,4 +1,4 @@
-import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import { ProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
@@ -8,7 +8,7 @@ import { IWalletState } from '@core/wallet/interfaces'
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
     wallet: IWalletState
-): Promise<IProcessedTransaction> {
+): Promise<ProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
 
@@ -26,15 +26,15 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
-    return {
-        outputs: outputs,
+    return new ProcessedTransaction(
+        outputs,
         transactionId,
         direction,
-        time: new Date(Number(transaction.timestamp)),
-        inclusionState: transaction.inclusionState,
-        wrappedInputs: <IWrappedOutput[]>inputs,
+        new Date(Number(transaction.timestamp)),
+        transaction.inclusionState,
         utxoInputs,
-    }
+        <IWrappedOutput[]>inputs,
+    )
 }
 
 function convertTransactionsOutputTypesToWrappedOutputs(

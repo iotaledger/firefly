@@ -1,4 +1,3 @@
-export * from './activity.type'
 export * from './asset-verification.type'
 export * from './sender-info.type'
 export * from './subject.type'

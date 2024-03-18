@@ -10,7 +10,7 @@
     import { sendOutput } from '@core/wallet/actions'
     import { SubjectType, TokenStandard } from '@core/wallet/enums'
     import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
-    import { NewTokenTransactionDetails, NftActivity, TransactionActivity, VestingActivity } from '@core/wallet/types'
+    import { ActivityBase, NewTokenTransactionDetails } from '@core/wallet/types'
     import {
         getDefaultTransactionOptions,
         getOutputParameters,
@@ -53,7 +53,7 @@
     let { surplus, expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
     let activeTab: Tab
-    let activity: Partial<TransactionActivity | VestingActivity | NftActivity> | undefined = undefined
+    let activity: Partial<ActivityBase> | undefined = undefined // TODO: Use abstract class.
     let expirationTimePicker: ExpirationTimePicker
     let initialExpirationDate: TimePeriod
 
