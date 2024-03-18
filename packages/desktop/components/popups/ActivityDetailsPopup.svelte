@@ -100,8 +100,8 @@
     })
 </script>
 
-<activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
-    {#if activity}
+{#if activity}
+    <activity-details-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
         <div class="flex flex-col">
             <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
                 {localize('popups.transactionDetails.title')}
@@ -158,5 +158,5 @@
                 </Button>
             </popup-buttons>
         {/if}
-    {/if}
-</activity-details-popup>
+    </activity-details-popup>
+{/if}
