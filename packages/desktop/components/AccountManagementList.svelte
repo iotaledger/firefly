@@ -65,7 +65,7 @@
             <hr />
             {#if implicitAccountsOrdered.length > 0}
                 <Text type={TextType.h2}>{localize('views.accountManagement.list.implicitTitle')}</Text>
-                <list-wrapper class="flex flex-col space-y-2">
+                <list-wrapper class="flex flex-col space-y-2 px-2">
                     {#each implicitAccountsOrdered as output}
                         <ClickableTile onClick={() => onAccountClick(output)} selected={isSelected(output)}>
                             <div class="flex flex-col space-y-4">
