@@ -5,6 +5,8 @@ import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
 
+// TODO: Refactor and clean this
+
 /**
  * It takes a list of transactions and links the transactions that are claiming async transactions
  * @param {IProcessedTransaction[]} transactions - IProcessedTransaction[]

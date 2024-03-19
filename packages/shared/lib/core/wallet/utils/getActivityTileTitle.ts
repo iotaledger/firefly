@@ -5,7 +5,7 @@ export function getActivityTileTitle(activity: Activity): string {
     const { type, isInternal, direction, inclusionState, action } = activity
     const isConfirmed = inclusionState === InclusionState.Confirmed
 
-    if (activity.type === ActivityType.Basic && activity.isShimmerClaiming) {
+    if (activity.type === ActivityType.Transaction && activity.isShimmerClaiming) {
         return isConfirmed ? 'general.shimmerClaimed' : 'general.shimmerClaiming'
     }
     if (activity.type === ActivityType.Vesting) {

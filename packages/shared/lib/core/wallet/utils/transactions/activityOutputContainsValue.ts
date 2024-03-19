@@ -6,11 +6,11 @@ import { getActivityTypeFromOutput, getAmountFromOutput, getStorageDepositFromOu
 import { BasicOutput } from '@iota/sdk/out/types'
 
 export async function activityOutputContainsValue(
-    wallet: IWalletState,
+    wallet: IWalletState, // TODO: Remove this parameter
     wrappedOutput: IWrappedOutput
 ): Promise<boolean> {
     const type = getActivityTypeFromOutput(wrappedOutput)
-    const typesToCheck = [ActivityType.Basic]
+    const typesToCheck = [ActivityType.Transaction]
     if (typesToCheck.includes(type)) {
         const output = wrappedOutput.output as BasicOutput
 

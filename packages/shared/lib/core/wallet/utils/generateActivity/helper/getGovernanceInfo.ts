@@ -13,6 +13,7 @@ interface IGovernanceInfo {
     participation?: IParticipation
 }
 
+// TODO: Think about moving this to GovernanceActivity
 export function getGovernanceInfo(output: Output, inputs: IWrappedOutput[], metadata: string): IGovernanceInfo {
     /**
      * NOTE: If the output is NOT a participation output, then it doesn't have any voting power.

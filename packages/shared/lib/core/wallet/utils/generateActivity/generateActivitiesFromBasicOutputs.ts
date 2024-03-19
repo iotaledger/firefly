@@ -157,7 +157,7 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
     return nativeTokens
 }
 
-function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
+export function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
     const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OutputType.Basic)
     const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
     const isSameAmount =

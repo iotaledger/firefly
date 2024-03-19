@@ -11,7 +11,7 @@ export async function loadAssetsForAllWallets(wallet: IWalletState): Promise<voi
     const persistedAssets: IPersistedAsset[] = []
     for (const activity of walletActivities) {
         try {
-            if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
+            if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) {
                 const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
                 if (asset) {
                     persistedAssets.push(asset)

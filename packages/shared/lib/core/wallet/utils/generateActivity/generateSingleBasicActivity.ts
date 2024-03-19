@@ -2,7 +2,7 @@ import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
 import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfileId, getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
-import { TransactionActivity } from '@core/wallet/types'
+import { BaseActivity } from '@core/wallet/types'
 import { get } from 'svelte/store'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
 import { ActivityAction, ActivityType } from '../../enums'
@@ -22,7 +22,7 @@ export async function generateSingleBasicActivity(
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     fallbackAssetId?: string,
     fallbackAmount?: number
-): Promise<TransactionActivity> {
+): Promise<BaseActivity> {
     const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
     const isHidden = false
@@ -39,8 +39,6 @@ export async function generateSingleBasicActivity(
 
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)
-    const publicNote = ''
-
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
 
@@ -79,7 +77,7 @@ export async function generateSingleBasicActivity(
     }
 
     return {
-        type: ActivityType.Basic,
+        type: ActivityType.Transaction,
         isHidden,
         id,
         transactionId,
@@ -95,7 +93,6 @@ export async function generateSingleBasicActivity(
         surplus,
         rawAmount,
         isShimmerClaiming,
-        publicNote,
         metadata,
         tag,
         assetId,

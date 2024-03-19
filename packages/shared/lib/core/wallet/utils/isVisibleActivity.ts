@@ -16,6 +16,8 @@ import {
     StatusFilterOption,
 } from '@core/utils/enums/filters'
 
+// TODO: Refactor this an clean up.
+
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
     const filter = get(activityFilter)
@@ -86,7 +88,7 @@ function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityF
 
 function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.asset.active && filter.asset.selected) {
-        if (activity.type !== ActivityType.Basic && activity.type !== ActivityType.Foundry) {
+        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) {
             return false
         }
         if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
@@ -98,7 +100,7 @@ function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilt
 
 function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
-        if (activity.type !== ActivityType.Basic && activity.type !== ActivityType.Foundry) return false
+        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) return false
         const asset = getAssetFromPersistedAssets(activity.assetId)
         if (!asset?.metadata) {
             return false
@@ -250,14 +252,14 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            (activity.type === ActivityType.Basic || activity.type === ActivityType.Nft) &&
+            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
             activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            (activity.type === ActivityType.Basic || activity.type === ActivityType.Nft) &&
+            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
             activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
         ) {
             return true
