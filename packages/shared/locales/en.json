@@ -686,7 +686,8 @@
         },
         "accountManagement":{
             "list": {
-                "title": "Your Accounts",
+                "accountTitle": " Accounts",
+                "implicitTitle": "Pending Accounts",
                 "tile": {
                     "title": "Account",
                     "pill": {
