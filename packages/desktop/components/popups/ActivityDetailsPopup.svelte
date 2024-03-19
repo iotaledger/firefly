@@ -76,7 +76,7 @@
     }
 
     async function prepareClaimOutput(): Promise<void> {
-        preparedTransaction = await $selectedWallet.prepareClaimOutputs([activity.outputId])
+        preparedTransaction = await $selectedWallet?.prepareClaimOutputs([activity.outputId])
     }
 
     function onRejectClick(): void {

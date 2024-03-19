@@ -88,7 +88,10 @@
     onMount(async () => {
         await updateStorageDeposit()
 
-        preparedTransaction = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
+        preparedTransaction = await $selectedWallet?.prepareSendOutputs(
+            [preparedOutput],
+            getDefaultTransactionOptions()
+        )
         if (isSendAndClosePopup || expirationDate) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
             initialExpirationDate = getInitialExpirationDate(
@@ -118,8 +121,8 @@
         try {
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
-            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            preparedTransaction = await $selectedWallet.prepareSendOutputs(
+            preparedOutput = await prepareOutput($selectedWallet?.id, outputParams, getDefaultTransactionOptions())
+            preparedTransaction = await $selectedWallet?.prepareSendOutputs(
                 [preparedOutput],
                 getDefaultTransactionOptions()
             )
