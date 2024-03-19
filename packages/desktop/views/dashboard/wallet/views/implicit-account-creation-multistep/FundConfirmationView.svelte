@@ -1,7 +1,7 @@
 <script lang="ts">
     import { ManaBox } from '@components'
     import { localize } from '@core/i18n'
-    import { DEFAULT_MANA, getManaBalance, getPassiveManaForOutput } from '@core/network'
+    import { DEFAULT_MANA, DEFAULT_SECONDS_PER_SLOT, getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
@@ -11,18 +11,19 @@
 
     export let outputId: string | undefined
 
-    // TODO: update when mana generation is available
-    const isLowManaGeneration = false
+    const LOW_MANA_GENERATION_SECONDS = 1000
+
     let walletAddress: string = ''
     let preparedTransaction: PreparedTransaction
     let hasEnoughMana = false
+    let isLowManaGeneration = false
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
 
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
 
     let totalAvailableMana: number
-    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana())
 
     let formattedSelectedOutputBlance: string
     $: selectedOutput,
@@ -49,13 +50,13 @@
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
             ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
-            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
+            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, outputId ? [outputId] : [])
         )
     }
 
-    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
+    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[]): number {
         return implicitAccountOutputs?.reduce((acc: number, outputData: OutputData) => {
-            if (excludeIds && excludeIds.includes(outputData.outputId)) {
+            if (excludeIds.length > 1 && !excludeIds.includes(outputData.outputId)) {
                 const totalMana = getPassiveManaForOutput(outputData)
                 return totalMana ? acc + totalMana : acc
             } else {
@@ -72,12 +73,19 @@
 
     $: timeRemaining = `${seconds}s remaining`
 
-    onMount(async () => {
-        walletAddress = await $selectedWallet?.address()
+    onMount(() => {
+        $selectedWallet?.address().then((address) => (walletAddress = address))
         $selectedWallet
             .prepareImplicitAccountTransition(selectedOutput.outputId)
             .then((prepareTx) => (preparedTransaction = prepareTx))
-            .catch(() => {})
+            .catch((err: Error) => {
+                console.error(err.message)
+                if (err.message?.includes('slots remaining until enough mana')) {
+                    const slotsRemaining = Number(err.message?.split(' ').reverse()[0].replace('`', ''))
+                    seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
+                    isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
+                }
+            })
         countdownInterval = setInterval(() => {
             seconds -= 1
 
