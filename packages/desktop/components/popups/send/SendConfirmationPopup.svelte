@@ -69,7 +69,7 @@
         transactionDetails.asset?.metadata?.standard === TokenStandard.BaseToken
     $: isInternal = recipient.type === SubjectType.Wallet
     $: isLayer2Transaction = !!layer2Parameters
-    $: isTransferring = $selectedWallet.isTransferring
+    $: isTransferring = $selectedWallet?.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
