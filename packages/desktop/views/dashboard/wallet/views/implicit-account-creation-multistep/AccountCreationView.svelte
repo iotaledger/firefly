@@ -66,6 +66,7 @@
                     bind:error
                     bind:value={strongholdPassword}
                     autofocus
+                    showRevealToggle
                     submitHandler={unlockWalletAndCreateAccount}
                     placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
                     disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}

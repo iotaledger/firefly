@@ -711,7 +711,8 @@
                     "unsetAsPrimary": "Unset as primary"
                 }
             },
-            "notification": "Activate one account to access the dashboard."
+            "notification": "Activate one account to access the dashboard.",
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
