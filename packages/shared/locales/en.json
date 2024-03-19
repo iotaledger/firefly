@@ -368,10 +368,6 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
-            },
             "errorLog": {
                 "title": "Error log",
                 "description": "View errors to debug an issue"
@@ -690,7 +686,8 @@
         },
         "accountManagement":{
             "list": {
-                "title": "Your Accounts",
+                "accountTitle": " Accounts",
+                "implicitTitle": "Pending Accounts",
                 "tile": {
                     "title": "Account",
                     "pill": {
@@ -715,7 +712,8 @@
                     "unsetAsPrimary": "Unset as primary"
                 }
             },
-            "notification": "Activate one account to access the dashboard."
+            "notification": "Activate one account to access the dashboard.",
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
@@ -724,19 +722,23 @@
                 "claimRewards": "Claim Rewards"
             },
             "info": {
-                "funds": "Total Funds",
                 "delegated": "Delegated",
+                "undelegated": "Undelegated",
                 "rewards": "Rewards"
             },
             "table": {
                 "header": {
-                    "name": "Name",
+                    "delegationId": "Delegation Id",
                     "delegatedFunds": "Delegated Funds",
                     "rewards": "Rewards",
-                    "epoch": "Epoch",
-                    "address": "Address",
+                    "epochs": "Epochs",
+                    "delegatedAddress": "Delegated to",
                     "action": "Action"
-                }
+                },
+                "body": {
+                    "epochs": "{epochs} epochs"
+                },
+                "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
             }
         }
     },
@@ -943,8 +945,7 @@
                     "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
-                    "version": "Version",
-                    "minPowScore": "Min PoW Score"
+                    "version": "Version"
                 },
                 "baseToken": {
                     "tab": "Base token",
@@ -1062,6 +1063,10 @@
             "title": "Verify internal transaction",
             "info": "Please confirm the internal transaction on your ledger.",
             "hint": "All assets will remain on your wallet when sending an internal transaction."
+        },
+        "verifyLedgerBlock": {
+            "title": "Verify block",
+            "info": "Compare and confirm the block information displayed on your ledger device against the information below."
         },
         "ledgerAddress": {
             "title": "Confirm receive address",
@@ -1254,6 +1259,11 @@
                 "title": "Account Address",
                 "description": "Account Address for the validator"
             } 
+        },
+        "claimDelegationRewards": {
+            "title": "Claim Rewards",
+            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
+            "confirmButton": "Claim"
         }
     },
     "actions": {
@@ -1345,7 +1355,6 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportTransactionHistory": "Export transaction history",
-        "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
@@ -1587,7 +1596,6 @@
         "transferRemainderAddress": "Generating remainder address",
         "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
@@ -1710,7 +1718,8 @@
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Mana cost",
         "availableMana": "Available mana",
-        "insufficientMana": "Insufficient mana {availableMana}"
+        "insufficientMana": "Insufficient mana {availableMana}",
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
     },
     "filters":{
         "title": "Filters",

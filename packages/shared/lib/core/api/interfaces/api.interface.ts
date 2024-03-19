@@ -1,4 +1,4 @@
-import { Client, SecretManager } from '@iota/sdk'
+import { Address, Client, SecretManager } from '@iota/sdk'
 import {
     AccountId,
     FoundryId,
@@ -12,6 +12,7 @@ import {
     Bech32Address,
     ProtocolParameters,
     DecayedMana,
+    DelegationId,
 } from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
@@ -39,14 +40,12 @@ export interface IApi {
     ): DecayedMana
     generateMnemonic(): string
     verifyMnemonic(mnemonic: string): void
-    hexToBech32(hex: HexEncodedString, bech32Hrp: string): Bech32Address
-    bech32ToHex(bech32: Bech32Address): HexEncodedString
+    addressToBech32(address: Address, bech32Hrp: string): Bech32Address
+    parseBech32Address(bech32: Bech32Address): Address
     computeAccountId(outputId: string): AccountId
     computeFoundryId(accountId: AccountId, serialNumber: number, tokenSchemeType: number): FoundryId
     computeNftId(outputId: string): NftId
-    hexPublicKeyToBech32Address(hex: HexEncodedString, bech32Hrp: string): Bech32Address
-    accountIdToBech32(accountId: AccountId, bech32Hrp: string): Bech32Address
-    nftIdToBech32(nftId: string, bech32Hrp: string): Bech32Address
     computeOutputId(id: TransactionId, index: number): OutputId
+    computeDelegationId(outputId: OutputId): DelegationId
     outputHexBytes(output: Output): HexEncodedString
 }

@@ -2,9 +2,10 @@
     import { MenuItem, Modal } from '@ui'
     import { localize } from '@core/i18n'
     import { Icon } from '@auxiliary/icon/enums'
-    import { updateActiveWalletPersistedData } from '@core/profile'
-    import { selectedWallet, selectedWalletId } from '@core/wallet'
+    import { updateActiveWallet, updateActiveWalletPersistedData } from '@core/profile'
+    import { AddressConverter, selectedWallet, selectedWalletId } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
+    import { AccountAddress } from '@iota/sdk/out/types'
 
     export let modal: Modal = undefined
     export let accountId: string
@@ -13,6 +14,9 @@
     function setAsMainAccount(): void {
         updateActiveWalletPersistedData($selectedWalletId, {
             mainAccountId: accountId,
+        })
+        updateActiveWallet($selectedWalletId, {
+            depositAddress: AddressConverter.addressToBech32(new AccountAddress(accountId)),
         })
         modal?.close()
     }

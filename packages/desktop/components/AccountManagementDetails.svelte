@@ -19,7 +19,7 @@
     import { AccountManagementMenu } from './modals'
     import {
         formatTokenAmountBestMatch,
-        getBech32AddressFromAddressTypes,
+        AddressConverter,
         isAccountOutput,
         isImplicitAccountOutput,
         selectedWallet,
@@ -28,7 +28,6 @@
     import {
         AccountAddress,
         AccountOutput,
-        CommonOutput,
         FeatureType,
         OutputData,
         BlockIssuerFeature,
@@ -42,7 +41,6 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
 
     export let selectedOutput: OutputData
-    export let index: number
 
     let modal: Modal
     let address: string = ''
@@ -50,9 +48,9 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output as CommonOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
-    $: address = accountId ? getBech32AddressFromAddressTypes(new AccountAddress(accountId)) : null
+    $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
     $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
@@ -129,7 +127,7 @@
             <right-pane-title class="flex flex-col space-y-1">
                 <title-container class="flex justify-between w-full items-center">
                     <title-wrapper class="flex items-center space-x-2 py-1">
-                        <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')} {index}</Text>
+                        <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')}</Text>
                         {#if isImplicitAccount}
                             <Pill backgroundColor="yellow-200" textColor="yellow-900"
                                 >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
@@ -192,7 +190,7 @@
                 {/if}
             </div>
             {#if accountId}
-                <div class="flex flex-col space-y-2 w-1/2">
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.address')}</Text
                     >
@@ -203,7 +201,7 @@
                         value={address}
                         classes="flex space-x-2 items-center"
                     >
-                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                             >{address}</Text
                         >
                         <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
@@ -211,21 +209,21 @@
                 </div>
             {/if}
             {#if isImplicitAccount}
-                <div class="flex flex-col space-y-2 w-1/2">
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.mana')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                         >{selectedOutput.output?.mana}</Text
                     >
                 </div>
             {/if}
-            {#if isAccountOutput && primaryKey}
-                <div class="flex flex-col space-y-2 w-1/2">
+            {#if accountId && primaryKey}
+                <div class="flex flex-col space-y-2">
                     <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                         >{localize('views.accountManagement.details.key')}</Text
                     >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start w-[260px]"
+                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
                         >{primaryKey}</Text
                     >
                 </div>
