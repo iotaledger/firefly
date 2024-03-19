@@ -6,7 +6,7 @@
     export let outputId: string | undefined
 
     // Redirect to the dashboard when the output we passed previously has now been consumed
-    $: isAccountActivated = $selectedWallet.walletUnspentOutputs.some((output) => outputId === output.outputId)
+    $: isAccountActivated = $selectedWallet?.walletUnspentOutputs?.some((output) => outputId === output.outputId)
     $: !isAccountActivated && $dashboardRouter.goTo(DashboardRoute.Wallet)
 </script>
 

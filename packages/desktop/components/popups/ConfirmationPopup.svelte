@@ -65,8 +65,8 @@
         <Button
             classes="w-full"
             variant={buttonVariant}
-            disabled={$selectedWallet.isTransferring || isBusy}
-            isBusy={$selectedWallet.isTransferring || isBusy}
+            disabled={$selectedWallet?.isTransferring || isBusy}
+            isBusy={$selectedWallet?.isTransferring || isBusy}
             onClick={onConfirmClick}
         >
             {confirmText}
