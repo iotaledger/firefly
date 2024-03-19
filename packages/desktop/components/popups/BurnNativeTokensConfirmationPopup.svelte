@@ -80,8 +80,8 @@
         <Button
             classes="w-full"
             variant={ButtonVariant.Warning}
-            isBusy={$selectedWallet.isTransferring}
-            disabled={$selectedWallet.isTransferring || !hasEnoughMana}
+            isBusy={$selectedWallet?.isTransferring}
+            disabled={$selectedWallet?.isTransferring || !hasEnoughMana}
             onClick={onBurnTokenClick}
         >
             {localize('actions.burnToken')}

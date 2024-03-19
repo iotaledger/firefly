@@ -12,7 +12,6 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             version: 2,
             networkName: 'shimmer',
             bech32Hrp: 'smr',
-            minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
                 vByteCost: 100,
@@ -31,7 +30,6 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             version: 2,
             networkName: 'testnet',
             bech32Hrp: 'rms',
-            minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
                 vByteCost: 100,
@@ -50,7 +48,6 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             version: 2,
             networkName: 'iota',
             bech32Hrp: 'iota',
-            minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
                 vByteCost: 250,
@@ -69,7 +66,6 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             version: 2,
             networkName: 'iota-alphanet-2',
             bech32Hrp: 'atoi',
-            minPowScore: 1500,
             belowMaxDepth: 15,
             rentStructure: {
                 vByteCost: 250,
