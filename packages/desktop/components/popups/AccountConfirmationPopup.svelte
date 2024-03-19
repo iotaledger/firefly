@@ -44,7 +44,7 @@
         : ''
 
     $: void setStorageDeposit(accountOutput)
-    $: isTransferring = $selectedWallet.isTransferring
+    $: isTransferring = $selectedWallet?.isTransferring
 
     async function setStorageDeposit(accountOutput: AccountOutput): Promise<void> {
         try {
