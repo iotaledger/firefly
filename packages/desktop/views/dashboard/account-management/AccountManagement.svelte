@@ -3,26 +3,18 @@
     import features from '@features/features'
     import { AccountManagementDetails, AccountManagementList } from '@components'
     import { AccountOutput, OutputData } from '@iota/sdk/out/types'
-    import { isAccountOutput, isImplicitAccountOutput } from '@core/wallet'
     import { Text } from '@ui'
     import { localize } from '@core/i18n'
 
-    $: allAccountOutputs =
-        $selectedWallet?.walletUnspentOutputs?.filter(
-            (output) => isAccountOutput(output) || isImplicitAccountOutput(output)
-        ) || []
-
     let selectedOutput =
-        $selectedWallet?.walletUnspentOutputs?.find(
-            (output) => (output.output as AccountOutput)?.accountId === $selectedWallet.mainAccountId
-        ) || allAccountOutputs?.[0]
+        $selectedWallet?.accountOutputs.find(
+            (output) => (output.output as AccountOutput)?.accountId === $selectedWallet?.mainAccountId
+        ) ||
+        $selectedWallet?.accountOutputs?.[0] ||
+        $selectedWallet?.implicitAccountOutputs?.[0]
 
     function handleAccountClick(account: OutputData): void {
         selectedOutput = account
-    }
-
-    function setAccountOutputIndex(account: OutputData): number {
-        return allAccountOutputs.indexOf(account) + 1
     }
 </script>
 
@@ -34,14 +26,10 @@
             {#if selectedOutput}
                 {#key $selectedWallet?.id}
                     {#if features.accountManagement.accountList.enabled}
-                        <AccountManagementList
-                            onAccountClick={handleAccountClick}
-                            allOutputs={allAccountOutputs}
-                            {selectedOutput}
-                        />
+                        <AccountManagementList onAccountClick={handleAccountClick} {selectedOutput} />
                     {/if}
                     {#if features.accountManagement.accountDetails.enabled}
-                        <AccountManagementDetails {selectedOutput} index={setAccountOutputIndex(selectedOutput)} />
+                        <AccountManagementDetails {selectedOutput} />
                     {/if}
                 {/key}
             {:else}
