@@ -138,14 +138,14 @@
         </nft-details>
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button outline classes="w-full" disabled={$selectedWallet.isTransferring} onClick={onBackClick}>
+        <Button outline classes="w-full" disabled={$selectedWallet?.isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet.isTransferring}
+            disabled={$selectedWallet?.isTransferring}
             onClick={onConfirmClick}
-            isBusy={$selectedWallet.isTransferring}
+            isBusy={$selectedWallet?.isTransferring}
         >
             {localize('actions.confirm')}
         </Button>
