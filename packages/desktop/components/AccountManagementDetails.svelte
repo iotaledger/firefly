@@ -167,16 +167,19 @@
                 {/if}
             </right-pane-title>
             <div class="flex flex-row space-x-2 w-1/2">
-                <Tile>
-                    <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                        <Text type={TextType.h3}>
-                            {formattedBalance}
-                        </Text>
-                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                            >{localize('views.accountManagement.details.balance')}</Text
-                        >
-                    </div>
-                </Tile>
+                <!-- TODO: Remove this if when calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080  -->
+                {#if !accountId}
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                            <Text type={TextType.h3}>
+                                {formattedBalance}
+                            </Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.accountManagement.details.balance')}</Text
+                            >
+                        </div>
+                    </Tile>
+                {/if}
 
                 {#if hasStakingFeature}
                     <Tile>
@@ -184,6 +187,19 @@
                             <Text type={TextType.h3}>{formattedStakedAmount}</Text>
                             <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                 >{localize('views.accountManagement.details.staked')}</Text
+                            >
+                        </div>
+                    </Tile>
+                {/if}
+
+                {#if accountId}
+                    <Tile>
+                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                            <Text type={TextType.h3}>
+                                {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
+                            </Text>
+                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
                             >
                         </div>
                     </Tile>

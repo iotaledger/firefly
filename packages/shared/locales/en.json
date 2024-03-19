@@ -698,6 +698,7 @@
             },
             "details": {
                 "balance": "Balance",
+                "blockIssuanceCredits": "Block Issuance Credit (BIC)",
                 "address": "Address",
                 "staked": "Staked",
                 "mana": "Mana",
