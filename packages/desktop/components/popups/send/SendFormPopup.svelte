@@ -24,7 +24,7 @@
     $: hasSpendableNfts = $ownedNfts.some((nft) => nft.isSpendable)
     $: isTransferInProgress =
         $selectedWalletActivities.some((_activity) => _activity.inclusionState === InclusionState.Pending) ||
-        $selectedWallet.isTransferring
+        $selectedWallet?.isTransferring
 
     async function validate(
         inputValidations?: [() => Promise<void>],
