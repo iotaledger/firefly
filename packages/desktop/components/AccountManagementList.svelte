@@ -9,7 +9,7 @@
     export let onAccountClick: (account: OutputData) => void
     export let selectedOutput: OutputData
 
-    $: isSelected = (output: OutputData) => output.outputId === selectedOutput.outputId
+    $: isSelected = (output: OutputData): boolean => output.outputId === selectedOutput.outputId
     $: accountsOrdered = $selectedWallet.accountOutputs.sort((a, b) =>
         (a.output as AccountOutput).accountId > (b.output as AccountOutput).accountId ? 1 : -1
     )
