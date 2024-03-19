@@ -73,11 +73,11 @@
 
     async function prepareDelegationOutput(): Promise<void> {
         const params: CreateDelegationParams = {
-            address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet.mainAccountId)),
+            address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
             delegatedAmount: rawAmount,
             validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
         }
-        preparedTransaction = await $selectedWallet.prepareCreateDelegation(params, getDefaultTransactionOptions())
+        preparedTransaction = await $selectedWallet?.prepareCreateDelegation(params, getDefaultTransactionOptions())
     }
 
     function onCancelClick(): void {

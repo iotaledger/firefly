@@ -31,8 +31,8 @@
             ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
             : '-')
     $: formattedWalletBalance =
-        $selectedWallet.balances?.baseCoin?.available && baseCoin
-            ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
+        $selectedWallet?.balances?.baseCoin?.available && baseCoin
+            ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
             : '-'
     $: formattedManaBalance = totalAvailableMana
         ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)

@@ -7,11 +7,9 @@
     // files included below should have no ts-errors
     "files": [
         "lib/core/network/constants/default-seconds-per-slot.constant.ts",
-        "./lib/core/network/utils/buildChainFromNetwork.ts",
         "./lib/core/network/utils/buildPersistedNetworkFromNodeInfoResponse.ts",
         "./lib/core/network/utils/checkNetworkId.ts",
         "./lib/core/network/utils/checkNodeUrlValidity.ts",
-        "./lib/core/network/utils/doesNodeHavePlugin.ts",
         "./lib/core/network/utils/getDefaultClientOptions.ts",
         "./lib/core/network/utils/getDefaultPersistedNetwork.ts",
         "./lib/core/network/utils/getNetworkIdFromNetworkName.ts",
@@ -25,17 +23,14 @@
         "./lib/core/utils/constants/default-exchange-rates.constant.ts",
         "./lib/core/utils/constants/hex.constants.ts",
         "./lib/core/utils/constants/index.ts",
-        "./lib/core/utils/constants/iota-unit-map.constant.ts",
         "./lib/core/utils/constants/max-bytes.constant.ts",
         "./lib/core/utils/constants/max-number-of-iotas.constant.ts",
         "./lib/core/utils/constants/pin-length.constant.ts",
         "./lib/core/utils/constants/time.constants.ts",
         "./lib/core/utils/enums/exchange-rate.enum.ts",
-        "./lib/core/utils/enums/iota-unit.enum.ts",
         "./lib/core/utils/enums/past-time-unit.enum.ts",
         "./lib/core/utils/interfaces/date-difference.interface.ts",
         "./lib/core/utils/types/exchange-rates.type.ts",
-        "./lib/core/utils/types/iota-unit-map.type.ts",
         "./lib/core/utils/date.ts",
         "./lib/core/utils/ui.ts"
     ]

@@ -8,13 +8,13 @@
         processAndAddToActivities,
         selectedWallet,
         updateSelectedWallet,
+        AddressConverter,
     } from '@core/wallet'
     import { UnlockConditionType, PreparedTransaction, AccountOutput } from '@iota/sdk/out/types'
     import { closePopup } from '@auxiliary/popup'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers/handleError'
     import { plainToInstance } from 'class-transformer'
-    import { api } from '@core/api'
     import { getClient } from '@core/wallet/actions/getClient'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -25,7 +25,7 @@
 
     $: address = {
         type: 0,
-        pubKeyHash: api.bech32ToHex($selectedWallet.depositAddress),
+        pubKeyHash: AddressConverter.parseBech32Address($selectedWallet.depositAddress),
     }
     $: accountOutput = address
         ? {
@@ -44,7 +44,7 @@
         : ''
 
     $: void setStorageDeposit(accountOutput)
-    $: isTransferring = $selectedWallet.isTransferring
+    $: isTransferring = $selectedWallet?.isTransferring
 
     async function setStorageDeposit(accountOutput: AccountOutput): Promise<void> {
         try {
