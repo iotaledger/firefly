@@ -2,11 +2,11 @@
     import { onMount } from 'svelte'
     import { Button, Checkbox, CopyableBox, Spinner, Text } from '@ui'
     import { formatNumber, localize } from '@core/i18n'
-    import { INode } from '@core/network'
+    import { INode, INodeInfoResponse } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { INodeInfo, NetworkMetricsResponse } from '@iota/sdk/out/types'
+    import { NetworkMetricsResponse } from '@iota/sdk/out/types'
     import { getNetworkMetrics, getNodeInfo } from '@core/wallet'
 
     enum NodeInfoTab {
@@ -65,7 +65,7 @@
         },
     }
 
-    let nodeInfo: INodeInfo
+    let nodeInfo: INodeInfoResponse
     let networkMetrics: NetworkMetricsResponse
 
     function processNodeInfoMapTab(
