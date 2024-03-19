@@ -1,23 +1,17 @@
-import { getBalance } from './getBalance'
 import { get } from 'svelte/store'
-import { selectedWalletId } from '../stores/selected-wallet-id.store'
-import { updateSelectedWallet } from '../stores/selected-wallet.store'
-import { updateActiveWallet } from '@core/profile/stores'
-import { getBicWalletBalance } from './getBicWalletBalance'
+import { selectedWalletId, updateSelectedWallet } from '../stores/'
+import { getWalletById, updateActiveWallet } from '@core/profile/stores'
 import { IBalance } from '../interfaces'
+import { getTotalWalletBalance } from '..'
+import { OutputData } from '@iota/sdk/out/types'
 
 export async function syncBalance(walletId: string, syncCongestion: boolean): Promise<void> {
-    const balances = await getBalance(walletId)
-    const blockIssuanceCredits = syncCongestion ? await getBicWalletBalance(walletId) : {}
-    const totalWalletBic =
-        syncCongestion && blockIssuanceCredits.length > 0
-            ? Object.values(blockIssuanceCredits).reduce((acc, bic) => acc + Number(bic), 0)
-            : 0
-
-    const totalBalance: IBalance = {
-        ...balances,
-        ...{ totalWalletBic, blockIssuanceCredits },
+    let accountOutputs: OutputData[] = []
+    if (syncCongestion) {
+        const wallet = getWalletById(walletId)
+        accountOutputs = wallet?.accountOutputs ?? []
     }
+    const totalBalance: IBalance = await getTotalWalletBalance(walletId, accountOutputs)
     if (get(selectedWalletId) === walletId) {
         updateSelectedWallet({ balances: totalBalance })
     } else {
