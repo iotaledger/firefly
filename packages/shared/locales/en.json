@@ -368,10 +368,6 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
-            },
             "errorLog": {
                 "title": "Error log",
                 "description": "View errors to debug an issue"
@@ -1598,7 +1594,6 @@
         "transferRemainderAddress": "Generating remainder address",
         "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
