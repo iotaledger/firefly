@@ -4,6 +4,7 @@
     import { DEFAULT_MANA, DEFAULT_SECONDS_PER_SLOT, getManaBalance, getPassiveManaForOutput } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData, PreparedTransaction } from '@iota/sdk/out/types'
     import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
@@ -11,7 +12,7 @@
 
     export let outputId: string | undefined
 
-    const LOW_MANA_GENERATION_SECONDS = 1000
+    const LOW_MANA_GENERATION_SECONDS = 10 * SECONDS_PER_MINUTE
 
     let walletAddress: string = ''
     let preparedTransaction: PreparedTransaction
@@ -71,7 +72,7 @@
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
 
-    $: timeRemaining = `${seconds}s remaining`
+    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
 
     onMount(() => {
         $selectedWallet?.address().then((address) => (walletAddress = address))
@@ -93,7 +94,7 @@
                 clearInterval(countdownInterval)
                 onTimeout()
             }
-        }, 1000)
+        }, MILLISECONDS_PER_SECOND)
     })
 
     onDestroy(() => {
@@ -106,10 +107,10 @@
     // ----------------------------------------------------------------
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-20">
-    <div class="flex flex-col h-full justify-between space-y-8 items-center">
+<step-content class={`flex flex-col items-center justify-between h-full ${isLowManaGeneration ? 'pt-8' : 'pt-20'}`}>
+    <div class="flex flex-col h-full justify-between space-y-4 items-center">
         <div class="flex flex-col text-center space-y-4 max-w-md">
-            <div class="flex items-center justify-center mb-7">
+            <div class={`flex items-center justify-center ${isLowManaGeneration ? 'mb-2' : 'mb-7'}`}>
                 <img
                     src="assets/illustrations/implicit-account-creation/step2.svg"
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
@@ -143,7 +144,7 @@
             </div>
         </div>
         {#if isLowManaGeneration}
-            <div class="flex flex-col space-y-4 w-2/3">
+            <div class="flex flex-col space-y-2 w-2/3">
                 <TextHint
                     variant={TextHintVariant.Warning}
                     text={localize('views.implicit-account-creation.steps.step2.view.walletAddress.description')}
