@@ -24,7 +24,6 @@ export const SETTINGS_ICON_SVG = {
     [CollectiblesSettingsRoute.RefreshNftMedia]: Icon.Refresh,
     [NetworkSettingsRoute.NetworkInformation]: Icon.Wifi,
     [NetworkSettingsRoute.ConfigureNodeList]: Icon.Customize,
-    [NetworkSettingsRoute.LocalProofOfWork]: Icon.Chip,
     [SecuritySettingsRoute.ExportStronghold]: Icon.Export,
     [SecuritySettingsRoute.StrongholdPasswordTimeout]: Icon.Timelock,
     [SecuritySettingsRoute.AppLock]: Icon.Logout,

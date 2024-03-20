@@ -27,7 +27,7 @@
             ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
             : '-')
     $: formattedWalletBalance =
-        $selectedWallet.balances?.baseCoin?.available && baseCoin
+        $selectedWallet?.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet.balances.baseCoin.available), baseCoin.metadata)
             : '-'
 
@@ -42,7 +42,7 @@
     function getTotalAvailableMana(): number {
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
-            ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
+            $selectedWallet?.balances.totalWalletBic -
             getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
         )
     }

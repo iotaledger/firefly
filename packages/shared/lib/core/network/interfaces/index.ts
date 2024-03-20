@@ -1,5 +1,4 @@
 export * from './chain-metadata.interface'
-export * from './connected-chain.interface'
 export * from './client-options.interface'
 export * from './network-status.interface'
 export * from './node-info-response.interface'
