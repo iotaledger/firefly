@@ -24,7 +24,7 @@
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
 
     let totalAvailableMana: number
-    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana())
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana()), prepareTransaction(selectedOutput?.outputId)
 
     let formattedSelectedOutputBlance: string
     $: selectedOutput,
@@ -66,7 +66,21 @@
         }, 0)
     }
 
-    // TODO: Replace this with proper time remaining
+    async function prepareTransaction(outputId: string): Promise<void> {
+        if (!outputId) return
+        try {
+            preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
+            seconds = 0 // If we don't get an error, it's because we can follow on to the next step
+        } catch (error) {
+            console.error(error.message)
+            if (error.message?.includes('slots remaining until enough mana')) {
+                const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
+                seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
+                isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
+            }
+        }
+    }
+
     // ----------------------------------------------------------------
     let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
@@ -74,22 +88,12 @@
 
     $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
 
-    onMount(() => {
+    onMount(async () => {
         $selectedWallet?.address().then((address) => (walletAddress = address))
-        $selectedWallet
-            .prepareImplicitAccountTransition(selectedOutput.outputId)
-            .then((prepareTx) => (preparedTransaction = prepareTx))
-            .catch((err: Error) => {
-                console.error(err.message)
-                if (err.message?.includes('slots remaining until enough mana')) {
-                    const slotsRemaining = Number(err.message?.split(' ').reverse()[0].replace('`', ''))
-                    seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
-                    isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
-                }
-            })
+        await prepareTransaction(selectedOutput.outputId)
+        if (seconds === 0) onTimeout()
         countdownInterval = setInterval(() => {
             seconds -= 1
-
             if (seconds <= 0) {
                 clearInterval(countdownInterval)
                 onTimeout()
