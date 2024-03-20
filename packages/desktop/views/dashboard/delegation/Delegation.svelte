@@ -13,13 +13,11 @@
         ButtonSize,
         CopyableBox,
         BoxedIconWithText,
-        TextHintVariant,
     } from '@ui'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
         AddressConverter,
-        getDefaultTransactionOptions,
         selectedWalletAssets,
         EMPTY_HEX_ID,
         getOutputRewards,
@@ -28,7 +26,7 @@
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
-    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
     import { api } from '@core/api'
     import { DEFAULT_MANA } from '@core/network'
@@ -102,26 +100,12 @@
             id: PopupId.CreateDelegation,
         })
     }
-
     function handleClaimRewards(delegationId: string, rewards: number): void {
         openPopup({
-            id: PopupId.Confirmation,
+            id: PopupId.claimDelegationRewards,
             props: {
-                title: localize('popups.claimDelegationRewards.title'),
-                description: localize('popups.claimDelegationRewards.description', {
-                    values: { rewards, delegationId },
-                }),
-                confirmText: localize('popups.claimDelegationRewards.confirmButton'),
-                variant: TextHintVariant.Success,
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
+                delegationId,
+                rewards,
             },
         })
     }

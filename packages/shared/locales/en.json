@@ -1263,8 +1263,9 @@
         },
         "claimDelegationRewards": {
             "title": "Claim Rewards",
-            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
-            "confirmButton": "Claim"
+            "confirmButton": "Claim",
+            "rewards": "Rewards",
+            "delegationId": "Delegation output ID"
         }
     },
     "actions": {
