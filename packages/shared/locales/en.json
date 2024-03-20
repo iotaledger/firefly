@@ -1197,6 +1197,11 @@
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         },
+        "allotMana": {
+            "title": "Allot Mana",
+            "body": "Select the account and the amount of mana to allot.",
+            "availableMana": "Your available mana is:"
+        },
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
@@ -1444,6 +1449,7 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
+        "allotMana": "Allot mana",
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
@@ -1672,6 +1678,7 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "allotManaDescription": "Allot mana to an account",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
