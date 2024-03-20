@@ -48,7 +48,7 @@
     function getTotalAvailableMana(): number {
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
-            ($selectedWallet?.balances.blockIssuanceCredits ?? 0) -
+            $selectedWallet?.balances.totalWalletBic -
             getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
         )
     }
