@@ -37,6 +37,10 @@ export class ActivityTransaction extends ActivityBase {
         super(basicOptions)
     }
 
+    assetId(){
+        return this.basicOptions.assetId
+    }
+
     type(){
         return ActivityType.Transaction
     }

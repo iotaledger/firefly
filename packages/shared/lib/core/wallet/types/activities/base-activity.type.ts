@@ -101,7 +101,7 @@ export abstract class ActivityBase  {
             const network = getLayer2NetworkFromAddress(subject.address)
             return { ...subject, address: network ?? subject.address }
         } else {
-            return this.subject()
+            return subject
         }
     }
 

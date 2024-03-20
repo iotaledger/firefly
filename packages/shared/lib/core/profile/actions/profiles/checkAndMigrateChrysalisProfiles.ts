@@ -96,8 +96,6 @@ export function checkAndMigrateChrysalisProfiles(): boolean {
                     }
                 })
             }
-            migratedProfile.clientOptions.localPow =
-                chrysalisProfile.settings?.networkConfig?.localPow ?? migratedClientOptions.localPow
 
             migrated = true
             saveProfile(migratedProfile)

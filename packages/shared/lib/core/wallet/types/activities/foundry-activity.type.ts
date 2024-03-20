@@ -2,7 +2,7 @@ import { ActivityAction, ActivityType } from '@core/wallet/enums'
 import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import { ActivityGenerationParameters, IWalletState, ProcessedTransaction } from '../../interfaces'
 import { AccountAddress, FoundryOutput, ImmutableAccountAddressUnlockCondition, OutputType, SimpleTokenScheme, UnlockConditionType } from '@iota/sdk/out/types'
-import { getAmountFromOutput, getAsyncDataFromOutput, getMetadataFromOutput, getNativeTokenFromOutput, getTagFromOutput } from '../../utils'
+import { AddressConverter, getAmountFromOutput, getAsyncDataFromOutput, getMetadataFromOutput, getNativeTokenFromOutput, getTagFromOutput } from '../../utils'
 import { api } from '@core/api'
 import { getCoinType, getNetworkHrp } from '@core/profile'
 
@@ -85,9 +85,8 @@ export class ActivityFoundry extends ActivityBase {
         const addressUnlockCondition = output.unlockConditions.find(
             (unlockCondition) => unlockCondition.type === UnlockConditionType.ImmutableAccountAddress
         ) as ImmutableAccountAddressUnlockCondition
-        const accountId = (addressUnlockCondition?.address as AccountAddress)?.accountId
         // TODO: Research whether this address should be optional or not.
-        const accountAddress = accountId ? api.accountIdToBech32(accountId, getNetworkHrp()) : undefined
+        const accountAddress = AddressConverter.addressToBech32(addressUnlockCondition.address).toString()
 
         const isHidden = false
         const isAssetHidden = false

@@ -31,8 +31,8 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
         balance: {
-            total: Number(wallet?.balances?.baseCoin?.total),
-            available: Number(wallet?.balances?.baseCoin?.available),
+            total: Number(wallet?.balances?.baseCoin?.total ?? 0),
+            available: Number(wallet?.balances?.baseCoin?.available ?? 0),
         },
         ...(shouldCalculateFiatPrice && { marketPrices: marketCoinPrices?.[marketCoinId] }),
     }

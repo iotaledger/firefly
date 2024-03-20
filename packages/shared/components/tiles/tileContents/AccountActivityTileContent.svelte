@@ -1,15 +1,15 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { AccountActivity, getActivityTileTitle } from '@core/wallet'
     import { truncateString } from '@core/utils'
     import { ActivityTileContent } from '@ui'
     import { Icon } from '@lib/auxiliary/icon'
+    import { ActivityAccount } from 'shared/lib/core/wallet'
 
-    export let activity: AccountActivity
+    export let activity: ActivityAccount
 
-    $: action = localize(getActivityTileTitle(activity))
+    $: action = localize(activity.tileTitle())
     $: formattedAsset = {
-        text: truncateString(activity.accountAddress, 6, 6),
+        text: truncateString(activity.accountAddress(), 6, 6),
         color: 'blue-700',
     }
 </script>

@@ -6,7 +6,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     mintNft: {
-        enabled: false,
+        enabled: true,
     },
     mintNativeTokens: {
         enabled: false,
@@ -18,7 +18,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     deeplink: {
-        enabled: true,
+        enabled: false,
     },
 }
 

@@ -5,7 +5,7 @@ import {
     IWalletState,
     ProcessedTransaction,
 } from '../../interfaces'
-import { AccountOutput, InclusionState, OutputType } from '@iota/sdk/out/types'
+import { AccountAddress, AccountOutput, Address, AddressType, InclusionState, OutputType } from '@iota/sdk/out/types'
 import { api } from '@core/api'
 import { getNetworkHrp } from '@core/profile'
 import {
@@ -14,6 +14,7 @@ import {
     getMetadataFromOutput,
     getTagFromOutput,
     getAsyncDataFromOutput,
+    AddressConverter,
 } from '../../utils'
 import { EMPTY_HEX_ID } from '../../constants'
 
@@ -82,8 +83,8 @@ export class ActivityAccount extends ActivityBase {
         const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
         const storageDeposit = getAmountFromOutput(output) + _storageDeposit
         const accountId = getAccountId(output, outputId)
-        const accountAddress = api.accountIdToBech32(accountId, getNetworkHrp())
-
+        const accountAddress =  AddressConverter.addressToBech32(new AccountAddress(accountId));
+        
         const isHidden = false
         const isAssetHidden = false
         const containsValue = true

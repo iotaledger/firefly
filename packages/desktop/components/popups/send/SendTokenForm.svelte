@@ -37,14 +37,12 @@
 
     let { rawAmount, asset, unit, recipient, tag, metadata } = transactionDetails as NewTokenTransactionDetails
     let iscpChainAddress = layer2Parameters?.networkAddress
-    let preparedOutput: Output
     let isPreparingOutput = false
     let assetAmountInput: AssetAmountInput
     let networkInput: NetworkInput
     let recipientInput: RecipientInput
     let metadataInput: OptionalInput
     let tagInput: OptionalInput
-    let requiredMana: number
 
     $: rawAmount,
         asset,
@@ -71,18 +69,19 @@
     $: showLayer2 = features?.network?.layer2?.enabled && ($activeProfile.isDeveloperProfile || isBaseTokenTransfer)
     $: asset, !showLayer2 && networkInput?.reset()
 
-    async function buildPreparedOutput(): Promise<void> {
+    async function buildPreparedOutput(): Promise<{ preparedOutput: Output; allotmentManaCost: number }> {
         try {
             const details = get(newTransactionDetails)
             isPreparingOutput = true
             const outputParams = await getOutputParameters(details)
-            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            const prepareTx = await $selectedWallet.prepareTransaction([preparedOutput], getDefaultTransactionOptions())
-            requiredMana =
-                prepareTx?._preparedData?.transaction?.allotments?.reduce(
-                    (acc, prev) => acc + Number(prev?.mana || 0),
-                    0
-                ) || 0
+            const preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
+            const prepareTx = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
+            const allotmentManaCost =
+                prepareTx?._preparedData?.transaction?.allotments?.reduce((acc, { mana }) => acc + mana, 0) || 0
+            return {
+                preparedOutput,
+                allotmentManaCost,
+            }
         } catch (err) {
             handleError(err)
         } finally {
@@ -112,16 +111,17 @@
         )
 
         if (valid) {
-            await buildPreparedOutput()
+            const preparedOutput = await buildPreparedOutput()
 
-            openPopup({
-                id: PopupId.SendConfirmation,
-                overflow: true,
-                props: {
-                    preparedOutput,
-                    requiredMana,
-                },
-            })
+            if (preparedOutput) {
+                openPopup({
+                    id: PopupId.SendConfirmation,
+                    overflow: true,
+                    props: {
+                        ...preparedOutput,
+                    },
+                })
+            }
         }
     }
 

@@ -28,7 +28,7 @@
         />
     {/if}
     <transaction-status class="flex flex-row w-full space-x-2 justify-center">
-        {#if activity.inclusionState && activity.direction}
+        {#if activity.inclusionState() && activity.direction()}
             <TransactionActivityStatusPill
                 type={activity.type()}
                 direction={activity.direction()}

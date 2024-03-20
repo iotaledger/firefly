@@ -2,15 +2,15 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { time } from '@core/app'
     import {
-        Activity,
         ActivityAsyncStatus,
+        ActivityBase,
         ActivityType,
         IAsset,
-        InclusionState,
         NotVerifiedStatus,
         getTokenFromSelectedWallet,
         selectedWalletAssets,
     } from '@core/wallet'
+    import { InclusionState } from '@iota/sdk/out/types'
     import {
         ActivityInclusionStatusPill,
         AccountActivityTileContent,
@@ -26,18 +26,18 @@
         VestingActivityTileContent,
     } from '@ui'
 
-    export let activity: Activity
+    export let activity: ActivityBase
 
     let asset: IAsset | undefined
     $: $selectedWalletAssets,
         (asset =
             activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Foundry
-                ? getTokenFromSelectedWallet(activity.assetId)
+                ? getTokenFromSelectedWallet(activity.assetId())
                 : undefined)
-    $: isConflicting = activity.inclusionState === InclusionState.Conflicting
-    $: isTimelocked = !isConflicting && activity?.asyncData?.timelockDate > $time
+    $: isConflicting = activity.inclusionState() === InclusionState.Conflicting
+    $: isTimelocked = !isConflicting && activity?.asyncData()?.timelockDate > $time
     $: shouldShowAsyncFooter =
-        !isConflicting && activity.asyncData && activity.asyncData.asyncStatus !== ActivityAsyncStatus.Claimed
+        !isConflicting && activity.asyncData() && activity.asyncData().asyncStatus !== ActivityAsyncStatus.Claimed
 
     function onTransactionClick(): void {
         if (asset?.verification?.status === NotVerifiedStatus.New) {
@@ -45,14 +45,14 @@
                 id: PopupId.TokenInformation,
                 overflow: true,
                 props: {
-                    activityId: activity.id,
+                    activityId: activity.id(),
                     asset,
                 },
             })
         } else {
             openPopup({
                 id: PopupId.ActivityDetails,
-                props: { activityId: activity.id },
+                props: { activityId: activity.id() },
             })
         }
     }
@@ -60,11 +60,11 @@
 
 <ClickableTile
     onClick={onTransactionClick}
-    classes={activity.inclusionState === InclusionState.Pending ? 'opacity-80 animate-pulse' : ''}
+    classes={activity.inclusionState() === InclusionState.Pending ? 'opacity-80 animate-pulse' : ''}
 >
     <activity-tile class="w-full flex flex-col space-y-4">
         <tile-content class="flex flex-row items-center text-left space-x-4">
-            {#if activity.type() === ActivityType.Basic}
+            {#if activity.type() === ActivityType.Transaction}
                 <TransactionActivityTileContent {activity} />
             {:else if activity.type() === ActivityType.Account}
                 <AccountActivityTileContent {activity} />
@@ -84,7 +84,7 @@
             <TileFooter>
                 <svelte:fragment slot="right">
                     <ActivityInclusionStatusPill
-                        inclusionState={activity.inclusionState}
+                        inclusionState={activity.inclusionState()}
                         localizationKey="external.outgoing"
                     />
                 </svelte:fragment>

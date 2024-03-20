@@ -125,7 +125,7 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
             enabled: true,
         },
         ledgerProfile: {
-            enabled: false,
+            enabled: true,
         },
     },
     restoreProfile: {

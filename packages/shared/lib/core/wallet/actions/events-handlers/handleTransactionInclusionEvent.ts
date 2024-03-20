@@ -1,5 +1,5 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { AccountOutput, InclusionState, TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from '@contexts/governance/utils/isWalletVoting'
 import { updateNftInAllWalletNfts } from '@core/nfts'
@@ -11,11 +11,9 @@ import {
     ActivityAction,
     ActivityDirection,
     ActivityType,
-    GovernanceActivity,
     WalletApiEventHandler,
 } from '@core/wallet'
-import { get } from 'svelte/store'
-import { activeWallets, updateActiveWallet } from '@core/profile'
+import { getActiveWalletById, updateActiveWallet } from '@core/profile'
 
 export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {
@@ -32,6 +30,19 @@ export function handleTransactionInclusionEventInternal(
     payload: TransactionInclusionWalletEvent
 ): void {
     const { inclusionState, transactionId } = payload
+
+    if (inclusionState === InclusionState.Confirmed) {
+        const wallet = getActiveWalletById(walletId)
+        if (wallet) {
+            const hasMainAccountOutput = wallet.accountOutputs.find(
+                (output) => (output.output as AccountOutput).accountId === wallet.mainAccountId
+            )
+            // Unselect the active account if it was transferred
+            if (!hasMainAccountOutput) {
+                updateActiveWallet(walletId, { mainAccountId: undefined, depositAddress: '' })
+            }
+        }
+    }
 
     // const activity = getActivityByTransactionId(walletId, transactionId)
 
@@ -67,7 +78,7 @@ export function handleTransactionInclusionEventInternal(
 //         // TODO: move this
 //         closePopup(true)
 
-//         const wallet = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
+//         const wallet = getActiveWalletById(walletId)
 //         if (!wallet) {
 //             return
 //         }
@@ -92,11 +103,11 @@ export function handleTransactionInclusionEventInternal(
 //         // With output consolidation we wait for the transaction confirmation to improve the UX of the vesting tab
 //         // we should think about making this consistent in the future
 //         updateActiveWallet(walletId, { isTransferring: false })
-//         const account = get(activeWallets)?.find((_wallet) => _wallet.id === walletId)
-//         if (!account) {
+//         const wallet = getActiveWalletById(walletId)
+//         if (!wallet) {
 //             return
 //         }
-//         if (account?.hasConsolidatingOutputsTransactionInProgress) {
+//         if (wallet?.hasConsolidatingOutputsTransactionInProgress) {
 //             updateActiveWallet(walletId, { hasConsolidatingOutputsTransactionInProgress: false })
 //         }
 //     }

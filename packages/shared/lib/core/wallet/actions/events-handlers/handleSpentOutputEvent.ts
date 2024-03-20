@@ -9,7 +9,7 @@ import {
     updateAsyncDataByTransactionId,
     validateWalletApiEvent,
 } from '@core/wallet'
-import { AccountOutput, OutputType, SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
 import { nodeInfoProtocolParameters } from '@core/network'
 import { getUnixTimestampFromNodeInfoAndSlotIndex } from '@core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 import { get } from 'svelte/store'
@@ -30,18 +30,9 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
     if (wallet) {
         const walletOutputs = await wallet.outputs()
         const accountOutputs = await wallet.accounts()
+        const walletUnspentOutputs = await wallet.unspentOutputs()
         const implicitAccountOutputs = await wallet.implicitAccounts()
-        updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs })
-        if (
-            wallet.mainAccountId &&
-            !walletOutputs.find(
-                (output) =>
-                    output.output.type === OutputType.Account &&
-                    (output as unknown as AccountOutput).accountId === wallet.mainAccountId
-            )
-        ) {
-            updateActiveWallet(walletId, { mainAccountId: undefined, depositAddress: '' })
-        }
+        updateActiveWallet(walletId, { walletOutputs, accountOutputs, implicitAccountOutputs, walletUnspentOutputs })
     }
     const outputId = output?.outputId
     const activity = get(allWalletActivities)?.[walletId]?.find((_activity) => _activity.outputId === outputId)

@@ -59,7 +59,7 @@ export function isVisibleActivity(activity: ActivityBase): boolean {
 function isVisibleWithActiveHiddenFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        activity.isAssetHidden
+        activity.isAssetHidden()
     ) {
         return false
     }
@@ -70,7 +70,7 @@ function isVisibleWithActiveValuelessFilter(activity: ActivityBase, filter: Acti
     if (
         (!filter.showValueless.active || filter.showValueless.selected === BooleanFilterOption.No) &&
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        !activity.containsValue
+        !activity.containsValue()
     ) {
         return false
     }
@@ -80,7 +80,7 @@ function isVisibleWithActiveValuelessFilter(activity: ActivityBase, filter: Acti
 function isVisibleWithActiveRejectedFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.asyncData?.isRejected
+        activity.asyncData()?.isRejected
     ) {
         return false
     }
@@ -89,10 +89,10 @@ function isVisibleWithActiveRejectedFilter(activity: ActivityBase, filter: Activ
 
 function isVisibleWithActiveAssetFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.asset.active && filter.asset.selected) {
-        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) {
+        if (activity.type() !== ActivityType.Transaction && activity.type() !== ActivityType.Foundry) {
             return false
         }
-        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
+        if (filter.asset.selected && activity.assetId() !== filter.asset.selected) {
             return false
         }
     }
@@ -101,12 +101,12 @@ function isVisibleWithActiveAssetFilter(activity: ActivityBase, filter: Activity
 
 function isVisibleWithActiveAmountFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
-        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) return false
-        const asset = getAssetFromPersistedAssets(activity.assetId)
+        if (activity.type() !== ActivityType.Transaction && activity.type() !== ActivityType.Foundry) return false
+        const asset = getAssetFromPersistedAssets(activity.assetId())
         if (!asset?.metadata) {
             return false
         }
-        const activityAmount = Big(activity.rawAmount)
+        const activityAmount = Big(activity.rawAmount())
 
         if (
             filter.amount.selected === NumberFilterOption.Equal &&
@@ -253,15 +253,15 @@ function isVisibleWithActiveStatusFilter(activity: ActivityBase, filter: Activit
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
-            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed
+            (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Nft) &&
+            activity.asyncData()?.asyncStatus === ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
-            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+            (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Nft) &&
+            activity.asyncData()?.asyncStatus === ActivityAsyncStatus.Unclaimed
         ) {
             return true
         }
@@ -272,7 +272,7 @@ function isVisibleWithActiveStatusFilter(activity: ActivityBase, filter: Activit
 
 function isVisibleWithActiveTypeFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected !== activity.type) {
+        if (filter.type.selected !== activity.type()) {
             return false
         }
     }
@@ -281,7 +281,7 @@ function isVisibleWithActiveTypeFilter(activity: ActivityBase, filter: ActivityF
 
 function isVisibleWithActiveDirectionFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.direction.active && filter.direction.selected) {
-        if (filter.direction.selected !== activity.direction) {
+        if (filter.direction.selected !== activity.direction()) {
             return false
         }
     }
@@ -290,10 +290,10 @@ function isVisibleWithActiveDirectionFilter(activity: ActivityBase, filter: Acti
 
 function isVisibleWithInternalExternalFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.internalExternal.active && filter.internalExternal.selected) {
-        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal) {
+        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal()) {
             return false
         }
-        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal) {
+        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal()) {
             return false
         }
     }

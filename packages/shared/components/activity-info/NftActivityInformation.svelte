@@ -3,14 +3,14 @@
     import { localize } from '@core/i18n'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { IKeyValueBoxList } from '@core/utils'
-    import { getBech32AddressFromAddressTypes, getHexAddressFromAddressTypes, ActivityNft } from '@core/wallet'
+    import { AddressConverter, getHexAddressFromAddressTypes, ActivityNft } from '@core/wallet'
     import { KeyValueBox } from '@ui'
     import { AddressType } from '@iota/sdk/out/types'
 
     export let activity: ActivityNft
 
     $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId())
-    $: issuerAddress = nft?.issuer && getBech32AddressFromAddressTypes(nft.issuer)
+    $: issuerAddress = nft?.issuer && AddressConverter.addressToBech32(nft.issuer)
     $: collectionId = nft?.issuer && getHexAddressFromAddressTypes(nft.issuer)
 
     let detailsList: IKeyValueBoxList

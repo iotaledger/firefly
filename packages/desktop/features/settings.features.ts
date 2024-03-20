@@ -70,9 +70,6 @@ const settingsFeatures: ISettingsFeatures = {
         configureNodeList: {
             enabled: true,
         },
-        localProofOfWork: {
-            enabled: true,
-        },
     },
     advanced: {
         enabled: true,

@@ -18,7 +18,7 @@
         color: isIncoming ? 'blue-700' : '',
         classes: 'truncate',
     }
-    $: subjectLocale = activity.subject()
+    $: subjectLocale = activity.subjectLocale()
 
     $: nft = getNftByIdFromAllWalletNfts($selectedWalletId, activity.nftId())
 </script>
