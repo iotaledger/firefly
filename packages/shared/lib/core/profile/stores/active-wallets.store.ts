@@ -8,8 +8,8 @@ export function getActiveWallets(): IWalletState[] {
     return get(activeWallets)
 }
 
-export function getActiveWalletById(walletId: string): IWalletState | undefined {
-    return get(activeWallets).find((wallet) => wallet.id === walletId)
+export function getWalletById(walletId: string): IWalletState | undefined {
+    return getActiveWallets().find((wallet) => wallet.id === walletId)
 }
 
 export function removeWalletFromActiveWallets(walletId: string): void {

@@ -46,7 +46,6 @@
                 nodeInfoPath: 'protocolParameters[0].parameters.tokenSupply',
             },
             version: { localeKey: 'protocol.version', nodeInfoPath: 'protocolParameters[0].parameters.version' },
-            // minPowScore: { localeKey: 'protocol.minPowScore', nodeInfoPath: 'protocol.minPowScore' },
         },
         [NodeInfoTab.BaseToken]: {
             token: { localeKey: 'baseToken.token', nodeInfoPath: 'baseToken.name' },

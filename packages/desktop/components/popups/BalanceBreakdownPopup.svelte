@@ -54,12 +54,12 @@
     function getManaBreakdown(): BalanceBreakdown {
         const totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
         const availableBalance = getManaBalance(walletBalance?.mana?.available)
-        const totalBalance = totalBalanceWithoutBic + walletBalance.blockIssuanceCredits
+        const totalBalance = totalBalanceWithoutBic + walletBalance.totalWalletBic
 
         const subBreakdown = {
             availableMana: { amount: availableBalance },
             lockedMana: { amount: totalBalanceWithoutBic - availableBalance },
-            bicMana: { amount: walletBalance.blockIssuanceCredits },
+            bicMana: { amount: walletBalance.totalWalletBic },
         }
         return { amount: totalBalance, subBreakdown, isBaseToken: false }
     }

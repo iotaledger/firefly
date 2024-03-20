@@ -31,7 +31,6 @@ interface ICollectiblesSettingsFeatures extends IFeatureFlag {
 interface INetworkSettingsFeatures extends IFeatureFlag {
     networkInformation: IFeatureFlag
     configureNodeList: IFeatureFlag
-    localProofOfWork: IFeatureFlag
 }
 
 interface IAdvancedSettingsFeatures extends IFeatureFlag {

@@ -368,10 +368,6 @@
                 "noNodes": "There are no nodes, unable to connect to the network",
                 "noNodesAuto": "There are no nodes, automatic selection will be used instead"
             },
-            "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
-            },
             "errorLog": {
                 "title": "Error log",
                 "description": "View errors to debug an issue"
@@ -690,7 +686,8 @@
         },
         "accountManagement":{
             "list": {
-                "title": "Your Accounts",
+                "accountTitle": " Accounts",
+                "implicitTitle": "Pending Accounts",
                 "tile": {
                     "title": "Account",
                     "pill": {
@@ -701,6 +698,7 @@
             },
             "details": {
                 "balance": "Balance",
+                "blockIssuanceCredits": "Block Issuance Credit (BIC)",
                 "address": "Address",
                 "staked": "Staked",
                 "mana": "Mana",
@@ -715,7 +713,8 @@
                     "unsetAsPrimary": "Unset as primary"
                 }
             },
-            "notification": "Activate one account to access the dashboard."
+            "notification": "Activate one account to access the dashboard.",
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
@@ -947,8 +946,7 @@
                     "network": "Network",
                     "bech32Hrp": "Bech32 HRP",
                     "tokenSupply": "Token supply",
-                    "version": "Version",
-                    "minPowScore": "Min PoW Score"
+                    "version": "Version"
                 },
                 "baseToken": {
                     "tab": "Base token",
@@ -1358,7 +1356,6 @@
         "enableDeveloperMode": "Enable developer mode",
         "enableSystemNotifications": "Enable system notifications",
         "exportTransactionHistory": "Export transaction history",
-        "localProofOfWork": "Local proof of work",
         "unlock": "Unlock",
         "updateFirefly": "Update Firefly",
         "restartNow": "Restart now",
@@ -1600,7 +1597,6 @@
         "transferRemainderAddress": "Generating remainder address",
         "transferPreparedTransaction": "Preparing transaction",
         "transferSigning": "Signing the transaction",
-        "transferPow": "Performing PoW",
         "transferBroadcasting": "Broadcasting transaction",
         "transferComplete": "Transfer complete",
         "generatingReceiveAddress": "Generating receive address",
@@ -1723,7 +1719,8 @@
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Mana cost",
         "availableMana": "Available mana",
-        "insufficientMana": "Insufficient mana {availableMana}"
+        "insufficientMana": "Insufficient mana {availableMana}",
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
     },
     "filters":{
         "title": "Filters",
