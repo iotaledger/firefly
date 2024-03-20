@@ -4,7 +4,7 @@ import { preprocessTransactionsForWallet } from './preprocessTransactionsForWall
 import { preprocessOutputsForWallet } from './preprocessOutputsForWallet'
 import { linkTransactionsWithClaimingTransactions } from './linkTransactionsWithClaimingTransactions'
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
-import { loadAssetsForAllWallets } from './loadAssetsForAllWallets'
+import { loadAssetsForSelectedWallet } from './loadAssetsForSelectedWallet'
 import { ActivityBase } from '../../types'
 import { selectedWalletActivities } from '../..'
 
@@ -23,9 +23,8 @@ export async function generateAndStoreActivitiesForWallet(wallet: IWalletState):
     const activities = await Promise.all(linkedProcessedTransactions.flatMap((tx) => ActivityBase.generateActivitiesFromProcessedTransaction(wallet, tx)));
     selectedWalletActivities.set(activities.flat());
     console.log(activities)
-    // TODO: Store into the store?
 
     hideActivitiesForFoundries(wallet)
     //await setOutgoingAsyncActivitiesToClaimed(wallet)
-    //await loadAssetsForAllWallets(wallet)
+    await loadAssetsForSelectedWallet()
 }

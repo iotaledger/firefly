@@ -1,10 +1,10 @@
 import { ActivityType } from '@core/wallet/enums'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import { activityOutputContainsValue, getAmountFromOutput, getAsyncDataFromOutput, getLayer2ActivityInformation, getMetadataFromOutput, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
 import { ActivityGenerationParameters, IWalletState } from '../../interfaces'
 import { BasicOutput } from '@iota/sdk/out/types'
-import { localize } from 'shared/lib/core/i18n'
-import { getCoinType } from 'shared/lib/core/profile'
+import { localize } from '@core/i18n'
+import { getCoinType } from '@core/profile'
 
 interface ActivityVestingOptions extends ActivityBaseOptions {
     rawAmount: number

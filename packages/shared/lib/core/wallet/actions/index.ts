@@ -1,7 +1,6 @@
 export * from './backup'
 export * from './burnAsset'
 export * from './burnNft'
-export * from './claimActivity'
 export * from './getWalletAssetsForSelectedWallet'
 export * from './generateAndStoreActivitiesForAllWallets'
 export * from './rejectActivity'

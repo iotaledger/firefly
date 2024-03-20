@@ -1,18 +1,17 @@
 import { getOrRequestAssetFromPersistedAssets } from '../getOrRequestAssetFromPersistedAssets'
-import { IWalletState } from '@core/wallet/interfaces'
 import { get } from 'svelte/store'
 import { ActivityType } from '@core/wallet/enums'
-import { allWalletActivities, addPersistedAsset } from '../../stores'
+import { addPersistedAsset, selectedWalletActivities } from '../../stores'
 import { IPersistedAsset } from '@core/wallet/interfaces'
 
-export async function loadAssetsForAllWallets(wallet: IWalletState): Promise<void> {
-    const walletActivities = get(allWalletActivities)[wallet.id]
+export async function loadAssetsForSelectedWallet(): Promise<void> {
+    const walletActivities = get(selectedWalletActivities);
 
     const persistedAssets: IPersistedAsset[] = []
     for (const activity of walletActivities) {
         try {
-            if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) {
-                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
+            if (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Foundry) {
+                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId())
                 if (asset) {
                     persistedAssets.push(asset)
                 }

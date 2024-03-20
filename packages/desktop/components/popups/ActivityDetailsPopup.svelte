@@ -10,7 +10,6 @@
         ActivityAsyncStatus,
         ActivityDirection,
         ActivityType,
-        claimActivity,
         rejectActivity,
         selectedWalletActivities,
     } from '@core/wallet'
@@ -58,7 +57,7 @@
     }
 
     async function claim(): Promise<void> {
-        await claimActivity(activity)
+        await activity.claim();
         openPopup({
             id: PopupId.ActivityDetails,
             props: { activityId },
