@@ -2,7 +2,7 @@ import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
 import { Converter } from '@core/utils'
-import { Bech32Address, MetadataFeature, MintNftParams, OutputType } from '@iota/sdk/out/types'
+import { MetadataFeature, MintNftParams, OutputType } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
 import {
     addActivityToWalletActivitiesInAllWalletActivities,
@@ -15,20 +15,13 @@ import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
 import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
-// TODO: Update this temporary interface when fixed in the SDK, linked issue https://github.com/iotaledger/firefly/issues/8134
-interface MintNftParamsTemp {
-    issuer: Bech32Address
-    address: Bech32Address
-    immutableMetadata: MetadataFeature
-}
-
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
         const wallet = getSelectedWallet()
         updateSelectedWallet({ isTransferring: true })
 
         if (!wallet) return
-        const mintNftParams: MintNftParamsTemp = {
+        const mintNftParams: MintNftParams = {
             issuer: wallet.depositAddress,
             address: wallet.depositAddress,
             immutableMetadata: new MetadataFeature({

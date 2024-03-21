@@ -15,11 +15,16 @@
     import { onMount } from 'svelte'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
-    import { getClient } from '@core/wallet/actions'
+    import { getClient, prepareCreateNativeToken } from '@core/wallet/actions'
+    import { ManaBox } from '@components'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
     let storageDeposit = '0'
+
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+    let hasEnoughMana = false
 
     let metadata: IIrc30Metadata | undefined
     $: metadata = getMetadata($mintTokenDetails)
@@ -37,6 +42,15 @@
             const client = await getClient()
             const preparedOutput = await client.buildFoundryOutput(outputData)
             storageDeposit = formatTokenAmountPrecise(Number(preparedOutput.amount) ?? 0, getBaseToken())
+            try {
+                transactionInfo.preparedTransaction = await prepareCreateNativeToken(
+                    Number($mintTokenDetails.totalSupply),
+                    Number($mintTokenDetails.circulatingSupply),
+                    metadata
+                )
+            } catch (error) {
+                transactionInfo.preparedTransactionError = error
+            }
         }
     }
 
@@ -151,6 +165,7 @@
                         isCopyable={value.isCopyable}
                     />
                 {/each}
+                <ManaBox {transactionInfo} bind:hasEnoughMana />
             </details-list>
         {/if}
     </div>
@@ -158,7 +173,12 @@
         <Button outline classes="w-full" disabled={isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
-        <Button classes="w-full" disabled={isTransferring} onClick={onConfirmClick} isBusy={isTransferring}>
+        <Button
+            classes="w-full"
+            disabled={isTransferring || !hasEnoughMana}
+            onClick={onConfirmClick}
+            isBusy={isTransferring}
+        >
             {localize('actions.confirm')}
         </Button>
     </div>
