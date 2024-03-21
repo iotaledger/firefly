@@ -9,7 +9,7 @@
         logout,
         reflectLockedStronghold,
     } from '@core/profile'
-    import { appRouter, dashboardRoute } from '@core/router'
+    import { appRouter, DashboardRoute, dashboardRoute, dashboardRouter } from '@core/router'
     import { Idle } from '@ui'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
@@ -28,7 +28,7 @@
         resetNftDownloadQueue,
         selectedWalletNfts,
     } from '@core/nfts'
-    import { selectedWalletId } from '@core/wallet'
+    import { selectedWallet, selectedWalletId } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
     import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
@@ -53,6 +53,11 @@
     $: $nftDownloadQueue, downloadNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedWalletId))
     $: addselectedWalletNftsToDownloadQueue($selectedWalletId)
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits[$selectedWallet?.mainAccountId] < 0
+
+    $: if (hasMainAccountNegativeBIC) {
+        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
+    }
 
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
         Platform.trackEvent('dashboard-route', { route: $dashboardRoute })

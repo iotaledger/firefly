@@ -14,6 +14,8 @@
         Pill,
         Button,
         ButtonSize,
+        TextHint,
+        TextHintVariant,
     } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AccountManagementMenu } from './modals'
@@ -59,6 +61,7 @@
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
     $: primaryKey = $selectedWallet?.primaryKey
     $: listBlockKeysFeature(selectedOutput)
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits[$selectedWallet?.mainAccountId] < 0
 
     function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
         if (isImplicitAccount) {
@@ -123,129 +126,131 @@
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
     <Pane height={Height.Full}>
-        <right-pane-container class="flex flex-col space-y-8 h-full">
-            <right-pane-title class="flex flex-col space-y-1">
-                <title-container class="flex justify-between w-full items-center">
-                    <title-wrapper class="flex items-center space-x-2 py-1">
-                        <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')}</Text>
-                        {#if isImplicitAccount}
-                            <Pill backgroundColor="yellow-200" textColor="yellow-900"
-                                >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
-                            >
-                        {:else if isMainAccount}
-                            <Pill backgroundColor="blue-200" textColor="blue-600"
-                                >{localize('views.accountManagement.list.tile.pill.main')}
-                            </Pill>
+        <right-pane-container class="flex flex-col justify-between h-full">
+            <right-pane-wrapper class="flex flex-col space-y-8 h-full">
+                <right-pane-title class="flex flex-col space-y-1">
+                    <title-container class="flex justify-between w-full items-center">
+                        <title-wrapper class="flex items-center space-x-2 py-1">
+                            <Text type={TextType.h2}>{localize('views.accountManagement.list.tile.title')}</Text>
+                            {#if isImplicitAccount}
+                                <Pill backgroundColor="yellow-200" textColor="yellow-900"
+                                    >{localize('views.accountManagement.list.tile.pill.pending')}</Pill
+                                >
+                            {:else if isMainAccount}
+                                <Pill backgroundColor="blue-200" textColor="blue-600"
+                                    >{localize('views.accountManagement.list.tile.pill.main')}
+                                </Pill>
+                            {/if}
+                        </title-wrapper>
+
+                        {#if accountId}
+                            <wallet-actions-button class="block relative">
+                                <MeatballMenuButton onClick={modal?.toggle} />
+                                <AccountManagementMenu
+                                    bind:modal
+                                    position={{ right: '0' }}
+                                    classes="mt-1.5"
+                                    {accountId}
+                                    {keys}
+                                />
+                            </wallet-actions-button>
                         {/if}
-                    </title-wrapper>
+                        {#if isImplicitAccount}
+                            <Button size={ButtonSize.Small} onClick={handleActivateAccount}
+                                >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+                            >
+                        {/if}
+                    </title-container>
+                    {#if selectedOutput.outputId}
+                        <button
+                            class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                            on:click={onExplorerClick}
+                        >
+                            {localize('general.viewOnExplorer')}
+                        </button>
+                    {/if}
+                </right-pane-title>
+                <div class="flex flex-row space-x-2 w-1/2">
+                    <!-- TODO: Remove this if when calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080  -->
+                    {#if !accountId}
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                                <Text type={TextType.h3}>
+                                    {formattedBalance}
+                                </Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.accountManagement.details.balance')}</Text
+                                >
+                            </div>
+                        </Tile>
+                    {/if}
+
+                    {#if hasStakingFeature}
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                                <Text type={TextType.h3}>{formattedStakedAmount}</Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.accountManagement.details.staked')}</Text
+                                >
+                            </div>
+                        </Tile>
+                    {/if}
 
                     {#if accountId}
-                        <wallet-actions-button class="block relative">
-                            <MeatballMenuButton onClick={modal?.toggle} />
-                            <AccountManagementMenu
-                                bind:modal
-                                position={{ right: '0' }}
-                                classes="mt-1.5"
-                                {accountId}
-                                {keys}
-                            />
-                        </wallet-actions-button>
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                                <Text type={TextType.h3}>
+                                    {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
+                                </Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
+                                >
+                            </div>
+                        </Tile>
                     {/if}
-                    {#if isImplicitAccount}
-                        <Button
-                            size={ButtonSize.Small}
-                            onClick={handleActivateAccount}
-                            disabled={$selectedWallet?.balances?.totalWalletBic < 0}
-                            >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
-                        >
-                    {/if}
-                </title-container>
-                {#if selectedOutput.outputId}
-                    <button
-                        class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
-                        on:click={onExplorerClick}
-                    >
-                        {localize('general.viewOnExplorer')}
-                    </button>
-                {/if}
-            </right-pane-title>
-            <div class="flex flex-row space-x-2 w-1/2">
-                <!-- TODO: Remove this if when calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080  -->
-                {#if !accountId}
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>
-                                {formattedBalance}
-                            </Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.accountManagement.details.balance')}</Text
-                            >
-                        </div>
-                    </Tile>
-                {/if}
-
-                {#if hasStakingFeature}
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>{formattedStakedAmount}</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.accountManagement.details.staked')}</Text
-                            >
-                        </div>
-                    </Tile>
-                {/if}
-
+                </div>
                 {#if accountId}
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full">
-                            <Text type={TextType.h3}>
-                                {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
-                            </Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
-                            >
-                        </div>
-                    </Tile>
-                {/if}
-            </div>
-            {#if accountId}
-                <div class="flex flex-col space-y-2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                        >{localize('views.accountManagement.details.address')}</Text
-                    >
-                    <CopyableBox
-                        clearBackground
-                        clearBoxPadding
-                        isCopyable
-                        value={address}
-                        classes="flex space-x-2 items-center"
-                    >
-                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
-                            >{address}</Text
+                    <div class="flex flex-col space-y-2">
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.address')}</Text
                         >
-                        <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
-                    </CopyableBox>
-                </div>
-            {/if}
-            {#if isImplicitAccount}
-                <div class="flex flex-col space-y-2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                        >{localize('views.accountManagement.details.mana')}</Text
-                    >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
-                        >{selectedOutput.output?.mana}</Text
-                    >
-                </div>
-            {/if}
-            {#if accountId && primaryKey}
-                <div class="flex flex-col space-y-2">
-                    <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                        >{localize('views.accountManagement.details.key')}</Text
-                    >
-                    <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
-                        >{primaryKey}</Text
-                    >
-                </div>
+                        <CopyableBox
+                            clearBackground
+                            clearBoxPadding
+                            isCopyable
+                            value={address}
+                            classes="flex space-x-2 items-center"
+                        >
+                            <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
+                                >{address}</Text
+                            >
+                            <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
+                        </CopyableBox>
+                    </div>
+                {/if}
+                {#if isImplicitAccount}
+                    <div class="flex flex-col space-y-2">
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.mana')}</Text
+                        >
+                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
+                            >{selectedOutput.output?.mana}</Text
+                        >
+                    </div>
+                {/if}
+                {#if accountId && primaryKey}
+                    <div class="flex flex-col space-y-2">
+                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                            >{localize('views.accountManagement.details.key')}</Text
+                        >
+                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
+                            >{primaryKey}</Text
+                        >
+                    </div>
+                {/if}
+            </right-pane-wrapper>
+            {#if isMainAccount && hasMainAccountNegativeBIC}
+                <TextHint variant={TextHintVariant.Danger} text={localize('views.accountManagement.details.hint')} />
             {/if}
         </right-pane-container>
     </Pane>

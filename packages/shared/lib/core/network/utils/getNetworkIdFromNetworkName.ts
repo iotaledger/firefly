@@ -15,6 +15,7 @@ export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
         case 'testnet-2':
         case 'docker':
         case 'docker-1709894432':
+        case 'docker-1711022286':
             return NetworkId.Testnet
         default:
             return NetworkId.Custom

@@ -38,7 +38,8 @@
             icon={Icon.Star}
             title={localize('views.accountManagement.details.modal.setMainAccount')}
             onClick={setAsMainAccount}
-            disabled={accountId === $selectedWallet.mainAccountId || $selectedWallet?.balances?.totalWalletBic < 0}
+            disabled={accountId === $selectedWallet.mainAccountId ||
+                $selectedWallet?.balances?.blockIssuanceCredits[accountId] < 0}
         />
     </account-management-menu>
 </Modal>
