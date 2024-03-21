@@ -36,7 +36,7 @@
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
-    let committeeAddress: string[] = []
+    let committeeAddresses: string[] = []
 
     enum Header {
         DelegationId = 'delegationId',
@@ -97,7 +97,7 @@
     async function setCurrentEpochAndCommittee(): Promise<void> {
         const committeeResponse = await getCommitteeInfo()
         currentEpoch = committeeResponse?.epoch
-        committeeAddress = committeeResponse?.committee?.map((committee) => committee.address) || []
+        committeeAddresses = committeeResponse?.committee?.map((committee) => committee.address) || []
     }
 
     function handleDelegate(): void {
@@ -189,10 +189,10 @@
                         component: PingingBadge,
                         props: {
                             classes: 'relative',
-                            innerColor: committeeAddress?.some((address) => address === value)
+                            innerColor: committeeAddresses?.some((address) => address === value)
                                 ? 'green-600'
                                 : 'red-500',
-                            outerColor: committeeAddress?.some((address) => address === value)
+                            outerColor: committeeAddresses?.some((address) => address === value)
                                 ? 'green-400'
                                 : 'red-300',
                         },
