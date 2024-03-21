@@ -1,4 +1,5 @@
 import { NETWORK_STATUS_POLL_INTERVAL } from '../constants'
+import { getAndUpdateNetworkMetrics } from './getAndUpdateNetworkMetrics'
 import { getAndUpdateNodeInfo } from './getAndUpdateNodeInfo'
 
 let pollInterval: number
@@ -8,7 +9,11 @@ let pollInterval: number
  */
 export async function pollNetworkStatus(): Promise<void> {
     await getAndUpdateNodeInfo()
-    pollInterval = window.setInterval(() => void getAndUpdateNodeInfo(), NETWORK_STATUS_POLL_INTERVAL)
+    await getAndUpdateNetworkMetrics()
+    pollInterval = window.setInterval(() => {
+        getAndUpdateNodeInfo()
+        getAndUpdateNetworkMetrics()
+    }, NETWORK_STATUS_POLL_INTERVAL)
 }
 
 export function clearNetworkPoll(): void {
