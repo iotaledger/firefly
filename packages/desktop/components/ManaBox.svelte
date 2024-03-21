@@ -1,46 +1,63 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { DEFAULT_SECONDS_PER_SLOT, getExtraMana, getManaBalance } from '@core/network'
+    import {
+        DEFAULT_SECONDS_PER_SLOT,
+        ITransactionInfoToCalculateManaCost,
+        getExtraMana,
+        getManaBalance,
+    } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { MILLISECONDS_PER_SECOND } from '@core/utils'
     import { selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
-    import { PreparedTransaction } from '@iota/sdk/out/types'
     import { KeyValueBox, Text, TextType } from '@ui'
     import { onMount, onDestroy } from 'svelte'
 
-    export let preparedTransaction: PreparedTransaction | undefined
+    export let transactionInfo: ITransactionInfoToCalculateManaCost
     export let hasEnoughMana: boolean
     export let showCountdown: boolean = true
 
     const NUMBER_OF_EXTRA_SLOTS_MANA = 3
+    const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
 
-    let allotmentManaCost: number = 0
+    let requiredTxManaCost: number = 0
+    let secondsRemaining: number = 0
     let countdownInterval: NodeJS.Timeout
-    let extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
-    let secondsToRefreshExtraMana = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
+    let secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
 
-    $: preparedTransaction && calculateAndSetManaCost() // updates mana values when preparedTransaction changes
+    $: (transactionInfo?.preparedTransaction || transactionInfo?.preparedTransactionError) && calculateManaCost()
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
     $: availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
+    $: requiredMana = requiredTxManaCost + extraMana
     $: hasEnoughMana = availableMana >= requiredMana
-    $: requiredMana = allotmentManaCost + extraMana
 
-    function calculateAndSetManaCost(): void {
-        allotmentManaCost =
-            preparedTransaction?._preparedData?.transaction?.allotments?.reduce(
-                (acc, { mana }) => acc + Number(mana),
-                0
-            ) || 0
-        extraMana = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
+    function calculateManaCost() {
+        if (
+            transactionInfo?.preparedTransactionError &&
+            transactionInfo.preparedTransactionError.message?.includes('slots remaining until enough mana')
+        ) {
+            const splittedError = transactionInfo.preparedTransactionError.message?.split(' ')
+
+            const requiredManaForTransaction = splittedError[splittedError.indexOf('required') + 1]?.replace(',', '')
+            requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
+
+            const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
+            secondsRemaining = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
+        } else if (transactionInfo?.preparedTransaction) {
+            requiredTxManaCost =
+                transactionInfo.preparedTransaction._preparedData?.transaction?.allotments?.reduce(
+                    (acc, { mana }) => acc + Number(mana),
+                    0
+                ) || 0
+        }
     }
 
     onMount(() => {
-        calculateAndSetManaCost()
+        calculateManaCost()
         countdownInterval = setInterval(() => {
-            secondsToRefreshExtraMana -= 1
-            if (secondsToRefreshExtraMana <= 0) {
-                calculateAndSetManaCost()
-                secondsToRefreshExtraMana = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
+            secondsToRefreshManaCost -= 1
+            if (secondsToRefreshManaCost <= 0) {
+                calculateManaCost()
+                secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
             }
         }, MILLISECONDS_PER_SECOND)
     })
@@ -56,12 +73,12 @@
         valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
     />
 
-    <!-- TODO: Update with mana generation -->
     {#if !hasEnoughMana}
         <Text type={TextType.p} error classes="text-center">
             {localize('general.insufficientMana', {
                 values: {
                     availableMana,
+                    secondsRemaining,
                 },
             })}
         </Text>
@@ -70,7 +87,7 @@
         <Text type={TextType.p} classes="text-center">
             {localize('general.secondsToRefreshManaCost', {
                 values: {
-                    seconds: secondsToRefreshExtraMana,
+                    seconds: secondsToRefreshManaCost,
                 },
             })}
         </Text>
