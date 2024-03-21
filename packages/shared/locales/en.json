@@ -1265,7 +1265,7 @@
             "title": "Claim Rewards",
             "confirmButton": "Claim",
             "rewards": "Rewards",
-            "delegationId": "Delegation output ID"
+            "delegationId": "Delegation ID"
         }
     },
     "actions": {

@@ -1,34 +1,28 @@
 <script lang="ts">
     import { Button, Text, FontWeight, TextType, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
-    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
+    import { getDefaultTransactionOptions, selectedWallet, selectedWalletId } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { PreparedTransaction } from '@iota/sdk/out/types'
     import { ManaBox } from '@components'
+    import { onMount } from 'svelte'
+    import { handleError } from '@core/error/handlers'
+    import { updateActiveWallet } from '@core/profile'
 
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let delegationId: string
     export let rewards: number
+    export let isBusy = false
 
-    let isBusy = false
     let hasEnoughMana = false
     let preparedTransaction: PreparedTransaction
 
     async function onConfirmClick(): Promise<void> {
+        isBusy = true
         try {
-            isBusy = true
-            await checkActiveProfileAuth(
-                async () => {
-                    const burnOutput = await $selectedWallet.burn(
-                        { delegations: [delegationId] },
-                        getDefaultTransactionOptions()
-                    )
-                    if (burnOutput) {
-                        closePopup()
-                    }
-                },
-                { stronghold: true }
-            )
+            updatePopupProps({ isBusy })
+            await checkActiveProfileAuth(burnDelegationOutput, { stronghold: true })
         } catch (error) {
             console.error(error)
         } finally {
@@ -36,9 +30,37 @@
         }
     }
 
+    async function burnDelegationOutput(): Promise<void> {
+        try {
+            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
+            updateActiveWallet($selectedWalletId, {
+                hasDelegationTransactionInProgress: true,
+                isTransferring: true,
+            })
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
+    async function prepareBurnDelegationOutput(): Promise<void> {
+        preparedTransaction = await $selectedWallet?.prepareBurn(
+            { delegations: [delegationId] },
+            getDefaultTransactionOptions()
+        )
+    }
+
     function onCancelClick(): void {
         closePopup()
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+            await prepareBurnDelegationOutput()
+        } catch (err) {
+            handleError(err.error)
+        }
+    })
 </script>
 
 <div class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
