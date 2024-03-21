@@ -1,12 +1,11 @@
 <script lang="ts">
     import { PopupId, closePopup, openPopup, updatePopupProps } from '@auxiliary/popup'
-    import { prepareOutput, selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
+    import { prepareOutput, selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
     import { localize } from '@core/i18n'
     import { ledgerPreparedOutput } from '@core/ledger'
-    import { checkActiveProfileAuth, isActiveLedgerProfile, activeProfile } from '@core/profile'
-    import { DEFAULT_SECONDS_PER_SLOT, getExtraMana, getManaBalance } from '@core/network'
-    import { MILLISECONDS_PER_SECOND, TimePeriod } from '@core/utils'
+    import { checkActiveProfileAuth, isActiveLedgerProfile } from '@core/profile'
+    import { TimePeriod } from '@core/utils'
     import { sendOutput } from '@core/wallet/actions'
     import { SubjectType, TokenStandard } from '@core/wallet/enums'
     import { NewTransactionType, newTransactionDetails, updateNewTransactionDetails } from '@core/wallet/stores'
@@ -32,14 +31,15 @@
     } from '@ui'
     import { ToggleColor } from '@ui/inputs/Toggle.svelte'
     import { FontWeight, Tab, TextHintVariant, TextType } from '@ui/enums'
-    import { onMount, onDestroy } from 'svelte'
+    import { ManaBox } from '@components'
+    import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let isSendAndClosePopup: boolean = false
     export let disableBack = false
     export let preparedOutput: Output
-    export let allotmentManaCost: number
 
     const transactionDetails = get(newTransactionDetails)
     const {
@@ -49,8 +49,6 @@
         disableToggleGift,
         disableChangeExpiration,
     } = get(newTransactionDetails)
-
-    const NUMBER_OF_EXTRA_SLOTS_MANA = 3
 
     let { surplus, expirationDate, giftStorageDeposit } = get(newTransactionDetails)
 
@@ -63,9 +61,8 @@
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
-    let countdownInterval: NodeJS.Timeout
-    let extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
-    let secondsToRefreshExtraMana = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+    let hasEnoughMana = false
 
     let isPreparingOutput = false
     $: expirationTimePicker?.setNull(giftStorageDeposit)
@@ -77,7 +74,6 @@
     $: isLayer2Transaction = !!layer2Parameters
     $: isTransferring = $selectedWallet?.isTransferring
     $: hideGiftToggle = isBaseTokenTransfer || isLayer2Transaction || (disableToggleGift && !giftStorageDeposit)
-    $: requiredMana = Number(allotmentManaCost) + extraMana
 
     $: if (!isSendAndClosePopup) expirationDate, giftStorageDeposit, void rebuildTransactionOutput()
 
@@ -90,29 +86,17 @@
         layer2Parameters
     )
 
-    $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
-    $: availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
-    $: hasEnoughMana = availableMana >= requiredMana
-
     onMount(async () => {
         await updateStorageDeposit()
 
-        countdownInterval = setInterval(() => {
-            secondsToRefreshExtraMana -= 1
-            if (secondsToRefreshExtraMana <= 0) {
-                $selectedWallet
-                    .prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
-                    .then((prepareTx) => {
-                        allotmentManaCost =
-                            prepareTx?._preparedData?.transaction?.allotments?.reduce(
-                                (acc, { mana }) => acc + Number(mana),
-                                0
-                            ) || 0
-                        extraMana = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
-                    })
-                secondsToRefreshExtraMana = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
-            }
-        }, MILLISECONDS_PER_SECOND)
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareSendOutputs(
+                [preparedOutput],
+                getDefaultTransactionOptions()
+            )
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
 
         if (isSendAndClosePopup || expirationDate) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
@@ -143,13 +127,11 @@
         try {
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
-            preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            const prepareTx = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
-            allotmentManaCost =
-                prepareTx?._preparedData?.transaction?.allotments?.reduce(
-                    (acc, prev) => acc + Number(prev?.mana || 0),
-                    0
-                ) || 0
+            preparedOutput = await prepareOutput($selectedWallet?.id, outputParams, getDefaultTransactionOptions())
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareSendOutputs(
+                [preparedOutput],
+                getDefaultTransactionOptions()
+            )
             await updateStorageDeposit()
 
             // This potentially triggers a second 'prepareOutput',
@@ -165,6 +147,7 @@
             }
         } catch (err) {
             handleError(err)
+            transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false
         }
@@ -244,10 +227,6 @@
     function onCancelClick(): void {
         closePopup()
     }
-
-    onDestroy(() => {
-        clearInterval(countdownInterval)
-    })
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
@@ -286,28 +265,7 @@
                     />
                 </KeyValueBox>
             {/if}
-            <KeyValueBox
-                keyText={localize('general.manaCost')}
-                valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
-            />
-
-            <!-- TODO: Update with mana generation -->
-            {#if !hasEnoughMana}
-                <Text type={TextType.p} error classes="text-center">
-                    {localize('general.insufficientMana', {
-                        values: {
-                            availableMana,
-                        },
-                    })}
-                </Text>
-            {/if}
-            <Text type={TextType.p} classes="text-center">
-                {localize('general.secondsToRefreshManaCost', {
-                    values: {
-                        seconds: secondsToRefreshExtraMana,
-                    },
-                })}
-            </Text>
+            <ManaBox {transactionInfo} bind:hasEnoughMana />
         {/if}
     </div>
     {#if surplus}
