@@ -8,6 +8,7 @@
         visibleSelectedWalletAssets,
         convertToRawAmount,
         getDefaultTransactionOptions,
+        AddressConverter,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
@@ -47,7 +48,6 @@
             if (!rawAmount || !accountAddress) return
             updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(allotMana, { stronghold: true, ledger: false })
-            closePopup()
         } catch (err) {
             error = err.error
             handleError(err)
@@ -70,12 +70,17 @@
 
     async function allotMana(): Promise<void> {
         try {
-            // const accountId = AddressConverter.parseBech32Address(accountAddress)
-            const prepareOutput = await $selectedWallet.prepareOutput({ recipientAddress: accountAddress, amount: '0' })
-            await $selectedWallet.sendOutputs([prepareOutput], {
-                ...getDefaultTransactionOptions(),
-                manaAllotments: { [$selectedWallet.mainAccountId]: Number(rawAmount) },
-            })
+            const accountId = AddressConverter.parseBech32Address(accountAddress)
+            // Send 0 amount transaction to accountAddress with amount in the allotMana
+            const prepareOutput = await $selectedWallet.prepareOutput(
+                { recipientAddress: accountAddress, amount: '0' },
+                {
+                    ...getDefaultTransactionOptions(accountId),
+                    manaAllotments: { [$selectedWallet.mainAccountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
+                }
+            )
+            await $selectedWallet.sendOutputs([prepareOutput], getDefaultTransactionOptions())
+            closePopup()
         } catch (err) {
             handleError(err)
         }
@@ -106,7 +111,7 @@
                     bind:this={assetAmountInput}
                     bind:rawAmount
                     bind:amount
-                    {asset}
+                    bind:asset
                     containsSlider
                     disableAssetSelection
                     disabled={hasTransactionInProgress}
