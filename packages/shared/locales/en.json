@@ -1719,7 +1719,7 @@
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available mana",
-        "insufficientMana": "Insufficient mana {availableMana}, wait {secondsRemaining} seconds.",
+        "insufficientMana": "Insufficient {availableMana}.",
         "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
     },
     "filters":{

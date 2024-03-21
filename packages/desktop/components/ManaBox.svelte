@@ -20,7 +20,6 @@
     const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
 
     let requiredTxManaCost: number = 0
-    let secondsRemaining: number = 0
     let countdownInterval: NodeJS.Timeout
     let secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
 
@@ -36,12 +35,8 @@
             transactionInfo.preparedTransactionError.message?.includes('slots remaining until enough mana')
         ) {
             const splittedError = transactionInfo.preparedTransactionError.message?.split(' ')
-
             const requiredManaForTransaction = splittedError[splittedError.indexOf('required') + 1]?.replace(',', '')
             requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
-
-            const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
-            secondsRemaining = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
         } else if (transactionInfo?.preparedTransaction) {
             requiredTxManaCost =
                 transactionInfo.preparedTransaction._preparedData?.transaction?.allotments?.reduce(
@@ -77,13 +72,11 @@
         <Text type={TextType.p} error classes="text-center">
             {localize('general.insufficientMana', {
                 values: {
-                    availableMana,
-                    secondsRemaining,
+                    availableMana: formatTokenAmountBestMatch(availableMana, mana.metadata),
                 },
             })}
         </Text>
-    {/if}
-    {#if showCountdown}
+    {:else if showCountdown}
         <Text type={TextType.p} classes="text-center">
             {localize('general.secondsToRefreshManaCost', {
                 values: {
