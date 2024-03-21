@@ -712,7 +712,7 @@
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
                 },
-                "hint": "Your main account has a negative Block Issuance Credit (BIC). Please select another account as the main one to operate smoothly."
+                "hint": "Your main account has a negative Block Issuance Credit (BIC). Please select another account as the main one."
             },
             "notification": "Activate one account to access the dashboard.",
             "emptyAccounts": "There are no accounts to show, activate one first."
