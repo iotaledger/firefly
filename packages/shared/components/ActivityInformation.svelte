@@ -12,27 +12,27 @@
         SmartContractActivityInformation,
     } from '@ui'
     import { Tab } from '@ui/enums'
-    import { ActivityType, Activity } from '@core/wallet'
+    import { ActivityType, ActivityBase } from '@core/wallet'
     import { getNftByIdFromAllWalletNfts } from '@core/nfts'
     import { selectedWalletId } from '@core/wallet'
 
-    export let activity: Activity
+    export let activity: ActivityBase
     export let activeTab: Tab = Tab.Transaction
 
     let hasMetadata = false
     $: {
         const storedNft =
-            activity?.type === ActivityType.Nft
-                ? getNftByIdFromAllWalletNfts($selectedWalletId, activity?.nftId)
+            activity?.type() === ActivityType.Nft
+                ? getNftByIdFromAllWalletNfts($selectedWalletId, activity?.nftId())
                 : undefined
         hasMetadata = !!storedNft?.metadata
     }
 
     let tabs: Tab[] = []
     $: {
-        switch (activity?.type) {
-            case ActivityType.Basic:
-                tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : [])]
+        switch (activity?.type()) {
+            case ActivityType.Transaction:
+                tabs = [Tab.Transaction, ...(activity?.parsedLayer2Metadata() ? [Tab.SmartContract] : [])]
                 break
             case ActivityType.Governance:
                 tabs = [Tab.Transaction]
@@ -48,7 +48,7 @@
                     Tab.Transaction,
                     Tab.Nft,
                     ...(hasMetadata ? [Tab.NftMetadata] : []),
-                    ...(activity?.parsedLayer2Metadata ? [Tab.SmartContract] : []),
+                    ...(activity?.parsedLayer2Metadata() ? [Tab.SmartContract] : []),
                 ]
                 break
             case ActivityType.Foundry:
@@ -63,22 +63,22 @@
         <Tabs bind:activeTab {tabs} />
     {/if}
     {#if activeTab === Tab.Transaction}
-        {#if activity?.type === ActivityType.Governance}
+        {#if activity?.type() === ActivityType.Governance}
             <GovernanceActivityInformation {activity} />
-        {:else if activity?.type === ActivityType.Consolidation}
+        {:else if activity?.type() === ActivityType.Consolidation}
             <ConsolidationActivityInformation {activity} />
         {:else}
             <GenericActivityInformation {activity} />
         {/if}
-    {:else if activeTab === Tab.Account && activity?.type === ActivityType.Account}
+    {:else if activeTab === Tab.Account && activity?.type() === ActivityType.Account}
         <AccountActivityInformation {activity} />
-    {:else if activeTab === Tab.Nft && activity?.type === ActivityType.Nft}
+    {:else if activeTab === Tab.Nft && activity?.type() === ActivityType.Nft}
         <NftActivityInformation {activity} />
     {:else if activeTab === Tab.Foundry}
         <FoundryActivityInformation {activity} />
     {:else if activeTab === Tab.Token}
         <TokenActivityInformation {activity} />
-    {:else if activeTab === Tab.NftMetadata && activity?.type === ActivityType.Nft}
+    {:else if activeTab === Tab.NftMetadata && activity?.type() === ActivityType.Nft}
         <NftMetadataInformation {activity} />
     {:else if activeTab === Tab.SmartContract}
         <SmartContractActivityInformation {activity} />

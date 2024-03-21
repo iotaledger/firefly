@@ -1,27 +1,27 @@
 <script lang="ts">
     import { AmountBox, ActivityInclusionStatusPill, Text, FontWeight } from '@ui'
     import { getAssetFromPersistedAssets } from '@core/wallet'
-    import { GovernanceActivity } from '@core/wallet'
+    import { ActivityGovernance } from '@core/wallet'
     import { getCoinType } from '@core/profile'
     import { getVotingEvent } from '@contexts/governance/actions'
     import { truncateString } from '@core/utils'
 
-    export let activity: GovernanceActivity
+    export let activity: ActivityGovernance
 
     const asset = getAssetFromPersistedAssets(getCoinType())
     let proposalName: string
 
-    $: amount = activity.votingPowerDifference ?? 0
+    $: amount = activity.votingPowerDifference() ?? 0
     $: localizationKey = 'governance.' + activity.governanceAction
-    $: activity.participation?.eventId, void setProposalName()
+    $: activity.participation()?.eventId, void setProposalName()
 
     async function setProposalName(): Promise<void> {
         try {
-            if (activity?.participation?.eventId) {
-                proposalName = (await getVotingEvent(activity.participation.eventId)).data.name
+            if (activity?.participation()?.eventId) {
+                proposalName = (await getVotingEvent(activity.participation()?.eventId)).data.name
             }
         } catch (err) {
-            proposalName = truncateString(activity?.participation?.eventId, 6, 6)
+            proposalName = truncateString(activity?.participation()?.eventId, 6, 6)
         }
     }
 </script>

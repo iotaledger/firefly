@@ -8,7 +8,7 @@ import { IIrc30Metadata, IPersistedAsset } from '../interfaces'
 import { getSelectedWallet, resetMintTokenDetails, updateSelectedWallet } from '../stores'
 import { addPersistedAsset } from '../stores/persisted-assets.store'
 import { plainToInstance } from 'class-transformer'
-import { getDefaultTransactionOptions, processAndAddToActivities } from '../utils'
+import { getDefaultTransactionOptions } from '../utils'
 
 export async function createNativeToken(
     maximumSupply: number,
@@ -37,7 +37,7 @@ export async function createNativeToken(
         )
         addPersistedAsset(persistedAsset)
 
-        await processAndAddToActivities(transaction, wallet)
+        
 
         showAppNotification({
             type: 'success',

@@ -1,8 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
     import {
-        FoundryActivity,
-        getActivityTileTitle,
+        ActivityFoundry,
         getAssetFromPersistedAssets,
         getFormattedAmountFromActivity,
         IPersistedAsset,
@@ -10,11 +9,11 @@
     } from '@core/wallet'
     import { AssetIcon, ActivityTileContent } from '@ui'
 
-    export let activity: FoundryActivity
+    export let activity: ActivityFoundry
 
     let asset: IPersistedAsset | undefined
-    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId))
-    $: action = localize(getActivityTileTitle(activity))
+    $: $selectedWalletAssets, (asset = getAssetFromPersistedAssets(activity.assetId()))
+    $: action = localize(activity.tileTitle())
     $: amount = getFormattedAmountFromActivity(activity)
     $: formattedAsset = {
         text: amount,

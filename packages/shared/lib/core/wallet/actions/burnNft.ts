@@ -6,7 +6,6 @@ import { getSelectedWallet, updateSelectedWallet } from '@core/wallet/stores/sel
 import { localize } from '@core/i18n'
 import { updateNftInAllWalletNfts } from '@core/nfts'
 import { handleError } from '@core/error/handlers'
-import { processAndAddToActivities } from '../utils'
 
 // TODO(2.0) Fix all usages
 export async function burnNft(nftId: string): Promise<void> {
@@ -16,9 +15,6 @@ export async function burnNft(nftId: string): Promise<void> {
         const prepareBurnNftTransaction = await wallet?.prepareBurnNft(nftId)
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNftTransaction)
         const burnNftTransaction = await preparedTransaction?.send()
-
-        // Generate Activity
-        await processAndAddToActivities(burnNftTransaction, wallet)
 
         // Update NFT
         updateNftInAllWalletNfts(wallet.id, nftId, { isSpendable: false })

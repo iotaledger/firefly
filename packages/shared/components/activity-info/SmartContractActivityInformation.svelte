@@ -1,12 +1,12 @@
 <script lang="ts">
     import { KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { TransactionActivity } from '@core/wallet'
+    import { ActivityTransaction } from '@core/wallet'
     import { Layer2Metadata } from '@core/layer-2'
 
-    export let activity: TransactionActivity
+    export let activity: ActivityTransaction
 
-    $: detailsList = createDetailsList(activity.parsedLayer2Metadata)
+    $: detailsList = createDetailsList(activity.parsedLayer2Metadata())
 
     function createDetailsList(metadata: Layer2Metadata): { [key: string]: { data: string } } {
         return {

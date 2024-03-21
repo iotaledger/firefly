@@ -1,37 +1,15 @@
-import { NftOutput, OutputType, InclusionState } from '@iota/sdk/out/types'
+import { OutputType, InclusionState } from '@iota/sdk/out/types'
 import { ActivityAsyncStatus, ActivityDirection, ActivityAction, ActivityType, SubjectType } from '../../enums'
-import { IProcessedTransaction, IWalletState, IWrappedOutput, ProcessedTransaction } from '../../interfaces'
+import { IWalletState, IWrappedOutput, ProcessedTransaction } from '../../interfaces'
 import { Subject } from '../subject.type'
 import { Layer2Metadata, getLayer2NetworkFromAddress } from '@core/layer-2'
 import { isParticipationOutput } from '@contexts/governance'
-import { getActivityTypeFromOutput, getNftId, getNonRemainderBasicOutputsFromTransaction } from '../../utils'
-import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts' // TODO: Fix imports
+import { getActivityTypeFromOutput } from '../../utils'
 import * as Activities from './'
-import { localize } from 'shared/lib/core/i18n'
-import { truncateString } from 'shared/lib/core/utils'
-
-export type BaseActivity = {
-    id: string
-    outputId: string
-    transactionId: string
-    time: Date
-    inclusionState: InclusionState
-    isHidden?: boolean
-    containsValue: boolean
-    isAssetHidden: boolean // TODO: Is `isAssetHidden` even used?
-    direction: ActivityDirection
-    action: ActivityAction
-    isInternal: boolean
-    storageDeposit: number
-    giftedStorageDeposit: number
-    surplus?: number
-    subject: Subject | undefined
-    metadata?: string
-    tag?: string
-    asyncData?: AsyncData
-    destinationNetwork?: string
-    parsedLayer2Metadata?: Partial<Layer2Metadata>
-}
+import { localize } from '@core/i18n'
+import { truncateString } from '@core/utils'
+import { getSelectedWallet, isActivityHiddenForWalletId, removeActivityFromHiddenActivities } from '../../stores'
+import { handleError } from '@core/error/handlers'
 
 export type AsyncData = {
     asyncStatus: ActivityAsyncStatus
@@ -79,17 +57,13 @@ export interface ActivityBaseOptions {
     parsedLayer2Metadata?: Partial<Layer2Metadata> | null
 }
 
-abstract class ActivityUtils {
-    abstract tileTitle(): string
-
-    abstract subjectLocale(): string
-}
-
-export class ActivityBase implements ActivityUtils {
+export abstract class ActivityBase  {
     constructor(private options: ActivityBaseOptions) {}
 
+    abstract type(): ActivityType;
+
     isIncoming(): boolean {
-        return [ActivityDirection.Incoming, ActivityDirection.Incoming].includes(this.direction())
+        return [ActivityDirection.Incoming, ActivityDirection.SelfTransaction].includes(this.direction())
     }
 
     subject(): Subject | undefined {
@@ -105,7 +79,7 @@ export class ActivityBase implements ActivityUtils {
             const network = getLayer2NetworkFromAddress(subject.address)
             return { ...subject, address: network ?? subject.address }
         } else {
-            return this.subject()
+            return subject
         }
     }
 
@@ -125,7 +99,7 @@ export class ActivityBase implements ActivityUtils {
     }
 
     id() {
-        return this.id
+        return this.options.id
     }
 
     inclusionState() {
@@ -192,8 +166,8 @@ export class ActivityBase implements ActivityUtils {
         return this.options.tag
     }
 
-    asyncData(): AsyncData | undefined {
-        return this.options.asyncData
+    asyncData(): AsyncData {
+        return this.options.asyncData as AsyncData
     }
 
     destinationNetwork() {
@@ -228,6 +202,34 @@ export class ActivityBase implements ActivityUtils {
         return ''
     }
 
+    async claim(): Promise<void> {
+        const wallet = getSelectedWallet()
+        try {
+            if (isActivityHiddenForWalletId(wallet.id, this.id())) {
+                removeActivityFromHiddenActivities(wallet.id, this.id())
+                if(this.options.asyncData){
+                    this.options.asyncData.isRejected = false;
+                }
+            }
+
+            if(this.options.asyncData){
+                this.options.asyncData.isClaiming = true;
+            }
+
+            const result = await wallet.claimOutputs([this.outputId()])
+            const transactionId = result.transactionId
+
+            if(this.options.asyncData){
+                this.options.asyncData.claimingTransactionId = transactionId 
+            }
+        } catch (err) {
+            handleError(err)
+            if(this.options.asyncData){
+                this.options.asyncData.isClaiming = false;
+            }
+        }
+    }
+
     /**
      * Generate a group of activies given a processed transaction
      * @returns ActivityBase[]
@@ -236,7 +238,7 @@ export class ActivityBase implements ActivityUtils {
         wallet: IWalletState,
         processedTransaction: ProcessedTransaction
     ): Promise<Array<ActivityBase>> {
-        if (processedTransaction.wrappedInputs?.length > 0) {
+        if (processedTransaction.transactionInputs?.length > 0) {
             return this.generateActivitiesFromProcessedTransactionsWithInputs(wallet, processedTransaction)
         } else {
             return this.generateActivitiesFromProcessedTransactionsWithoutInputs(wallet, processedTransaction)
@@ -249,7 +251,7 @@ export class ActivityBase implements ActivityUtils {
     ): Promise<Array<ActivityBase>> {
         let activities: Array<ActivityBase> = []
 
-        const { wrappedInputs, outputs } = processedTransaction
+        const { transactionInputs: wrappedInputs, outputs } = processedTransaction
 
         const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
         if (containsFoundryActivity) {
@@ -333,7 +335,7 @@ export class ActivityBase implements ActivityUtils {
         return activities
     }
 
-    static isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
+    static isConsolidation(output: IWrappedOutput, processedTransaction: ProcessedTransaction): boolean {
         const allBasicInputs = processedTransaction.wrappedInputs.every(
             (input) => input.output.type === OutputType.Basic
         )

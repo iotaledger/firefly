@@ -1,4 +1,4 @@
-import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import { ProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
@@ -8,11 +8,10 @@ import { IWalletState } from '@core/wallet/interfaces'
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
     wallet: IWalletState
-): Promise<IProcessedTransaction> {
+): Promise<ProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
-
-    const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
+    const outputs = regularTransactionEssence.outputs;
 
     const direction = getDirectionFromOutgoingTransaction(outputs, wallet.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
@@ -26,35 +25,13 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
-    return {
-        outputs: outputs,
+    return new ProcessedTransaction(
+        outputs,
         transactionId,
         direction,
-        time: new Date(Number(transaction.timestamp)),
-        inclusionState: transaction.inclusionState,
-        wrappedInputs: <IWrappedOutput[]>inputs,
-        utxoInputs,
-    }
-}
-
-function convertTransactionsOutputTypesToWrappedOutputs(
-    transactionId: string,
-    outputTypes: Output[]
-): IWrappedOutput[] {
-    return outputTypes.map((outputType, index) =>
-        convertTransactionOutputTypeToWrappedOutput(transactionId, index, outputType)
+        new Date(Number(transaction.timestamp)),
+        transaction.inclusionState,
+        <IWrappedOutput[]>inputs,
+        transaction.blockId
     )
-}
-
-function convertTransactionOutputTypeToWrappedOutput(
-    transactionId: string,
-    index: number,
-    outputType: Output
-): IWrappedOutput {
-    const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
-    return {
-        outputId,
-        output: outputType,
-        remainder: index === 0 || outputType.type !== OutputType.Basic ? false : true, // when sending prepared output in the resulting transactions outputs array it will always be first output(index = 0)
-    }
 }

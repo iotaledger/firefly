@@ -1,6 +1,6 @@
-import { NewTransactionDetails, NftActivity, Subject, BaseActivity, VestingActivity } from '@core/wallet/types'
+import { NewTransactionDetails, Subject, ActivityBase } from '@core/wallet/types'
 import { NewTransactionType } from '@core/wallet/stores'
-import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
+import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { TimePeriod } from '@core/utils'
 import { getAddressFromSubject } from '../getAddressFromSubject'
 import {
@@ -37,6 +37,7 @@ export function getInitialExpirationDate(
     }
 }
 
+// TODO: Fix this.
 export function rebuildActivity(
     transactionDetails: NewTransactionDetails,
     recipient: Subject,
@@ -44,35 +45,35 @@ export function rebuildActivity(
     visibleSurplus: number,
     isInternal: boolean,
     layer2Parameters: ILayer2Parameters
-): Partial<BaseActivity | VestingActivity | NftActivity> {
-    return {
-        ...(transactionDetails as unknown as BaseActivity | VestingActivity | NftActivity),
-        id: undefined,
-        outputId: undefined,
-        transactionId: undefined,
-        time: undefined,
-        asyncData: undefined,
-        assetId:
-            transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails?.asset?.id : undefined,
-        storageDeposit,
-        subject: recipient,
-        isInternal,
-        containsValue: true,
-        isAssetHidden: false,
-        giftedStorageDeposit: 0,
-        surplus: visibleSurplus,
-        type: ActivityType.Transaction,
-        direction: ActivityDirection.Outgoing,
-        inclusionState: InclusionState.Pending,
-        action: ActivityAction.Send,
-        destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
-        ...(layer2Parameters?.networkAddress && {
-            parsedLayer2Metadata: {
-                ethereumAddress: getAddressFromSubject(recipient),
-                targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
-                contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
-                gasBudget: (layer2Parameters?.gasBudget ?? 0).toString(),
-            },
-        }),
-    }
+): Partial<ActivityBase> {
+    // return {
+    //     ...(transactionDetails as unknown as BaseActivity | VestingActivity | NftActivity),
+    //     id: undefined,
+    //     outputId: undefined,
+    //     transactionId: undefined,
+    //     time: undefined,
+    //     asyncData: undefined,
+    //     assetId:
+    //         transactionDetails.type === NewTransactionType.TokenTransfer ? transactionDetails?.asset?.id : undefined,
+    //     storageDeposit,
+    //     subject: recipient,
+    //     isInternal,
+    //     containsValue: true,
+    //     isAssetHidden: false,
+    //     giftedStorageDeposit: 0,
+    //     surplus: visibleSurplus,
+    //     type: ActivityType.Transaction,
+    //     direction: ActivityDirection.Outgoing,
+    //     inclusionState: InclusionState.Pending,
+    //     action: ActivityAction.Send,
+    //     destinationNetwork: getDestinationNetworkFromAddress(layer2Parameters?.networkAddress),
+    //     ...(layer2Parameters?.networkAddress && {
+    //         parsedLayer2Metadata: {
+    //             ethereumAddress: getAddressFromSubject(recipient),
+    //             targetContract: TARGET_CONTRACTS[ACCOUNTS_CONTRACT],
+    //             contractFunction: CONTRACT_FUNCTIONS[TRANSFER_ALLOWANCE],
+    //             gasBudget: (layer2Parameters?.gasBudget ?? 0).toString(),
+    //         },
+    //     }),
+    // }
 }

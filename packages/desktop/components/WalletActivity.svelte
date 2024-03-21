@@ -20,7 +20,7 @@
 
     $: if (searchActive && inputElement) inputElement.focus()
     $: searchValue = searchActive ? searchValue.toLowerCase() : ''
-    $: setAsyncStatusOfWalletActivities($time)
+    //$: setAsyncStatusOfWalletActivities($time)
     $: if (searchActive && $selectedWalletActivities) {
         debounce(() => {
             $activitySearchTerm = searchValue
@@ -28,13 +28,13 @@
     }
 
     $: activityListWithTitles = $queriedActivities.map((activity, index) => {
-        const currentTitle = getActivityGroupTitleForTimestamp(activity.time)
+        const currentTitle = getActivityGroupTitleForTimestamp(activity.time())
         const previousTitle = $queriedActivities[index - 1]
-            ? getActivityGroupTitleForTimestamp($queriedActivities[index - 1]?.time)
+            ? getActivityGroupTitleForTimestamp($queriedActivities[index - 1]?.time())
             : undefined
         if (currentTitle !== previousTitle || index === 0) {
             const amount = $queriedActivities.filter(
-                (activity) => getActivityGroupTitleForTimestamp(activity.time) === currentTitle
+                (activity) => getActivityGroupTitleForTimestamp(activity.time()) === currentTitle
             ).length
 
             return { title: currentTitle, amount, activity }

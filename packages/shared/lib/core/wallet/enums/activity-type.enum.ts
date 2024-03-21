@@ -1,6 +1,6 @@
 export enum ActivityType {
     Account = 'account',
-    Transaction = 'transaction',
+    Transaction = 'transaction', // TODO: Maybe rename it back to "Basic"
     Foundry = 'foundry',
     Consolidation = 'consolidation',
     Governance = 'governance',

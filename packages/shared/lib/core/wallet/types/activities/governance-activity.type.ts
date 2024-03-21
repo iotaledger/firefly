@@ -4,17 +4,9 @@ import {
     IParticipation,
     IWalletState,
 } from '@core/wallet/interfaces'
-import { ActivityBase, ActivityBaseOptions, BaseActivity, SpecialStatus } from './base-activity.type'
+import { ActivityBase, ActivityBaseOptions, SpecialStatus } from './base-activity.type'
 import { BasicOutput, InclusionState } from '@iota/sdk/out/types'
 import { activityOutputContainsValue, getGovernanceInfo, getMetadataFromOutput, getStorageDepositFromOutput, getTagFromOutput } from '../../utils'
-
-export type GovernanceActivity = BaseActivity & {
-    type: ActivityType.Governance
-    governanceAction: GovernanceAction
-    votingPower: number
-    participation?: IParticipation
-    votingPowerDifference?: number
-}
 
 interface ActivityGovernanceOptions extends ActivityBaseOptions {
     governanceAction: GovernanceAction
@@ -26,6 +18,22 @@ interface ActivityGovernanceOptions extends ActivityBaseOptions {
 export class ActivityGovernance extends ActivityBase {
     constructor(private governanceOptions: ActivityGovernanceOptions) {
         super(governanceOptions)
+    }
+
+    type(){
+        return ActivityType.Governance
+    }
+
+    votingPowerDifference(){
+        return this.governanceOptions.votingPowerDifference
+    }
+
+    votingPower(){
+        return this.governanceOptions.votingPower
+    }
+
+    participation(){
+        return this.governanceOptions.participation
     }
 
     governanceAction(){
@@ -56,7 +64,7 @@ export class ActivityGovernance extends ActivityBase {
         wallet: IWalletState,
         { action, processedTransaction, wrappedOutput }: ActivityGenerationParameters
     ): Promise<ActivityGovernance> {
-        const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction
+        const { transactionId, direction, time, inclusionState, transactionInputs: wrappedInputs } = processedTransaction
 
         const specialStatus = SpecialStatus.Unclaimed // TODO: Fix this
         const giftedStorageDeposit = 0

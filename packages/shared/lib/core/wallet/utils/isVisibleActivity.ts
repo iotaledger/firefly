@@ -1,8 +1,7 @@
 import { get } from 'svelte/store'
-import { Activity } from '../types'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
-import { ActivityAsyncStatus, InclusionState, ActivityType } from '../enums'
+import { ActivityAsyncStatus, ActivityType } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
 import { convertToRawAmount } from '.'
@@ -15,11 +14,13 @@ import {
     NumberFilterOption,
     StatusFilterOption,
 } from '@core/utils/enums/filters'
+import { ActivityBase } from '../types'
+import { InclusionState } from '@iota/sdk/out/types'
 
-// TODO: Refactor this an clean up.
+// TODO: Refactor: Move this to ActivityBase.
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
-export function isVisibleActivity(activity: Activity): boolean {
+export function isVisibleActivity(activity: ActivityBase): boolean {
     const filter = get(activityFilter)
 
     if (!isVisibleWithActiveValuelessFilter(activity, filter)) {
@@ -55,57 +56,57 @@ export function isVisibleActivity(activity: Activity): boolean {
     return true
 }
 
-function isVisibleWithActiveHiddenFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveHiddenFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        activity.isAssetHidden
+        activity.isAssetHidden()
     ) {
         return false
     }
     return true
 }
 
-function isVisibleWithActiveValuelessFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveValuelessFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (
         (!filter.showValueless.active || filter.showValueless.selected === BooleanFilterOption.No) &&
         (!filter.showHidden.active || filter.showHidden.selected === BooleanFilterOption.No) &&
-        !activity.containsValue
+        !activity.containsValue()
     ) {
         return false
     }
     return true
 }
 
-function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveRejectedFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (
         (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.asyncData?.isRejected
+        activity.asyncData()?.isRejected
     ) {
         return false
     }
     return true
 }
 
-function isVisibleWithActiveAssetFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveAssetFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.asset.active && filter.asset.selected) {
-        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) {
+        if (activity.type() !== ActivityType.Transaction && activity.type() !== ActivityType.Foundry) {
             return false
         }
-        if (filter.asset.selected && activity.assetId !== filter.asset.selected) {
+        if (filter.asset.selected && activity.assetId() !== filter.asset.selected) {
             return false
         }
     }
     return true
 }
 
-function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveAmountFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.amount.active) {
-        if (activity.type !== ActivityType.Transaction && activity.type !== ActivityType.Foundry) return false
-        const asset = getAssetFromPersistedAssets(activity.assetId)
+        if (activity.type() !== ActivityType.Transaction && activity.type() !== ActivityType.Foundry) return false
+        const asset = getAssetFromPersistedAssets(activity.assetId())
         if (!asset?.metadata) {
             return false
         }
-        const activityAmount = Big(activity.rawAmount)
+        const activityAmount = Big(activity.rawAmount())
 
         if (
             filter.amount.selected === NumberFilterOption.Equal &&
@@ -169,29 +170,29 @@ function isVisibleWithActiveAmountFilter(activity: Activity, filter: ActivityFil
     return true
 }
 
-function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveDateFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.date.active) {
         if (filter.date.selected === DateFilterOption.Equals && filter.date.subunit.type === 'single') {
             const filterDate = new Date(filter.date.subunit.value)
-            if (!datesOnSameDay(activity.time, filterDate)) {
+            if (!datesOnSameDay(activity.time(), filterDate)) {
                 return false
             }
         }
         if (filter.date.selected === DateFilterOption.Before && filter.date.subunit.type === 'single') {
             const filterDate = new Date(filter.date.subunit.value)
-            if (!dateIsBeforeOtherDate(activity.time, filterDate)) {
+            if (!dateIsBeforeOtherDate(activity.time(), filterDate)) {
                 return false
             }
         }
         if (filter.date.selected === DateFilterOption.After && filter.date.subunit.type === 'single') {
             const filterDate = new Date(filter.date.subunit.value)
-            if (!dateIsAfterOtherDate(activity.time, filterDate)) {
+            if (!dateIsAfterOtherDate(activity.time(), filterDate)) {
                 return false
             }
         }
         if (filter.date.selected === DateFilterOption.AfterOrEquals && filter.date.subunit.type === 'single') {
             const filterDate = new Date(filter.date.subunit.value)
-            if (!(dateIsAfterOtherDate(activity.time, filterDate) || datesOnSameDay(activity.time, filterDate))) {
+            if (!(dateIsAfterOtherDate(activity.time(), filterDate) || datesOnSameDay(activity.time(), filterDate))) {
                 return false
             }
         }
@@ -200,10 +201,10 @@ function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilte
             const endFilterDate = new Date(filter.date.subunit.end)
 
             const isInRange =
-                dateIsAfterOtherDate(activity.time, startFilterDate) &&
-                dateIsBeforeOtherDate(activity.time, endFilterDate)
+                dateIsAfterOtherDate(activity.time(), startFilterDate) &&
+                dateIsBeforeOtherDate(activity.time(), endFilterDate)
             const isOnBoundries =
-                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+                datesOnSameDay(activity.time(), startFilterDate) || datesOnSameDay(activity.time(), endFilterDate)
             if (!(isInRange || isOnBoundries)) {
                 return false
             }
@@ -224,10 +225,10 @@ function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilte
             }
 
             const isInRange =
-                dateIsAfterOtherDate(activity.time, startFilterDate) &&
-                dateIsBeforeOtherDate(activity.time, endFilterDate)
+                dateIsAfterOtherDate(activity.time(), startFilterDate) &&
+                dateIsBeforeOtherDate(activity.time(), endFilterDate)
             const isOnBoundries =
-                datesOnSameDay(activity.time, startFilterDate) || datesOnSameDay(activity.time, endFilterDate)
+                datesOnSameDay(activity.time(), startFilterDate) || datesOnSameDay(activity.time(), endFilterDate)
             if (!(isInRange || isOnBoundries)) {
                 return false
             }
@@ -236,31 +237,31 @@ function isVisibleWithActiveDateFilter(activity: Activity, filter: ActivityFilte
     return true
 }
 
-function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveStatusFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.status.active && filter.status.selected) {
         if (
             filter.status.selected === StatusFilterOption.Confirmed &&
-            activity.inclusionState === InclusionState.Confirmed
+            activity.inclusionState() === InclusionState.Confirmed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Pending &&
-            activity.inclusionState === InclusionState.Pending
+            activity.inclusionState() === InclusionState.Pending
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Claimed &&
-            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
-            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Claimed
+            (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Nft) &&
+            activity.asyncData()?.asyncStatus === ActivityAsyncStatus.Claimed
         ) {
             return true
         }
         if (
             filter.status.selected === StatusFilterOption.Unclaimed &&
-            (activity.type === ActivityType.Transaction || activity.type === ActivityType.Nft) &&
-            activity.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
+            (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Nft) &&
+            activity.asyncData()?.asyncStatus === ActivityAsyncStatus.Unclaimed
         ) {
             return true
         }
@@ -269,30 +270,30 @@ function isVisibleWithActiveStatusFilter(activity: Activity, filter: ActivityFil
     return true
 }
 
-function isVisibleWithActiveTypeFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveTypeFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.type.active && filter.type.selected) {
-        if (filter.type.selected !== activity.type) {
+        if (filter.type.selected !== activity.type()) {
             return false
         }
     }
     return true
 }
 
-function isVisibleWithActiveDirectionFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveDirectionFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.direction.active && filter.direction.selected) {
-        if (filter.direction.selected !== activity.direction) {
+        if (filter.direction.selected !== activity.direction()) {
             return false
         }
     }
     return true
 }
 
-function isVisibleWithInternalExternalFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithInternalExternalFilter(activity: ActivityBase, filter: ActivityFilter): boolean {
     if (filter.internalExternal.active && filter.internalExternal.selected) {
-        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal) {
+        if (filter.internalExternal.selected === InternalExternalOption.Internal && !activity.isInternal()) {
             return false
         }
-        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal) {
+        if (filter.internalExternal.selected === InternalExternalOption.External && activity.isInternal()) {
             return false
         }
     }

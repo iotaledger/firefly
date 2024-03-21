@@ -5,7 +5,6 @@ import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { Converter } from '@core/utils'
 import { handleError } from '@core/error/handlers'
-import { processAndAddToActivities } from '../utils'
 import { getSelectedWallet, updateSelectedWallet } from '../stores'
 
 export async function burnAsset(assetId: string, rawAmount: string): Promise<void> {
@@ -19,8 +18,6 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
         )
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNativeTokenTransaction)
         const burnTokenTransaction = await preparedTransaction?.send()
-
-        await processAndAddToActivities(burnTokenTransaction, account)
 
         showAppNotification({
             type: 'success',

@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet'
+    import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet'
     import ActivityInclusionStatusPill from './ActivityInclusionStatusPill.svelte'
+    import { InclusionState } from '@iota/sdk/out/types'
 
     export let isInternal: boolean
     export let type: ActivityType
