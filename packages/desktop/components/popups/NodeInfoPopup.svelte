@@ -2,12 +2,12 @@
     import { onMount } from 'svelte'
     import { Button, Checkbox, CopyableBox, Spinner, Text } from '@ui'
     import { formatNumber, localize } from '@core/i18n'
-    import { INode } from '@core/network'
+    import { INode, INodeInfoResponse } from '@core/network'
     import { closePopup } from '@auxiliary/popup'
     import { showAppNotification } from '@auxiliary/notification'
     import { resolveObjectPath, setClipboard } from '@core/utils'
-    import { INodeInfo } from '@iota/sdk/out/types'
-    import { getNodeInfo } from '@core/wallet/actions'
+    import { NetworkMetricsResponse } from '@iota/sdk/out/types'
+    import { getNetworkMetrics, getNodeInfo } from '@core/wallet'
 
     enum NodeInfoTab {
         General = 'general',
@@ -31,17 +31,12 @@
             // features: { localeKey: 'general.features', nodeInfoPath: 'features' },
         },
         [NodeInfoTab.Metrics]: {
-            blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'metrics.blocksPerSecond' },
+            blocksPerSecond: { localeKey: 'metrics.blocksPerSecond', nodeInfoPath: 'blocksPerSecond' },
             confirmedBlocksPerSecond: {
                 localeKey: 'metrics.confirmedBlocksPerSecond',
-                nodeInfoPath: 'metrics.confirmedBlocksPerSecond',
+                nodeInfoPath: 'confirmedBlocksPerSecond',
             },
-            confirmationRate: { localeKey: 'metrics.confirmationRate', nodeInfoPath: 'metrics.confirmationRate' },
-            // latestSlot: { localeKey: 'metrics.latestSlot', nodeInfoPath: 'status.latestSlot.index' },
-            // confirmedSlot: {
-            //     localeKey: 'metrics.confirmedSlot',
-            //     nodeInfoPath: 'status.confirmedSlot.index',
-            // },
+            confirmationRate: { localeKey: 'metrics.confirmationRate', nodeInfoPath: 'confirmationRate' },
         },
         [NodeInfoTab.Protocol]: {
             network: { localeKey: 'protocol.network', nodeInfoPath: 'protocolParameters[0].parameters.networkName' },
@@ -69,7 +64,8 @@
         },
     }
 
-    let nodeInfo: INodeInfo
+    let nodeInfo: INodeInfoResponse
+    let networkMetrics: NetworkMetricsResponse
 
     function processNodeInfoMapTab(
         _nodeInfoTab: NodeInfoTab,
@@ -80,20 +76,20 @@
         let nodeInfoValue = ''
         if (key === 'url') {
             nodeInfoValue = node.url
+        } else if (_nodeInfoTab === NodeInfoTab.Metrics) {
+            nodeInfoValue = resolveObjectPath(networkMetrics, nodeInfoTabObject[key]?.nodeInfoPath, null)
+            const numberValue = Number(nodeInfoValue)
+            if (numberValue >= 0) {
+                if (key === 'confirmationRate') {
+                    nodeInfoValue = `${formatNumber(Math.min(numberValue, 100), 1, 1)}%`
+                } else {
+                    nodeInfoValue = formatNumber(numberValue, 1, 1)
+                }
+            } else {
+                nodeInfoValue = ''
+            }
         } else {
             nodeInfoValue = resolveObjectPath(nodeInfo, nodeInfoTabObject[key]?.nodeInfoPath, null)
-            if (key === 'confirmationRate' || key === 'blocksPerSecond' || key === 'confirmedBlocksPerSecond') {
-                const numberValue = Number(nodeInfoValue)
-                if (numberValue >= 0) {
-                    if (key === 'confirmationRate') {
-                        nodeInfoValue = `${formatNumber(Math.min(numberValue, 100), 1, 1)}%`
-                    } else {
-                        nodeInfoValue = formatNumber(numberValue, 1, 1)
-                    }
-                } else {
-                    nodeInfoValue = ''
-                }
-            }
         }
 
         return {
@@ -116,6 +112,17 @@
         getNodeInfo(node.url, node.auth)
             .then((nodeInfoResponse) => {
                 nodeInfo = nodeInfoResponse.nodeInfo
+            })
+            .catch((err) => {
+                closePopup()
+                showAppNotification({
+                    type: 'error',
+                    message: localize(err.error),
+                })
+            })
+        getNetworkMetrics()
+            .then((networkMetricsResponse) => {
+                networkMetrics = networkMetricsResponse
             })
             .catch((err) => {
                 closePopup()
