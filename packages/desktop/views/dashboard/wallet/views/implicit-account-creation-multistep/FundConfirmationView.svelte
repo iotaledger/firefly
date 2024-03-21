@@ -71,7 +71,7 @@
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
-    let seconds: number = 1000
+    let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
 
