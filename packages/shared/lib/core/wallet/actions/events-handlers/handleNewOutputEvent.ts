@@ -17,7 +17,6 @@ import {
     preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
-    DEFAULT_SYNC_OPTIONS,
 } from '@core/wallet'
 import {
     AccountAddress,
@@ -47,19 +46,9 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
     const output = outputData.output
     const isNftOutput = output.type === OutputType.Nft
-    let _isDelegationOutput = isDelegationOutput(outputData)
+    const _isDelegationOutput = isDelegationOutput(outputData)
 
     const address = outputData.address ? AddressConverter.addressToBech32(outputData.address) : undefined
-
-    // TODO: Improve this logic when the delegation output is received -> https://github.com/iotaledger/firefly/issues/8187
-    if (wallet?.hasDelegationTransactionInProgress) {
-        const prevDelegationOutputs = wallet.walletUnspentOutputs?.filter(isDelegationOutput) || []
-        await wallet.sync(DEFAULT_SYNC_OPTIONS)
-        const postDelegationOutputs = (await wallet.unspentOutputs())?.filter(isDelegationOutput) || []
-        if (prevDelegationOutputs.length < postDelegationOutputs.length) {
-            _isDelegationOutput = true
-        }
-    }
 
     // The basic outputs of the faucet dont have an address
     const isBasicOutput = output.type === OutputType.Basic

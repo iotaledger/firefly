@@ -14,6 +14,8 @@ import {
     isStrongholdUnlocked,
     refreshWalletAssetsForActiveProfile,
     setSelectedWallet,
+    setStrongholdPasswordClearInterval,
+    startBackgroundSync,
 } from '@core/wallet/actions'
 import { get } from 'svelte/store'
 import { CHECK_PREVIOUS_WALLETS_ARE_DESTROYED_TIMEOUT } from '../../constants'
@@ -34,7 +36,7 @@ import { logout } from './logout'
 import { subscribeToWalletApiEventsForActiveProfile } from './subscribeToWalletApiEventsForActiveProfile'
 import { checkAndUpdateActiveProfileNetwork } from './checkAndUpdateActiveProfileNetwork'
 import { checkAndRemoveProfilePicture } from './checkAndRemoveProfilePicture'
-import { setStrongholdPasswordClearInterval, startBackgroundSync } from '@core/wallet/actions'
+import { DEFAULT_SYNC_OPTIONS } from '@core/wallet/constants'
 
 export async function login(loginOptions?: ILoginOptions): Promise<void> {
     const loginRouter = get(routerManager).getRouterForAppContext(AppContext.Login)
@@ -94,11 +96,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
             incrementLoginProgress()
             subscribeToWalletApiEventsForActiveProfile()
 
-            await startBackgroundSync({
-                syncIncomingTransactions: true,
-                syncImplicitAccounts: true,
-                account: { nftOutputs: true },
-            })
+            await startBackgroundSync(DEFAULT_SYNC_OPTIONS)
 
             // Step 8: finish login
             incrementLoginProgress()
