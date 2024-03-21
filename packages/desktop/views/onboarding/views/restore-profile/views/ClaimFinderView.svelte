@@ -38,7 +38,7 @@
     import { AnimationEnum } from '@auxiliary/animation'
     import { setStrongholdPassword, unsubscribeFromWalletApiEvents } from '@core/wallet/actions'
     import { ManaBox } from '@components'
-    import { Output, PreparedTransaction } from '@iota/sdk/out/types'
+    import { Output } from '@iota/sdk/out/types'
     import { get } from 'svelte/store'
     import {
         NewTokenTransactionDetails,
@@ -48,6 +48,7 @@
         getOutputParameters,
         selectedWallet,
     } from '@core/wallet'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -57,7 +58,7 @@
 
     let hasTriedClaimingRewards = false
 
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     $: isClaimingRewards = shimmerClaimingAccounts.some(
@@ -220,10 +221,14 @@
                 console.error(err)
             }
         }
-        preparedTransaction = await get(selectedWallet).prepareSendOutputs(
-            preparedOutputs,
-            getDefaultTransactionOptions()
-        )
+        try {
+            transactionInfo.preparedTransaction = await get(selectedWallet).prepareSendOutputs(
+                preparedOutputs,
+                getDefaultTransactionOptions()
+            )
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
     }
 
     onMount(async () => {
@@ -288,7 +293,7 @@
                 {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
             </Button>
         {/if}
-        <ManaBox {preparedTransaction} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana />
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />

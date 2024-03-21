@@ -1,12 +1,18 @@
 <script lang="ts">
     import { ManaBox } from '@components'
     import { localize } from '@core/i18n'
-    import { DEFAULT_MANA, DEFAULT_SECONDS_PER_SLOT, getManaBalance, getPassiveManaForOutput } from '@core/network'
+    import {
+        DEFAULT_MANA,
+        ITransactionInfoToCalculateManaCost,
+        getManaBalance,
+        getPassiveManaForOutput,
+        DEFAULT_SECONDS_PER_SLOT,
+    } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
-    import { OutputData, PreparedTransaction } from '@iota/sdk/out/types'
+    import { OutputData } from '@iota/sdk/out/types'
     import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
     import { onDestroy, onMount } from 'svelte'
 
@@ -15,7 +21,7 @@
     const LOW_MANA_GENERATION_SECONDS = 10 * SECONDS_PER_MINUTE
 
     let walletAddress: string = ''
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
     let isLowManaGeneration = false
 
@@ -69,11 +75,12 @@
     async function prepareTransaction(outputId: string): Promise<void> {
         if (!outputId) return
         try {
-            preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
             seconds = 0 // If we don't get an error, it's because we can follow on to the next step
         } catch (error) {
             console.error(error.message)
             if (error.message?.includes('slots remaining until enough mana')) {
+                transactionInfo.preparedTransactionError
                 const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
@@ -144,7 +151,7 @@
                     keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                     valueText={formattedManaBalance}
                 />
-                <ManaBox {preparedTransaction} bind:hasEnoughMana showCountdown={false} />
+                <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={false} />
             </div>
         </div>
         {#if isLowManaGeneration}

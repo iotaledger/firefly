@@ -20,4 +20,5 @@ export const DEFAULT_SYNC_OPTIONS: SyncOptions = {
     },
     syncIncomingTransactions: true,
     syncNativeTokenFoundries: true,
+    syncImplicitAccounts: true,
 }
