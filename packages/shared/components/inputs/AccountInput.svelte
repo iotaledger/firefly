@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { validateBech32Address } from '@core/utils/crypto'
     import { getNetworkHrp } from '@core/profile/actions'
-    import { AddressType } from '@iota/sdk/out/types'
+    import { AccountAddress, AddressType } from '@iota/sdk/out/types'
 
     export let account: string = ''
     export let error: string = ''
@@ -14,7 +14,7 @@
 
     const accountOptions: IOption[] =
         $selectedWallet?.balances?.accounts.map((hexAccountId: string, index: number) => {
-            const accountAddress = AddressConverter.addressToBech32(hexAccountId)
+            const accountAddress = AddressConverter.addressToBech32(new AccountAddress(hexAccountId))
             return { key: 'Account ' + (index + 1), value: accountAddress }
         }) ?? []
 

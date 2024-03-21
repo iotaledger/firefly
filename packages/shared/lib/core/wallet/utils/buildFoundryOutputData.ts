@@ -10,8 +10,8 @@ import {
 import { Converter } from '@core/utils'
 import { IIrc30Metadata } from '../interfaces'
 import { getSerialNumberFromAccountAddress } from './outputs'
-import { api } from '@core/api'
 import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
+import { AddressConverter } from './AddressConverter'
 
 export async function buildFoundryOutputData(
     totalSupply: number,
@@ -19,7 +19,7 @@ export async function buildFoundryOutputData(
     metadata: IIrc30Metadata,
     accountAddress: string
 ): Promise<FoundryOutputBuilderParams> {
-    const accountId = api.bech32ToHex(accountAddress)
+    const accountId = AddressConverter.parseBech32Address(accountAddress)
     const unlockConditions: UnlockCondition[] = [
         new ImmutableAccountAddressUnlockCondition(new AccountAddress(accountId)),
     ]
