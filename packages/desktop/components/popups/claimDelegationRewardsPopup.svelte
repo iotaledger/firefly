@@ -4,11 +4,11 @@
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
     import { getDefaultTransactionOptions, selectedWallet, selectedWalletId } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { PreparedTransaction } from '@iota/sdk/out/types'
     import { ManaBox } from '@components'
     import { onMount } from 'svelte'
     import { handleError } from '@core/error/handlers'
     import { updateActiveWallet } from '@core/profile'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let delegationId: string
@@ -16,7 +16,7 @@
     export let isBusy = false
 
     let hasEnoughMana = false
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
 
     async function onConfirmClick(): Promise<void> {
         isBusy = true
@@ -43,10 +43,14 @@
     }
 
     async function prepareBurnDelegationOutput(): Promise<void> {
-        preparedTransaction = await $selectedWallet?.prepareBurn(
-            { delegations: [delegationId] },
-            getDefaultTransactionOptions()
-        )
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareBurn(
+                { delegations: [delegationId] },
+                getDefaultTransactionOptions()
+            )
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
     }
 
     function onCancelClick(): void {
@@ -70,7 +74,7 @@
     <div class="flex flex-col space-y-4">
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.delegationId')} valueText={delegationId} />
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.rewards')} valueText={rewards.toString()} />
-        <ManaBox {preparedTransaction} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>

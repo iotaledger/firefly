@@ -9,8 +9,8 @@
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
-    import { PreparedTransaction } from '@iota/sdk/out/types'
     import { ManaBox } from '@components'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -23,7 +23,7 @@
     const tabs: Tab[] = [Tab.Transaction, Tab.Nft, Tab.Metadata]
     let activeTab = Tab.Transaction
 
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
     let storageDeposit: number = 0
     let totalStorageDeposit: number = 0
@@ -60,7 +60,11 @@
         const preparedOutput = await client.buildNftOutput(outputData)
         storageDeposit = Number(preparedOutput.amount) ?? 0
         totalStorageDeposit = storageDeposit * quantity
-        preparedTransaction = await prepareMintNft(irc27Metadata, Number(quantity))
+        try {
+            transactionInfo.preparedTransaction = await prepareMintNft(irc27Metadata, Number(quantity))
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
     }
 
     async function mintAction(): Promise<void> {
@@ -109,7 +113,7 @@
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
                     {#if quantity > 1}
-                        <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
+                        <KeyValueBox keyText={localize('general.quantity')} valueText={quantity.toString()} />
                         <KeyValueBox
                             keyText={localize('general.storageDepositPerNft')}
                             valueText={formatTokenAmountPrecise(storageDeposit, getBaseToken())}
@@ -139,7 +143,7 @@
                         isPreText
                     />
                 {/if}
-                <ManaBox {preparedTransaction} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana />
             </activity-details>
         </nft-details>
     </div>

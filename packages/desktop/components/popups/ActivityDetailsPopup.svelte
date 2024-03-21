@@ -2,7 +2,7 @@
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { openUrlInBrowser } from '@core/app'
     import { localize } from '@core/i18n'
-    import { ExplorerEndpoint } from '@core/network'
+    import { ExplorerEndpoint, ITransactionInfoToCalculateManaCost } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
     import { setClipboard, truncateString } from '@core/utils'
@@ -15,7 +15,6 @@
         selectedWallet,
         selectedWalletActivities,
     } from '@core/wallet'
-    import { PreparedTransaction } from '@iota/sdk/out/types'
     import {
         ActivityInformation,
         AccountActivityDetails,
@@ -38,7 +37,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     $: activity = $selectedWalletActivities?.find((_activity) => _activity.id === activityId)
@@ -76,7 +75,11 @@
     }
 
     async function prepareClaimOutput(): Promise<void> {
-        preparedTransaction = await $selectedWallet?.prepareClaimOutputs([activity.outputId])
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareClaimOutputs([activity.outputId])
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
     }
 
     function onRejectClick(): void {
@@ -153,7 +156,7 @@
         </activity-details>
         {#if !isTimelocked && isActivityIncomingAndUnclaimed}
             <div class="flex flex-col space-y-4">
-                <ManaBox {preparedTransaction} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana />
                 <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
                     <Button
                         outline

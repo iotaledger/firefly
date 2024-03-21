@@ -11,10 +11,11 @@
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { AccountAddress, CreateDelegationParams, PreparedTransaction } from '@iota/sdk/out/types'
+    import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
     import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
     import { ManaBox } from '@components'
     import { onMount } from 'svelte'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = $selectedWallet?.balances?.baseCoin?.available?.toString()
@@ -24,7 +25,7 @@
     let amount: string
     let confirmDisabled = false
 
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
@@ -77,7 +78,14 @@
             delegatedAmount: rawAmount,
             validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
         }
-        preparedTransaction = await $selectedWallet?.prepareCreateDelegation(params, getDefaultTransactionOptions())
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
+                params,
+                getDefaultTransactionOptions()
+            )
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
     }
 
     function onCancelClick(): void {
@@ -113,7 +121,7 @@
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
-            <ManaBox {preparedTransaction} bind:hasEnoughMana />
+            <ManaBox {transactionInfo} bind:hasEnoughMana />
         </div>
         <div class="flex flex-row flex-nowrap w-full space-x-4">
             <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>

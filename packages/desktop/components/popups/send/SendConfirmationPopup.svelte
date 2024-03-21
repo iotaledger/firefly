@@ -17,7 +17,7 @@
         validateSendConfirmation,
     } from '@core/wallet/utils'
     import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
-    import { CommonOutput, Output, PreparedTransaction } from '@iota/sdk/out/types'
+    import { CommonOutput, Output } from '@iota/sdk/out/types'
     import {
         ActivityInformation,
         BasicActivityDetails,
@@ -34,6 +34,7 @@
     import { ManaBox } from '@components'
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let isSendAndClosePopup: boolean = false
@@ -60,7 +61,7 @@
     let minimumStorageDeposit = 0
     let visibleSurplus: number | undefined = undefined
 
-    let preparedTransaction: PreparedTransaction
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     let isPreparingOutput = false
@@ -88,10 +89,15 @@
     onMount(async () => {
         await updateStorageDeposit()
 
-        preparedTransaction = await $selectedWallet?.prepareSendOutputs(
-            [preparedOutput],
-            getDefaultTransactionOptions()
-        )
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareSendOutputs(
+                [preparedOutput],
+                getDefaultTransactionOptions()
+            )
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
+
         if (isSendAndClosePopup || expirationDate) {
             // Needed after 'return from stronghold' to SHOW to correct expiration date before output is sent
             initialExpirationDate = getInitialExpirationDate(
@@ -122,7 +128,7 @@
             const transactionDetails = get(newTransactionDetails)
             const outputParams = await getOutputParameters(transactionDetails)
             preparedOutput = await prepareOutput($selectedWallet?.id, outputParams, getDefaultTransactionOptions())
-            preparedTransaction = await $selectedWallet?.prepareSendOutputs(
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareSendOutputs(
                 [preparedOutput],
                 getDefaultTransactionOptions()
             )
@@ -141,6 +147,7 @@
             }
         } catch (err) {
             handleError(err)
+            transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false
         }
@@ -258,7 +265,7 @@
                     />
                 </KeyValueBox>
             {/if}
-            <ManaBox {preparedTransaction} bind:hasEnoughMana />
+            <ManaBox {transactionInfo} bind:hasEnoughMana />
         {/if}
     </div>
     {#if surplus}

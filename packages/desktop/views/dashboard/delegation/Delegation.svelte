@@ -13,6 +13,7 @@
         ButtonSize,
         CopyableBox,
         BoxedIconWithText,
+        PingingBadge,
     } from '@ui'
     import { activeProfile } from '@core/profile'
     import {
@@ -33,6 +34,7 @@
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
+    let committeeAddresses: string[] = []
 
     enum Header {
         DelegationId = 'delegationId',
@@ -54,7 +56,7 @@
 
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
-    $: delegationOutputs?.length > 0 && setCurrentEpoch()
+    $: delegationOutputs?.length > 0 && setCurrentEpochAndCommittee()
     $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
@@ -90,9 +92,10 @@
         delegationData = await Promise.all(result)
     }
 
-    async function setCurrentEpoch(): Promise<void> {
-        const committee = await getCommitteeInfo()
-        currentEpoch = committee.epoch
+    async function setCurrentEpochAndCommittee(): Promise<void> {
+        const committeeResponse = await getCommitteeInfo()
+        currentEpoch = committeeResponse?.epoch
+        committeeAddresses = committeeResponse?.committee?.map((committee) => committee.address) || []
     }
 
     function handleDelegate(): void {
@@ -110,7 +113,7 @@
         })
     }
 
-    function renderCellValue(value: any, header: string): { component: any; props: any; text?: string } {
+    function renderCellValue(value: any, header: string): { component: any; props: any; text?: string; slot?: any } {
         switch (header as Header) {
             case Header.DelegationId:
                 return {
@@ -164,7 +167,19 @@
                         isCopyable: true,
                         clearBoxPadding: true,
                         clearBackground: true,
-                        classes: 'text-gray-600 dark:text-white text-xs font-medium',
+                        classes: 'flex flex-row items-center text-gray-600 dark:text-white text-xs font-medium gap-2',
+                    },
+                    slot: {
+                        component: PingingBadge,
+                        props: {
+                            classes: 'relative',
+                            innerColor: committeeAddresses?.some((address) => address === value)
+                                ? 'green-600'
+                                : 'red-500',
+                            outerColor: committeeAddresses?.some((address) => address === value)
+                                ? 'green-400'
+                                : 'red-300',
+                        },
                     },
                     text: truncateString(value, 5, 5, 3),
                 }
@@ -246,6 +261,12 @@
                                             <td class="text-start flex-1">
                                                 {#if renderCell.text}
                                                     <svelte:component this={renderCell.component} {...renderCell.props}>
+                                                        {#if renderCell.slot}
+                                                            <svelte:component
+                                                                this={renderCell.slot.component}
+                                                                {...renderCell.slot.props}
+                                                            />
+                                                        {/if}
                                                         {renderCell.text}
                                                     </svelte:component>
                                                 {:else}
