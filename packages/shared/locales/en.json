@@ -698,6 +698,7 @@
             },
             "details": {
                 "balance": "Balance",
+                "blockIssuanceCredits": "Block Issuance Credit (BIC)",
                 "address": "Address",
                 "staked": "Staked",
                 "mana": "Mana",
@@ -1723,9 +1724,9 @@
         "coinType":"Coin type",
         "custom": "Custom",
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
-        "manaCost": "Mana cost",
+        "manaCost": "Estimated Mana cost",
         "availableMana": "Available mana",
-        "insufficientMana": "Insufficient mana {availableMana}",
+        "insufficientMana": "Insufficient {availableMana}.",
         "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
     },
     "filters":{

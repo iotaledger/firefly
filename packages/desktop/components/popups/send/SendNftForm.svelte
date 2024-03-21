@@ -79,20 +79,16 @@
         }
     })
 
-    async function buildPreparedOutput(): Promise<{ preparedOutput: Output; allotmentManaCost: number }> {
+    async function buildPreparedOutput(): Promise<{ preparedOutput: Output }> {
         try {
             const details = get(newTransactionDetails)
             isPreparingOutput = true
 
             const outputParams = await getOutputParameters(details)
             const preparedOutput = await prepareOutput($selectedWallet.id, outputParams, getDefaultTransactionOptions())
-            const prepareTx = await $selectedWallet.prepareSendOutputs([preparedOutput], getDefaultTransactionOptions())
-            const allotmentManaCost =
-                prepareTx?._preparedData?.transaction?.allotments?.reduce((acc, { mana }) => acc + mana, 0) || 0
 
             return {
                 preparedOutput,
-                allotmentManaCost,
             }
         } catch (err) {
             handleError(err)

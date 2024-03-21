@@ -17,7 +17,7 @@ import {
     InclusionState,
     WalletApiEventHandler,
 } from '@core/wallet'
-import { getActiveWalletById, updateActiveWallet } from '@core/profile'
+import { getWalletById, updateActiveWallet } from '@core/profile'
 
 export function handleTransactionInclusionEvent(walletId: string): WalletApiEventHandler {
     return (error: Error, rawEvent: WalletEvent) => {
@@ -37,7 +37,7 @@ export function handleTransactionInclusionEventInternal(
     updateActivityByTransactionId(walletId, transactionId, { inclusionState })
 
     if (inclusionState === InclusionState.Confirmed) {
-        const wallet = getActiveWalletById(walletId)
+        const wallet = getWalletById(walletId)
         if (wallet) {
             const hasMainAccountOutput = wallet.accountOutputs.find(
                 (output) => (output.output as AccountOutput).accountId === wallet.mainAccountId
@@ -83,7 +83,7 @@ function handleGovernanceTransactionInclusionEvent(
         // TODO: move this
         closePopup(true)
 
-        const wallet = getActiveWalletById(walletId)
+        const wallet = getWalletById(walletId)
         if (!wallet) {
             return
         }
@@ -108,7 +108,7 @@ function handleConsolidationTransactionInclusionEvent(walletId: string, inclusio
         // With output consolidation we wait for the transaction confirmation to improve the UX of the vesting tab
         // we should think about making this consistent in the future
         updateActiveWallet(walletId, { isTransferring: false })
-        const wallet = getActiveWalletById(walletId)
+        const wallet = getWalletById(walletId)
         if (!wallet) {
             return
         }
