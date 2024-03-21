@@ -1,6 +1,6 @@
 import { ActivityDirection } from '@core/wallet/enums'
 import { IWrappedOutput } from './wrapped-output.interface'
-import { CommonOutput, NftOutput, OutputType, UTXOInput, InclusionState } from '@iota/sdk/out/types'
+import { CommonOutput, NftOutput, OutputType, UTXOInput, InclusionState, OutputWithMetadata, OutputData } from '@iota/sdk/out/types'
 import {
     getNativeTokenFromOutput,
     getNftId,
@@ -16,6 +16,7 @@ import { SenderInfo } from '../types'
 export interface IProcessedTransaction {
     outputs: IWrappedOutput[]
     transactionId: string
+    blockId: string
     direction: ActivityDirection
     time: Date
     inclusionState: InclusionState
@@ -31,19 +32,19 @@ export interface IClaimData {
 
 export class ProcessedTransaction {
     constructor(
-        public outputs: IWrappedOutput[],
+        public outputs: OutputData[],
         public transactionId: string,
         public direction: ActivityDirection,
         public time: Date,
         public inclusionState: InclusionState,
-        public utxoInputs: UTXOInput[],
-        public wrappedInputs: IWrappedOutput[],
-        public claimingData?: IClaimData
+        public transactionInputs: OutputWithMetadata[],
+        public blockId: string,
+        public claimingData?: IClaimData,
     ) {}
 
     getSendingInformation(wallet: IWalletState, output: CommonOutput): SenderInfo {
         const recipient = getRecipientFromOutput(output)
-        const sender = this.wrappedInputs?.length
+        const sender = this.transactionInputs?.length
             ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs)) // TODO: Fix this
             : getSenderFromTransaction(this.direction === ActivityDirection.Incoming, wallet.depositAddress, output)
 
@@ -56,17 +57,17 @@ export class ProcessedTransaction {
         }
     }
 
-    getBurnedNftInputs(): IWrappedOutput[] {
-        return this.wrappedInputs.filter((wrappedInput) => {
+    getBurnedNftInputs(): OutputWithMetadata[] {
+        return this.transactionInputs.filter((wrappedInput) => {
             const input = wrappedInput.output
             if (input.type === OutputType.Nft) {
                 const nftInput = input as NftOutput
-                const nftId = getNftId(nftInput.nftId, wrappedInput.outputId)
+                const nftId = getNftId(nftInput.nftId, wrappedInput.metadata.blockId)
 
                 const isIncludedInOutputs = this.outputs.some((output) => {
                     if (output.output.type === OutputType.Nft) {
                         const nftOutput = output.output as NftOutput
-                        return getNftId(nftOutput.nftId, output.outputId) === nftId
+                        return getNftId(nftOutput.nftId, output.metadata.outputId) === nftId
                     } else {
                         return false
                     }
@@ -87,7 +88,7 @@ export class ProcessedTransaction {
         }
 
         const inputNativeTokens: { [key: string]: number } = ProcessedTransaction.getAllNativeTokensFromOutputs(
-            this.wrappedInputs
+            this.transactionInputs
         )
         // No burned native tokens if input doesn't contain any native tokens
         if (Object.keys(inputNativeTokens).length === 0) {
@@ -116,7 +117,7 @@ export class ProcessedTransaction {
         }
     }
 
-    static getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: string]: number } {
+    static getAllNativeTokensFromOutputs(outputs: OutputWithMetadata[]): { [key: string]: number } {
         const nativeTokens: { [key: string]: number } = {}
         for (const output of outputs) {
             if (output.output.type === OutputType.Foundry || output.output.type === OutputType.Basic) {

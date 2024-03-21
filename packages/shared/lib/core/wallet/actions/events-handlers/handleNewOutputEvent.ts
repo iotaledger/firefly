@@ -5,9 +5,7 @@ import {
     ActivityType,
     IWrappedOutput,
     WalletApiEventHandler,
-    addActivitiesToWalletActivitiesInAllWalletActivities,
     addPersistedAsset,
-    generateActivities,
     AddressConverter,
     getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
@@ -18,6 +16,8 @@ import {
     syncBalance,
     validateWalletApiEvent,
     DEFAULT_SYNC_OPTIONS,
+    ActivityBase,
+    selectedWalletActivities,
 } from '@core/wallet'
 import {
     AccountAddress,
@@ -75,18 +75,18 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, walletUnspentOutputs })
 
-        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
+        const processedTransaction = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
 
-        const activities = await generateActivities(processedOutput, wallet)
+        const activities = await ActivityBase.generateActivitiesFromProcessedTransaction(wallet, processedTransaction)
         for (const activity of activities) {
-            if (activity.type === ActivityType.Transaction || activity.type === ActivityType.Foundry) {
-                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
+            if (activity.type() === ActivityType.Transaction || activity.type() === ActivityType.Foundry) {
+                selectedWalletActivities.update((activities) => [...activities, activity])
+                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId())
                 if (asset) {
                     addPersistedAsset(asset)
                 }
             }
         }
-        addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
     }
     if (isImplicitAccountOutput(outputData)) {
         await syncBalance(wallet.id, true)

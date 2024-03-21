@@ -1,11 +1,10 @@
 import { OutputType, InclusionState } from '@iota/sdk/out/types'
 import { ActivityAsyncStatus, ActivityDirection, ActivityAction, ActivityType, SubjectType } from '../../enums'
-import { IProcessedTransaction, IWalletState, IWrappedOutput, ProcessedTransaction } from '../../interfaces'
+import { IWalletState, IWrappedOutput, ProcessedTransaction } from '../../interfaces'
 import { Subject } from '../subject.type'
 import { Layer2Metadata, getLayer2NetworkFromAddress } from '@core/layer-2'
 import { isParticipationOutput } from '@contexts/governance'
 import { getActivityTypeFromOutput } from '../../utils'
-import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput } from '@core/nfts' // TODO: Fix imports
 import * as Activities from './'
 import { localize } from '@core/i18n'
 import { truncateString } from '@core/utils'
@@ -64,7 +63,7 @@ export abstract class ActivityBase  {
     abstract type(): ActivityType;
 
     isIncoming(): boolean {
-        return [ActivityDirection.Incoming, ActivityDirection.Incoming].includes(this.direction())
+        return [ActivityDirection.Incoming, ActivityDirection.SelfTransaction].includes(this.direction())
     }
 
     subject(): Subject | undefined {
@@ -239,7 +238,7 @@ export abstract class ActivityBase  {
         wallet: IWalletState,
         processedTransaction: ProcessedTransaction
     ): Promise<Array<ActivityBase>> {
-        if (processedTransaction.wrappedInputs?.length > 0) {
+        if (processedTransaction.transactionInputs?.length > 0) {
             return this.generateActivitiesFromProcessedTransactionsWithInputs(wallet, processedTransaction)
         } else {
             return this.generateActivitiesFromProcessedTransactionsWithoutInputs(wallet, processedTransaction)
@@ -252,7 +251,7 @@ export abstract class ActivityBase  {
     ): Promise<Array<ActivityBase>> {
         let activities: Array<ActivityBase> = []
 
-        const { wrappedInputs, outputs } = processedTransaction
+        const { transactionInputs: wrappedInputs, outputs } = processedTransaction
 
         const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
         if (containsFoundryActivity) {
@@ -336,7 +335,7 @@ export abstract class ActivityBase  {
         return activities
     }
 
-    static isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
+    static isConsolidation(output: IWrappedOutput, processedTransaction: ProcessedTransaction): boolean {
         const allBasicInputs = processedTransaction.wrappedInputs.every(
             (input) => input.output.type === OutputType.Basic
         )

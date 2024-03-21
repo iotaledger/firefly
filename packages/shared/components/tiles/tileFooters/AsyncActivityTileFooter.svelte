@@ -16,11 +16,14 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
 
     export let activity: ActivityBase
-
+    
+    
     $: shouldShowActions =
         (activity.direction() === ActivityDirection.Incoming ||
             activity.direction() === ActivityDirection.SelfTransaction) &&
         activity.asyncData()?.asyncStatus === ActivityAsyncStatus.Unclaimed
+    
+    $: console.log(activity, shouldShowActions)
 
     $: timeDiff = getTimeDiff(activity)
     $: hasExpirationTime = !!activity.asyncData()?.expirationDate
@@ -50,7 +53,7 @@
     }
 
     function getTimeDiff(activity: ActivityBase): string {
-        if (activity.asyncData) {
+        if (activity.asyncData()) {
             const { asyncStatus, expirationDate, timelockDate } = activity.asyncData()
             if (asyncStatus === ActivityAsyncStatus.Timelocked) {
                 return getTimeDifference(timelockDate, $time)
@@ -84,7 +87,7 @@
         {#if shouldShowActions}
             <Button
                 onClick={onRejectClick}
-                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                disabled={activity.asyncData()?.isClaiming || activity.asyncData()?.isRejected}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}
                 outline
@@ -93,15 +96,15 @@
             </Button>
             <Button
                 onClick={onClaimClick}
-                disabled={activity.asyncData?.isClaiming}
-                isBusy={activity.asyncData?.isClaiming}
+                disabled={activity.asyncData()?.isClaiming}
+                isBusy={activity.asyncData()?.isClaiming}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}
             >
                 {localize('actions.claim')}
             </Button>
         {:else}
-            <ActivityAsyncStatusPill asyncStatus={activity.asyncData?.asyncStatus} />
+            <ActivityAsyncStatusPill asyncStatus={activity.asyncData()?.asyncStatus} />
         {/if}
     </svelte:fragment>
 </TileFooter>

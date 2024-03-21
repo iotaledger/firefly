@@ -83,6 +83,6 @@ function searchClaimedTransactionInIncomingAsyncTransactions(
     transaction: ProcessedTransaction
 ): ProcessedTransaction {
     return allAsyncTransaction.find((candidate) =>
-        transaction.utxoInputs?.some((input) => input?.transactionId === candidate?.transactionId)
+        transaction.transactionInputs?.some((input) => input.metadata?.blockId === candidate.blockId)
     )
 }

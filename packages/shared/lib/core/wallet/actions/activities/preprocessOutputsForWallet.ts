@@ -1,35 +1,37 @@
-import type { OutputData, OutputResponse, TransactionWithMetadata } from '@iota/sdk/out/types'
-
+import type { OutputData, OutputWithMetadata, TransactionWithMetadata } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
-
 import { preprocessGroupedOutputs } from '../../utils/outputs'
 import { ProcessedTransaction } from '../../interfaces'
 
+// TODO: Fix this.
 export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<ProcessedTransaction[]> {
     const outputs = await wallet.outputs()
+    console.log(outputs)
 
     const transactions = await wallet.transactions()
-    const transactionMap = getTransactionsMapFromList(transactions)
-    const incomingTransactions = getMapFromList(await wallet.incomingTransactions())
+    const transactionsSet = txsListToSet(transactions)
+    const incomingTransactions = txsListToMap(await wallet.incomingTransactions())
 
-    const groupedOutputs: { [key: string]: OutputData[] } = {}
+    const groupedOutputs = new Map<string, OutputData[]>();
     for (const output of outputs) {
-        const transactionId = output?.metadata?.transactionId
+        const blockId = output?.metadata?.blockId 
 
-        const hasTransaction = !!transactionMap[transactionId]
-        if (!hasTransaction) {
-            if (!groupedOutputs[transactionId]) {
-                groupedOutputs[transactionId] = []
+        const hasBlock = transactionsSet.has(blockId);
+        if (!hasBlock) {
+            if (!groupedOutputs.has(blockId)) {
+                groupedOutputs.set(blockId, [])
             }
-            groupedOutputs[transactionId].push(output)
+            groupedOutputs.get(blockId)?.push(output)
         }
     }
 
     const processedTransactions: ProcessedTransaction[] = []
-    for (const transactionId of Object.keys(groupedOutputs)) {
+    for (const blockId of Object.keys(groupedOutputs)) {
         try {
-            const inputs: OutputResponse[] = incomingTransactions[transactionId]?.inputs ?? []
-            const processedTransaction = preprocessGroupedOutputs(groupedOutputs[transactionId], inputs, wallet)
+            const transaction = incomingTransactions.get(blockId)
+            const inputs: OutputWithMetadata[] = transaction?.inputs ?? []
+            const outputs = groupedOutputs.get(blockId) ?? [];
+            const processedTransaction = preprocessGroupedOutputs(outputs, inputs, wallet)
 
             processedTransactions.push(processedTransaction)
         } catch (err) {
@@ -39,20 +41,20 @@ export async function preprocessOutputsForWallet(wallet: IWalletState): Promise<
     return processedTransactions
 }
 
-function getTransactionsMapFromList(transactions: TransactionWithMetadata[]): { [transactionId: string]: boolean } {
-    const transactionMap = {}
+function txsListToSet(transactions: TransactionWithMetadata[]): Set<string> {
+    const blocksSet = new Set<string>();
     for (const transaction of transactions) {
-        transactionMap[transaction?.transactionId] = true
+        if(transaction.blockId){
+            blocksSet.add(transaction.blockId);
+        }
     }
-    return transactionMap
+    return blocksSet
 }
 
-function getMapFromList(transactions: TransactionWithMetadata[]): {
-    [transactionId: string]: TransactionWithMetadata
-} {
-    const transactionMap = {}
+function txsListToMap(transactions: TransactionWithMetadata[]): Map<string, TransactionWithMetadata> {
+    const transactionMap = new Map();
     for (const transaction of transactions) {
-        transactionMap[transaction.transactionId] = transaction
+        transactionMap.set(transaction.blockId, transaction);
     }
     return transactionMap
 }

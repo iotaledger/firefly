@@ -30,7 +30,7 @@ export class ActivityConsolidation extends ActivityBase {
         wallet: IWalletState,
         { action, processedTransaction, wrappedOutput }: ActivityGenerationParameters
     ) {
-        const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction
+        const { transactionId, direction, claimingData, time, inclusionState, transactionInputs: wrappedInputs } = processedTransaction
 
         const specialStatus = SpecialStatus.Unclaimed // TODO: Fix this
         const isHidden = false

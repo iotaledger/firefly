@@ -64,7 +64,7 @@ export class ActivityGovernance extends ActivityBase {
         wallet: IWalletState,
         { action, processedTransaction, wrappedOutput }: ActivityGenerationParameters
     ): Promise<ActivityGovernance> {
-        const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction
+        const { transactionId, direction, time, inclusionState, transactionInputs: wrappedInputs } = processedTransaction
 
         const specialStatus = SpecialStatus.Unclaimed // TODO: Fix this
         const giftedStorageDeposit = 0

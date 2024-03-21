@@ -17,9 +17,11 @@ export const activitySearchTerm: Writable<string> = writable('')
 export const queriedActivities: Readable<ActivityBase[]> = derived(
     [selectedWalletActivities, activitySearchTerm, activityFilter],
     ([$selectedWalletActivities, $activitySearchTerm]) => {
+        console.log($selectedWalletActivities)
         // TODO: Refactor this an clean up.
         let activityList = $selectedWalletActivities.filter((_activity) => {
             const containsAssets = _activity.type() === ActivityType.Transaction || _activity.type() === ActivityType.Foundry
+            console.log(_activity.isHidden(), containsAssets)
             if (!_activity.isHidden() && !containsAssets) {
                 return true
             }
@@ -29,10 +31,14 @@ export const queriedActivities: Readable<ActivityBase[]> = derived(
                     ? getAssetFromPersistedAssets(_activity.assetId())
                     : undefined
             const hasValidAsset = asset?.metadata && isValidIrc30Token(asset.metadata)
-            return !_activity.isHidden && hasValidAsset
+            return !_activity.isHidden() && hasValidAsset
         })
 
+        console.log(activityList)
+
         activityList = activityList.filter((activity) => isVisibleActivity(activity))
+
+        console.log(activityList)
 
         if ($activitySearchTerm) {
             activityList = activityList.filter((activity) => {
@@ -91,4 +97,17 @@ function getFieldsToSearchFromActivity(activity: ActivityBase): string[] {
     }
 
     return fieldsToSearch
+}
+
+
+export function updateActivityById(id: string, updater: (activity: ActivityBase) => void){
+    selectedWalletActivities.update((activities) => {
+        let activity = activities.find((activity) => { activity.id() === id });
+
+        if(activity){
+            updater(activity)
+        }
+
+        return activities
+    })
 }

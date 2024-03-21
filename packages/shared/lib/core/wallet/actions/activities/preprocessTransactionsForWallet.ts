@@ -4,6 +4,7 @@ import { ProcessedTransaction } from '../../interfaces/processed-transaction.int
 
 export async function preprocessTransactionsForWallet(wallet: IWalletState): Promise<ProcessedTransaction[]> {
     const transactions = await wallet.transactions()
+    console.log(transactions)
 
     const processedTransactions: ProcessedTransaction[] = []
 

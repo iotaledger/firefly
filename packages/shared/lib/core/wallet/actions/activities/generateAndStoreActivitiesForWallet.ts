@@ -19,12 +19,11 @@ export async function generateAndStoreActivitiesForWallet(wallet: IWalletState):
     const linkedProcessedTransactions = linkTransactionsWithClaimingTransactions(processedTransactions, wallet)
 
     // Step 3: generate activities from processed transactions
-    //const activities = await generateActivitiesFromProcessedTransactions(linkedProcessedTransactions, wallet)
     const activities = await Promise.all(linkedProcessedTransactions.flatMap((tx) => ActivityBase.generateActivitiesFromProcessedTransaction(wallet, tx)));
     selectedWalletActivities.set(activities.flat());
     console.log(activities)
 
     hideActivitiesForFoundries(wallet)
-    //await setOutgoingAsyncActivitiesToClaimed(wallet)
+    await setOutgoingAsyncActivitiesToClaimed(wallet)
     await loadAssetsForSelectedWallet()
 }

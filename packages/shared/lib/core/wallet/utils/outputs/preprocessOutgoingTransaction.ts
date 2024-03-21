@@ -11,8 +11,7 @@ export async function preprocessOutgoingTransaction(
 ): Promise<ProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
-
-    const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
+    const outputs = regularTransactionEssence.outputs;
 
     const direction = getDirectionFromOutgoingTransaction(outputs, wallet.depositAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
@@ -32,29 +31,7 @@ export async function preprocessOutgoingTransaction(
         direction,
         new Date(Number(transaction.timestamp)),
         transaction.inclusionState,
-        utxoInputs,
         <IWrappedOutput[]>inputs,
+        transaction.blockId
     )
-}
-
-function convertTransactionsOutputTypesToWrappedOutputs(
-    transactionId: string,
-    outputTypes: Output[]
-): IWrappedOutput[] {
-    return outputTypes.map((outputType, index) =>
-        convertTransactionOutputTypeToWrappedOutput(transactionId, index, outputType)
-    )
-}
-
-function convertTransactionOutputTypeToWrappedOutput(
-    transactionId: string,
-    index: number,
-    outputType: Output
-): IWrappedOutput {
-    const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
-    return {
-        outputId,
-        output: outputType,
-        remainder: index === 0 || outputType.type !== OutputType.Basic ? false : true, // when sending prepared output in the resulting transactions outputs array it will always be first output(index = 0)
-    }
 }

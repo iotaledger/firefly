@@ -1,4 +1,3 @@
-import { IWrappedOutput } from '@core/wallet/interfaces'
 import { AddressConverter } from '../AddressConverter'
 import {
     AddressUnlockCondition,
@@ -7,11 +6,12 @@ import {
     ExpirationUnlockCondition,
     UnlockConditionType,
     AccountAddress,
+    OutputWithMetadata,
 } from '@iota/sdk/out/types'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 
-export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
+export function getSenderAddressFromInputs(inputs: OutputWithMetadata[]): string | undefined {
     for (const input of inputs) {
         const { output, metadata } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions

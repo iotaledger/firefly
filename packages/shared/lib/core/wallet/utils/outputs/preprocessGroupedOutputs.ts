@@ -1,32 +1,20 @@
-import { CommonOutput, InclusionState, OutputData, OutputResponse, UTXOInput } from '@iota/sdk/out/types'
+import { CommonOutput, InclusionState, OutputData, OutputWithMetadata } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
 import { ActivityDirection } from '../../enums'
-import { ProcessedTransaction, IWrappedOutput } from '../../interfaces'
+import { ProcessedTransaction } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'
-import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
-// TODO(2.0) Fix all usages
 export function preprocessGroupedOutputs(
     outputDatas: OutputData[],
-    transactionInputs: OutputResponse[],
+    transactionInputs: OutputWithMetadata[],
     wallet: IWalletState
 ): ProcessedTransaction {
     const transactionMetadata = outputDatas[0]?.metadata
-    const wrappedInputs = convertTransactionOutputResponsesToWrappedOutputs(
-        transactionMetadata?.included.transactionId,
-        transactionInputs
-    )
-    const utxoInputs = getUtxoInputsFromWrappedInputs(wrappedInputs)
-    const direction = getDirectionForOutputs(outputDatas, wrappedInputs, wallet.depositAddress)
-    const wrappedOutputs = outputDatas.map((outputData) => ({
-        outputId: outputData.outputId,
-        remainder: outputData.remainder,
-        output: outputData.output,
-    }))
+    const direction = getDirectionForOutputs(outputDatas, transactionInputs, wallet.depositAddress)
 
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     let slotUnixTimestamp = 0
@@ -38,20 +26,19 @@ export function preprocessGroupedOutputs(
     }
 
     return new ProcessedTransaction(
-        wrappedOutputs,
+        outputDatas,
         transactionMetadata?.included.transactionId,
         direction,
         new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         InclusionState.Confirmed,
-        utxoInputs,
-        wrappedInputs,
+        transactionInputs,
+        transactionMetadata.blockId
     )
 }
 
-// TODO(2.0) Fix all usages
 function getDirectionForOutputs(
     outputs: OutputData[],
-    wrappedInputs: IWrappedOutput[],
+    transactionInputs: OutputWithMetadata[],
     depositAddress: string
 ): ActivityDirection {
     const nonRemainderOutputs = outputs.filter((output) => !output.remainder)
@@ -60,7 +47,7 @@ function getDirectionForOutputs(
     }
     const output = nonRemainderOutputs[0].output
     const recipientAddress = output ? getRecipientAddressFromOutput(output as CommonOutput) : undefined
-    const senderAddress = wrappedInputs ? getSenderAddressFromInputs(wrappedInputs) : ''
+    const senderAddress = transactionInputs ? getSenderAddressFromInputs(transactionInputs) : ''
     const isRecipientOneOfAccountAddresses = depositAddress === recipientAddress
     const isSenderOneOfAccountAddresses = depositAddress === senderAddress
     const isSelfTransaction = isRecipientOneOfAccountAddresses && isSenderOneOfAccountAddresses
@@ -73,28 +60,4 @@ function getDirectionForOutputs(
     } else {
         return ActivityDirection.Outgoing
     }
-}
-
-function convertTransactionOutputResponsesToWrappedOutputs(
-    transactionId: string,
-    outputResponses: OutputResponse[]
-): IWrappedOutput[] {
-    return outputResponses.map((outputResponse) =>
-        convertTransactionOutputResponseToWrappedOutput(transactionId, outputResponse)
-    )
-}
-
-// TODO: Fix this?
-function convertTransactionOutputResponseToWrappedOutput(
-    transactionId: string,
-    outputResponse: OutputResponse
-): IWrappedOutput {
-    const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, outputResponse.metadata.outputIndex)
-    return { outputId, output: outputResponse.output, metadata: outputResponse.metadata }
-}
-
-function getUtxoInputsFromWrappedInputs(wrappedInputs: IWrappedOutput[]): UTXOInput[] {
-    return (
-        wrappedInputs?.map((input) => new UTXOInput(input.metadata?.transactionId, input.metadata?.outputIndex)) ?? []
-    )
 }
