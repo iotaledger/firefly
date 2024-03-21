@@ -1200,8 +1200,7 @@
         },
         "allotMana": {
             "title": "Allot Mana",
-            "body": "Select the account and the amount of mana to allot.",
-            "availableMana": "Your available mana is:"
+            "body": "Select the account address to allot mana."
         },
         "manageVotingPower": {
             "title": "Manage voting power",

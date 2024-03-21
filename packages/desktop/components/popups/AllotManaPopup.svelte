@@ -1,22 +1,52 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { closePopup } from '@auxiliary/popup'
-    import { Button, Text, FontWeight, TextType, NumberInput, TextInput } from '@ui'
+    import { closePopup, updatePopupProps } from '@auxiliary/popup'
+    import { Button, Text, FontWeight, TextType, TextInput, AssetAmountInput } from '@ui'
     import { handleError } from '@core/error/handlers'
-    import { DEFAULT_MANA, getManaBalance } from '@core/network'
-    import { formatTokenAmountBestMatch, selectedWallet } from '@core/wallet'
+    import {
+        selectedWallet,
+        visibleSelectedWalletAssets,
+        convertToRawAmount,
+        getDefaultTransactionOptions,
+    } from '@core/wallet'
+    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
+    import { onMount } from 'svelte'
+    import { ManaBox } from '@components'
+
+    export let _onMount: (..._: any[]) => Promise<void> = async () => {}
+    export let rawAmount: string = getManaBalance($selectedWallet?.balances?.mana?.available)?.toString()
+    export let accountAddress: string
 
     let isBusy = false
-    let account: string = ''
     let error: string
-    let amountError: string
     let amount: string
-    const availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
-    $: availableManaFormatted = formatTokenAmountBestMatch(availableMana, DEFAULT_MANA, false)
+    let assetAmountInput: AssetAmountInput
+    let confirmDisabled = false
 
-    function onConfirmClick(): void {
-        error = null
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+    let hasEnoughMana = false
+
+    $: hasTransactionInProgress =
+        $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
+    $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
+    $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
+
+    function setConfirmDisabled(): void {
+        if (!amount || !accountAddress) {
+            confirmDisabled = true
+            return
+        }
+        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
+        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress || !hasEnoughMana
+    }
+
+    async function onSubmit(): Promise<void> {
         try {
+            await assetAmountInput?.validate(true)
+            if (!rawAmount || !accountAddress) return
+            updatePopupProps({ rawAmount, accountAddress })
+            await checkActiveProfileAuth(allotMana, { stronghold: true, ledger: false })
             closePopup()
         } catch (err) {
             error = err.error
@@ -26,9 +56,43 @@
         }
     }
 
+    async function preparedOutput() {
+        try {
+            const prepareOutput = await $selectedWallet.prepareOutput({
+                recipientAddress: $selectedWallet.depositAddress,
+                amount: '0',
+            })
+            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput])
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
+    }
+
+    async function allotMana(): Promise<void> {
+        try {
+            // const accountId = AddressConverter.parseBech32Address(accountAddress)
+            const prepareOutput = await $selectedWallet.prepareOutput({ recipientAddress: accountAddress, amount: '0' })
+            await $selectedWallet.sendOutputs([prepareOutput], {
+                ...getDefaultTransactionOptions(),
+                manaAllotments: { [$selectedWallet.mainAccountId]: Number(rawAmount) },
+            })
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
     function onBackClick(): void {
         closePopup()
     }
+
+    onMount(async () => {
+        try {
+            await _onMount()
+            await preparedOutput()
+        } catch (err) {
+            handleError(err.error)
+        }
+    })
 </script>
 
 <allot-mana-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
@@ -36,37 +100,35 @@
         {localize('popups.allotMana.title')}
     </Text>
     <div class="w-full flex-col space-y-4">
-        <Text type={TextType.p} classes="text-left">
-            {localize('popups.allotMana.body')}
-        </Text>
-        <available-mana-row class="flex flex-row space-x-2">
-            <Text type={TextType.p} classes="text-left">
-                {localize('popups.allotMana.availableMana')}
-            </Text>
-            <Text type={TextType.p} classes="text-left" fontWeight={FontWeight.semibold}>
-                {availableManaFormatted}
-            </Text>
-        </available-mana-row>
-        <NumberInput
-            error={amountError}
-            bind:value={amount}
-            placeholder={localize('filters.amount.label')}
-            label={localize('filters.amount.label')}
-            disabled={isBusy}
-            isInteger={false}
-        />
-        <TextInput
-            {error}
-            bind:value={account}
-            placeholder={localize('general.accountAddress')}
-            submitHandler={onConfirmClick}
-            disabled={isBusy}
-        />
+        <form id="allot-mana" on:submit|preventDefault={onSubmit} class="flex flex-col space-y-5">
+            <div class="space-y-4">
+                <AssetAmountInput
+                    bind:this={assetAmountInput}
+                    bind:rawAmount
+                    bind:amount
+                    {asset}
+                    containsSlider
+                    disableAssetSelection
+                    disabled={hasTransactionInProgress}
+                />
+                <TextInput
+                    {error}
+                    bind:value={accountAddress}
+                    placeholder={localize('general.accountAddress')}
+                    label={localize('popups.allotMana.body')}
+                    submitHandler={onSubmit}
+                    disabled={isBusy}
+                />
+                <ManaBox {transactionInfo} bind:hasEnoughMana />
+            </div>
+            <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
+                <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}
+                    >{localize('actions.back')}</Button
+                >
+                <Button classes="w-full" onClick={onSubmit} disabled={isBusy} {isBusy}>
+                    {localize('actions.send')}
+                </Button>
+            </popup-buttons>
+        </form>
     </div>
-    <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-        <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}>{localize('actions.back')}</Button>
-        <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy} {isBusy}>
-            {localize('actions.send')}
-        </Button>
-    </popup-buttons>
 </allot-mana-popup>
