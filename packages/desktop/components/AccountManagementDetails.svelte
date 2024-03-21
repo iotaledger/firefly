@@ -152,7 +152,10 @@
                         </wallet-actions-button>
                     {/if}
                     {#if isImplicitAccount}
-                        <Button size={ButtonSize.Small} onClick={handleActivateAccount}
+                        <Button
+                            size={ButtonSize.Small}
+                            onClick={handleActivateAccount}
+                            disabled={$selectedWallet?.balances?.totalWalletBic < 0}
                             >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
                         >
                     {/if}
