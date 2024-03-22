@@ -77,7 +77,7 @@
     }
 
     function getBalanceSummary(): { amount: number; details?: { [key: string]: { amount: number } } } {
-        const totalBalance = asset.id === MANA_ID ? asset?.balance?.available : asset?.balance?.total
+        const totalBalance = asset?.balance?.total
 
         const details = {
             available: { amount: asset?.balance?.available },
