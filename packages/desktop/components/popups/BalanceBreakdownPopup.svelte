@@ -52,16 +52,16 @@
     }
 
     function getManaBreakdown(): BalanceBreakdown {
-        const totalBalanceWithoutBic = getManaBalance(walletBalance?.mana?.total)
-        const availableBalance = getManaBalance(walletBalance?.mana?.available)
-        const totalBalance = totalBalanceWithoutBic + walletBalance.totalWalletBic
+        const totalPasiveMana = getManaBalance(walletBalance?.mana?.total)
+        const availablePasiveBalance = getManaBalance(walletBalance?.mana?.available)
+        const totalMana = totalPasiveMana + (walletBalance.totalWalletBic ?? 0)
 
         const subBreakdown = {
-            availableMana: { amount: availableBalance },
-            lockedMana: { amount: totalBalanceWithoutBic - availableBalance },
+            availableMana: { amount: availablePasiveBalance },
+            lockedMana: { amount: totalPasiveMana - availablePasiveBalance },
             bicMana: { amount: walletBalance.totalWalletBic },
         }
-        return { amount: totalBalance, subBreakdown, isBaseToken: false }
+        return { amount: totalMana, subBreakdown, isBaseToken: false }
     }
 
     async function getPendingBreakdown(): Promise<BalanceBreakdown> {
