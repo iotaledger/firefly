@@ -54,22 +54,17 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: balance = getAccountBalance(selectedOutput, isImplicitAccount)
+    $: balance = getImplicitAccountBalance(selectedOutput)
     $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
     $: primaryKey = $selectedWallet?.primaryKey
     $: listBlockKeysFeature(selectedOutput)
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
 
-    function getAccountBalance(outputData: OutputData, isImplicitAccount: boolean): number | undefined {
-        if (isImplicitAccount) {
-            return Number(outputData.output.amount)
-        } else {
-            // TODO: Calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080
-            return undefined
-        }
+    function getImplicitAccountBalance(outputData: OutputData): number | undefined {
+        return Number(outputData.output.amount)
     }
 
     function onExplorerClick(): void {
@@ -171,8 +166,7 @@
                     {/if}
                 </right-pane-title>
                 <div class="flex flex-row space-x-2 w-1/2">
-                    <!-- TODO: Remove this if when calculate the balance of an account output https://github.com/iotaledger/firefly/issues/8080  -->
-                    {#if !accountId}
+                    {#if isImplicitAccount}
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>

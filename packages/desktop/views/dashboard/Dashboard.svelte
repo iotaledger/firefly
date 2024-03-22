@@ -53,10 +53,14 @@
     $: $nftDownloadQueue, downloadNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedWalletId))
     $: addselectedWalletNftsToDownloadQueue($selectedWalletId)
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
 
     $: if (hasMainAccountNegativeBIC) {
         $dashboardRouter.goTo(DashboardRoute.AccountManagement)
+        showAppNotification({
+            type: 'error',
+            message: localize('views.accountManagement.bicNotification'),
+        })
     }
 
     $: if (features.analytics.dashboardRoute.enabled && $dashboardRoute)
