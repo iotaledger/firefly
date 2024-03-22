@@ -29,54 +29,56 @@ export async function generateActivitiesFromBasicOutputs(
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)
     for (const basicOutput of basicOutputs) {
         let activity: Activity
+        const isRemainder = basicOutput.remainder
 
-        const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
         const burnedNftInputIndex = burnedNftInputs.findIndex(
             (input) => input.output.amount === basicOutput.output.amount
         )
         const burnedNativeToken = burnedNftInputIndex < 0 ? getBurnedNativeTokens(processedTransaction) : undefined
 
-        if (isSelfTransaction && burnedNftInputIndex >= 0) {
-            const wrappedInput = burnedNftInputs[burnedNftInputIndex]
-            const nftInput = wrappedInput.output as NftOutput
-            activity = await generateSingleNftActivity(
-                wallet,
-                {
-                    action: ActivityAction.Burn,
-                    processedTransaction,
-                    wrappedOutput: basicOutput,
-                },
-                getNftId(nftInput.nftId, wrappedInput.outputId)
-            )
-            const nft = buildNftFromNftOutput(wrappedInput, wallet.depositAddress, false)
-            addOrUpdateNftInAllWalletNfts(wallet.id, nft)
+        if (!isRemainder) {
+            if (burnedNftInputIndex >= 0) {
+                const wrappedInput = burnedNftInputs[burnedNftInputIndex]
+                const nftInput = wrappedInput.output as NftOutput
+                activity = await generateSingleNftActivity(
+                    wallet,
+                    {
+                        action: ActivityAction.Burn,
+                        processedTransaction,
+                        wrappedOutput: basicOutput,
+                    },
+                    getNftId(nftInput.nftId, wrappedInput.outputId)
+                )
+                const nft = buildNftFromNftOutput(wrappedInput, wallet.depositAddress, false)
+                addOrUpdateNftInAllWalletNfts(wallet.id, nft)
 
-            burnedNftInputs.splice(burnedNftInputIndex, 1)
-        } else if (isSelfTransaction && burnedNativeToken) {
-            activity = await generateSingleBasicActivity(
-                wallet,
-                {
-                    action: ActivityAction.Burn,
+                burnedNftInputs.splice(burnedNftInputIndex, 1)
+            } else if (burnedNativeToken) {
+                activity = await generateSingleBasicActivity(
+                    wallet,
+                    {
+                        action: ActivityAction.Burn,
+                        processedTransaction,
+                        wrappedOutput: basicOutput,
+                    },
+                    burnedNativeToken.assetId,
+                    burnedNativeToken.amount
+                )
+            } else if (isConsolidation(basicOutput, processedTransaction)) {
+                activity = await generateSingleConsolidationActivity(wallet, {
+                    action: ActivityAction.Send,
                     processedTransaction,
                     wrappedOutput: basicOutput,
-                },
-                burnedNativeToken.assetId,
-                burnedNativeToken.amount
-            )
-        } else if (isSelfTransaction && isConsolidation(basicOutput, processedTransaction)) {
-            activity = await generateSingleConsolidationActivity(wallet, {
-                action: ActivityAction.Send,
-                processedTransaction,
-                wrappedOutput: basicOutput,
-            })
-        } else {
-            activity = await generateSingleBasicActivity(wallet, {
-                action: ActivityAction.Send,
-                processedTransaction,
-                wrappedOutput: basicOutput,
-            })
+                })
+            } else {
+                activity = await generateSingleBasicActivity(wallet, {
+                    action: ActivityAction.Send,
+                    processedTransaction,
+                    wrappedOutput: basicOutput,
+                })
+            }
+            activities.push(activity)
         }
-        activities.push(activity)
     }
     return activities
 }

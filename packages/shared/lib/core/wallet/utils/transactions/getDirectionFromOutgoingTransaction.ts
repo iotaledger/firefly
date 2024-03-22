@@ -1,15 +1,14 @@
-import { IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFromOutput'
 import { ActivityDirection } from '@core/wallet/enums'
-import { CommonOutput } from '@iota/sdk/out/types'
+import { CommonOutput, Output } from '@iota/sdk/out/types'
 
 export function getDirectionFromOutgoingTransaction(
-    wrappedOutputs: IWrappedOutput[],
+    outputs: Output[],
     walletDepositAddress: string
 ): ActivityDirection {
     // Check if any output is not destined for the wallet
-    const containsNonWalletRecipient = wrappedOutputs.some((outputData) => {
-        const outputRecipient = getRecipientAddressFromOutput(outputData.output as CommonOutput)
+    const containsNonWalletRecipient = outputs.some((output) => {
+        const outputRecipient = getRecipientAddressFromOutput(output as CommonOutput)
         return walletDepositAddress !== outputRecipient
     })
 
