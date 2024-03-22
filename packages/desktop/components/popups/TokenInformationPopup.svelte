@@ -23,12 +23,15 @@
         AssetActionsModal,
         MeatballMenuButton,
         Modal,
+        BalanceSummarySection,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { MANA_ID } from '@core/network'
 
     export let asset: IAsset
     export let activityId: string = undefined
+
+    const balanceSummary = getBalanceSummary()
 
     let modal: Modal
 
@@ -71,6 +74,16 @@
             id: PopupId.SendForm,
             overflow: true,
         })
+    }
+
+    function getBalanceSummary(): { amount: number; details?: { [key: string]: { amount: number } } } {
+        const totalBalance = asset.id === MANA_ID ? asset?.balance?.available : asset?.balance?.total
+
+        const details = {
+            available: { amount: asset?.balance?.available },
+            conditionallyLocked: { amount: asset?.balance?.total - asset?.balance?.available },
+        }
+        return { amount: totalBalance, details }
     }
 </script>
 
@@ -127,9 +140,16 @@
                         isCopyable
                     />
                 {/if}
+                <balance-wrapper class="flex flex-col bg-gray-50 dark:bg-gray-850 px-4 py-4 rounded-lg">
+                    <BalanceSummarySection
+                        titleKey="asset"
+                        subtitleKey="asset"
+                        amount={balanceSummary?.amount}
+                        subBreakdown={balanceSummary?.details}
+                    />
+                </balance-wrapper>
             </div>
         </div>
-
         <div class="flex flex-row flex-nowrap w-full space-x-4">
             {#if asset.verification?.status === NotVerifiedStatus.New}
                 <Button outline classes="w-full" onClick={onSkipClick}>
