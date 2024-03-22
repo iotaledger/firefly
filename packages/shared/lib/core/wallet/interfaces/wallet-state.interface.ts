@@ -13,6 +13,7 @@ export interface IWalletState extends IWallet, IPersistedWalletData {
     hasConsolidatingOutputsTransactionInProgress: boolean
     hasImplicitAccountCreationTransactionInProgress: boolean
     hasDelegationTransactionInProgress: boolean
+    hasDelegationRewardClaimTransactionInProgress: boolean
     votingPower: string
     walletOutputs: OutputData[]
     walletUnspentOutputs: OutputData[]
