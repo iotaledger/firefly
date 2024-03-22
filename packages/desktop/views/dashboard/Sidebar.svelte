@@ -76,7 +76,7 @@
         ...(features?.delegation?.enabled
             ? [
                   {
-                      icon: IconEnum.Sync,
+                      icon: IconEnum.Staking,
                       label: localize('tabs.delegation'),
                       route: DashboardRoute.Delegation,
                       onClick: openDelegation,
