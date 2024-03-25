@@ -21,7 +21,7 @@
         activity.direction === ActivityDirection.SelfTransaction
             ? localize('general.internalTransaction')
             : localize(isIncoming ? 'general.fromAddress' : 'general.toAddress', {
-                  values: { account: getSubjectLocaleFromActivity(activity) },
+                  values: { address: getSubjectLocaleFromActivity(activity) },
               })
 
     $: amount = getFormattedAmountFromActivity(activity)
