@@ -22,8 +22,8 @@
             timeout: 10000,
             alert: true,
         })
-        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
         addToVisitedTabs(DashboardRoute.AccountManagement)
+        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
     }
 
     // TODO: Update this when we have enough mana to route to the next step
