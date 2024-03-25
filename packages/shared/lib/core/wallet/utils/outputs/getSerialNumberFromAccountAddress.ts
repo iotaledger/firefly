@@ -1,15 +1,12 @@
 import { get } from 'svelte/store'
-import { api } from '@core/api'
 import { AccountOutput } from '@iota/sdk/out/types'
 import { selectedWallet } from '../../stores'
 
-export async function getSerialNumberFromAccountAddress(accountAddress: string): Promise<number> {
+export async function getSerialNumberFromAccountAddress(accountId: string): Promise<number> {
     const wallet = get(selectedWallet)
     if (!wallet) {
         throw new Error('Wallet is undefined')
     }
-    const accountId = api.bech32ToHex(accountAddress)
-
     const [accountOutput] = await wallet.unspentOutputs({ accountIds: [accountId] })
 
     // If it's the first state transition of the account address, the accountId is 0x0.
