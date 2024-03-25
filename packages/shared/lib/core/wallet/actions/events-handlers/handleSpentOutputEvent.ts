@@ -66,13 +66,11 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
         }
     }
 
-    if (_isDelegationOutput) {
-        if (wallet?.hasDelegationRewardClaimTransactionInProgress) {
-            updateActiveWallet(walletId, {
-                hasDelegationRewardClaimTransactionInProgress: false,
-                isTransferring: false,
-            })
-            closePopup() // close claimDelegationRewardsPopup when the account output is burned
-        }
+    if (_isDelegationOutput && wallet?.hasDelegationRewardClaimTransactionInProgress) {
+        updateActiveWallet(walletId, {
+            hasDelegationRewardClaimTransactionInProgress: false,
+            isTransferring: false,
+        })
+        closePopup() // close claimDelegationRewardsPopup when the account output is burned
     }
 }
