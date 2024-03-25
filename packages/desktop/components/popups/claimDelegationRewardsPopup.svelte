@@ -2,7 +2,7 @@
     import { Button, Text, FontWeight, TextType, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
-    import { getDefaultTransactionOptions, selectedWallet, selectedWalletId } from '@core/wallet'
+    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { ManaBox } from '@components'
     import { onMount } from 'svelte'
@@ -33,7 +33,7 @@
     async function burnDelegationOutput(): Promise<void> {
         try {
             await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
-            updateActiveWallet($selectedWalletId, {
+            updateActiveWallet($selectedWallet.id, {
                 hasDelegationRewardClaimTransactionInProgress: true,
                 isTransferring: true,
             })
