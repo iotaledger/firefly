@@ -41,6 +41,7 @@ export async function buildWalletState(
         delegations: [],
     }
 
+    let votingPower = ''
     let walletOutputs: OutputData[] = []
     let walletUnspentOutputs: OutputData[] = []
     let accountOutputs: OutputData[] = []
@@ -78,6 +79,7 @@ export async function buildWalletState(
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
         walletUnspentOutputs = await wallet.unspentOutputs()
+        votingPower = balances.baseCoin.votingPower
     } catch (err) {
         console.error(err)
     }
@@ -92,6 +94,7 @@ export async function buildWalletState(
         hasImplicitAccountCreationTransactionInProgress: false,
         hasDelegationTransactionInProgress: false,
         isTransferring: false,
+        votingPower,
         walletOutputs,
         walletUnspentOutputs,
         accountOutputs,
