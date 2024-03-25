@@ -9,7 +9,7 @@
         logout,
         reflectLockedStronghold,
     } from '@core/profile'
-    import { appRouter, DashboardRoute, dashboardRoute, dashboardRouter } from '@core/router'
+    import { appRouter, dashboardRoute } from '@core/router'
     import { Idle } from '@ui'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
@@ -56,10 +56,9 @@
     $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
 
     $: if (hasMainAccountNegativeBIC) {
-        $dashboardRouter.goTo(DashboardRoute.AccountManagement)
         showAppNotification({
             type: 'warning',
-            message: localize('views.accountManagement.bicNotification'),
+            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
         })
     }
 

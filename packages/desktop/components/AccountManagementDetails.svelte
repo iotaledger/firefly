@@ -54,7 +54,7 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: implicitAccountBalance = getImplicitAccountBalance(selectedOutput)
+    $: implicitAccountBalance = isImplicitAccount ? getImplicitAccountBalance(selectedOutput) : undefined
     $: formattedImplicitAccountBalance = implicitAccountBalance
         ? formatTokenAmountBestMatch(implicitAccountBalance, getBaseToken())
         : '-'
@@ -64,6 +64,8 @@
     $: primaryKey = $selectedWallet?.primaryKey
     $: listBlockKeysFeature(selectedOutput)
     $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasAccountNegativeBIC =
+        $selectedWallet?.balances?.blockIssuanceCredits?.[(selectedOutput.output as AccountOutput)?.accountId] < 0
 
     function getImplicitAccountBalance(outputData: OutputData): number | undefined {
         return Number(outputData.output.amount)
@@ -246,7 +248,16 @@
                 {/if}
             </right-pane-wrapper>
             {#if isMainAccount && hasMainAccountNegativeBIC}
-                <TextHint variant={TextHintVariant.Danger} text={localize('views.accountManagement.details.hint')} />
+                <TextHint
+                    variant={TextHintVariant.Danger}
+                    text={localize('views.accountManagement.details.mainAccountNegativeBICHint')}
+                />
+            {/if}
+            {#if !isMainAccount && hasAccountNegativeBIC}
+                <TextHint
+                    variant={TextHintVariant.Danger}
+                    text={localize('views.accountManagement.details.accountNegativeBICHint')}
+                />
             {/if}
         </right-pane-container>
     </Pane>
