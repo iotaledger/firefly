@@ -7,5 +7,5 @@ export interface IMintTokenDetails {
     description?: string
     url?: string
     logoUrl?: string
-    accountId: string
+    accountAddress: string
 }

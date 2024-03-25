@@ -1,11 +1,6 @@
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
-import {
-    addOrUpdateNftInAllWalletNfts,
-    buildNftFromNftOutput,
-    DEFAULT_NFT_FEATURE_ENTRY_KEY,
-    IIrc27Metadata,
-} from '@core/nfts'
+import { addOrUpdateNftInAllWalletNfts, buildNftFromNftOutput, IIrc27Metadata } from '@core/nfts'
 import { Converter } from '@core/utils'
 import { MetadataFeature, MintNftParams, OutputType } from '@iota/sdk/out/types'
 import { ActivityAction } from '../enums'
@@ -18,6 +13,7 @@ import {
 import { NftActivity } from '../types'
 import { getDefaultTransactionOptions, preprocessOutgoingTransaction } from '../utils'
 import { generateSingleNftActivity } from '../utils/generateActivity/generateSingleNftActivity'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
 export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promise<void> {
     try {
@@ -29,7 +25,7 @@ export async function mintNft(metadata: IIrc27Metadata, quantity: number): Promi
             issuer: wallet.depositAddress,
             address: wallet.depositAddress,
             immutableMetadata: new MetadataFeature({
-                [DEFAULT_NFT_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+                [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
             }),
         }
 
