@@ -9,27 +9,30 @@
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
-    import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
+    import {
+        IWalletState,
+        formatTokenAmountBestMatch,
+        getClient,
+        selectedWallet,
+        selectedWalletAssets,
+    } from '@core/wallet'
     import { OutputData } from '@iota/sdk/out/types'
     import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
     import { onDestroy, onMount } from 'svelte'
-
     export let outputId: string | undefined
-
     // TODO: update when mana generation is available
     const isLowManaGeneration = false
-    let walletAddress: string = ''
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+    let walletAddress: string = ''
     let hasEnoughMana = false
-
-    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
-
-    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
-
     let totalAvailableMana: number
-    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
-
     let formattedSelectedOutputBlance: string
+    let isCongestionNotFound
+    let minCommittableAge
+    let maxCommittableAge
+    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
+    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
+    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
     $: selectedOutput,
         (formattedSelectedOutputBlance = baseCoin
             ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
@@ -41,7 +44,6 @@
     $: formattedManaBalance = totalAvailableMana
         ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
         : '-'
-
     function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
         return (
             _selectedWallet?.implicitAccountOutputs.find(
@@ -49,7 +51,6 @@
             ) ?? _selectedWallet?.implicitAccountOutputs?.[0]
         )
     }
-
     function getTotalAvailableMana(): number {
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
@@ -57,7 +58,6 @@
             getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
         )
     }
-
     function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
         return implicitAccountOutputs?.reduce((acc: number, outputData: OutputData) => {
             if (excludeIds && excludeIds.includes(outputData.outputId)) {
@@ -68,42 +68,89 @@
             }
         }, 0)
     }
+    let isPreparing = false
+    async function prepareImplicitAccountWithRetry(outputId: string) {
+        isPreparing = true
+        try {
+            return await $selectedWallet
+                .prepareImplicitAccountTransition(outputId)
+                .then((prepareTx) => (transactionInfo.preparedTransaction = prepareTx))
+                .then(() => (isCongestionNotFound = ''))
+        } catch (error) {
+            if (error.message.includes('congestion was not found')) {
+                // Handle "congestion not found" error and display to the user that it is "Calculating..."
+                isCongestionNotFound = 'Calculating'
+                // Retry with timeout based on minCommittableAge
+                await retryWithTimeout(minCommittableAge)
+                // If maxCommittableAge exceeded, throw error
+                if (seconds <= maxCommittableAge) {
+                    throw new Error('MaxCommittableAge exceeded')
+                }
+            } else {
+                transactionInfo.preparedTransactionError = error
+            }
+        } finally {
+            isPreparing = false
+        }
+    }
+    async function retryWithTimeout(timeout: number): Promise<void> {
+        return new Promise((resolve) => {
+            setTimeout(resolve, timeout)
+        })
+    }
+    async function getProtocolParameters(): Promise<void> {
+        const client = await getClient()
+        const protocolParams = await client.getProtocolParameters()
+        minCommittableAge = protocolParams?.minCommittableAge
+        maxCommittableAge = protocolParams?.maxCommittableAge
+    }
+    async function attemptImplicitAccountCreation(): Promise<void> {
+        walletAddress = await $selectedWallet?.address()
+        try {
+            await getProtocolParameters()
+            /* eslint-disable @typescript-eslint/no-misused-promises */
+            void prepareImplicitAccountWithRetry(selectedOutput.outputId)
+            isCongestionNotFound = ''
+        } catch (error) {
+            // Handle errors or retry after a delay
+            if (error.message === 'MaxCommittableAge exceeded') {
+                // Handle error when maxCommittableAge is exceeded
+                isCongestionNotFound = 'MaxCommittableAge exceeded'
+                // Redirect to account management
+                $implicitAccountCreationRouter.next()
+            } else {
+                setTimeout(attemptImplicitAccountCreation, minCommittableAge)
+            }
+        }
+    }
 
     // TODO: Replace this with proper time remaining
     // ----------------------------------------------------------------
     let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
-
     $: timeRemaining = `${seconds}s remaining`
-
     onMount(async () => {
-        walletAddress = await $selectedWallet?.address()
-        $selectedWallet
-            .prepareImplicitAccountTransition(selectedOutput.outputId)
-            .then((prepareTx) => (transactionInfo.preparedTransaction = prepareTx))
-            .catch((error) => (transactionInfo.preparedTransactionError = error))
+        await getProtocolParameters()
+        attemptImplicitAccountCreation()
         countdownInterval = setInterval(() => {
             seconds -= 1
-
             if (seconds <= 0) {
                 clearInterval(countdownInterval)
                 onTimeout()
             }
         }, 1000)
     })
-
     onDestroy(() => {
         clearInterval(countdownInterval)
     })
-
     const onTimeout = (): void => {
         $implicitAccountCreationRouter.next()
     }
     // ----------------------------------------------------------------
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-20">
+<step-content class="flex flex-col items-center justify-between h-full pt-14">
     <div class="flex flex-col h-full justify-between space-y-8 items-center">
         <div class="flex flex-col text-center space-y-4 max-w-md">
             <div class="flex items-center justify-center mb-7">
@@ -121,7 +168,7 @@
                 >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
             >
             <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
-                {timeRemaining}
+                {isCongestionNotFound ? isCongestionNotFound : timeRemaining}
             </Text>
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>
                 {localize('views.implicit-account-creation.steps.step2.view.title')}
