@@ -54,8 +54,10 @@
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId
-    $: balance = getImplicitAccountBalance(selectedOutput)
-    $: formattedBalance = balance ? formatTokenAmountBestMatch(balance, getBaseToken()) : '-'
+    $: implicitAccountBalance = getImplicitAccountBalance(selectedOutput)
+    $: formattedImplicitAccountBalance = implicitAccountBalance
+        ? formatTokenAmountBestMatch(implicitAccountBalance, getBaseToken())
+        : '-'
     $: hasStakingFeature = hasOutputStakingFeature(selectedOutput)
     $: rawStakedAmount = getStakedAmount(selectedOutput)
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
@@ -170,7 +172,7 @@
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
-                                    {formattedBalance}
+                                    {formattedImplicitAccountBalance}
                                 </Text>
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.balance')}</Text

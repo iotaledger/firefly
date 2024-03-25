@@ -716,7 +716,7 @@
             },
             "notification": "Activate one account to access the dashboard.",
             "emptyAccounts": "There are no accounts to show, activate one first.",
-            "bicNotification": "There is a problem with your account BIC."
+            "bicNotification": "There is a problem with the BIC of your account."
         },
         "delegation": {
             "title": "Delegation",

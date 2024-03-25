@@ -58,7 +58,7 @@
     $: if (hasMainAccountNegativeBIC) {
         $dashboardRouter.goTo(DashboardRoute.AccountManagement)
         showAppNotification({
-            type: 'error',
+            type: 'warning',
             message: localize('views.accountManagement.bicNotification'),
         })
     }
