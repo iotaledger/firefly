@@ -15,11 +15,11 @@ export async function preprocessOutgoingTransaction(
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
     const direction = getDirectionFromOutgoingTransaction(outputs, wallet.depositAddress)
-    const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = await Promise.all(
-        utxoInputs.map((input) => {
-            const transactionId = input.transactionId
-            const transactionOutputIndex = input.transactionOutputIndex
+        regularTransactionEssence.inputs.map((input) => {
+            const _input = input as UTXOInput
+            const transactionId = _input.transactionId
+            const transactionOutputIndex = _input.transactionOutputIndex
             return computeOutputId(transactionId, transactionOutputIndex)
         })
     )
@@ -33,7 +33,6 @@ export async function preprocessOutgoingTransaction(
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,
         wrappedInputs: <IWrappedOutput[]>inputs,
-        utxoInputs,
     }
 }
 
