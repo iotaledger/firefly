@@ -2,7 +2,6 @@ import { IWalletState } from '@core/wallet/interfaces'
 
 import { setOutgoingAsyncActivitiesToClaimed } from '../setOutgoingAsyncActivitiesToClaimed'
 import { preprocessTransactionsForWallet } from './preprocessTransactionsForWallet'
-import { preprocessOutputsForWallet } from './preprocessOutputsForWallet'
 import { linkTransactionsWithClaimingTransactions } from './linkTransactionsWithClaimingTransactions'
 import { hideActivitiesForFoundries } from './hideActivitiesForFoundries'
 import { generateActivitiesFromProcessedTransactions } from './generateActivitiesFromProcessedTransactions'
@@ -13,7 +12,7 @@ export async function generateAndStoreActivitiesForWallet(wallet: IWalletState):
     // Step 1: process wallet transactions and outputs into processed transactions
     const processedTransactions = [
         ...(await preprocessTransactionsForWallet(wallet)),
-        ...(await preprocessOutputsForWallet(wallet)),
+        // ...(await preprocessOutputsForWallet(wallet)),
     ]
 
     // Step 2: link transactions with corresponding claiming transactions
