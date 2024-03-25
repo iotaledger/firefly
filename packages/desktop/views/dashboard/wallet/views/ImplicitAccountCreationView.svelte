@@ -10,6 +10,7 @@
     import { localize } from '@core/i18n'
     import { selectedWallet } from '@core/wallet'
     import { showAppNotification } from '@auxiliary/notification'
+    import { addToVisitedTabs } from '@contexts/dashboard/stores'
 
     export let outputId: string | undefined
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
@@ -22,6 +23,7 @@
             alert: true,
         })
         $dashboardRouter.goTo(DashboardRoute.AccountManagement)
+        addToVisitedTabs(DashboardRoute.AccountManagement)
     }
 
     // TODO: Update this when we have enough mana to route to the next step

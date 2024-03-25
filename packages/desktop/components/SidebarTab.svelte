@@ -15,12 +15,6 @@
         addToVisitedTabs(tab?.route)
     }
 
-    $: {
-        if ($dashboardRoute === tab?.route) {
-            addToVisitedTabs(tab?.route)
-        }
-    }
-
     function handleHideTooltip(): void {
         showTooltip = false
     }
