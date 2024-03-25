@@ -31,7 +31,6 @@ export async function preprocessOutgoingTransaction(
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,
         wrappedInputs: <IWrappedOutput[]>inputs,
-        utxoInputs,
     }
 }
 
