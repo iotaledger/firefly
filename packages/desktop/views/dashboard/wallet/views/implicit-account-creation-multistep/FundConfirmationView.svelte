@@ -80,7 +80,7 @@
         } catch (error) {
             console.error(error.message)
             if (error.message?.includes('slots remaining until enough mana')) {
-                transactionInfo.preparedTransactionError
+                transactionInfo.preparedTransactionError = error.message
                 const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
