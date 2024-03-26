@@ -7,7 +7,7 @@
 
     export let label: string = ''
     export let description: string = ''
-    export let value: string | undefined = undefined
+    export let value: string | number | undefined = undefined
     export let fontSize: number = 15
     export let error: string = ''
     export let classes: string = null

@@ -1,8 +1,9 @@
 import { Converter } from '@core/utils'
-import { CreateNativeTokenParams, PreparedCreateNativeTokenTransaction } from '@iota/sdk/out/types'
+import { CreateNativeTokenParams, MetadataFeature, PreparedCreateNativeTokenTransaction } from '@iota/sdk/out/types'
 import { IIrc30Metadata } from '../interfaces'
 import { getSelectedWallet } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
 export async function prepareCreateNativeToken(
     maximumSupply: number,
@@ -15,7 +16,9 @@ export async function prepareCreateNativeToken(
         const params: CreateNativeTokenParams = {
             maximumSupply: BigInt(maximumSupply),
             circulatingSupply: BigInt(circulatingSupply),
-            foundryMetadata: Converter.utf8ToHex(JSON.stringify(metadata)),
+            foundryMetadata: new MetadataFeature({
+                [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: Converter.utf8ToHex(JSON.stringify(metadata)),
+            }),
         }
 
         return wallet.prepareCreateNativeToken(params, getDefaultTransactionOptions())

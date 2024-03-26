@@ -47,8 +47,11 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...nftActivities)
     }
 
+    const containsAccountInInputs = wrappedInputs.some((input) => input.output.type === OutputType.Account)
     const containsAccountActivity =
-        outputs.some((output) => output.output.type === OutputType.Account) && !containsFoundryActivity
+        !containsAccountInInputs &&
+        outputs.some((output) => output.output.type === OutputType.Account) &&
+        !containsFoundryActivity
     if (containsAccountActivity) {
         const accountActivities = await generateActivitiesFromAccountOutputs(processedTransaction, wallet)
         activities.push(...accountActivities)

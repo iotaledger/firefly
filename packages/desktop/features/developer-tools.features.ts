@@ -9,7 +9,7 @@ const developerToolsFeatures: IDeveloperFeatures = {
         enabled: true,
     },
     mintNativeTokens: {
-        enabled: false,
+        enabled: true,
     },
     account: {
         enabled: false,
