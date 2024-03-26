@@ -7,9 +7,11 @@
         getManaBalance,
         getPassiveManaForOutput,
         nodeInfoProtocolParameters,
+        DEFAULT_SECONDS_PER_SLOT,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk/out/types'
     import {
@@ -27,20 +29,23 @@
 
     export let outputId: string | undefined
 
-    // TODO: update when mana generation is available
-    const isLowManaGeneration = false
+    const LOW_MANA_GENERATION_SECONDS = 10 * SECONDS_PER_MINUTE
+
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
 
     let walletAddress: string = ''
     let hasEnoughMana = false
-    let totalAvailableMana: number
-    let formattedSelectedOutputBlance: string
     let isCongestionNotFound: boolean | null = null
     const minCommittableAge = $nodeInfoProtocolParameters?.minCommittableAge
+    let isLowManaGeneration = false
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
-    $: $selectedWallet, seconds, (totalAvailableMana = getTotalAvailableMana())
+
+    let totalAvailableMana: number
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana())
+
+    let formattedSelectedOutputBlance: string
     $: selectedOutput,
         (formattedSelectedOutputBlance = baseCoin
             ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
@@ -64,14 +69,14 @@
     function getTotalAvailableMana(): number {
         return (
             getManaBalance($selectedWallet?.balances?.mana?.available) +
-            $selectedWallet?.balances.totalWalletBic -
-            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [outputId])
+            ($selectedWallet?.balances.totalWalletBic ?? 0) -
+            getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, outputId ? [outputId] : [])
         )
     }
 
-    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[] | undefined): number {
+    function getImplicitAccountsMana(implicitAccountOutputs: OutputData[], excludeIds: string[]): number {
         return implicitAccountOutputs?.reduce((acc: number, outputData: OutputData) => {
-            if (excludeIds && excludeIds.includes(outputData.outputId)) {
+            if (excludeIds.length > 1 && !excludeIds.includes(outputData.outputId)) {
                 const totalMana = getPassiveManaForOutput(outputData)
                 return totalMana ? acc + totalMana : acc
             } else {
@@ -82,20 +87,20 @@
 
     async function prepareImplicitAccountWithRetry(outputId: string): Promise<void> {
         try {
-            await $selectedWallet
-                .prepareImplicitAccountTransition(outputId)
-                .then((prepareTx) => (transactionInfo.preparedTransaction = prepareTx))
-                .then(() => (isCongestionNotFound = false))
-                .then(() => {
-                    // Start countdown after successful preparation
-                    countdownInterval = setInterval(() => {
-                        seconds -= 1
-                        if (seconds <= 0) {
-                            clearInterval(countdownInterval)
-                            onTimeout()
-                        }
-                    }, 1000)
-                })
+            await $selectedWallet.prepareImplicitAccountTransition(outputId).then((prepareTx) => {
+                transactionInfo.preparedTransaction = prepareTx
+                isCongestionNotFound = false
+                seconds = 0
+
+                // Start countdown after successful preparation
+                countdownInterval = setInterval(() => {
+                    seconds -= 1
+                    if (seconds <= 0) {
+                        clearInterval(countdownInterval)
+                        onTimeout()
+                    }
+                }, 1000)
+            })
         } catch (error) {
             // Handle "congestion not found" error and retry
             if (error.message.includes('congestion was not found')) {
@@ -103,8 +108,11 @@
                 await retryWithTimeout(minCommittableAge)
                 // Retry implicit account creation after timeout
                 await attemptImplicitAccountCreation()
-            } else {
-                transactionInfo.preparedTransactionError = error
+            } else if (error.message?.includes('slots remaining until enough mana')) {
+                transactionInfo.preparedTransactionError = error.message
+                const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
+                seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
+                isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
             }
         }
     }
@@ -116,7 +124,6 @@
     }
 
     async function attemptImplicitAccountCreation(): Promise<void> {
-        walletAddress = await $selectedWallet?.address()
         try {
             /* eslint-disable @typescript-eslint/no-misused-promises */
             await prepareImplicitAccountWithRetry(selectedOutput.outputId)
@@ -132,9 +139,10 @@
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
 
-    $: timeRemaining = `${seconds}s remaining`
+    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
 
     onMount(async () => {
+        $selectedWallet?.address().then((address) => (walletAddress = address))
         await attemptImplicitAccountCreation()
     })
     onDestroy(() => {
@@ -146,10 +154,10 @@
     // ----------------------------------------------------------------
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-14">
-    <div class="flex flex-col h-full justify-between space-y-8 items-center">
+<step-content class={`flex flex-col items-center justify-between h-full ${isLowManaGeneration ? 'pt-8' : 'pt-14'}`}>
+    <div class="flex flex-col h-full justify-between space-y-4 items-center">
         <div class="flex flex-col text-center space-y-4 max-w-md">
-            <div class="flex items-center justify-center mb-7">
+            <div class={`flex items-center justify-center ${isLowManaGeneration ? 'mb-2' : 'mb-7'}`}>
                 <img
                     src="assets/illustrations/implicit-account-creation/step2.svg"
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
@@ -192,7 +200,7 @@
             </div>
         </div>
         {#if isLowManaGeneration}
-            <div class="flex flex-col space-y-4 w-2/3">
+            <div class="flex flex-col space-y-2 w-2/3">
                 <TextHint
                     variant={TextHintVariant.Warning}
                     text={localize('views.implicit-account-creation.steps.step2.view.walletAddress.description')}
