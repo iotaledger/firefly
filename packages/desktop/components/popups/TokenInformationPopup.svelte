@@ -23,10 +23,10 @@
         AssetActionsModal,
         MeatballMenuButton,
         Modal,
+        BalanceSummarySection,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { MANA_ID } from '@core/network'
-    import BalanceSummarySection from '@ui/BalanceSummarySection.svelte'
 
     export let asset: IAsset
     export let activityId: string = undefined
