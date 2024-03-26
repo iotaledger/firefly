@@ -30,14 +30,17 @@
     export let outputId: string | undefined
 
     const LOW_MANA_GENERATION_SECONDS = 10 * SECONDS_PER_MINUTE
-
+    const minCommittableAge = $nodeInfoProtocolParameters?.minCommittableAge
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
 
     let walletAddress: string = ''
     let hasEnoughMana = false
     let isCongestionNotFound: boolean | null = null
-    const minCommittableAge = $nodeInfoProtocolParameters?.minCommittableAge
     let isLowManaGeneration = false
+
+    let seconds: number = 10
+    let countdownInterval: NodeJS.Timeout
+    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
@@ -91,15 +94,7 @@
                 transactionInfo.preparedTransaction = prepareTx
                 isCongestionNotFound = false
                 seconds = 0
-
-                // Start countdown after successful preparation
-                countdownInterval = setInterval(() => {
-                    seconds -= 1
-                    if (seconds <= 0) {
-                        clearInterval(countdownInterval)
-                        onTimeout()
-                    }
-                }, 1000)
+                $implicitAccountCreationRouter.next()
             })
         } catch (error) {
             // Handle "congestion not found" error and retry
@@ -113,6 +108,15 @@
                 const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
+                isCongestionNotFound = false
+
+                // Start countdown after successful preparation
+                countdownInterval = setInterval(() => {
+                    seconds -= 1
+                    if (seconds <= 0) {
+                        $implicitAccountCreationRouter.next()
+                    }
+                }, MILLISECONDS_PER_SECOND)
             }
         }
     }
@@ -127,19 +131,10 @@
         try {
             /* eslint-disable @typescript-eslint/no-misused-promises */
             await prepareImplicitAccountWithRetry(selectedOutput.outputId)
-            isCongestionNotFound = false
         } catch (error) {
             setTimeout(attemptImplicitAccountCreation, minCommittableAge)
         }
     }
-
-    // TODO: Replace this with proper time remaining
-    // ----------------------------------------------------------------
-    let seconds: number = 10
-    let countdownInterval: NodeJS.Timeout
-    let timeRemaining: string
-
-    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
 
     onMount(async () => {
         $selectedWallet?.address().then((address) => (walletAddress = address))
@@ -148,10 +143,6 @@
     onDestroy(() => {
         clearInterval(countdownInterval)
     })
-    const onTimeout = (): void => {
-        $implicitAccountCreationRouter.next()
-    }
-    // ----------------------------------------------------------------
 </script>
 
 <step-content class={`flex flex-col items-center justify-between h-full ${isLowManaGeneration ? 'pt-8' : 'pt-14'}`}>
@@ -163,14 +154,6 @@
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
                 />
             </div>
-            <Text
-                type={TextType.h5}
-                fontSize="15"
-                color="blue-700"
-                darkColor="blue-700"
-                fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
-            >
             {#if isCongestionNotFound}
                 <div class="flex items-center justify-center space-x-2">
                     <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
@@ -179,6 +162,14 @@
                     <Spinner size={16} />
                 </div>
             {:else}
+                <Text
+                    type={TextType.h5}
+                    fontSize="15"
+                    color="blue-700"
+                    darkColor="blue-700"
+                    fontWeight={FontWeight.semibold}
+                    >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
+                >
                 <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
                     {timeRemaining}
                 </Text>
@@ -192,11 +183,13 @@
                     keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
                     valueText={formattedWalletBalance}
                 />
-                <KeyValueBox
-                    keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
-                    valueText={formattedManaBalance}
-                />
-                <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={false} />
+                {#if !isCongestionNotFound}
+                    <KeyValueBox
+                        keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
+                        valueText={formattedManaBalance}
+                    />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={false} />
+                {/if}
             </div>
         </div>
         {#if isLowManaGeneration}
