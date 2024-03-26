@@ -12,7 +12,17 @@
     import { implicitAccountCreationRouter } from '@core/router'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk/out/types'
-    import { Button, FontWeight, KeyValueBox, Text, TextType, TextHint, TextHintVariant, CopyableBox } from '@ui'
+    import {
+        Button,
+        FontWeight,
+        KeyValueBox,
+        Text,
+        TextType,
+        TextHint,
+        TextHintVariant,
+        CopyableBox,
+        Spinner,
+    } from '@ui'
     import { onDestroy, onMount } from 'svelte'
 
     export let outputId: string | undefined
@@ -25,9 +35,8 @@
     let hasEnoughMana = false
     let totalAvailableMana: number
     let formattedSelectedOutputBlance: string
-    let isCongestionNotFound: string | null = null
+    let isCongestionNotFound: boolean | null = null
     const minCommittableAge = $nodeInfoProtocolParameters?.minCommittableAge
-    const maxCommittableAge = $nodeInfoProtocolParameters?.maxCommittableAge
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
@@ -76,22 +85,30 @@
             await $selectedWallet
                 .prepareImplicitAccountTransition(outputId)
                 .then((prepareTx) => (transactionInfo.preparedTransaction = prepareTx))
-                .then(() => (isCongestionNotFound = ''))
+                .then(() => (isCongestionNotFound = false))
+                .then(() => {
+                    // Start countdown after successful preparation
+                    countdownInterval = setInterval(() => {
+                        seconds -= 1
+                        if (seconds <= 0) {
+                            clearInterval(countdownInterval)
+                            onTimeout()
+                        }
+                    }, 1000)
+                })
         } catch (error) {
+            // Handle "congestion not found" error and retry
             if (error.message.includes('congestion was not found')) {
-                // Handle "congestion not found" error and display to the user that it is "Calculating..."
-                isCongestionNotFound = 'Calculating'
-                // Retry with timeout based on minCommittableAge
+                isCongestionNotFound = true
                 await retryWithTimeout(minCommittableAge)
-                // If maxCommittableAge exceeded, throw error
-                if (seconds <= maxCommittableAge) {
-                    throw new Error('MaxCommittableAge exceeded')
-                }
+                // Retry implicit account creation after timeout
+                await attemptImplicitAccountCreation()
             } else {
                 transactionInfo.preparedTransactionError = error
             }
         }
     }
+
     async function retryWithTimeout(timeout: number): Promise<void> {
         return new Promise((resolve) => {
             setTimeout(resolve, timeout)
@@ -103,15 +120,9 @@
         try {
             /* eslint-disable @typescript-eslint/no-misused-promises */
             await prepareImplicitAccountWithRetry(selectedOutput.outputId)
-            isCongestionNotFound = ''
+            isCongestionNotFound = false
         } catch (error) {
-            // Handle errors or retry after a delay
-            if (error.message === 'MaxCommittableAge exceeded') {
-                // Handle error when maxCommittableAge is exceeded
-                isCongestionNotFound = 'MaxCommittableAge exceeded'
-            } else {
-                setTimeout(attemptImplicitAccountCreation, minCommittableAge)
-            }
+            setTimeout(attemptImplicitAccountCreation, minCommittableAge)
         }
     }
 
@@ -120,16 +131,11 @@
     let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
     let timeRemaining: string
+
     $: timeRemaining = `${seconds}s remaining`
-    onMount(() => {
-        attemptImplicitAccountCreation()
-        countdownInterval = setInterval(() => {
-            seconds -= 1
-            if (seconds <= 0) {
-                clearInterval(countdownInterval)
-                onTimeout()
-            }
-        }, 1000)
+
+    onMount(async () => {
+        await attemptImplicitAccountCreation()
     })
     onDestroy(() => {
         clearInterval(countdownInterval)
@@ -157,9 +163,18 @@
                 fontWeight={FontWeight.semibold}
                 >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
             >
-            <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
-                {isCongestionNotFound ? isCongestionNotFound : timeRemaining}
-            </Text>
+            {#if isCongestionNotFound}
+                <div class="flex items-center justify-center space-x-2">
+                    <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
+                        {localize('views.implicit-account-creation.steps.step2.view.calculating')}
+                    </Text>
+                    <Spinner size={16} />
+                </div>
+            {:else}
+                <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
+                    {timeRemaining}
+                </Text>
+            {/if}
             <Text type={TextType.h3} fontWeight={FontWeight.semibold}>
                 {localize('views.implicit-account-creation.steps.step2.view.title')}
                 {formattedSelectedOutputBlance}
