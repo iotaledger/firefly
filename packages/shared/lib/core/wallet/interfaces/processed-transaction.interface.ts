@@ -11,6 +11,7 @@ export interface IProcessedTransaction {
     utxoInputs: UTXOInput[]
     wrappedInputs: IWrappedOutput[]
     claimingData?: IClaimData
+    mana: number
 }
 
 export interface IClaimData {
