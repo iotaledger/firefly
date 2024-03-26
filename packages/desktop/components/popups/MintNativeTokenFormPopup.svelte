@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { setMintTokenDetails, mintTokenDetails, IMintTokenDetails } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight, AccountInput } from '@ui'
+    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight, AccountInput, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { handleError } from '@core/error/handlers/handleError'
@@ -19,7 +19,7 @@
         description: undefined,
         url: undefined,
         logoUrl: undefined,
-        accountId: undefined,
+        accountAddress: undefined,
     }
 
     let {
@@ -31,7 +31,7 @@
         description,
         url,
         logoUrl,
-        accountId,
+        accountAddress,
     } = $mintTokenDetails ?? DEFAULT
 
     let nameError: string = ''
@@ -42,8 +42,8 @@
     $: circulatingSupply, (circulatingSupplyError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
-    let accountIdError: string
-    $: accountId, (accountIdError = '')
+    let accountAddressError: string
+    $: accountAddress, (accountAddressError = '')
 
     let error: BaseError
     let decimalsInput: OptionalInput
@@ -64,7 +64,7 @@
             description,
             url,
             logoUrl,
-            accountId,
+            accountAddress,
         }
         if (valid && isEverythingDefined(tokenDetailsForm)) {
             setMintTokenDetails(tokenDetailsForm)
@@ -82,7 +82,7 @@
             form.circulatingSupply !== undefined &&
             form.decimals !== undefined &&
             form.symbol !== undefined &&
-            form.accountId !== undefined
+            form.accountAddress !== undefined
         )
     }
 
@@ -170,12 +170,12 @@
 </script>
 
 <div class="space-y-6">
-    <Text type="h4" fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
+    <Text type={TextType.h4} fontSize="18" lineHeight="6" fontWeight={FontWeight.semibold}>
         {localize('popups.nativeToken.formTitle')}
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <AccountInput bind:this={accountInput} bind:account={accountId} bind:error={accountIdError} />
+        <AccountInput bind:this={accountInput} bind:account={accountAddress} bind:error={accountAddressError} />
         <TextInput
             bind:value={tokenName}
             label={localize('popups.nativeToken.property.tokenName')}
@@ -212,25 +212,25 @@
                 maxlength={MAX_SUPPORTED_DECIMALS}
                 label={localize('popups.nativeToken.property.decimals')}
                 description={localize('tooltips.mintNativeToken.decimals')}
-                fontSize="14"
+                fontSize={14}
             />
             <OptionalInput
                 bind:value={description}
                 label={localize('popups.nativeToken.property.description')}
                 description={localize('tooltips.mintNativeToken.description')}
-                fontSize="14"
+                fontSize={14}
             />
             <OptionalInput
                 bind:value={url}
                 label={localize('popups.nativeToken.property.url')}
                 description={localize('tooltips.mintNativeToken.url')}
-                fontSize="14"
+                fontSize={14}
             />
             <OptionalInput
                 bind:value={logoUrl}
                 label={localize('popups.nativeToken.property.logoUrl')}
                 description={localize('tooltips.mintNativeToken.logoUrl')}
-                fontSize="14"
+                fontSize={14}
             />
         </optional-inputs>
         {#if error}

@@ -18,7 +18,6 @@
     import { onDestroy, onMount } from 'svelte'
     import Sidebar from './Sidebar.svelte'
     import TopNavigation from './TopNavigation.svelte'
-
     import {
         addNftsToDownloadQueue,
         downloadingNftId,
@@ -28,12 +27,11 @@
         resetNftDownloadQueue,
         selectedWalletNfts,
     } from '@core/nfts'
-    import { selectedWallet, selectedWalletId } from '@core/wallet'
+    import { selectedWallet, selectedWalletId, clearBalanceSyncPoll, syncBalancePoll } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
-    import { isAwareOfMetricSystemDrop } from '@contexts/dashboard/stores'
+    import { isAwareOfMetricSystemDrop, showBalanceOverviewPopup } from '@contexts/dashboard/stores'
     import { openPopup, PopupId } from '@auxiliary/popup'
-    import { showBalanceOverviewPopup } from '@contexts/dashboard/stores'
 
     const tabs = {
         wallet: Wallet,
@@ -91,6 +89,7 @@
     }
 
     onMount(() => {
+        syncBalancePoll($selectedWalletId, true)
         Platform.onEvent('menu-logout', () => {
             void logout()
         })
@@ -134,6 +133,7 @@
     })
 
     onDestroy(() => {
+        clearBalanceSyncPoll()
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
 
