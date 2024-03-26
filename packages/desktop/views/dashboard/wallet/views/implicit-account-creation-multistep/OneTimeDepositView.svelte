@@ -3,6 +3,8 @@
     import { localize } from '@core/i18n'
     import { setClipboard } from '@core/utils'
     import { selectedWallet } from '@core/wallet'
+    import { updateActiveWallet } from '@core/profile'
+    import { onMount } from 'svelte'
 
     let isVisibleAddress: boolean = false
     let implicitAccountCreationAddress: string = ''
@@ -15,6 +17,12 @@
     function onCopyClick(): void {
         setClipboard(implicitAccountCreationAddress)
     }
+
+    onMount(() => {
+        updateActiveWallet($selectedWallet.id, {
+            hasImplicitAccountCreationTransactionInProgress: true,
+        })
+    })
 </script>
 
 <step-content class="flex flex-col items-center justify-between h-full pt-12">

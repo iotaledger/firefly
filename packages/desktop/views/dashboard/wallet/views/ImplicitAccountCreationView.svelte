@@ -33,7 +33,10 @@
                 $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
             } else if ($selectedWallet?.implicitAccountOutputs?.length >= 2) {
                 handleMultipleAccounts()
-            } else if ($selectedWallet?.implicitAccountOutputs?.length === 0) {
+            } else if (
+                $selectedWallet?.implicitAccountOutputs?.length === 0 &&
+                !$selectedWallet?.hasImplicitAccountCreationTransactionInProgress
+            ) {
                 $implicitAccountCreationRoute = ImplicitAccountCreationRoute.Init
             }
         } else {
