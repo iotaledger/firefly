@@ -23,10 +23,10 @@
         AssetActionsModal,
         MeatballMenuButton,
         Modal,
-        BalanceSummarySection,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { MANA_ID } from '@core/network'
+    import BalanceSummarySection from '@ui/BalanceSummarySection.svelte'
 
     export let asset: IAsset
     export let activityId: string = undefined
@@ -88,7 +88,7 @@
 </script>
 
 {#if asset}
-    <div class="space-y-6">
+    <div class="space-y-6 max-h-xl scrollable-y">
         <div class="flex flex-row justify-between items-center space-x-3 mr-8">
             <Text
                 type={TextType.h4}
@@ -142,6 +142,7 @@
                 {/if}
                 <balance-wrapper class="flex flex-col bg-gray-50 dark:bg-gray-850 px-4 py-4 rounded-lg">
                     <BalanceSummarySection
+                        {asset}
                         titleKey="asset"
                         subtitleKey="asset"
                         amount={balanceSummary?.amount}

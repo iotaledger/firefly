@@ -1,12 +1,13 @@
 <script lang="ts">
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
+    import { IAsset, TokenMetadata, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { BalanceSummaryRow, Icon } from '@ui'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { activeProfile } from '@core/profile'
     import { DEFAULT_MANA } from '@core/network'
 
+    export let asset: IAsset | null = null
     export let titleKey: string
     export let subtitleKey: string = ''
     export let subBreakdown: { [key: string]: { amount: number } } = {}
@@ -20,7 +21,11 @@
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
     function getAmount(amount: number): string {
-        return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
+        if (!asset) {
+            return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
+        } else {
+            return asset?.metadata ? formatTokenAmountBestMatch(amount, asset?.metadata) : ''
+        }
     }
 
     function getAmountMana(amount: number): string {
@@ -32,16 +37,28 @@
         }
     }
 
-    function handleAmount(isBaseToken: boolean, amount: number) {
-        return isBaseToken ? getAmount(amount) : getAmountMana(amount)
+    function handleAmount(isBaseToken: boolean = false, amount: number) {
+        if (!asset) {
+            return isBaseToken ? getAmount(amount) : getAmountMana(amount)
+        } else {
+            return getAmount(amount)
+        }
     }
 
-    function handleCurrencyAmount(isBaseToken: boolean, amount: number) {
-        return isBaseToken ? getCurrencyAmount(amount) : getAmountMana(amount)
+    function handleCurrencyAmount(isBaseToken: boolean = false, amount: number) {
+        if (!asset) {
+            return isBaseToken ? getCurrencyAmount(amount) : getAmountMana(amount)
+        } else {
+            return getCurrencyAmount(amount)
+        }
     }
 
     function getCurrencyAmount(amount: number): string {
-        return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
+        if (!asset) {
+            return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
+        } else {
+            return formatTokenAmountBestMatch(amount, asset?.metadata as TokenMetadata)
+        }
     }
 
     function toggleExpandedView(): void {
