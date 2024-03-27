@@ -3,10 +3,17 @@ import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOIn
 // import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { ActivityDirection } from '../../enums'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
+import { get } from 'svelte/store'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 export function preprocessIncomingTransaction(transaction: TransactionWithMetadata): IProcessedTransaction {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const slotUnixTimestamp = nodeProtocolParameters
+        ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
+        : 0
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
@@ -22,7 +29,7 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
         outputs: outputs,
         transactionId,
         direction: ActivityDirection.Incoming,
-        time: new Date(Number(transaction.timestamp)),
+        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
         wrappedInputs: [],
         // wrappedInputs: <IWrappedOutput[]>inputs,
