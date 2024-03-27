@@ -5,7 +5,7 @@ import { localize } from '@core/i18n'
 import { showAppNotification } from '@auxiliary/notification'
 import { activeProfileId } from '@core/profile'
 
-export function rejectActivity(id: string): void {
+export function ignoreActivity(id: string): void {
     const walletId = get(selectedWalletId)
     hiddenActivities.update((state) => {
         const profileId = get(activeProfileId)
@@ -23,7 +23,7 @@ export function rejectActivity(id: string): void {
         return state
     })
 
-    updateAsyncDataByActivityId(walletId, id, { isRejected: true })
+    updateAsyncDataByActivityId(walletId, id, { isIgnored: true })
     showAppNotification({
         type: 'success',
         alert: true,

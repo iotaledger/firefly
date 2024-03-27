@@ -13,7 +13,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
     try {
         if (isActivityHiddenForWalletId(wallet.id, activity.id)) {
             removeActivityFromHiddenActivities(wallet.id, activity.id)
-            updateAsyncDataByActivityId(wallet.id, activity.id, { isRejected: false })
+            updateAsyncDataByActivityId(wallet.id, activity.id, { isIgnored: false })
         }
 
         updateAsyncDataByActivityId(wallet.id, activity.id, { isClaiming: true })

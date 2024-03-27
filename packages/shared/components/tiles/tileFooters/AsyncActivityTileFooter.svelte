@@ -3,7 +3,7 @@
         ActivityAsyncStatus,
         ActivityDirection,
         claimActivity,
-        rejectActivity,
+        ignoreActivity,
         getTimeDifference,
         Activity,
     } from '@core/wallet'
@@ -26,17 +26,17 @@
     $: timeDiff = getTimeDiff(activity)
     $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
-    function onRejectClick(): void {
+    function onIgnoreClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
-                title: localize('actions.confirmRejection.title'),
-                description: localize('actions.confirmRejection.description'),
-                hint: localize('actions.confirmRejection.node'),
+                title: localize('actions.confirmIgnore.title'),
+                description: localize('actions.confirmIgnore.description'),
+                hint: localize('actions.confirmIgnore.node'),
                 variant: TextHintVariant.Warning,
-                confirmText: localize('actions.reject'),
+                confirmText: localize('actions.ignore'),
                 onConfirm: () => {
-                    rejectActivity(activity.id)
+                    ignoreActivity(activity.id)
                     closePopup()
                 },
             },
@@ -84,13 +84,13 @@
     <svelte:fragment slot="right">
         {#if shouldShowActions}
             <Button
-                onClick={onRejectClick}
-                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
+                onClick={onIgnoreClick}
+                disabled={activity.asyncData?.isClaiming || activity.asyncData?.isIgnored}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}
                 outline
             >
-                {localize('actions.reject')}
+                {localize('actions.ignore')}
             </Button>
             <Button
                 onClick={onClaimClick}

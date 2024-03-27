@@ -78,10 +78,10 @@ export const DEFAULT_ACTIVITY_FILTER: ActivityFilter = {
             value: undefined,
         },
     },
-    showRejected: {
+    showIgnored: {
         active: false,
         type: 'selection',
-        localeKey: 'filters.showRejected',
+        localeKey: 'filters.showIgnored',
         selected: BooleanFilterOption.Yes,
         choices: [BooleanFilterOption.Yes, BooleanFilterOption.No],
     },
