@@ -20,7 +20,7 @@
     $: hasChildren = !!Object.keys(subBreakdown ?? {}).length
     $: ({ baseCoin } = $selectedWalletAssets?.[$activeProfile?.network?.id] ?? {})
 
-    function getAmount(amount: number): string {
+    function getAmount(amount: number, asset: IAsset | null): string {
         if (!asset) {
             return baseCoin?.metadata ? formatTokenAmountBestMatch(amount, baseCoin?.metadata) : ''
         } else {
@@ -37,23 +37,23 @@
         }
     }
 
-    function handleAmount(isBaseToken: boolean = false, amount: number) {
+    function handleAmount(isBaseToken: boolean = false, amount: number, asset: IAsset | null): string {
         if (!asset) {
-            return isBaseToken ? getAmount(amount) : getAmountMana(amount)
+            return isBaseToken ? getAmount(amount, null) : getAmountMana(amount)
         } else {
-            return getAmount(amount)
+            return getAmount(amount, asset)
         }
     }
 
-    function handleCurrencyAmount(isBaseToken: boolean = false, amount: number) {
+    function handleCurrencyAmount(isBaseToken: boolean = false, amount: number, asset: IAsset | null): string {
         if (!asset) {
-            return isBaseToken ? getCurrencyAmount(amount) : getAmountMana(amount)
+            return isBaseToken ? getCurrencyAmount(amount, null, baseCoin) : getAmountMana(amount)
         } else {
-            return getCurrencyAmount(amount)
+            return getCurrencyAmount(amount, asset, baseCoin)
         }
     }
 
-    function getCurrencyAmount(amount: number): string {
+    function getCurrencyAmount(amount: number, asset: IAsset | null, baseCoin: IAsset | null | undefined): string {
         if (!asset) {
             return baseCoin ? formatCurrency(getMarketAmountFromAssetValue(amount, baseCoin)) : ''
         } else {
@@ -84,8 +84,8 @@
         <BalanceSummaryRow
             title={titleKey ? localize(`popups.balanceBreakdown.${titleKey}.title`) : ''}
             subtitle={subtitleKey ? localize(`popups.balanceBreakdown.${subtitleKey}.subtitle`) : ''}
-            amount={handleAmount(isBaseToken, amount)}
-            convertedAmount={handleCurrencyAmount(isBaseToken, amount)}
+            amount={handleAmount(isBaseToken, amount, asset)}
+            convertedAmount={handleCurrencyAmount(isBaseToken, amount, asset)}
             {bold}
         />
     </div>
@@ -95,8 +95,8 @@
                 <BalanceSummaryRow
                     title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
                     subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
-                    amount={handleAmount(isBaseToken, subBreakdown[breakdownKey].amount)}
-                    convertedAmount={handleCurrencyAmount(isBaseToken, subBreakdown[breakdownKey].amount)}
+                    amount={handleAmount(isBaseToken, subBreakdown[breakdownKey].amount, asset)}
+                    convertedAmount={handleCurrencyAmount(isBaseToken, subBreakdown[breakdownKey].amount, asset)}
                 />
             </balance-summary-row-expanded>
         {/each}
