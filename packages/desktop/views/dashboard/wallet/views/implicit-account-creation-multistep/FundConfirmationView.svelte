@@ -9,6 +9,7 @@
         DEFAULT_SECONDS_PER_SLOT,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
+    import { implicitAccountCreationRouter } from '@core/router'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk/out/types'
@@ -28,21 +29,21 @@
     export let outputId: string | undefined
 
     const LOW_MANA_GENERATION_SECONDS = 10 * SECONDS_PER_MINUTE
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
 
     let walletAddress: string = ''
-    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
     let isLowManaGeneration = false
     let isCongestionNotFound: boolean | null = null
+    let seconds: number = 10
+    let countdownInterval: NodeJS.Timeout
+    let timeRemaining: string
+    let totalAvailableMana: number
+    let formattedSelectedOutputBalance: string
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
-
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
-
-    let totalAvailableMana: number
     $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana()), prepareTransaction(selectedOutput?.outputId)
-
-    let formattedSelectedOutputBalance: string
     $: selectedOutput,
         (formattedSelectedOutputBalance = baseCoin
             ? formatTokenAmountBestMatch(Number(selectedOutput?.output.amount), baseCoin.metadata)
@@ -54,6 +55,12 @@
     $: formattedManaBalance = totalAvailableMana
         ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
         : '-'
+    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
+    $: async () => {
+        await prepareTransaction(selectedOutput.outputId)
+    }
+
+    $: if (isCongestionNotFound === false) startCountdown()
 
     function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
         return (
@@ -108,20 +115,10 @@
             }
         }
     }
-    // ----------------------------------------------------------------
-    let seconds: number = 10
-    let countdownInterval: NodeJS.Timeout
-    let timeRemaining: string
 
-    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
-    $: {
-        async () => {
-            await prepareTransaction(selectedOutput.outputId)
-        }
-    }
-    onMount(() => {
-        $selectedWallet?.address().then((address) => (walletAddress = address))
-        if (seconds === 0) onTimeout()
+    function startCountdown(): void {
+        if (countdownInterval) clearInterval(countdownInterval)
+
         countdownInterval = setInterval(() => {
             seconds -= 1
             if (seconds <= 0) {
@@ -129,6 +126,11 @@
                 onTimeout()
             }
         }, MILLISECONDS_PER_SECOND)
+    }
+
+    onMount(() => {
+        $selectedWallet?.address().then((address) => (walletAddress = address))
+        if (seconds === 0) onTimeout()
     })
 
     onDestroy(() => {
@@ -136,9 +138,8 @@
     })
 
     const onTimeout = (): void => {
-        // $implicitAccountCreationRouter.next()
+        $implicitAccountCreationRouter.next()
     }
-    // ----------------------------------------------------------------
 </script>
 
 <step-content class={`flex flex-col items-center justify-between h-full ${isLowManaGeneration ? 'pt-8' : 'pt-20'}`}>
