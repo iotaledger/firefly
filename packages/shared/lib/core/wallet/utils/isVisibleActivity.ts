@@ -27,7 +27,7 @@ export function isVisibleActivity(activity: Activity): boolean {
     if (!isVisibleWithActiveHiddenFilter(activity, filter)) {
         return false
     }
-    if (!isVisibleWithActiveRejectedFilter(activity, filter)) {
+    if (!isVisibleWithActiveIgnoredFilter(activity, filter)) {
         return false
     }
     if (!isVisibleWithActiveAssetFilter(activity, filter)) {
@@ -75,10 +75,10 @@ function isVisibleWithActiveValuelessFilter(activity: Activity, filter: Activity
     return true
 }
 
-function isVisibleWithActiveRejectedFilter(activity: Activity, filter: ActivityFilter): boolean {
+function isVisibleWithActiveIgnoredFilter(activity: Activity, filter: ActivityFilter): boolean {
     if (
-        (!filter.showRejected.active || filter.showRejected.selected === BooleanFilterOption.No) &&
-        activity.asyncData?.isRejected
+        (!filter.showIgnored.active || filter.showIgnored.selected === BooleanFilterOption.No) &&
+        activity.asyncData?.isIgnored
     ) {
         return false
     }

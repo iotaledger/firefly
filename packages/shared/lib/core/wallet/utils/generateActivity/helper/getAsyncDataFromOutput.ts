@@ -18,7 +18,7 @@ export async function getAsyncDataFromOutput(
         const isClaiming = false
         const claimingTransactionId = claimingData?.claimingTransactionId
         const claimedDate = claimingData?.claimedDate
-        const isRejected = isActivityHiddenForWalletId(wallet.id, outputId)
+        const isIgnored = isActivityHiddenForWalletId(wallet.id, outputId)
 
         const expirationDate = getExpirationDateFromOutput(commonOutput)
         const timelockDate = getTimelockDateFromOutput(commonOutput)
@@ -36,7 +36,7 @@ export async function getAsyncDataFromOutput(
             asyncStatus,
             timelockDate,
             expirationDate,
-            isRejected,
+            isIgnored,
             isClaiming,
             claimingTransactionId,
             claimedDate,

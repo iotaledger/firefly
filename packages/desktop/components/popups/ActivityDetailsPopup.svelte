@@ -11,7 +11,7 @@
         ActivityDirection,
         ActivityType,
         claimActivity,
-        rejectActivity,
+        ignoreActivity,
         selectedWallet,
         selectedWalletActivities,
     } from '@core/wallet'
@@ -82,17 +82,17 @@
         }
     }
 
-    function onRejectClick(): void {
+    function onIgnoreClick(): void {
         openPopup({
             id: PopupId.Confirmation,
             props: {
-                title: localize('actions.confirmRejection.title'),
-                description: localize('actions.confirmRejection.description'),
-                hint: localize('actions.confirmRejection.node'),
-                confirmText: localize('actions.reject'),
+                title: localize('actions.confirmIgnore.title'),
+                description: localize('actions.confirmIgnore.description'),
+                hint: localize('actions.confirmIgnore.node'),
+                confirmText: localize('actions.ignore'),
                 variant: TextHintVariant.Warning,
                 onConfirm: () => {
-                    rejectActivity(activityId)
+                    ignoreActivity(activityId)
                     closePopup()
                 },
                 onCancel: () =>
@@ -161,10 +161,10 @@
                     <Button
                         outline
                         classes="w-full"
-                        disabled={activity.asyncData?.isClaiming || activity.asyncData?.isRejected}
-                        onClick={onRejectClick}
+                        disabled={activity.asyncData?.isClaiming || activity.asyncData?.isIgnored}
+                        onClick={onIgnoreClick}
                     >
-                        {localize('actions.reject')}
+                        {localize('actions.ignore')}
                     </Button>
                     <Button
                         classes="w-full"
