@@ -47,9 +47,9 @@
 
     function handleCurrencyAmount(isBaseToken: boolean = false, amount: number, asset: IAsset | null): string {
         if (!asset) {
-            return isBaseToken ? getCurrencyAmount(amount, null, baseCoin) : getAmountMana(amount)
+            return isBaseToken ? getCurrencyAmount(amount, null, baseCoin) : ''
         } else {
-            return getCurrencyAmount(amount, asset, baseCoin)
+            return ''
         }
     }
 
@@ -94,9 +94,10 @@
             <balance-summary-row-expanded class="ml-8">
                 <BalanceSummaryRow
                     title={localize(`popups.balanceBreakdown.${breakdownKey}.title`)}
-                    subtitle={localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`)}
+                    subtitle={!asset ? localize(`popups.balanceBreakdown.${breakdownKey}.subtitle`) : undefined}
                     amount={handleAmount(isBaseToken, subBreakdown[breakdownKey].amount, asset)}
                     convertedAmount={handleCurrencyAmount(isBaseToken, subBreakdown[breakdownKey].amount, asset)}
+                    secondaryStyle={asset ? true : false}
                 />
             </balance-summary-row-expanded>
         {/each}

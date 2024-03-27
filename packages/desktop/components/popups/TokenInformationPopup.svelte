@@ -80,7 +80,7 @@
         const totalBalance = asset?.balance?.total
 
         const details = {
-            available: { amount: asset?.balance?.available },
+            availableAmount: { amount: asset?.balance?.available },
             conditionallyLocked: { amount: asset?.balance?.total - asset?.balance?.available },
         }
         return { amount: totalBalance, details }
@@ -143,8 +143,7 @@
                 <balance-wrapper class="flex flex-col bg-gray-50 dark:bg-gray-850 px-4 py-4 rounded-lg">
                     <BalanceSummarySection
                         {asset}
-                        titleKey="asset"
-                        subtitleKey="asset"
+                        titleKey="totalBalanceAmount"
                         amount={balanceSummary?.amount}
                         subBreakdown={balanceSummary?.details}
                     />

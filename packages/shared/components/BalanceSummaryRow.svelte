@@ -6,33 +6,39 @@
     export let bold: boolean = false
     export let amount: string
     export let convertedAmount: string
+    export let secondaryStyle: boolean = false
 
-    const PRIMARY_TEXT_CONFIG = {
-        color: 'gray-800',
-        darkColor: 'white',
-        fontSize: '15',
-        fontWeight: bold ? FontWeight.semibold : FontWeight.normal,
-        lineHeight: '5',
-    }
-
-    const SECONDARY_TEXT_CONFIG = {
-        color: 'gray-600',
-        darkColor: 'gray-400',
-        fontSize: '13',
-        fontWeight: FontWeight.normal,
-        lineHeight: '4',
+    const TEXT_CONFIG = {
+        primary: {
+            color: 'gray-800',
+            darkColor: 'white',
+            fontSize: '15',
+            fontWeight: bold ? FontWeight.semibold : FontWeight.normal,
+            lineHeight: '5',
+        },
+        secondary: {
+            color: 'gray-600',
+            darkColor: 'gray-400',
+            fontSize: '13',
+            fontWeight: FontWeight.normal,
+            lineHeight: '4',
+        },
     }
 </script>
 
 <div class="flex flex-row justify-between flex-grow">
     <div class={title ? 'flex flex-col space-y-0.5' : null}>
-        <Text {...PRIMARY_TEXT_CONFIG}>{title}</Text>
+        <Text {...secondaryStyle ? TEXT_CONFIG.secondary : TEXT_CONFIG.primary}>
+            {title}
+        </Text>
         {#if subtitle}
-            <Text {...SECONDARY_TEXT_CONFIG}>{subtitle}</Text>
+            <Text {...TEXT_CONFIG.secondary}>{subtitle}</Text>
         {/if}
     </div>
     <div class="flex flex-col items-end space-y-0.5">
-        <Text {...PRIMARY_TEXT_CONFIG} classes="text-right">{amount}</Text>
-        <Text {...SECONDARY_TEXT_CONFIG} classes="text-right">{convertedAmount}</Text>
+        <Text {...secondaryStyle ? TEXT_CONFIG.secondary : TEXT_CONFIG.primary} classes="text-right">
+            {amount}
+        </Text>
+        <Text {...TEXT_CONFIG.secondary} classes="text-right">{convertedAmount}</Text>
     </div>
 </div>
