@@ -5,6 +5,7 @@ import {
     ActivityType,
     WalletApiEventHandler,
     allWalletActivities,
+    isDelegationOutput,
     syncBalance,
     updateAsyncDataByTransactionId,
     validateWalletApiEvent,
@@ -13,6 +14,7 @@ import { SpentOutputWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/
 import { nodeInfoProtocolParameters } from '@core/network'
 import { getUnixTimestampFromNodeInfoAndSlotIndex } from '@core/network/helpers/getSlotInfoFromNodeProtocolParameters'
 import { get } from 'svelte/store'
+import { closePopup } from 'shared/lib/auxiliary/popup'
 
 export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler {
     return async (error: Error, rawEvent: WalletEvent) => {
@@ -26,6 +28,8 @@ export function handleSpentOutputEvent(walletId: string): WalletApiEventHandler 
 export async function handleSpentOutputEventInternal(walletId: string, payload: SpentOutputWalletEvent): Promise<void> {
     const wallet = get(activeWallets)?.find((wallet) => wallet.id === walletId)
     const output = payload.output
+    const _isDelegationOutput = isDelegationOutput(output)
+
     await syncBalance(walletId, true)
     if (wallet) {
         const walletOutputs = await wallet.outputs()
@@ -60,5 +64,13 @@ export async function handleSpentOutputEventInternal(walletId: string, payload: 
         if (unixTimestampOutputMetadata > unixTimestampPreviousOutputMetadata) {
             updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable: false })
         }
+    }
+
+    if (_isDelegationOutput && wallet?.hasDelegationRewardClaimTransactionInProgress) {
+        updateActiveWallet(walletId, {
+            hasDelegationRewardClaimTransactionInProgress: false,
+            isTransferring: false,
+        })
+        closePopup() // close claimDelegationRewardsPopup when the account output is burned
     }
 }
