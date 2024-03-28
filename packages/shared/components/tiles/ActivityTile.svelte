@@ -6,11 +6,11 @@
         ActivityAsyncStatus,
         ActivityType,
         IAsset,
-        InclusionState,
         NotVerifiedStatus,
         getTokenFromSelectedWallet,
         selectedWalletAssets,
     } from '@core/wallet'
+    import { InclusionState } from '@iota/sdk/out/types'
     import {
         ActivityInclusionStatusPill,
         AccountActivityTileContent,

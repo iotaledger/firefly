@@ -1,5 +1,11 @@
 import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-import { AccountOutput, TransactionInclusionWalletEvent, WalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import {
+    AccountOutput,
+    InclusionState,
+    TransactionInclusionWalletEvent,
+    WalletEvent,
+    WalletEventType,
+} from '@iota/sdk/out/types'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from '@contexts/governance/utils/isWalletVoting'
 import { updateNftInAllWalletNfts } from '@core/nfts'
@@ -14,7 +20,6 @@ import {
     ActivityDirection,
     ActivityType,
     GovernanceActivity,
-    InclusionState,
     WalletApiEventHandler,
 } from '@core/wallet'
 import { getWalletById, updateActiveWallet } from '@core/profile'
