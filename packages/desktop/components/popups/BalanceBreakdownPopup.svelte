@@ -32,7 +32,6 @@
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
-        const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
         const vestingBreakdown = getVestingBreakdown()
         const manaBreakdown = getManaBreakdown()
@@ -40,7 +39,6 @@
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
-            locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
             mana: manaBreakdown,
             ...(features.vesting.enabled && { vesting: vestingBreakdown }),
@@ -102,17 +100,6 @@
         }
 
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
-    }
-
-    function getLockedBreakdown(): BalanceBreakdown {
-        const governanceAmount = parseInt($selectedWallet?.votingPower, 10)
-        const totalLockedAmount = governanceAmount
-
-        const subBreakdown = {
-            governance: { amount: governanceAmount },
-        }
-
-        return { amount: totalLockedAmount, subBreakdown }
     }
 
     function getStorageDepositBreakdown(): BalanceBreakdown {
