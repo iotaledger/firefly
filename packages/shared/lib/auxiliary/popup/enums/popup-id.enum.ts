@@ -1,4 +1,5 @@
 export enum PopupId {
+    AllotMana = 'allotMana',
     WalletSwitcher = 'WalletSwitcher',
     ActivityDetails = 'activityDetails',
     AddNode = 'addNode',

@@ -4,3 +4,4 @@ export { default as MintNativeTokenButton } from './MintNativeTokenButton.svelte
 export { default as MintNftButton } from './MintNftButton.svelte'
 export { default as RefreshTokenMetadataButton } from './RefreshTokenMetadataButton.svelte'
 export { default as TestDeepLinkButton } from './TestDeepLinkButton.svelte'
+export { default as AllotManaButton } from './AllotManaButton.svelte'

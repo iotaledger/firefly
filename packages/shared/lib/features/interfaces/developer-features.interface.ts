@@ -7,4 +7,5 @@ export interface IDeveloperFeatures extends IFeatureFlag {
     account: IFeatureFlag
     refreshTokens: IFeatureFlag
     deeplink: IFeatureFlag
+    allotMana: IFeatureFlag
 }
