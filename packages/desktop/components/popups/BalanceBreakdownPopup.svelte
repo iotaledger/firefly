@@ -175,7 +175,7 @@
                 subtitleKey={breakdownKey}
                 amount={breakdown[breakdownKey].amount}
                 subBreakdown={breakdown[breakdownKey].subBreakdown}
-                isBaseToken={breakdown[breakdownKey].isBaseToken}
+                isBaseToken={breakdownKey !== 'mana'}
             />
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(walletBalance?.baseCoin?.total ?? 0)} bold />

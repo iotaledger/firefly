@@ -6,6 +6,7 @@
     import { getMarketAmountFromAssetValue } from '@core/market/utils/getMarketAmountFromAssetValue'
     import { getMarketPriceForAsset } from '@core/market/utils'
     import { AssetIconSize } from '@ui/enums'
+    import { MANA_ID } from '@core/network'
 
     export let asset: IAsset | undefined
     export let onClick: () => unknown
@@ -15,6 +16,7 @@
 
     $: marketPrice = asset ? getMarketPriceForAsset(asset) : undefined
     $: marketBalance = asset ? getMarketAmountFromAssetValue(asset.balance?.total, asset) : undefined
+    $: total = (asset?.id === MANA_ID ? asset?.balance?.available : asset?.balance?.total) ?? 0
 </script>
 
 {#if asset}
@@ -46,7 +48,7 @@
             </div>
             <div class="flex flex-col text-right">
                 <Text type={TextType.p} fontWeight={FontWeight.semibold}>
-                    {asset.metadata ? formatTokenAmountBestMatch(asset.balance?.total, asset.metadata) : '-'}
+                    {asset.metadata ? formatTokenAmountBestMatch(total, asset.metadata) : '-'}
                 </Text>
                 {#if !squashed}
                     <div class="flex flex-row justify-between items-center text-right">

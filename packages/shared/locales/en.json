@@ -851,6 +851,15 @@
                 "title": "Available Mana",
                 "subtitle": "Mana available to send and issue blocks"
             },
+            "totalBalanceAmount": {
+                "title": "Total balance amount"
+            },
+            "availableAmount": {
+                "title": "Available amount"
+            },
+            "conditionallyLocked": {
+                "title": "Conditionally locked amount"
+            },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
