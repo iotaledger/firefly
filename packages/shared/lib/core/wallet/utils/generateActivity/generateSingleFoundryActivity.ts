@@ -23,7 +23,7 @@ export async function generateSingleFoundryActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<FoundryActivity> {
-    const { transactionId, claimingData, time, direction, inclusionState } = processedTransaction
+    const { transactionId, claimingData, time, direction, inclusionState, mana } = processedTransaction
 
     const output = wrappedOutput.output as FoundryOutput
     const outputId = wrappedOutput.outputId
@@ -78,6 +78,7 @@ export async function generateSingleFoundryActivity(
         metadata,
         tag,
         asyncData,
+        mana,
         ...sendingInfo,
     }
 }

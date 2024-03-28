@@ -23,7 +23,7 @@ export async function generateSingleBasicActivity(
     fallbackAssetId?: string,
     fallbackAmount?: number
 ): Promise<TransactionActivity> {
-    const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
+    const { transactionId, direction, claimingData, time, inclusionState, mana } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
@@ -102,6 +102,7 @@ export async function generateSingleBasicActivity(
         asyncData,
         destinationNetwork,
         parsedLayer2Metadata,
+        mana,
         ...sendingInfo,
     }
 }

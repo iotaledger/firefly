@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { ActivityDirection } from '../../enums'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
@@ -24,6 +24,10 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
         remainder: true,
     }))
 
+    const manaCost = outputs
+        .filter((output) => !output.remainder)
+        .reduce((acc, output) => acc + Number(output.output.mana), 0)
+
     return {
         outputs,
         transactionId,
@@ -31,6 +35,7 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
         time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
         wrappedInputs: <IWrappedOutput[]>inputs,
+        mana: manaCost,
         utxoInputs,
     }
 }
@@ -50,7 +55,6 @@ function convertTransactionOutputTypeToWrappedOutput(
     outputType: Output
 ): IWrappedOutput {
     const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
-    OutputWithMetadata
     return {
         outputId,
         output: outputType,
