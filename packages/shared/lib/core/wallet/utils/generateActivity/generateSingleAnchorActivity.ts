@@ -17,7 +17,7 @@ export async function generateSingleAnchorActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<AnchorActivity> {
-    const { transactionId, claimingData, direction, time, inclusionState, mana } = processedTransaction
+    const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
 
     const output = wrappedOutput.output as AnchorOutput
     const outputId = wrappedOutput.outputId
@@ -56,7 +56,6 @@ export async function generateSingleAnchorActivity(
         inclusionState,
         containsValue,
         asyncData,
-        mana,
         ...sendingInfo,
     }
 }

@@ -16,7 +16,7 @@ export async function generateSingleConsolidationActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<ConsolidationActivity> {
-    const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs, mana } = processedTransaction
+    const { transactionId, direction, claimingData, time, inclusionState, wrappedInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
@@ -54,7 +54,6 @@ export async function generateSingleConsolidationActivity(
         tag,
         asyncData,
         amountConsolidatedInputs,
-        mana,
         ...sendingInfo,
     }
 }

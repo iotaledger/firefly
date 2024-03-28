@@ -19,7 +19,7 @@ export async function generateSingleNftActivity(
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters,
     nftIdFromInput?: string
 ): Promise<NftActivity> {
-    const { claimingData, time, inclusionState, transactionId, direction, mana } = processedTransaction
+    const { claimingData, time, inclusionState, transactionId, direction } = processedTransaction
     const outputId = wrappedOutput.outputId
     const output = wrappedOutput.output as NftOutput
     const id = outputId || transactionId
@@ -81,6 +81,5 @@ export async function generateSingleNftActivity(
         direction,
         destinationNetwork,
         parsedLayer2Metadata,
-        mana,
     }
 }
