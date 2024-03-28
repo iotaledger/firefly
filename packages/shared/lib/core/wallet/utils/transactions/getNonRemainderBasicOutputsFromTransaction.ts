@@ -5,16 +5,16 @@ import { CommonOutput } from '@iota/sdk/out/types'
 
 export function getNonRemainderBasicOutputsFromTransaction(
     wrappedOutputs: IWrappedOutput[],
-    walletDepositAddress: string,
+    validAddresses: string[],
     direction: ActivityDirection
 ): IWrappedOutput[] {
     return wrappedOutputs.filter((outputData) => {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output as CommonOutput)
 
         if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return !outputData.remainder && walletDepositAddress === recipientAddress
+            return !outputData.remainder && validAddresses.includes(recipientAddress)
         } else {
-            return walletDepositAddress !== recipientAddress
+            return !validAddresses.includes(recipientAddress)
         }
     })
 }
