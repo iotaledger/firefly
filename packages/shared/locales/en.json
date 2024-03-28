@@ -1292,11 +1292,11 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "claimingRewards": "Claiming rewards",
-        "reject": "Reject",
-        "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        "ignore": "Ignore",
+        "confirmIgnore": {
+            "title": "Ignore transaction",
+            "description": "Are you sure you want to ignore this transaction?",
+            "node": "Please note that ignoring a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
@@ -1743,8 +1743,8 @@
             "yes": "Yes",
             "no": "No"
         },
-        "showRejected": {
-            "label": "Show rejected",
+        "showIgnored": {
+            "label": "Show ignored",
             "yes": "Yes",
             "no": "No"
         },
