@@ -1,5 +1,5 @@
 import { IWalletState } from '@core/wallet/interfaces'
-import { ActivityAction, ActivityType, IProcessedTransaction } from '@core/wallet'
+import { ActivityAction, ActivityType, IProcessedTransaction, getSenderAddressFromInputs } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { generateSingleAccountActivity } from './generateSingleAccountActivity'
@@ -33,6 +33,8 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     wallet: IWalletState
 ): Promise<Activity[]> {
     const { outputs, wrappedInputs } = processedTransaction
+    const sender = getSenderAddressFromInputs(wrappedInputs)
+    const isSentToImplicitAccountCreationAddress = sender === (await wallet.implicitAccountCreationAddress())
     const activities: Activity[] = []
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
@@ -75,7 +77,11 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         const anchorActivities = await generateActivitiesFromAnchorOutputs(processedTransaction, wallet)
         activities.push(...anchorActivities)
     }
-    if (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) {
+
+    if (
+        (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) ||
+        isSentToImplicitAccountCreationAddress
+    ) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }

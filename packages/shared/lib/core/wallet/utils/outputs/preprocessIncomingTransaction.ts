@@ -1,6 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
-// import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { ActivityDirection } from '../../enums'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
@@ -18,21 +17,20 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
-    // const inputIds =  utxoInputs.map((input) => {
-    //         const transactionId = input.transactionId
-    //         const transactionOutputIndex = input.transactionOutputIndex
-    //         return computeOutputId(transactionId, transactionOutputIndex)
-    //     })
-    // const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
+    const inputs = transaction.inputs.map((input) => ({
+        output: input.output,
+        outputId: input.metadata.outputId,
+        metadata: input.metadata,
+        remainder: true,
+    }))
 
     return {
-        outputs: outputs,
+        outputs,
         transactionId,
         direction: ActivityDirection.Incoming,
         time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
-        wrappedInputs: [],
-        // wrappedInputs: <IWrappedOutput[]>inputs,
+        wrappedInputs: <IWrappedOutput[]>inputs,
         utxoInputs,
     }
 }
