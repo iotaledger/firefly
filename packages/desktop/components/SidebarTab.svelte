@@ -28,8 +28,9 @@
     on:mouseenter={handleShowTooltip}
     on:mouseleave={handleHideTooltip}
     bind:this={anchor}
-    class="{$dashboardRoute === tab?.route ? 'text-blue-500' : 'text-gray-500'} relative"
+    class="{$dashboardRoute === tab?.route ? 'text-blue-500' : 'text-gray-500'} relative disabled:opacity-50"
     on:click={onClick}
+    disabled={tab?.disabled}
 >
     <Icon width="24" height="24" icon={tab?.icon} />
 

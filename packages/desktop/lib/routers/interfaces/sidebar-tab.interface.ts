@@ -9,4 +9,5 @@ export interface ISidebarTab {
     onClick: () => void
     notificationType?: NotificationType
     showNotificationBadge?: boolean
+    disabled?: boolean
 }
