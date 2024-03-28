@@ -4,6 +4,9 @@ import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
+import { get } from 'svelte/store'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -11,6 +14,10 @@ export async function preprocessOutgoingTransaction(
 ): Promise<IProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const slotUnixTimestamp = nodeProtocolParameters
+        ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
+        : 0
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
@@ -28,7 +35,7 @@ export async function preprocessOutgoingTransaction(
         outputs: outputs,
         transactionId,
         direction,
-        time: new Date(Number(transaction.timestamp)),
+        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
         wrappedInputs: <IWrappedOutput[]>inputs,
     }
