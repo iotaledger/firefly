@@ -17,7 +17,7 @@ export async function generateSingleGovernanceActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<GovernanceActivity> {
-    const { transactionId, direction, time, inclusionState, wrappedInputs, mana } = processedTransaction
+    const { transactionId, direction, time, inclusionState, wrappedInputs } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
@@ -55,7 +55,6 @@ export async function generateSingleGovernanceActivity(
         metadata,
         tag,
         asyncData: null,
-        mana,
         ...governanceInfo,
         ...sendingInfo,
     }

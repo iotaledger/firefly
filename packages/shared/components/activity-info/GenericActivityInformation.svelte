@@ -2,8 +2,8 @@
     import { KeyValueBox } from '@ui'
     import { getFormattedTimeStamp, localize } from '@core/i18n'
     import { activeProfile, getBaseToken } from '@core/profile'
-    import { Activity, ActivityDirection, formatTokenAmountBestMatch, formatTokenAmountPrecise } from '@core/wallet'
-    import { DEFAULT_MANA, ExplorerEndpoint } from '@core/network'
+    import { Activity, formatTokenAmountPrecise } from '@core/wallet'
+    import { ExplorerEndpoint } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { openUrlInBrowser } from '@core/app'
     import { IKeyValueBoxList, truncateString } from '@core/utils'
@@ -28,8 +28,6 @@
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, getBaseToken())
     $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, getBaseToken())
     $: formattedGasFee = formatTokenAmountPrecise(Number(gasFee ?? 0), getBaseToken())
-    $: formattedManaPrefix = activity.direction === ActivityDirection.Incoming ? '' : '- '
-    $: formattedMana = formattedManaPrefix + formatTokenAmountBestMatch(Number(activity?.mana ?? 0), DEFAULT_MANA)
 
     let transactionDetailsList: IKeyValueBoxList
     $: transactionDetailsList = {
@@ -64,9 +62,6 @@
             timelockDate: { data: formattedTimelockDate, isTooltipVisible: true },
         }),
         ...(claimedTime && { claimedTime: { data: claimedTime } }),
-        ...(typeof activity?.mana === 'number' && {
-            mana: { data: formattedMana },
-        }),
     }
 
     function onTransactionIdClick(): void {

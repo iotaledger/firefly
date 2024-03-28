@@ -1,17 +1,9 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import {
-    AccountOutput,
-    Output,
-    OutputType,
-    OutputWithMetadata,
-    TransactionWithMetadata,
-    UTXOInput,
-} from '@iota/sdk/out/types'
+import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
-import { getPassiveManaForOutput } from 'shared/lib/core/network'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -32,24 +24,12 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
-    let manaCost = 0
-    const prevAccountOutput = inputs.find((input) => (input.output as AccountOutput).accountId)
-    if (prevAccountOutput) {
-        const prevMana = getPassiveManaForOutput(prevAccountOutput) ?? 0
-        const postAccountOutput = outputs.find(
-            (output) =>
-                (prevAccountOutput.output as AccountOutput).accountId === (output.output as AccountOutput).accountId
-        )
-        manaCost = prevMana - Number(postAccountOutput?.output?.mana ?? 0)
-    }
-
     return {
         outputs: outputs,
         transactionId,
         direction,
         time: new Date(Number(transaction.timestamp)),
         inclusionState: transaction.inclusionState,
-        mana: manaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
     }
 }

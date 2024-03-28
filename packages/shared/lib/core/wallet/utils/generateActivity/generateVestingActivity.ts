@@ -19,7 +19,7 @@ export async function generateVestingActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<VestingActivity> {
-    const { transactionId, direction, claimingData, time, inclusionState, mana } = processedTransaction
+    const { transactionId, direction, claimingData, time, inclusionState } = processedTransaction
 
     const isHidden = false
     const isAssetHidden = false
@@ -63,7 +63,6 @@ export async function generateVestingActivity(
         tag,
         asyncData,
         destinationNetwork,
-        mana,
         ...sendingInfo,
         ...parsedLayer2Metadata,
     }
