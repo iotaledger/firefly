@@ -851,6 +851,15 @@
                 "title": "Available Mana",
                 "subtitle": "Mana available to send and issue blocks"
             },
+            "totalBalanceAmount": {
+                "title": "Total balance amount"
+            },
+            "availableAmount": {
+                "title": "Available amount"
+            },
+            "conditionallyLocked": {
+                "title": "Conditionally locked amount"
+            },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
         "minimizeStorageDeposit": {
@@ -1724,7 +1733,8 @@
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available mana",
         "insufficientMana": "Insufficient {availableMana}.",
-        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost",
+        "mana": "Mana"
     },
     "filters":{
         "title": "Filters",
