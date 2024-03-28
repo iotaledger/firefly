@@ -1,6 +1,6 @@
-import { CommonOutput, OutputData, OutputWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import { CommonOutput, InclusionState, OutputData, OutputWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
-import { InclusionState, ActivityDirection } from '../../enums'
+import { ActivityDirection } from '../../enums'
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import { getRecipientAddressFromOutput } from './getRecipientAddressFromOutput'
 import { getSenderAddressFromInputs } from '../transactions'

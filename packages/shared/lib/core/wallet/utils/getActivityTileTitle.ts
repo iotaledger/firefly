@@ -1,4 +1,5 @@
-import { ActivityAction, ActivityDirection, ActivityType, GovernanceAction, InclusionState } from '../enums'
+import { InclusionState } from '@iota/sdk/out/types'
+import { ActivityAction, ActivityDirection, ActivityType, GovernanceAction } from '../enums'
 import { Activity } from '../types'
 
 export function getActivityTileTitle(activity: Activity): string {

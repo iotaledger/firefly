@@ -1,6 +1,6 @@
 import { NewTransactionDetails, NftActivity, Subject, TransactionActivity, VestingActivity } from '@core/wallet/types'
 import { NewTransactionType } from '@core/wallet/stores'
-import { ActivityAction, ActivityDirection, ActivityType, InclusionState } from '@core/wallet/enums'
+import { ActivityAction, ActivityDirection, ActivityType } from '@core/wallet/enums'
 import { TimePeriod } from '@core/utils'
 import { getAddressFromSubject } from '../getAddressFromSubject'
 import {
@@ -11,6 +11,7 @@ import {
     TRANSFER_ALLOWANCE,
     getDestinationNetworkFromAddress,
 } from '@core/layer-2'
+import { InclusionState } from '@iota/sdk/out/types'
 
 export enum SendFormTab {
     SendToken = 'general.sendToken',

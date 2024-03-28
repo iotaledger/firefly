@@ -1,9 +1,9 @@
 import { get } from 'svelte/store'
 
-import { Event, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
+import { Event, InclusionState, TransactionInclusionWalletEvent, WalletEventType } from '@iota/sdk/out/types'
 
 import { localize } from '@core/i18n'
-import { InclusionState, MissingTransactionIdError, validateWalletApiEvent } from '@core/wallet'
+import { MissingTransactionIdError, validateWalletApiEvent } from '@core/wallet'
 import { showAppNotification } from '@auxiliary/notification'
 
 import { ShimmerClaimingWalletState } from '../enums'

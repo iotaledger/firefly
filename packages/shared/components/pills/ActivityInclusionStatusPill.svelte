@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { InclusionState } from '@core/wallet'
     import Pill from './Pill.svelte'
+    import { InclusionState } from '@iota/sdk/out/types'
 
     export let localizationKey: string
     export let inclusionState: InclusionState

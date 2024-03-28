@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { Activity } from '../types'
 import { activityFilter } from '../stores'
 import { getAssetFromPersistedAssets } from './getAssetFromPersistedAssets'
-import { ActivityAsyncStatus, InclusionState, ActivityType } from '../enums'
+import { ActivityAsyncStatus, ActivityType } from '../enums'
 import { dateIsAfterOtherDate, dateIsBeforeOtherDate, datesOnSameDay } from '@core/utils'
 import { ActivityFilter } from '../interfaces'
 import { convertToRawAmount } from '.'
@@ -15,6 +15,7 @@ import {
     NumberFilterOption,
     StatusFilterOption,
 } from '@core/utils/enums/filters'
+import { InclusionState } from '@iota/sdk/out/types'
 
 // Filters activities based on activity properties. If none of the conditionals are valid, then activity is shown.
 export function isVisibleActivity(activity: Activity): boolean {
