@@ -227,6 +227,8 @@
     function onCancelClick(): void {
         closePopup()
     }
+
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">
@@ -271,6 +273,9 @@
     {#if surplus}
         <TextHint variant={TextHintVariant.Warning} text={localize('popups.transaction.surplusIncluded')} />
     {/if}
+    {#if hasMainAccountNegativeBIC}
+        <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+    {/if}
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         {#if disableBack}
             <Button classes="w-full" outline onClick={onCancelClick} disabled={isTransferring}>
@@ -286,6 +291,7 @@
             classes="w-full"
             onClick={onConfirmClick}
             disabled={isTransferring ||
+                hasMainAccountNegativeBIC ||
                 isPreparingOutput ||
                 !hasEnoughMana ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}

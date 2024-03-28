@@ -73,6 +73,7 @@
     }
 
     async function prepareDelegationOutput(): Promise<void> {
+        if (!accountAddress) return
         const params: CreateDelegationParams = {
             address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
             delegatedAmount: rawAmount,

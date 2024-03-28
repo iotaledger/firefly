@@ -711,10 +711,13 @@
                     "primary": "Primary key",
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
-                }
+                },
+                "mainAccountNegativeBICHint": "Your main account has a negative Block Issuance Credit (BIC). Please select another account as the main one.",
+                "accountNegativeBICHint": "This account has a negative Block Issuance Credit (BIC)."
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There are no accounts to show, activate one first."
+            "emptyAccounts": "There are no accounts to show, activate one first.",
+            "hasMainAccountNegativeBIC": "There is a problem with the BIC of your account."
         },
         "delegation": {
             "title": "Delegation",
@@ -986,7 +989,8 @@
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send."
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "negativeBIC": "Unable to send transaction. Your account has a negative Block Issuance Credit (BIC)."
         },
         "balanceFinder": {
             "title": "Balance finder",
