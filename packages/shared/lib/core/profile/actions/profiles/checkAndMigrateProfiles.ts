@@ -73,6 +73,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     14: persistedProfileMigrationToV15,
     15: persistedProfileMigrationToV16,
     16: persistedProfileMigrationToV17,
+    17: persistedProfileMigrationToV18,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -326,6 +327,13 @@ function persistedProfileMigrationToV16(existingProfile: IPersistedProfile): voi
 }
 
 function persistedProfileMigrationToV17(existingProfile: IPersistedProfile): void {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+    const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
+    existingProfile.network.chains = newChains
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): void {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
     const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
     existingProfile.network.chains = newChains
