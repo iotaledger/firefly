@@ -38,7 +38,7 @@
                       label: localize('tabs.collectibles'),
                       route: DashboardRoute.Collectibles,
                       onClick: openCollectibles,
-                      disabled: Boolean(!$selectedWallet?.mainAccountId),
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -49,7 +49,7 @@
                       label: localize('tabs.governance'),
                       route: DashboardRoute.Governance,
                       onClick: openGovernance,
-                      disabled: Boolean(!$selectedWallet?.mainAccountId),
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -60,7 +60,7 @@
                       label: localize('tabs.vesting'),
                       route: DashboardRoute.Vesting,
                       onClick: openVesting,
-                      disabled: Boolean(!$selectedWallet?.mainAccountId),
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -82,7 +82,7 @@
                       label: localize('tabs.delegation'),
                       route: DashboardRoute.Delegation,
                       onClick: openDelegation,
-                      disabled: Boolean(!$selectedWallet?.mainAccountId),
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -93,7 +93,7 @@
                       label: localize('tabs.developer'),
                       route: DashboardRoute.Developer,
                       onClick: openDeveloper,
-                      disabled: Boolean(!$selectedWallet?.mainAccountId),
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
