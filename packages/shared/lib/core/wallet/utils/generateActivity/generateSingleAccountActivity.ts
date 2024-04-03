@@ -18,7 +18,7 @@ export async function generateSingleAccountActivity(
     wallet: IWalletState,
     { action, processedTransaction, wrappedOutput }: IActivityGenerationParameters
 ): Promise<AccountActivity> {
-    const { transactionId, claimingData, direction, time, inclusionState } = processedTransaction
+    const { transactionId, claimingData, direction, time, inclusionState, mana } = processedTransaction
 
     const output = wrappedOutput.output as AccountOutput
     const outputId = wrappedOutput.outputId
@@ -57,6 +57,7 @@ export async function generateSingleAccountActivity(
         inclusionState,
         containsValue,
         asyncData,
+        mana,
         ...sendingInfo,
     }
 }
