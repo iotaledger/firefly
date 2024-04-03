@@ -1,21 +1,53 @@
 <script lang="ts">
-    import { Button, FontWeight, PasswordInput, Text, TextType, LedgerAnimation } from '@ui'
+    import { Button, PasswordInput, LedgerAnimation, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { selectedWallet, selectedWalletId } from '@core/wallet'
+    import {
+        IWalletState,
+        formatTokenAmountBestMatch,
+        selectedWallet,
+        selectedWalletAssets,
+        selectedWalletId,
+    } from '@core/wallet'
     import { Icon } from '@auxiliary/icon'
     import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { IllustrationEnum } from '@auxiliary/illustration'
-    import { unlockStronghold, updateActiveWallet, isSoftwareProfile } from '@core/profile'
-    import { OutputId } from '@iota/sdk/out/types'
+    import { unlockStronghold, updateActiveWallet, isSoftwareProfile, activeProfile } from '@core/profile'
+    import { OutputData, OutputId } from '@iota/sdk/out/types'
+    import { DEFAULT_MANA, ITransactionInfoToCalculateManaCost, getTotalAvailableMana } from '@core/network'
+    import { ManaBox } from '@components'
 
     export let outputId: string | undefined
 
     let error = ''
     let isBusy = false
     let strongholdPassword = ''
+    let totalAvailableMana: number
+    let hasEnoughMana = false
+    const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+
+    $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
+    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
     $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length !== 0 : true
     $: disabledActive = !validStronghold || isBusy
     $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, outputId))
+    $: formattedManaBalance = totalAvailableMana
+        ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
+        : '-'
+    $: formattedWalletBalance =
+        $selectedWallet?.balances?.baseCoin?.available && baseCoin
+            ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
+            : null
+
+    $: $selectedWallet, prepareTransaction(selectedOutput?.outputId)
+
+    function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
+        return (
+            _selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === _outputId
+            ) ?? _selectedWallet?.implicitAccountOutputs?.[0]
+        )
+    }
 
     async function unlockWalletAndCreateAccount(): Promise<void> {
         isBusy = true
@@ -47,9 +79,17 @@
             isBusy = false
         }
     }
+
+    async function prepareTransaction(outputId: string): Promise<void> {
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
+        }
+    }
 </script>
 
-<step-content class="flex flex-col items-center justify-between h-full pt-28">
+<step-content class="flex flex-col items-center justify-between h-full pt-20">
     <div class="flex flex-col h-full justify-between space-y-8">
         <div class="flex flex-col text-center justify-center px-4 space-y-9 max-w-md">
             {#if $isSoftwareProfile}
@@ -59,9 +99,19 @@
                         alt={localize('views.implicit-account-creation.steps.step3.title')}
                     />
                 </div>
-                <Text type={TextType.h3} fontWeight={FontWeight.semibold}
-                    >{localize('views.implicit-account-creation.steps.step3.view.title')}</Text
-                >
+                <div class="flex flex-col space-y-2">
+                    {#if formattedWalletBalance}
+                        <KeyValueBox
+                            keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
+                            valueText={formattedWalletBalance}
+                        />
+                    {/if}
+                    <KeyValueBox
+                        keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
+                        valueText={formattedManaBalance}
+                    />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} />
+                </div>
                 <PasswordInput
                     bind:error
                     bind:value={strongholdPassword}
