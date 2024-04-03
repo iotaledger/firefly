@@ -9,7 +9,7 @@
     } from '@core/network'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
-    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
+    import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
     import { OutputData } from '@iota/sdk/out/types'
     import {
@@ -36,7 +36,6 @@
     let isCongestionNotFound: boolean | null = null
     let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
-    let timeRemaining: string
     let totalAvailableMana: number
     let formattedSelectedOutputBalance: string
 
@@ -56,7 +55,6 @@
     $: formattedManaBalance = totalAvailableMana
         ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
         : '-'
-    $: timeRemaining = `${getBestTimeDuration(seconds * MILLISECONDS_PER_SECOND)} remaining`
     $: async () => {
         await prepareTransaction(selectedOutput.outputId)
     }
@@ -95,7 +93,7 @@
                     })
             }
             if (error.message?.includes('slots remaining until enough mana')) {
-                transactionInfo.preparedTransactionError = error.message
+                transactionInfo.preparedTransactionError = error
                 const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
@@ -139,14 +137,6 @@
                     alt={localize('views.implicit-account-creation.steps.step2.title')}
                 />
             </div>
-            <Text
-                type={TextType.h5}
-                fontSize="15"
-                color="blue-700"
-                darkColor="blue-700"
-                fontWeight={FontWeight.semibold}
-                >{localize('views.implicit-account-creation.steps.step2.view.subtitle')}</Text
-            >
             {#if isCongestionNotFound}
                 <div class="flex items-center justify-center space-x-2">
                     <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
