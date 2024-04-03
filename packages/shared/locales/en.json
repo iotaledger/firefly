@@ -712,10 +712,13 @@
                     "primary": "Primary key",
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
-                }
+                },
+                "mainAccountNegativeBICHint": "Your main account has a negative Block Issuance Credit (BIC). Please select another account as the main one.",
+                "accountNegativeBICHint": "This account has a negative Block Issuance Credit (BIC)."
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There are no accounts to show, activate one first."
+            "emptyAccounts": "There are no accounts to show, activate one first.",
+            "hasMainAccountNegativeBIC": "There is a problem with the BIC of your account."
         },
         "delegation": {
             "title": "Delegation",
@@ -848,6 +851,15 @@
             "availableMana": {
                 "title": "Available Mana",
                 "subtitle": "Mana available to send and issue blocks"
+            },
+            "totalBalanceAmount": {
+                "title": "Total balance amount"
+            },
+            "availableAmount": {
+                "title": "Available amount"
+            },
+            "conditionallyLocked": {
+                "title": "Conditionally locked amount"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -987,7 +999,8 @@
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send."
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "negativeBIC": "Unable to send transaction. Your account has a negative Block Issuance Credit (BIC)."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -1280,11 +1293,11 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "claimingRewards": "Claiming rewards",
-        "reject": "Reject",
-        "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        "ignore": "Ignore",
+        "confirmIgnore": {
+            "title": "Ignore transaction",
+            "description": "Are you sure you want to ignore this transaction?",
+            "node": "Please note that ignoring a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
@@ -1721,7 +1734,8 @@
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available mana",
         "insufficientMana": "Insufficient {availableMana}.",
-        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost",
+        "mana": "Mana"
     },
     "filters":{
         "title": "Filters",
@@ -1730,8 +1744,8 @@
             "yes": "Yes",
             "no": "No"
         },
-        "showRejected": {
-            "label": "Show rejected",
+        "showIgnored": {
+            "label": "Show ignored",
             "yes": "Yes",
             "no": "No"
         },
