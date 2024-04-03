@@ -107,7 +107,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
     }
 
-    // TODO: update this logic when available balance is fixed
     if (_isDelegationOutput) {
         if (wallet?.hasDelegationTransactionInProgress) {
             updateActiveWallet(walletId, {

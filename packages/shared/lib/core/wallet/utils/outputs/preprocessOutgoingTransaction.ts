@@ -1,9 +1,20 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import {
+    AccountOutput,
+    Output,
+    OutputType,
+    OutputWithMetadata,
+    TransactionWithMetadata,
+    UTXOInput,
+} from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
+import { getPassiveManaForOutput } from '@core/network'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
+import { get } from 'svelte/store'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -11,6 +22,10 @@ export async function preprocessOutgoingTransaction(
 ): Promise<IProcessedTransaction> {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const slotUnixTimestamp = nodeProtocolParameters
+        ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
+        : 0
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
@@ -24,12 +39,24 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
+    let manaCost = 0
+    const prevAccountOutput = inputs.find((input) => (input.output as AccountOutput).accountId)
+    if (prevAccountOutput) {
+        const prevMana = getPassiveManaForOutput(prevAccountOutput) ?? 0
+        const postAccountOutput = outputs.find(
+            (output) =>
+                (prevAccountOutput.output as AccountOutput).accountId === (output.output as AccountOutput).accountId
+        )
+        manaCost = prevMana - Number(postAccountOutput?.output?.mana ?? 0)
+    }
+
     return {
         outputs: outputs,
         transactionId,
         direction,
-        time: new Date(Number(transaction.timestamp)),
+        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
+        mana: manaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
     }
 }

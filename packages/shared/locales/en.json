@@ -661,13 +661,13 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
-                        "eyebrow": "Wallet avaible balance:",
+                        "eyebrow": "Wallet available balance:",
                         "generatedMana": "Generated Mana:",
                         "title": "Funds arrived:",
-                        "subtitle": "Generating mana...",
-                        "action": "Activate Account",
+                        "subtitle": "Generating Mana...",
+                        "action": "Activate account",
                         "walletAddress": {
-                            "description": "Send funds to your wallet address to speed up the mana generation",
+                            "description": "Send funds to your wallet address to speed up the Mana generation",
                             "show": "Show Address",
                             "copy": "Copy"
                         }
@@ -711,10 +711,13 @@
                     "primary": "Primary key",
                     "setAsPrimary": "Set as primary",
                     "unsetAsPrimary": "Unset as primary"
-                }
+                },
+                "mainAccountNegativeBICHint": "Your main account has a negative Block Issuance Credit (BIC). Please select another account as the main one.",
+                "accountNegativeBICHint": "This account has a negative Block Issuance Credit (BIC)."
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There are no accounts to show, activate one first."
+            "emptyAccounts": "There are no accounts to show, activate one first.",
+            "hasMainAccountNegativeBIC": "There is a problem with the BIC of your account."
         },
         "delegation": {
             "title": "Delegation",
@@ -834,7 +837,7 @@
             },
             "mana": {
                 "title": "Mana",
-                "subtitle": "Total mana"
+                "subtitle": "Total Mana"
             },
             "lockedMana": {
                 "title": "Locked Mana",
@@ -847,6 +850,15 @@
             "availableMana": {
                 "title": "Available Mana",
                 "subtitle": "Mana available to send and issue blocks"
+            },
+            "totalBalanceAmount": {
+                "title": "Total balance amount"
+            },
+            "availableAmount": {
+                "title": "Available amount"
+            },
+            "conditionallyLocked": {
+                "title": "Conditionally locked amount"
             },
             "minimizeStorageDepositButton": "Minimize storage deposit"
         },
@@ -986,7 +998,8 @@
             "selectAmount": "Send {tokenName}",
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send."
+            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "negativeBIC": "Unable to send transaction. Your account has a negative Block Issuance Credit (BIC)."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -1267,8 +1280,9 @@
         },
         "claimDelegationRewards": {
             "title": "Claim Rewards",
-            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
-            "confirmButton": "Claim"
+            "confirmButton": "Claim",
+            "rewards": "Rewards",
+            "delegationId": "Delegation ID"
         }
     },
     "actions": {
@@ -1283,11 +1297,11 @@
         "claim": "Claim",
         "claiming": "Claiming",
         "claimingRewards": "Claiming rewards",
-        "reject": "Reject",
-        "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+        "ignore": "Ignore",
+        "confirmIgnore": {
+            "title": "Ignore transaction",
+            "description": "Are you sure you want to ignore this transaction?",
+            "node": "Please note that ignoring a transaction only hides it from your Activity feed"
         },
         "confirmTokenBurn": {
             "title": "Burn {assetName}",
@@ -1662,7 +1676,7 @@
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
-        "availableManaWithValue": "Available mana: {mana}",
+        "availableManaWithValue": "Available Mana: {mana}",
         "availableBalance": "Available balance",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
@@ -1724,9 +1738,10 @@
         "custom": "Custom",
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
-        "availableMana": "Available mana",
+        "availableMana": "Available Mana",
         "insufficientMana": "Insufficient {availableMana}.",
-        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost"
+        "secondsToRefreshManaCost": "{seconds} seconds to refresh the Mana cost",
+        "mana": "Mana"
     },
     "filters":{
         "title": "Filters",
@@ -1735,8 +1750,8 @@
             "yes": "Yes",
             "no": "No"
         },
-        "showRejected": {
-            "label": "Show rejected",
+        "showIgnored": {
+            "label": "Show ignored",
             "yes": "Yes",
             "no": "No"
         },

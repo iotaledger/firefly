@@ -13,7 +13,7 @@ export interface ActivityFilter {
     internalExternal: SelectionFilterUnit
     asset: AssetFilterUnit
     date: DateFilterUnit
-    showRejected: SelectionFilterUnit
+    showIgnored: SelectionFilterUnit
     showHidden: SelectionFilterUnit
     showValueless: SelectionFilterUnit
 }

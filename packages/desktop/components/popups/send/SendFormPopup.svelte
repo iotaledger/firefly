@@ -4,7 +4,6 @@
     import { selectedWallet } from '@core/wallet'
     import {
         isReservedTagKeyword,
-        InclusionState,
         selectedWalletActivities,
         newTransactionDetails,
         NewTransactionType,
@@ -15,6 +14,7 @@
     import SendNftForm from './SendNftForm.svelte'
     import { OptionalInputType, SendFormTab } from '@core/wallet/utils/send/sendUtils'
     import { FontWeight, Tabs, Text, TextType } from '@ui'
+    import { InclusionState } from '@iota/sdk/out/types'
 
     const tabs: SendFormTab[] = [SendFormTab.SendToken, SendFormTab.SendNft]
     const { type: transactionType, disableAssetSelection } = get(newTransactionDetails)

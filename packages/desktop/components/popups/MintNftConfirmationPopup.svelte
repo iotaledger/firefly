@@ -113,7 +113,7 @@
                 <Tabs bind:activeTab {tabs} />
                 {#if activeTab === Tab.Transaction}
                     {#if quantity > 1}
-                        <KeyValueBox keyText={localize('general.quantity')} valueText={quantity} />
+                        <KeyValueBox keyText={localize('general.quantity')} valueText={quantity.toString()} />
                         <KeyValueBox
                             keyText={localize('general.storageDepositPerNft')}
                             valueText={formatTokenAmountPrecise(storageDeposit, getBaseToken())}
