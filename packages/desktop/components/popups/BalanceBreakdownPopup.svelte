@@ -1,16 +1,17 @@
 <script lang="ts">
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
-    import { selectedWallet } from '@core/wallet'
     import { localize } from '@core/i18n'
-    import { checkActiveProfileAuth } from '@core/profile'
     import { getManaBalance } from '@core/network'
+    import { checkActiveProfileAuth } from '@core/profile'
+    import { selectedWallet } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
-    import { UnlockCondition, UnlockConditionType, CommonOutput } from '@iota/sdk/out/types'
+    import features from '@features/features'
+    import { CommonOutput, OutputType, UnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
     import { TextHintVariant } from '@ui/enums'
-    import features from '@features/features'
+    import { get } from 'svelte/store'
 
     interface BalanceBreakdown {
         amount: number
@@ -32,6 +33,7 @@
     async function setBreakdown(): Promise<void> {
         const availableBreakdown = getAvailableBreakdown()
         const pendingBreakdown = await getPendingBreakdown()
+        const lockedBreakdown = getLockedBreakdown()
         const storageDepositBreakdown = getStorageDepositBreakdown()
         const vestingBreakdown = getVestingBreakdown()
         const manaBreakdown = getManaBreakdown()
@@ -39,6 +41,7 @@
         breakdown = {
             available: availableBreakdown,
             pending: pendingBreakdown,
+            locked: lockedBreakdown,
             storageDeposit: storageDepositBreakdown,
             mana: manaBreakdown,
             ...(features.vesting.enabled && { vesting: vestingBreakdown }),
@@ -53,11 +56,13 @@
         const totalPasiveMana = getManaBalance(walletBalance?.mana?.total)
         const availablePasiveBalance = getManaBalance(walletBalance?.mana?.available)
         const totalMana = totalPasiveMana + (walletBalance?.totalWalletBic ?? 0)
+        const manaRewards = Number(walletBalance?.mana?.rewards ?? 0)
 
         const subBreakdown = {
             availableMana: { amount: availablePasiveBalance },
             lockedMana: { amount: totalPasiveMana - availablePasiveBalance },
             bicMana: { amount: walletBalance?.totalWalletBic },
+            manaRewards: { amount: manaRewards },
         }
         return { amount: totalMana, subBreakdown, isBaseToken: false }
     }
@@ -100,6 +105,24 @@
         }
 
         return { amount: pendingOutputsStorageDeposit, subBreakdown }
+    }
+
+    function getLockedBreakdown(): BalanceBreakdown {
+        const delegationOutputs =
+            get(selectedWallet)?.walletUnspentOutputs?.filter(
+                (output) => output?.output?.type === OutputType.Delegation
+            ) || []
+        const implicitAccounts = get(selectedWallet)?.implicitAccountOutputs || []
+        const delegatedAmount = Number(delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0))
+        const implicitAccountsAmount = Number(
+            implicitAccounts.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
+        )
+        const totalLockedAmount = delegatedAmount + implicitAccountsAmount
+        const subBreakdown = {
+            delegation: { amount: delegatedAmount },
+            implicitAccounts: { amount: implicitAccountsAmount },
+        }
+        return { amount: totalLockedAmount, subBreakdown }
     }
 
     function getStorageDepositBreakdown(): BalanceBreakdown {
