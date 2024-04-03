@@ -38,7 +38,7 @@
         StakingFeature,
     } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
-    import { ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { DEFAULT_MANA, ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
@@ -169,7 +169,7 @@
                         </button>
                     {/if}
                 </right-pane-title>
-                <div class="flex flex-row space-x-2 w-1/2">
+                <div class="flex flex-row space-x-2 {isImplicitAccount ? 'w-full' : 'w-1/2'}">
                     {#if isImplicitAccount}
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
@@ -206,6 +206,18 @@
                             </div>
                         </Tile>
                     {/if}
+                    {#if isImplicitAccount}
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full">
+                                <Text type={TextType.h3}>
+                                    {formatTokenAmountBestMatch(selectedOutput.output?.mana, DEFAULT_MANA)}</Text
+                                >
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.accountManagement.details.mana')}</Text
+                                >
+                            </div>
+                        </Tile>
+                    {/if}
                 </div>
                 {#if accountId}
                     <div class="flex flex-col space-y-2">
@@ -224,16 +236,6 @@
                             >
                             <Icon icon={IconEnum.Copy} classes="text-blue-500" width={24} height={24} />
                         </CopyableBox>
-                    </div>
-                {/if}
-                {#if isImplicitAccount}
-                    <div class="flex flex-col space-y-2">
-                        <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                            >{localize('views.accountManagement.details.mana')}</Text
-                        >
-                        <Text type={TextType.pre} fontSize="13" lineHeight="leading-120" classes="text-start"
-                            >{selectedOutput.output?.mana}</Text
-                        >
                     </div>
                 {/if}
                 {#if accountId && primaryKey}

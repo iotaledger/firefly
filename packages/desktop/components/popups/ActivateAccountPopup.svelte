@@ -10,4 +10,6 @@
     $: !isAccountActivated && $dashboardRouter.goTo(DashboardRoute.Wallet)
 </script>
 
-<ImplicitAccountCreationView {outputId} />
+<div class="scrollable-y h-[600px]">
+    <ImplicitAccountCreationView {outputId} />
+</div>
