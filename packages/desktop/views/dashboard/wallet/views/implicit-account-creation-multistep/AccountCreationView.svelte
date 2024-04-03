@@ -1,12 +1,18 @@
 <script lang="ts">
     import { Button, PasswordInput, LedgerAnimation, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets, selectedWalletId } from '@core/wallet'
+    import {
+        IWalletState,
+        formatTokenAmountBestMatch,
+        selectedWallet,
+        selectedWalletAssets,
+        selectedWalletId,
+    } from '@core/wallet'
     import { Icon } from '@auxiliary/icon'
     import { LedgerAppName, ledgerAppName } from '@core/ledger'
     import { IllustrationEnum } from '@auxiliary/illustration'
     import { unlockStronghold, updateActiveWallet, isSoftwareProfile, activeProfile } from '@core/profile'
-    import { OutputId } from '@iota/sdk/out/types'
+    import { OutputData, OutputId } from '@iota/sdk/out/types'
     import { DEFAULT_MANA, ITransactionInfoToCalculateManaCost, getTotalAvailableMana } from '@core/network'
     import { ManaBox } from '@components'
 
@@ -20,6 +26,7 @@
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
 
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
+    $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
     $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length !== 0 : true
     $: disabledActive = !validStronghold || isBusy
     $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
@@ -31,6 +38,17 @@
         $selectedWallet?.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
             : null
+
+    $: $selectedWallet, prepareTransaction(selectedOutput?.outputId)
+
+    function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
+        return (
+            _selectedWallet?.implicitAccountOutputs.find(
+                (implicitAccounts) => implicitAccounts.outputId.toString() === _outputId
+            ) ?? _selectedWallet?.implicitAccountOutputs?.[0]
+        )
+    }
+
     async function unlockWalletAndCreateAccount(): Promise<void> {
         isBusy = true
         error = ''
@@ -59,6 +77,14 @@
             console.error('err', err)
             error = localize(err?.message ?? err)
             isBusy = false
+        }
+    }
+
+    async function prepareTransaction(outputId: string): Promise<void> {
+        try {
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
+        } catch (error) {
+            transactionInfo.preparedTransactionError = error
         }
     }
 </script>
