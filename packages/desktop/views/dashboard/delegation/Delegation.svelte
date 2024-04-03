@@ -14,13 +14,11 @@
         CopyableBox,
         BoxedIconWithText,
         PingingBadge,
-        TextHintVariant,
     } from '@ui'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile } from '@core/profile'
     import {
         formatTokenAmountBestMatch,
         AddressConverter,
-        getDefaultTransactionOptions,
         selectedWalletAssets,
         EMPTY_HEX_ID,
         getOutputRewards,
@@ -29,7 +27,7 @@
     import { truncateString } from '@core/utils'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
-    import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
+    import { PopupId, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
     import { api } from '@core/api'
     import { DEFAULT_MANA } from '@core/network'
@@ -58,8 +56,8 @@
 
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
-    $: delegationOutputs?.length > 0 && setCurrentEpochAndCommittee()
-    $: delegationOutputs?.length > 0 && currentEpoch && buildMappedDelegationData(delegationOutputs)
+    $: delegationOutputs, setCurrentEpochAndCommittee()
+    $: currentEpoch, delegationOutputs?.length > 0 && buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
@@ -105,26 +103,12 @@
             id: PopupId.CreateDelegation,
         })
     }
-
     function handleClaimRewards(delegationId: string, rewards: number): void {
         openPopup({
-            id: PopupId.Confirmation,
+            id: PopupId.ClaimDelegationRewards,
             props: {
-                title: localize('popups.claimDelegationRewards.title'),
-                description: localize('popups.claimDelegationRewards.description', {
-                    values: { rewards, delegationId },
-                }),
-                confirmText: localize('popups.claimDelegationRewards.confirmButton'),
-                variant: TextHintVariant.Success,
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await $selectedWallet.burn({ delegations: [delegationId] }, getDefaultTransactionOptions())
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
+                delegationId,
+                rewards,
             },
         })
     }
@@ -218,7 +202,7 @@
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
         <Pane height={Height.Full} width={Width.Full}>
-            <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
+            <div class="flex flex-col space-y-10 max-w-7xl w-full h-full p-8">
                 <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
@@ -251,7 +235,7 @@
                 </div>
                 {#if features.delegation.delegationList.enabled}
                     {#if delegationData.length > 0}
-                        <table class="flex flex-col w-full space-y-4 h-80">
+                        <table class="flex flex-col overflow-hidden h-full">
                             <thead class="w-full">
                                 <tr class="flex flex-row justify-between align-items w-full">
                                     {#each Object.values(Header) as header}
