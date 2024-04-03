@@ -57,8 +57,8 @@
     }
 </script>
 
-<implicit-account-creation-view class="h-full">
-    <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
+<implicit-account-creation-view class="h-full w-full">
+    <box-content class="flex flex-col w-full h-full pt-9 pb-12 items-center justify-between rounded-2xl">
         <Text type={TextType.h2}>{localize('views.implicit-account-creation.title')}</Text>
         {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Init}
             <InitView />

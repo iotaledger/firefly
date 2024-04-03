@@ -678,7 +678,6 @@
                     "title": "Step 3",
                     "body": "Account creation",
                     "view":{
-                        "title": "Confirm Something",
                         "placeholder": "Stronghold Password"
                     }
                 }
@@ -1736,7 +1735,7 @@
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available Mana",
         "insufficientMana": "Insufficient {availableMana}.",
-        "secondsToRefreshManaCost": "{seconds} seconds to refresh the Mana cost",
+        "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana"
     },
     "filters":{

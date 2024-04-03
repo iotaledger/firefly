@@ -77,10 +77,10 @@
             })}
         </Text>
     {:else if showCountdown}
-        <Text type={TextType.p} classes="text-center">
+        <Text type={TextType.p} classes="text-center" color="gray-500" darkColor="gray-50">
             {localize('general.secondsToRefreshManaCost', {
                 values: {
-                    seconds: secondsToRefreshManaCost,
+                    time: secondsToRefreshManaCost,
                 },
             })}
         </Text>
