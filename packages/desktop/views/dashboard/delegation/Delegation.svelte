@@ -2,8 +2,9 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { api } from '@core/api'
+    import { openUrlInBrowser } from '@core/app'
     import { localize } from '@core/i18n'
-    import { DEFAULT_MANA } from '@core/network'
+    import { DEFAULT_MANA, getOfficialExplorerUrl } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { truncateString } from '@core/utils'
     import {
@@ -199,6 +200,12 @@
                 }
         }
     }
+
+    function onExplorerClick(): void {
+        const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+        const validatorsUrl = `${explorerUrl}/validators`
+        openUrlInBrowser(validatorsUrl)
+    }
 </script>
 
 {#if $selectedWallet}
@@ -206,7 +213,15 @@
         <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full h-full p-8">
                 <div class="flex flex-row justify-between">
-                    <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                    <div class="flex flex-col space-y-1">
+                        <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                        <button
+                            class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                            on:click={onExplorerClick}
+                        >
+                            {localize('views.delegation.validators')}
+                        </button>
+                    </div>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
                 </div>
                 <div class="flex flex-row space-x-4 w-2/3">
