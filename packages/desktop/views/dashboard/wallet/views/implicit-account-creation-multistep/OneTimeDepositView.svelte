@@ -20,7 +20,7 @@
 
     onMount(() => {
         updateActiveWallet($selectedWallet.id, {
-            hasImplicitAccountCreationTransactionInProgress: true,
+            isImplicitAccountCreationStarted: true,
         })
     })
 </script>

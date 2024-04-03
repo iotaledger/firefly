@@ -35,7 +35,7 @@
                 handleMultipleAccounts()
             } else if (
                 $selectedWallet?.implicitAccountOutputs?.length === 0 &&
-                !$selectedWallet?.hasImplicitAccountCreationTransactionInProgress
+                !$selectedWallet?.isImplicitAccountCreationStarted
             ) {
                 $implicitAccountCreationRoute = ImplicitAccountCreationRoute.Init
             }
