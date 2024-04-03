@@ -105,7 +105,7 @@
     }
     function handleClaimRewards(delegationId: string, rewards: number): void {
         openPopup({
-            id: PopupId.claimDelegationRewards,
+            id: PopupId.ClaimDelegationRewards,
             props: {
                 delegationId,
                 rewards,
@@ -202,7 +202,7 @@
 {#if $selectedWallet}
     <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
         <Pane height={Height.Full} width={Width.Full}>
-            <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
+            <div class="flex flex-col space-y-10 max-w-7xl w-full h-full p-8">
                 <div class="flex flex-row justify-between">
                     <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
@@ -235,7 +235,7 @@
                 </div>
                 {#if features.delegation.delegationList.enabled}
                     {#if delegationData.length > 0}
-                        <table class="flex flex-col w-full space-y-4 h-80">
+                        <table class="flex flex-col overflow-hidden h-full">
                             <thead class="w-full">
                                 <tr class="flex flex-row justify-between align-items w-full">
                                     {#each Object.values(Header) as header}

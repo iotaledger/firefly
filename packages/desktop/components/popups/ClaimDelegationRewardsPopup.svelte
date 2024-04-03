@@ -1,14 +1,16 @@
 <script lang="ts">
-    import { Button, Text, FontWeight, TextType, KeyValueBox } from '@ui'
-    import { localize } from '@core/i18n'
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
-    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
     import { ManaBox } from '@components'
-    import { onMount } from 'svelte'
+    import { openUrlInBrowser } from '@core/app'
     import { handleError } from '@core/error/handlers'
+    import { localize } from '@core/i18n'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
-    import { updateActiveWallet } from '@core/profile'
+    import { getOfficialExplorerUrl } from '@core/network/utils'
+    import { activeProfile, updateActiveWallet } from '@core/profile'
+    import { checkActiveProfileAuth } from '@core/profile/actions'
+    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
+    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let delegationId: string
@@ -17,6 +19,7 @@
 
     let hasEnoughMana = false
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
     async function onConfirmClick(): Promise<void> {
         isBusy = true
@@ -57,6 +60,10 @@
         closePopup()
     }
 
+    function onExplorerClick(): void {
+        openUrlInBrowser(`${explorerUrl}/search/${delegationId}`)
+    }
+
     onMount(async () => {
         try {
             await _onMount()
@@ -71,6 +78,12 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left">
         {localize('popups.claimDelegationRewards.title')}
     </Text>
+    <button
+        class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+        on:click={onExplorerClick}
+    >
+        {localize('general.viewOnExplorer')}
+    </button>
     <div class="flex flex-col space-y-4">
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.delegationId')} valueText={delegationId} />
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.rewards')} valueText={rewards.toString()} />
