@@ -791,7 +791,7 @@
             },
             "locked": {
                 "title": "Locked",
-                "subtitle": "Temporarily locked for governance"
+                "subtitle": "Temporarily locked in delegation or pending accounts"
             },
             "storageDeposit": {
                 "title": "Storage deposit",
@@ -829,9 +829,13 @@
                 "title": "SDRUC",
                 "subtitle": "Temporarily locked in Storage Deposit Return"
             },
-            "governance": {
-                "title": "Governance",
-                "subtitle": "Reserved for voting power"
+            "delegation": {
+                "title": "Delegation",
+                "subtitle": "Delegated funds"
+            },
+            "implicitAccounts": {
+                "title": "Pending accounts",
+                "subtitle": "Pending accounts"
             },
             "vesting": {
                 "title": "Vesting",
@@ -848,6 +852,10 @@
             "bicMana": {
                 "title": "BIC Mana",
                 "subtitle": "Block Issuance Credits Mana"
+            },
+            "manaRewards": {
+                "title": "Mana Rewards",
+                "subtitle": "Mana Rewards (Delegation & Staking)"
             },
             "availableMana": {
                 "title": "Available Mana",
