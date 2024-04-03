@@ -8,7 +8,7 @@
         getPassiveManaForOutput,
         DEFAULT_SECONDS_PER_SLOT,
     } from '@core/network'
-    import { activeProfile } from '@core/profile'
+    import { activeProfile, updateActiveWallet } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
     import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE, getBestTimeDuration } from '@core/utils'
     import { IWalletState, formatTokenAmountBestMatch, selectedWallet, selectedWalletAssets } from '@core/wallet'
@@ -92,7 +92,12 @@
     async function prepareTransaction(outputId: string): Promise<void> {
         if (!outputId) return
         try {
-            transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
+            if ($selectedWallet) {
+                transactionInfo.preparedTransaction = await $selectedWallet.prepareImplicitAccountTransition(outputId)
+                updateActiveWallet($selectedWallet.id, {
+                    hasEnoughManaToCreateExplicitAccount: { [outputId]: true },
+                })
+            }
             isCongestionNotFound = false
             seconds = 0 // If we don't get an error, it's because we can follow on to the next step
         } catch (error) {
