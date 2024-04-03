@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { Icon, Text, TextHintVariant } from '@ui'
+    import { Icon, Text, TextHintVariant, TextType } from '@ui'
     import { Icon as IconEnum } from '@lib/auxiliary/icon'
 
     export let variant: TextHintVariant
     export let icon: IconEnum | undefined = undefined
     export let text: string = ''
+    export let valuePre: string = ''
 
     $: iconClasses = DEFAULT_VALUES[variant].iconClasses
     $: icon ||= DEFAULT_VALUES[variant].icon
@@ -47,9 +48,16 @@
         {#if icon}
             <Icon {icon} primaryColor="white" classes="mr-3 fill-current {iconClasses}" />
         {/if}
-        <Text fontSize="14" lineHeight="5">
-            {text}
-        </Text>
+        <div class="flex flex-col space-y-1 text-left">
+            <Text fontSize="14" lineHeight="5">
+                {text}
+            </Text>
+            {#if valuePre}
+                <Text type={TextType.pre}>
+                    {valuePre}
+                </Text>
+            {/if}
+        </div>
     </text-hint>
 {/if}
 
