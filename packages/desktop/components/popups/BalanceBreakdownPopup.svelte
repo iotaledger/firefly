@@ -11,7 +11,6 @@
     import { CommonOutput, OutputType, UnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
     import { TextHintVariant } from '@ui/enums'
-    import { get } from 'svelte/store'
 
     interface BalanceBreakdown {
         amount: number
@@ -109,10 +108,9 @@
 
     function getLockedBreakdown(): BalanceBreakdown {
         const delegationOutputs =
-            get(selectedWallet)?.walletUnspentOutputs?.filter(
-                (output) => output?.output?.type === OutputType.Delegation
-            ) || []
-        const implicitAccounts = get(selectedWallet)?.implicitAccountOutputs || []
+            $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) ||
+            []
+        const implicitAccounts = $selectedWallet?.implicitAccountOutputs || []
         const delegatedAmount = Number(delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0))
         const implicitAccountsAmount = Number(
             implicitAccounts.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
