@@ -1,8 +1,8 @@
 {
     "name": "desktop",
-    "productName": "Firefly Shimmer",
-    "version": "2.1.12",
-    "description": "Official wallet application of Shimmer",
+    "productName": "Firefly Canary",
+    "version": "3.0.0-alpha-1",
+    "description": "Official wallet application of Canary",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
     "author": "IOTA Foundation <contact@iota.org>",
