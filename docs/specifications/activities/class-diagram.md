@@ -78,7 +78,7 @@ classDiagram
         - asyncStatus: ActivityAsyncStatus
         - timelockDate: Date
         - expirationDate: Date
-        - isRejected: boolean
+        - isIgnored: boolean
         - isClaiming: boolean
         - claimingTransactionId: string
         - claimedDate: Date
