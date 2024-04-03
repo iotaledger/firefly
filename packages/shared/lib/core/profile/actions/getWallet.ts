@@ -6,7 +6,9 @@ import { activeProfile } from '../stores'
 
 export async function getWallet(walletId: string): Promise<IWallet> {
     const profile: IPersistedProfile = get(activeProfile)
-    const persistedWallet: IPersistedWalletData = profile?.walletPersistedData[walletId]
-    const wallet = await api.getWallet(walletId, persistedWallet.walletOptions)
+    // Persisted wallet data will only exist after the onboarding.
+    const persistedWallet: IPersistedWalletData | undefined = profile?.walletPersistedData[walletId]
+    // Automatically create a Wallet with the given WalletOptions in case it doesn't exist
+    const wallet = await api.getWallet(walletId, persistedWallet?.walletOptions)
     return wallet
 }

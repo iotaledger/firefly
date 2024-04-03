@@ -100,6 +100,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             } else {
                 updateActiveWallet(walletId, {
                     hasImplicitAccountCreationTransactionInProgress: false,
+                    isImplicitAccountCreationStarted: false,
                     isTransferring: false,
                 })
             }
@@ -107,7 +108,6 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         }
     }
 
-    // TODO: update this logic when available balance is fixed
     if (_isDelegationOutput) {
         if (wallet?.hasDelegationTransactionInProgress) {
             updateActiveWallet(walletId, {
