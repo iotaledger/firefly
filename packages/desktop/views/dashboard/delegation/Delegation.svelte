@@ -215,9 +215,10 @@
         }
     }
 
-    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
     function onExplorerClick(): void {
-        openUrlInBrowser(explorerUrl)
+        const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+        const validatorsUrl = `${explorerUrl}/validators`
+        openUrlInBrowser(validatorsUrl)
     }
 </script>
 
@@ -226,7 +227,7 @@
         <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
                 <div class="flex flex-row justify-between">
-                    <div>
+                    <div class="flex flex-col space-y-1">
                         <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
                         <button
                             class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
