@@ -1,6 +1,6 @@
 import { ProtocolParameters } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
-import { convertDateToUnixTimestamp } from '@core/utils'
+import { convertDateToUnixTimestamp, isValidDate } from '@core/utils'
 
 export function getSlotIndexFromNodeInfo(protocolParameters: ProtocolParameters): number {
     const elapsedTime = getElapsedTimeFromNodeInfo(protocolParameters)
@@ -13,8 +13,8 @@ export function getSlotIndexFromNodeInfo(protocolParameters: ProtocolParameters)
     return slotIndex
 }
 
-function getElapsedTimeFromNodeInfo(protocolParameters: ProtocolParameters): number {
-    const unixTimestamp = convertDateToUnixTimestamp(new Date())
+function getElapsedTimeFromNodeInfo(protocolParameters: ProtocolParameters, date: Date = new Date()): number {
+    const unixTimestamp = convertDateToUnixTimestamp(date)
     return BigInteger(unixTimestamp).minus(protocolParameters.genesisUnixTimestamp).toJSNumber()
 }
 
@@ -24,4 +24,13 @@ export function getUnixTimestampFromNodeInfoAndSlotIndex(
 ): number {
     const elapsedTime = (slotIndex - protocolParameters.genesisSlot - 1) * protocolParameters.slotDurationInSeconds
     return BigInteger(elapsedTime).add(protocolParameters.genesisUnixTimestamp).toJSNumber()
+}
+
+export function convertDateToSlotIndex(date: Date, protocolParameters: ProtocolParameters): number | undefined {
+    if (isValidDate(date)) {
+        const elapsedTime = getElapsedTimeFromNodeInfo(protocolParameters, date)
+        return Math.round((protocolParameters.genesisSlot + elapsedTime) / protocolParameters.slotDurationInSeconds + 1)
+    } else {
+        return undefined
+    }
 }
