@@ -1,11 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import {
-        DEFAULT_SECONDS_PER_SLOT,
-        ITransactionInfoToCalculateManaCost,
-        getExtraMana,
-        getManaBalance,
-    } from '@core/network'
+    import { DEFAULT_SECONDS_PER_SLOT, ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { MILLISECONDS_PER_SECOND, getBestTimeDuration } from '@core/utils'
     import { selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
@@ -17,7 +12,8 @@
     export let showCountdown: boolean = true
 
     const NUMBER_OF_EXTRA_SLOTS_MANA = 3
-    const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
+    const extraMana: number = 0 // the sdk returns the wait time without extra slots
+    // const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
 
     let requiredTxManaCost: number = 0
     let refreshManaCountdownInterval: NodeJS.Timeout
