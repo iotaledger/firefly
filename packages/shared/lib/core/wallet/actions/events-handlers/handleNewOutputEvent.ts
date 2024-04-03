@@ -100,6 +100,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
             } else {
                 updateActiveWallet(walletId, {
                     hasImplicitAccountCreationTransactionInProgress: false,
+                    isImplicitAccountCreationStarted: false,
                     isTransferring: false,
                 })
             }
