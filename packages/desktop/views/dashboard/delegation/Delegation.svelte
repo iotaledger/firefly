@@ -1,36 +1,36 @@
 <script lang="ts">
+    import { Icon as IconEnum } from '@auxiliary/icon'
+    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { api } from '@core/api'
     import { localize } from '@core/i18n'
-    import { selectedWallet } from '@core/wallet/stores'
+    import { DEFAULT_MANA } from '@core/network'
+    import { activeProfile } from '@core/profile'
+    import { truncateString } from '@core/utils'
     import {
-        Height,
-        Width,
-        Pane,
+        AddressConverter,
+        EMPTY_HEX_ID,
+        formatTokenAmountBestMatch,
+        getCommitteeInfo,
+        getOutputRewards,
+        selectedWalletAssets,
+    } from '@core/wallet'
+    import { selectedWallet } from '@core/wallet/stores'
+    import features from '@features/features'
+    import { DelegationId, DelegationOutput, OutputData, OutputType } from '@iota/sdk/out/types'
+    import {
+        BoxedIconWithText,
         Button,
-        Tile,
-        Text,
-        TextType,
-        FontWeight,
         ButtonSize,
         CopyableBox,
-        BoxedIconWithText,
+        FontWeight,
+        Height,
+        Pane,
         PingingBadge,
+        Text,
+        TextType,
+        Tile,
+        Width,
     } from '@ui'
-    import { activeProfile } from '@core/profile'
-    import {
-        formatTokenAmountBestMatch,
-        AddressConverter,
-        selectedWalletAssets,
-        EMPTY_HEX_ID,
-        getOutputRewards,
-        getCommitteeInfo,
-    } from '@core/wallet'
-    import { truncateString } from '@core/utils'
-    import { Icon as IconEnum } from '@auxiliary/icon'
-    import { OutputType, DelegationOutput, OutputData, DelegationId } from '@iota/sdk/out/types'
-    import { PopupId, openPopup } from '@auxiliary/popup'
-    import features from '@features/features'
-    import { api } from '@core/api'
-    import { DEFAULT_MANA } from '@core/network'
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
@@ -63,7 +63,9 @@
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
     $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
 
-    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount
+    // Needed to do Math.max because sometimes the delegated amount is higher than the available balance for a short time and
+    // this leads to a negative undelegated amount
+    $: rawUndelegatedAmount = Math.max(Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount, 0)
     $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
 
     $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
