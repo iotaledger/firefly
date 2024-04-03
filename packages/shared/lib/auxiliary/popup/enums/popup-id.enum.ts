@@ -53,4 +53,5 @@ export enum PopupId {
     WithdrawFromL2 = 'withdrawFromL2',
     CreateDelegation = 'createDelegation',
     ActivateAccount = 'activateAccount',
+    ClaimDelegationRewards = 'claimDelegationRewardsPopup',
 }

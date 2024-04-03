@@ -21,7 +21,7 @@ export interface IApi {
     createSecretManager(options: SecretManagerType): Promise<SecretManager>
     createWallet(id: string, payload: WalletOptions): Promise<IWallet>
     deleteWallet(id: string): Promise<void>
-    getWallet(id: string, walletOptions: WalletOptions): Promise<IWallet>
+    getWallet(id: string, walletOptions?: WalletOptions): Promise<IWallet>
     clearWalletsFromMemory(): Promise<void>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,
