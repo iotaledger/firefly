@@ -112,6 +112,7 @@
                 const slotsRemaining = Number(error.message?.split(' ').reverse()[0].replace('`', ''))
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
+                isCongestionNotFound = false
             }
         }
     }
@@ -166,7 +167,7 @@
                     </Text>
                     <Spinner size={16} />
                 </div>
-            {:else}
+            {:else if seconds > 0}
                 <Text type={TextType.h5} fontWeight={FontWeight.normal} color="gray-600" darkColor="gray-400">
                     {timeRemaining}
                 </Text>
