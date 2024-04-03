@@ -31,7 +31,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
-    const nativeToken = getNativeTokenFromTransactionDetails(transactionDetails)
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
@@ -42,7 +42,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
-            ...(nativeToken && { nativeToken }),
+            ...(native_token && { native_token }),
         },
         unlocks: {
             ...(expirationUnixTime && { expirationUnixTime }),
@@ -71,7 +71,7 @@ async function buildOutputParametersForLayer2(
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = getLayer2MetadataForTransfer(transactionDetails)
-    const nativeToken = getNativeTokenFromTransactionDetails(transactionDetails)
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
     const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
     const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
 
@@ -82,7 +82,7 @@ async function buildOutputParametersForLayer2(
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
-            ...(nativeToken && { nativeToken }),
+            ...(native_token && { native_token }),
             ...(layer2Parameters && { sender: senderAddress }),
         },
         unlocks: {
