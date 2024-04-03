@@ -670,7 +670,8 @@
                             "description": "Send funds to your wallet address to speed up the Mana generation",
                             "show": "Show Address",
                             "copy": "Copy"
-                        }
+                        },
+                        "calculating": "Calculating..."
                     }
                 },
                 "step3": {
