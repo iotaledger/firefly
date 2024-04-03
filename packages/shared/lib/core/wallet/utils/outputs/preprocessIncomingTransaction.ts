@@ -1,31 +1,41 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
-// import { computeOutputId } from './computeOutputId'
+import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { ActivityDirection } from '../../enums'
+import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
+import { get } from 'svelte/store'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 export function preprocessIncomingTransaction(transaction: TransactionWithMetadata): IProcessedTransaction {
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const slotUnixTimestamp = nodeProtocolParameters
+        ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
+        : 0
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
-    // const inputIds =  utxoInputs.map((input) => {
-    //         const transactionId = input.transactionId
-    //         const transactionOutputIndex = input.transactionOutputIndex
-    //         return computeOutputId(transactionId, transactionOutputIndex)
-    //     })
-    // const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
+    const inputs = transaction.inputs.map((input) => ({
+        output: input.output,
+        outputId: input.metadata.outputId,
+        metadata: input.metadata,
+        remainder: true,
+    }))
+
+    const manaCost = outputs
+        .filter((output) => !output.remainder)
+        .reduce((acc, output) => acc + Number(output.output.mana), 0)
 
     return {
-        outputs: outputs,
+        outputs,
         transactionId,
         direction: ActivityDirection.Incoming,
-        time: new Date(Number(transaction.timestamp)),
+        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
-        wrappedInputs: [],
-        // wrappedInputs: <IWrappedOutput[]>inputs,
+        wrappedInputs: <IWrappedOutput[]>inputs,
+        mana: manaCost,
         utxoInputs,
     }
 }
@@ -45,7 +55,6 @@ function convertTransactionOutputTypeToWrappedOutput(
     outputType: Output
 ): IWrappedOutput {
     const outputId = getOutputIdFromTransactionIdAndIndex(transactionId, index)
-    OutputWithMetadata
     return {
         outputId,
         output: outputType,

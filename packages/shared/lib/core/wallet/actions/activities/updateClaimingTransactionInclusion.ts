@@ -1,8 +1,9 @@
-import { ActivityAsyncStatus, ActivityType, InclusionState } from '@core/wallet/enums'
+import { ActivityAsyncStatus, ActivityType } from '@core/wallet/enums'
 import { addClaimedActivity, allWalletActivities } from '@core/wallet/stores'
 import { showAppNotification } from '@auxiliary/notification'
 import { localize } from '@core/i18n'
 import { updateActivityFromPartialActivity } from '@core/wallet/utils/generateActivity/helper'
+import { InclusionState } from '@iota/sdk/out/types'
 
 export function updateClaimingTransactionInclusion(
     transactionId: string,

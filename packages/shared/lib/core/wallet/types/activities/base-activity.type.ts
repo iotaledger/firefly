@@ -1,4 +1,5 @@
-import { ActivityAsyncStatus, ActivityDirection, InclusionState, ActivityAction } from '../../enums'
+import { InclusionState } from '@iota/sdk/out/types'
+import { ActivityAsyncStatus, ActivityDirection, ActivityAction } from '../../enums'
 import { Subject } from '../subject.type'
 import { Layer2Metadata } from '@core/layer-2'
 
@@ -23,13 +24,14 @@ export type BaseActivity = {
     asyncData: AsyncData
     destinationNetwork?: string
     parsedLayer2Metadata?: Partial<Layer2Metadata>
+    mana: number
 }
 
 export type AsyncData = {
     asyncStatus: ActivityAsyncStatus
     timelockDate: Date
     expirationDate: Date
-    isRejected: boolean
+    isIgnored: boolean
     isClaiming: boolean
     claimingTransactionId: string
     claimedDate: Date
