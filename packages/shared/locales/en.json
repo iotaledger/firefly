@@ -721,6 +721,7 @@
         },
         "delegation": {
             "title": "Delegation",
+            "validators": "View validators on Explorer",
             "action": {
                 "delegate": "Delegate",
                 "claimRewards": "Claim Rewards"

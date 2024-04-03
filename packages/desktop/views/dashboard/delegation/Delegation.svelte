@@ -32,7 +32,8 @@
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import features from '@features/features'
     import { api } from '@core/api'
-    import { DEFAULT_MANA } from '@core/network'
+    import { DEFAULT_MANA, getOfficialExplorerUrl } from '@core/network'
+    import { openUrlInBrowser } from '@core/app'
 
     let delegationData: IDelegationTable[] = []
     let currentEpoch = 0
@@ -213,6 +214,11 @@
                 }
         }
     }
+
+    const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+    function onExplorerClick(): void {
+        openUrlInBrowser(explorerUrl)
+    }
 </script>
 
 {#if $selectedWallet}
@@ -220,7 +226,15 @@
         <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full p-8">
                 <div class="flex flex-row justify-between">
-                    <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                    <div>
+                        <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                        <button
+                            class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                            on:click={onExplorerClick}
+                        >
+                            {localize('views.delegation.validators')}
+                        </button>
+                    </div>
                     <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
                 </div>
                 <div class="flex flex-row space-x-4 w-2/3">
