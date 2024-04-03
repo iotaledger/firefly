@@ -7,7 +7,7 @@
         getManaBalance,
     } from '@core/network'
     import { activeProfile } from '@core/profile'
-    import { MILLISECONDS_PER_SECOND } from '@core/utils'
+    import { MILLISECONDS_PER_SECOND, getBestTimeDuration } from '@core/utils'
     import { selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
     import { KeyValueBox, Text, TextType } from '@ui'
     import { onMount, onDestroy } from 'svelte'
@@ -20,14 +20,17 @@
     const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
 
     let requiredTxManaCost: number = 0
-    let countdownInterval: NodeJS.Timeout
+    let refreshManaCountdownInterval: NodeJS.Timeout
+    let secondsRemainingCountdownInterval: NodeJS.Timeout
     let secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
+    let secondsRemaining: number = 10
 
     $: (transactionInfo?.preparedTransaction || transactionInfo?.preparedTransactionError) && calculateManaCost()
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
     $: availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
     $: requiredMana = requiredTxManaCost + extraMana
     $: hasEnoughMana = availableMana >= requiredMana
+    $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)
 
     function calculateManaCost() {
         if (
@@ -37,6 +40,17 @@
             const splittedError = transactionInfo.preparedTransactionError.message?.split(' ')
             const requiredManaForTransaction = splittedError[splittedError.indexOf('required') + 1]?.replace(',', '')
             requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
+
+            const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
+            if (slotsRemaining) {
+                secondsRemaining = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
+                secondsRemainingCountdownInterval = setInterval(() => {
+                    secondsRemaining -= 1
+                    if (secondsRemaining <= 0) {
+                        clearInterval(secondsRemainingCountdownInterval)
+                    }
+                }, MILLISECONDS_PER_SECOND)
+            }
         } else if (transactionInfo?.preparedTransaction) {
             requiredTxManaCost =
                 transactionInfo.preparedTransaction._preparedData?.transaction?.allotments?.reduce(
@@ -48,7 +62,7 @@
 
     onMount(() => {
         calculateManaCost()
-        countdownInterval = setInterval(() => {
+        refreshManaCountdownInterval = setInterval(() => {
             secondsToRefreshManaCost -= 1
             if (secondsToRefreshManaCost <= 0) {
                 calculateManaCost()
@@ -58,7 +72,8 @@
     })
 
     onDestroy(() => {
-        clearInterval(countdownInterval)
+        clearInterval(refreshManaCountdownInterval)
+        clearInterval(secondsRemainingCountdownInterval)
     })
 </script>
 
@@ -72,7 +87,7 @@
         <Text type={TextType.p} error classes="text-center">
             {localize('general.insufficientMana', {
                 values: {
-                    availableMana: formatTokenAmountBestMatch(availableMana, mana.metadata),
+                    timeRemaining,
                 },
             })}
         </Text>
