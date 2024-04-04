@@ -17,32 +17,31 @@ export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState):
 
     for (const activity of activities) {
         try {
-            let walletOutput = await wallet.getOutput(activity.outputId)
+            const walletOutput = await wallet.getOutput(activity.outputId)
+
             let outputMetadata: OutputMetadataResponse
+            let output: BasicOutput
+
             if (walletOutput) {
                 outputMetadata = walletOutput.metadata
+                output = walletOutput.output as BasicOutput
             } else {
-                walletOutput = await client.getOutput(activity.outputId)
+                const clientOutput = await client.getOutput(activity.outputId)
+                output = clientOutput.output as BasicOutput
                 outputMetadata = await client.getOutputMetadata(activity.outputId)
             }
+
             const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-            if (nodeProtocolParameters && walletOutput.metadata.spent) {
+            if (nodeProtocolParameters && outputMetadata.spent) {
                 const claimedDate = new Date(
-                    getUnixTimestampFromNodeInfoAndSlotIndex(
-                        nodeProtocolParameters,
-                        walletOutput.metadata.spent.slot
-                    )
+                    getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputMetadata.spent.slot)
                 )
-                const isClaimed =
-                    walletOutput.metadata &&
-                    isOutputClaimed(walletOutput.output as BasicOutput, walletOutput.metadata, claimedDate)
+                const isClaimed = outputMetadata && isOutputClaimed(output, outputMetadata, claimedDate)
                 if (isClaimed && claimedDate) {
                     updateAsyncDataByActivityId(wallet.id, activity.id, {
                         asyncStatus: ActivityAsyncStatus.Claimed,
                         claimedDate,
                     })
-                }
-            }
                 }
             }
         } catch (err) {
