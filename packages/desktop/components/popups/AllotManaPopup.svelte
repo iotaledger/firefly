@@ -58,11 +58,17 @@
 
     async function preparedOutput() {
         try {
-            const prepareOutput = await $selectedWallet.prepareOutput({
-                recipientAddress: $selectedWallet.depositAddress,
-                amount: '0',
-            })
-            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput])
+            const prepareOutput = await $selectedWallet.prepareOutput(
+                {
+                    recipientAddress: $selectedWallet.depositAddress,
+                    amount: '0',
+                },
+                getDefaultTransactionOptions()
+            )
+            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs(
+                [prepareOutput],
+                getDefaultTransactionOptions()
+            )
         } catch (error) {
             transactionInfo.preparedTransactionError = error
         }
@@ -74,12 +80,12 @@
             // Send 0 amount transaction to accountAddress with amount in the allotMana
             const prepareOutput = await $selectedWallet.prepareOutput(
                 { recipientAddress: accountAddress, amount: '0' },
-                {
-                    ...getDefaultTransactionOptions(accountId),
-                    manaAllotments: { [$selectedWallet.mainAccountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
-                }
+                getDefaultTransactionOptions()
             )
-            await $selectedWallet.sendOutputs([prepareOutput], getDefaultTransactionOptions())
+            await $selectedWallet.sendOutputs([prepareOutput], {
+                ...getDefaultTransactionOptions(accountId),
+                manaAllotments: { [accountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
+            })
             closePopup()
         } catch (err) {
             handleError(err)
