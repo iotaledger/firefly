@@ -1,53 +1,65 @@
 <script lang="ts">
     import { closePopup, updatePopupProps } from '@auxiliary/popup'
+    import { ManaBox } from '@components'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
+    import { getNetworkHrp } from '@core/profile/actions'
+    import { validateBech32Address } from '@core/utils/crypto'
     import {
-        convertToRawAmount,
         AddressConverter,
         getDefaultTransactionOptions,
         selectedWallet,
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
-    import { AccountAddress, CreateDelegationParams } from '@iota/sdk/out/types'
-    import { Text, TextType, AssetAmountInput, TextInput, Button, HTMLButtonType } from '@ui'
-    import { ManaBox } from '@components'
+    import { AccountAddress, AddressType, CreateDelegationParams } from '@iota/sdk/out/types'
+    import { AssetAmountInput, Button, HTMLButtonType, Text, TextInput, TextType } from '@ui'
+    import Big from 'big.js'
     import { onMount } from 'svelte'
-    import { ITransactionInfoToCalculateManaCost } from '@core/network'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
-    export let rawAmount: string = $selectedWallet?.balances?.baseCoin?.available?.toString()
+    export let rawAmount: string = '0'
     export let accountAddress: string
 
     let assetAmountInput: AssetAmountInput
-    let amount: string
-    let confirmDisabled = false
+    let confirmAllowed = false
+    let addressError: string
 
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
+
+    let preparingOutput = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
     $: hasTransactionInProgress =
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress ||
         $selectedWallet?.hasDelegationTransactionInProgress ||
         $selectedWallet?.isTransferring
-    $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
+    $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    function setConfirmDisabled(): void {
-        if (!amount || !accountAddress) {
-            confirmDisabled = true
-            return
-        }
-        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress || !hasEnoughMana
-    }
+    $: accountAddress, validAmount, prepareDelegationOutput()
+
+    $: confirmAllowed =
+        validAmount &&
+        !!accountAddress &&
+        !hasTransactionInProgress &&
+        hasEnoughMana &&
+        !addressError &&
+        transactionInfo.preparedTransaction &&
+        !transactionInfo.preparedTransactionError
+    $: displayManaBox =
+        !!accountAddress &&
+        !addressError &&
+        validAmount &&
+        transactionInfo.preparedTransaction &&
+        !transactionInfo.preparedTransactionError
 
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
-            if (!rawAmount || !accountAddress) return
+            if (!rawAmount || !accountAddress || !validAmount) return
             updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(delegate, { stronghold: true, ledger: false })
         } catch (err) {
@@ -73,19 +85,38 @@
     }
 
     async function prepareDelegationOutput(): Promise<void> {
-        if (!accountAddress) return
-        const params: CreateDelegationParams = {
-            address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
-            delegatedAmount: rawAmount,
-            validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
+        if (!accountAddress || !rawAmount || !validAmount) {
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = undefined
+            return
         }
         try {
-            transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
-                params,
-                getDefaultTransactionOptions()
-            )
-        } catch (error) {
-            transactionInfo.preparedTransactionError = error
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            addressError = undefined
+        } catch (err) {
+            addressError = localize('error.send.invalidAddress')
+            return
+        }
+        if (!preparingOutput) {
+            try {
+                preparingOutput = true
+                const params: CreateDelegationParams = {
+                    address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
+                    delegatedAmount: rawAmount,
+                    validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
+                }
+                transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
+                    params,
+                    getDefaultTransactionOptions()
+                )
+                transactionInfo.preparedTransactionError = undefined
+            } catch (error) {
+                handleError(error)
+                transactionInfo.preparedTransaction = undefined
+                transactionInfo.preparedTransactionError = error
+            } finally {
+                preparingOutput = false
+            }
         }
     }
 
@@ -96,7 +127,6 @@
     onMount(async () => {
         try {
             await _onMount()
-            await prepareDelegationOutput()
         } catch (err) {
             handleError(err.error)
         }
@@ -111,7 +141,6 @@
             <AssetAmountInput
                 bind:this={assetAmountInput}
                 bind:rawAmount
-                bind:amount
                 {asset}
                 containsSlider
                 disableAssetSelection
@@ -122,7 +151,9 @@
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
-            <ManaBox {transactionInfo} bind:hasEnoughMana />
+            {#if displayManaBox}
+                <ManaBox {transactionInfo} bind:hasEnoughMana />
+            {/if}
         </div>
         <div class="flex flex-row flex-nowrap w-full space-x-4">
             <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>
@@ -130,7 +161,7 @@
             </Button>
             <Button
                 type={HTMLButtonType.Submit}
-                disabled={confirmDisabled}
+                disabled={!confirmAllowed}
                 isBusy={hasTransactionInProgress}
                 classes="w-full"
             >
