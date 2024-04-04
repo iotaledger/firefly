@@ -11,6 +11,7 @@
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
     import { ManaBox } from '@components'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -52,6 +53,14 @@
             ...(issuerName && { issuerName }),
             ...(collectionName && { collectionName }),
         }
+    }
+
+    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: if (hasMainAccountNegativeBIC) {
+        showAppNotification({
+            type: 'warning',
+            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
+        })
     }
 
     async function prepareNftOutput(): Promise<void> {
@@ -153,7 +162,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || !hasEnoughMana || hasMainAccountNegativeBIC}
             onClick={onConfirmClick}
             isBusy={$selectedWallet?.isTransferring}
         >
