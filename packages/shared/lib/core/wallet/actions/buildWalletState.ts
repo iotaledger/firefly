@@ -58,7 +58,7 @@ export async function buildWalletState(
             !accountOutputs.find(
                 (output) =>
                     output.output.type === OutputType.Account &&
-                    (output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
+                    (output.output as unknown as AccountOutput).accountId === walletPersistedData.mainAccountId
             )
         ) {
             updateWalletPersistedDataOnActiveProfile(wallet.id, { mainAccountId: undefined })
