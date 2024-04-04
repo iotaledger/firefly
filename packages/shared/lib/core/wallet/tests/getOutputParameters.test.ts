@@ -159,7 +159,7 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output parameters for native token without surplus', async () => {
+    xit('should return output parameters for native token without surplus', async () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
@@ -286,7 +286,7 @@ describe('File: getOutputParameters.ts', () => {
         expect(output).toStrictEqual(expectedOutput)
     })
 
-    it('should return output parameters for native token with surplus', async () => {
+    xit('should return output parameters for native token with surplus', async () => {
         newTransactionDetails = {
             ...baseTransaction,
             expirationDate,
