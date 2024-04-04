@@ -8,7 +8,7 @@ import { getCoinType } from '@core/profile'
 import { Converter } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { prepareOutput } from '../actions/prepareOutput'
 import { ReturnStrategy } from '../enums'
@@ -33,6 +33,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
 
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     const expirationSlotIndex =
@@ -51,6 +52,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
+            ...(native_token && { native_token }),
         },
         unlocks: {
             ...(expirationSlotIndex && { expirationSlotIndex }),
@@ -79,6 +81,7 @@ async function buildOutputParametersForLayer2(
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = getLayer2MetadataForTransfer(transactionDetails)
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
 
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     const expirationSlotIndex =
@@ -97,6 +100,7 @@ async function buildOutputParametersForLayer2(
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
+            ...(native_token && { native_token }),
             ...(layer2Parameters && { sender: senderAddress }),
         },
         unlocks: {
@@ -184,29 +188,29 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
 
     if (transactionDetails.type === NewTransactionType.NftTransfer) {
         assets = { nftId: transactionDetails.nftId }
-    } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        const assetId = transactionDetails.asset?.id
+    } else {
+        assets = undefined
+    }
 
+    return assets
+}
+
+function getNativeTokenFromTransactionDetails(transactionDetails: NewTransactionDetails): NativeToken | undefined {
+    let nativeToken: NativeToken | undefined = undefined
+
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        const assetId = transactionDetails.asset?.id
         const nativeTokenId = assetId === getCoinType() ? undefined : assetId
 
         if (nativeTokenId) {
             const bigAmount = BigInt(transactionDetails.rawAmount)
-            assets = {
-                nativeTokens: [
-                    {
-                        id: nativeTokenId,
-                        amount: bigAmount,
-                    },
-                ],
+            nativeToken = {
+                id: nativeTokenId,
+                amount: bigAmount,
             }
-
-            // If it's a base coin transaction, we don't need to specify assets
-        } else {
-            assets = undefined
+            // If it's a base coin transaction, we don't need to specify nativeToken
         }
-    } else {
-        throw new Error('Invalid transaction type')
     }
 
-    return assets
+    return nativeToken
 }
