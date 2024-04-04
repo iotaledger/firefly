@@ -1,12 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import {
-    AccountOutput,
-    Output,
-    OutputType,
-    OutputWithMetadata,
-    TransactionWithMetadata,
-    UTXOInput,
-} from '@iota/sdk/out/types'
+import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
@@ -17,6 +10,7 @@ import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } 
 import { get } from 'svelte/store'
 import { isImplicitAccountOutput } from '../isImplicitAccountOutput'
 import { isOutputOfSelectedWalletAddress } from '../isOutputOfSelectedWalletAddress'
+import { isAccountOutput } from '../isAccountOutput'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -42,10 +36,7 @@ export async function preprocessOutgoingTransaction(
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
     const inputsToConsiderWhenCalculatingMana = inputs.filter(
-        (input) =>
-            (input.output as AccountOutput).accountId ||
-            isImplicitAccountOutput(input) ||
-            isOutputOfSelectedWalletAddress(input)
+        (input) => isAccountOutput(input) || isImplicitAccountOutput(input) || isOutputOfSelectedWalletAddress(input)
     )
     const prevManaCost = inputsToConsiderWhenCalculatingMana.reduce(
         (acc, input) => acc + (getPassiveManaForOutput(input) ?? 0),
