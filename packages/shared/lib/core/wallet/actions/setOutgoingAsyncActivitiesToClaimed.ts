@@ -17,42 +17,32 @@ export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState):
 
     for (const activity of activities) {
         try {
-            const walletOutput = await wallet.getOutput(activity.outputId)
+            let walletOutput = await wallet.getOutput(activity.outputId)
+            let outputMetadata: OutputMetadataResponse
             if (walletOutput) {
-                const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-                if (nodeProtocolParameters && walletOutput.metadata.spent) {
-                    const claimedDate = new Date(
-                        getUnixTimestampFromNodeInfoAndSlotIndex(
-                            nodeProtocolParameters,
-                            walletOutput.metadata.spent.slot
-                        )
-                    )
-                    const isClaimed =
-                        walletOutput.metadata &&
-                        isOutputClaimed(walletOutput.output as BasicOutput, walletOutput.metadata, claimedDate)
-                    if (isClaimed && claimedDate) {
-                        updateAsyncDataByActivityId(wallet.id, activity.id, {
-                            asyncStatus: ActivityAsyncStatus.Claimed,
-                            claimedDate,
-                        })
-                    }
-                }
+                outputMetadata = walletOutput.metadata
             } else {
-                const output = await client.getOutput(activity.outputId)
-                const outputMetadata = await client.getOutputMetadata(activity.outputId)
-                const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-                if (nodeProtocolParameters && outputMetadata.spent) {
-                    const claimedDate = new Date(
-                        getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputMetadata.spent.slot)
+                walletOutput = await client.getOutput(activity.outputId)
+                outputMetadata = await client.getOutputMetadata(activity.outputId)
+            }
+            const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+            if (nodeProtocolParameters && walletOutput.metadata.spent) {
+                const claimedDate = new Date(
+                    getUnixTimestampFromNodeInfoAndSlotIndex(
+                        nodeProtocolParameters,
+                        walletOutput.metadata.spent.slot
                     )
-                    const isClaimed =
-                        outputMetadata && isOutputClaimed(output.output as BasicOutput, outputMetadata, claimedDate)
-                    if (isClaimed && claimedDate) {
-                        updateAsyncDataByActivityId(wallet.id, activity.id, {
-                            asyncStatus: ActivityAsyncStatus.Claimed,
-                            claimedDate,
-                        })
-                    }
+                )
+                const isClaimed =
+                    walletOutput.metadata &&
+                    isOutputClaimed(walletOutput.output as BasicOutput, walletOutput.metadata, claimedDate)
+                if (isClaimed && claimedDate) {
+                    updateAsyncDataByActivityId(wallet.id, activity.id, {
+                        asyncStatus: ActivityAsyncStatus.Claimed,
+                        claimedDate,
+                    })
+                }
+            }
                 }
             }
         } catch (err) {
