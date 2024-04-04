@@ -6,21 +6,20 @@
     import { activeProfile } from '@core/profile/stores'
     import { DashboardRoute, collectiblesRouter, dashboardRouter, governanceRouter, settingsRouter } from '@core/router'
     import { isRecentDate } from '@core/utils'
+    import { selectedWallet } from '@core/wallet'
     import { ISidebarTab } from '@desktop/routers'
     import features from '@features/features'
     import { Icon, Modal, NotificationBadge, ProfileActionsModal, ProfilePicture, Size } from '@ui'
 
     let profileModal: Modal
+    let sidebarTabs: ISidebarTab[]
 
     const profileColor = 'blue' // TODO: each profile has a different color
-
     const { shouldOpenProfileModal } = $activeProfile
 
     $: lastStrongholdBackupTime = $activeProfile?.lastStrongholdBackupTime
     $: lastBackupDate = lastStrongholdBackupTime ? new Date(lastStrongholdBackupTime) : null
     $: isBackupSafe = lastBackupDate && isRecentDate(lastBackupDate)?.lessThanThreeMonths
-
-    let sidebarTabs: ISidebarTab[]
     $: sidebarTabs = [
         ...(features?.wallet?.enabled
             ? [
@@ -39,6 +38,7 @@
                       label: localize('tabs.collectibles'),
                       route: DashboardRoute.Collectibles,
                       onClick: openCollectibles,
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -49,6 +49,7 @@
                       label: localize('tabs.governance'),
                       route: DashboardRoute.Governance,
                       onClick: openGovernance,
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -59,6 +60,7 @@
                       label: localize('tabs.vesting'),
                       route: DashboardRoute.Vesting,
                       onClick: openVesting,
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -80,6 +82,7 @@
                       label: localize('tabs.delegation'),
                       route: DashboardRoute.Delegation,
                       onClick: openDelegation,
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),
@@ -90,6 +93,7 @@
                       label: localize('tabs.developer'),
                       route: DashboardRoute.Developer,
                       onClick: openDeveloper,
+                      disabled: !$selectedWallet?.mainAccountId,
                   },
               ]
             : []),

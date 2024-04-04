@@ -26,18 +26,29 @@
         $dashboardRouter.goTo(DashboardRoute.AccountManagement)
     }
 
-    // TODO: Update this when we have enough mana to route to the next step
     $: {
         if (outputId === undefined) {
             if ($selectedWallet?.implicitAccountOutputs?.length === 1) {
-                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+                const outputId = $selectedWallet?.implicitAccountOutputs[0]?.outputId
+                if ($selectedWallet?.hasEnoughManaToCreateExplicitAccount?.[outputId]) {
+                    $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
+                } else {
+                    $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+                }
             } else if ($selectedWallet?.implicitAccountOutputs?.length >= 2) {
                 handleMultipleAccounts()
-            } else if ($selectedWallet?.implicitAccountOutputs?.length === 0) {
+            } else if (
+                $selectedWallet?.implicitAccountOutputs?.length === 0 &&
+                !$selectedWallet?.isImplicitAccountCreationStarted
+            ) {
                 $implicitAccountCreationRoute = ImplicitAccountCreationRoute.Init
             }
         } else {
-            $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+            if ($selectedWallet?.hasEnoughManaToCreateExplicitAccount?.[outputId]) {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
+            } else {
+                $implicitAccountCreationRoute = ImplicitAccountCreationRoute.FundConfirmation
+            }
         }
 
         if ($selectedWallet?.hasImplicitAccountCreationTransactionInProgress && $selectedWallet?.isTransferring) {
@@ -46,8 +57,8 @@
     }
 </script>
 
-<implicit-account-creation-view class="h-full">
-    <box-content class="flex flex-col w-full h-full pt-9 px-8 pb-12 items-center justify-between rounded-2xl">
+<implicit-account-creation-view class="h-full w-full">
+    <box-content class="flex flex-col w-full h-full pt-9 pb-12 items-center justify-between rounded-2xl">
         <Text type={TextType.h2}>{localize('views.implicit-account-creation.title')}</Text>
         {#if $implicitAccountCreationRoute === ImplicitAccountCreationRoute.Init}
             <InitView />

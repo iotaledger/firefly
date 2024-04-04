@@ -661,23 +661,22 @@
                     "title": "Step 2",
                     "body": "Fund confirmation",
                     "view": {
-                        "eyebrow": "Wallet avaible balance:",
+                        "eyebrow": "Wallet available balance:",
                         "generatedMana": "Generated Mana:",
                         "title": "Funds arrived:",
-                        "subtitle": "Generating mana...",
-                        "action": "Activate Account",
+                        "action": "Activate account",
                         "walletAddress": {
-                            "description": "Send funds to your wallet address to speed up the mana generation",
+                            "description": "Send funds to your wallet address to speed up the Mana generation",
                             "show": "Show Address",
                             "copy": "Copy"
-                        }
+                        },
+                        "calculating": "Calculating..."
                     }
                 },
                 "step3": {
                     "title": "Step 3",
                     "body": "Account creation",
                     "view":{
-                        "title": "Confirm Something",
                         "placeholder": "Stronghold Password"
                     }
                 }
@@ -721,6 +720,7 @@
         },
         "delegation": {
             "title": "Delegation",
+            "validators": "View validators on Explorer",
             "action": {
                 "delegate": "Delegate",
                 "claimRewards": "Claim Rewards"
@@ -789,7 +789,7 @@
             },
             "locked": {
                 "title": "Locked",
-                "subtitle": "Temporarily locked for governance"
+                "subtitle": "Temporarily locked in delegation or pending accounts"
             },
             "storageDeposit": {
                 "title": "Storage deposit",
@@ -827,9 +827,13 @@
                 "title": "SDRUC",
                 "subtitle": "Temporarily locked in Storage Deposit Return"
             },
-            "governance": {
-                "title": "Governance",
-                "subtitle": "Reserved for voting power"
+            "delegation": {
+                "title": "Delegation",
+                "subtitle": "Delegated funds"
+            },
+            "implicitAccounts": {
+                "title": "Pending accounts",
+                "subtitle": "Pending accounts"
             },
             "vesting": {
                 "title": "Vesting",
@@ -837,7 +841,7 @@
             },
             "mana": {
                 "title": "Mana",
-                "subtitle": "Total mana"
+                "subtitle": "Total Mana"
             },
             "lockedMana": {
                 "title": "Locked Mana",
@@ -846,6 +850,10 @@
             "bicMana": {
                 "title": "BIC Mana",
                 "subtitle": "Block Issuance Credits Mana"
+            },
+            "manaRewards": {
+                "title": "Mana Rewards",
+                "subtitle": "Mana Rewards (Delegation & Staking)"
             },
             "availableMana": {
                 "title": "Available Mana",
@@ -1276,8 +1284,9 @@
         },
         "claimDelegationRewards": {
             "title": "Claim Rewards",
-            "description": "Claim all the rewards, {rewards} Mana, of this delegation output {delegationId}",
-            "confirmButton": "Claim"
+            "confirmButton": "Claim",
+            "rewards": "Rewards",
+            "delegationId": "Delegation ID"
         }
     },
     "actions": {
@@ -1670,7 +1679,7 @@
         "copiedToClipboard": "Copied to clipboard",
         "total": "Total: {balance}",
         "availableBalanceWithValue": "Available balance: {balance}",
-        "availableManaWithValue": "Available mana: {mana}",
+        "availableManaWithValue": "Available Mana: {mana}",
         "availableBalance": "Available balance",
         "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
         "amountClaimed": "{amount} claimed",
@@ -1731,9 +1740,9 @@
         "custom": "Custom",
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
-        "availableMana": "Available mana",
-        "insufficientMana": "Insufficient {availableMana}.",
-        "secondsToRefreshManaCost": "{seconds} seconds to refresh the mana cost",
+        "availableMana": "Available Mana",
+        "insufficientMana": "Generating mana... {timeRemaining}.",
+        "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana"
     },
     "filters":{
