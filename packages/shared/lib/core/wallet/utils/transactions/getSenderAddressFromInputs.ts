@@ -7,9 +7,15 @@ import {
     ExpirationUnlockCondition,
     UnlockConditionType,
     AccountAddress,
+    SlotIndex,
 } from '@iota/sdk/out/types'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
+
+// TODO: Remove temp interface -> https://github.com/iotaledger/firefly/issues/8305
+interface ExpirationUnlockConditionTemp extends ExpirationUnlockCondition {
+    slot: SlotIndex
+}
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
     for (const input of inputs) {
@@ -24,7 +30,8 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
                 const expirationUnlockCondition = unlockConditions.find(
                     (unlockCondition) =>
                         unlockCondition.type === UnlockConditionType.Expiration &&
-                        (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
+                        ((unlockCondition as ExpirationUnlockConditionTemp).slotIndex ??
+                            (unlockCondition as ExpirationUnlockConditionTemp).slot) < spentDate
                 ) as ExpirationUnlockCondition
 
                 if (expirationUnlockCondition) {
