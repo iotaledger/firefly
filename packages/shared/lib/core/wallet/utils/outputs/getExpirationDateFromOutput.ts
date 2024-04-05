@@ -1,12 +1,7 @@
-import { CommonOutput, ExpirationUnlockCondition, SlotIndex, UnlockConditionType } from '@iota/sdk/out/types'
+import { CommonOutput, ExpirationUnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
 import { get } from 'svelte/store'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { MILLISECONDS_PER_SECOND } from 'shared/lib/core/utils'
-
-// TODO: Remove temp interface -> https://github.com/iotaledger/firefly/issues/8305
-interface ExpirationUnlockConditionTemp extends ExpirationUnlockCondition {
-    slot: SlotIndex
-}
 
 export function getExpirationDateFromOutput(output: CommonOutput): Date | undefined {
     const expirationUnixTime = getExpirationUnixTimeFromOutput(output)
@@ -20,8 +15,7 @@ export function getExpirationUnixTimeFromOutput(output: CommonOutput): number | 
             if (!nodeProtocolParameters) return
             const unixTimestamp = getUnixTimestampFromNodeInfoAndSlotIndex(
                 nodeProtocolParameters,
-                (unlockCondition as ExpirationUnlockConditionTemp).slotIndex ??
-                    (unlockCondition as ExpirationUnlockConditionTemp).slot
+                (unlockCondition as ExpirationUnlockCondition).slot
             )
             return unixTimestamp
         }
