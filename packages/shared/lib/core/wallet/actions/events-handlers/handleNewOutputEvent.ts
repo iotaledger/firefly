@@ -2,21 +2,16 @@ import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftO
 import { activeWallets, updateActiveWallet } from '@core/profile'
 import { checkAndRemoveProfilePicture, updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
-    ActivityType,
     IWrappedOutput,
     WalletApiEventHandler,
-    addActivitiesToWalletActivitiesInAllWalletActivities,
-    addPersistedAsset,
-    generateActivities,
     AddressConverter,
-    getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
     isDelegationOutput,
     isImplicitAccountOutput,
-    preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
+    generateAndStoreActivitiesForWallet,
 } from '@core/wallet'
 import {
     AccountAddress,
@@ -64,18 +59,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, walletUnspentOutputs })
 
-        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
-
-        const activities = await generateActivities(processedOutput, wallet)
-        for (const activity of activities) {
-            if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
-                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
-                if (asset) {
-                    addPersistedAsset(asset)
-                }
-            }
-        }
-        addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
+        await generateAndStoreActivitiesForWallet(wallet)
     }
     if (isImplicitAccountOutput(outputData)) {
         await syncBalance(wallet.id, true)
