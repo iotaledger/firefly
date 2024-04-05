@@ -28,11 +28,13 @@ describe('File: formatTokenAmountDefault.ts', () => {
     })
     it('should throw an error if amount is not an integer', () => {
         const amount = 42.069
-        expect(() => formatTokenAmountDefault(amount, decimalToken)).toThrow()
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
+        expect(formattedAmount).toBe('-')
     })
     it('should throw an error if amount is negative', () => {
         const amount = -42069
-        expect(() => formatTokenAmountDefault(amount, decimalToken)).toThrow()
+        const formattedAmount = formatTokenAmountDefault(amount, decimalToken)
+        expect(formattedAmount).toBe('-')
     })
     it('should add correct decimal character for german', () => {
         appSettings.update((state) => ({ ...state, language: 'de' }))

@@ -1,12 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import {
-    AccountOutput,
-    Output,
-    OutputType,
-    OutputWithMetadata,
-    TransactionWithMetadata,
-    UTXOInput,
-} from '@iota/sdk/out/types'
+import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
@@ -15,6 +8,9 @@ import { getPassiveManaForOutput } from '@core/network'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
+import { isImplicitAccountOutput } from '../isImplicitAccountOutput'
+import { isOutputOfSelectedWalletAddress } from '../isOutputOfSelectedWalletAddress'
+import { isAccountOutput } from '../isAccountOutput'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -39,16 +35,15 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
-    let manaCost = 0
-    const prevAccountOutput = inputs.find((input) => (input.output as AccountOutput).accountId)
-    if (prevAccountOutput) {
-        const prevMana = getPassiveManaForOutput(prevAccountOutput) ?? 0
-        const postAccountOutput = outputs.find(
-            (output) =>
-                (prevAccountOutput.output as AccountOutput).accountId === (output.output as AccountOutput).accountId
-        )
-        manaCost = prevMana - Number(postAccountOutput?.output?.mana ?? 0)
-    }
+    const inputsToConsiderWhenCalculatingMana = inputs.filter(
+        (input) => isAccountOutput(input) || isImplicitAccountOutput(input) || isOutputOfSelectedWalletAddress(input)
+    )
+    const prevManaCost = inputsToConsiderWhenCalculatingMana.reduce(
+        (acc, input) => acc + (getPassiveManaForOutput(input) ?? 0),
+        0
+    )
+
+    const postManaCost = outputs.reduce((acc, output) => acc + Number(output.output.mana ?? 0), 0)
 
     return {
         outputs: outputs,
@@ -56,7 +51,7 @@ export async function preprocessOutgoingTransaction(
         direction,
         time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
         inclusionState: transaction.inclusionState,
-        mana: manaCost,
+        mana: prevManaCost - postManaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
     }
 }

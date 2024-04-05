@@ -1,9 +1,9 @@
 <script lang="ts">
     import { BaseError } from '@core/error'
     import { localize } from '@core/i18n'
-    import { setMintTokenDetails, mintTokenDetails, IMintTokenDetails } from '@core/wallet'
+    import { setMintTokenDetails, mintTokenDetails, IMintTokenDetails, selectedWallet } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight, AccountInput, TextType } from '@ui'
+    import { Button, Error, NumberInput, Text, TextInput, OptionalInput, FontWeight, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { MAX_SUPPORTED_DECIMALS } from '@core/wallet/constants/max-supported-decimals.constants'
     import { handleError } from '@core/error/handlers/handleError'
@@ -19,7 +19,7 @@
         description: undefined,
         url: undefined,
         logoUrl: undefined,
-        accountAddress: undefined,
+        accountAddress: $selectedWallet.depositAddress,
     }
 
     let {
@@ -42,12 +42,9 @@
     $: circulatingSupply, (circulatingSupplyError = '')
     let symbolError: string
     $: symbol, (symbolError = '')
-    let accountAddressError: string
-    $: accountAddress, (accountAddressError = '')
 
     let error: BaseError
     let decimalsInput: OptionalInput
-    let accountInput: AccountInput
 
     function onCancelClick(): void {
         closePopup()
@@ -81,8 +78,7 @@
             form.totalSupply !== undefined &&
             form.circulatingSupply !== undefined &&
             form.decimals !== undefined &&
-            form.symbol !== undefined &&
-            form.accountAddress !== undefined
+            form.symbol !== undefined
         )
     }
 
@@ -90,7 +86,6 @@
         try {
             await Promise.all([
                 isNameValid(),
-                accountInput.validate(),
                 isTotalSupplyValid(),
                 isCirculatingSupplyValid(),
                 decimalsInput?.validate(isDecimalsValid()),
@@ -175,7 +170,6 @@
     </Text>
 
     <div class="space-y-4 max-h-100 scrollable-y flex-1">
-        <AccountInput bind:this={accountInput} bind:account={accountAddress} bind:error={accountAddressError} />
         <TextInput
             bind:value={tokenName}
             label={localize('popups.nativeToken.property.tokenName')}
