@@ -8,6 +8,8 @@ import { ReturnStrategy, TokenStandard, VerifiedStatus } from '../enums'
 import { IAsset, IPersistedAsset } from '../interfaces'
 import { NewTransactionType } from '../stores'
 import { NewTransactionDetails } from '../types'
+import { MetadataFeature } from '@iota/sdk/out/types'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 
 const PERSISTED_ASSET_SHIMMER: IPersistedAsset = {
     id: '1',
@@ -101,7 +103,12 @@ describe('File: getOutputParameters.ts', () => {
             recipientAddress,
             amount,
             unlocks: {},
-            features: { metadata: '0x6d65746164617461', tag: '0x746167' },
+            features: {
+                metadata: new MetadataFeature({
+                    [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: '0x6d65746164617461',
+                }),
+                tag: '0x746167',
+            },
             storageDeposit: { returnStrategy: ReturnStrategy.Return },
         }
         expect(output).toStrictEqual(expectedOutput)
