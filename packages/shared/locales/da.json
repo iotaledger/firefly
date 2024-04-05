@@ -1409,7 +1409,7 @@
         "skipAndKeep": "Overspring og behold gammel adgangskode",
         "addChain": "Tilføj kæde",
         "viewVestingRewardsFinder": "Find vesting rewards",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "copyProfileSystemLocation": "Kopiér profilsystemsplacering"
     },
     "general": {
         "recipient": "Recipient",
@@ -2129,7 +2129,7 @@
             "noFunds": "You do not have any IOTA."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Vær forsigtig, når ukendte link følges. Del eller indtast aldrig private nøgler via nogen websteder eller tjenester."
         }
     },
     "tooltips": {
