@@ -8,12 +8,13 @@ import { getCoinType } from '@core/profile'
 import { Converter } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken, MetadataFeature } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { prepareOutput } from '../actions/prepareOutput'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails, getSelectedWallet } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
 import { convertDateToSlotIndex, nodeInfoProtocolParameters } from '../../network'
 import { get } from 'svelte/store'
 
@@ -27,7 +28,6 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
 
 function buildOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit } = transactionDetails ?? {}
-
     const recipientAddress = getAddressFromSubject(recipient)
     const amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
@@ -51,7 +51,11 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
         ...(assets && { assets }),
         features: {
             ...(tag && { tag }),
-            ...(metadata && { metadata }),
+            ...(metadata && {
+                metadata: new MetadataFeature({
+                    [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: metadata,
+                }),
+            }),
             ...(native_token && { native_token }),
         },
         unlocks: {
