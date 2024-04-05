@@ -39,6 +39,7 @@ export * from './syncWalletsInParallel'
 export * from './validateWalletName'
 export * from './isVisibleAsset'
 export * from './isVisibleActivity'
+export * from './isOutputOfSelectedWalletAddress'
 
 // Folders
 export * from './generateActivity'
