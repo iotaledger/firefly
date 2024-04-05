@@ -14,9 +14,9 @@ export const DEFAULT_SYNC_OPTIONS: SyncOptions = {
         delegationOutputs: true,
     },
     nft: {
-        accountOutputs: false,
-        basicOutputs: false,
-        nftOutputs: false,
+        accountOutputs: true,
+        basicOutputs: true,
+        nftOutputs: true,
     },
     syncIncomingTransactions: true,
     syncNativeTokenFoundries: true,

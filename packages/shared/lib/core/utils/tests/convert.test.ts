@@ -2,7 +2,6 @@ import {
     convertBytesToHexString,
     convertDateToUnixTimestamp,
     convertHexToRgba,
-    convertUInt16NumberToLittleEndianHex,
     convertUnixTimestampToDate,
 } from '../convert'
 
@@ -27,32 +26,6 @@ describe('File: convert.ts', () => {
         })
         it('should handle invalid timestamp parameters', () => {
             expect(convertUnixTimestampToDate(undefined)).toEqual(undefined)
-        })
-    })
-
-    describe('Function: convertUInt16NumberToLittleEndianHex', () => {
-        it('should handle valid input', () => {
-            expect(convertUInt16NumberToLittleEndianHex(0)).toEqual('0x0000')
-            expect(convertUInt16NumberToLittleEndianHex(1)).toEqual('0x0100')
-            expect(convertUInt16NumberToLittleEndianHex(-1)).toEqual('0xFFFF')
-            expect(convertUInt16NumberToLittleEndianHex(255)).toEqual('0xFF00')
-            expect(convertUInt16NumberToLittleEndianHex(511)).toEqual('0xFF01')
-            expect(convertUInt16NumberToLittleEndianHex(1023)).toEqual('0xFF03')
-            expect(convertUInt16NumberToLittleEndianHex(32767)).toEqual('0xFF7F')
-            expect(convertUInt16NumberToLittleEndianHex(-32768)).toEqual('0x0080')
-        })
-        it('should handle invalid input', () => {
-            expect(convertUInt16NumberToLittleEndianHex(undefined)).toEqual('0x0000')
-        })
-        it('should NOT use the hex prefix if specified', () => {
-            expect(convertUInt16NumberToLittleEndianHex(0, false)).toEqual('0000')
-            expect(convertUInt16NumberToLittleEndianHex(1, false)).toEqual('0100')
-            expect(convertUInt16NumberToLittleEndianHex(-1, false)).toEqual('FFFF')
-            expect(convertUInt16NumberToLittleEndianHex(255, false)).toEqual('FF00')
-            expect(convertUInt16NumberToLittleEndianHex(511, false)).toEqual('FF01')
-            expect(convertUInt16NumberToLittleEndianHex(1023, false)).toEqual('FF03')
-            expect(convertUInt16NumberToLittleEndianHex(32767, false)).toEqual('FF7F')
-            expect(convertUInt16NumberToLittleEndianHex(-32768, false)).toEqual('0080')
         })
     })
 
