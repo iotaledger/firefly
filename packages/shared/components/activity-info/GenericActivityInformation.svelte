@@ -28,7 +28,8 @@
     $: formattedGiftedStorageDeposit = formatTokenAmountPrecise(activity?.giftedStorageDeposit ?? 0, getBaseToken())
     $: formattedSurplus = formatTokenAmountPrecise(activity?.surplus ?? 0, getBaseToken())
     $: formattedGasFee = formatTokenAmountPrecise(Number(gasFee ?? 0), getBaseToken())
-    $: formattedManaPrefix = activity.direction === ActivityDirection.Incoming ? '' : '- '
+    $: formattedManaPrefix =
+        activity.direction === ActivityDirection.Incoming || Number(activity?.mana) === 0 ? '' : '- '
     $: formattedMana = formattedManaPrefix + formatTokenAmountBestMatch(Number(activity?.mana ?? 0), DEFAULT_MANA)
 
     let transactionDetailsList: IKeyValueBoxList
