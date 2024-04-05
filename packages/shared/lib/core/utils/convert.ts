@@ -27,12 +27,6 @@ export function convertUnixTimestampToDate(timestamp: number): Date {
     }
 }
 
-export function convertUInt16NumberToLittleEndianHex(num: number, withHexPrefix = true): string {
-    const littleEndianNumber = ((num & 0xff) << 8) | ((num >> 8) & 0xff)
-    const hex = ('0000' + littleEndianNumber.toString(16).toUpperCase()).slice(-4)
-    return withHexPrefix ? HEXADECIMAL_PREFIX + hex : hex
-}
-
 export function convertBytesToHexString(bytes: number[], withHexPrefix = true): string {
     if (!bytes) {
         throw new Error('"bytes" must be an array of numbers')
