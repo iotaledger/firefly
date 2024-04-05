@@ -3,7 +3,7 @@
     import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { getClient, prepareMintNft } from '@core/wallet/actions'
-    import { selectedWallet } from '@core/wallet'
+    import { hasWalletMainAccountNegativeBIC, selectedWallet } from '@core/wallet'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
@@ -11,6 +11,7 @@
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
     import { ManaBox } from '@components'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
+    import { showAppNotification } from '@auxiliary/notification'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -52,6 +53,14 @@
             ...(issuerName && { issuerName }),
             ...(collectionName && { collectionName }),
         }
+    }
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
+    $: if (hasMainAccountNegativeBIC) {
+        showAppNotification({
+            type: 'warning',
+            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
+        })
     }
 
     async function prepareNftOutput(): Promise<void> {
@@ -153,7 +162,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || !hasEnoughMana || hasMainAccountNegativeBIC}
             onClick={onConfirmClick}
             isBusy={$selectedWallet?.isTransferring}
         >

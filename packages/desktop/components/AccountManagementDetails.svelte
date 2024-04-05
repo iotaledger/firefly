@@ -26,6 +26,7 @@
         isImplicitAccountOutput,
         selectedWallet,
         selectedWalletMainAccountId,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
     import {
         AccountAddress,
@@ -63,7 +64,7 @@
     $: formattedStakedAmount = formatTokenAmountBestMatch(rawStakedAmount, getBaseToken())
     $: primaryKey = $selectedWallet?.primaryKey
     $: listBlockKeysFeature(selectedOutput)
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: hasAccountNegativeBIC =
         $selectedWallet?.balances?.blockIssuanceCredits?.[(selectedOutput.output as AccountOutput)?.accountId] < 0
 

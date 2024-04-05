@@ -27,7 +27,13 @@
         resetNftDownloadQueue,
         selectedWalletNfts,
     } from '@core/nfts'
-    import { selectedWallet, selectedWalletId, clearBalanceSyncPoll, syncBalancePoll } from '@core/wallet'
+    import {
+        selectedWallet,
+        selectedWalletId,
+        clearBalanceSyncPoll,
+        syncBalancePoll,
+        hasWalletMainAccountNegativeBIC,
+    } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
     import { isAwareOfMetricSystemDrop, showBalanceOverviewPopup } from '@contexts/dashboard/stores'
@@ -51,7 +57,7 @@
     $: $nftDownloadQueue, downloadNextNftInQueue()
     $: $downloadingNftId && interruptNftDownloadAfterTimeout(get(selectedWalletId))
     $: addselectedWalletNftsToDownloadQueue($selectedWalletId)
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     $: if (hasMainAccountNegativeBIC) {
         showAppNotification({
