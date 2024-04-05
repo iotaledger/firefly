@@ -3,7 +3,7 @@
     import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize, TextType } from '@ui'
     import { localize } from '@core/i18n'
     import { getClient, prepareMintNft } from '@core/wallet/actions'
-    import { selectedWallet } from '@core/wallet'
+    import { hasWalletMainAccountNegativeBIC, selectedWallet } from '@core/wallet'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
@@ -55,7 +55,7 @@
         }
     }
 
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: if (hasMainAccountNegativeBIC) {
         showAppNotification({
             type: 'warning',

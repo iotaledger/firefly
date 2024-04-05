@@ -7,6 +7,7 @@
         getTimeDifference,
         Activity,
         selectedWallet,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
     import { ActivityAsyncStatusPill, TooltipIcon, Text, Button, TileFooter, FontWeight, ButtonSize } from '@ui'
     import { time } from '@core/app'
@@ -27,7 +28,7 @@
     $: timeDiff = getTimeDiff(activity)
     $: hasExpirationTime = !!activity.asyncData?.expirationDate
 
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     function onIgnoreClick(): void {
         openPopup({

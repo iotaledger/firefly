@@ -11,6 +11,7 @@
         ActivityDirection,
         ActivityType,
         claimActivity,
+        hasWalletMainAccountNegativeBIC,
         ignoreActivity,
         selectedWallet,
         selectedWalletActivities,
@@ -49,7 +50,7 @@
             activity?.direction === ActivityDirection.SelfTransaction) &&
         activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: if (hasMainAccountNegativeBIC) {
         showAppNotification({
             type: 'warning',

@@ -9,6 +9,7 @@
         formatTokenAmountPrecise,
         IIrc30Metadata,
         IMintTokenDetails,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
@@ -31,7 +32,7 @@
     $: metadata = getMetadata($mintTokenDetails)
     $: isTransferring = $selectedWallet?.isTransferring
 
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: if (hasMainAccountNegativeBIC) {
         showAppNotification({
             type: 'warning',
