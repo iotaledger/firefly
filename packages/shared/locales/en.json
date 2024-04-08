@@ -1743,7 +1743,8 @@
         "availableMana": "Available Mana",
         "insufficientMana": "Generating mana... {timeRemaining}.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
-        "mana": "Mana"
+        "mana": "Mana",
+        "delegationCreated": "Delegation created"
     },
     "filters":{
         "title": "Filters",
