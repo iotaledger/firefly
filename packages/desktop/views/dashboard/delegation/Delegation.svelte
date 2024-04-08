@@ -136,7 +136,7 @@
                     props: {
                         icon: IconEnum.Lock,
                         text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
-                        boxClasses: 'bg-gray-100 w-6 h-6 rounded-full text-blue-500',
+                        boxClasses: 'bg-gray-100 w-5 h-5 rounded-full text-blue-500',
                         width: 20,
                         height: 20,
                     },
@@ -146,8 +146,8 @@
                     component: BoxedIconWithText,
                     props: {
                         icon: IconEnum.Star,
-                        text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
-                        boxClasses: 'bg-orange-100 w-6 h-6 rounded-full text-orange-600',
+                        text: formatTokenAmountBestMatch(Math.round(value), DEFAULT_MANA),
+                        boxClasses: 'bg-orange-100 w-5 h-5 rounded-full text-orange-600',
                         width: 20,
                         height: 20,
                     },
