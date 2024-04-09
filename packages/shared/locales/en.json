@@ -693,7 +693,8 @@
                         "main" : "Main",
                         "pending" : "Pending"
                     }
-                }
+                },
+                "newAccount": "Create Account"
             },
             "details": {
                 "balance": "Balance",
@@ -1287,6 +1288,10 @@
             "confirmButton": "Claim",
             "rewards": "Rewards",
             "delegationId": "Delegation ID"
+        },
+        "implicitAccountAddress": {
+            "title": "Create Account",
+            "subtitle": "Create a new account by sending funds to this account. The funds are yours to use after the account has been created."
         }
     },
     "actions": {
