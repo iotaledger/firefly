@@ -4,11 +4,11 @@
     import { openUrlInBrowser } from '@core/app'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { ITransactionInfoToCalculateManaCost } from '@core/network'
+    import { DEFAULT_MANA, ITransactionInfoToCalculateManaCost } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
+    import { formatTokenAmountBestMatch, getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
     import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
 
@@ -86,7 +86,10 @@
     </button>
     <div class="flex flex-col space-y-4">
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.delegationId')} valueText={delegationId} />
-        <KeyValueBox keyText={localize('popups.claimDelegationRewards.rewards')} valueText={rewards.toString()} />
+        <KeyValueBox
+            keyText={localize('popups.claimDelegationRewards.rewards')}
+            valueText={formatTokenAmountBestMatch(Math.round(rewards), DEFAULT_MANA)}
+        />
         <ManaBox {transactionInfo} bind:hasEnoughMana />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
