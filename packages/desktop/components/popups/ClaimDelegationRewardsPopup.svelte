@@ -8,8 +8,13 @@
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { formatTokenAmountBestMatch, getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import {
+        formatTokenAmountBestMatch,
+        getDefaultTransactionOptions,
+        hasWalletMainAccountNegativeBIC,
+        selectedWallet,
+    } from '@core/wallet'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextHintVariant, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -20,6 +25,8 @@
     let hasEnoughMana = false
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onConfirmClick(): Promise<void> {
         isBusy = true
@@ -91,6 +98,9 @@
             valueText={formatTokenAmountBestMatch(Math.round(rewards), DEFAULT_MANA)}
         />
         <ManaBox {transactionInfo} bind:hasEnoughMana />
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>

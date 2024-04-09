@@ -28,11 +28,11 @@
         NftActivityDetails,
         Text,
         TextType,
+        TextHint,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { onMount } from 'svelte'
     import { ManaBox } from '@components'
-    import { showAppNotification } from '@auxiliary/notification'
 
     export let activityId: string
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -51,12 +51,6 @@
         activity?.asyncData?.asyncStatus === ActivityAsyncStatus.Unclaimed
 
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
-    $: if (hasMainAccountNegativeBIC) {
-        showAppNotification({
-            type: 'warning',
-            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
-        })
-    }
 
     function onExplorerClick(): void {
         let url: string
@@ -167,6 +161,9 @@
         {#if !isTimelocked && isActivityIncomingAndUnclaimed}
             <div class="flex flex-col space-y-4">
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
+                {#if hasMainAccountNegativeBIC}
+                    <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+                {/if}
                 <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
                     <Button
                         outline
