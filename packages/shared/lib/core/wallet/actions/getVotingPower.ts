@@ -1,6 +1,6 @@
 import { getBalance } from './getBalance'
 
-export async function getVotingPower(walletId: string): Promise<string> {
-    const balance = await getBalance(walletId)
+export function getVotingPower(walletId: string): string {
+    const balance = getBalance(walletId)
     return balance.baseCoin.votingPower
 }

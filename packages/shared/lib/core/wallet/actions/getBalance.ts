@@ -1,6 +1,6 @@
 import { Balance } from '@iota/sdk/out/types'
-import { getWallet } from '@core/profile/actions'
+import { getWalletById } from '@core/profile'
 
-export async function getBalance(walletId: string): Promise<Balance> {
-    return (await getWallet(walletId))?.getBalance()
+export function getBalance(walletId: string): Balance {
+    return getWalletById(walletId)?.getBalance() as unknown as Balance
 }
