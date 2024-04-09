@@ -122,6 +122,14 @@
         }
         return amount
     }
+
+    function formatBIC(amount: number): string {
+        if (amount < 0) {
+            return '-' + formatTokenAmountBestMatch(amount * -1, DEFAULT_MANA)
+        } else {
+            return formatTokenAmountBestMatch(amount, DEFAULT_MANA)
+        }
+    }
 </script>
 
 <right-pane class="w-full h-full min-h-96 flex-1 space-y-4 flex flex-col">
@@ -199,7 +207,7 @@
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
-                                    {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
+                                    {formatBIC($selectedWallet?.balances?.blockIssuanceCredits?.[accountId] ?? 0)}
                                 </Text>
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
