@@ -200,6 +200,7 @@
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
                                     {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
+                                    {localize('views.accountManagement.details.mana')}
                                 </Text>
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
