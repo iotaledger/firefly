@@ -2,7 +2,13 @@
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from '@ui'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { burnAsset, formatTokenAmountBestMatch, getDefaultTransactionOptions, IAsset } from '@core/wallet'
+    import {
+        burnAsset,
+        formatTokenAmountBestMatch,
+        getDefaultTransactionOptions,
+        hasWalletMainAccountNegativeBIC,
+        IAsset,
+    } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
@@ -19,6 +25,7 @@
     let hasEnoughMana = false
 
     $: formattedAmount = formatTokenAmountBestMatch(Number(rawAmount), asset?.metadata)
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     function onBackClick(): void {
         openPopup({
@@ -78,6 +85,9 @@
         <KeyValueBox keyText={localize('general.amount')} valueText={formattedAmount} />
         <TextHint variant={TextHintVariant.Warning} text={localize('actions.confirmTokenBurn.hint')} />
         <ManaBox {transactionInfo} bind:hasEnoughMana />
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onBackClick}>{localize('actions.back')}</Button>
@@ -85,7 +95,7 @@
             classes="w-full"
             variant={ButtonVariant.Warning}
             isBusy={$selectedWallet?.isTransferring}
-            disabled={$selectedWallet?.isTransferring || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || !hasEnoughMana || hasMainAccountNegativeBIC}
             onClick={onBurnTokenClick}
         >
             {localize('actions.burnToken')}
