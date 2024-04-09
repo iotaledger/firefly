@@ -1,6 +1,11 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { DEFAULT_SECONDS_PER_SLOT, ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
+    import {
+        DEFAULT_SECONDS_PER_SLOT,
+        ITransactionInfoToCalculateManaCost,
+        getManaBalance,
+        getTotalAvailableMana,
+    } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { MILLISECONDS_PER_SECOND, getBestTimeDuration } from '@core/utils'
     import { selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
@@ -10,6 +15,7 @@
     export let transactionInfo: ITransactionInfoToCalculateManaCost
     export let hasEnoughMana: boolean
     export let showCountdown: boolean = true
+    export let outputId: string | undefined
 
     const NUMBER_OF_EXTRA_SLOTS_MANA = 3
     const extraMana: number = 0 // the sdk returns the wait time without extra slots
@@ -23,12 +29,14 @@
 
     $: (transactionInfo?.preparedTransaction || transactionInfo?.preparedTransactionError) && calculateManaCost()
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
-    $: availableMana = getManaBalance($selectedWallet?.balances?.mana?.available)
+    $: availableMana = outputId
+        ? getTotalAvailableMana($selectedWallet, outputId)
+        : getManaBalance($selectedWallet?.balances?.mana?.available)
     $: requiredMana = requiredTxManaCost + extraMana
     $: hasEnoughMana = availableMana >= requiredMana
     $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)
 
-    function calculateManaCost() {
+    function calculateManaCost(): void {
         if (
             transactionInfo?.preparedTransactionError &&
             transactionInfo.preparedTransactionError.message?.includes('slots remaining until enough mana')
