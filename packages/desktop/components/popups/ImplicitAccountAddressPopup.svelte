@@ -11,9 +11,7 @@
     <Text type={TextType.h3} fontWeight={FontWeight.semibold} classes="text-left"
         >{localize('popups.implicitAccountAddress.title')}</Text
     >
-    <Text type={TextType.p} fontWeight={FontWeight.semibold} classes="text-left"
-        >{localize('popups.implicitAccountAddress.subtitle')}</Text
-    >
+    <Text type={TextType.p} classes="text-left">{localize('popups.implicitAccountAddress.subtitle')}</Text>
     <div class="flex flex-col space-y-2">
         <CopyableBox value={implicitAddress} isCopyable classes="w-full">
             <Text type={TextType.pre} fontSize="14" fontWeight={FontWeight.medium} color="gray-900" darkColor="white"
