@@ -10,12 +10,13 @@
     import {
         AddressConverter,
         getDefaultTransactionOptions,
+        hasWalletMainAccountNegativeBIC,
         selectedWallet,
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
     import { AccountAddress, AddressType, CreateDelegationParams } from '@iota/sdk/out/types'
-    import { AssetAmountInput, Button, HTMLButtonType, Text, TextInput, TextType } from '@ui'
+    import { AssetAmountInput, Button, HTMLButtonType, Text, TextHint, TextHintVariant, TextInput, TextType } from '@ui'
     import Big from 'big.js'
     import { onMount } from 'svelte'
 
@@ -55,6 +56,7 @@
         validAmount &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
         try {
@@ -154,6 +156,9 @@
             {#if displayManaBox}
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
             {/if}
+            {#if hasMainAccountNegativeBIC}
+                <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+            {/if}
         </div>
         <div class="flex flex-row flex-nowrap w-full space-x-4">
             <Button outline disabled={hasTransactionInProgress} classes="w-full" onClick={onCancelClick}>
@@ -161,7 +166,7 @@
             </Button>
             <Button
                 type={HTMLButtonType.Submit}
-                disabled={!confirmAllowed}
+                disabled={!confirmAllowed || hasMainAccountNegativeBIC}
                 isBusy={hasTransactionInProgress}
                 classes="w-full"
             >
