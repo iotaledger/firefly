@@ -36,7 +36,7 @@
     $: hasEnoughMana = availableMana >= requiredMana
     $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)
 
-    function calculateManaCost() {
+    function calculateManaCost(): void {
         if (
             transactionInfo?.preparedTransactionError &&
             transactionInfo.preparedTransactionError.message?.includes('slots remaining until enough mana')
