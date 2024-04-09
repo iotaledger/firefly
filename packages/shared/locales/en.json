@@ -1291,7 +1291,7 @@
         },
         "implicitAccountAddress": {
             "title": "Create Account",
-            "subtitle": "Create a new account by sending funds to this account. The funds are yours to use after the account has been created."
+            "subtitle": "Send funds to this address to start the acount creation process. We recommend sending 3$ - 15$."
         }
     },
     "actions": {
