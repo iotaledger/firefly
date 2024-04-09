@@ -209,7 +209,7 @@
 </script>
 
 {#if $selectedWallet}
-    <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
+    <delegation-container class="w-full h-full flex flex-nowrap p-8 relative justify-center max-w-7xl self-center">
         <Pane height={Height.Full} width={Width.Full}>
             <div class="flex flex-col space-y-10 max-w-7xl w-full h-full p-8">
                 <div class="flex flex-row justify-between">
