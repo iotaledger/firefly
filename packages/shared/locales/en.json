@@ -2398,7 +2398,7 @@
             "creation": {
                 "Pending": "creating account",
                 "Confirmed": "account created",
-                "Failed": "Failed to create account"
+                "Conflicting": "Failed to create account"
             }
         },
         "networkHealth": {
