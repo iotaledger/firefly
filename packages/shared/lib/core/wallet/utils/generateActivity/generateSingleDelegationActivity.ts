@@ -4,12 +4,11 @@ import { DelegationActivity } from '@core/wallet/types'
 import {
     getAmountFromOutput,
     getAsyncDataFromOutput,
-    getMetadataFromOutput,
     getSendingInformation,
     getStorageDepositFromOutput,
-    getTagFromOutput,
 } from './helper'
 import { DelegationOutput } from '@iota/sdk/out/types'
+import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleDelegationActivity(
     wallet: IWalletState,
@@ -29,9 +28,7 @@ export async function generateSingleDelegationActivity(
     const containsValue = true
     const delegatedAmount = output.delegatedAmount.toString()
     const delegationId = output.delegationId
-    const validatorAddress = wrappedOutput?.validatorAddress
-    const metadata = getMetadataFromOutput(output)
-    const tag = getTagFromOutput(output)
+    const validatorAddress = AddressConverter.addressToBech32(output?.validatorAddress)
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
 
@@ -47,8 +44,6 @@ export async function generateSingleDelegationActivity(
         isHidden,
         isAssetHidden,
         time,
-        metadata,
-        tag,
         inclusionState,
         containsValue,
         mana,
