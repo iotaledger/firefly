@@ -166,7 +166,7 @@
             </Button>
             <Button
                 type={HTMLButtonType.Submit}
-                disabled={!confirmAllowed}
+                disabled={!confirmAllowed || hasMainAccountNegativeBIC}
                 isBusy={hasTransactionInProgress}
                 classes="w-full"
             >

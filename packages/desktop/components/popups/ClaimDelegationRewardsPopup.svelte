@@ -106,7 +106,7 @@
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || isBusy || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || isBusy || !hasEnoughMana || hasMainAccountNegativeBIC}
             isBusy={$selectedWallet?.isTransferring || isBusy}
             onClick={onConfirmClick}
         >
