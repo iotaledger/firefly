@@ -693,7 +693,8 @@
                         "main" : "Main",
                         "pending" : "Pending"
                     }
-                }
+                },
+                "newAccount": "Create Account"
             },
             "details": {
                 "balance": "Balance",
@@ -1286,6 +1287,10 @@
             "confirmButton": "Claim",
             "rewards": "Rewards",
             "delegationId": "Delegation ID"
+        },
+        "implicitAccountAddress": {
+            "title": "Create Account",
+            "subtitle": "Send funds to this address to start the acount creation process. We recommend sending 3$ - 15$."
         }
     },
     "actions": {
@@ -2397,7 +2402,7 @@
             "creation": {
                 "Pending": "creating account",
                 "Confirmed": "account created",
-                "Failed": "Failed to create account"
+                "Conflicting": "Failed to create account"
             }
         },
         "networkHealth": {
