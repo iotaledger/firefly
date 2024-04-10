@@ -1,6 +1,5 @@
 <script lang="ts">
     import { INft, NFT_MEDIA_FILE_NAME, nftDownloadQueue } from '@core/nfts'
-    import { DEV_STORAGE_DIRECTORY } from '@core/profile/constants'
     import features from '@features/features'
     import { MediaDisplay, MediaPlaceholder } from '@ui'
     import { DirectoryManager } from '@core/profile'
@@ -14,7 +13,7 @@
     export { classes as class }
 
     let classes: string = ''
-    const basePath = process.env.NODE_ENV === 'development' ? DEV_STORAGE_DIRECTORY : DirectoryManager.forProfiles()
+    const basePath = DirectoryManager.storageBasePath()
 
     $: isDownloading = $nftDownloadQueue.some((queueItem) => queueItem.nft.id === nft.id)
     $: src =
