@@ -19,11 +19,6 @@
     const showDeleteWallet = false // TODO(2.0) It doesn't make sense to allow removing
     // the wallet as there is only one for each profile at the moment
 
-    function onCustomiseWalletClick(): void {
-        openPopup({ id: PopupId.ManageWallet })
-        modal?.close()
-    }
-
     function onViewBalanceClick(): void {
         openPopup({ id: PopupId.BalanceBreakdown })
         modal?.close()
@@ -90,7 +85,6 @@
         {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
-        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseWalletClick} />
         {#if $isActiveLedgerProfile}
             <MenuItem
                 icon={Icon.Ledger}

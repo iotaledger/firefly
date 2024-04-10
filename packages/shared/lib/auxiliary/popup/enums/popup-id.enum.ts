@@ -23,7 +23,6 @@ export enum PopupId {
     LedgerConnection = 'ledgerConnection',
     LegalUpdate = 'legalUpdate',
     ManageKeys = 'manageKeys',
-    ManageWallet = 'manageWallet',
     ManageVotingPower = 'manageVotingPower',
     MetricSystemInfo = 'metricSystemInfo',
     MintNativeTokenConfirmation = 'mintNativeTokenConfirmation',
