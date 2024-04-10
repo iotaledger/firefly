@@ -28,6 +28,7 @@
         NftActivityDetails,
         Text,
         TextType,
+        DelegationActivityDetails,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
     import { onMount } from 'svelte'
@@ -161,6 +162,8 @@
                 <NftActivityDetails {activity} />
             {:else if activity.type === ActivityType.Account}
                 <AccountActivityDetails {activity} />
+            {:else if activity.type === ActivityType.Delegation}
+                <DelegationActivityDetails {activity} />
             {/if}
             <ActivityInformation {activity} />
         </activity-details>

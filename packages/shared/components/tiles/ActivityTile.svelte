@@ -24,6 +24,7 @@
         TimelockActivityTileFooter,
         TransactionActivityTileContent,
         VestingActivityTileContent,
+        DelegationActivityTileContent,
     } from '@ui'
 
     export let activity: Activity
@@ -76,6 +77,8 @@
                 <ConsolidationActivityTileContent {activity} />
             {:else if activity.type === ActivityType.Vesting}
                 <VestingActivityTileContent {activity} />
+            {:else if activity.type === ActivityType.Delegation}
+                <DelegationActivityTileContent {activity} />
             {:else}
                 <FoundryActivityTileContent {activity} />
             {/if}

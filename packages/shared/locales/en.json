@@ -2402,6 +2402,13 @@
                 "Failed": "Failed to create account"
             }
         },
+        "delegation": {
+            "creation": {
+                "Pending": "creating delegation",
+                "Confirmed": "delegation created",
+                "Failed": "Failed to create delegation"
+            }
+        },
         "networkHealth": {
             "down": "Down",
             "degraded": "Degraded",
