@@ -9,9 +9,10 @@
         formatTokenAmountPrecise,
         IIrc30Metadata,
         IMintTokenDetails,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { Button, KeyValueBox, Text, FontWeight, TextType } from '@ui'
+    import { Button, KeyValueBox, Text, FontWeight, TextType, TextHint, TextHintVariant } from '@ui'
     import { onMount } from 'svelte'
     import { selectedWallet } from '@core/wallet'
     import { handleError } from '@core/error/handlers/handleError'
@@ -29,6 +30,8 @@
     let metadata: IIrc30Metadata | undefined
     $: metadata = getMetadata($mintTokenDetails)
     $: isTransferring = $selectedWallet?.isTransferring
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function prepareFoundryOutput(): Promise<void> {
         if ($mintTokenDetails && $selectedWallet && metadata) {
@@ -169,13 +172,16 @@
             </details-list>
         {/if}
     </div>
+    {#if hasMainAccountNegativeBIC}
+        <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+    {/if}
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={isTransferring} onClick={onBackClick}>
             {localize('actions.back')}
         </Button>
         <Button
             classes="w-full"
-            disabled={isTransferring || !hasEnoughMana}
+            disabled={isTransferring || !hasEnoughMana || hasMainAccountNegativeBIC}
             onClick={onConfirmClick}
             isBusy={isTransferring}
         >

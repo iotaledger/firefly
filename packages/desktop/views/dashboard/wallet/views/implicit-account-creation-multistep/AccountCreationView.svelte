@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { Button, PasswordInput, LedgerAnimation, KeyValueBox } from '@ui'
+    import { Button, PasswordInput, LedgerAnimation, KeyValueBox, TextHint, TextHintVariant } from '@ui'
     import { localize } from '@core/i18n'
     import {
         IWalletState,
         formatTokenAmountBestMatch,
+        hasWalletMainAccountNegativeBIC,
         selectedWallet,
         selectedWalletAssets,
         selectedWalletId,
@@ -40,6 +41,7 @@
             : null
 
     $: $selectedWallet, prepareTransaction(selectedOutput?.outputId)
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     function getSelectedOutput(_selectedWallet: IWalletState, _outputId: string | undefined): OutputData | undefined {
         return (
@@ -110,7 +112,10 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={!$selectedWallet.isTransferring} />
+                    {#if hasMainAccountNegativeBIC}
+                        <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+                    {/if}
                 </div>
                 <PasswordInput
                     bind:error
@@ -125,8 +130,10 @@
                 <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
             {/if}
             <button-wrapper class="flex items-center justify-center">
-                <Button onClick={unlockWalletAndCreateAccount} disabled={disabledActive} {isBusy}
-                    >{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
+                <Button
+                    onClick={unlockWalletAndCreateAccount}
+                    disabled={disabledActive || hasMainAccountNegativeBIC}
+                    {isBusy}>{localize('views.implicit-account-creation.steps.step2.view.action')}</Button
                 >
             </button-wrapper>
         </div>

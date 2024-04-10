@@ -24,7 +24,7 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
                 const expirationUnlockCondition = unlockConditions.find(
                     (unlockCondition) =>
                         unlockCondition.type === UnlockConditionType.Expiration &&
-                        (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
+                        (unlockCondition as ExpirationUnlockCondition).slot < spentDate
                 ) as ExpirationUnlockCondition
 
                 if (expirationUnlockCondition) {

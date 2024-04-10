@@ -1,6 +1,6 @@
 import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfileId } from '@core/profile'
-import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
+import { ActivityDirection, IClaimedActivities, IProcessedTransaction } from '@core/wallet'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
@@ -17,9 +17,11 @@ export function linkTransactionsWithClaimingTransactions(
     wallet: IWalletState
 ): IProcessedTransaction[] {
     const resultingTransactions = []
-    const transactionsIncludedAsClaimingTransactions = []
+    const transactionsIncludedAsClaimingTransactions: string[] = []
 
-    const claimedWalletActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
+    const claimedWalletActivities: { [transactionId: string]: IClaimedActivities } =
+        get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
+
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -28,13 +30,12 @@ export function linkTransactionsWithClaimingTransactions(
             transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             (transaction.direction === ActivityDirection.Incoming ||
                 transaction.direction === ActivityDirection.SelfTransaction)
-
         if (isClaimingTransaction) {
             continue
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedWalletActivities?.[transaction?.transactionId]
-            if (claimedActivity && claimedActivity.claimingTransactionId === transaction?.transactionId) {
+            if (claimedActivity) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
                     claimingTransactionId: claimedActivity.claimingTransactionId,
@@ -72,14 +73,13 @@ export function linkTransactionsWithClaimingTransactions(
             }
         }
     }
-
     return resultingTransactions
 }
 
 function searchClaimedTransactionInIncomingAsyncTransactions(
     allAsyncTransaction: IProcessedTransaction[],
     transaction: IProcessedTransaction
-): IProcessedTransaction {
+): IProcessedTransaction | undefined {
     return allAsyncTransaction.find((candidate) =>
         transaction.utxoInputs?.some((input) => input?.transactionId === candidate?.transactionId)
     )

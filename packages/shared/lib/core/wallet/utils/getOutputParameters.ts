@@ -5,15 +5,18 @@ import {
     outputHexBytes,
 } from '@core/layer-2/utils'
 import { getCoinType } from '@core/profile'
-import { Converter, convertDateToUnixTimestamp } from '@core/utils'
+import { Converter } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken, MetadataFeature } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { prepareOutput } from '../actions/prepareOutput'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails, getSelectedWallet } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
+import { convertDateToSlotIndex, nodeInfoProtocolParameters } from '../../network'
+import { get } from 'svelte/store'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -25,15 +28,22 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
 
 function buildOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit } = transactionDetails ?? {}
-
     const recipientAddress = getAddressFromSubject(recipient)
     const amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
     const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
-    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const expirationSlotIndex =
+        expirationDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(expirationDate, nodeProtocolParameters)
+            : undefined
+    const timelockSlotIndex =
+        timelockDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(timelockDate, nodeProtocolParameters)
+            : undefined
 
     return <OutputParams>{
         recipientAddress,
@@ -41,12 +51,16 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
         ...(assets && { assets }),
         features: {
             ...(tag && { tag }),
-            ...(metadata && { metadata }),
+            ...(metadata && {
+                metadata: new MetadataFeature({
+                    [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: metadata,
+                }),
+            }),
             ...(native_token && { native_token }),
         },
         unlocks: {
-            ...(expirationUnixTime && { expirationUnixTime }),
-            ...(timelockUnixTime && { timelockUnixTime }),
+            ...(expirationSlotIndex && { expirationSlotIndex }),
+            ...(timelockSlotIndex && { timelockSlotIndex }),
         },
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
@@ -72,8 +86,16 @@ async function buildOutputParametersForLayer2(
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = getLayer2MetadataForTransfer(transactionDetails)
     const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
-    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const expirationSlotIndex =
+        expirationDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(expirationDate, nodeProtocolParameters)
+            : undefined
+    const timelockSlotIndex =
+        timelockDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(timelockDate, nodeProtocolParameters)
+            : undefined
 
     const outputParams = <OutputParams>{
         recipientAddress,
@@ -86,8 +108,8 @@ async function buildOutputParametersForLayer2(
             ...(layer2Parameters && { sender: senderAddress }),
         },
         unlocks: {
-            ...(expirationUnixTime && { expirationUnixTime }),
-            ...(timelockUnixTime && { timelockUnixTime }),
+            ...(expirationSlotIndex && { expirationSlotIndex }),
+            ...(timelockSlotIndex && { timelockSlotIndex }),
         },
         storageDeposit: {
             returnStrategy: ReturnStrategy.Gift,
@@ -177,7 +199,7 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
     return assets
 }
 
-function getNativeTokenFromTransactionDetails(transactionDetails: NewTransactionDetails): Assets | undefined {
+function getNativeTokenFromTransactionDetails(transactionDetails: NewTransactionDetails): NativeToken | undefined {
     let nativeToken: NativeToken | undefined = undefined
 
     if (transactionDetails.type === NewTransactionType.TokenTransfer) {

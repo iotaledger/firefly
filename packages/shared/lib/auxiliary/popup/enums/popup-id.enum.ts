@@ -55,4 +55,5 @@ export enum PopupId {
     CreateDelegation = 'createDelegation',
     ActivateAccount = 'activateAccount',
     ClaimDelegationRewards = 'claimDelegationRewardsPopup',
+    ImplicitAccountAddress = 'implicitAccountAddressPopup',
 }

@@ -1,9 +1,20 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize, TextType } from '@ui'
+    import {
+        Button,
+        Text,
+        FontWeight,
+        NftImageOrIconBox,
+        Tabs,
+        KeyValueBox,
+        NftSize,
+        TextType,
+        TextHint,
+        TextHintVariant,
+    } from '@ui'
     import { localize } from '@core/i18n'
     import { getClient, prepareMintNft } from '@core/wallet/actions'
-    import { selectedWallet } from '@core/wallet'
+    import { hasWalletMainAccountNegativeBIC, selectedWallet } from '@core/wallet'
     import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
@@ -53,6 +64,8 @@
             ...(collectionName && { collectionName }),
         }
     }
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function prepareNftOutput(): Promise<void> {
         const outputData = buildNftOutputData(irc27Metadata, $selectedWallet.depositAddress)
@@ -146,6 +159,9 @@
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
             </activity-details>
         </nft-details>
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={$selectedWallet?.isTransferring} onClick={onBackClick}>
@@ -153,7 +169,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || !hasEnoughMana || hasMainAccountNegativeBIC}
             onClick={onConfirmClick}
             isBusy={$selectedWallet?.isTransferring}
         >

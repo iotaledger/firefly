@@ -6,6 +6,8 @@
         ignoreActivity,
         getTimeDifference,
         Activity,
+        selectedWallet,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
     import { ActivityAsyncStatusPill, TooltipIcon, Text, Button, TileFooter, FontWeight, ButtonSize } from '@ui'
     import { time } from '@core/app'
@@ -25,6 +27,8 @@
 
     $: timeDiff = getTimeDiff(activity)
     $: hasExpirationTime = !!activity.asyncData?.expirationDate
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     function onIgnoreClick(): void {
         openPopup({
@@ -94,7 +98,7 @@
             </Button>
             <Button
                 onClick={onClaimClick}
-                disabled={activity.asyncData?.isClaiming}
+                disabled={activity.asyncData?.isClaiming || hasMainAccountNegativeBIC}
                 isBusy={activity.asyncData?.isClaiming}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}
