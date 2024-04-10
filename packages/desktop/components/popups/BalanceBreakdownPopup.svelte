@@ -2,7 +2,7 @@
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
     import { localize } from '@core/i18n'
-    import { getManaBalance } from '@core/network'
+    import { getImplicitAccountsMana, getManaBalance } from '@core/network'
     import { checkActiveProfileAuth } from '@core/profile'
     import { selectedWallet } from '@core/wallet'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
@@ -53,13 +53,15 @@
 
     function getManaBreakdown(): BalanceBreakdown {
         const totalPasiveMana = getManaBalance(walletBalance?.mana?.total)
-        const availablePasiveBalance = getManaBalance(walletBalance?.mana?.available)
+        const availableManaBalance = walletBalance?.realAvailableMana
         const totalMana = totalPasiveMana + (walletBalance?.totalWalletBic ?? 0)
         const manaRewards = Number(walletBalance?.mana?.rewards ?? 0)
+        const implicitAccountsMana = getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [])
 
         const subBreakdown = {
-            availableMana: { amount: availablePasiveBalance },
-            lockedMana: { amount: totalPasiveMana - availablePasiveBalance },
+            availableMana: { amount: availableManaBalance },
+            lockedMana: { amount: totalPasiveMana - availableManaBalance },
+            implicitAccountsMana: { amount: implicitAccountsMana },
             bicMana: { amount: walletBalance?.totalWalletBic },
             manaRewards: { amount: manaRewards },
         }

@@ -855,6 +855,10 @@
                 "title": "Mana Rewards",
                 "subtitle": "Mana Rewards (Delegation & Staking)"
             },
+            "implicitAccountsMana": {
+                "title": "Pending Accounts Mana",
+                "subtitle": "Pending Account mana is locked until the account is activated"
+            },
             "availableMana": {
                 "title": "Available Mana",
                 "subtitle": "Mana available to send and issue blocks"
