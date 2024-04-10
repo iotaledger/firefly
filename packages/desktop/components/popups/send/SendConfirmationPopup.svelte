@@ -36,7 +36,6 @@
     import { onMount } from 'svelte'
     import { get } from 'svelte/store'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
-    import { showAppNotification } from '@auxiliary/notification'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let isSendAndClosePopup: boolean = false
@@ -231,12 +230,6 @@
     }
 
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
-    $: if (hasMainAccountNegativeBIC) {
-        showAppNotification({
-            type: 'warning',
-            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
-        })
-    }
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">

@@ -693,7 +693,8 @@
                         "main" : "Main",
                         "pending" : "Pending"
                     }
-                }
+                },
+                "newAccount": "Create Account"
             },
             "details": {
                 "balance": "Balance",
@@ -715,8 +716,7 @@
                 "accountNegativeBICHint": "This account has a negative Block Issuance Credit (BIC)."
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There are no accounts to show, activate one first.",
-            "hasMainAccountNegativeBIC": "There is a problem with the BIC of your account."
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
@@ -1007,7 +1007,7 @@
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
-            "negativeBIC": "Unable to send transaction. Your account has a negative Block Issuance Credit (BIC)."
+            "negativeBIC": "Unable to issue a block. Your account has a negative Block Issuance Credit (BIC)."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -1287,6 +1287,10 @@
             "confirmButton": "Claim",
             "rewards": "Rewards",
             "delegationId": "Delegation ID"
+        },
+        "implicitAccountAddress": {
+            "title": "Create Account",
+            "subtitle": "Send funds to this address to start the acount creation process. We recommend sending 3$ - 15$."
         }
     },
     "actions": {
@@ -2399,7 +2403,7 @@
             "creation": {
                 "Pending": "creating account",
                 "Confirmed": "account created",
-                "Failed": "Failed to create account"
+                "Conflicting": "Failed to create account"
             }
         },
         "delegation": {

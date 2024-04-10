@@ -61,8 +61,8 @@
 
     $: if (hasMainAccountNegativeBIC) {
         showAppNotification({
-            type: 'warning',
-            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
+            type: 'error',
+            message: localize('popups.transaction.negativeBIC'),
         })
     }
 
