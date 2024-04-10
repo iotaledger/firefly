@@ -19,6 +19,10 @@
     const showDeleteWallet = false // TODO(2.0) It doesn't make sense to allow removing
     // the wallet as there is only one for each profile at the moment
 
+    // TODO: update when multiwallet is implemented
+    // https://github.com/iotaledger/firefly/issues/8362
+    const isMultiwalletSupported = false
+
     function onCustomiseWalletClick(): void {
         openPopup({ id: PopupId.ManageWallet })
         modal?.close()
@@ -90,7 +94,13 @@
         {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
-        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseWalletClick} />
+        {#if isMultiwalletSupported}
+            <MenuItem
+                icon={Icon.Customize}
+                title={localize('actions.customizeAcount')}
+                onClick={onCustomiseWalletClick}
+            />
+        {/if}
         {#if $isActiveLedgerProfile}
             <MenuItem
                 icon={Icon.Ledger}
