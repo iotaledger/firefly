@@ -3,7 +3,7 @@
     import { DEV_STORAGE_DIRECTORY } from '@core/profile/constants'
     import features from '@features/features'
     import { MediaDisplay, MediaPlaceholder } from '@ui'
-    import { DirectoryManager } from 'shared/lib/core/profile'
+    import { DirectoryManager } from '@core/profile'
 
     export let nft: INft
     export let autoplay: boolean = false
