@@ -13,15 +13,12 @@
     import { selectedWallet } from '@core/wallet/stores'
     import { activeProfileSecretManager } from '@core/secret-manager'
     import { deleteWallet } from '@core/profile'
+    import features from '@features/features'
 
     export let modal: Modal = undefined
 
     const showDeleteWallet = false // TODO(2.0) It doesn't make sense to allow removing
     // the wallet as there is only one for each profile at the moment
-
-    // TODO: update when multiwallet is implemented
-    // https://github.com/iotaledger/firefly/issues/8362
-    const isMultiwalletSupported = false
 
     function onCustomiseWalletClick(): void {
         openPopup({ id: PopupId.ManageWallet })
@@ -94,7 +91,7 @@
         {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
-        {#if isMultiwalletSupported}
+        {#if features?.wallet?.multiWallet?.enabled}
             <MenuItem
                 icon={Icon.Customize}
                 title={localize('actions.customizeAcount')}

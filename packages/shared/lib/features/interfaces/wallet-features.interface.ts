@@ -12,4 +12,5 @@ export interface IWalletFeatures extends IFeatureFlag {
         sync: IFeatureFlag
         search: IFeatureFlag
     }
+    multiWallet: IFeatureFlag
 }
