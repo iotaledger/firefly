@@ -26,6 +26,10 @@ const walletFeatures: IWalletFeatures = {
             enabled: true,
         },
     },
+    multiWallet: {
+        // TODO: update when multiwallet is implemented -> https://github.com/iotaledger/firefly/issues/8362
+        enabled: false,
+    },
 }
 
 export default walletFeatures
