@@ -1,13 +1,23 @@
 import { Platform } from '@core/app/classes'
-import { PROFILE_STORAGE_DIRECTORY, TEMPORARY_WALLET_DIRECTORY_NAME } from '../constants'
+import { DEV_STORAGE_DIRECTORY, PROFILE_STORAGE_DIRECTORY, TEMPORARY_WALLET_DIRECTORY_NAME } from '../constants'
 
 class DirectoryManagerBase {
     profilePathResolver: Promise<string>
+    profilePath: string = ''
 
     constructor() {
-        this.profilePathResolver = Platform.getUserDataPath().then(
-            (profilesPath) => `${profilesPath}/${PROFILE_STORAGE_DIRECTORY}`
-        )
+        this.profilePathResolver = Platform.getUserDataPath().then((profilesPath) => {
+            this.profilePath = `${profilesPath}/${PROFILE_STORAGE_DIRECTORY}`
+            return this.profilePath
+        })
+    }
+
+    storageBasePath(): string {
+        if (process.env.NODE_ENV === 'development') {
+            return DEV_STORAGE_DIRECTORY
+        } else {
+            return this.profilePath
+        }
     }
 
     forProfiles(): Promise<string> {
