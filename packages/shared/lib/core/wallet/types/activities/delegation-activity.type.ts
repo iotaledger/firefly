@@ -6,4 +6,5 @@ export type DelegationActivity = BaseActivity & {
     validatorAddress: string
     delegatedAmount: number
     delegationId: string
+    startEpoch: number
 }

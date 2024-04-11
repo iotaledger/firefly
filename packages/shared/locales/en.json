@@ -1748,7 +1748,12 @@
         "insufficientMana": "Generating mana... {timeRemaining}.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
-        "delegationCreated": "Delegation created"
+        "delegationCreated": "Delegation created",
+        "delegation": "Delegation",
+        "delegationId": "Delegation ID",
+        "validatorAddress": "Validator Address",
+        "delegatedAmount": "Delegated amount",
+        "startEpoch": "Start epoch"
     },
     "filters":{
         "title": "Filters",

@@ -23,6 +23,7 @@ export async function generateSingleDelegationActivity(
     const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
     const storageDeposit = getAmountFromOutput(output)
     const giftedStorageDeposit = 0
+    const startEpoch = output.startEpoch
     return {
         type: ActivityType.Delegation,
         id,
@@ -42,6 +43,7 @@ export async function generateSingleDelegationActivity(
         delegationId,
         validatorAddress,
         asyncData,
+        startEpoch,
         ...sendingInfo,
     }
 }
