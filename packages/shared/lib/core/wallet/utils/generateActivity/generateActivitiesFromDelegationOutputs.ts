@@ -12,7 +12,6 @@ export async function generateActivitiesFromDelegationOutputs(
     const activities: DelegationActivity[] = []
 
     const delegationOutputs = outputs.filter((output) => output.output.type === OutputType.Delegation)
-    // console.log('delegationOutputs________', delegationOutputs)
     for (const delegationOutput of delegationOutputs) {
         const activity = await generateSingleDelegationActivity(wallet, {
             action: ActivityAction.Create,
@@ -20,7 +19,6 @@ export async function generateActivitiesFromDelegationOutputs(
             wrappedOutput: delegationOutput,
         })
         activities.push(activity)
-        // console.log('generateActivitiesFromDelegationOutputs ACTIVITY:', activity)
     }
     return activities
 }

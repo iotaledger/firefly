@@ -2401,15 +2401,15 @@
         },
         "account": {
             "creation": {
-                "Pending": "creating account",
-                "Confirmed": "account created",
+                "Pending": "Creating account",
+                "Confirmed": "Account created",
                 "Conflicting": "Failed to create account"
             }
         },
         "delegation": {
             "creation": {
-                "Pending": "creating delegation",
-                "Confirmed": "delegation created",
+                "Pending": "Creating delegation",
+                "Confirmed": "Delegation created",
                 "Failed": "Failed to create delegation"
             }
         },

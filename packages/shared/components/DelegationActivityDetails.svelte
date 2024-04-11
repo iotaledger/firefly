@@ -6,7 +6,7 @@
     export let activity: DelegationActivity
 
     const asset = getAssetFromPersistedAssets(getCoinType())
-    $: amount = Number(activity?.delegatedAmount)
+    $: amount = activity?.delegatedAmount
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">

@@ -80,21 +80,23 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...anchorActivities)
     }
 
+    const containsDelegationActivity = outputs.some((output) => output.output.type === OutputType.Delegation)
+    if (containsDelegationActivity) {
+        const delegationActivities = await generateActivitiesFromDelegationOutputs(processedTransaction, wallet)
+        activities.push(...delegationActivities)
+    }
+
     if (
-        (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) ||
+        (!containsFoundryActivity &&
+            !containsNftActivity &&
+            !containsAccountActivity &&
+            !governanceOutput &&
+            !containsDelegationActivity) ||
         isSentToImplicitAccountCreationAddress
     ) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }
-    const containsDelegationActivity = outputs.some((output) => output.output.type === OutputType.Delegation)
-    if (containsDelegationActivity) {
-        const delegationActivities = await generateActivitiesFromDelegationOutputs(processedTransaction, wallet)
-        // console.log('delegationActivities', delegationActivities)
-        activities.push(...delegationActivities)
-    }
-
-    // console.log('generateActivitiesFromProcessedTransactionsWithInputs ACTIVITIES>>>>', activities)
     return activities
 }
 
