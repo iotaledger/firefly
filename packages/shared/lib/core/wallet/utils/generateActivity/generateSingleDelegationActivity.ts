@@ -24,6 +24,7 @@ export async function generateSingleDelegationActivity(
     const storageDeposit = getAmountFromOutput(output)
     const giftedStorageDeposit = 0
     const startEpoch = output.startEpoch
+    const accountAddress = AddressConverter.addressToBech32(output.unlockConditions[0]?.address)
     return {
         type: ActivityType.Delegation,
         id,
@@ -43,6 +44,7 @@ export async function generateSingleDelegationActivity(
         delegationId,
         validatorAddress,
         asyncData,
+        accountAddress,
         startEpoch,
         ...sendingInfo,
     }

@@ -7,4 +7,5 @@ export type DelegationActivity = BaseActivity & {
     delegatedAmount: number
     delegationId: string
     startEpoch: number
+    accountAddress: string
 }
