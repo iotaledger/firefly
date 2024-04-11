@@ -4,6 +4,7 @@
     import { DelegationActivity, EMPTY_HEX_ID, formatTokenAmountBestMatch } from '@core/wallet'
     import { getBaseToken } from 'shared/lib/core/profile'
     import { api } from '@core/api'
+    import { onMount } from 'svelte'
 
     export let activity: DelegationActivity
 
@@ -12,11 +13,11 @@
     let delegationId = activity.delegationId
     let detailsList: { [key in string]: string }
 
-    $: {
+    onMount(() => {
         if (delegationId === EMPTY_HEX_ID) {
             delegationId = api.computeDelegationId(activity.outputId)
         }
-    }
+    })
 
     $: detailsList = {
         validatorAddress: activity.validatorAddress,
