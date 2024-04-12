@@ -36,10 +36,11 @@ export function linkTransactionsWithClaimingTransactions(
             transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             (transaction.direction === ActivityDirection.Incoming ||
                 transaction.direction === ActivityDirection.SelfTransaction)
+        const _isReturnStorageDepositBack = isReturnStorageDepositBack(transaction)
 
-        if (isClaimingTransaction || isReturnStorageDepositBack(transaction)) {
+        if (isClaimingTransaction || _isReturnStorageDepositBack) {
             continue
-        } else if (isIncomingAsyncTransaction) {
+        } else if (isIncomingAsyncTransaction || _isReturnStorageDepositBack) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedWalletActivities?.[transaction?.transactionId]
             if (claimedActivity) {
@@ -100,28 +101,26 @@ function isReturnStorageDepositBack(transaction: IProcessedTransaction): boolean
     )
     if (!returnStorageDepositInputs.length) return false
 
-    return (
-        returnStorageDepositInputs.filter((input) => transaction.outputs.find((output) => {
-                const hasSameAmount = Number(input.output.amount) === Number(output.output.amount)
-                const returnStorageDepositAddressInput = AddressConverter.addressToBech32(
-                    (
-                        (input.output as CommonOutput)?.unlockConditions.find(
-                            (uc) => uc.type === UnlockConditionType.StorageDepositReturn
-                        ) as StorageDepositReturnUnlockCondition
-                    )?.returnAddress
-                )
-                const addressUnlockConditionOutput = AddressConverter.addressToBech32(
-                    (
-                        (output.output as CommonOutput)?.unlockConditions.find(
-                            (uc) => uc.type === UnlockConditionType.Address
-                        ) as AddressUnlockCondition
-                    )?.address
-                )
-                return (
-                    hasSameAmount &&
-                    returnStorageDepositAddressInput === addressUnlockConditionOutput &&
-                    output.remainder
-                )
-            })).length > 0
+    return returnStorageDepositInputs.some((input) =>
+        transaction.outputs.find((output) => {
+            const hasSameAmount = Number(input.output.amount) === Number(output.output.amount)
+            const returnStorageDepositAddressInput = AddressConverter.addressToBech32(
+                (
+                    (input.output as CommonOutput)?.unlockConditions.find(
+                        (uc) => uc.type === UnlockConditionType.StorageDepositReturn
+                    ) as StorageDepositReturnUnlockCondition
+                )?.returnAddress
+            )
+            const addressUnlockConditionOutput = AddressConverter.addressToBech32(
+                (
+                    (output.output as CommonOutput)?.unlockConditions.find(
+                        (uc) => uc.type === UnlockConditionType.Address
+                    ) as AddressUnlockCondition
+                )?.address
+            )
+            return (
+                hasSameAmount && returnStorageDepositAddressInput === addressUnlockConditionOutput && output.remainder
+            )
+        })
     )
 }
