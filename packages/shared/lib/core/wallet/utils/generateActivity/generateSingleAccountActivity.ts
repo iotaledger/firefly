@@ -3,7 +3,6 @@ import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { AccountActivity } from '@core/wallet/types'
 import {
-    getAmountFromOutput,
     getAsyncDataFromOutput,
     getMetadataFromOutput,
     getSendingInformation,
@@ -24,8 +23,7 @@ export async function generateSingleAccountActivity(
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
-    const storageDeposit = getAmountFromOutput(output) + _storageDeposit
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     const accountId = getAccountId(output, outputId)
     const accountAddress = AddressConverter.addressToBech32(new AccountAddress(accountId))
 
