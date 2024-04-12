@@ -1,6 +1,6 @@
 import { OutputData } from '@iota/sdk/out/types'
 import { IBalance, getBicBalance } from '..'
-import { IWallet } from '../../profile'
+import { IWallet } from '@core/profile'
 
 export async function getTotalWalletBalance(wallet: IWallet, accountOutputs: OutputData[]): Promise<IBalance> {
     const balance = await wallet.getBalance()
