@@ -51,7 +51,7 @@ export async function buildWalletState(
     try {
         await wallet.sync(DEFAULT_SYNC_OPTIONS)
         accountOutputs = await wallet.accounts()
-        balances = await getTotalWalletBalance(wallet.id, accountOutputs)
+        balances = await getTotalWalletBalance(wallet, accountOutputs)
         // check if the mainAccountId is still valid
         if (
             walletPersistedData.mainAccountId &&
