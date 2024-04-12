@@ -139,6 +139,7 @@
             nftOutputs: { amount: Number(storageDeposits?.nft ?? 0) },
             accountOutputs: { amount: Number(storageDeposits?.account ?? 0) },
             foundryOutputs: { amount: Number(storageDeposits?.foundry ?? 0) },
+            delegationOutputs: { amount: Number(storageDeposits?.delegation ?? 0) },
         }
 
         return { amount: totalStorageDeposit, subBreakdown }

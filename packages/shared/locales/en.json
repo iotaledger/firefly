@@ -815,6 +815,10 @@
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
+            "delegationOutputs": {
+                "title": "Delegations",
+                "subtitle": "Reserved for Delegation storage"
+            },
             "unclaimed": {
                 "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
