@@ -40,7 +40,7 @@ export function linkTransactionsWithClaimingTransactions(
 
         if (isClaimingTransaction || _isReturnStorageDepositBack) {
             continue
-        } else if (isIncomingAsyncTransaction || _isReturnStorageDepositBack) {
+        } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedWalletActivities?.[transaction?.transactionId]
             if (claimedActivity) {
