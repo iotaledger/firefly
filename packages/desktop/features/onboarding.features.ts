@@ -123,32 +123,32 @@ const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
 }
 
 const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
-    enabled: false,
-    hidden: true,
+    enabled: true,
+    hidden: false,
     newProfile: {
-        enabled: false,
+        enabled: true,
         softwareProfile: {
-            enabled: false,
+            enabled: true,
         },
         ledgerProfile: {
-            enabled: false,
+            enabled: true,
         },
     },
     restoreProfile: {
-        enabled: false,
+        enabled: true,
         recoveryPhrase: {
-            enabled: false,
+            enabled: true,
         },
         strongholdBackup: {
-            enabled: false,
+            enabled: true,
         },
         ledgerBackup: {
-            enabled: false,
+            enabled: true,
         },
     },
     claimRewards: {
         enabled: false,
-        hidden: false,
+        hidden: true,
         recoveryPhrase: {
             enabled: false,
         },
