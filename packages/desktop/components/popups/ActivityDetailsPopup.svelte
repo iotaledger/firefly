@@ -28,6 +28,7 @@
         NftActivityDetails,
         Text,
         TextType,
+        DelegationActivityDetails,
         TextHint,
     } from '@ui'
     import { TextHintVariant } from '@ui/enums'
@@ -155,6 +156,8 @@
                 <NftActivityDetails {activity} />
             {:else if activity.type === ActivityType.Account}
                 <AccountActivityDetails {activity} />
+            {:else if activity.type === ActivityType.Delegation}
+                <DelegationActivityDetails {activity} />
             {/if}
             <ActivityInformation {activity} />
         </activity-details>
