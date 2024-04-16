@@ -76,7 +76,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: TokenSupply.Iota,
+            tokenSupply: TokenSupply.IotaTestnet,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet],
     },
