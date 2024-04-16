@@ -24,6 +24,7 @@
     function updateAssetIcon(): void {
         switch (asset.id) {
             case String(COIN_TYPE[NetworkId.Iota]):
+            case String(COIN_TYPE[NetworkId.IotaTestnet]):
             case String(COIN_TYPE[NetworkId.IotaAlphanet]):
                 assetIconBackgroundColor = '#6E82A4'
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]

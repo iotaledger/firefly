@@ -18,9 +18,10 @@
 
     const NETWORK_ICON: Record<NetworkId, Icon> = {
         [NetworkId.Iota]: Icon.Iota,
+        [NetworkId.IotaTestnet]: Icon.Settings,
+        [NetworkId.IotaAlphanet]: Icon.Settings,
         [NetworkId.ShimmerTestnet]: Icon.Settings,
         [NetworkId.Shimmer]: Icon.Shimmer,
-        [NetworkId.IotaAlphanet]: Icon.Settings,
         [NetworkId.Custom]: Icon.Settings,
     }
 
@@ -31,6 +32,7 @@
             case NetworkId.Shimmer:
                 return 'shimmer-highlight'
             case NetworkId.ShimmerTestnet:
+            case NetworkId.IotaTestnet:
             case NetworkId.Custom:
             case NetworkId.IotaAlphanet:
                 return 'blue-500'

@@ -3,6 +3,6 @@ export enum NetworkId {
     IotaAlphanet = 'iotaAlphanet',
     Shimmer = 'shimmer',
     ShimmerTestnet = 'shimmerTestnet',
-    IOTATestnet = 'iotaTestnet',
+    IotaTestnet = 'iotaTestnet',
     Custom = 'custom',
 }

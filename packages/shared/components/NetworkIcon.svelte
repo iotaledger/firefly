@@ -16,15 +16,19 @@
             backgroundColor: 'bg-black',
             iconColor: 'text-white',
         },
+        [NetworkId.IotaTestnet]: {
+            backgroundColor: 'bg-gray-400',
+            iconColor: 'text-black',
+        },
+        [NetworkId.IotaAlphanet]: {
+            backgroundColor: 'bg-gray-400',
+            iconColor: 'text-black',
+        },
         [NetworkId.Shimmer]: {
             backgroundColor: 'bg-shimmer-highlight',
             iconColor: 'text-black',
         },
         [NetworkId.ShimmerTestnet]: {
-            backgroundColor: 'bg-gray-400',
-            iconColor: 'text-black',
-        },
-        [NetworkId.IotaAlphanet]: {
             backgroundColor: 'bg-gray-400',
             iconColor: 'text-black',
         },

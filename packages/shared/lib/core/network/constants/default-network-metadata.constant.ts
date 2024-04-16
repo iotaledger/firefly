@@ -61,6 +61,25 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
     },
+    [NetworkId.IotaTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.IotaTestnet,
+        name: 'IOTA Testnet',
+        coinType: COIN_TYPE[NetworkId.IotaTestnet],
+        protocol: {
+            version: 2,
+            networkName: 'iota-testnet', // TODO: update when testnet is available
+            bech32Hrp: 'tst',
+            minPowScore: 1500,
+            belowMaxDepth: 15,
+            rentStructure: {
+                vByteCost: 250,
+                vByteFactorData: 1,
+                vByteFactorKey: 10,
+            },
+            tokenSupply: TokenSupply.Iota,
+        },
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet],
+    },
     [NetworkId.IotaAlphanet]: <IStardustNetworkMetadata>{
         id: NetworkId.IotaAlphanet,
         name: 'IOTA Alphanet',
