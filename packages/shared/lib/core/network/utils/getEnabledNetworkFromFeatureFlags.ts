@@ -7,9 +7,13 @@ export function getEnabledNetworkFromFeatureFlags(): NetworkId {
         features.onboarding[NetworkId.IotaTestnet]?.enabled ||
         features.onboarding[NetworkId.IotaAlphanet]?.enabled
     ) {
-        return features.onboarding[NetworkId.Iota]?.enabled || features.onboarding[NetworkId.IotaTestnet]?.enabled
-            ? NetworkId.Iota
-            : NetworkId.IotaAlphanet
+        if (features.onboarding[NetworkId.Iota]?.enabled) {
+            return NetworkId.Iota
+        } else if (features.onboarding[NetworkId.IotaTestnet]?.enabled) {
+            return NetworkId.IotaTestnet
+        } else {
+            return NetworkId.IotaAlphanet
+        }
     } else if (
         features.onboarding[NetworkId.Shimmer]?.enabled ||
         features.onboarding[NetworkId.ShimmerTestnet]?.enabled
