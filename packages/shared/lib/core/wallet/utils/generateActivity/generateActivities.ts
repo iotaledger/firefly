@@ -16,6 +16,8 @@ import { OutputType } from '@iota/sdk/out/types'
 import { generateVestingActivity } from './generateVestingActivity'
 import { generateSingleAnchorActivity } from './generateSingleAnchorActivity'
 import { generateActivitiesFromAnchorOutputs } from './generateActivitiesFromAnchorOutputs'
+import { generateActivitiesFromDelegationOutputs } from './generateActivitiesFromDelegationOutputs'
+import { generateSingleDelegationActivity } from './generateSingleDelegationActivity'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
@@ -78,14 +80,23 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...anchorActivities)
     }
 
+    const containsDelegationActivity = outputs.some((output) => output.output.type === OutputType.Delegation)
+    if (containsDelegationActivity) {
+        const delegationActivities = await generateActivitiesFromDelegationOutputs(processedTransaction, wallet)
+        activities.push(...delegationActivities)
+    }
+
     if (
-        (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) ||
+        (!containsFoundryActivity &&
+            !containsNftActivity &&
+            !containsAccountActivity &&
+            !governanceOutput &&
+            !containsDelegationActivity) ||
         isSentToImplicitAccountCreationAddress
     ) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }
-
     return activities
 }
 
@@ -121,6 +132,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateVestingActivity(wallet, params)
                 case ActivityType.Anchor:
                     return generateSingleAnchorActivity(wallet, params)
+                case ActivityType.Delegation:
+                    return generateSingleDelegationActivity(wallet, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }
