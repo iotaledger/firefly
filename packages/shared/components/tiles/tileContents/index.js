@@ -6,3 +6,4 @@ export { default as TransactionActivityTileContent } from './TransactionActivity
 export { default as FoundryActivityTileContent } from './FoundryActivityTileContent.svelte'
 export { default as NftActivityTileContent } from './NftActivityTileContent.svelte'
 export { default as VestingActivityTileContent } from './VestingActivityTileContent.svelte'
+export { default as DelegationActivityTileContent } from './DelegationActivityTileContent.svelte'
