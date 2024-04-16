@@ -13,7 +13,7 @@ export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
         case 'testnet':
         case 'testnet-1':
         case 'testnet-2':
-            return NetworkId.Testnet
+            return NetworkId.ShimmerTestnet
         default:
             return NetworkId.Custom
     }

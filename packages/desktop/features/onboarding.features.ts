@@ -120,7 +120,7 @@ const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
     },
 }
 
-const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
+const onboardingFeaturesForShimmerTestnet: IOnboardingFeaturesForNetwork = {
     enabled: true,
     newProfile: {
         enabled: true,
@@ -204,7 +204,7 @@ const onboardingFeatures: OnboardingFeatures = {
     iota: onboardingFeaturesForIota,
     iotaAlphanet: onboardingFeaturesForIotaAlphanet,
     shimmer: onboardingFeaturesForShimmer,
-    testnet: onboardingFeaturesForTestnet,
+    shimmerTestnet: onboardingFeaturesForShimmerTestnet,
     custom: onboardingFeaturesForCustom,
 }
 

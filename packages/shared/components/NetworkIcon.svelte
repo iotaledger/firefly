@@ -20,7 +20,7 @@
             backgroundColor: 'bg-shimmer-highlight',
             iconColor: 'text-black',
         },
-        [NetworkId.Testnet]: {
+        [NetworkId.ShimmerTestnet]: {
             backgroundColor: 'bg-gray-400',
             iconColor: 'text-black',
         },

@@ -23,10 +23,10 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
     },
-    [NetworkId.Testnet]: <IStardustNetworkMetadata>{
-        id: NetworkId.Testnet,
-        name: 'Testnet',
-        coinType: COIN_TYPE[NetworkId.Testnet],
+    [NetworkId.ShimmerTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.ShimmerTestnet,
+        name: 'Shimmer Testnet',
+        coinType: COIN_TYPE[NetworkId.ShimmerTestnet],
         protocol: {
             version: 2,
             networkName: 'testnet',
@@ -38,9 +38,9 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: TokenSupply.Testnet,
+            tokenSupply: TokenSupply.ShimmerTestnet,
         },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.ShimmerTestnet],
     },
     [NetworkId.Iota]: <IStardustNetworkMetadata>{
         id: NetworkId.Iota,

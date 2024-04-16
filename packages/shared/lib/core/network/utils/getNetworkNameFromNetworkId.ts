@@ -8,8 +8,8 @@ export function getNetworkNameFromNetworkId(networkId: NetworkId): string {
             return 'IOTA Alphanet'
         case NetworkId.Shimmer:
             return 'Shimmer'
-        case NetworkId.Testnet:
-            return 'Testnet'
+        case NetworkId.ShimmerTestnet:
+            return 'Shimmer Testnet'
         default:
             return 'Unknown Network'
     }

@@ -29,7 +29,7 @@
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]
                 break
             case String(COIN_TYPE[NetworkId.Shimmer]):
-            case String(COIN_TYPE[NetworkId.Testnet]):
+            case String(COIN_TYPE[NetworkId.ShimmerTestnet]):
                 assetIconBackgroundColor = '#25DFCA'
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
                 break

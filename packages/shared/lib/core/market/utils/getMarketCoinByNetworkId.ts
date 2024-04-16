@@ -7,7 +7,7 @@ export function getMarketCoinIdByNetworkId(networkId: NetworkId): MarketCoinId |
         case NetworkId.IotaAlphanet:
             return MarketCoinId.Iota
         case NetworkId.Shimmer:
-        case NetworkId.Testnet:
+        case NetworkId.ShimmerTestnet:
             return MarketCoinId.Shimmer
         default:
             return

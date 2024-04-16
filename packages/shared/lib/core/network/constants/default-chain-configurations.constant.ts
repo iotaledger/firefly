@@ -13,7 +13,7 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
             'https://api.evm.shimmer.network/v1/chains/smr1prxvwqvwf7nru5q5xvh5thwg54zsm2y4wfnk6yk56hj3exxkg92mx20wl3s',
         archiveEndpoint: 'https://archive.evm.shimmer.network',
     },
-    [NetworkId.Testnet]: {
+    [NetworkId.ShimmerTestnet]: {
         type: ChainType.Iscp,
         name: DestinationNetwork.ShimmerEvmTestnet,
         chainId: ChainId.ShimmerEVMTestnet,
