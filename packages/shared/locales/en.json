@@ -1755,7 +1755,13 @@
         "availableMana": "Available Mana",
         "insufficientMana": "Generating mana... {timeRemaining}.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
-        "mana": "Mana"
+        "mana": "Mana",
+        "delegationCreated": "Delegation created",
+        "delegation": "Delegation",
+        "delegationId": "Delegation ID",
+        "validatorAddress": "Validator Address",
+        "delegatedAmount": "Delegated amount",
+        "startEpoch": "Start epoch"
     },
     "filters":{
         "title": "Filters",
@@ -2408,9 +2414,16 @@
         },
         "account": {
             "creation": {
-                "Pending": "creating account",
-                "Confirmed": "account created",
+                "Pending": "Creating account",
+                "Confirmed": "Account created",
                 "Conflicting": "Failed to create account"
+            }
+        },
+        "delegation": {
+            "creation": {
+                "Pending": "Creating delegation",
+                "Confirmed": "Delegation created",
+                "Failed": "Failed to create delegation"
             }
         },
         "networkHealth": {

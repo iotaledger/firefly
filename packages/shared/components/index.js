@@ -55,6 +55,7 @@ export { default as TextHint } from './TextHint.svelte'
 export { default as Toast } from './Toast.svelte'
 export { default as Tooltip } from './Tooltip.svelte'
 export { default as Transition } from './Transition.svelte'
+export { default as DelegationActivityDetails } from './DelegationActivityDetails.svelte'
 
 export * from './enums'
 export * from './inputs'

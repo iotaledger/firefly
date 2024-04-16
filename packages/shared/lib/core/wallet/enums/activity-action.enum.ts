@@ -3,4 +3,5 @@ export enum ActivityAction {
     Burn = 'burn',
     Mint = 'mint',
     Unknown = 'unknown',
+    Create = 'create',
 }

@@ -10,6 +10,7 @@
         ConsolidationActivityInformation,
         NftMetadataInformation,
         SmartContractActivityInformation,
+        DelegationActivityInformation,
     } from '@ui'
     import { Tab } from '@ui/enums'
     import { ActivityType, Activity } from '@core/wallet'
@@ -42,6 +43,9 @@
                 break
             case ActivityType.Account:
                 tabs = [Tab.Transaction, Tab.Account]
+                break
+            case ActivityType.Delegation:
+                tabs = [Tab.Transaction, Tab.Delegation]
                 break
             case ActivityType.Nft:
                 tabs = [
@@ -82,5 +86,7 @@
         <NftMetadataInformation {activity} />
     {:else if activeTab === Tab.SmartContract}
         <SmartContractActivityInformation {activity} />
+    {:else if activeTab === Tab.Delegation}
+        <DelegationActivityInformation {activity} />
     {/if}
 </activity-details>
