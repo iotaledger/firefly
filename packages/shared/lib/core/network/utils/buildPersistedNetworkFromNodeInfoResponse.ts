@@ -15,7 +15,7 @@ export function buildPersistedNetworkFromNodeInfoResponse(
         id: networkId,
         name: name ?? 'Unknown Network',
         coinType: _coinType,
-        bech32Hrp: bech32Hrp ?? 'Unknown Network',
+        bech32Hrp,
         chains: [],
     }
 }
