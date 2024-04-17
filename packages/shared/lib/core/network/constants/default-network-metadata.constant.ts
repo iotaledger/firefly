@@ -29,7 +29,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         coinType: COIN_TYPE[NetworkId.ShimmerTestnet],
         protocol: {
             version: 2,
-            networkName: 'testnet',
+            networkName: 'shimmer-testnet',
             bech32Hrp: 'rms',
             minPowScore: 1500,
             belowMaxDepth: 15,
@@ -67,7 +67,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         coinType: COIN_TYPE[NetworkId.IotaTestnet],
         protocol: {
             version: 2,
-            networkName: 'iota-testnet', // TODO: update when testnet is available
+            networkName: 'iota-testnet',
             bech32Hrp: 'tst',
             minPowScore: 1500,
             belowMaxDepth: 15,
