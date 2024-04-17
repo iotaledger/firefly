@@ -96,7 +96,7 @@
                 renderer={AnimationRenderer.Canvas}
             />
         {:else if icon}
-            <Icon {icon} width="80%" height="80%" classes="{assetIconColor} text-center" />
+            <Icon {icon} width="90%" height="90%" classes="{assetIconColor} text-center" />
         {:else if assetLogoUrl}
             <img src={assetLogoUrl} on:error={handleOnError} alt={assetLogoUrl} class="w-full h-full" />
         {:else}
