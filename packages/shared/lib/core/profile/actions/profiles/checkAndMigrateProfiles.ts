@@ -342,11 +342,15 @@ function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): voi
         }
 
         const oldNetwork = existingProfile.network as unknown as IOldPersistedNetwork
+
+        // If the networkId is Custom the default hrp is not known, and is obtained from the previous network protocol
+        const defaultBech32Hrp =
+            DEFAULT_NETWORK_METADATA[existingProfile.network.id]?.bech32Hrp || oldNetwork?.protocol?.bech32Hrp || ''
+
         delete oldNetwork.protocol
         delete oldNetwork.baseToken
 
         const newNetwork = oldNetwork as unknown as IPersistedNetwork
-        const defaultBech32Hrp = DEFAULT_NETWORK_METADATA[existingProfile.network.id]?.bech32Hrp || ''
         newNetwork.bech32Hrp = defaultBech32Hrp
 
         existingProfile.network = newNetwork
