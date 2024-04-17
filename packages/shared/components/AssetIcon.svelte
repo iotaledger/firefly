@@ -2,7 +2,7 @@
     import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId } from '@core/network'
+    import { COIN_TYPE, NetworkId, DEFAULT_BASE_TOKEN } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
     import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
@@ -22,26 +22,38 @@
     $: assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
 
     function updateAssetIcon(): void {
-        switch (asset.id) {
-            case String(COIN_TYPE[NetworkId.Iota]):
-            case String(COIN_TYPE[NetworkId.IotaTestnet]):
-            case String(COIN_TYPE[NetworkId.IotaAlphanet]):
+        const assetName = asset?.metadata?.name?.toLowerCase() ?? ''
+        const assetId = asset?.id
+        if (
+            [
+                String(COIN_TYPE[NetworkId.Iota]),
+                String(COIN_TYPE[NetworkId.IotaTestnet]),
+                String(COIN_TYPE[NetworkId.IotaAlphanet]),
+                String(COIN_TYPE[NetworkId.Shimmer]),
+                String(COIN_TYPE[NetworkId.ShimmerTestnet]),
+            ].includes(assetId)
+        ) {
+            if (
+                [
+                    String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()),
+                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet]?.name?.toLowerCase()),
+                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaAlphanet]?.name?.toLowerCase()),
+                ].includes(assetName)
+            ) {
                 assetIconBackgroundColor = '#6E82A4'
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]
-                break
-            case String(COIN_TYPE[NetworkId.Shimmer]):
-            case String(COIN_TYPE[NetworkId.ShimmerTestnet]):
+            } else {
                 assetIconBackgroundColor = '#25DFCA'
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
-                break
-            default:
-                assetInitials = getAssetInitials(asset)
-                assetIconBackgroundColor = getIconColorFromString(asset.metadata?.name, {
-                    shades: ['500', '600', '700', '800'],
-                    colorsToExclude: ['gray'],
-                })
-                assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
-                icon = null
+            }
+        } else {
+            assetInitials = getAssetInitials(asset)
+            assetIconBackgroundColor = getIconColorFromString(asset.metadata?.name, {
+                shades: ['500', '600', '700', '800'],
+                colorsToExclude: ['gray'],
+            })
+            assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
+            icon = null
         }
     }
 
