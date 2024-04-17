@@ -37,6 +37,7 @@
     import { restoreProfileRouter } from '../restore-profile-router'
     import { AnimationEnum } from '@auxiliary/animation'
     import { getBaseToken } from '@core/profile'
+    import { getAndUpdateNodeInfo } from '@core/network'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -173,7 +174,8 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
+        await getAndUpdateNodeInfo()
         void ledgerRaceConditionProtectionWrapper(setupShimmerClaiming)
     })
 
