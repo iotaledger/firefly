@@ -2,9 +2,9 @@
     import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId, DEFAULT_BASE_TOKEN } from '@core/network'
+    import { COIN_TYPE, DEFAULT_BASE_TOKEN, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, IPersistedAsset, TokenStandard, getAssetInitials } from '@core/wallet'
     import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
@@ -33,6 +33,21 @@
                 String(COIN_TYPE[NetworkId.ShimmerTestnet]),
             ].includes(assetId)
         ) {
+            // if not a production network, use gray icon
+            if (
+                [
+                    String(COIN_TYPE[NetworkId.IotaTestnet]),
+                    String(COIN_TYPE[NetworkId.IotaAlphanet]),
+                    String(COIN_TYPE[NetworkId.ShimmerTestnet]),
+                ].includes(assetId)
+            ) {
+                assetIconBackgroundColor = '#C4D1E8'
+            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()) === assetName) {
+                assetIconBackgroundColor = '#000000'
+            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Shimmer]?.name?.toLowerCase()) === assetName) {
+                assetIconBackgroundColor = '#25DFCA'
+            }
+
             if (
                 [
                     String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()),
@@ -40,10 +55,8 @@
                     String(DEFAULT_BASE_TOKEN[NetworkId.IotaAlphanet]?.name?.toLowerCase()),
                 ].includes(assetName)
             ) {
-                assetIconBackgroundColor = '#6E82A4'
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]
             } else {
-                assetIconBackgroundColor = '#25DFCA'
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
             }
         } else {
