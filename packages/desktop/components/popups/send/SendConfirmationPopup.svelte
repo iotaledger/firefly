@@ -96,7 +96,7 @@
                 getDefaultTransactionOptions()
             )
         } catch (error) {
-            transactionInfo.preparedTransactionError = error
+            console.error(error)
         }
 
         if (isSendAndClosePopup || expirationDate) {
@@ -147,7 +147,7 @@
                 )
             }
         } catch (err) {
-            handleError(err)
+            console.error(err)
             transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false
