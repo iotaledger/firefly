@@ -1225,7 +1225,7 @@
         },
         "allotMana": {
             "title": "Allot Mana",
-            "body": "Select the own account address to allot mana."
+            "body": "Select the account address to allot mana."
         },
         "manageVotingPower": {
             "title": "Manage voting power",
@@ -1708,7 +1708,7 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
-        "allotManaDescription": "Allot mana to an own account",
+        "allotManaDescription": "Allot mana to an account",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
