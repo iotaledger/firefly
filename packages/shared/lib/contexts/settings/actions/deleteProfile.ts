@@ -28,7 +28,7 @@ export async function deleteProfile(): Promise<void> {
          * app's list of profiles that lives as a Svelte store.
          */
         removeProfile(_activeProfile?.id)
-        //removePersistedShimmerClaimingTransactions(_activeProfile?.id)
+        // removePersistedShimmerClaimingTransactions(_activeProfile?.id)
 
         /**
          * CAUTION: This removes the actual directory for the profile,

@@ -82,7 +82,7 @@
 
     // Actions
     async function findProfileBalances(): Promise<void> {
-        //await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
+        // await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
         await loadWallets()
         hasUsedBalanceFinder = true
         shouldInitSearch = false

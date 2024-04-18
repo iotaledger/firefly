@@ -1,4 +1,4 @@
-import { PreparedTransaction, Transaction, TransactionWithMetadata } from '@iota/sdk/out/types'
+import { PreparedTransaction, TransactionWithMetadata } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 import { processAndAddToActivities } from '@core/wallet/utils'
 import { handleError } from '@core/error/handlers'
