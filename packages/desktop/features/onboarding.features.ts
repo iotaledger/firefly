@@ -44,8 +44,8 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
 }
 
 const onboardingFeaturesForIotaTestnet: IOnboardingFeaturesForNetwork = {
-    enabled: false,
-    hidden: true,
+    enabled: true,
+    hidden: false,
     newProfile: {
         enabled: true,
         softwareProfile: {
