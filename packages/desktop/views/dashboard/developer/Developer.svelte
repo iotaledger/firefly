@@ -1,5 +1,6 @@
 <script lang="ts">
     import {
+        AllotManaButton,
         CreateAccountButton,
         FaucetRequestButton,
         MintNativeTokenButton,
@@ -49,6 +50,9 @@
                     {/if}
                     {#if features.developerTools.refreshTokens.enabled}
                         <RefreshTokenMetadataButton />
+                    {/if}
+                    {#if features.developerTools.allotMana.enabled}
+                        <AllotManaButton />
                     {/if}
                 </div>
             </Pane>
