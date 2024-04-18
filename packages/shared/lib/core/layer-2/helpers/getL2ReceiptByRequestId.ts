@@ -6,7 +6,7 @@ const TIMEOUT_SECONDS = 5
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getL2ReceiptByRequestId(requestId: string): Promise<any> {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
-    let URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.aliasAddress}/requests/${requestId}/wait?`
+    let URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.chainId}/requests/${requestId}/wait?`
 
     const queryParams: {
         [key: string]: number | boolean

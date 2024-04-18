@@ -3,7 +3,7 @@ import { get } from 'svelte/store'
 import { AppContext } from '@core/app/enums'
 import { activeProfile, logout, profiles, removeProfile, removeProfileFolder } from '@core/profile'
 import { routerManager } from '@core/router/stores'
-import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
+// import { removePersistedShimmerClaimingTransactions } from '@contexts/onboarding/stores'
 
 /**
  * It removes the active profile from the app's list of profiles, removes the profile's directory from
@@ -28,7 +28,7 @@ export async function deleteProfile(): Promise<void> {
          * app's list of profiles that lives as a Svelte store.
          */
         removeProfile(_activeProfile?.id)
-        removePersistedShimmerClaimingTransactions(_activeProfile?.id)
+        //removePersistedShimmerClaimingTransactions(_activeProfile?.id)
 
         /**
          * CAUTION: This removes the actual directory for the profile,

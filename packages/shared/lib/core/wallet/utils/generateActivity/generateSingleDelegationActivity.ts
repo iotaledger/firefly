@@ -2,7 +2,7 @@ import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { DelegationActivity } from '@core/wallet/types'
 import { getAsyncDataFromOutput, getSendingInformation, getStorageDepositFromOutput } from './helper'
-import { DelegationOutput } from '@iota/sdk/out/types'
+import { AddressUnlockCondition, CommonOutput, DelegationOutput } from '@iota/sdk/out/types'
 import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleDelegationActivity(
@@ -11,7 +11,7 @@ export async function generateSingleDelegationActivity(
 ): Promise<DelegationActivity> {
     const { transactionId, direction, time, claimingData, inclusionState, mana } = processedTransaction
     const output = wrappedOutput.output as DelegationOutput
-    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
+    const { storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output as unknown as CommonOutput)
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
     const isHidden = false
@@ -21,9 +21,10 @@ export async function generateSingleDelegationActivity(
     const delegationId = output.delegationId
     const validatorAddress = AddressConverter.addressToBech32(output?.validatorAddress)
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
-    const sendingInfo = getSendingInformation(processedTransaction, output, wallet)
+    const sendingInfo = getSendingInformation(processedTransaction, output as unknown as CommonOutput, wallet)
     const startEpoch = output.startEpoch
-    const accountAddress = AddressConverter.addressToBech32(output.unlockConditions[0]?.address)
+    const addressUnlockCondition = output.unlockConditions[0] as AddressUnlockCondition;
+    const accountAddress = AddressConverter.addressToBech32(addressUnlockCondition.address)
     return {
         type: ActivityType.Delegation,
         id,

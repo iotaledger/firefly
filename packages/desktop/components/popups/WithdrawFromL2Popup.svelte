@@ -23,7 +23,7 @@
 
     const bip44Chain: Bip44 = {
         coinType: Number(getCoinType()),
-        account: getSelectedWallet().index,
+        account: 0,
         change: 0,
         addressIndex: 0,
     }

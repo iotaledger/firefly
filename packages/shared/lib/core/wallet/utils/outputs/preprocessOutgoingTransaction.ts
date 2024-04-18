@@ -43,7 +43,7 @@ export async function preprocessOutgoingTransaction(
         0
     )
 
-    const postManaCost = outputs.reduce((acc, output) => acc + Number(output.output.mana ?? 0), 0)
+    const postManaCost = outputs.reduce((acc, output) => acc + Number((output.output as any).mana ?? 0), 0)
 
     return {
         outputs: outputs,
@@ -53,6 +53,7 @@ export async function preprocessOutgoingTransaction(
         inclusionState: transaction.inclusionState,
         mana: prevManaCost - postManaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
+        utxoInputs
     }
 }
 

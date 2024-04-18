@@ -29,8 +29,8 @@
     <Transition>
         <CreateFromLedgerRouterView router={$restoreProfileRouter} />
     </Transition>
-{:else if $restoreProfileRoute === RestoreProfileRoute.ClaimFinder}
+<!-- {:else if $restoreProfileRoute === RestoreProfileRoute.ClaimFinder}
     <Transition>
         <ClaimFinderView />
-    </Transition>
+    </Transition> -->
 {/if}

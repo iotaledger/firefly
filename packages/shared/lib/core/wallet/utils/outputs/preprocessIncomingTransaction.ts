@@ -26,7 +26,7 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
 
     const manaCost = outputs
         .filter((output) => !output.remainder)
-        .reduce((acc, output) => acc + Number(output.output.mana ?? 0), 0)
+        .reduce((acc, output) => acc + Number((output.output as any).mana ?? 0), 0)
 
     return {
         outputs,

@@ -12,7 +12,6 @@ export async function generateAndStoreActivitiesForWallet(wallet: IWalletState):
     // Step 1: process wallet transactions and outputs into processed transactions
     const processedTransactions = [
         ...(await preprocessTransactionsForWallet(wallet)),
-        // ...(await preprocessOutputsForWallet(wallet)),
     ]
 
     // Step 2: link transactions with corresponding claiming transactions

@@ -6,6 +6,7 @@ import {
     getUnitFromTokenMetadata,
     newTransactionDetails,
     NewTransactionType,
+    SubjectType,
 } from '@core/wallet'
 
 export function deconstructLedgerVerificationProps(): PopupProps {
@@ -15,9 +16,9 @@ export function deconstructLedgerVerificationProps(): PopupProps {
 
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     const toAddress =
-        transactionDetails?.recipient?.type === 'account'
-            ? transactionDetails?.recipient?.account?.depositAddress
-            : transactionDetails?.recipient?.address
+        transactionDetails?.recipient?.type === SubjectType.Address
+            ? transactionDetails?.recipient?.address
+            : undefined
     let toAmount = '0'
     if (transactionDetails?.type === NewTransactionType.TokenTransfer) {
         const tokenMetadata = transactionDetails?.asset?.metadata
