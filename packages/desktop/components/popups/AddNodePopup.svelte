@@ -32,7 +32,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-               // TODO: https://github.com/iotaledger/firefly/issues/7947
+                // TODO: https://github.com/iotaledger/firefly/issues/7947
             }
 
             onSuccess()

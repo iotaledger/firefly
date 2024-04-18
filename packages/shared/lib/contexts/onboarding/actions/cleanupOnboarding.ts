@@ -8,4 +8,3 @@ export async function cleanupOnboarding(deleteProfile: boolean = false): Promise
         await deleteOnboardingProfile()
     }
 }
-

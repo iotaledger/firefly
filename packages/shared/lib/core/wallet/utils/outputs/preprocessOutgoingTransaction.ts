@@ -53,7 +53,7 @@ export async function preprocessOutgoingTransaction(
         inclusionState: transaction.inclusionState,
         mana: prevManaCost - postManaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
-        utxoInputs
+        utxoInputs,
     }
 }
 

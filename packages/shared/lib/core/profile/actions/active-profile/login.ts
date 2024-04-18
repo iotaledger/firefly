@@ -111,7 +111,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
-              // TODO: https://github.com/iotaledger/firefly/issues/7947
+                // TODO: https://github.com/iotaledger/firefly/issues/7947
             }
             void cleanupOnboarding()
         } else {

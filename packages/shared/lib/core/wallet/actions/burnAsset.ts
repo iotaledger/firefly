@@ -11,10 +11,7 @@ export async function burnAsset(assetId: string, rawAmount: string): Promise<voi
     const wallet = getSelectedWallet()
     try {
         updateSelectedWallet({ isTransferring: true })
-        const prepareBurnNativeTokenTransaction = await wallet?.prepareBurnNativeToken(
-            assetId,
-            BigInt(rawAmount)
-        )
+        const prepareBurnNativeTokenTransaction = await wallet?.prepareBurnNativeToken(assetId, BigInt(rawAmount))
         const preparedTransaction = plainToInstance(PreparedTransaction, prepareBurnNativeTokenTransaction)
         const burnTokenTransaction = await preparedTransaction?.send()
 

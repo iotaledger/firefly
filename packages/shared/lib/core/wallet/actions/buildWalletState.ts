@@ -25,7 +25,7 @@ export async function buildWalletState(
                 stored: BigInt(0),
                 potential: BigInt(0),
             },
-            rewards: BigInt(0)
+            rewards: BigInt(0),
         },
         requiredStorageDeposit: {
             account: BigInt(0),

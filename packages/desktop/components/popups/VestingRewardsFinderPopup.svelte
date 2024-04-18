@@ -6,13 +6,7 @@
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { loadNftsForActiveProfile } from '@core/nfts'
-    import {
-        activeProfile,
-        getBaseToken,
-        isActiveLedgerProfile,
-        isSoftwareProfile,
-        loadWallets,
-    } from '@core/profile'
+    import { activeProfile, getBaseToken, isActiveLedgerProfile, isSoftwareProfile, loadWallets } from '@core/profile'
     import { truncateString } from '@core/utils'
     import {
         formatTokenAmountBestMatch,

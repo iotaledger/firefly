@@ -29,7 +29,7 @@
  * in a newer Firefly version.
  */
 export function checkAndMigrateProfiles(): void {
-    const shouldMigratePersistedProfiles = false; // (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
+    const shouldMigratePersistedProfiles = false // (get(currentProfileVersion) ?? 3) < PROFILE_VERSION
 
     if (shouldMigratePersistedProfiles) {
         // if (checkAndMigrateChrysalisProfiles()) {

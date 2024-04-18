@@ -10,9 +10,7 @@ import { setWalletActivitiesInAllWalletActivities } from '../../stores'
 
 export async function generateAndStoreActivitiesForWallet(wallet: IWalletState): Promise<void> {
     // Step 1: process wallet transactions and outputs into processed transactions
-    const processedTransactions = [
-        ...(await preprocessTransactionsForWallet(wallet)),
-    ]
+    const processedTransactions = [...(await preprocessTransactionsForWallet(wallet))]
 
     // Step 2: link transactions with corresponding claiming transactions
     const linkedProcessedTransactions = linkTransactionsWithClaimingTransactions(processedTransactions, wallet)
