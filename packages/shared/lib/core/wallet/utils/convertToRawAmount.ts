@@ -19,7 +19,7 @@ function convertToRawAmountFromMetadata(
     tokenMetadata: TokenMetadata,
     selectedUnit?: string
 ): Big | undefined {
-    if (tokenMetadata?.standard === TokenStandard.BaseToken) {
+    if (tokenMetadata?.standard === TokenStandard.BaseToken || tokenMetadata?.standard === TokenStandard.Mana) {
         if (selectedUnit === tokenMetadata.unit) {
             const decimals = Math.min(tokenMetadata.decimals, MAX_SUPPORTED_DECIMALS)
             return convertAmountToMatchUnit(amount, decimals)
