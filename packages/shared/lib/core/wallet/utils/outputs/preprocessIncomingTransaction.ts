@@ -1,5 +1,5 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import { AccountOutput, AnchorOutput, BasicOutput, NftOutput, Output, OutputType, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { ActivityDirection } from '../../enums'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
@@ -26,7 +26,7 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
 
     const manaCost = outputs
         .filter((output) => !output.remainder)
-        .reduce((acc, output) => acc + Number((output.output as any).mana ?? 0), 0)
+        .reduce((acc, output) => acc + Number((output.output as BasicOutput | AccountOutput | AnchorOutput | NftOutput).mana ?? 0), 0)
 
     return {
         outputs,

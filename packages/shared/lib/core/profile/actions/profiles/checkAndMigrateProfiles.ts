@@ -17,7 +17,7 @@
 //     // DEFAULT_STRONGHOLD_PASSWORD_TIMEOUT_IN_MINUTES,
 //     PROFILE_VERSION,
 // } from '../../constants'
-//import { currentProfileVersion } from '../../stores'
+// import { currentProfileVersion } from '../../stores'
 // import { IPersistedProfile } from '../../interfaces'
 // import { profiles, saveProfile } from '../../stores'
 
