@@ -1,7 +1,7 @@
 import { api } from '@core/api'
 import { IPersistedProfile, IWallet } from '../interfaces'
 import { getSecretManagerFromProfileType } from '../utils'
-import { WalletOptions } from '@iota/sdk'
+import { WalletOptions } from '@iota/sdk/out/types'
 import { selectedWalletId } from '@core/wallet'
 import { generateRandomId } from '@core/utils'
 import { DirectoryManager } from '@core/profile/classes'

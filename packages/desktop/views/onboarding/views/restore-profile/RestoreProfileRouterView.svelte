@@ -6,7 +6,7 @@
     import { RestoreFromMnemonicRouterView } from '../restore-from-mnemonic'
     import { RestoreFromStrongholdRouterView } from '../restore-from-stronghold'
     import { restoreProfileRoute, restoreProfileRouter, RestoreProfileRoute } from '@core/router'
-    import { ChooseRestoreProfileFlowView, ClaimFinderView } from './views'
+    import { ChooseRestoreProfileFlowView } from './views'
 
     $: if (features.analytics.onboardingRoute.enabled && $restoreProfileRoute) {
         Platform.trackEvent('restore-profile-route', { route: $restoreProfileRoute })
@@ -29,7 +29,7 @@
     <Transition>
         <CreateFromLedgerRouterView router={$restoreProfileRouter} />
     </Transition>
-<!-- {:else if $restoreProfileRoute === RestoreProfileRoute.ClaimFinder}
+    <!-- {:else if $restoreProfileRoute === RestoreProfileRoute.ClaimFinder}
     <Transition>
         <ClaimFinderView />
     </Transition> -->

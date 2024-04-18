@@ -10,9 +10,10 @@ export function formatTokenAmountPrecise(amount: number, tokenMetadata: TokenMet
         } else {
             return formattedAmount + ' ' + tokenMetadata?.subunit
         }
-    } else if(tokenMetadata.standard == TokenStandard.Mana){
+    } else if (tokenMetadata.standard === TokenStandard.Mana) {
         return formattedAmount
-    } {
+    }
+    {
         return formattedAmount + ' ' + tokenMetadata?.symbol
     }
 }

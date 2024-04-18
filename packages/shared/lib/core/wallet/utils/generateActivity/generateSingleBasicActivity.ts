@@ -1,9 +1,8 @@
-//import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
+// import { isShimmerClaimingTransaction } from '@contexts/onboarding/stores'
 import { IWalletState } from '@core/wallet/interfaces'
-import { activeProfileId, getCoinType } from '@core/profile'
+import { getCoinType } from '@core/profile'
 import { IActivityGenerationParameters } from '@core/wallet/interfaces'
 import { TransactionActivity } from '@core/wallet/types'
-import { get } from 'svelte/store'
 import { activityOutputContainsValue, getNativeTokenFromOutput } from '..'
 import { ActivityAction, ActivityType } from '../../enums'
 import {
@@ -35,7 +34,7 @@ export async function generateSingleBasicActivity(
     const output = wrappedOutput.output as BasicOutput
     const amount = getAmountFromOutput(output)
 
-    const isShimmerClaiming = false; // isShimmerClaimingTransaction(transactionId, get(activeProfileId))
+    const isShimmerClaiming = false // isShimmerClaimingTransaction(transactionId, get(activeProfileId))
 
     const tag = getTagFromOutput(output)
     const metadata = getMetadataFromOutput(output)

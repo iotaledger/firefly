@@ -3,12 +3,11 @@ import BigInteger from 'big-integer'
 import { SpecialStream } from '../classes'
 import { ACCOUNTS_CONTRACT, WITHDRAW } from '../constants'
 import { Blake2b } from '@iota/crypto.js'
-import { api } from '@core/api'
 import { activeProfile } from '@core/profile'
 import { DEFAULT_CHAIN_CONFIGURATIONS } from '@core/network'
 import { Converter } from '@iota/util.js'
 import { Bip44 } from '@iota/sdk/out/types'
-import { HexEncodedString } from '@iota/sdk'
+import { HexEncodedString } from '@iota/sdk/out/types'
 import { activeProfileSecretManager } from '@core/secret-manager'
 
 export interface WithdrawRequest {

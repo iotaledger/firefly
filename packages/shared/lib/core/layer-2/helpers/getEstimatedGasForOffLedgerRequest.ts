@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { activeProfile } from '@core/profile'
 import { DEFAULT_CHAIN_CONFIGURATIONS } from '@core/network'
 import BigInteger from 'big-integer'
-import { HexEncodedString } from '@iota/sdk'
+import { HexEncodedString } from '@iota/sdk/out/types'
 
 interface GasEstimatePayload {
     gasBurned?: number

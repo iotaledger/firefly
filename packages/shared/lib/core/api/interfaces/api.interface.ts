@@ -1,5 +1,5 @@
-import { Address, Client, SecretManager } from '@iota/sdk'
-import {
+import type { Address, Client, SecretManager } from '@iota/sdk/'
+import type {
     AccountId,
     FoundryId,
     HexEncodedString,
