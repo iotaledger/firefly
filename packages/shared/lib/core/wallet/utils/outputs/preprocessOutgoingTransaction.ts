@@ -1,5 +1,15 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import { AccountOutput, AnchorOutput, BasicOutput, NftOutput, Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
+import {
+    AccountOutput,
+    AnchorOutput,
+    BasicOutput,
+    NftOutput,
+    Output,
+    OutputType,
+    OutputWithMetadata,
+    TransactionWithMetadata,
+    UTXOInput,
+} from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
@@ -43,7 +53,11 @@ export async function preprocessOutgoingTransaction(
         0
     )
 
-    const postManaCost = outputs.reduce((acc, output) => acc + Number((output.output as BasicOutput | AccountOutput | AnchorOutput | NftOutput).mana ?? 0), 0)
+    const postManaCost = outputs.reduce(
+        (acc, output) =>
+            acc + Number((output.output as BasicOutput | AccountOutput | AnchorOutput | NftOutput).mana ?? 0),
+        0
+    )
 
     return {
         outputs: outputs,
