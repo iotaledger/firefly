@@ -43,6 +43,45 @@ const onboardingFeaturesForIota: IOnboardingFeaturesForNetwork = {
     },
 }
 
+const onboardingFeaturesForIotaTestnet: IOnboardingFeaturesForNetwork = {
+    enabled: false,
+    hidden: true,
+    newProfile: {
+        enabled: true,
+        softwareProfile: {
+            enabled: true,
+        },
+        ledgerProfile: {
+            enabled: true,
+        },
+    },
+    restoreProfile: {
+        enabled: true,
+        recoveryPhrase: {
+            enabled: true,
+        },
+        strongholdBackup: {
+            enabled: true,
+        },
+        ledgerBackup: {
+            enabled: true,
+        },
+    },
+    claimRewards: {
+        enabled: false,
+        hidden: true,
+        recoveryPhrase: {
+            enabled: false,
+        },
+        strongholdBackup: {
+            enabled: false,
+        },
+        ledgerBackup: {
+            enabled: false,
+        },
+    },
+}
+
 const IS_ALPHANET_ENABLED = process.env.STAGE !== 'prod'
 const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
     enabled: IS_ALPHANET_ENABLED,
@@ -122,7 +161,7 @@ const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
     },
 }
 
-const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
+const onboardingFeaturesForShimmerTestnet: IOnboardingFeaturesForNetwork = {
     enabled: false,
     hidden: true,
     newProfile: {
@@ -205,9 +244,10 @@ const onboardingFeatures: OnboardingFeatures = {
         enabled: true,
     },
     iota: onboardingFeaturesForIota,
+    iotaTestnet: onboardingFeaturesForIotaTestnet,
     iotaAlphanet: onboardingFeaturesForIotaAlphanet,
     shimmer: onboardingFeaturesForShimmer,
-    testnet: onboardingFeaturesForTestnet,
+    shimmerTestnet: onboardingFeaturesForShimmerTestnet,
     custom: onboardingFeaturesForCustom,
 }
 

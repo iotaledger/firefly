@@ -1409,7 +1409,7 @@
         "skipAndKeep": "Ignorer et conserver l'ancien mot de passe",
         "addChain": "Ajouter une chaîne",
         "viewVestingRewardsFinder": "Find vesting rewards",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "copyProfileSystemLocation": "Copier l'emplacement du profil système"
     },
     "general": {
         "recipient": "Destinataire",
@@ -2129,7 +2129,7 @@
             "noFunds": "Vous n'avez pas de IOTA."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Soyez prudent lorsque vous suivez des liens inconnus. Ne partagez jamais vos clés privées, ni ne les entrez dans aucun site Web ou service."
         }
     },
     "tooltips": {
