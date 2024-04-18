@@ -64,6 +64,7 @@
     import CreateDelegationPopup from './CreateDelegationPopup.svelte'
     import ClaimDelegationRewardsPopup from './ClaimDelegationRewardsPopup.svelte'
     import ImplicitAccountAddressPopup from './ImplicitAccountAddressPopup.svelte'
+    import BurnNftPopup from './BurnNftPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -159,6 +160,7 @@
         [PopupId.CreateDelegation]: CreateDelegationPopup,
         [PopupId.ClaimDelegationRewards]: ClaimDelegationRewardsPopup,
         [PopupId.ImplicitAccountAddress]: ImplicitAccountAddressPopup,
+        [PopupId.BurnNft]: BurnNftPopup,
     }
 
     function onKey(event: KeyboardEvent): void {
