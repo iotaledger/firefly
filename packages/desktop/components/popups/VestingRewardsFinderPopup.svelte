@@ -56,7 +56,7 @@
                     displayNotificationForLedgerProfile('warning')
                     return
                 }
-                //await findBalances(SearchAlgorithmType.DFS, !hasUsedVestingRewardsFinder, config)
+                // await findBalances(SearchAlgorithmType.DFS, !hasUsedVestingRewardsFinder, config)
                 await loadWallets()
                 hasUsedVestingRewardsFinder = true
             } catch (err) {
