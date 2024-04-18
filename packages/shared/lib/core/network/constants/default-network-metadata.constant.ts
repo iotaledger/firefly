@@ -23,13 +23,13 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Shimmer],
     },
-    [NetworkId.Testnet]: <IStardustNetworkMetadata>{
-        id: NetworkId.Testnet,
-        name: 'Testnet',
-        coinType: COIN_TYPE[NetworkId.Testnet],
+    [NetworkId.ShimmerTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.ShimmerTestnet,
+        name: 'Shimmer Testnet',
+        coinType: COIN_TYPE[NetworkId.ShimmerTestnet],
         protocol: {
             version: 2,
-            networkName: 'testnet',
+            networkName: 'shimmer-testnet',
             bech32Hrp: 'rms',
             minPowScore: 1500,
             belowMaxDepth: 15,
@@ -38,9 +38,9 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
                 vByteFactorData: 1,
                 vByteFactorKey: 10,
             },
-            tokenSupply: TokenSupply.Testnet,
+            tokenSupply: TokenSupply.ShimmerTestnet,
         },
-        baseToken: DEFAULT_BASE_TOKEN[NetworkId.Testnet],
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.ShimmerTestnet],
     },
     [NetworkId.Iota]: <IStardustNetworkMetadata>{
         id: NetworkId.Iota,
@@ -60,6 +60,25 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
             tokenSupply: TokenSupply.Iota,
         },
         baseToken: DEFAULT_BASE_TOKEN[NetworkId.Iota],
+    },
+    [NetworkId.IotaTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.IotaTestnet,
+        name: 'IOTA Testnet',
+        coinType: COIN_TYPE[NetworkId.IotaTestnet],
+        protocol: {
+            version: 2,
+            networkName: 'iota-testnet',
+            bech32Hrp: 'tst',
+            minPowScore: 1500,
+            belowMaxDepth: 15,
+            rentStructure: {
+                vByteCost: 100,
+                vByteFactorData: 1,
+                vByteFactorKey: 10,
+            },
+            tokenSupply: TokenSupply.IotaTestnet,
+        },
+        baseToken: DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet],
     },
     [NetworkId.IotaAlphanet]: <IStardustNetworkMetadata>{
         id: NetworkId.IotaAlphanet,
