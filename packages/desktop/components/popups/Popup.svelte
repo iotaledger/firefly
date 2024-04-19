@@ -8,6 +8,7 @@
     import { clickOutside } from '@core/utils/ui'
 
     // Popups
+    import AllotManaPopup from './AllotManaPopup.svelte'
     import WalletSwitcherPopup from './WalletSwitcherPopup.svelte'
     import ActivityDetailsPopup from './ActivityDetailsPopup.svelte'
     import AddNodePopup from './AddNodePopup.svelte'
@@ -63,6 +64,7 @@
     import CreateDelegationPopup from './CreateDelegationPopup.svelte'
     import ClaimDelegationRewardsPopup from './ClaimDelegationRewardsPopup.svelte'
     import ImplicitAccountAddressPopup from './ImplicitAccountAddressPopup.svelte'
+    import BurnNftPopup from './BurnNftPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -101,6 +103,7 @@
     let popupContent
 
     const POPUP_MAP: PopupComponentMap = {
+        [PopupId.AllotMana]: AllotManaPopup,
         [PopupId.WalletSwitcher]: WalletSwitcherPopup,
         [PopupId.ActivityDetails]: ActivityDetailsPopup,
         [PopupId.AddNode]: AddNodePopup,
@@ -157,6 +160,7 @@
         [PopupId.CreateDelegation]: CreateDelegationPopup,
         [PopupId.ClaimDelegationRewards]: ClaimDelegationRewardsPopup,
         [PopupId.ImplicitAccountAddress]: ImplicitAccountAddressPopup,
+        [PopupId.BurnNft]: BurnNftPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

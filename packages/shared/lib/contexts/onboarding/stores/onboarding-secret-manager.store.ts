@@ -26,7 +26,7 @@ export async function buildOnboardingSecretManager(): Promise<void> {
 
         if (mnemonicStringified) {
             // 3. Verify Mnemonic
-            await verifyMnemonic(mnemonicStringified)
+            verifyMnemonic(mnemonicStringified)
 
             // 4. Store Mnemonic
             await secretManager.storeMnemonic(mnemonicStringified)

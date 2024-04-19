@@ -1223,6 +1223,10 @@
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         },
+        "allotMana": {
+            "title": "Allot Mana",
+            "body": "Select the account address to allot mana."
+        },
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
@@ -1475,6 +1479,7 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
+        "allotMana": "Allot mana",
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
@@ -1544,6 +1549,8 @@
         "consolidating": "Consolidating outputs",
         "accountCreated": "Account created",
         "creatingAnAccount": "Creating Account",
+        "nftCreated": "NFT created",
+        "creatingNft": "Creating NFT",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -1703,6 +1710,7 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "allotManaDescription": "Allot mana to an account",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
@@ -1751,7 +1759,13 @@
         "availableMana": "Available Mana",
         "insufficientMana": "Generating mana... {timeRemaining}.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
-        "mana": "Mana"
+        "mana": "Mana",
+        "delegationCreated": "Delegation created",
+        "delegation": "Delegation",
+        "delegationId": "Delegation ID",
+        "validatorAddress": "Validator Address",
+        "delegatedAmount": "Delegated amount",
+        "startEpoch": "Start epoch"
     },
     "filters":{
         "title": "Filters",
@@ -2404,9 +2418,16 @@
         },
         "account": {
             "creation": {
-                "Pending": "creating account",
-                "Confirmed": "account created",
+                "Pending": "Creating account",
+                "Confirmed": "Account created",
                 "Conflicting": "Failed to create account"
+            }
+        },
+        "delegation": {
+            "creation": {
+                "Pending": "Creating delegation",
+                "Confirmed": "Delegation created",
+                "Failed": "Failed to create delegation"
             }
         },
         "networkHealth": {

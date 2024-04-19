@@ -1,7 +1,4 @@
 export * from './buildInitialOnboardingProfile'
 export * from './convertOnboardingProfileToPersistedProfile'
 export * from './copyStrongholdFileToProfileDirectory'
-export * from './deriveShimmerClaimingWalletState'
-export * from './getSortedRenamedBoundAccounts'
-export * from './prepareShimmerClaimingAccount'
 export * from './validateStrongholdCoinType'

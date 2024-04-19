@@ -13,6 +13,6 @@ export function mapBasicOutputToVestingOutput(output: OutputData): IVestingOutpu
         unlockTime,
         status,
         amount: parseInt(output.output.amount),
-        isSpent: output.isSpent,
+        isSpent: !!output.metadata.spent,
     }
 }

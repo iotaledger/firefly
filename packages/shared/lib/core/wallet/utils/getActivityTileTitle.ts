@@ -12,6 +12,9 @@ export function getActivityTileTitle(activity: Activity): string {
     if (activity.type === ActivityType.Vesting) {
         return 'general.vestingReward'
     }
+    if (activity.type === ActivityType.Delegation) {
+        return 'general.delegationCreated'
+    }
     if (activity.type === ActivityType.Governance) {
         if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
             return isConfirmed ? 'general.increased' : 'general.increasing'
@@ -33,6 +36,8 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
+    } else if (type === ActivityType.Nft && action === ActivityAction.Mint) {
+        return isConfirmed ? 'general.nftCreated' : 'general.creatingNft'
     } else if (action === ActivityAction.Burn) {
         return isConfirmed ? 'general.burned' : 'general.burning'
     } else if (action === ActivityAction.Send) {

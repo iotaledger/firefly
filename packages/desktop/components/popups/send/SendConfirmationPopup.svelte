@@ -147,7 +147,6 @@
                 )
             }
         } catch (err) {
-            handleError(err)
             transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false

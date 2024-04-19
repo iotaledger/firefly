@@ -8,4 +8,5 @@ export enum ActivityType {
     Nft = 'nft',
     Vesting = 'vesting',
     Anchor = 'anchor',
+    Delegation = 'delegation',
 }

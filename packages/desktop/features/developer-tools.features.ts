@@ -20,6 +20,9 @@ const developerToolsFeatures: IDeveloperFeatures = {
     deeplink: {
         enabled: false,
     },
+    allotMana: {
+        enabled: true,
+    },
 }
 
 export default developerToolsFeatures

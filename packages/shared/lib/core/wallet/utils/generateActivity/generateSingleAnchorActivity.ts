@@ -23,7 +23,7 @@ export async function generateSingleAnchorActivity(
     const outputId = wrappedOutput.outputId
     const id = outputId || transactionId
 
-    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(wallet, output)
+    const { storageDeposit: _storageDeposit, giftedStorageDeposit } = await getStorageDepositFromOutput(output)
     const storageDeposit = getAmountFromOutput(output) + _storageDeposit
     const governorAddress = getGovernorAddressFromAnchorOutput(output)
     const stateControllerAddress = getStateControllerAddressFromAnchorOutput(output)
