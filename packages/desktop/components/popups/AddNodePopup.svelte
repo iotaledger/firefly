@@ -5,8 +5,7 @@
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup } from '@auxiliary/popup'
     import { Platform } from '@core/app'
-    import { activeWallets, activeProfile } from '@core/profile'
-    import { registerProposalsForWallets } from '@contexts/governance'
+    import { activeProfile } from '@core/profile'
 
     export let node: INode = structuredClone(EMPTY_NODE)
     export let isEditingNode: boolean = false
@@ -33,7 +32,8 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
-                await registerProposalsForWallets({ node }, $activeWallets)
+                // await registerProposalsForWallets({ node }, $activeWallets)
+                // TODO: https://github.com/iotaledger/firefly/issues/7947
             }
 
             onSuccess()

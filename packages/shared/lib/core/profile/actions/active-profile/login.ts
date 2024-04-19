@@ -1,4 +1,3 @@
-import { initializeRegisteredProposals, registerProposalsFromNodes } from '@contexts/governance/actions'
 import { cleanupOnboarding } from '@contexts/onboarding/actions'
 import { Platform } from '@core/app/classes'
 import { AppContext } from '@core/app/enums'
@@ -112,8 +111,9 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
 
             void pollMarketPrices()
             if (Platform.isFeatureFlagEnabled('governance')) {
-                void initializeRegisteredProposals()
-                void registerProposalsFromNodes(get(activeWallets))
+                // void initializeRegisteredProposals()
+                // void registerProposalsFromNodes(get(activeWallets))
+                // TODO: https://github.com/iotaledger/firefly/issues/7947
             }
             void cleanupOnboarding()
         } else {

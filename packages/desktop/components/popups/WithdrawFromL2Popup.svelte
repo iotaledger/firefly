@@ -23,7 +23,7 @@
 
     const bip44Chain: Bip44 = {
         coinType: Number(getCoinType()),
-        account: getSelectedWallet().index,
+        account: 0, // TODO: update when multiwallet is implemented -> https://github.com/iotaledger/firefly/issues/8362
         change: 0,
         addressIndex: 0,
     }

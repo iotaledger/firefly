@@ -1,5 +1,5 @@
 import type {
-    INode,
+    Node,
     ParticipationEventWithNodes,
     ParticipationEventId,
     ParticipationEventRegistrationOptions,
@@ -10,7 +10,7 @@ import { createProposalFromEvent } from '@contexts/governance'
 
 export async function registerParticipationEvent(
     eventId: ParticipationEventId,
-    node: INode,
+    node: Node,
     wallet: IWalletState
 ): Promise<ParticipationEventWithNodes> {
     const options: ParticipationEventRegistrationOptions = {
