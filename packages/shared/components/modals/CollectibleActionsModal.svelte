@@ -3,12 +3,8 @@
     import { openUrlInBrowser, time } from '@core/app'
     import { localize } from '@core/i18n'
     import { INft, rewriteIpfsUri } from '@core/nfts'
-    import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { burnNft } from '@core/wallet'
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
-    import { TextHintVariant } from '@ui/enums'
     import { Icon as IconEnum } from '@auxiliary/icon'
 
     export let modal: Modal
@@ -43,30 +39,11 @@
             disabled: isLocked,
         },
     ]
-
     function openBurnNft(): void {
         openPopup({
-            id: PopupId.Confirmation,
+            id: PopupId.BurnNft,
             props: {
-                title: localize('actions.confirmNftBurn.title', {
-                    values: {
-                        nftName: nft.name,
-                    },
-                }),
-                description: localize('actions.confirmNftBurn.description'),
-                hint: localize('actions.confirmNftBurn.hint'),
-                variant: TextHintVariant.Warning,
-                confirmText: localize('actions.burn'),
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await burnNft(nft.id)
-                            $collectiblesRouter.goTo(CollectiblesRoute.Gallery)
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
+                nft: nft,
             },
         })
     }
