@@ -32,6 +32,7 @@
             }
 
             if (Platform.isFeatureFlagEnabled('governance')) {
+                // await registerProposalsForWallets({ node }, $activeWallets)
                 // TODO: https://github.com/iotaledger/firefly/issues/7947
             }
 
