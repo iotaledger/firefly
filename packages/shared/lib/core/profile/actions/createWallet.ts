@@ -18,7 +18,7 @@ export function getWalletOptions(
         secretManager: getSecretManagerFromProfileType(profile.type, secretManagerPath, password),
         bipPath: {
             coinType: profile.network.coinType,
-            account: 0,
+            account: 0, // TODO: update when multiwallet is implemented -> https://github.com/iotaledger/firefly/issues/8362
             addressIndex: 0,
         },
     }
