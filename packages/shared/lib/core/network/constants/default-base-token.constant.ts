@@ -34,11 +34,11 @@ const DEFAULT_SHIMMER_BASE_TOKEN: IBaseToken = {
 
 const DEFAULT_TESTNET_BASE_TOKEN: IBaseToken = {
     standard: TokenStandard.BaseToken,
-    name: 'Shimmer',
-    tickerSymbol: 'SMR',
-    unit: 'SMR',
+    name: 'TST',
+    tickerSymbol: 'TST',
+    unit: 'TST',
     decimals: 6,
-    subunit: 'glow',
+    subunit: 'testies',
     useMetricPrefix: false,
 }
 
