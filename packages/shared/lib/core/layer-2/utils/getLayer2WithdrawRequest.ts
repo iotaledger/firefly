@@ -27,7 +27,9 @@ export async function getLayer2WithdrawRequest(
     metadataStream.writeUInt8('requestType', 1) // This request is of type OffLedger (1)
 
     /* Request Essence */
-    const chainIdBytes = Converter.hexToBytes(AddressConverter.parseBech32Address(defaultChainConfig?.anchorAddress || ''))
+    const chainIdBytes = Converter.hexToBytes(
+        AddressConverter.parseBech32Address(defaultChainConfig?.anchorAddress || '')
+    )
     metadataStream.writeBytes('chainId', chainIdBytes.length, chainIdBytes)
 
     metadataStream.writeUInt32('targetContract', ACCOUNTS_CONTRACT)
