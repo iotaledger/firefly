@@ -56,4 +56,5 @@ export enum PopupId {
     ActivateAccount = 'activateAccount',
     ClaimDelegationRewards = 'claimDelegationRewardsPopup',
     ImplicitAccountAddress = 'implicitAccountAddressPopup',
+    BurnNft = 'burnNft',
 }
