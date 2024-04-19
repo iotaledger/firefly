@@ -1,5 +1,5 @@
 import { getNetworkMetrics } from '@core/wallet/actions'
-import { NetworkMetricsResponse } from '@iota/sdk'
+import { NetworkMetricsResponse } from '@iota/sdk/out/types'
 import { setNetworkMetrics } from '../stores'
 
 export async function getAndUpdateNetworkMetrics(forwardErrors = false): Promise<NetworkMetricsResponse | undefined> {

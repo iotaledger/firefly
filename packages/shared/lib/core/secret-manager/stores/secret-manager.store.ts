@@ -1,6 +1,6 @@
 import { api } from '@core/api'
 import { activeProfile } from '@core/profile/stores'
-import { SecretManager, SecretManagerType } from '@iota/sdk'
+import { SecretManager, type SecretManagerType } from '@iota/sdk'
 import { writable } from 'svelte/store'
 
 export const activeProfileSecretManager = writable<SecretManager | null>(null)

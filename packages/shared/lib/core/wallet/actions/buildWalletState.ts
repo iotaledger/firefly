@@ -25,6 +25,7 @@ export async function buildWalletState(
                 stored: BigInt(0),
                 potential: BigInt(0),
             },
+            rewards: BigInt(0),
         },
         requiredStorageDeposit: {
             account: BigInt(0),
@@ -79,7 +80,7 @@ export async function buildWalletState(
         implicitAccountOutputs = await wallet.implicitAccounts()
         walletOutputs = await wallet.outputs()
         walletUnspentOutputs = await wallet.unspentOutputs()
-        votingPower = balances.baseCoin.votingPower
+        votingPower = balances.baseCoin.votingPower.toString()
     } catch (err) {
         console.error(err)
     }
