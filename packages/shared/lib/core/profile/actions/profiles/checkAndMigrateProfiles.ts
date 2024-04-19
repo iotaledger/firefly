@@ -355,7 +355,8 @@ function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): voi
 function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): void {
     if (existingProfile.network) {
         interface IOldPersistedNetwork {
-            protocol: unknown
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            protocol: any // protocol with 'any' instead of 'unknown' to get the value of bech32Hrp later
             baseToken: unknown
         }
 
