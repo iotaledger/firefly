@@ -24,7 +24,7 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         protocol: {
             version: 2,
             networkName: 'testnet',
-            bech32Hrp: 'rms',
+            bech32Hrp: 'tst',
             belowMaxDepth: 15,
             tokenSupply: TokenSupply.Testnet,
         },
