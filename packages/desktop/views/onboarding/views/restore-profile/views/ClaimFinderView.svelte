@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import {
@@ -9,21 +9,12 @@
         ShimmerClaimingWalletState,
         canUserClaimRewards,
         canUserRecoverFromShimmerClaiming,
-        claimShimmerRewards,
-        createShimmerClaimingProfileManager,
-        findShimmerRewards,
         hasUserClaimedRewards,
-        initialiseAccountRecoveryConfigurationForShimmerClaiming,
         initialiseFirstShimmerClaimingAccount,
-        isOnboardingLedgerProfile,
-        onboardingProfile,
         shimmerClaimingProfileManager,
-        subscribeToWalletApiEventsForShimmerClaiming,
-        syncShimmerClaimingAccount,
     } from '@contexts/onboarding'
     import {
         copyStrongholdFileToProfileDirectory,
-        getTemporaryProfileManagerStorageDirectory,
     } from '@contexts/onboarding/helpers'
     import { localize } from '@core/i18n'
     import {
@@ -162,7 +153,6 @@
 
                 await createShimmerClaimingProfileManager()
 
-                subscribeToWalletApiEventsForShimmerClaiming()
                 await $shimmerClaimingProfileManager.startBackgroundSync({
                     syncOnlyMostBasicOutputs: true,
                     syncIncomingTransactions: true,
@@ -304,4 +294,4 @@
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
-</OnboardingLayout>
+</OnboardingLayout> -->

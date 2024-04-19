@@ -3,7 +3,7 @@
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { showAppNotification } from '@auxiliary/notification'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
-    import { findBalances, sumBalanceForWallets, SearchAlgorithmType, selectedWalletId } from '@core/wallet'
+    import { sumBalanceForWallets, SearchAlgorithmType, selectedWalletId } from '@core/wallet'
     import { localize } from '@core/i18n'
     import { displayNotificationForLedgerProfile, ledgerNanoStatus } from '@core/ledger'
     import { NetworkId } from '@core/network'
@@ -82,7 +82,7 @@
 
     // Actions
     async function findProfileBalances(): Promise<void> {
-        await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
+        // await findBalances(searchAlgorithm, !hasUsedBalanceFinder || shouldInitSearch)
         await loadWallets()
         hasUsedBalanceFinder = true
         shouldInitSearch = false

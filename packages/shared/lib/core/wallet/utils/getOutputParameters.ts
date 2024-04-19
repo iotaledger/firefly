@@ -45,7 +45,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
             ? convertDateToSlotIndex(timelockDate, nodeProtocolParameters)
             : undefined
 
-    return <OutputParams>{
+    return {
         recipientAddress,
         amount,
         ...(assets && { assets }),
@@ -65,7 +65,7 @@ function buildOutputParameters(transactionDetails: NewTransactionDetails): Outpu
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
         },
-    }
+    } as unknown as OutputParams
 }
 
 async function buildOutputParametersForLayer2(
@@ -125,7 +125,7 @@ async function buildOutputParametersForLayer2(
             outputParams,
             getDefaultTransactionOptions()
         )) as unknown as BasicOutput | NftOutput
-        const serializedOutput = await outputHexBytes(outputForEstimate)
+        const serializedOutput = outputHexBytes(outputForEstimate)
         const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
         return {
             outputForEstimate,

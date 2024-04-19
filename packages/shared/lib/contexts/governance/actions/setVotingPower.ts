@@ -1,4 +1,4 @@
-import { PreparedTransaction, Transaction } from '@iota/sdk/out/types'
+import { PreparedTransaction, TransactionWithMetadata } from '@iota/sdk/out/types'
 import { plainToInstance } from 'class-transformer'
 import { processAndAddToActivities } from '@core/wallet/utils'
 import { handleError } from '@core/error/handlers'
@@ -19,7 +19,7 @@ export async function setVotingPower(rawAmount: string): Promise<void> {
 
         updateSelectedWallet({ hasVotingPowerTransactionInProgress: true, isTransferring: true })
 
-        let transaction: Transaction
+        let transaction: TransactionWithMetadata
         let preparedTransaction: PreparedTransaction
 
         if (amount < votingPower) {

@@ -1,11 +1,10 @@
-import { IPersistedProfile, ProfileType } from '@core/profile'
+import { IPersistedProfile } from '@core/profile'
 import { CreateProfileType, OnboardingType, RestoreProfileType } from '../enums'
 import { ImportFile, Mnemonic } from '../types'
 import { IShimmerClaimingWallet } from './shimmer-claiming-account.interface'
 
-export interface IOnboardingProfile extends Omit<Partial<IPersistedProfile>, 'id' | 'type'> {
+export interface IOnboardingProfile extends Omit<Partial<IPersistedProfile>, 'id'> {
     id: string
-    type: ProfileType
 
     // Onboarding flow indicators
     onboardingType?: OnboardingType

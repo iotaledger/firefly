@@ -4,5 +4,5 @@ export enum RestoreProfileRoute {
     RestoreFromStronghold = 'restoreFromStronghold',
     RestoreFromLedger = 'restoreFromLedger',
     BalanceFinder = 'balanceFinder',
-    ClaimFinder = 'claimFinder',
+    // ClaimFinder = 'claimFinder',
 }
