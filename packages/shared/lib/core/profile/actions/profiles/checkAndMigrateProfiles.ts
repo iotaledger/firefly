@@ -75,6 +75,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     15: persistedProfileMigrationToV16,
     16: persistedProfileMigrationToV17,
     17: persistedProfileMigrationToV18,
+    18: persistedProfileMigrationToV19,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -196,7 +197,7 @@ function getNetworkIdFromOldNetworkType(networkType: 'mainnet' | 'devnet' | 'pri
         case 'mainnet':
             return NetworkId.Shimmer
         case 'devnet':
-            return NetworkId.Testnet
+            return NetworkId.ShimmerTestnet
         case 'private-net':
             return NetworkId.Custom
         default:
@@ -210,7 +211,7 @@ function persistedProfileMigrationToV11(
     if (!existingProfile?.network) {
         let network: IPersistedNetwork
         const networkId = getNetworkIdFromOldNetworkType(existingProfile?.networkType)
-        if (networkId === NetworkId.Shimmer || networkId === NetworkId.Testnet) {
+        if (networkId === NetworkId.Shimmer || networkId === NetworkId.ShimmerTestnet) {
             network = getDefaultPersistedNetwork(networkId)
         } else {
             network.id = NetworkId.Custom
@@ -334,7 +335,24 @@ function persistedProfileMigrationToV17(existingProfile: IPersistedProfile): voi
     saveProfile(existingProfile)
 }
 
+/*
+ * Migration 18
+ * Change from 1 testnet to 2: Shimmer Testnet (what we knew as Testnet) & IOTA Testnet.
+ * For this reason, we have to rename the existing testnet network ids to Shimmer Testnet.
+ */
 function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): void {
+    if ((existingProfile.network.id as string) === 'testnet') {
+        existingProfile.network.id = NetworkId.ShimmerTestnet
+        existingProfile.network.name = 'Shimmer Testnet'
+    }
+    saveProfile(existingProfile)
+}
+
+/*
+ * Migration 19
+ * Remove hardcoded base token and protocol network dependencies.
+ */
+function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): void {
     if (existingProfile.network) {
         interface IOldPersistedNetwork {
             protocol: unknown

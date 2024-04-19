@@ -10,17 +10,21 @@ export const DEFAULT_NETWORK_METADATA: Readonly<{ [key in NetworkId]?: NetworkMe
         coinType: COIN_TYPE[NetworkId.Shimmer],
         bech32Hrp: 'smr',
     },
-    [NetworkId.Testnet]: <IStardustNetworkMetadata>{
-        id: NetworkId.Testnet,
-        name: 'Testnet',
-        coinType: COIN_TYPE[NetworkId.Testnet],
-        bech32Hrp: 'rms',
+    [NetworkId.ShimmerTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.ShimmerTestnet,
+        name: 'Shimmer Testnet',
+        coinType: COIN_TYPE[NetworkId.ShimmerTestnet],
     },
     [NetworkId.Iota]: <IStardustNetworkMetadata>{
         id: NetworkId.Iota,
         name: 'IOTA',
         coinType: COIN_TYPE[NetworkId.Iota],
         bech32Hrp: 'iota',
+    },
+    [NetworkId.IotaTestnet]: <IStardustNetworkMetadata>{
+        id: NetworkId.IotaTestnet,
+        name: 'IOTA Testnet',
+        coinType: COIN_TYPE[NetworkId.IotaTestnet],
     },
     [NetworkId.IotaAlphanet]: <IStardustNetworkMetadata>{
         id: NetworkId.IotaAlphanet,

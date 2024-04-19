@@ -8,7 +8,9 @@ export const ledgerAppName: Readable<LedgerAppName> = derived(
     [profileNetwork, onboardingProfileNetwork],
     ([$profileNetwork, $onboardingProfileNetwork]) => {
         const networkId = $profileNetwork?.id || $onboardingProfileNetwork?.id || NetworkId.Iota
-        return networkId === NetworkId.Iota || networkId === NetworkId.IotaAlphanet
+        return networkId === NetworkId.Iota ||
+            networkId === NetworkId.IotaAlphanet ||
+            networkId === NetworkId.IotaTestnet
             ? LedgerAppName.Iota
             : LedgerAppName.Shimmer
     }
