@@ -6,8 +6,6 @@ import { ProfileType } from '@core/profile'
 export function getSecretManagerFromProfileType(
     type?: ProfileType,
     strongholdPath?: string,
-    // TODO: MOVE STONGHOLD FILE TO PROFILE FOLDER
-    // TODO: USE RESTORE PATH
     password?: string
 ): SecretManagerType {
     const strongholdSecretManager = {
