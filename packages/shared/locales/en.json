@@ -1553,6 +1553,8 @@
         "consolidating": "Consolidating outputs",
         "accountCreated": "Account created",
         "creatingAnAccount": "Creating Account",
+        "nftCreated": "NFT created",
+        "creatingNft": "Creating NFT",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",

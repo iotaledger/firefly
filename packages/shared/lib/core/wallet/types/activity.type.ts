@@ -1,5 +1,6 @@
 import {
     AccountActivity,
+    AnchorActivity,
     ConsolidationActivity,
     DelegationActivity,
     FoundryActivity,
@@ -18,3 +19,4 @@ export type Activity =
     | ConsolidationActivity
     | VestingActivity
     | DelegationActivity
+    | AnchorActivity

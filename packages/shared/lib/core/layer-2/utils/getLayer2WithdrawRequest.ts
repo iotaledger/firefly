@@ -3,13 +3,13 @@ import BigInteger from 'big-integer'
 import { SpecialStream } from '../classes'
 import { ACCOUNTS_CONTRACT, WITHDRAW } from '../constants'
 import { Blake2b } from '@iota/crypto.js'
-import { api } from '@core/api'
 import { activeProfile } from '@core/profile'
 import { DEFAULT_CHAIN_CONFIGURATIONS } from '@core/network'
 import { Converter } from '@iota/util.js'
 import { Bip44 } from '@iota/sdk/out/types'
-import { HexEncodedString } from '@iota/sdk'
+import { HexEncodedString } from '@iota/sdk/out/types'
 import { activeProfileSecretManager } from '@core/secret-manager'
+import { AddressConverter } from '../../wallet'
 
 export interface WithdrawRequest {
     request: HexEncodedString
@@ -27,7 +27,9 @@ export async function getLayer2WithdrawRequest(
     metadataStream.writeUInt8('requestType', 1) // This request is of type OffLedger (1)
 
     /* Request Essence */
-    const chainIdBytes = Converter.hexToBytes(api.bech32ToHex(defaultChainConfig?.aliasAddress ?? ''))
+    const chainIdBytes = Converter.hexToBytes(
+        AddressConverter.parseBech32Address(defaultChainConfig?.anchorAddress || '')
+    )
     metadataStream.writeBytes('chainId', chainIdBytes.length, chainIdBytes)
 
     metadataStream.writeUInt32('targetContract', ACCOUNTS_CONTRACT)

@@ -1,6 +1,7 @@
 import { Converter } from '@iota/util.js'
-import { api } from '@core/api'
 import { EXTERNALLY_OWNED_ACCOUNT_TYPE_ID } from '../constants'
+import { AddressConverter } from '../../wallet'
+import { AccountAddress } from '@iota/sdk/out/types'
 
 export function evmAddressToAgentID(evmStoreAccount: string, accountAddress: string): Uint8Array {
     // This function constructs an AgentID that is required to be used with contracts
@@ -12,7 +13,9 @@ export function evmAddressToAgentID(evmStoreAccount: string, accountAddress: str
     // otherwise fetching balances using the iscmagic contract will fail,
     // because evm addresses are case-insensitive but hexToBytes is not.
     const receiverAddrBinary = Converter.hexToBytes(evmStoreAccount?.toLowerCase())
-    const accountAddressInBytes = Converter.hexToBytes(api.bech32ToHex(accountAddress))
+    const accountAddressInBytes = Converter.hexToBytes(
+        AddressConverter.addressToBech32(new AccountAddress(accountAddress))
+    )
 
     const agentIdBytes = new Uint8Array([agentIDKindEthereumAddress, ...accountAddressInBytes, ...receiverAddrBinary])
 
