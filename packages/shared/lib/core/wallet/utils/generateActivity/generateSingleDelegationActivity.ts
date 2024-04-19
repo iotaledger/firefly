@@ -2,7 +2,7 @@ import { ActivityType } from '@core/wallet/enums'
 import { IActivityGenerationParameters, IWalletState } from '@core/wallet/interfaces'
 import { DelegationActivity } from '@core/wallet/types'
 import { getAsyncDataFromOutput, getSendingInformation, getStorageDepositFromOutput } from './helper'
-import { AddressUnlockCondition, CommonOutput, DelegationOutput } from '@iota/sdk/out/types'
+import { AddressUnlockCondition, CommonOutput, DelegationOutput, UnlockConditionType } from '@iota/sdk/out/types'
 import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleDelegationActivity(
@@ -25,7 +25,9 @@ export async function generateSingleDelegationActivity(
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
     const sendingInfo = getSendingInformation(processedTransaction, output as unknown as CommonOutput, wallet)
     const startEpoch = output.startEpoch
-    const addressUnlockCondition = output.unlockConditions[0] as AddressUnlockCondition
+    const addressUnlockCondition = output.unlockConditions.find(
+        (uc) => uc.type === UnlockConditionType.Address
+    ) as AddressUnlockCondition
     const accountAddress = AddressConverter.addressToBech32(addressUnlockCondition.address)
     return {
         type: ActivityType.Delegation,
