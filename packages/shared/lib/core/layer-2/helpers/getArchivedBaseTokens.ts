@@ -8,7 +8,7 @@ interface ArchivedResponse {
 
 export async function getArchivedBaseTokens(address: string): Promise<number> {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
-    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.chainId}/core/accounts/account/${address}/balance`
+    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.anchorAddress}/core/accounts/account/${address}/balance`
 
     try {
         const archivedResponse: ArchivedResponse = await fetch(URL).then((response) => {

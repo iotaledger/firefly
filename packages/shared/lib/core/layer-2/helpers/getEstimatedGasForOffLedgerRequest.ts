@@ -11,7 +11,7 @@ interface GasEstimatePayload {
 
 export async function getEstimatedGasForOffLedgerRequest(requestHex: HexEncodedString): Promise<GasEstimatePayload> {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
-    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.chainId}/estimategas-offledger`
+    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.anchorAddress}/estimategas-offledger`
 
     const requestOptions = {
         method: 'POST',
