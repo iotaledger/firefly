@@ -16,7 +16,9 @@ export function deconstructLedgerVerificationProps(): PopupProps {
 
     /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
     const toAddress =
-        transactionDetails?.recipient?.type === SubjectType.Address ? transactionDetails?.recipient?.address : undefined
+        transactionDetails?.recipient?.type === SubjectType.Wallet
+            ? transactionDetails?.recipient?.wallet.depositAddress
+            : transactionDetails?.recipient?.address
     let toAmount = '0'
     if (transactionDetails?.type === NewTransactionType.TokenTransfer) {
         const tokenMetadata = transactionDetails?.asset?.metadata
