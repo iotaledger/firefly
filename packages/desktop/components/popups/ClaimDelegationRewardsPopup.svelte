@@ -4,12 +4,17 @@
     import { openUrlInBrowser } from '@core/app'
     import { handleError } from '@core/error/handlers'
     import { localize } from '@core/i18n'
-    import { ITransactionInfoToCalculateManaCost } from '@core/network'
+    import { DEFAULT_MANA, ITransactionInfoToCalculateManaCost } from '@core/network'
     import { getOfficialExplorerUrl } from '@core/network/utils'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { checkActiveProfileAuth } from '@core/profile/actions'
-    import { getDefaultTransactionOptions, selectedWallet } from '@core/wallet'
-    import { Button, FontWeight, KeyValueBox, Text, TextType } from '@ui'
+    import {
+        formatTokenAmountBestMatch,
+        getDefaultTransactionOptions,
+        hasWalletMainAccountNegativeBIC,
+        selectedWallet,
+    } from '@core/wallet'
+    import { Button, FontWeight, KeyValueBox, Text, TextHint, TextHintVariant, TextType } from '@ui'
     import { onMount } from 'svelte'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
@@ -20,6 +25,8 @@
     let hasEnoughMana = false
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onConfirmClick(): Promise<void> {
         isBusy = true
@@ -86,14 +93,20 @@
     </button>
     <div class="flex flex-col space-y-4">
         <KeyValueBox keyText={localize('popups.claimDelegationRewards.delegationId')} valueText={delegationId} />
-        <KeyValueBox keyText={localize('popups.claimDelegationRewards.rewards')} valueText={rewards.toString()} />
+        <KeyValueBox
+            keyText={localize('popups.claimDelegationRewards.rewards')}
+            valueText={formatTokenAmountBestMatch(Math.round(rewards), DEFAULT_MANA)}
+        />
         <ManaBox {transactionInfo} bind:hasEnoughMana />
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || isBusy || !hasEnoughMana}
+            disabled={$selectedWallet?.isTransferring || isBusy || !hasEnoughMana || hasMainAccountNegativeBIC}
             isBusy={$selectedWallet?.isTransferring || isBusy}
             onClick={onConfirmClick}
         >

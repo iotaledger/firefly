@@ -12,6 +12,9 @@ export function getActivityTileTitle(activity: Activity): string {
     if (activity.type === ActivityType.Vesting) {
         return 'general.vestingReward'
     }
+    if (activity.type === ActivityType.Delegation) {
+        return 'general.delegationCreated'
+    }
     if (activity.type === ActivityType.Governance) {
         if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
             return isConfirmed ? 'general.increased' : 'general.increasing'

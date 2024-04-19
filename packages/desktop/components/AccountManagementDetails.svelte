@@ -39,7 +39,7 @@
         StakingFeature,
     } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
-    import { DEFAULT_MANA, ExplorerEndpoint, getOfficialExplorerUrl } from '@core/network'
+    import { DEFAULT_MANA, ExplorerEndpoint, getOfficialExplorerUrl, getPassiveManaForOutput } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
@@ -67,7 +67,7 @@
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: hasAccountNegativeBIC =
         $selectedWallet?.balances?.blockIssuanceCredits?.[(selectedOutput.output as AccountOutput)?.accountId] < 0
-
+    $: selectedOutputPassiveMana = getPassiveManaForOutput(selectedOutput)
     function getImplicitAccountBalance(outputData: OutputData): number | undefined {
         return Number(outputData.output.amount)
     }
@@ -121,6 +121,14 @@
             amount = Number(stakingFeature?.stakedAmount)
         }
         return amount
+    }
+
+    function formatBIC(amount: number): string {
+        if (amount < 0) {
+            return '-' + formatTokenAmountBestMatch(amount * -1, DEFAULT_MANA)
+        } else {
+            return formatTokenAmountBestMatch(amount, DEFAULT_MANA)
+        }
     }
 </script>
 
@@ -199,7 +207,7 @@
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
-                                    {$selectedWallet?.balances?.blockIssuanceCredits?.[accountId] || 0}
+                                    {formatBIC($selectedWallet?.balances?.blockIssuanceCredits?.[accountId] ?? 0)}
                                 </Text>
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.blockIssuanceCredits')}</Text
@@ -211,7 +219,7 @@
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
-                                    {formatTokenAmountBestMatch(selectedOutput.output?.mana, DEFAULT_MANA)}</Text
+                                    {formatTokenAmountBestMatch(selectedOutputPassiveMana, DEFAULT_MANA)}</Text
                                 >
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.mana')}</Text

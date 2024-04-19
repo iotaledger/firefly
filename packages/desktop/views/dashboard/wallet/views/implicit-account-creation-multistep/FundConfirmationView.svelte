@@ -174,7 +174,7 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} {outputId} />
                 </div>
             {/if}
         </div>

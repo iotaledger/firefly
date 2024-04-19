@@ -1,6 +1,17 @@
 <script lang="ts">
     import { onMount } from 'svelte'
-    import { Button, Text, FontWeight, NftImageOrIconBox, Tabs, KeyValueBox, NftSize, TextType } from '@ui'
+    import {
+        Button,
+        Text,
+        FontWeight,
+        NftImageOrIconBox,
+        Tabs,
+        KeyValueBox,
+        NftSize,
+        TextType,
+        TextHint,
+        TextHintVariant,
+    } from '@ui'
     import { localize } from '@core/i18n'
     import { getClient, prepareMintNft } from '@core/wallet/actions'
     import { hasWalletMainAccountNegativeBIC, selectedWallet } from '@core/wallet'
@@ -11,7 +22,6 @@
     import { CURRENT_IRC27_VERSION } from '@core/nfts'
     import { ManaBox } from '@components'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
-    import { showAppNotification } from '@auxiliary/notification'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
 
@@ -56,12 +66,6 @@
     }
 
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
-    $: if (hasMainAccountNegativeBIC) {
-        showAppNotification({
-            type: 'warning',
-            message: localize('views.accountManagement.hasMainAccountNegativeBIC'),
-        })
-    }
 
     async function prepareNftOutput(): Promise<void> {
         const outputData = buildNftOutputData(irc27Metadata, $selectedWallet.depositAddress)
@@ -155,6 +159,9 @@
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
             </activity-details>
         </nft-details>
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <div class="flex flex-row flex-nowrap w-full space-x-4">
         <Button outline classes="w-full" disabled={$selectedWallet?.isTransferring} onClick={onBackClick}>

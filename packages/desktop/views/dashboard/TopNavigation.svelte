@@ -15,6 +15,8 @@
     } from '@core/router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { popupState } from '@auxiliary/popup'
+    import features from '@features/features'
+    import { WalletSwitcher } from '@components'
 
     let isBackButtonVisible = false
 
@@ -61,8 +63,9 @@
         {/if}
     </div>
 
-    <!-- TODO(2.0) We hide the WalletSwitcher for now -->
-    <!-- <WalletSwitcher /> -->
+    {#if features?.wallet?.multiWallet?.enabled}
+        <WalletSwitcher />
+    {/if}
 
     <div class="right-button flex justify-end" />
 </top-navigation>
