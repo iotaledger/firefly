@@ -6,6 +6,7 @@ import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interf
 import { buildWalletState } from './buildWalletState'
 import { activeProfile, getWalletOptions, DirectoryManager } from '@core/profile'
 import { get } from 'svelte/store'
+import { getTotalWalletBalance } from '..'
 
 export async function buildWalletStateAndPersistedData(
     profileId: string,
@@ -26,5 +27,6 @@ export async function buildWalletStateAndPersistedData(
         walletOptions,
     }
     const walletState = await buildWalletState(wallet, persistedWalletData)
+    walletState.balances = await getTotalWalletBalance(walletState, true)
     return [walletState, persistedWalletData]
 }
