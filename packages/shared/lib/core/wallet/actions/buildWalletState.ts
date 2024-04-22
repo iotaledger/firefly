@@ -4,7 +4,7 @@ import { updateWalletPersistedDataOnActiveProfile } from '@core/profile'
 import { IPersistedWalletData } from '../interfaces/persisted-wallet-data.interface'
 import { IWalletState } from '../interfaces/wallet-state.interface'
 import { AddressConverter, getBlockIssuerAccounts } from '../utils'
-import { DEFAULT_SYNC_OPTIONS, getTotalWalletBalance } from '..'
+import { DEFAULT_SYNC_OPTIONS } from '..'
 
 export async function buildWalletState(
     wallet: IWallet,
@@ -52,7 +52,7 @@ export async function buildWalletState(
     try {
         await wallet.sync(DEFAULT_SYNC_OPTIONS)
         accountOutputs = await wallet.accounts()
-        balances = await getTotalWalletBalance(wallet, accountOutputs)
+        balances = await wallet.getBalance()
         // check if the mainAccountId is still valid
         if (
             walletPersistedData.mainAccountId &&

@@ -41,7 +41,7 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
         ...PERSISTED_MANA_ASSET,
         balance: {
             total: getManaBalance(wallet?.balances?.mana?.total),
-            available: getManaBalance(wallet?.balances?.mana?.available),
+            available: wallet?.balances?.availableManaToUse,
         },
     }
 
