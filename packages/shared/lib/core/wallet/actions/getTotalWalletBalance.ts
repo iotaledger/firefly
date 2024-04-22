@@ -6,11 +6,11 @@ export async function getTotalWalletBalance(wallet: IWalletState, syncCongestion
     const balances = await getBalance(wallet.id)
     const blockIssuanceCredits = await getBicBalance(wallet.id, syncCongestion ? wallet.accountOutputs : [])
     const totalWalletBic = Object.values(blockIssuanceCredits).reduce((acc, bic) => acc + Number(bic), 0)
-    const realAvailableMana = getTotalAvailableMana(wallet)
+    const availableManaToUse = getTotalAvailableMana(wallet)
 
     return {
         ...balances,
-        realAvailableMana,
+        availableManaToUse,
         ...{ totalWalletBic, blockIssuanceCredits },
     }
 }

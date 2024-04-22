@@ -26,7 +26,7 @@
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
     $: availableMana = outputId
         ? getTotalAvailableMana($selectedWallet, outputId)
-        : $selectedWallet?.balances?.realAvailableMana
+        : $selectedWallet?.balances?.availableManaToUse
     $: requiredMana = requiredTxManaCost + extraMana
     $: hasEnoughMana = availableMana >= requiredMana
     $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)

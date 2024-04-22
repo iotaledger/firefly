@@ -53,7 +53,7 @@
 
     function getManaBreakdown(): BalanceBreakdown {
         const totalPasiveMana = getManaBalance(walletBalance?.mana?.total)
-        const availableManaBalance = walletBalance?.realAvailableMana
+        const availableManaBalance = walletBalance?.availableManaToUse
         const totalMana = totalPasiveMana + (walletBalance?.totalWalletBic ?? 0)
         const manaRewards = Number(walletBalance?.mana?.rewards ?? 0)
         const implicitAccountsMana = getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [])
