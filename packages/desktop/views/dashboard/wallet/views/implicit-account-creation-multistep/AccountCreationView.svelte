@@ -119,7 +119,7 @@
                     showRevealToggle
                     submitHandler={unlockWalletAndCreateAccount}
                     placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
-                    disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
+                    disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress || isBusy}
                 />
             {:else}
                 <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />
