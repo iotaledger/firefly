@@ -5,7 +5,6 @@ export function sanitizeOnboardingProfile(onboardingProfile: Partial<IOnboarding
         return undefined
     }
 
-    delete onboardingProfile?.importFile
     delete onboardingProfile?.importFilePath
     delete onboardingProfile?.mnemonic
     delete onboardingProfile?.strongholdPassword

@@ -40,6 +40,10 @@ class DirectoryManagerBase {
         return `${await this.forSecretManager(profileId)}/wallet.stronghold`
     }
 
+    async forStrongholdBackup(profileId: string): Promise<string> {
+        return `${await this.forSecretManager(profileId)}/wallet-backup.stronghold`
+    }
+
     async forTemporaryWallet(): Promise<string> {
         return `${await this.profilePathResolver}/${TEMPORARY_WALLET_DIRECTORY_NAME}`
     }
