@@ -1,11 +1,6 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import {
-        DEFAULT_SECONDS_PER_SLOT,
-        ITransactionInfoToCalculateManaCost,
-        getManaBalance,
-        getTotalAvailableMana,
-    } from '@core/network'
+    import { DEFAULT_SECONDS_PER_SLOT, ITransactionInfoToCalculateManaCost, getTotalAvailableMana } from '@core/network'
     import { activeProfile } from '@core/profile'
     import { MILLISECONDS_PER_SECOND, getBestTimeDuration } from '@core/utils'
     import { selectedWallet, formatTokenAmountBestMatch, selectedWalletAssets } from '@core/wallet'
@@ -31,7 +26,7 @@
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
     $: availableMana = outputId
         ? getTotalAvailableMana($selectedWallet, outputId)
-        : getManaBalance($selectedWallet?.balances?.mana?.available)
+        : $selectedWallet?.balances?.availableManaToUse
     $: requiredMana = requiredTxManaCost + extraMana
     $: hasEnoughMana = availableMana >= requiredMana
     $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)
