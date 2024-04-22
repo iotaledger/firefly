@@ -1,4 +1,4 @@
-import { OnboardingType, RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
+import { RestoreProfileType, onboardingProfile } from '@contexts/onboarding'
 import { Router, Subrouter } from '@core/router'
 import { get, writable } from 'svelte/store'
 import { CreateFromLedgerRouter, createFromLedgerRouter } from '../create-from-ledger'
@@ -39,15 +39,18 @@ export class RestoreProfileRouter extends Subrouter<RestoreProfileRoute> {
             case RestoreProfileRoute.RestoreFromMnemonic:
             case RestoreProfileRoute.RestoreFromStronghold:
             case RestoreProfileRoute.RestoreFromLedger:
-                if (_onboardingProfile.onboardingType === OnboardingType.Claim) {
-                    nextRoute = RestoreProfileRoute.ClaimFinder
-                } else {
-                    this.parentRouter.next()
-                    return
-                }
+                // TODO: We need to adapt the Shimmer Claiming logic
+                // if (_onboardingProfile.onboardingType === OnboardingType.Claim) {
+                //     nextRoute = RestoreProfileRoute.ClaimFinder
+                // } else {
+
+                //     return
+                // }
+
+                this.parentRouter.next()
                 break
             case RestoreProfileRoute.BalanceFinder:
-            case RestoreProfileRoute.ClaimFinder:
+                // case RestoreProfileRoute.ClaimFinder:
                 this.parentRouter.next()
                 return
         }

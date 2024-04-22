@@ -36,6 +36,8 @@ export function getActivityTileTitle(activity: Activity): string {
             return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
+    } else if (type === ActivityType.Nft && action === ActivityAction.Mint) {
+        return isConfirmed ? 'general.nftCreated' : 'general.creatingNft'
     } else if (action === ActivityAction.Burn) {
         return isConfirmed ? 'general.burned' : 'general.burning'
     } else if (action === ActivityAction.Send) {

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { AnimationEnum } from '@auxiliary/animation'
     import { OnboardingLayout } from '@components'
-    import { ImportFile, onboardingProfile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
+    import { ImportFile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
     import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
     import { ClientError } from '@core/error/enums'
     import { localize } from '@core/i18n'
@@ -10,7 +10,6 @@
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '@core/router'
-    import { restoreBackup } from '@core/wallet/actions'
 
     interface FileWithPath extends File {
         path?: string
@@ -23,9 +22,9 @@
     let importFilePath = ''
     let dropping = false
 
-    async function onContinueClick(): Promise<void> {
+    function onContinueClick(): void {
         validateBackupFile(importFileName)
-        const _shouldMigrate = await shouldMigrate()
+        const _shouldMigrate = shouldMigrate()
         updateOnboardingProfile({
             importFile,
             importFilePath,
@@ -77,9 +76,9 @@
         reader.readAsArrayBuffer(fileWithPath)
     }
 
-    async function shouldMigrate(): Promise<boolean> {
+    function shouldMigrate(): boolean {
         try {
-            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
+            // await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
         } catch (err) {
             const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
             return isMigrationRequired

@@ -60,7 +60,7 @@
         }
     }
 
-    async function handleKeyDown(): Promise<void> {
+    function handleKeyDown(): void {
         value = ''
         statusMessage = ''
         error = false
@@ -87,7 +87,7 @@
                     error = true
                 } else {
                     try {
-                        await verifyMnemonic(trimmedContent)
+                        verifyMnemonic(trimmedContent)
                         statusMessage = localize('views.onboarding.profileRecovery.importMnemonicPhrase.phraseDetected')
                         value = trimmedContent
                     } catch (err) {

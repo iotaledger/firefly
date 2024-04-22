@@ -1,7 +1,7 @@
 import { MILLISECONDS_PER_SECOND, SECONDS_PER_MINUTE } from '@core/utils'
 import { NetworkHealth } from '../enums'
 import { INetworkStatus } from '../interfaces'
-import { INodeInfo, NetworkMetricsResponse } from '@iota/sdk/out/types'
+import type { NetworkMetricsResponse, InfoResponse } from '@iota/sdk/out/types'
 import { getUnixTimestampFromNodeInfoAndSlotIndex } from './getSlotInfoFromNodeProtocolParameters'
 
 /**
@@ -12,7 +12,7 @@ import { getUnixTimestampFromNodeInfoAndSlotIndex } from './getSlotInfoFromNodeP
  * @returns {INetworkStatus}
  */
 export function getNetworkStatusFromNodeInfo(
-    nodeInfo: INodeInfo,
+    nodeInfo: InfoResponse,
     networkMetrics: NetworkMetricsResponse
 ): INetworkStatus {
     let health = NetworkHealth.Down

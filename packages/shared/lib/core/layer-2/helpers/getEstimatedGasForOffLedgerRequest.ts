@@ -2,7 +2,7 @@ import { get } from 'svelte/store'
 import { activeProfile } from '@core/profile'
 import { DEFAULT_CHAIN_CONFIGURATIONS } from '@core/network'
 import BigInteger from 'big-integer'
-import { HexEncodedString } from '@iota/sdk'
+import { HexEncodedString } from '@iota/sdk/out/types'
 
 interface GasEstimatePayload {
     gasBurned?: number
@@ -11,7 +11,7 @@ interface GasEstimatePayload {
 
 export async function getEstimatedGasForOffLedgerRequest(requestHex: HexEncodedString): Promise<GasEstimatePayload> {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
-    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.aliasAddress}/estimategas-offledger`
+    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.anchorAddress}/estimategas-offledger`
 
     const requestOptions = {
         method: 'POST',

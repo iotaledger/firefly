@@ -1,7 +1,7 @@
 import { api } from '@core/api'
 import { IPersistedProfile, IWallet } from '../interfaces'
 import { getSecretManagerFromProfileType } from '../utils'
-import { WalletOptions } from '@iota/sdk'
+import { WalletOptions } from '@iota/sdk/out/types'
 import { selectedWalletId } from '@core/wallet'
 import { generateRandomId } from '@core/utils'
 import { DirectoryManager } from '@core/profile/classes'
@@ -18,7 +18,7 @@ export function getWalletOptions(
         secretManager: getSecretManagerFromProfileType(profile.type, secretManagerPath, password),
         bipPath: {
             coinType: profile.network.coinType,
-            account: 0,
+            account: 0, // TODO: update when multiwallet is implemented -> https://github.com/iotaledger/firefly/issues/8362
             addressIndex: 0,
         },
     }

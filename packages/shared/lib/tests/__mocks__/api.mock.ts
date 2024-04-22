@@ -41,8 +41,8 @@ const api = {
         return Promise.resolve(MOCK_MNEMONIC)
     },
 
-    verifyMnemonic(mnemonic: string): Promise<void> {
-        return Promise.resolve()
+    verifyMnemonic(mnemonic: string): void {
+        return
     },
 } as unknown as IApi
 

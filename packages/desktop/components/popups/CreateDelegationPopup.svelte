@@ -113,7 +113,6 @@
                 )
                 transactionInfo.preparedTransactionError = undefined
             } catch (error) {
-                handleError(error)
                 transactionInfo.preparedTransaction = undefined
                 transactionInfo.preparedTransactionError = error
             } finally {
