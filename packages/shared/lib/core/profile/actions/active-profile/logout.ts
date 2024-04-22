@@ -15,6 +15,7 @@ import { activeProfile, isSoftwareProfile, isDestroyingWallets, activeWallets } 
 import { isLedgerProfile } from '@core/profile/utils'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
+import { closePopup } from '@auxiliary/popup'
 import { unsubscribeFromWalletApiEvents, resetSelectedWalletId, clearBalanceSyncPoll } from '@core/wallet'
 
 /**
@@ -32,6 +33,7 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
     clearMarketPricesPoll()
 
     get(routerManager).resetRouters()
+    closePopup(true)
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
