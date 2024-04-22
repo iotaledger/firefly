@@ -2,7 +2,6 @@ import {
     activeProfile,
     activeWallets,
     addWalletPersistedDataToActiveProfile,
-    addWalletToActiveWallets,
     createWallet,
     IPersistedProfile,
     login,
@@ -10,12 +9,7 @@ import {
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
-import {
-    addEmptyWalletActivitiesToAllWalletActivities,
-    buildWalletStateAndPersistedData,
-    IWalletState,
-} from '@core/wallet'
-import { DEFAULT_SYNC_OPTIONS } from '@core/wallet/constants'
+import { buildWalletPersistedData } from '@core/wallet'
 import { localize } from '@core/i18n'
 import { IOnboardingProfile } from '../interfaces'
 
@@ -33,28 +27,24 @@ export async function completeOnboardingProcess(): Promise<void> {
     }
     const { strongholdPassword } = profile
 
-    await initWallet(profile, strongholdPassword)
+    await initWalletAndPersistedData(profile, strongholdPassword)
     void login({ isFromOnboardingFlow: true })
 
     onboardingProfile.set(undefined)
 }
 
-export async function initWallet(profile: IOnboardingProfile, strongholdPassword?: string): Promise<IWalletState> {
+export async function initWalletAndPersistedData(
+    profile: IOnboardingProfile,
+    strongholdPassword?: string
+): Promise<void> {
     // 1. Get the wallet name
     const walletName = `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
     const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
-    // 3. Sync the wallet with the Node
-    await wallet.sync(DEFAULT_SYNC_OPTIONS)
+    // 3. Create the persisted data
+    const walletPersistedData = await buildWalletPersistedData(profile.id, wallet, walletName)
 
-    // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(profile.id, wallet, walletName)
-
-    addWalletToActiveWallets(walletState)
-    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)
-    addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
-
-    return walletState
+    addWalletPersistedDataToActiveProfile(wallet.id, walletPersistedData)
 }
