@@ -4,6 +4,7 @@ import {
     addWalletPersistedDataToActiveProfile,
     addWalletToActiveWallets,
     createWallet,
+    DirectoryManager,
     IPersistedProfile,
     login,
 } from '@core/profile'
@@ -45,6 +46,11 @@ export async function initWallet(profile: IOnboardingProfile, strongholdPassword
 
     // 2. Create the wallet instance
     const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
+
+    if (profile.importFilePath && strongholdPassword) {
+        const strongholdBackupPath = await DirectoryManager.forStrongholdBackup(profile.id)
+        await wallet.restoreFromStrongholdSnapshot(strongholdBackupPath, strongholdPassword, true)
+    }
 
     // 3. Sync the wallet with the Node
     await wallet.sync(DEFAULT_SYNC_OPTIONS)
