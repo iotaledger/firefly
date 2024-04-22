@@ -1,4 +1,4 @@
-import { AccountAddress, TransactionOptions } from '@iota/sdk/out/types'
+import { TransactionOptions } from '@iota/sdk/out/types'
 import { getSelectedWallet } from '../stores'
 
 export function getDefaultTransactionOptions(
@@ -7,8 +7,10 @@ export function getDefaultTransactionOptions(
     if (!accountId) return
     return {
         remainderValueStrategy: {
-            strategy: 'CustomAddress',
-            value: new AccountAddress(accountId),
+            /** The name of the strategy. */
+            strategy: 'ReuseAddress',
+            /** Only required for `CustomAddress`. */
+            value: null,
         },
         allowMicroAmount: true,
     }
