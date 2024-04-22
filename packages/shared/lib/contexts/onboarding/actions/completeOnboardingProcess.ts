@@ -48,8 +48,8 @@ export async function initWallet(profile: IOnboardingProfile, strongholdPassword
     const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
     if (profile.importFilePath && strongholdPassword) {
-        const secretManagerPath = await DirectoryManager.forSecretManager(profile.id)
-        await wallet.restoreFromStrongholdSnapshot(`${secretManagerPath}/wallet.stronghold`, strongholdPassword, true)
+        const strongholdBackupPath = await DirectoryManager.forStrongholdBackup(profile.id)
+        await wallet.restoreFromStrongholdSnapshot(strongholdBackupPath, strongholdPassword, true)
     }
 
     // 3. Sync the wallet with the Node
