@@ -87,37 +87,30 @@
     }
 
     async function prepareDelegationOutput(): Promise<void> {
-        if (!accountAddress || !rawAmount || !validAmount) {
-            transactionInfo.preparedTransaction = undefined
-            transactionInfo.preparedTransactionError = undefined
-            return
-        }
         try {
+            if (!accountAddress || !rawAmount || !validAmount) {
+                transactionInfo.preparedTransaction = undefined
+                transactionInfo.preparedTransactionError = undefined
+                return
+            }
             validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
             addressError = undefined
-        } catch (err) {
-            addressError = localize('error.send.invalidAddress')
-            return
-        }
-        if (!preparingOutput) {
-            try {
-                preparingOutput = true
-                const params: CreateDelegationParams = {
-                    address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
-                    delegatedAmount: rawAmount,
-                    validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
-                }
-                transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
-                    params,
-                    getDefaultTransactionOptions()
-                )
-                transactionInfo.preparedTransactionError = undefined
-            } catch (error) {
-                transactionInfo.preparedTransaction = undefined
-                transactionInfo.preparedTransactionError = error
-            } finally {
-                preparingOutput = false
+            preparingOutput = true
+            const params: CreateDelegationParams = {
+                address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
+                delegatedAmount: rawAmount,
+                validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
             }
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
+                params,
+                getDefaultTransactionOptions()
+            )
+            transactionInfo.preparedTransactionError = undefined
+        } catch (error) {
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
+        } finally {
+            preparingOutput = false
         }
     }
 
