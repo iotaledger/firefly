@@ -7,6 +7,7 @@ import { getWalletById } from '../../profile'
 export function getClient(walletId: string = get(selectedWalletId)): Promise<Client> {
     const wallet = getWalletById(walletId)
     if (wallet) {
-        return api.getClientFromWallet(walletId)
+        return
     }
+    return api.getClientFromWallet(walletId)
 }

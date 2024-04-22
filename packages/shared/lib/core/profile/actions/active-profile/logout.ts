@@ -31,6 +31,8 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
     clearNetworkPoll()
     clearMarketPricesPoll()
 
+    get(routerManager).resetRouters()
+
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
         await logOutProfile()
@@ -59,7 +61,6 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
         resetActiveProfile()
     }
     clearFilters()
-    get(routerManager).resetRouters()
 }
 
 async function logOutProfile(): Promise<void> {
