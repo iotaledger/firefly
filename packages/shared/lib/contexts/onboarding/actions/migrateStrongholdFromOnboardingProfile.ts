@@ -14,7 +14,7 @@ export async function migrateStrongholdFromOnboardingProfile(password: string): 
     const strongholdPath = await DirectoryManager.forStronghold(profile?.id)
 
     await copyStrongholdFileToProfileDirectory(profile?.id, profile?.importFilePath ?? '')
-    updateOnboardingProfile({ strongholdPassword: password, importFilePath: strongholdPath, importFile: null })
+    updateOnboardingProfile({ strongholdPassword: password, importFilePath: strongholdPath })
 
     if (profile?.strongholdVersion === StrongholdVersion.V2) {
         await api.migrateStrongholdSnapshotV2ToV3(strongholdPath, password, strongholdPath, password)

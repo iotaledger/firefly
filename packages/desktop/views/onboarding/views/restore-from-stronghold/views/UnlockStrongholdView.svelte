@@ -1,7 +1,11 @@
 <script lang="ts">
     import { showAppNotification } from '@auxiliary/notification'
     import { OnboardingLayout } from '@components'
-    import { restoreBackupFromStrongholdFile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        buildOnboardingSecretManager,
+        restoreBackupFromStrongholdFile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
     import { localize } from '@core/i18n'
     import { Animation, Button, PasswordInput, Text } from '@ui'
@@ -19,8 +23,9 @@
         if (strongholdPassword) {
             busy = true
             try {
-                await restoreBackupFromStrongholdFile(strongholdPassword)
+                await restoreBackupFromStrongholdFile()
                 updateOnboardingProfile({ strongholdPassword })
+                await buildOnboardingSecretManager()
                 $restoreFromStrongholdRouter.next()
             } catch (err) {
                 if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {

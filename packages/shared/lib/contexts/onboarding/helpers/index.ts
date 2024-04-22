@@ -1,5 +1,4 @@
 export * from './buildInitialOnboardingProfile'
 export * from './convertOnboardingProfileToPersistedProfile'
 export * from './copyStrongholdFileToProfileDirectory'
-export * from './restoreBackupByCopyingFile'
 export * from './validateStrongholdCoinType'

@@ -3,6 +3,7 @@ import {
     activeWallets,
     addWalletPersistedDataToActiveProfile,
     createWallet,
+    DirectoryManager,
     IPersistedProfile,
     login,
 } from '@core/profile'
@@ -43,7 +44,13 @@ export async function initWalletAndPersistedData(
     // 2. Create the wallet instance
     const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
-    // 3. Create the persisted data
+    // 3. Restore from stronghold if needed
+    if (profile.importFilePath && strongholdPassword) {
+        const strongholdBackupPath = await DirectoryManager.forStrongholdBackup(profile.id)
+        await wallet.restoreFromStrongholdSnapshot(strongholdBackupPath, strongholdPassword, true)
+    }
+
+    // 4. Create the persisted data
     const walletPersistedData = await buildWalletPersistedData(profile.id, wallet, walletName)
 
     addWalletPersistedDataToActiveProfile(wallet.id, walletPersistedData)
