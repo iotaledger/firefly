@@ -15,8 +15,8 @@ import { activeProfile, isSoftwareProfile, isDestroyingWallets, activeWallets } 
 import { isLedgerProfile } from '@core/profile/utils'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
-import { unsubscribeFromWalletApiEvents, resetSelectedWalletId } from '@core/wallet'
 import { closePopup } from '@auxiliary/popup'
+import { unsubscribeFromWalletApiEvents, resetSelectedWalletId, clearBalanceSyncPoll } from '@core/wallet'
 
 /**
  * Logout from active profile
@@ -28,6 +28,7 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
 
+    clearBalanceSyncPoll()
     clearNetworkPoll()
     clearMarketPricesPoll()
 
