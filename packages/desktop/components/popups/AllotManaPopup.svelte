@@ -11,13 +11,13 @@
         AddressConverter,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth } from '@core/profile'
-    import { ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
+    import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { onMount } from 'svelte'
     import { ManaBox } from '@components'
     import Big from 'big.js'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
-    export let rawAmount: string = getManaBalance($selectedWallet?.balances?.mana?.available)?.toString()
+    export let rawAmount: string = '0'
     export let accountAddress: string
 
     let isBusy = false
@@ -34,14 +34,9 @@
     $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, preparedOutput()
+    $: accountAddress, validAmount, rawAmount, void preparedOutput()
 
-    $: displayManaBox =
-        !!accountAddress &&
-        !error &&
-        validAmount &&
-        transactionInfo.preparedTransaction &&
-        !transactionInfo.preparedTransactionError
+    $: displayManaBox = !!accountAddress && !error && validAmount
 
     function setConfirmDisabled(): void {
         if (!amount || !accountAddress) {
