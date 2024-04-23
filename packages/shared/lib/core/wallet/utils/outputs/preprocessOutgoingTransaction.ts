@@ -1,8 +1,10 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
 import {
+    AccountAddress,
     AccountOutput,
     AnchorOutput,
     BasicOutput,
+    CommonOutput,
     NftOutput,
     Output,
     OutputType,
@@ -18,9 +20,9 @@ import { getPassiveManaForOutput } from '@core/network'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
-import { isImplicitAccountOutput } from '../isImplicitAccountOutput'
-import { isOutputOfSelectedWalletAddress } from '../isOutputOfSelectedWalletAddress'
+import { isOutputUnlockedByAddress } from '../isOutputUnlockedByAddress'
 import { isAccountOutput } from '../isAccountOutput'
+import { AddressConverter } from '../AddressConverter'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -29,13 +31,15 @@ export async function preprocessOutgoingTransaction(
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const walletAddress = await wallet.address()
+    const implicitAddress = await wallet.implicitAccountCreationAddress()
     const slotUnixTimestamp = nodeProtocolParameters
         ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
         : 0
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
-    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, await wallet.address())
+    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, walletAddress)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = utxoInputs.map((input) => {
         const transactionId = input.transactionId
@@ -45,15 +49,36 @@ export async function preprocessOutgoingTransaction(
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
 
-    const inputsToConsiderWhenCalculatingMana = inputs.filter(
-        (input) => isAccountOutput(input) || isImplicitAccountOutput(input) || isOutputOfSelectedWalletAddress(input)
+    const addressToConsiderWhenCalculatingMana = [
+        ...inputs
+            .filter(isAccountOutput)
+            .map((accountInput) =>
+                AddressConverter.addressToBech32(
+                    new AccountAddress((accountInput.output as unknown as AccountOutput).accountId)
+                )
+            ),
+        implicitAddress,
+        walletAddress,
+    ]
+
+    const inputsToConsiderWhenCalculatingMana = inputs.filter((input) =>
+        addressToConsiderWhenCalculatingMana.find((address) =>
+            isOutputUnlockedByAddress(input.output as CommonOutput, address)
+        )
     )
+
+    const outputsToConsiderWhenCalculatingMana = outputs.filter((output) =>
+        addressToConsiderWhenCalculatingMana.find((address) =>
+            isOutputUnlockedByAddress(output.output as CommonOutput, address)
+        )
+    )
+
     const prevManaCost = inputsToConsiderWhenCalculatingMana.reduce(
         (acc, input) => acc + (getPassiveManaForOutput(input) ?? 0),
         0
     )
 
-    const postManaCost = outputs.reduce(
+    const postManaCost = outputsToConsiderWhenCalculatingMana.reduce(
         (acc, output) =>
             acc + Number((output.output as BasicOutput | AccountOutput | AnchorOutput | NftOutput).mana ?? 0),
         0
