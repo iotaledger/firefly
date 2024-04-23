@@ -14,6 +14,7 @@
     import { ITransactionInfoToCalculateManaCost, getManaBalance } from '@core/network'
     import { onMount } from 'svelte'
     import { ManaBox } from '@components'
+    import Big from 'big.js'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = getManaBalance($selectedWallet?.balances?.mana?.available)?.toString()
@@ -32,6 +33,15 @@
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
+    $: validAmount = Big(rawAmount ?? 0)?.gt(0)
+    $: accountAddress, validAmount, preparedOutput()
+
+    $: displayManaBox =
+        !!accountAddress &&
+        !error &&
+        validAmount &&
+        transactionInfo.preparedTransaction &&
+        !transactionInfo.preparedTransactionError
 
     function setConfirmDisabled(): void {
         if (!amount || !accountAddress) {
@@ -45,7 +55,7 @@
     async function onSubmit(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
-            if (!rawAmount || !accountAddress) return
+            if (!rawAmount || !accountAddress || !validAmount) return
             updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(allotMana, { stronghold: true, ledger: false })
         } catch (err) {
@@ -57,7 +67,13 @@
     }
 
     async function preparedOutput() {
+        if (!accountAddress || !rawAmount || !validAmount) {
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = undefined
+            return
+        }
         try {
+            const accountId = AddressConverter.parseBech32Address(accountAddress)
             const prepareOutput = await $selectedWallet.prepareOutput(
                 {
                     recipientAddress: $selectedWallet.depositAddress,
@@ -65,10 +81,10 @@
                 },
                 getDefaultTransactionOptions()
             )
-            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs(
-                [prepareOutput],
-                getDefaultTransactionOptions()
-            )
+            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput], {
+                ...getDefaultTransactionOptions(accountId),
+                manaAllotments: { [accountId]: Number(rawAmount) },
+            })
         } catch (error) {
             transactionInfo.preparedTransactionError = error
         }
@@ -130,7 +146,9 @@
                     submitHandler={onSubmit}
                     disabled={isBusy}
                 />
-                <ManaBox {transactionInfo} bind:hasEnoughMana />
+                {#if displayManaBox}
+                    <ManaBox {transactionInfo} bind:hasEnoughMana />
+                {/if}
             </div>
             <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
                 <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}
