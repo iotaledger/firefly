@@ -64,9 +64,7 @@
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
     $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
 
-    // Needed to do Math.max because sometimes the delegated amount is higher than the available balance for a short time and
-    // this leads to a negative undelegated amount
-    $: rawUndelegatedAmount = Math.max(Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount, 0)
+    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available)
     $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
 
     $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)

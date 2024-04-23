@@ -14,19 +14,28 @@ export async function buildWalletStateAndPersistedData(
     name?: string,
     color?: string
 ): Promise<[IWalletState, IPersistedWalletData]> {
+    const persistedWalletData = await buildWalletPersistedData(profileId, wallet, name, color)
+    const walletState = await buildWalletState(wallet, persistedWalletData)
+    walletState.balances = await getTotalWalletBalance(walletState, true)
+    return [walletState, persistedWalletData]
+}
+
+export async function buildWalletPersistedData(
+    profileId: string,
+    wallet: IWallet,
+    name?: string,
+    color?: string
+): Promise<IPersistedWalletData> {
     const walletPath = await DirectoryManager.forWallet(profileId, wallet.id)
     const secretManagerPath = await DirectoryManager.forSecretManager(profileId)
 
     const walletOptions = getWalletOptions(get(activeProfile), walletPath, secretManagerPath)
 
-    const persistedWalletData: IPersistedWalletData = {
+    return {
         name: name || `${localize('general.wallet')}`,
         color: color || getRandomWalletColor(),
         hidden: false,
         shouldRevote: false,
         walletOptions,
     }
-    const walletState = await buildWalletState(wallet, persistedWalletData)
-    walletState.balances = await getTotalWalletBalance(walletState, true)
-    return [walletState, persistedWalletData]
 }
