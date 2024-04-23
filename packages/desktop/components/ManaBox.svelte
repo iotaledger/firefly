@@ -20,7 +20,7 @@
     let refreshManaCountdownInterval: NodeJS.Timeout
     let secondsRemainingCountdownInterval: NodeJS.Timeout
     let secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
-    let secondsRemaining: number = 10
+    let secondsRemaining: number = 0
 
     $: (transactionInfo?.preparedTransaction || transactionInfo?.preparedTransactionError) && calculateManaCost()
     $: mana = ($selectedWalletAssets?.[$activeProfile?.network?.id] ?? {}).mana
@@ -28,8 +28,9 @@
         ? getTotalAvailableMana($selectedWallet, outputId)
         : $selectedWallet?.balances?.availableManaToUse
     $: requiredMana = requiredTxManaCost + extraMana
-    $: hasEnoughMana = availableMana >= requiredMana
-    $: timeRemaining = getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND)
+    // When making a transaction, the account output is spent and there is a time where the available mana is 0 until the new account output is received
+    $: hasEnoughMana = availableMana && $selectedWallet?.isTransferring ? availableMana >= requiredMana : null
+    $: timeRemaining = secondsRemaining ? getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND) : null
 
     function calculateManaCost(): void {
         if (
@@ -41,7 +42,7 @@
             requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
 
             const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
-            if (slotsRemaining) {
+            if (slotsRemaining && !secondsRemaining) {
                 secondsRemaining = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 secondsRemainingCountdownInterval = setInterval(() => {
                     secondsRemaining -= 1
@@ -82,7 +83,7 @@
         valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
     />
 
-    {#if !hasEnoughMana}
+    {#if !hasEnoughMana && timeRemaining}
         <Text type={TextType.p} error classes="text-center">
             {localize('general.insufficientMana', {
                 values: {
