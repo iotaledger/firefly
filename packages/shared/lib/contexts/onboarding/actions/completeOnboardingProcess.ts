@@ -7,7 +7,6 @@ import {
     IPersistedProfile,
     login,
     logout,
-    resetLoginProgress,
 } from '@core/profile'
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
@@ -16,7 +15,6 @@ import { buildWalletPersistedData } from '@core/wallet'
 import { localize } from '@core/i18n'
 import { IOnboardingProfile } from '../interfaces'
 import { handleError } from '@core/error/handlers'
-import { loginRouter } from '@core/router'
 
 export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
@@ -41,8 +39,6 @@ export async function completeOnboardingProcess(): Promise<void> {
         console.error(err)
         handleError(err)
         void logout(false)
-        loginRouter?.previous()
-        resetLoginProgress()
     }
 }
 
