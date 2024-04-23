@@ -13,7 +13,6 @@
     import { addToVisitedTabs } from '@contexts/dashboard/stores'
 
     export let outputId: string | undefined
-    export let isWizard: boolean = false
     const IMPLICIT_ACCOUNT_STEPS = Object.keys(ImplicitAccountCreationRoute).slice(1)
 
     function handleMultipleAccounts() {
@@ -28,8 +27,9 @@
     }
 
     $: {
-        if (isWizard) {
+        if (outputId === undefined) {
             if ($selectedWallet?.implicitAccountOutputs?.length === 1) {
+                const outputId = $selectedWallet?.implicitAccountOutputs[0]?.outputId
                 if ($selectedWallet?.hasEnoughManaToCreateExplicitAccount?.[outputId]) {
                     $implicitAccountCreationRoute = ImplicitAccountCreationRoute.AccountCreation
                 } else {

@@ -43,7 +43,7 @@
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
     $: $selectedWallet,
-        (totalAvailableMana = getTotalAvailableMana($selectedWallet, outputId)),
+        (totalAvailableMana = getTotalAvailableMana($selectedWallet, selectedOutput?.outputId)),
         prepareTransaction(selectedOutput?.outputId)
     $: selectedOutput,
         (formattedSelectedOutputBalance = baseCoin

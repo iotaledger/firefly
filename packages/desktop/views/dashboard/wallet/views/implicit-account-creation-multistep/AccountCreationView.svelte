@@ -35,7 +35,7 @@
     $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length !== 0 : true
     $: disabledActive = !validStronghold || isBusy
     $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
-    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, outputId))
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, selectedOutput?.outputId))
     $: generatedManaToTransitionAccount = totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs)
     $: formattedManaBalance = generatedManaToTransitionAccount
         ? formatTokenAmountBestMatch(Number(generatedManaToTransitionAccount), DEFAULT_MANA)
