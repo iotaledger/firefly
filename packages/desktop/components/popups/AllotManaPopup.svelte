@@ -149,7 +149,12 @@
                 <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}
                     >{localize('actions.back')}</Button
                 >
-                <Button classes="w-full" onClick={onSubmit} disabled={isBusy} {isBusy}>
+                <Button
+                    classes="w-full"
+                    onClick={onSubmit}
+                    disabled={isBusy || !accountAddress || !validAmount}
+                    {isBusy}
+                >
                     {localize('actions.send')}
                 </Button>
             </popup-buttons>
