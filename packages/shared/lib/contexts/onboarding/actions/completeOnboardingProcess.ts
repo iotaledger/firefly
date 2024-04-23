@@ -6,6 +6,7 @@ import {
     DirectoryManager,
     IPersistedProfile,
     login,
+    logout,
 } from '@core/profile'
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
@@ -13,6 +14,7 @@ import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnb
 import { buildWalletPersistedData } from '@core/wallet'
 import { localize } from '@core/i18n'
 import { IOnboardingProfile } from '../interfaces'
+import { handleError } from '@core/error/handlers'
 
 export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
@@ -28,10 +30,16 @@ export async function completeOnboardingProcess(): Promise<void> {
     }
     const { strongholdPassword } = profile
 
-    await initWalletAndPersistedData(profile, strongholdPassword)
-    void login({ isFromOnboardingFlow: true })
+    try {
+        await initWalletAndPersistedData(profile, strongholdPassword)
+        void login({ isFromOnboardingFlow: true })
 
-    onboardingProfile.set(undefined)
+        onboardingProfile.set(undefined)
+    } catch (err) {
+        console.error(err)
+        handleError(err)
+        void logout(false)
+    }
 }
 
 export async function initWalletAndPersistedData(
