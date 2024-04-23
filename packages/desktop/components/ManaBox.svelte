@@ -42,7 +42,7 @@
             requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
 
             const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
-            if (slotsRemaining && !secondsRemaining) {
+            if (slotsRemaining && secondsRemaining === 0) {
                 secondsRemaining = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 secondsRemainingCountdownInterval = setInterval(() => {
                     secondsRemaining -= 1
