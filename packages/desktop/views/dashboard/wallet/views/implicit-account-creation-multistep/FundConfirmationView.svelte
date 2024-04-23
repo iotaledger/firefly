@@ -53,8 +53,7 @@
         $selectedWallet?.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
             : null
-    $: generatedManaToTransitionAccount =
-        totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs, outputId ? [outputId] : [])
+    $: generatedManaToTransitionAccount = totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs)
     $: formattedManaBalance = generatedManaToTransitionAccount
         ? formatTokenAmountBestMatch(Number(generatedManaToTransitionAccount), DEFAULT_MANA)
         : '-'
