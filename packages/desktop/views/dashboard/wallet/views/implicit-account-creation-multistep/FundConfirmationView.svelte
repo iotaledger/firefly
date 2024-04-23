@@ -6,6 +6,7 @@
         ITransactionInfoToCalculateManaCost,
         DEFAULT_SECONDS_PER_SLOT,
         getTotalAvailableMana,
+        getAccountOutputsMana,
     } from '@core/network'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
@@ -52,9 +53,12 @@
         $selectedWallet?.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
             : null
-    $: formattedManaBalance = totalAvailableMana
-        ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
+    $: generatedManaToTransitionAccount =
+        totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs, outputId ? [outputId] : [])
+    $: formattedManaBalance = generatedManaToTransitionAccount
+        ? formatTokenAmountBestMatch(Number(generatedManaToTransitionAccount), DEFAULT_MANA)
         : '-'
+
     $: async () => {
         await prepareTransaction(selectedOutput.outputId)
     }
