@@ -39,13 +39,7 @@
         StakingFeature,
     } from '@iota/sdk/out/types'
     import { openUrlInBrowser } from '@core/app'
-    import {
-        DEFAULT_MANA,
-        ExplorerEndpoint,
-        getAccountOutputsMana,
-        getOfficialExplorerUrl,
-        getTotalAvailableMana,
-    } from '@core/network'
+    import { DEFAULT_MANA, ExplorerEndpoint, getOfficialExplorerUrl, getPassiveManaForOutput } from '@core/network'
     import { activeProfile, getBaseToken } from '@core/profile'
     import { PopupId, openPopup } from '@auxiliary/popup'
 
@@ -54,7 +48,6 @@
     let modal: Modal
     let address: string = ''
     let keys: string[] = []
-    let totalAvailableMana: number
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
@@ -74,10 +67,12 @@
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: hasAccountNegativeBIC =
         $selectedWallet?.balances?.blockIssuanceCredits?.[(selectedOutput.output as AccountOutput)?.accountId] < 0
-    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, selectedOutput?.outputId))
-    $: generatedManaImplicitAccount = totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs)
-    $: formattedManaBalance = generatedManaImplicitAccount
-        ? formatTokenAmountBestMatch(Number(generatedManaImplicitAccount), DEFAULT_MANA)
+
+    let selectedOutputPassiveMana: number
+    $: $selectedWallet, (selectedOutputPassiveMana = getPassiveManaForOutput(selectedOutput))
+
+    $: formattedManaBalance = selectedOutputPassiveMana
+        ? formatTokenAmountBestMatch(Number(selectedOutputPassiveMana), DEFAULT_MANA)
         : '-'
 
     function getImplicitAccountBalance(outputData: OutputData): number | undefined {
