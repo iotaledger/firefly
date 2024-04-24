@@ -31,8 +31,6 @@
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
-    let preparingOutput = false
-
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
     $: hasTransactionInProgress =
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress ||
@@ -50,7 +48,7 @@
         !addressError &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
-    $: displayManaBox = !!accountAddress && !addressError && validAmount
+    $: displayManaBox = !!accountAddress && !addressError && validAmount && !hasTransactionInProgress
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
@@ -90,7 +88,6 @@
             }
             validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
             addressError = undefined
-            preparingOutput = true
             const params: CreateDelegationParams = {
                 address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
                 delegatedAmount: rawAmount,
@@ -104,8 +101,6 @@
         } catch (error) {
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = error
-        } finally {
-            preparingOutput = false
         }
     }
 
