@@ -21,9 +21,9 @@ import { unsubscribeFromWalletApiEvents, resetSelectedWalletId, clearBalanceSync
 /**
  * Logout from active profile
  */
-export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
+export async function logout(): Promise<void> {
     if (get(isSoftwareProfile)) {
-        _lockStronghold && lockStronghold()
+        lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
@@ -40,10 +40,10 @@ export async function logout(clearActiveProfile = true, _lockStronghold = true):
         await logOutProfile()
     }
 
-    cleanupProfileState(clearActiveProfile)
+    cleanupProfileState()
 }
 
-function cleanupProfileState(clearActiveProfile: boolean): void {
+function cleanupProfileState(): void {
     const { lastActiveAt, loggedIn, hasLoadedWallets } = get(activeProfile)
 
     loggedIn.set(false)
@@ -59,9 +59,7 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     clearSelectedParticipationEventStatus()
 
     activeWallets.set([])
-    if (clearActiveProfile) {
-        resetActiveProfile()
-    }
+    resetActiveProfile()
     clearFilters()
 }
 
