@@ -9,7 +9,7 @@ import { DirectoryManager } from '@core/profile/classes'
 export function getWalletOptions(
     profile: IPersistedProfile,
     walletPath: string,
-    secretManagerPath?: string,
+    secretManagerPath: string,
     password?: string
 ): WalletOptions {
     return {
