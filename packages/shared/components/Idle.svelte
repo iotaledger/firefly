@@ -56,7 +56,7 @@
     }
 
     function lock(): void {
-        void logout(false)
+        void logout()
     }
 
     onDestroy(() => {
