@@ -6,15 +6,17 @@
     import {
         selectedWallet,
         visibleSelectedWalletAssets,
-        convertToRawAmount,
         getDefaultTransactionOptions,
         AddressConverter,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, getNetworkHrp } from '@core/profile'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { onMount } from 'svelte'
     import { ManaBox } from '@components'
     import Big from 'big.js'
+    import { validateBech32Address } from '@core/utils'
+    import { AddressType } from '@iota/sdk/out/types'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = '0'
@@ -24,28 +26,29 @@
     let error: string
     let amount: string
     let assetAmountInput: AssetAmountInput
-    let confirmDisabled = false
 
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     $: hasTransactionInProgress =
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
-    $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
     $: accountAddress, validAmount, rawAmount, void preparedOutput()
 
-    $: displayManaBox = !!accountAddress && !error && validAmount
+    $: submitAllowed =
+        validAmount &&
+        !!accountAddress &&
+        !hasTransactionInProgress &&
+        hasEnoughMana &&
+        !error &&
+        !hasMainAccountNegativeBIC &&
+        transactionInfo.preparedTransaction &&
+        !transactionInfo.preparedTransactionError
 
-    function setConfirmDisabled(): void {
-        if (!amount || !accountAddress) {
-            confirmDisabled = true
-            return
-        }
-        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress || !hasEnoughMana
-    }
+    $: displayManaBox = validAmount && !!accountAddress && !hasTransactionInProgress && !error
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
         try {
@@ -54,7 +57,7 @@
             updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(allotMana, { stronghold: true, ledger: false })
         } catch (err) {
-            error = err.error
+            error = err.message
             handleError(err)
         } finally {
             isBusy = false
@@ -68,6 +71,8 @@
             return
         }
         try {
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            error = undefined
             const accountId = AddressConverter.parseBech32Address(accountAddress)
             const prepareOutput = await $selectedWallet.prepareOutput(
                 {
@@ -80,8 +85,13 @@
                 ...getDefaultTransactionOptions(accountId),
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
-        } catch (error) {
-            transactionInfo.preparedTransactionError = error
+        } catch (err) {
+            if (err.message?.includes('Addresses')) {
+                error = err.message
+                handleError(err)
+            } else {
+                transactionInfo.preparedTransactionError = err
+            }
         }
     }
 
@@ -103,7 +113,7 @@
         }
     }
 
-    function onBackClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -112,6 +122,7 @@
             await _onMount()
             await preparedOutput()
         } catch (err) {
+            error = err.message
             handleError(err.error)
         }
     })
@@ -146,15 +157,10 @@
                 {/if}
             </div>
             <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-                <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}
-                    >{localize('actions.back')}</Button
+                <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}
+                    >{localize('actions.cancel')}</Button
                 >
-                <Button
-                    classes="w-full"
-                    onClick={onSubmit}
-                    disabled={isBusy || !accountAddress || !validAmount}
-                    {isBusy}
-                >
+                <Button classes="w-full" onClick={onSubmit} disabled={submitAllowed} {isBusy}>
                     {localize('actions.send')}
                 </Button>
             </popup-buttons>

@@ -46,6 +46,7 @@
         !hasTransactionInProgress &&
         hasEnoughMana &&
         !addressError &&
+        !hasMainAccountNegativeBIC &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
     $: displayManaBox = !!accountAddress && !addressError && validAmount && !hasTransactionInProgress
@@ -99,8 +100,13 @@
             )
             transactionInfo.preparedTransactionError = undefined
         } catch (error) {
-            transactionInfo.preparedTransaction = undefined
-            transactionInfo.preparedTransactionError = error
+            if (error.message?.includes('Addresses')) {
+                addressError = error.message
+                handleError(error)
+            } else {
+                transactionInfo.preparedTransaction = undefined
+                transactionInfo.preparedTransactionError = error
+            }
         }
     }
 
@@ -132,6 +138,7 @@
             />
             <TextInput
                 bind:value={accountAddress}
+                error={addressError}
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
@@ -148,7 +155,7 @@
             </Button>
             <Button
                 type={HTMLButtonType.Submit}
-                disabled={!confirmAllowed || hasMainAccountNegativeBIC}
+                disabled={!confirmAllowed}
                 isBusy={hasTransactionInProgress}
                 classes="w-full"
             >
