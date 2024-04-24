@@ -38,7 +38,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     } catch (err) {
         console.error(err)
         handleError(err)
-        void logout(false)
+        void logout()
     }
 }
 
