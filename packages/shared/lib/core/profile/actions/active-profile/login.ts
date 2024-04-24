@@ -123,7 +123,7 @@ export async function login(loginOptions?: ILoginOptions): Promise<void> {
         console.error(err)
         handleError(err)
         if (!loginOptions?.isFromOnboardingFlow) {
-            void logout(false)
+            void logout()
         }
         loginRouter?.previous()
         resetLoginProgress()

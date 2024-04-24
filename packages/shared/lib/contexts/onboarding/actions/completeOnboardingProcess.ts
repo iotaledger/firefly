@@ -38,7 +38,7 @@ export async function completeOnboardingProcess(): Promise<void> {
     } catch (err) {
         console.error(err)
         handleError(err)
-        void logout(false)
+        void logout()
     }
 }
 
@@ -54,8 +54,8 @@ export async function initWalletAndPersistedData(
 
     // 3. Restore from stronghold if needed
     if (profile.importFilePath && strongholdPassword) {
-        const strongholdBackupPath = await DirectoryManager.forStrongholdBackup(profile.id)
-        await wallet.restoreFromStrongholdSnapshot(strongholdBackupPath, strongholdPassword, true)
+        const strongholdPath = await DirectoryManager.forStronghold(profile.id)
+        await wallet.restoreFromStrongholdSnapshot(strongholdPath, strongholdPassword, true)
     }
 
     // 4. Create the persisted data

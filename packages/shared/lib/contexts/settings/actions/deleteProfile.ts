@@ -21,7 +21,7 @@ export async function deleteProfile(): Promise<void> {
          * CAUTION: Logout must occur before the profile is removed
          * from the Svelte store list of profiles.
          */
-        await logout(true, true)
+        await logout()
 
         /**
          * CAUTION: The profile and its data must be removed from the
