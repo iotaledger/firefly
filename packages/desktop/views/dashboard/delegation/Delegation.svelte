@@ -30,6 +30,7 @@
         Text,
         TextType,
         Tile,
+        TooltipIcon,
         Width,
     } from '@ui'
 
@@ -58,7 +59,7 @@
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs, setCurrentEpochAndCommittee()
-    $: currentEpoch, delegationOutputs?.length > 0 && buildMappedDelegationData(delegationOutputs)
+    $: currentEpoch, buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
@@ -215,7 +216,15 @@
                 <div class="flex flex-col space-y-10 w-full h-full max-w-7xl">
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-col space-y-1">
-                            <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                            <div class="flex flex-row space-x-2 items-center">
+                                <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                                <TooltipIcon
+                                    title={localize('views.delegation.infoTooltip.title')}
+                                    text={localize('views.delegation.infoTooltip.body')}
+                                    width={15}
+                                    height={15}
+                                />
+                            </div>
                             <button
                                 class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
                                 on:click={onExplorerClick}
