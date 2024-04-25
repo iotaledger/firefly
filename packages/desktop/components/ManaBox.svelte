@@ -10,7 +10,7 @@
     export let transactionInfo: ITransactionInfoToCalculateManaCost
     export let hasEnoughMana: boolean
     export let showCountdown: boolean = true
-    export let outputId: string | undefined
+    export let outputId: string | undefined = undefined
 
     const NUMBER_OF_EXTRA_SLOTS_MANA = 3
     const extraMana: number = 0 // the sdk returns the wait time without extra slots
