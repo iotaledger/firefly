@@ -14,11 +14,11 @@ export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | u
         const { output, metadata } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions
 
-        const spentSlot = metadata?.spent?.slot;
+        const spentSlot = metadata?.spent?.slot
 
         if (spentSlot) {
-             // A transaction with an expiration unlock condition is included if the transaction expired
-             const expirationUnlockCondition = unlockConditions.find(
+            // A transaction with an expiration unlock condition is included if the transaction expired
+            const expirationUnlockCondition = unlockConditions.find(
                 (unlockCondition) =>
                     unlockCondition.type === UnlockConditionType.Expiration &&
                     (unlockCondition as ExpirationUnlockCondition).slot < spentSlot
