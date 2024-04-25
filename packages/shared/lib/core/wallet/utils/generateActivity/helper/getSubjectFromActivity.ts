@@ -22,13 +22,12 @@ export function getSubjectFromActivity(activity: Activity): Subject {
 
 export function getSubjectLocaleFromActivity(activity: Activity): string {
     const { subject } = activity
-
     if (activity.type === ActivityType.Basic && activity?.isShimmerClaiming) {
         return localize('general.shimmerGenesis')
     } else if (activity.type === ActivityType.Vesting) {
         return localize('general.stardustGenesis')
     } else if (subject?.type === SubjectType.Wallet) {
-        return truncateString(subject?.wallet?.name, 13, 0)
+        return truncateString(activity?.accountAddress, 8, 6)
     } else if (subject?.type === SubjectType.Address) {
         const address = activity?.parsedLayer2Metadata?.ethereumAddress ?? subject?.address
         const network = getLayer2NetworkFromAddress(address)

@@ -11,8 +11,9 @@ import {
     getStorageDepositFromOutput,
     getTagFromOutput,
 } from './helper'
-import { NftOutput } from '@iota/sdk/out/types'
+import { AddressUnlockCondition, NftOutput, UnlockConditionType } from '@iota/sdk/out/types'
 import { getClient } from '../../actions/getClient'
+import { AddressConverter } from '../AddressConverter'
 
 export async function generateSingleNftActivity(
     wallet: IWalletState,
@@ -57,6 +58,10 @@ export async function generateSingleNftActivity(
     }
 
     const asyncData = await getAsyncDataFromOutput(output, outputId, claimingData, wallet)
+    const addressUnlockCondition = output.unlockConditions.find(
+        (uc) => uc.type === UnlockConditionType.Address
+    ) as AddressUnlockCondition
+    const accountAddress = AddressConverter.addressToBech32(addressUnlockCondition.address)
 
     return {
         type: ActivityType.Nft,
@@ -81,6 +86,7 @@ export async function generateSingleNftActivity(
         direction,
         destinationNetwork,
         parsedLayer2Metadata,
+        accountAddress,
         mana,
     }
 }
