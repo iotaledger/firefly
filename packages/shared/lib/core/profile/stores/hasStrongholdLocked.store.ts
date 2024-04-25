@@ -7,7 +7,7 @@ import { timeSinceStrongholdUnlocked } from './timeSinceStrongholdUnlocked.store
 export const hasStrongholdLocked = derived(timeSinceStrongholdUnlocked, ($timeSinceStrongholdUnlocked) => {
     const profile = get(activeProfile)
     if (!profile) {
-        return false
+        return true
     }
     const { strongholdPasswordTimeoutInMinutes } = profile.settings
     const _isSoftwareProfile = get(isSoftwareProfile)
