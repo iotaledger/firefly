@@ -7,6 +7,7 @@ import {
     CommonOutput,
     ExpirationUnlockCondition,
     NftOutput,
+    OutputData,
     UnlockConditionType,
 } from '@iota/sdk/out/types'
 import { IWalletState } from '@core/wallet/interfaces'
@@ -57,7 +58,7 @@ export async function getTotalTransactionMana(
     )
 
     const prevManaCost = inputsToConsiderWhenCalculatingMana.reduce(
-        (acc, input) => acc + (getPassiveManaForOutput(input, transactionSlot) ?? 0),
+        (acc, input) => acc + (getPassiveManaForOutput(input as OutputData, transactionSlot) ?? 0),
         0
     )
 
