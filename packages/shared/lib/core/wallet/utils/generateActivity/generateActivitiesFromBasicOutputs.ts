@@ -5,7 +5,7 @@ import {
     ActivityDirection,
     getNativeTokenFromOutput,
     getNftId,
-    getNonRemainderBasicOutputsFromTransaction as getNonRemainderBasicOrAccountOutputsFromTransaction,
+    getBasicOrAccountOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
 } from '@core/wallet'
@@ -21,13 +21,13 @@ export async function generateActivitiesFromBasicOutputs(
 ): Promise<Activity[]> {
     const activities = []
 
-    const basicOrAccountInputs = getNonRemainderBasicOrAccountOutputsFromTransaction(
+    const basicOrAccountInputs = getBasicOrAccountOutputsFromTransaction(
         processedTransaction.wrappedInputs,
         [await wallet.address(), await wallet.implicitAccountCreationAddress()],
         processedTransaction.direction
     )
 
-    const basicOrAccountOutputs = getNonRemainderBasicOrAccountOutputsFromTransaction(
+    const basicOrAccountOutputs = getBasicOrAccountOutputsFromTransaction(
         processedTransaction.outputs,
         [await wallet.address(), await wallet.implicitAccountCreationAddress()],
         processedTransaction.direction
@@ -50,10 +50,11 @@ export async function generateActivitiesFromBasicOutputs(
             }
         })
 
-        const burnedNftInputIndex = burnedNftInputs.findIndex((input) => (
+        const burnedNftInputIndex = burnedNftInputs.findIndex(
+            (input) =>
                 Number(input.output.amount) + (Number(basicOrAccountInput?.output.amount) ?? 0) ===
                 Number(basicOrAccountOutput.output.amount)
-            ))
+        )
         const burnedNativeToken = burnedNftInputIndex < 0 ? getBurnedNativeTokens(processedTransaction) : undefined
 
         if (!isRemainder) {
