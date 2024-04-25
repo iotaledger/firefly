@@ -38,7 +38,7 @@
         $selectedWallet?.isTransferring
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    $: accountAddress, validAmount, rawAmount, void prepareDelegationOutput()
+    $: accountAddress, validAmount, void prepareDelegationOutput()
 
     $: confirmAllowed =
         validAmount &&

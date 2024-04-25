@@ -34,7 +34,7 @@
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, rawAmount, void preparedOutput()
+    $: accountAddress, validAmount, void preparedOutput()
 
     $: submitAllowed =
         validAmount &&
