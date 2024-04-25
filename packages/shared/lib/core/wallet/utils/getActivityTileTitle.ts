@@ -31,13 +31,13 @@ export function getActivityTileTitle(activity: Activity): string {
         }
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'
-    } else if (type === ActivityType.Account) {
-        if (action === ActivityAction.Mint) {
+    } else if (action === ActivityAction.Mint) {
+        if (type === ActivityType.Account) {
             return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
+        } else if (type === ActivityType.Nft) {
+            return isConfirmed ? 'general.nftCreated' : 'general.creatingNft'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
-    } else if (type === ActivityType.Nft && action === ActivityAction.Mint) {
-        return isConfirmed ? 'general.nftCreated' : 'general.creatingNft'
     } else if (action === ActivityAction.Burn) {
         return isConfirmed ? 'general.burned' : 'general.burning'
     } else if (action === ActivityAction.Send) {

@@ -35,7 +35,7 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     wallet: IWalletState
 ): Promise<Activity[]> {
     const { outputs, wrappedInputs } = processedTransaction
-    const sender = getSenderAddressFromInputs(wrappedInputs)
+    const sender = getSenderAddressFromInputs(wrappedInputs, processedTransaction.creationSlot)
     const isSentToImplicitAccountCreationAddress = sender === (await wallet.implicitAccountCreationAddress())
     const activities: Activity[] = []
 
