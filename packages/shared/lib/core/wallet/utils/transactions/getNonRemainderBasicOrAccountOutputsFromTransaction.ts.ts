@@ -10,9 +10,8 @@ export function getNonRemainderBasicOutputsFromTransaction(
 ): IWrappedOutput[] {
     return wrappedOutputs.filter((outputData) => {
         const recipientAddress = getRecipientAddressFromOutput(outputData.output as CommonOutput)
-
         if (direction === ActivityDirection.Incoming || direction === ActivityDirection.SelfTransaction) {
-            return !outputData.remainder && validAddresses.includes(recipientAddress)
+            return true && validAddresses.includes(recipientAddress)
         } else {
             return !validAddresses.includes(recipientAddress)
         }

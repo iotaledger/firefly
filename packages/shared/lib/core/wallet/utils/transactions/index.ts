@@ -1,5 +1,5 @@
 export * from './activityOutputContainsValue'
 export * from './getDirectionFromOutgoingTransaction'
-export * from './getNonRemainderBasicOutputsFromTransaction'
+export * from './getNonRemainderBasicOrAccountOutputsFromTransaction.ts'
 export * from './getSenderAddressFromInputs'
 export * from './getSenderFromTransaction'
