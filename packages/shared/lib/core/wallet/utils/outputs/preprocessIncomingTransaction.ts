@@ -46,6 +46,7 @@ export async function preprocessIncomingTransaction(
         wrappedInputs: <IWrappedOutput[]>inputs,
         mana: totalTransactionMana,
         utxoInputs,
+        creationSlot: regularTransactionEssence.creationSlot,
     }
 }
 
