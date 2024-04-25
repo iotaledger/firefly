@@ -61,7 +61,7 @@ export async function generateSingleNftActivity(
     const addressUnlockCondition = output.unlockConditions.find(
         (uc) => uc.type === UnlockConditionType.Address
     ) as AddressUnlockCondition
-    const accountAddress = AddressConverter.addressToBech32(addressUnlockCondition.address)
+    const address = AddressConverter.addressToBech32(addressUnlockCondition.address)
 
     return {
         type: ActivityType.Nft,
@@ -86,7 +86,7 @@ export async function generateSingleNftActivity(
         direction,
         destinationNetwork,
         parsedLayer2Metadata,
-        accountAddress,
+        address,
         mana,
     }
 }
