@@ -144,13 +144,15 @@
                     disabled={hasTransactionInProgress}
                 />
                 <TextInput
-                    {error}
                     bind:value={accountAddress}
                     placeholder={localize('general.accountAddress')}
                     label={localize('popups.allotMana.body')}
                     submitHandler={onSubmit}
                     disabled={isBusy}
                 />
+                {#if error}
+                    <Text error>{error}</Text>
+                {/if}
                 {#if displayManaBox}
                     <ManaBox {transactionInfo} bind:hasEnoughMana />
                 {/if}

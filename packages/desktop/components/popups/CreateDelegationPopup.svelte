@@ -38,7 +38,7 @@
         $selectedWallet?.isTransferring
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    $: accountAddress, validAmount, prepareDelegationOutput()
+    $: accountAddress, validAmount, rawAmount, void prepareDelegationOutput()
 
     $: confirmAllowed =
         validAmount &&
@@ -137,10 +137,12 @@
             />
             <TextInput
                 bind:value={accountAddress}
-                error={addressError}
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
+            {#if addressError}
+                <Text error>{addressError}</Text>
+            {/if}
             {#if displayManaBox}
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
             {/if}
