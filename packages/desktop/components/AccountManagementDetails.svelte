@@ -67,7 +67,14 @@
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
     $: hasAccountNegativeBIC =
         $selectedWallet?.balances?.blockIssuanceCredits?.[(selectedOutput.output as AccountOutput)?.accountId] < 0
-    $: selectedOutputPassiveMana = getPassiveManaForOutput(selectedOutput)
+
+    let selectedOutputPassiveMana: number
+    $: $selectedWallet, (selectedOutputPassiveMana = getPassiveManaForOutput(selectedOutput))
+
+    $: formattedManaBalance = selectedOutputPassiveMana
+        ? formatTokenAmountBestMatch(Number(selectedOutputPassiveMana), DEFAULT_MANA)
+        : '-'
+
     function getImplicitAccountBalance(outputData: OutputData): number | undefined {
         return Number(outputData.output.amount)
     }
@@ -219,7 +226,7 @@
                         <Tile>
                             <div class="flex flex-col space-y-2 items-center justify-center w-full">
                                 <Text type={TextType.h3}>
-                                    {formatTokenAmountBestMatch(selectedOutputPassiveMana, DEFAULT_MANA)}</Text
+                                    {formattedManaBalance}</Text
                                 >
                                 <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
                                     >{localize('views.accountManagement.details.mana')}</Text
