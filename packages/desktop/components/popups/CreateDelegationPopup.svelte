@@ -39,6 +39,7 @@
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
     $: accountAddress, validAmount, void prepareDelegationOutput()
+    $: accountAddress, void validateAddress()
 
     $: confirmAllowed =
         validAmount &&
@@ -80,6 +81,16 @@
         }
     }
 
+    function validateAddress(): void {
+        try {
+            if (!accountAddress) return
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            addressError = undefined
+        } catch (error) {
+            addressError = error.message
+        }
+    }
+
     async function prepareDelegationOutput(): Promise<void> {
         try {
             if (!accountAddress || !rawAmount || !validAmount) {
@@ -87,8 +98,6 @@
                 transactionInfo.preparedTransactionError = undefined
                 return
             }
-            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
-            addressError = undefined
             const params: CreateDelegationParams = {
                 address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
                 delegatedAmount: rawAmount,
@@ -100,12 +109,8 @@
             )
             transactionInfo.preparedTransactionError = undefined
         } catch (error) {
-            if (error.message?.includes('slots remaining until enough mana')) {
-                transactionInfo.preparedTransaction = undefined
-                transactionInfo.preparedTransactionError = error
-            } else {
-                addressError = error.message
-            }
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
         }
     }
 

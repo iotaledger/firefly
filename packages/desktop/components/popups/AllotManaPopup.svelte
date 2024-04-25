@@ -35,6 +35,7 @@
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
     $: accountAddress, validAmount, void preparedOutput()
+    $: accountAddress, void validateAddress()
 
     $: submitAllowed =
         validAmount &&
@@ -64,6 +65,16 @@
         }
     }
 
+    function validateAddress(): void {
+        try {
+            if (!accountAddress) return
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            error = undefined
+        } catch (err) {
+            error = err.message
+        }
+    }
+
     async function preparedOutput() {
         if (!accountAddress || !rawAmount || !validAmount) {
             transactionInfo.preparedTransaction = undefined
@@ -71,8 +82,6 @@
             return
         }
         try {
-            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
-            error = undefined
             const accountId = AddressConverter.parseBech32Address(accountAddress)
             const prepareOutput = await $selectedWallet.prepareOutput(
                 {
@@ -86,11 +95,7 @@
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
         } catch (err) {
-            if (err.message?.includes('slots remaining until enough mana')) {
-                transactionInfo.preparedTransactionError = err
-            } else {
-                error = err.message
-            }
+            transactionInfo.preparedTransactionError = err
         }
     }
 
