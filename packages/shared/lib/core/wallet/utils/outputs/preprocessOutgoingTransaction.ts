@@ -1,28 +1,13 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import {
-    AccountAddress,
-    AccountOutput,
-    AnchorOutput,
-    BasicOutput,
-    CommonOutput,
-    NftOutput,
-    Output,
-    OutputType,
-    OutputWithMetadata,
-    TransactionWithMetadata,
-    UTXOInput,
-} from '@iota/sdk/out/types'
+import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
-import { getPassiveManaForOutput } from '@core/network'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
-import { isOutputUnlockedByAddress } from '../isOutputUnlockedByAddress'
-import { isAccountOutput } from '../isAccountOutput'
-import { AddressConverter } from '../AddressConverter'
+import { getTotalTransactionMana } from './getTotalTransactionMana'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -32,10 +17,10 @@ export async function preprocessOutgoingTransaction(
     const transactionId = transaction?.transactionId?.toString()
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
     const walletAddress = await wallet.address()
-    const implicitAddress = await wallet.implicitAccountCreationAddress()
-    const slotUnixTimestamp = nodeProtocolParameters
+    const createTransactionUnixTimestamp = nodeProtocolParameters
         ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
         : 0
+    const createTransactionTimestamp = createTransactionUnixTimestamp * MILLISECONDS_PER_SECOND
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
@@ -48,49 +33,21 @@ export async function preprocessOutgoingTransaction(
     })
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
-
-    const addressToConsiderWhenCalculatingMana = [
-        ...inputs
-            .filter(isAccountOutput)
-            .map((accountInput) =>
-                AddressConverter.addressToBech32(
-                    new AccountAddress((accountInput.output as unknown as AccountOutput).accountId)
-                )
-            ),
-        implicitAddress,
-        walletAddress,
-    ]
-
-    const inputsToConsiderWhenCalculatingMana = inputs.filter((input) =>
-        addressToConsiderWhenCalculatingMana.find((address) =>
-            isOutputUnlockedByAddress(input.output as CommonOutput, address)
-        )
-    )
-
-    const outputsToConsiderWhenCalculatingMana = outputs.filter((output) =>
-        addressToConsiderWhenCalculatingMana.find((address) =>
-            isOutputUnlockedByAddress(output.output as CommonOutput, address)
-        )
-    )
-
-    const prevManaCost = inputsToConsiderWhenCalculatingMana.reduce(
-        (acc, input) => acc + (getPassiveManaForOutput(input) ?? 0),
-        0
-    )
-
-    const postManaCost = outputsToConsiderWhenCalculatingMana.reduce(
-        (acc, output) =>
-            acc + Number((output.output as BasicOutput | AccountOutput | AnchorOutput | NftOutput).mana ?? 0),
-        0
+    const totalTransactionMana = await getTotalTransactionMana(
+        inputs,
+        outputs,
+        wallet,
+        regularTransactionEssence.creationSlot,
+        createTransactionTimestamp
     )
 
     return {
         outputs: outputs,
         transactionId,
         direction,
-        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
+        time: new Date(createTransactionTimestamp),
         inclusionState: transaction.inclusionState,
-        mana: prevManaCost - postManaCost,
+        mana: totalTransactionMana,
         wrappedInputs: <IWrappedOutput[]>inputs,
         utxoInputs,
     }
