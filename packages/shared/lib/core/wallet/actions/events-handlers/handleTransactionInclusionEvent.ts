@@ -8,6 +8,7 @@ import {
 } from '@iota/sdk/out/types'
 import { updateParticipationOverview } from '@contexts/governance/stores'
 import { isWalletVoting } from '@contexts/governance/utils/isWalletVoting'
+import { updateNftInAllWalletNfts } from '@core/nfts'
 import { updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
     syncVotingPower,
@@ -15,6 +16,8 @@ import {
     updateActivityByTransactionId,
     validateWalletApiEvent,
     updateClaimingTransactionInclusion,
+    ActivityAction,
+    ActivityDirection,
     ActivityType,
     GovernanceActivity,
     WalletApiEventHandler,
@@ -52,6 +55,14 @@ export function handleTransactionInclusionEventInternal(
     }
 
     const activity = getActivityByTransactionId(walletId, transactionId)
+
+    if (activity?.type === ActivityType.Nft) {
+        const isSpendable =
+            (activity.direction === ActivityDirection.Incoming ||
+                activity.direction === ActivityDirection.Outgoing) &&
+            activity.action !== ActivityAction.Burn
+        updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable })
+    }
 
     if (activity?.type === ActivityType.Governance) {
         handleGovernanceTransactionInclusionEvent(walletId, inclusionState, activity)
