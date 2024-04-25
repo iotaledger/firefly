@@ -6,6 +6,7 @@ import { allWalletActivities, updateAsyncDataByActivityId } from '../stores'
 import { getExpirationDateFromOutput } from '../utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { getClient } from './getClient'
+import { MILLISECONDS_PER_SECOND } from '@core/utils'
 
 export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState): Promise<void> {
     const client = await getClient()
@@ -34,7 +35,8 @@ export async function setOutgoingAsyncActivitiesToClaimed(wallet: IWalletState):
             const nodeProtocolParameters = get(nodeInfoProtocolParameters)
             if (nodeProtocolParameters && outputMetadata.spent) {
                 const claimedDate = new Date(
-                    getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputMetadata.spent.slot)
+                    getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, outputMetadata.spent.slot) *
+                        MILLISECONDS_PER_SECOND
                 )
                 const isClaimed = outputMetadata && isOutputClaimed(output, outputMetadata, claimedDate)
                 if (isClaimed && claimedDate) {

@@ -33,6 +33,8 @@
         clearBalanceSyncPoll,
         syncBalancePoll,
         hasWalletMainAccountNegativeBIC,
+        clearNodeInfoSyncPoll,
+        syncNodeInfoPoll,
     } from '@core/wallet'
     import { get } from 'svelte/store'
     import features from '@features/features'
@@ -96,6 +98,7 @@
 
     onMount(() => {
         syncBalancePoll($selectedWalletId, true)
+        syncNodeInfoPoll()
         Platform.onEvent('menu-logout', () => {
             void logout()
         })
@@ -140,6 +143,7 @@
 
     onDestroy(() => {
         clearBalanceSyncPoll()
+        clearNodeInfoSyncPoll()
         Platform.DeepLinkManager.clearDeepLinkRequest()
         Platform.removeListenersForEvent('deep-link-params')
 
