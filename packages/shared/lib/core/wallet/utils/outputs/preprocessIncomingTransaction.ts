@@ -50,7 +50,7 @@ export function preprocessIncomingTransaction(transaction: TransactionWithMetada
         wrappedInputs: <IWrappedOutput[]>inputs,
         mana: manaCost,
         utxoInputs,
-        creationSlot: regularTransactionEssence.creationSlot
+        creationSlot: regularTransactionEssence.creationSlot,
     }
 }
 

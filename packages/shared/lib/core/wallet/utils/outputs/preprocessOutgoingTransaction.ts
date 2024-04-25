@@ -68,7 +68,7 @@ export async function preprocessOutgoingTransaction(
         mana: prevManaCost - postManaCost,
         wrappedInputs: <IWrappedOutput[]>inputs,
         utxoInputs,
-        creationSlot: regularTransactionEssence.creationSlot
+        creationSlot: regularTransactionEssence.creationSlot,
     }
 }
 
