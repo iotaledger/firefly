@@ -743,6 +743,10 @@
                     "epochs": "{epochs} epochs"
                 },
                 "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
+            },
+            "infoTooltip": {
+                "title": "Delegate Funds",
+                "body":"Earn Mana rewards by delegating your funds to a validator."
             }
         }
     },
