@@ -86,11 +86,10 @@
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
         } catch (err) {
-            if (err.message?.includes('Addresses')) {
-                error = err.message
-                handleError(err)
-            } else {
+            if (err.message?.includes('slots remaining until enough mana')) {
                 transactionInfo.preparedTransactionError = err
+            } else {
+                error = err.message
             }
         }
     }

@@ -100,12 +100,11 @@
             )
             transactionInfo.preparedTransactionError = undefined
         } catch (error) {
-            if (error.message?.includes('Addresses')) {
-                addressError = error.message
-                handleError(error)
-            } else {
+            if (error.message?.includes('slots remaining until enough mana')) {
                 transactionInfo.preparedTransaction = undefined
                 transactionInfo.preparedTransactionError = error
+            } else {
+                addressError = error.message
             }
         }
     }
