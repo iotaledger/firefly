@@ -58,8 +58,7 @@ export function handleTransactionInclusionEventInternal(
 
     if (activity?.type === ActivityType.Nft) {
         const isSpendable =
-            (activity.direction === ActivityDirection.Incoming ||
-                activity.direction === ActivityDirection.Outgoing) &&
+            (activity.direction === ActivityDirection.Incoming || activity.direction === ActivityDirection.Outgoing) &&
             activity.action !== ActivityAction.Burn
         updateNftInAllWalletNfts(walletId, activity.nftId, { isSpendable })
     }
