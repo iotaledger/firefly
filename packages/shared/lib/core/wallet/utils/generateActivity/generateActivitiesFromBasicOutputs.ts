@@ -5,7 +5,7 @@ import {
     ActivityDirection,
     getNativeTokenFromOutput,
     getNftId,
-    getNonRemainderBasicOutputsFromTransaction,
+    getBasicOrAccountOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
 } from '@core/wallet'
@@ -13,7 +13,7 @@ import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
 import { generateSingleConsolidationActivity } from './generateSingleConsolidationActivity'
 import { generateSingleNftActivity } from './generateSingleNftActivity'
-import { CommonOutput, NftOutput, OutputType } from '@iota/sdk/out/types'
+import { AccountOutput, CommonOutput, NftOutput, OutputType } from '@iota/sdk/out/types'
 
 export async function generateActivitiesFromBasicOutputs(
     processedTransaction: IProcessedTransaction,
@@ -21,18 +21,39 @@ export async function generateActivitiesFromBasicOutputs(
 ): Promise<Activity[]> {
     const activities = []
 
-    const basicOutputs = getNonRemainderBasicOutputsFromTransaction(
+    const basicOrAccountInputs = getBasicOrAccountOutputsFromTransaction(
+        processedTransaction.wrappedInputs,
+        [await wallet.address(), await wallet.implicitAccountCreationAddress()],
+        processedTransaction.direction
+    )
+
+    const basicOrAccountOutputs = getBasicOrAccountOutputsFromTransaction(
         processedTransaction.outputs,
-        [wallet.depositAddress, await wallet.implicitAccountCreationAddress()],
+        [await wallet.address(), await wallet.implicitAccountCreationAddress()],
         processedTransaction.direction
     )
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)
-    for (const basicOutput of basicOutputs) {
+
+    for (const basicOrAccountOutput of basicOrAccountOutputs) {
         let activity: Activity
-        const isRemainder = basicOutput.remainder
+        const isRemainder = basicOrAccountOutput.remainder
+
+        const basicOrAccountInput = basicOrAccountInputs.find((input) => {
+            if (
+                input?.output?.type === OutputType.Account &&
+                basicOrAccountOutput?.output?.type === OutputType.Account
+            ) {
+                return (
+                    (input.output as AccountOutput).accountId ===
+                    (basicOrAccountOutput.output as AccountOutput).accountId
+                )
+            }
+        })
 
         const burnedNftInputIndex = burnedNftInputs.findIndex(
-            (input) => input.output.amount === basicOutput.output.amount
+            (input) =>
+                Number(input.output.amount) + (Number(basicOrAccountInput?.output.amount) ?? 0) ===
+                Number(basicOrAccountOutput.output.amount)
         )
         const burnedNativeToken = burnedNftInputIndex < 0 ? getBurnedNativeTokens(processedTransaction) : undefined
 
@@ -45,7 +66,7 @@ export async function generateActivitiesFromBasicOutputs(
                     {
                         action: ActivityAction.Burn,
                         processedTransaction,
-                        wrappedOutput: basicOutput,
+                        wrappedOutput: basicOrAccountOutput,
                     },
                     getNftId(nftInput.nftId, wrappedInput.outputId)
                 )
@@ -59,22 +80,22 @@ export async function generateActivitiesFromBasicOutputs(
                     {
                         action: ActivityAction.Burn,
                         processedTransaction,
-                        wrappedOutput: basicOutput,
+                        wrappedOutput: basicOrAccountOutput,
                     },
                     burnedNativeToken.assetId,
                     burnedNativeToken.amount
                 )
-            } else if (isConsolidation(basicOutput, processedTransaction)) {
+            } else if (isConsolidation(basicOrAccountOutput, processedTransaction)) {
                 activity = await generateSingleConsolidationActivity(wallet, {
                     action: ActivityAction.Send,
                     processedTransaction,
-                    wrappedOutput: basicOutput,
+                    wrappedOutput: basicOrAccountOutput,
                 })
             } else {
                 activity = await generateSingleBasicActivity(wallet, {
                     action: ActivityAction.Send,
                     processedTransaction,
-                    wrappedOutput: basicOutput,
+                    wrappedOutput: basicOrAccountOutput,
                 })
             }
             activities.push(activity)
