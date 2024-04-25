@@ -8,28 +8,24 @@ import {
     UnlockConditionType,
     AccountAddress,
 } from '@iota/sdk/out/types'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
-import { get } from 'svelte/store'
 
 export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
     for (const input of inputs) {
         const { output, metadata } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions
 
-        const nodeParamenters = get(nodeInfoProtocolParameters)
-        if (nodeParamenters && metadata?.spent?.slot) {
-            const spentDate = getUnixTimestampFromNodeInfoAndSlotIndex(nodeParamenters, metadata?.spent?.slot)
-            if (spentDate) {
-                // A transaction with an expiration unlock condition is included if the transaction expired
-                const expirationUnlockCondition = unlockConditions.find(
-                    (unlockCondition) =>
-                        unlockCondition.type === UnlockConditionType.Expiration &&
-                        (unlockCondition as ExpirationUnlockCondition).slot < spentDate
-                ) as ExpirationUnlockCondition
+        const spentSlot = metadata?.spent?.slot;
 
-                if (expirationUnlockCondition) {
-                    return AddressConverter.addressToBech32(expirationUnlockCondition.returnAddress)
-                }
+        if (spentSlot) {
+             // A transaction with an expiration unlock condition is included if the transaction expired
+             const expirationUnlockCondition = unlockConditions.find(
+                (unlockCondition) =>
+                    unlockCondition.type === UnlockConditionType.Expiration &&
+                    (unlockCondition as ExpirationUnlockCondition).slot < spentSlot
+            ) as ExpirationUnlockCondition
+
+            if (expirationUnlockCondition) {
+                return AddressConverter.addressToBech32(expirationUnlockCondition.returnAddress)
             }
         }
 
