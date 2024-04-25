@@ -58,7 +58,7 @@
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs, setCurrentEpochAndCommittee()
-    $: currentEpoch, delegationOutputs?.length > 0 && buildMappedDelegationData(delegationOutputs)
+    $: currentEpoch, buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
