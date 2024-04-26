@@ -9,7 +9,6 @@ import {
     IProcessedTransaction,
     IWrappedOutput,
     getInvolvedAddresses,
-    isImplicitAccountOutput,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
@@ -185,19 +184,11 @@ function getAllNativeTokensFromOutputs(outputs: IWrappedOutput[]): { [key: strin
 }
 
 function isConsolidation(output: IWrappedOutput, processedTransaction: IProcessedTransaction): boolean {
-    const consolidatedInputs = processedTransaction.wrappedInputs.filter((input) => {
-        const isBasic = input.output.type === OutputType.Basic
-        const isAccount = input.output.type === OutputType.Account
-        const isImplicitAccountFeature = isImplicitAccountOutput(input.output)
-        return (isBasic || isAccount) && !isImplicitAccountFeature
-    })
-    const inputsOfSameType = consolidatedInputs.filter((op) => op.output.type === output.output.type)
+    const allBasicInputs = processedTransaction.wrappedInputs.every((input) => input.output.type === OutputType.Basic)
     const isSelfTransaction = processedTransaction.direction === ActivityDirection.SelfTransaction
     const isSameAmount =
-        inputsOfSameType.reduce((sum, input) => sum + Number(input.output.amount), 0) === Number(output.output.amount)
+        processedTransaction.wrappedInputs.reduce((sum, input) => sum + Number(input.output.amount), 0) ===
+        Number(output.output.amount)
 
-    const allBasicNonImplicitAccountOrAccountsInputs =
-        consolidatedInputs.length === processedTransaction.wrappedInputs.length
-
-    return allBasicNonImplicitAccountOrAccountsInputs && isSelfTransaction && isSameAmount
+    return allBasicInputs && isSelfTransaction && isSameAmount
 }
