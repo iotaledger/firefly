@@ -8,6 +8,7 @@ import {
     getBasicOrAccountOutputsFromTransaction,
     IProcessedTransaction,
     IWrappedOutput,
+    getInvolvedAddresses,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
@@ -21,15 +22,17 @@ export async function generateActivitiesFromBasicOutputs(
 ): Promise<Activity[]> {
     const activities = []
 
+    const involvedAddresses = await getInvolvedAddresses(wallet)
+
     const basicOrAccountInputs = getBasicOrAccountOutputsFromTransaction(
         processedTransaction.wrappedInputs,
-        [await wallet.address(), await wallet.implicitAccountCreationAddress()],
+        involvedAddresses,
         processedTransaction.direction
     )
 
     const basicOrAccountOutputs = getBasicOrAccountOutputsFromTransaction(
         processedTransaction.outputs,
-        [await wallet.address(), await wallet.implicitAccountCreationAddress()],
+        involvedAddresses,
         processedTransaction.direction
     )
     const burnedNftInputs = getBurnedNftInputs(processedTransaction)
