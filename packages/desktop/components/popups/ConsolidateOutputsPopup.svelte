@@ -4,7 +4,7 @@
     import { closePopup } from '@auxiliary/popup'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
-    import { selectedWallet } from '@core/wallet'
+    import { selectedWallet, hasWalletMainAccountNegativeBIC } from '@core/wallet'
     import { TextHintVariant } from '@ui/enums'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { checkActiveProfileAuth } from '@core/profile'
@@ -24,10 +24,12 @@
         !isBusy &&
         hasEnoughMana &&
         !hasError &&
+        !hasMainAccountNegativeBIC &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
 
     $: displayManaBox = !hasError && !$selectedWallet?.isTransferring
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function prepareConsolidateTransaction(): Promise<void> {
         try {
@@ -85,6 +87,9 @@
         <TextHint variant={TextHintVariant.Info} text={localize('popups.minimizeStorageDeposit.description')} />
         {#if displayManaBox}
             <ManaBox {transactionInfo} bind:hasEnoughMana />
+        {/if}
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
         {/if}
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
