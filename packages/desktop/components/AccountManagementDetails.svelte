@@ -51,7 +51,7 @@
 
     const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
 
-    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput)
+    $: isImplicitAccount = isImplicitAccountOutput(selectedOutput.output)
     $: accountId = isAccountOutput(selectedOutput) ? (selectedOutput.output as AccountOutput)?.accountId : null
     $: address = accountId ? AddressConverter.addressToBech32(new AccountAddress(accountId)) : null
     $: isMainAccount = accountId && accountId === $selectedWalletMainAccountId

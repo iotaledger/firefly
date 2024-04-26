@@ -8,6 +8,7 @@ import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
 import { getTotalTransactionMana } from './getTotalTransactionMana'
+import { getInvolvedAddresses } from '../getInvolvedAddresses'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -16,7 +17,7 @@ export async function preprocessOutgoingTransaction(
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-    const walletAddress = await wallet.address()
+    const involvedAddresses = await getInvolvedAddresses(wallet)
     const createTransactionUnixTimestamp = nodeProtocolParameters
         ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
         : 0
@@ -24,7 +25,7 @@ export async function preprocessOutgoingTransaction(
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
-    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, walletAddress)
+    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, involvedAddresses)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = utxoInputs.map((input) => {
         const transactionId = input.transactionId

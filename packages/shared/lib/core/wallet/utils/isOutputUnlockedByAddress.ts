@@ -1,12 +1,10 @@
-import { CommonOutput, UnlockConditionType, AddressUnlockCondition } from '@iota/sdk/out/types'
-import { AddressConverter } from './AddressConverter'
+import { CommonOutput } from '@iota/sdk/out/types'
+import { getRecipientAddressFromOutput } from './outputs'
 
 export function isOutputUnlockedByAddress(output: CommonOutput, address: string): boolean {
-    const outputAddress = (
-        output.unlockConditions.find(
-            (unlockCondition) => unlockCondition.type === UnlockConditionType.Address
-        ) as AddressUnlockCondition
-    ).address
-    const bech32Address = AddressConverter.addressToBech32(outputAddress)
-    return bech32Address === address
+    const outputAddress = getRecipientAddressFromOutput(output)
+    if(!outputAddress) {
+        return false
+    }
+    return outputAddress === address
 }

@@ -1,6 +1,5 @@
 import { IWrappedOutput } from '../../interfaces'
 import {
-    AccountAddress,
     AccountOutput,
     AnchorOutput,
     BasicOutput,
@@ -15,6 +14,7 @@ import { getPassiveManaForOutput } from '@core/network'
 import { isOutputUnlockedByAddress } from '../isOutputUnlockedByAddress'
 import { AddressConverter } from '../AddressConverter'
 import { getExpirationDateFromOutput } from './getExpirationDateFromOutput'
+import { getInvolvedAddresses } from '../getInvolvedAddresses'
 
 export async function getTotalTransactionMana(
     inputs: IWrappedOutput[],
@@ -23,16 +23,7 @@ export async function getTotalTransactionMana(
     transactionSlot: number,
     transactionTimestamp: number
 ): Promise<number> {
-    const walletAddress = await wallet.address()
-    const implicitAddress = await wallet.implicitAccountCreationAddress()
-    // We are ignoring accounts that the wallet may have had in the past
-    const currentAccountsAddresses = (await wallet.accounts()).map((accountInput) =>
-        AddressConverter.addressToBech32(
-            new AccountAddress((accountInput.output as unknown as AccountOutput).accountId)
-        )
-    )
-
-    const addressToConsiderWhenCalculatingMana = [...currentAccountsAddresses, implicitAddress, walletAddress]
+    const addressToConsiderWhenCalculatingMana = await getInvolvedAddresses(wallet)
 
     const inputsToConsiderWhenCalculatingMana = inputs.filter((input) => {
         const commonInput = input.output as CommonOutput
