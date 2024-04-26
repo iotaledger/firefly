@@ -6,15 +6,17 @@
     import {
         selectedWallet,
         visibleSelectedWalletAssets,
-        convertToRawAmount,
         getDefaultTransactionOptions,
         AddressConverter,
+        hasWalletMainAccountNegativeBIC,
     } from '@core/wallet'
-    import { activeProfile, checkActiveProfileAuth } from '@core/profile'
+    import { activeProfile, checkActiveProfileAuth, getNetworkHrp } from '@core/profile'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { onMount } from 'svelte'
     import { ManaBox } from '@components'
     import Big from 'big.js'
+    import { validateBech32Address } from '@core/utils'
+    import { AddressType } from '@iota/sdk/out/types'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = '0'
@@ -24,40 +26,52 @@
     let error: string
     let amount: string
     let assetAmountInput: AssetAmountInput
-    let confirmDisabled = false
 
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
     $: hasTransactionInProgress =
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
-    $: amount, accountAddress, hasTransactionInProgress, setConfirmDisabled()
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, rawAmount, void preparedOutput()
+    $: accountAddress, validAmount, void preparedOutput()
+    $: accountAddress, void validateAddress()
 
-    $: displayManaBox = !!accountAddress && !error && validAmount
+    $: sendAllowed =
+        validAmount &&
+        !!accountAddress &&
+        !hasTransactionInProgress &&
+        hasEnoughMana &&
+        !error &&
+        !hasMainAccountNegativeBIC &&
+        transactionInfo.preparedTransaction &&
+        !transactionInfo.preparedTransactionError
 
-    function setConfirmDisabled(): void {
-        if (!amount || !accountAddress) {
-            confirmDisabled = true
-            return
-        }
-        const convertedSliderAmount = convertToRawAmount(amount, asset?.metadata)?.toString()
-        confirmDisabled = convertedSliderAmount === rawAmount || hasTransactionInProgress || !hasEnoughMana
-    }
+    $: displayManaBox = validAmount && !!accountAddress && !hasTransactionInProgress && !error
 
-    async function onSubmit(): Promise<void> {
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
+
+    async function onSend(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
             if (!rawAmount || !accountAddress || !validAmount) return
             updatePopupProps({ rawAmount, accountAddress })
             await checkActiveProfileAuth(allotMana, { stronghold: true, ledger: false })
         } catch (err) {
-            error = err.error
+            error = err.message
             handleError(err)
         } finally {
             isBusy = false
+        }
+    }
+
+    function validateAddress(): void {
+        try {
+            if (!accountAddress) return
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            error = undefined
+        } catch (err) {
+            error = err.message
         }
     }
 
@@ -80,8 +94,8 @@
                 ...getDefaultTransactionOptions(accountId),
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
-        } catch (error) {
-            transactionInfo.preparedTransactionError = error
+        } catch (err) {
+            transactionInfo.preparedTransactionError = err
         }
     }
 
@@ -103,7 +117,7 @@
         }
     }
 
-    function onBackClick(): void {
+    function onCancelClick(): void {
         closePopup()
     }
 
@@ -112,6 +126,7 @@
             await _onMount()
             await preparedOutput()
         } catch (err) {
+            error = err.message
             handleError(err.error)
         }
     })
@@ -122,7 +137,7 @@
         {localize('popups.allotMana.title')}
     </Text>
     <div class="w-full flex-col space-y-4">
-        <form id="allot-mana" on:submit|preventDefault={onSubmit} class="flex flex-col space-y-5">
+        <form id="allot-mana" on:submit|preventDefault={onSend} class="flex flex-col space-y-5">
             <div class="space-y-4">
                 <AssetAmountInput
                     bind:this={assetAmountInput}
@@ -134,27 +149,24 @@
                     disabled={hasTransactionInProgress}
                 />
                 <TextInput
-                    {error}
                     bind:value={accountAddress}
                     placeholder={localize('general.accountAddress')}
                     label={localize('popups.allotMana.body')}
-                    submitHandler={onSubmit}
+                    submitHandler={onSend}
                     disabled={isBusy}
                 />
+                {#if error}
+                    <Text error>{error}</Text>
+                {/if}
                 {#if displayManaBox}
                     <ManaBox {transactionInfo} bind:hasEnoughMana />
                 {/if}
             </div>
             <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
-                <Button classes="w-full" outline onClick={onBackClick} disabled={isBusy}
-                    >{localize('actions.back')}</Button
+                <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}
+                    >{localize('actions.cancel')}</Button
                 >
-                <Button
-                    classes="w-full"
-                    onClick={onSubmit}
-                    disabled={isBusy || !accountAddress || !validAmount}
-                    {isBusy}
-                >
+                <Button classes="w-full" onClick={onSend} disabled={!sendAllowed} {isBusy}>
                     {localize('actions.send')}
                 </Button>
             </popup-buttons>
