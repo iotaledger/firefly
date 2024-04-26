@@ -37,7 +37,7 @@
     $: accountAddress, validAmount, void preparedOutput()
     $: accountAddress, void validateAddress()
 
-    $: submitAllowed =
+    $: sendAllowed =
         validAmount &&
         !!accountAddress &&
         !hasTransactionInProgress &&
@@ -51,7 +51,7 @@
 
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
-    async function onSubmit(): Promise<void> {
+    async function onSend(): Promise<void> {
         try {
             await assetAmountInput?.validate(true)
             if (!rawAmount || !accountAddress || !validAmount) return
@@ -166,7 +166,7 @@
                 <Button classes="w-full" outline onClick={onCancelClick} disabled={isBusy}
                     >{localize('actions.cancel')}</Button
                 >
-                <Button classes="w-full" onClick={onSubmit} disabled={submitAllowed} {isBusy}>
+                <Button classes="w-full" onClick={onSend} disabled={!sendAllowed} {isBusy}>
                     {localize('actions.send')}
                 </Button>
             </popup-buttons>
