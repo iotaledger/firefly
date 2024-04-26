@@ -2349,6 +2349,11 @@
                 "Pending": "sending to",
                 "Confirmed": "sent to",
                 "Conflicting": "failed to send"
+            },
+            "selfTransaction": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             }
         },
         "internal": {
