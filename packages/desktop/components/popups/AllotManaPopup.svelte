@@ -137,7 +137,7 @@
         {localize('popups.allotMana.title')}
     </Text>
     <div class="w-full flex-col space-y-4">
-        <form id="allot-mana" on:submit|preventDefault={onSubmit} class="flex flex-col space-y-5">
+        <form id="allot-mana" on:submit|preventDefault={onSend} class="flex flex-col space-y-5">
             <div class="space-y-4">
                 <AssetAmountInput
                     bind:this={assetAmountInput}
@@ -152,7 +152,7 @@
                     bind:value={accountAddress}
                     placeholder={localize('general.accountAddress')}
                     label={localize('popups.allotMana.body')}
-                    submitHandler={onSubmit}
+                    submitHandler={onSend}
                     disabled={isBusy}
                 />
                 {#if error}
