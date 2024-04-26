@@ -1,6 +1,6 @@
-import { AccountAddress, AccountOutput } from "@iota/sdk/out/types"
-import { IWallet } from "../../profile"
-import { AddressConverter } from "./AddressConverter"
+import { AccountAddress, AccountOutput } from '@iota/sdk/out/types'
+import { IWallet } from '../../profile'
+import { AddressConverter } from './AddressConverter'
 
 export async function getInvolvedAddresses(wallet: IWallet): Promise<string[]> {
     const walletAddress = await wallet.address()
