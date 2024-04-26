@@ -9,6 +9,7 @@ import {
     IProcessedTransaction,
     IWrappedOutput,
     getInvolvedAddresses,
+    isImplicitAccountOutput,
 } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { generateSingleBasicActivity } from './generateSingleBasicActivity'
