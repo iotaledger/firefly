@@ -80,7 +80,9 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...anchorActivities)
     }
 
-    const containsDelegationActivity = outputs.some((output) => output.output.type === OutputType.Delegation)
+    const hasDelegationOutput = outputs.some((output) => output.output.type === OutputType.Delegation)
+    const hasDelegationInput = wrappedInputs?.some((input) => input.output.type === OutputType.Delegation)
+    const containsDelegationActivity = hasDelegationOutput || (hasDelegationInput && !hasDelegationOutput)
     if (containsDelegationActivity) {
         const delegationActivities = await generateActivitiesFromDelegationOutputs(processedTransaction, wallet)
         activities.push(...delegationActivities)

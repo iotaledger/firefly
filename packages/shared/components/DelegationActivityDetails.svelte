@@ -9,12 +9,13 @@
     const unit = getBaseToken().unit
 
     $: amount = activity.delegatedAmount
+    $: localizationKey = activity.action
 </script>
 
 <main-content class="flex flex-auto w-full flex-col items-center justify-center space-y-3">
     <AmountBox {amount} {asset} {unit} />
     <account-status class="flex flex-row w-full space-x-2 justify-center">
-        <ActivityInclusionStatusPill localizationKey={'delegation.creation'} inclusionState={activity.inclusionState} />
+        <ActivityInclusionStatusPill {localizationKey} inclusionState={activity.inclusionState} />
     </account-status>
     <AddressBox clearBackground clearPadding isCopyable address={activity.transactionId} />
 </main-content>

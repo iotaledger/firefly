@@ -1769,6 +1769,7 @@
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
         "delegationCreated": "Delegation created",
+        "delegationClaimed": "Delegation claimed",
         "delegation": "Delegation",
         "delegationId": "Delegation ID",
         "validatorAddress": "Validator Address",
