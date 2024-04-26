@@ -1769,6 +1769,7 @@
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
         "delegationCreated": "Delegation created",
+        "delegationClaimed": "Delegation claimed",
         "delegation": "Delegation",
         "delegationId": "Delegation ID",
         "validatorAddress": "Validator Address",
@@ -2240,6 +2241,15 @@
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
                 "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
+            "selfTransaction": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+            },
             "outgoing": {
                 "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
@@ -2340,6 +2350,11 @@
                 "Pending": "sending to",
                 "Confirmed": "sent to",
                 "Conflicting": "failed to send"
+            },
+            "selfTransaction": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             }
         },
         "internal": {

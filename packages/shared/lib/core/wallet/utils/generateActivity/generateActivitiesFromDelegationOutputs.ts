@@ -10,15 +10,30 @@ export async function generateActivitiesFromDelegationOutputs(
 ): Promise<Activity[]> {
     const outputs = processedTransaction.outputs
     const activities: DelegationActivity[] = []
+    const inputs = processedTransaction.wrappedInputs
+    const hasDelegationInput = inputs?.some((input) => input.output.type === OutputType.Delegation)
+    const hasDelegationOutput = outputs.some((output) => output.output.type === OutputType.Delegation)
 
-    const delegationOutputs = outputs.filter((output) => output.output.type === OutputType.Delegation)
-    for (const delegationOutput of delegationOutputs) {
-        const activity = await generateSingleDelegationActivity(wallet, {
-            action: ActivityAction.Create,
-            processedTransaction,
-            wrappedOutput: delegationOutput,
-        })
-        activities.push(activity)
+    if (hasDelegationOutput) {
+        const delegationOutputs = outputs.filter((output) => output.output.type === OutputType.Delegation)
+        for (const delegationOutput of delegationOutputs) {
+            const activity = await generateSingleDelegationActivity(wallet, {
+                action: ActivityAction.Mint,
+                processedTransaction,
+                wrappedOutput: delegationOutput,
+            })
+            activities.push(activity)
+        }
+    } else if (hasDelegationInput) {
+        const delegationInputs = inputs.filter((input) => input.output.type === OutputType.Delegation)
+        for (const delegationInput of delegationInputs) {
+            const activity = await generateSingleDelegationActivity(wallet, {
+                action: ActivityAction.Burn,
+                processedTransaction,
+                wrappedOutput: delegationInput,
+            })
+            activities.push(activity)
+        }
     }
     return activities
 }
