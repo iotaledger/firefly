@@ -38,7 +38,8 @@
         $selectedWallet?.isTransferring
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    $: accountAddress, validAmount, prepareDelegationOutput()
+    $: accountAddress, validAmount, void prepareDelegationOutput()
+    $: accountAddress, void validateAddress()
 
     $: confirmAllowed =
         validAmount &&
@@ -46,6 +47,7 @@
         !hasTransactionInProgress &&
         hasEnoughMana &&
         !addressError &&
+        !hasMainAccountNegativeBIC &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
     $: displayManaBox = !!accountAddress && !addressError && validAmount && !hasTransactionInProgress
@@ -79,6 +81,16 @@
         }
     }
 
+    function validateAddress(): void {
+        try {
+            if (!accountAddress) return
+            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
+            addressError = undefined
+        } catch (error) {
+            addressError = error.message
+        }
+    }
+
     async function prepareDelegationOutput(): Promise<void> {
         try {
             if (!accountAddress || !rawAmount || !validAmount) {
@@ -86,8 +98,6 @@
                 transactionInfo.preparedTransactionError = undefined
                 return
             }
-            validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
-            addressError = undefined
             const params: CreateDelegationParams = {
                 address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
                 delegatedAmount: rawAmount,
@@ -135,6 +145,9 @@
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
+            {#if addressError}
+                <Text error>{addressError}</Text>
+            {/if}
             {#if displayManaBox}
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
             {/if}
@@ -148,7 +161,7 @@
             </Button>
             <Button
                 type={HTMLButtonType.Submit}
-                disabled={!confirmAllowed || hasMainAccountNegativeBIC}
+                disabled={!confirmAllowed}
                 isBusy={hasTransactionInProgress}
                 classes="w-full"
             >
