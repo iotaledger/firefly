@@ -2,7 +2,7 @@ import { NetworkId } from '../enums'
 
 export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
     if (networkName.startsWith('iota-alphanet')) {
-        return NetworkId.IotaAlphanet
+        return NetworkId.Testnet
     }
     switch (networkName) {
         case 'iota-mainnet':
