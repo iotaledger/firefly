@@ -39,8 +39,9 @@ export * from './syncWalletsInParallel'
 export * from './validateWalletName'
 export * from './isVisibleAsset'
 export * from './isVisibleActivity'
-export * from './isOutputOfSelectedWalletAddress'
+export * from './isOutputUnlockedByAddress'
 export * from './hasWalletMainAccountNegativeBIC'
+export * from './getInvolvedAddresses'
 
 // Folders
 export * from './generateActivity'

@@ -61,7 +61,7 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
 
         await generateAndStoreActivitiesForWallet(wallet)
     }
-    if (isImplicitAccountOutput(outputData)) {
+    if (isImplicitAccountOutput(outputData.output)) {
         await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })

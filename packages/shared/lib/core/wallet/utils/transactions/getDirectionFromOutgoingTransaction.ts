@@ -2,14 +2,11 @@ import { getRecipientAddressFromOutput } from '../outputs/getRecipientAddressFro
 import { ActivityDirection } from '@core/wallet/enums'
 import { CommonOutput, Output } from '@iota/sdk/out/types'
 
-export function getDirectionFromOutgoingTransaction(
-    outputs: Output[],
-    walletDepositAddress: string
-): ActivityDirection {
+export function getDirectionFromOutgoingTransaction(outputs: Output[], involvedAddresses: string[]): ActivityDirection {
     // Check if any output is not destined for the wallet
     const containsNonWalletRecipient = outputs.some((output) => {
         const outputRecipient = getRecipientAddressFromOutput(output as CommonOutput)
-        return walletDepositAddress !== outputRecipient
+        return !involvedAddresses.includes(outputRecipient)
     })
 
     // If there is any output not destined for the wallet, it's an outgoing transaction.

@@ -4,11 +4,11 @@ import {
     UnlockConditionType,
     AddressUnlockCondition,
     AddressType,
-    OutputData,
+    Output,
 } from '@iota/sdk/out/types'
 
-export function isImplicitAccountOutput(outputData: OutputData): boolean {
-    const output = outputData.output as CommonOutput
+export function isImplicitAccountOutput(_output: Output): boolean {
+    const output = _output as CommonOutput
     return (
         output?.type === OutputType.Basic &&
         output.unlockConditions.length === 1 &&

@@ -1,16 +1,13 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
     import { localize } from '@core/i18n'
     import { getImplicitAccountsMana, getManaBalance } from '@core/network'
-    import { checkActiveProfileAuth } from '@core/profile'
     import { selectedWallet } from '@core/wallet'
-    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import features from '@features/features'
     import { CommonOutput, OutputType, UnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
-    import { TextHintVariant } from '@ui/enums'
 
     interface BalanceBreakdown {
         amount: number
@@ -155,22 +152,7 @@
 
     function onConsolidationClick(): void {
         openPopup({
-            id: PopupId.Confirmation,
-            props: {
-                title: localize('popups.minimizeStorageDeposit.title'),
-                description: localize('popups.minimizeStorageDeposit.description'),
-                confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
-                variant: TextHintVariant.Info,
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await consolidateOutputs()
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
-            },
+            id: PopupId.ConsolidateOutputs,
         })
     }
 </script>
