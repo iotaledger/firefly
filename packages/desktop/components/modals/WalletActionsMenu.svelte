@@ -88,7 +88,7 @@
                 onClick={onViewAddressHistoryClick}
             />
         {/if}
-        {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
+        {#if ($activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet) && features?.network?.layer2?.enabled}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
         {#if features?.wallet?.multiWallet?.enabled}
