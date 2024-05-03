@@ -1,6 +1,6 @@
 import { TransactionOptions } from '@iota/sdk/out/types'
 
-export function getDefaultTransactionOptions(): TransactionOptions | undefined {
+export function getDefaultTransactionOptions(): TransactionOptions {
     return {
         remainderValueStrategy: {
             /** The name of the strategy. */
