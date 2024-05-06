@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "IOTA의 스테이징 네트워크"
                     },
-                    "testnet": {
-                        "title": "테스트넷",
-                        "body": "Shimmer의 공개 베타 네트워크"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA 메인넷"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA 알파넷",
@@ -1245,14 +1249,16 @@
             "iota": "IOTA 프로필 복원",
             "iotaAlphanet": "IOTA 알파넷 프로필 복원",
             "shimmer": "Shimmer 프로필 복원",
-            "testnet": "테스트넷 프로필 복원",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "사용자 정의 네트워크 프로필 복원"
         },
         "restoreWalletDescription": {
             "iota": "기존 IOTA 프로필 복원",
             "iotaAlphanet": "기존 IOTA 알파넷 프로필을 복원합니다.",
             "shimmer": "기존 Shimmer 프로필을 복원합니다.",
-            "testnet": "기존 테스트넷 프로필을 복원합니다.",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "기존 사용자 정의 네트워크 프로필을 복원합니다."
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "이 계정의 모든 NFT 미디어를 삭제하고 다시 다운로드하시겠습니까?"
         },
         "createWallet": "새 {network} 프로필 만들기",
-        "createWalletDescription": "{network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 에서 실행되는 새로운 프로필을 생성합니다.",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Shimmer 스테이킹 보상 요청하기",
         "claimShimmerDescription": "IOTA 프로필을 가져오고 스테이킹 보상을 요청합니다.",
         "migrateFromLegacy": "Migrate from Legacy",
