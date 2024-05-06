@@ -56,7 +56,7 @@
         !addressError &&
         validAmount &&
         !hasTransactionInProgress &&
-        transactionInfo.preparedTransaction
+        (transactionInfo.preparedTransaction || transactionInfo.preparedTransactionError)
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
