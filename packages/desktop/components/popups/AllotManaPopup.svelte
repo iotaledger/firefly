@@ -91,7 +91,7 @@
                 getDefaultTransactionOptions()
             )
             transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput], {
-                ...getDefaultTransactionOptions(accountId),
+                ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
         } catch (err) {
@@ -108,7 +108,7 @@
                 getDefaultTransactionOptions()
             )
             await $selectedWallet.sendOutputs([prepareOutput], {
-                ...getDefaultTransactionOptions(accountId),
+                ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
             })
             closePopup()
