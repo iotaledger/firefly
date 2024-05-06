@@ -1766,6 +1766,7 @@
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available Mana",
         "insufficientMana": "Generating mana... {timeRemaining}.",
+        "insufficientManaGeneration": "Your funds do not generate enough mana. Send funds to your wallet for faster mana generation.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
         "delegationCreated": "Delegation created",
