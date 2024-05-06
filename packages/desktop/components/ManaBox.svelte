@@ -29,7 +29,7 @@
         : $selectedWallet?.balances?.availableManaToUse
     $: requiredMana = requiredTxManaCost + extraMana
     // When making a transaction, the account output is spent and there is a time where the available mana is 0 until the new account output is received
-    $: hasEnoughMana = availableMana && !$selectedWallet?.isTransferring ? availableMana >= requiredMana : null
+    $: hasEnoughMana = availableMana && !$selectedWallet?.isTransferring ? availableMana >= requiredMana : false
     $: timeRemaining = secondsRemaining ? getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND) : null
 
     function calculateManaCost(): void {

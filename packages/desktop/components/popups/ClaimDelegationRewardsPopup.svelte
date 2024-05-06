@@ -106,8 +106,11 @@
         <Button classes="w-full" outline onClick={onCancelClick}>{localize('actions.cancel')}</Button>
         <Button
             classes="w-full"
-            disabled={$selectedWallet?.isTransferring || isBusy || !hasEnoughMana || hasMainAccountNegativeBIC}
-            isBusy={$selectedWallet?.isTransferring || isBusy}
+            disabled={$selectedWallet?.hasDelegationRewardClaimTransactionInProgress ||
+                isBusy ||
+                !hasEnoughMana ||
+                hasMainAccountNegativeBIC}
+            isBusy={$selectedWallet?.hasDelegationRewardClaimTransactionInProgress || isBusy}
             onClick={onConfirmClick}
         >
             {localize('popups.claimDelegationRewards.confirmButton')}
