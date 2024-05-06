@@ -7,6 +7,7 @@ import {
     updateAsyncDataByActivityId,
 } from '../stores'
 import { Activity } from '../types'
+import { getAccountTransactionOptions } from '../utils'
 
 export async function claimActivity(activity: Activity): Promise<void> {
     const wallet = getSelectedWallet()
@@ -17,7 +18,7 @@ export async function claimActivity(activity: Activity): Promise<void> {
         }
 
         updateAsyncDataByActivityId(wallet.id, activity.id, { isClaiming: true })
-        const result = await wallet.claimOutputs([activity.outputId])
+        const result = await wallet.claimOutputs([activity.outputId], getAccountTransactionOptions())
         const transactionId = result.transactionId
         updateAsyncDataByActivityId(wallet.id, activity.id, { claimingTransactionId: transactionId })
     } catch (err) {
