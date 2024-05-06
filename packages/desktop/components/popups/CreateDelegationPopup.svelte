@@ -104,7 +104,7 @@
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
         }
-        debounce(updateTransactionInfo, 2000)()
+        debounce(updateTransactionInfo, 500)()
         async function updateTransactionInfo(): Promise<void> {
             try {
                 if (accountAddress && rawAmount && validAmount) {
