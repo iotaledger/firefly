@@ -29,6 +29,7 @@
     let confirmAllowed = false
     let addressError: string
 
+    const transactionUpdater = debounce(updateTransactionInfo, 500)
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
@@ -104,27 +105,28 @@
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
         }
-        debounce(updateTransactionInfo, 500)()
-        async function updateTransactionInfo(): Promise<void> {
-            try {
-                if (accountAddress && rawAmount && validAmount) {
-                    const params: CreateDelegationParams = {
-                        address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
-                        delegatedAmount: rawAmount,
-                        validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
-                    }
-                    transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
-                        params,
-                        getDefaultTransactionOptions()
-                    )
-                    transactionInfo.preparedTransactionError = undefined
+        transactionUpdater()
+    }
+
+    async function updateTransactionInfo(): Promise<void> {
+        try {
+            if (accountAddress && rawAmount && validAmount) {
+                const params: CreateDelegationParams = {
+                    address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
+                    delegatedAmount: rawAmount,
+                    validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
                 }
-            } catch (error) {
-                transactionInfo.preparedTransaction = undefined
-                transactionInfo.preparedTransactionError = error
-            } finally {
-                updatingTransactionInfo = false
+                transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
+                    params,
+                    getDefaultTransactionOptions()
+                )
+                transactionInfo.preparedTransactionError = undefined
             }
+        } catch (error) {
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
+        } finally {
+            updatingTransactionInfo = false
         }
     }
 
