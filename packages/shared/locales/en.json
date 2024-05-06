@@ -1553,6 +1553,8 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
+        "claimed": "Claimed",
+        "claiming": "Claiming",
         "consolidated": "Outputs consolidated",
         "consolidating": "Consolidating outputs",
         "accountCreated": "Account created",
@@ -2384,6 +2386,16 @@
             "Pending": "burning",
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
+        },
+        "claim": {
+            "Pending": "claiming",
+            "Confirmed": "claimed",
+            "Conflicting": "failed to claim"
+        },
+        "create": {
+            "Pending": "creating",
+            "Confirmed": "created",
+            "Conflicting": "failed to create"
         },
         "consolidation": {
             "Pending": "Consolidating outputs",

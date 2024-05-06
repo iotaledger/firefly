@@ -18,7 +18,7 @@ export async function generateActivitiesFromDelegationOutputs(
         const delegationOutputs = outputs.filter((output) => output.output.type === OutputType.Delegation)
         for (const delegationOutput of delegationOutputs) {
             const activity = await generateSingleDelegationActivity(wallet, {
-                action: ActivityAction.Mint,
+                action: ActivityAction.Create,
                 processedTransaction,
                 wrappedOutput: delegationOutput,
             })
@@ -28,7 +28,7 @@ export async function generateActivitiesFromDelegationOutputs(
         const delegationInputs = inputs.filter((input) => input.output.type === OutputType.Delegation)
         for (const delegationInput of delegationInputs) {
             const activity = await generateSingleDelegationActivity(wallet, {
-                action: ActivityAction.Burn,
+                action: ActivityAction.Claim,
                 processedTransaction,
                 wrappedOutput: delegationInput,
             })
