@@ -4,4 +4,5 @@ export enum ActivityAction {
     Mint = 'mint',
     Claim = 'claim',
     Unknown = 'unknown',
+    Create = 'create',
 }

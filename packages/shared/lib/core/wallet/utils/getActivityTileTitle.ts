@@ -38,6 +38,10 @@ export function getActivityTileTitle(activity: Activity): string {
             return 'general.delegationCreated'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
+    } else if (action === ActivityAction.Create) {
+        if (type === ActivityType.Delegation) {
+            return 'general.delegationCreated'
+        }
     } else if (action === ActivityAction.Burn) {
         return isConfirmed ? 'general.burned' : 'general.burning'
     } else if (action === ActivityAction.Claim) {

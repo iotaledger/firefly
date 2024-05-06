@@ -2391,6 +2391,11 @@
             "Confirmed": "claimed",
             "Conflicting": "failed to claim"
         },
+        "create": {
+            "Pending": "creating",
+            "Confirmed": "created",
+            "Conflicting": "failed to create"
+        },
         "consolidation": {
             "Pending": "Consolidating outputs",
             "Confirmed": "Outputs consolidated",
