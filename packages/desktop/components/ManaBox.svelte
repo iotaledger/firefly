@@ -107,18 +107,12 @@
                 valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
             />
         {/if}
-        {#if manaToGenerate > 0}
-            <KeyValueBox
-                keyText={localize('general.manaDeficit')}
-                valueText={formatTokenAmountBestMatch(manaToGenerate, mana.metadata)}
-            />
-        {/if}
-
         {#if !hasEnoughMana && timeRemaining}
             <Text type={TextType.p} error classes="text-center">
                 {localize('general.insufficientMana', {
                     values: {
-                        timeRemaining,
+                        mana: formatTokenAmountBestMatch(manaToGenerate, mana.metadata),
+                        time: timeRemaining,
                     },
                 })}
             </Text>
