@@ -109,7 +109,7 @@
         {/if}
         {#if manaToGenerate > 0}
             <KeyValueBox
-                keyText={localize('general.missingMana')}
+                keyText={localize('general.manaDeficit')}
                 valueText={formatTokenAmountBestMatch(manaToGenerate, mana.metadata)}
             />
         {/if}
