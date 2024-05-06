@@ -90,6 +90,7 @@
         try {
             transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
     }
