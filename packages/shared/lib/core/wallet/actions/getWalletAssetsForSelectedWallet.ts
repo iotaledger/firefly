@@ -26,7 +26,7 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
     const wallet = getSelectedWallet()
 
     const marketCoinId = getMarketCoinIdByNetworkId(networkId)
-    const shouldCalculateFiatPrice = networkId !== NetworkId.Custom && marketCoinId
+    const shouldCalculateFiatPrice = networkId !== NetworkId.Custom && networkId !== NetworkId.Testnet && marketCoinId
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
