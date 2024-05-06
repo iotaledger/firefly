@@ -123,6 +123,7 @@
                 transactionInfo.preparedTransactionError = undefined
             }
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = error
         } finally {

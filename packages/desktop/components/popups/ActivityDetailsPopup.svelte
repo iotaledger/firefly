@@ -87,6 +87,7 @@
                 getAccountTransactionOptions()
             )
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
     }
