@@ -202,7 +202,7 @@
 
     function onExplorerClick(): void {
         const explorerUrl = getOfficialExplorerUrl($activeProfile?.network?.id)
-        const validatorsUrl = `${explorerUrl}/validators`
+        const validatorsUrl = `${explorerUrl}/validators/`
         openUrlInBrowser(validatorsUrl)
     }
 </script>
