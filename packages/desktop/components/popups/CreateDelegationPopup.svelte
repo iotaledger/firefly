@@ -6,6 +6,7 @@
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
     import { getNetworkHrp } from '@core/profile/actions'
+    import { debounce } from '@core/utils'
     import { validateBech32Address } from '@core/utils/crypto'
     import {
         AddressConverter,
@@ -28,6 +29,7 @@
     let confirmAllowed = false
     let addressError: string
 
+    const transactionUpdater = debounce(updateTransactionInfo, 500)
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
@@ -38,7 +40,7 @@
         $selectedWallet?.isTransferring
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    $: accountAddress, validAmount, void prepareDelegationOutput()
+    $: accountAddress, validAmount, rawAmount, void prepareDelegationOutput()
     $: accountAddress, void validateAddress()
 
     $: confirmAllowed =
@@ -50,7 +52,12 @@
         !hasMainAccountNegativeBIC &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
-    $: displayManaBox = !!accountAddress && !addressError && validAmount && !hasTransactionInProgress
+    $: displayManaBox =
+        !!accountAddress &&
+        !addressError &&
+        validAmount &&
+        !hasTransactionInProgress &&
+        (transactionInfo.preparedTransaction || transactionInfo.preparedTransactionError)
     $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
@@ -91,27 +98,36 @@
         }
     }
 
-    async function prepareDelegationOutput(): Promise<void> {
-        try {
-            if (!accountAddress || !rawAmount || !validAmount) {
-                transactionInfo.preparedTransaction = undefined
-                transactionInfo.preparedTransactionError = undefined
-                return
-            }
-            const params: CreateDelegationParams = {
-                address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
-                delegatedAmount: rawAmount,
-                validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
-            }
-            transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
-                params,
-                getDefaultTransactionOptions()
-            )
+    let updatingTransactionInfo = false
+    function prepareDelegationOutput(): void {
+        updatingTransactionInfo = true
+        if (!updatingTransactionInfo) {
+            transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
+        }
+        transactionUpdater()
+    }
+
+    async function updateTransactionInfo(): Promise<void> {
+        try {
+            if (accountAddress && rawAmount && validAmount) {
+                const params: CreateDelegationParams = {
+                    address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
+                    delegatedAmount: rawAmount,
+                    validatorAddress: new AccountAddress(AddressConverter.parseBech32Address(accountAddress)),
+                }
+                transactionInfo.preparedTransaction = await $selectedWallet?.prepareCreateDelegation(
+                    params,
+                    getDefaultTransactionOptions()
+                )
+                transactionInfo.preparedTransactionError = undefined
+            }
         } catch (error) {
             console.error(error)
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = error
+        } finally {
+            updatingTransactionInfo = false
         }
     }
 
