@@ -28,7 +28,7 @@ export async function generateActivitiesFromDelegationOutputs(
         const delegationInputs = inputs.filter((input) => input.output.type === OutputType.Delegation)
         for (const delegationInput of delegationInputs) {
             const activity = await generateSingleDelegationActivity(wallet, {
-                action: ActivityAction.Burn,
+                action: ActivityAction.Claim,
                 processedTransaction,
                 wrappedOutput: delegationInput,
             })
