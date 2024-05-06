@@ -1766,6 +1766,7 @@
         "custom": "Custom",
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
+        "missingMana": "Missing Mana",
         "availableMana": "Available Mana",
         "insufficientMana": "Generating mana... {timeRemaining}.",
         "insufficientManaGeneration": "Your funds do not generate enough mana. Send funds to your wallet for faster mana generation.",

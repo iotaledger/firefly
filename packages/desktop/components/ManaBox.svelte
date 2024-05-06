@@ -16,7 +16,7 @@
     const extraMana: number = 0 // the sdk returns the wait time without extra slots
     // const extraMana: number = getExtraMana(NUMBER_OF_EXTRA_SLOTS_MANA)
 
-    let requiredTxManaCost: number = 0
+    let estimatedManaCost: number | undefined = undefined
     let refreshManaCountdownInterval: NodeJS.Timeout
     let secondsRemainingCountdownInterval: NodeJS.Timeout
     let secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
@@ -29,7 +29,13 @@
     $: availableMana = outputId
         ? getTotalAvailableMana($selectedWallet, outputId)
         : $selectedWallet?.balances?.availableManaToUse
-    $: requiredMana = requiredTxManaCost + extraMana
+
+    // When the transaction is succesfully prepared, we can know the mana cost
+    let requiredMana: number | undefined = undefined
+    $: requiredMana = estimatedManaCost ? estimatedManaCost + extraMana : undefined
+    // When the transaction is not succesfully prepared, we can only know how much we need to generate
+    let manaToGenerate: number | undefined = undefined
+
     // When making a transaction, the account output is spent and there is a time where the available mana is 0 until the new account output is received
     $: hasEnoughMana = availableMana && !$selectedWallet?.isTransferring && !transactionInfo?.preparedTransactionError
     $: timeRemaining = secondsRemaining ? getBestTimeDuration(secondsRemaining * MILLISECONDS_PER_SECOND) : null
@@ -37,12 +43,13 @@
     function calculateManaCost(): void {
         if (transactionInfo?.preparedTransactionError) {
             if (transactionInfo.preparedTransactionError.message?.includes('slots remaining until enough mana')) {
+                estimatedManaCost = undefined
+                errorMessage = ''
+
                 const splittedError = transactionInfo.preparedTransactionError.message?.split(' ')
-                const requiredManaForTransaction = splittedError[splittedError.indexOf('required') + 1]?.replace(
-                    ',',
-                    ''
-                )
-                requiredTxManaCost = Number(requiredManaForTransaction ?? 0)
+                const requiredManaFromError = splittedError[splittedError.indexOf('required') + 1]?.replace(',', '')
+                const foundManaFromError = splittedError[splittedError.indexOf('found') + 1]?.replace(',', '')
+                manaToGenerate = Number(requiredManaFromError) - Number(foundManaFromError)
 
                 const slotsRemaining = Number(splittedError.reverse()[0].replace('`', ''))
                 if (slotsRemaining && secondsRemaining === 0) {
@@ -60,11 +67,14 @@
                     'insufficient amount to generate positive mana'
                 )
             ) {
+                manaToGenerate = undefined
+                estimatedManaCost = undefined
                 errorMessage = localize('general.insufficientManaGeneration')
             }
         } else if (transactionInfo?.preparedTransaction) {
             errorMessage = ''
-            requiredTxManaCost =
+            manaToGenerate = undefined
+            estimatedManaCost =
                 transactionInfo.preparedTransaction._preparedData?.transaction?.allotments?.reduce(
                     (acc, { mana }) => acc + Number(mana),
                     0
@@ -91,10 +101,18 @@
 
 <div class="flex flex-col space-y-2">
     {#if !errorMessage}
-        <KeyValueBox
-            keyText={localize('general.manaCost')}
-            valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
-        />
+        {#if requiredMana > extraMana}
+            <KeyValueBox
+                keyText={localize('general.manaCost')}
+                valueText={formatTokenAmountBestMatch(requiredMana, mana.metadata)}
+            />
+        {/if}
+        {#if manaToGenerate > 0}
+            <KeyValueBox
+                keyText={localize('general.missingMana')}
+                valueText={formatTokenAmountBestMatch(manaToGenerate, mana.metadata)}
+            />
+        {/if}
 
         {#if !hasEnoughMana && timeRemaining}
             <Text type={TextType.p} error classes="text-center">
