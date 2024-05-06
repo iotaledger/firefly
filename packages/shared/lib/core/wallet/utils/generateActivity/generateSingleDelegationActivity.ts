@@ -15,7 +15,7 @@ export async function generateSingleDelegationActivity(
         output as unknown as CommonOutput
     )
     const outputId = wrappedOutput.outputId
-    const id = outputId || transactionId
+    const id = transactionId
     const isHidden = false
     const isAssetHidden = false
     const containsValue = true
