@@ -25,6 +25,7 @@ export type BaseActivity = {
     destinationNetwork?: string
     parsedLayer2Metadata?: Partial<Layer2Metadata>
     mana: number
+    address?: string
 }
 
 export type AsyncData = {

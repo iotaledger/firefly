@@ -6,16 +6,18 @@
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
     import { activeProfile, checkActiveProfileAuth, updateActiveWallet } from '@core/profile'
     import { getNetworkHrp } from '@core/profile/actions'
+    import { debounce } from '@core/utils'
     import { validateBech32Address } from '@core/utils/crypto'
     import {
         AddressConverter,
         getDefaultTransactionOptions,
+        hasWalletMainAccountNegativeBIC,
         selectedWallet,
         selectedWalletId,
         visibleSelectedWalletAssets,
     } from '@core/wallet'
     import { AccountAddress, AddressType, CreateDelegationParams } from '@iota/sdk/out/types'
-    import { AssetAmountInput, Button, HTMLButtonType, Text, TextInput, TextType } from '@ui'
+    import { AssetAmountInput, Button, HTMLButtonType, Text, TextHint, TextHintVariant, TextInput, TextType } from '@ui'
     import Big from 'big.js'
     import { onMount } from 'svelte'
 
@@ -27,10 +29,9 @@
     let confirmAllowed = false
     let addressError: string
 
+    const transactionUpdater = debounce(updateTransactionInfo, 500)
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
-
-    let preparingOutput = false
 
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].baseCoin
     $: hasTransactionInProgress =
@@ -39,7 +40,8 @@
         $selectedWallet?.isTransferring
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
 
-    $: accountAddress, validAmount, prepareDelegationOutput()
+    $: accountAddress, validAmount, rawAmount, void prepareDelegationOutput()
+    $: accountAddress, void validateAddress()
 
     $: confirmAllowed =
         validAmount &&
@@ -47,14 +49,16 @@
         !hasTransactionInProgress &&
         hasEnoughMana &&
         !addressError &&
+        !hasMainAccountNegativeBIC &&
         transactionInfo.preparedTransaction &&
         !transactionInfo.preparedTransactionError
     $: displayManaBox =
         !!accountAddress &&
         !addressError &&
         validAmount &&
-        transactionInfo.preparedTransaction &&
-        !transactionInfo.preparedTransactionError
+        !hasTransactionInProgress &&
+        (transactionInfo.preparedTransaction || transactionInfo.preparedTransactionError)
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     async function onSubmit(): Promise<void> {
         try {
@@ -84,22 +88,29 @@
         }
     }
 
-    async function prepareDelegationOutput(): Promise<void> {
-        if (!accountAddress || !rawAmount || !validAmount) {
-            transactionInfo.preparedTransaction = undefined
-            transactionInfo.preparedTransactionError = undefined
-            return
-        }
+    function validateAddress(): void {
         try {
+            if (!accountAddress) return
             validateBech32Address(getNetworkHrp(), accountAddress, AddressType.Account)
             addressError = undefined
-        } catch (err) {
-            addressError = localize('error.send.invalidAddress')
-            return
+        } catch (error) {
+            addressError = error.message
         }
-        if (!preparingOutput) {
-            try {
-                preparingOutput = true
+    }
+
+    let updatingTransactionInfo = false
+    function prepareDelegationOutput(): void {
+        updatingTransactionInfo = true
+        if (!updatingTransactionInfo) {
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = undefined
+        }
+        transactionUpdater()
+    }
+
+    async function updateTransactionInfo(): Promise<void> {
+        try {
+            if (accountAddress && rawAmount && validAmount) {
                 const params: CreateDelegationParams = {
                     address: AddressConverter.addressToBech32(new AccountAddress($selectedWallet?.mainAccountId)),
                     delegatedAmount: rawAmount,
@@ -110,13 +121,13 @@
                     getDefaultTransactionOptions()
                 )
                 transactionInfo.preparedTransactionError = undefined
-            } catch (error) {
-                handleError(error)
-                transactionInfo.preparedTransaction = undefined
-                transactionInfo.preparedTransactionError = error
-            } finally {
-                preparingOutput = false
             }
+        } catch (error) {
+            console.error(error)
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
+        } finally {
+            updatingTransactionInfo = false
         }
     }
 
@@ -151,8 +162,14 @@
                 placeholder={localize('popups.createDelegation.account.title')}
                 label={localize('popups.createDelegation.account.description')}
             />
+            {#if addressError}
+                <Text error>{addressError}</Text>
+            {/if}
             {#if displayManaBox}
                 <ManaBox {transactionInfo} bind:hasEnoughMana />
+            {/if}
+            {#if hasMainAccountNegativeBIC}
+                <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
             {/if}
         </div>
         <div class="flex flex-row flex-nowrap w-full space-x-4">

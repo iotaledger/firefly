@@ -7,7 +7,7 @@ export async function withdrawL2Funds(requestHex: string): Promise<void> {
     const URL = `${defaultChainConfig?.archiveEndpoint}/v1/requests/offledger`
 
     const request = {
-        chainId: defaultChainConfig?.aliasAddress,
+        chainId: defaultChainConfig?.anchorAddress,
         request: requestHex,
     }
 

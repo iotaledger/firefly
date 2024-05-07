@@ -6,6 +6,7 @@ export interface IProcessedTransaction {
     outputs: IWrappedOutput[]
     transactionId: string
     direction: ActivityDirection
+    creationSlot: number
     time: Date
     inclusionState: InclusionState
     utxoInputs: UTXOInput[]

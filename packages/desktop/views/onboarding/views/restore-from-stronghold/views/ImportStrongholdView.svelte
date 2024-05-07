@@ -1,16 +1,12 @@
 <script lang="ts">
     import { AnimationEnum } from '@auxiliary/animation'
     import { OnboardingLayout } from '@components'
-    import { ImportFile, onboardingProfile, updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
-    import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
-    import { ClientError } from '@core/error/enums'
+    import { updateOnboardingProfile, validateBackupFile } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
     import { STRONGHOLD_VERSION } from '@core/stronghold/constants'
-    import { StrongholdVersion } from '@core/stronghold/enums'
     import { Animation, Button, Dropzone, Text } from '@ui'
     import { onMount } from 'svelte'
     import { restoreFromStrongholdRouter } from '@core/router'
-    import { restoreBackup } from '@core/wallet/actions'
 
     interface FileWithPath extends File {
         path?: string
@@ -18,19 +14,16 @@
 
     const allowedExtensions = ['stronghold']
 
-    let importFile: ImportFile
     let importFileName = ''
     let importFilePath = ''
     let dropping = false
 
-    async function onContinueClick(): Promise<void> {
+    function onContinueClick(): void {
         validateBackupFile(importFileName)
-        const _shouldMigrate = await shouldMigrate()
         updateOnboardingProfile({
-            importFile,
             importFilePath,
             // TODO: we don't have a way to know the stronghold version of the backup file yet
-            strongholdVersion: _shouldMigrate ? StrongholdVersion.V2 : STRONGHOLD_VERSION,
+            strongholdVersion: STRONGHOLD_VERSION,
         })
         $restoreFromStrongholdRouter.next()
     }
@@ -39,15 +32,14 @@
         $restoreFromStrongholdRouter.previous()
     }
 
-    function setFile(buffer?: ImportFile, file?: FileWithPath): void {
-        if (!buffer) {
+    function setFile(file?: FileWithPath): void {
+        if (!file) {
             file = null
             importFileName = null
             importFilePath = null
             return
         }
 
-        importFile = buffer
         importFileName = file?.name
         importFilePath = file?.path
     }
@@ -70,24 +62,15 @@
 
         const reader = new FileReader()
 
-        reader.onload = (e): void => {
-            setFile(e.target.result, fileWithPath)
+        reader.onload = (): void => {
+            setFile(fileWithPath)
         }
 
         reader.readAsArrayBuffer(fileWithPath)
     }
 
-    async function shouldMigrate(): Promise<boolean> {
-        try {
-            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
-        } catch (err) {
-            const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
-            return isMigrationRequired
-        }
-    }
-
     onMount(() => {
-        updateOnboardingProfile({ importFile: undefined, importFilePath: undefined })
+        updateOnboardingProfile({ importFilePath: undefined })
     })
 </script>
 
@@ -108,7 +91,7 @@
         />
     </div>
     <div slot="leftpane__action" class="flex flex-row flex-wrap justify-between items-center space-x-4">
-        <Button classes="flex-1" disabled={!importFile} onClick={onContinueClick}>
+        <Button classes="flex-1" disabled={!importFilePath} onClick={onContinueClick}>
             {localize('actions.continue')}
         </Button>
     </div>

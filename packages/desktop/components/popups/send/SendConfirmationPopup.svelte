@@ -14,6 +14,7 @@
         getDefaultTransactionOptions,
         getOutputParameters,
         getStorageDepositFromOutput,
+        hasWalletMainAccountNegativeBIC,
         validateSendConfirmation,
     } from '@core/wallet/utils'
     import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
@@ -95,6 +96,7 @@
                 getDefaultTransactionOptions()
             )
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
 
@@ -146,7 +148,7 @@
                 )
             }
         } catch (err) {
-            handleError(err)
+            console.error(err)
             transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false
@@ -228,7 +230,7 @@
         closePopup()
     }
 
-    $: hasMainAccountNegativeBIC = $selectedWallet?.balances?.blockIssuanceCredits?.[$selectedWallet?.mainAccountId] < 0
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 </script>
 
 <send-confirmation-popup class="w-full h-full space-y-6 flex flex-auto flex-col shrink-0">

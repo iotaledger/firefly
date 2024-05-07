@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { onMount } from 'svelte'
     import { Button, ColorPicker, Input, Text, TextType } from '@ui'
     import { getRandomWalletColor } from '@core/wallet'
@@ -95,4 +95,4 @@
             {localize('actions.create')}
         </Button>
     </create-wallet-popup-actions>
-</create-wallet-popup>
+</create-wallet-popup> -->

@@ -1,6 +1,8 @@
 import {
     AccountActivity,
+    AnchorActivity,
     ConsolidationActivity,
+    DelegationActivity,
     FoundryActivity,
     GovernanceActivity,
     NftActivity,
@@ -16,3 +18,5 @@ export type Activity =
     | GovernanceActivity
     | ConsolidationActivity
     | VestingActivity
+    | DelegationActivity
+    | AnchorActivity

@@ -1,20 +1,14 @@
 import { IProcessedTransaction, IWrappedOutput } from '../../interfaces'
-import {
-    AccountOutput,
-    Output,
-    OutputType,
-    OutputWithMetadata,
-    TransactionWithMetadata,
-    UTXOInput,
-} from '@iota/sdk/out/types'
+import { Output, OutputType, OutputWithMetadata, TransactionWithMetadata, UTXOInput } from '@iota/sdk/out/types'
 import { computeOutputId } from './computeOutputId'
 import { getOutputIdFromTransactionIdAndIndex } from './getOutputIdFromTransactionIdAndIndex'
 import { getDirectionFromOutgoingTransaction } from '../transactions'
 import { IWalletState } from '@core/wallet/interfaces'
-import { getPassiveManaForOutput } from '@core/network'
 import { MILLISECONDS_PER_SECOND } from '@core/utils'
 import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
 import { get } from 'svelte/store'
+import { getTotalTransactionMana } from './getTotalTransactionMana'
+import { getInvolvedAddresses } from '../getInvolvedAddresses'
 
 export async function preprocessOutgoingTransaction(
     transaction: TransactionWithMetadata,
@@ -23,13 +17,15 @@ export async function preprocessOutgoingTransaction(
     const regularTransactionEssence = transaction.payload.transaction
     const transactionId = transaction?.transactionId?.toString()
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-    const slotUnixTimestamp = nodeProtocolParameters
+    const involvedAddresses = await getInvolvedAddresses(wallet)
+    const createTransactionUnixTimestamp = nodeProtocolParameters
         ? getUnixTimestampFromNodeInfoAndSlotIndex(nodeProtocolParameters, regularTransactionEssence.creationSlot)
         : 0
+    const createTransactionTimestamp = createTransactionUnixTimestamp * MILLISECONDS_PER_SECOND
 
     const outputs = convertTransactionsOutputTypesToWrappedOutputs(transactionId, regularTransactionEssence.outputs)
 
-    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, await wallet.address())
+    const direction = getDirectionFromOutgoingTransaction(regularTransactionEssence.outputs, involvedAddresses)
     const utxoInputs = regularTransactionEssence.inputs.map((i) => i as UTXOInput)
     const inputIds = utxoInputs.map((input) => {
         const transactionId = input.transactionId
@@ -38,26 +34,24 @@ export async function preprocessOutgoingTransaction(
     })
 
     const inputs = await Promise.all(inputIds.map((inputId) => wallet.getOutput(inputId)))
-
-    let manaCost = 0
-    const prevAccountOutput = inputs.find((input) => (input.output as AccountOutput).accountId)
-    if (prevAccountOutput) {
-        const prevMana = getPassiveManaForOutput(prevAccountOutput) ?? 0
-        const postAccountOutput = outputs.find(
-            (output) =>
-                (prevAccountOutput.output as AccountOutput).accountId === (output.output as AccountOutput).accountId
-        )
-        manaCost = prevMana - Number(postAccountOutput?.output?.mana ?? 0)
-    }
+    const totalTransactionMana = await getTotalTransactionMana(
+        inputs,
+        outputs,
+        wallet,
+        regularTransactionEssence.creationSlot,
+        createTransactionTimestamp
+    )
 
     return {
         outputs: outputs,
         transactionId,
         direction,
-        time: new Date(slotUnixTimestamp * MILLISECONDS_PER_SECOND),
+        time: new Date(createTransactionTimestamp),
         inclusionState: transaction.inclusionState,
-        mana: manaCost,
+        mana: totalTransactionMana,
         wrappedInputs: <IWrappedOutput[]>inputs,
+        utxoInputs,
+        creationSlot: regularTransactionEssence.creationSlot,
     }
 }
 

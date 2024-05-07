@@ -17,7 +17,7 @@ export async function preprocessTransactionsForWallet(wallet: IWalletState): Pro
     const incomingTransactions = await wallet.incomingTransactions()
     for (const incomingTransaction of incomingTransactions) {
         try {
-            const processedTransaction = preprocessIncomingTransaction(incomingTransaction)
+            const processedTransaction = await preprocessIncomingTransaction(incomingTransaction, wallet)
             processedTransactions.push(processedTransaction)
         } catch (err) {
             console.error(err)

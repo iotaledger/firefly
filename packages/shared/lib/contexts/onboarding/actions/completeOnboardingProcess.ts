@@ -2,22 +2,19 @@ import {
     activeProfile,
     activeWallets,
     addWalletPersistedDataToActiveProfile,
-    addWalletToActiveWallets,
     createWallet,
+    DirectoryManager,
     IPersistedProfile,
     login,
+    logout,
 } from '@core/profile'
 import { get } from 'svelte/store'
 import { onboardingProfile } from '../stores'
 import { createNewProfileFromOnboardingProfile } from './createNewProfileFromOnboardingProfile'
-import {
-    addEmptyWalletActivitiesToAllWalletActivities,
-    buildWalletStateAndPersistedData,
-    IWalletState,
-} from '@core/wallet'
-import { DEFAULT_SYNC_OPTIONS } from '@core/wallet/constants'
+import { buildWalletPersistedData } from '@core/wallet'
 import { localize } from '@core/i18n'
 import { IOnboardingProfile } from '../interfaces'
+import { handleError } from '@core/error/handlers'
 
 export async function completeOnboardingProcess(): Promise<void> {
     // if we already have an active profile
@@ -33,28 +30,36 @@ export async function completeOnboardingProcess(): Promise<void> {
     }
     const { strongholdPassword } = profile
 
-    await initWallet(profile, strongholdPassword)
-    void login({ isFromOnboardingFlow: true })
+    try {
+        await initWalletAndPersistedData(profile, strongholdPassword)
+        void login({ isFromOnboardingFlow: true })
 
-    onboardingProfile.set(undefined)
+        onboardingProfile.set(undefined)
+    } catch (err) {
+        console.error(err)
+        handleError(err)
+        void logout()
+    }
 }
 
-export async function initWallet(profile: IOnboardingProfile, strongholdPassword?: string): Promise<IWalletState> {
+export async function initWalletAndPersistedData(
+    profile: IOnboardingProfile,
+    strongholdPassword?: string
+): Promise<void> {
     // 1. Get the wallet name
     const walletName = `${localize('general.wallet')} ${(get(activeWallets)?.length ?? 0) + 1}`
 
     // 2. Create the wallet instance
     const wallet = await createWallet(profile as IPersistedProfile, strongholdPassword)
 
-    // 3. Sync the wallet with the Node
-    await wallet.sync(DEFAULT_SYNC_OPTIONS)
+    // 3. Restore from stronghold if needed
+    if (profile.importFilePath && strongholdPassword) {
+        const strongholdPath = await DirectoryManager.forStronghold(profile.id)
+        await wallet.restoreFromStrongholdSnapshot(strongholdPath, strongholdPassword, true)
+    }
 
-    // 4. Create a wrapper over the wallet instance and the persisted data
-    const [walletState, walletPersistedData] = await buildWalletStateAndPersistedData(profile.id, wallet, walletName)
+    // 4. Create the persisted data
+    const walletPersistedData = await buildWalletPersistedData(profile.id, wallet, walletName)
 
-    addWalletToActiveWallets(walletState)
-    addWalletPersistedDataToActiveProfile(walletState.id, walletPersistedData)
-    addEmptyWalletActivitiesToAllWalletActivities(walletState.id)
-
-    return walletState
+    addWalletPersistedDataToActiveProfile(wallet.id, walletPersistedData)
 }

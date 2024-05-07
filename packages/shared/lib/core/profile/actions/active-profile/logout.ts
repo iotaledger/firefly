@@ -15,30 +15,35 @@ import { activeProfile, isSoftwareProfile, isDestroyingWallets, activeWallets } 
 import { isLedgerProfile } from '@core/profile/utils'
 import { routerManager } from '@core/router/stores'
 import { clearFilters } from '@core/utils/clearFilters'
-import { unsubscribeFromWalletApiEvents, resetSelectedWalletId } from '@core/wallet'
+import { closePopup } from '@auxiliary/popup'
+import { unsubscribeFromWalletApiEvents, resetSelectedWalletId, clearBalanceSyncPoll } from '@core/wallet'
 
 /**
  * Logout from active profile
  */
-export async function logout(clearActiveProfile = true, _lockStronghold = true): Promise<void> {
+export async function logout(): Promise<void> {
     if (get(isSoftwareProfile)) {
-        _lockStronghold && lockStronghold()
+        lockStronghold()
     } else if (isLedgerProfile(get(activeProfile).type)) {
         get(isPollingLedgerDeviceStatus) && stopPollingLedgerNanoStatus()
     }
 
+    clearBalanceSyncPoll()
     clearNetworkPoll()
     clearMarketPricesPoll()
+
+    get(routerManager).resetRouters()
+    closePopup(true)
 
     const _activeProfile = get(activeProfile)
     if (_activeProfile) {
         await logOutProfile()
     }
 
-    cleanupProfileState(clearActiveProfile)
+    cleanupProfileState()
 }
 
-function cleanupProfileState(clearActiveProfile: boolean): void {
+function cleanupProfileState(): void {
     const { lastActiveAt, loggedIn, hasLoadedWallets } = get(activeProfile)
 
     loggedIn.set(false)
@@ -54,11 +59,8 @@ function cleanupProfileState(clearActiveProfile: boolean): void {
     clearSelectedParticipationEventStatus()
 
     activeWallets.set([])
-    if (clearActiveProfile) {
-        resetActiveProfile()
-    }
+    resetActiveProfile()
     clearFilters()
-    get(routerManager).resetRouters()
 }
 
 async function logOutProfile(): Promise<void> {

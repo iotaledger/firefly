@@ -6,6 +6,7 @@
         ITransactionInfoToCalculateManaCost,
         DEFAULT_SECONDS_PER_SLOT,
         getTotalAvailableMana,
+        getAccountOutputsMana,
     } from '@core/network'
     import { activeProfile, updateActiveWallet } from '@core/profile'
     import { implicitAccountCreationRouter } from '@core/router'
@@ -33,6 +34,7 @@
     let walletAddress: string = ''
     let hasEnoughMana = false
     let isLowManaGeneration = false
+    let isInsufficientManaGeneration = false
     let isCongestionNotFound: boolean | null = null
     let seconds: number = 10
     let countdownInterval: NodeJS.Timeout
@@ -42,7 +44,7 @@
     $: baseCoin = $selectedWalletAssets?.[$activeProfile?.network?.id]?.baseCoin
     $: selectedOutput = getSelectedOutput($selectedWallet, outputId)
     $: $selectedWallet,
-        (totalAvailableMana = getTotalAvailableMana($selectedWallet, outputId)),
+        (totalAvailableMana = getTotalAvailableMana($selectedWallet, selectedOutput?.outputId)),
         prepareTransaction(selectedOutput?.outputId)
     $: selectedOutput,
         (formattedSelectedOutputBalance = baseCoin
@@ -52,9 +54,11 @@
         $selectedWallet?.balances?.baseCoin?.available && baseCoin
             ? formatTokenAmountBestMatch(Number($selectedWallet?.balances.baseCoin.available), baseCoin.metadata)
             : null
-    $: formattedManaBalance = totalAvailableMana
-        ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
+    $: generatedManaToTransitionAccount = totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs)
+    $: formattedManaBalance = generatedManaToTransitionAccount
+        ? formatTokenAmountBestMatch(Number(generatedManaToTransitionAccount), DEFAULT_MANA)
         : '-'
+
     $: async () => {
         await prepareTransaction(selectedOutput.outputId)
     }
@@ -98,6 +102,12 @@
                 seconds = slotsRemaining * DEFAULT_SECONDS_PER_SLOT
                 isLowManaGeneration = seconds >= LOW_MANA_GENERATION_SECONDS
                 isCongestionNotFound = false
+                isInsufficientManaGeneration = false
+            }
+            if (error.message?.includes('insufficient amount to generate positive mana')) {
+                transactionInfo.preparedTransactionError = error
+                isInsufficientManaGeneration = true
+                isCongestionNotFound = false
             }
         }
     }
@@ -109,7 +119,9 @@
             seconds -= 1
             if (seconds <= 0) {
                 clearInterval(countdownInterval)
-                onTimeout()
+                if (!isInsufficientManaGeneration) {
+                    onTimeout()
+                }
             }
         }, MILLISECONDS_PER_SECOND)
     }
@@ -150,7 +162,7 @@
                 {formattedSelectedOutputBalance}
             </Text>
             {#if !isCongestionNotFound}
-                {#if isLowManaGeneration}
+                {#if isLowManaGeneration || isInsufficientManaGeneration}
                     <div class="flex flex-col space-y-2">
                         <CopyableBox clearBoxPadding value={walletAddress} isCopyable classes="w-full">
                             <TextHint
@@ -164,7 +176,7 @@
                     </div>
                 {/if}
                 <div class="flex flex-col space-y-2">
-                    {#if isLowManaGeneration && formattedWalletBalance}
+                    {#if (isLowManaGeneration || isInsufficientManaGeneration) && formattedWalletBalance}
                         <KeyValueBox
                             keyText={localize('views.implicit-account-creation.steps.step2.view.eyebrow')}
                             valueText={formattedWalletBalance}
@@ -174,7 +186,7 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} {outputId} />
                 </div>
             {/if}
         </div>

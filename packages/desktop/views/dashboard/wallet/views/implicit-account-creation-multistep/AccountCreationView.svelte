@@ -13,7 +13,12 @@
     import { IllustrationEnum } from '@auxiliary/illustration'
     import { unlockStronghold, updateActiveWallet, isSoftwareProfile, activeProfile } from '@core/profile'
     import { OutputData, OutputId } from '@iota/sdk/out/types'
-    import { DEFAULT_MANA, ITransactionInfoToCalculateManaCost, getTotalAvailableMana } from '@core/network'
+    import {
+        DEFAULT_MANA,
+        ITransactionInfoToCalculateManaCost,
+        getAccountOutputsMana,
+        getTotalAvailableMana,
+    } from '@core/network'
     import { ManaBox } from '@components'
 
     export let outputId: string | undefined
@@ -30,9 +35,10 @@
     $: validStronghold = $isSoftwareProfile ? strongholdPassword && strongholdPassword.length !== 0 : true
     $: disabledActive = !validStronghold || isBusy
     $: iconNetwork = $ledgerAppName === LedgerAppName.Shimmer ? Icon.Shimmer : Icon.Iota
-    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, outputId))
-    $: formattedManaBalance = totalAvailableMana
-        ? formatTokenAmountBestMatch(Number(totalAvailableMana), DEFAULT_MANA)
+    $: $selectedWallet, (totalAvailableMana = getTotalAvailableMana($selectedWallet, selectedOutput?.outputId))
+    $: generatedManaToTransitionAccount = totalAvailableMana - getAccountOutputsMana($selectedWallet?.accountOutputs)
+    $: formattedManaBalance = generatedManaToTransitionAccount
+        ? formatTokenAmountBestMatch(Number(generatedManaToTransitionAccount), DEFAULT_MANA)
         : '-'
     $: formattedWalletBalance =
         $selectedWallet?.balances?.baseCoin?.available && baseCoin
@@ -84,6 +90,7 @@
         try {
             transactionInfo.preparedTransaction = await $selectedWallet?.prepareImplicitAccountTransition(outputId)
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
     }
@@ -110,7 +117,7 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={!$selectedWallet.isTransferring} />
                 </div>
                 <PasswordInput
                     bind:error
@@ -119,7 +126,7 @@
                     showRevealToggle
                     submitHandler={unlockWalletAndCreateAccount}
                     placeholder={localize('views.implicit-account-creation.steps.step3.view.placeholder')}
-                    disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress}
+                    disabled={$selectedWallet?.hasImplicitAccountCreationTransactionInProgress || isBusy}
                 />
             {:else}
                 <LedgerAnimation illustration={IllustrationEnum.LedgerConnected2Desktop} {iconNetwork} />

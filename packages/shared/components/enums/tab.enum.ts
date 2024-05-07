@@ -7,4 +7,5 @@ export enum Tab {
     Governance = 'general.governance',
     NftMetadata = 'general.metadata',
     SmartContract = 'general.smartContract',
+    Delegation = 'general.delegation',
 }

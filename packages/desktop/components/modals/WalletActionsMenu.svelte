@@ -13,6 +13,7 @@
     import { selectedWallet } from '@core/wallet/stores'
     import { activeProfileSecretManager } from '@core/secret-manager'
     import { deleteWallet } from '@core/profile'
+    import features from '@features/features'
 
     export let modal: Modal = undefined
 
@@ -87,10 +88,16 @@
                 onClick={onViewAddressHistoryClick}
             />
         {/if}
-        {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet}
+        {#if ($activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.Testnet) && features?.network?.layer2?.enabled}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
-        <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseWalletClick} />
+        {#if features?.wallet?.multiWallet?.enabled}
+            <MenuItem
+                icon={Icon.Customize}
+                title={localize('actions.customizeAcount')}
+                onClick={onCustomiseWalletClick}
+            />
+        {/if}
         {#if $isActiveLedgerProfile}
             <MenuItem
                 icon={Icon.Ledger}

@@ -30,6 +30,7 @@
         Text,
         TextType,
         Tile,
+        TooltipIcon,
         Width,
     } from '@ui'
 
@@ -58,15 +59,13 @@
     $: delegationOutputs =
         $selectedWallet?.walletUnspentOutputs?.filter((output) => output?.output?.type === OutputType.Delegation) || []
     $: delegationOutputs, setCurrentEpochAndCommittee()
-    $: currentEpoch, delegationOutputs?.length > 0 && buildMappedDelegationData(delegationOutputs)
+    $: currentEpoch, buildMappedDelegationData(delegationOutputs)
     $: ({ baseCoin } = $selectedWalletAssets[$activeProfile?.network.id])
 
     $: rawDelegatedAmount = delegationOutputs.reduce((acc, prev) => acc + Number(prev.output.amount), 0)
     $: formattedDelegated = formatTokenAmountBestMatch(rawDelegatedAmount, baseCoin.metadata)
 
-    // Needed to do Math.max because sometimes the delegated amount is higher than the available balance for a short time and
-    // this leads to a negative undelegated amount
-    $: rawUndelegatedAmount = Math.max(Number($selectedWallet?.balances?.baseCoin?.available) - rawDelegatedAmount, 0)
+    $: rawUndelegatedAmount = Number($selectedWallet?.balances?.baseCoin?.available)
     $: formattedUndelegated = formatTokenAmountBestMatch(rawUndelegatedAmount, baseCoin.metadata)
 
     $: rawRewardsAmount = delegationData.reduce((acc, prev) => acc + prev.rewards, 0)
@@ -82,7 +81,12 @@
                 if (delegationId === EMPTY_HEX_ID) {
                     delegationId = api.computeDelegationId(output.outputId)
                 }
-                const rewards = await getOutputRewards(output.outputId)
+                let rewards = 0
+                try {
+                    rewards = await getOutputRewards(output.outputId)
+                } catch (error) {
+                    console.error('Error getting delegation', error)
+                }
                 return {
                     [Header.DelegationId]: delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
@@ -136,7 +140,7 @@
                     props: {
                         icon: IconEnum.Lock,
                         text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
-                        boxClasses: 'bg-gray-100 w-6 h-6 rounded-full text-blue-500',
+                        boxClasses: 'bg-gray-100 w-5 h-5 rounded-full text-blue-500',
                         width: 20,
                         height: 20,
                     },
@@ -146,8 +150,8 @@
                     component: BoxedIconWithText,
                     props: {
                         icon: IconEnum.Star,
-                        text: baseCoin ? formatTokenAmountBestMatch(Math.round(value), baseCoin.metadata) : value,
-                        boxClasses: 'bg-orange-100 w-6 h-6 rounded-full text-orange-600',
+                        text: formatTokenAmountBestMatch(Math.round(value), DEFAULT_MANA),
+                        boxClasses: 'bg-orange-100 w-5 h-5 rounded-full text-orange-600',
                         width: 20,
                         height: 20,
                     },
@@ -209,102 +213,117 @@
 </script>
 
 {#if $selectedWallet}
-    <delegation-container class="w-full h-full flex flex-nowrap p-8 relative space-x-4 justify-center">
-        <Pane height={Height.Full} width={Width.Full}>
-            <div class="flex flex-col space-y-10 max-w-7xl w-full h-full p-8">
-                <div class="flex flex-row justify-between">
-                    <div class="flex flex-col space-y-1">
-                        <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
-                        <button
-                            class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
-                            on:click={onExplorerClick}
-                        >
-                            {localize('views.delegation.validators')}
-                        </button>
+    <delegation-container
+        class="w-full h-full flex flex-nowrap p-8 relative flex-1 bg-gray-50 dark:bg-gray-900 space-x-4 justify-center"
+    >
+        <div class="flex max-w-7xl justify-center w-full">
+            <Pane height={Height.Full} width={Width.Full}>
+                <div class="flex flex-col space-y-10 w-full h-full max-w-7xl">
+                    <div class="flex flex-row justify-between">
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex flex-row space-x-2 items-center">
+                                <Text type={TextType.h2}>{localize('views.delegation.title')}</Text>
+                                <TooltipIcon
+                                    title={localize('views.delegation.infoTooltip.title')}
+                                    text={localize('views.delegation.infoTooltip.body')}
+                                    width={15}
+                                    height={15}
+                                />
+                            </div>
+                            <button
+                                class="action w-max flex justify-start text-center font-medium text-14 text-blue-500"
+                                on:click={onExplorerClick}
+                            >
+                                {localize('views.delegation.validators')}
+                            </button>
+                        </div>
+                        <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
                     </div>
-                    <Button onClick={handleDelegate}>{localize('views.delegation.action.delegate')}</Button>
-                </div>
-                <div class="flex flex-row space-x-4 w-2/3">
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
-                            <Text type={TextType.h3}>{formattedDelegated}</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.delegated')}</Text
-                            >
-                        </div>
-                    </Tile>
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
-                            <Text type={TextType.h3}>{formattedUndelegated}</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.undelegated')}</Text
-                            >
-                        </div>
-                    </Tile>
-                    <Tile>
-                        <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
-                            <Text type={TextType.h3}>{formattedRewards}</Text>
-                            <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
-                                >{localize('views.delegation.info.rewards')}</Text
-                            >
-                        </div>
-                    </Tile>
-                </div>
-                {#if features.delegation.delegationList.enabled}
-                    {#if delegationData.length > 0}
-                        <table class="flex flex-col overflow-hidden h-full">
-                            <thead class="w-full">
-                                <tr class="flex flex-row justify-between align-items w-full">
-                                    {#each Object.values(Header) as header}
-                                        <th class="text-start flex-1">
-                                            <Text
-                                                color="gray-600"
-                                                fontWeight={FontWeight.medium}
-                                                fontSize="12"
-                                                type={TextType.p}
-                                                >{localize(`views.delegation.table.header.${header}`)}</Text
-                                            >
-                                        </th>
-                                    {/each}
-                                </tr>
-                            </thead>
-                            <tbody class="flex flex-col w-full space-y-4 scrollable-y">
-                                {#each delegationData as data}
-                                    <tr
-                                        class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
-                                    >
-                                        {#each Object.entries(data) as [key, value]}
-                                            {@const renderCell = renderCellValue(value, key)}
-                                            <td class="text-start flex-1">
-                                                {#if renderCell.text}
-                                                    <svelte:component this={renderCell.component} {...renderCell.props}>
-                                                        {#if renderCell.slot}
-                                                            <svelte:component
-                                                                this={renderCell.slot.component}
-                                                                {...renderCell.slot.props}
-                                                            />
-                                                        {/if}
-                                                        {renderCell.text}
-                                                    </svelte:component>
-                                                {:else}
-                                                    <svelte:component
-                                                        this={renderCell.component}
-                                                        {...renderCell.props}
-                                                    />
-                                                {/if}
-                                            </td>
+                    <div class="flex flex-row space-x-4 w-2/3">
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                                <Text type={TextType.h3}>{formattedDelegated}</Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.delegation.info.delegated')}</Text
+                                >
+                            </div>
+                        </Tile>
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                                <Text type={TextType.h3}>{formattedUndelegated}</Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.delegation.info.undelegated')}</Text
+                                >
+                            </div>
+                        </Tile>
+                        <Tile>
+                            <div class="flex flex-col space-y-2 items-center justify-center w-full text-center">
+                                <Text type={TextType.h3}>{formattedRewards}</Text>
+                                <Text color="gray-600" fontWeight={FontWeight.medium} fontSize="12" type={TextType.p}
+                                    >{localize('views.delegation.info.rewards')}</Text
+                                >
+                            </div>
+                        </Tile>
+                    </div>
+                    {#if features.delegation.delegationList.enabled}
+                        {#if delegationData.length > 0}
+                            <table class="flex flex-col overflow-hidden h-full">
+                                <thead class="w-full">
+                                    <tr class="flex flex-row justify-between align-items w-full">
+                                        {#each Object.values(Header) as header}
+                                            <th class="text-start flex-1">
+                                                <Text
+                                                    color="gray-600"
+                                                    fontWeight={FontWeight.medium}
+                                                    fontSize="12"
+                                                    type={TextType.p}
+                                                    >{localize(`views.delegation.table.header.${header}`)}</Text
+                                                >
+                                            </th>
                                         {/each}
                                     </tr>
-                                {/each}
-                            </tbody>
-                        </table>
-                    {:else}
-                        <div class="flex flex-col w-full items-center">
-                            <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
-                        </div>
+                                </thead>
+                                <tbody class="flex flex-col w-full space-y-4 scrollable-y">
+                                    {#each delegationData as data}
+                                        <tr
+                                            class="flex flex-row items-center w-full border-solid border-b border-gray-200 dark:border-gray-600 py-4"
+                                        >
+                                            {#each Object.entries(data) as [key, value]}
+                                                {@const renderCell = renderCellValue(value, key)}
+                                                <td class="text-start flex-1">
+                                                    {#if renderCell.text}
+                                                        <svelte:component
+                                                            this={renderCell.component}
+                                                            {...renderCell.props}
+                                                        >
+                                                            {#if renderCell.slot}
+                                                                <svelte:component
+                                                                    this={renderCell.slot.component}
+                                                                    {...renderCell.slot.props}
+                                                                />
+                                                            {/if}
+                                                            {renderCell.text}
+                                                        </svelte:component>
+                                                    {:else}
+                                                        <svelte:component
+                                                            this={renderCell.component}
+                                                            {...renderCell.props}
+                                                        />
+                                                    {/if}
+                                                </td>
+                                            {/each}
+                                        </tr>
+                                    {/each}
+                                </tbody>
+                            </table>
+                        {:else}
+                            <div class="flex flex-col w-full items-center">
+                                <Text secondary>{localize('views.delegation.table.emptyData')}</Text>
+                            </div>
+                        {/if}
                     {/if}
-                {/if}
-            </div>
-        </Pane>
+                </div>
+            </Pane>
+        </div>
     </delegation-container>
 {/if}

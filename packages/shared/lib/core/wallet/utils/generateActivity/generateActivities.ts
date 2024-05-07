@@ -1,5 +1,5 @@
 import { IWalletState } from '@core/wallet/interfaces'
-import { ActivityAction, ActivityType, IProcessedTransaction, getSenderAddressFromInputs } from '@core/wallet'
+import { ActivityAction, ActivityType, IProcessedTransaction } from '@core/wallet'
 import { Activity } from '@core/wallet/types'
 import { isParticipationOutput } from '@contexts/governance/utils'
 import { generateSingleAccountActivity } from './generateSingleAccountActivity'
@@ -16,6 +16,8 @@ import { OutputType } from '@iota/sdk/out/types'
 import { generateVestingActivity } from './generateVestingActivity'
 import { generateSingleAnchorActivity } from './generateSingleAnchorActivity'
 import { generateActivitiesFromAnchorOutputs } from './generateActivitiesFromAnchorOutputs'
+import { generateActivitiesFromDelegationOutputs } from './generateActivitiesFromDelegationOutputs'
+import { generateSingleDelegationActivity } from './generateSingleDelegationActivity'
 
 export async function generateActivities(
     processedTransaction: IProcessedTransaction,
@@ -33,8 +35,6 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
     wallet: IWalletState
 ): Promise<Activity[]> {
     const { outputs, wrappedInputs } = processedTransaction
-    const sender = getSenderAddressFromInputs(wrappedInputs)
-    const isSentToImplicitAccountCreationAddress = sender === (await wallet.implicitAccountCreationAddress())
     const activities: Activity[] = []
 
     const containsFoundryActivity = outputs.some((output) => output.output.type === OutputType.Foundry)
@@ -78,14 +78,24 @@ async function generateActivitiesFromProcessedTransactionsWithInputs(
         activities.push(...anchorActivities)
     }
 
+    const hasDelegationOutput = outputs.some((output) => output.output.type === OutputType.Delegation)
+    const hasDelegationInput = wrappedInputs?.some((input) => input.output.type === OutputType.Delegation)
+    const containsDelegationActivity = hasDelegationOutput || (hasDelegationInput && !hasDelegationOutput)
+    if (containsDelegationActivity) {
+        const delegationActivities = await generateActivitiesFromDelegationOutputs(processedTransaction, wallet)
+        activities.push(...delegationActivities)
+    }
+
     if (
-        (!containsFoundryActivity && !containsNftActivity && !containsAccountActivity && !governanceOutput) ||
-        isSentToImplicitAccountCreationAddress
+        !containsFoundryActivity &&
+        !containsNftActivity &&
+        !containsAccountActivity &&
+        !governanceOutput &&
+        !containsDelegationActivity
     ) {
         const basicActivities = await generateActivitiesFromBasicOutputs(processedTransaction, wallet)
         activities.push(...basicActivities)
     }
-
     return activities
 }
 
@@ -121,6 +131,8 @@ async function generateActivitiesFromProcessedTransactionsWithoutInputs(
                     return generateVestingActivity(wallet, params)
                 case ActivityType.Anchor:
                     return generateSingleAnchorActivity(wallet, params)
+                case ActivityType.Delegation:
+                    return generateSingleDelegationActivity(wallet, params)
                 default:
                     throw new Error(`Unknown activity type: ${params.type}`)
             }

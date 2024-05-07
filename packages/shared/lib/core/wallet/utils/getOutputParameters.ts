@@ -5,15 +5,18 @@ import {
     outputHexBytes,
 } from '@core/layer-2/utils'
 import { getCoinType } from '@core/profile'
-import { Converter, convertDateToUnixTimestamp } from '@core/utils'
+import { Converter } from '@core/utils'
 import { NewTransactionDetails } from '@core/wallet/types'
 import { getAddressFromSubject } from '@core/wallet/utils'
-import { Assets, BasicOutput, NftOutput, OutputParams } from '@iota/sdk/out/types'
+import { Assets, BasicOutput, NftOutput, OutputParams, NativeToken, MetadataFeature } from '@iota/sdk/out/types'
 import BigInteger from 'big-integer'
 import { prepareOutput } from '../actions/prepareOutput'
 import { ReturnStrategy } from '../enums'
 import { NewTransactionType, newTransactionDetails, getSelectedWallet } from '../stores'
 import { getDefaultTransactionOptions } from '../utils'
+import { DEFAULT_METADATA_FEATURE_ENTRY_KEY } from '../constants'
+import { convertDateToSlotIndex, nodeInfoProtocolParameters } from '../../network'
+import { get } from 'svelte/store'
 
 export async function getOutputParameters(transactionDetails: NewTransactionDetails): Promise<OutputParams> {
     const { layer2Parameters } = transactionDetails ?? {}
@@ -25,31 +28,44 @@ export async function getOutputParameters(transactionDetails: NewTransactionDeta
 
 function buildOutputParameters(transactionDetails: NewTransactionDetails): OutputParams {
     const { recipient, expirationDate, timelockDate, giftStorageDeposit } = transactionDetails ?? {}
-
     const recipientAddress = getAddressFromSubject(recipient)
     const amount = getAmountFromTransactionDetails(transactionDetails)
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = transactionDetails?.metadata ? Converter.utf8ToHex(transactionDetails?.metadata) : undefined
-    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
 
-    return <OutputParams>{
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const expirationSlotIndex =
+        expirationDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(expirationDate, nodeProtocolParameters)
+            : undefined
+    const timelockSlotIndex =
+        timelockDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(timelockDate, nodeProtocolParameters)
+            : undefined
+
+    return {
         recipientAddress,
         amount,
         ...(assets && { assets }),
         features: {
             ...(tag && { tag }),
-            ...(metadata && { metadata }),
+            ...(metadata && {
+                metadata: new MetadataFeature({
+                    [DEFAULT_METADATA_FEATURE_ENTRY_KEY]: metadata,
+                }),
+            }),
+            ...(native_token && { native_token }),
         },
         unlocks: {
-            ...(expirationUnixTime && { expirationUnixTime }),
-            ...(timelockUnixTime && { timelockUnixTime }),
+            ...(expirationSlotIndex && { expirationSlotIndex }),
+            ...(timelockSlotIndex && { timelockSlotIndex }),
         },
         storageDeposit: {
             returnStrategy: giftStorageDeposit ? ReturnStrategy.Gift : ReturnStrategy.Return,
         },
-    }
+    } as unknown as OutputParams
 }
 
 async function buildOutputParametersForLayer2(
@@ -69,8 +85,17 @@ async function buildOutputParametersForLayer2(
     const assets = getAssetFromTransactionDetails(transactionDetails)
     const tag = transactionDetails?.tag ? Converter.utf8ToHex(transactionDetails?.tag) : undefined
     const metadata = getLayer2MetadataForTransfer(transactionDetails)
-    const expirationUnixTime = expirationDate ? convertDateToUnixTimestamp(expirationDate) : undefined
-    const timelockUnixTime = timelockDate ? convertDateToUnixTimestamp(timelockDate) : undefined
+    const native_token = getNativeTokenFromTransactionDetails(transactionDetails)
+
+    const nodeProtocolParameters = get(nodeInfoProtocolParameters)
+    const expirationSlotIndex =
+        expirationDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(expirationDate, nodeProtocolParameters)
+            : undefined
+    const timelockSlotIndex =
+        timelockDate && nodeProtocolParameters
+            ? convertDateToSlotIndex(timelockDate, nodeProtocolParameters)
+            : undefined
 
     const outputParams = <OutputParams>{
         recipientAddress,
@@ -79,11 +104,12 @@ async function buildOutputParametersForLayer2(
         features: {
             ...(tag && { tag }),
             ...(metadata && { metadata }),
+            ...(native_token && { native_token }),
             ...(layer2Parameters && { sender: senderAddress }),
         },
         unlocks: {
-            ...(expirationUnixTime && { expirationUnixTime }),
-            ...(timelockUnixTime && { timelockUnixTime }),
+            ...(expirationSlotIndex && { expirationSlotIndex }),
+            ...(timelockSlotIndex && { timelockSlotIndex }),
         },
         storageDeposit: {
             returnStrategy: ReturnStrategy.Gift,
@@ -99,7 +125,7 @@ async function buildOutputParametersForLayer2(
             outputParams,
             getDefaultTransactionOptions()
         )) as unknown as BasicOutput | NftOutput
-        const serializedOutput = await outputHexBytes(outputForEstimate)
+        const serializedOutput = outputHexBytes(outputForEstimate)
         const gasEstimatePayload = await getEstimatedGasForTransferFromTransactionDetails(serializedOutput)
         return {
             outputForEstimate,
@@ -166,29 +192,29 @@ function getAssetFromTransactionDetails(transactionDetails: NewTransactionDetail
 
     if (transactionDetails.type === NewTransactionType.NftTransfer) {
         assets = { nftId: transactionDetails.nftId }
-    } else if (transactionDetails.type === NewTransactionType.TokenTransfer) {
-        const assetId = transactionDetails.asset?.id
+    } else {
+        assets = undefined
+    }
 
+    return assets
+}
+
+function getNativeTokenFromTransactionDetails(transactionDetails: NewTransactionDetails): NativeToken | undefined {
+    let nativeToken: NativeToken | undefined = undefined
+
+    if (transactionDetails.type === NewTransactionType.TokenTransfer) {
+        const assetId = transactionDetails.asset?.id
         const nativeTokenId = assetId === getCoinType() ? undefined : assetId
 
         if (nativeTokenId) {
             const bigAmount = BigInt(transactionDetails.rawAmount)
-            assets = {
-                nativeTokens: [
-                    {
-                        id: nativeTokenId,
-                        amount: bigAmount,
-                    },
-                ],
+            nativeToken = {
+                id: nativeTokenId,
+                amount: bigAmount,
             }
-
-            // If it's a base coin transaction, we don't need to specify assets
-        } else {
-            assets = undefined
+            // If it's a base coin transaction, we don't need to specify nativeToken
         }
-    } else {
-        throw new Error('Invalid transaction type')
     }
 
-    return assets
+    return nativeToken
 }

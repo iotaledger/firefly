@@ -1,16 +1,13 @@
 <script lang="ts">
-    import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
+    import { openPopup, PopupId } from '@auxiliary/popup'
     import { isVestingOutputId, selectedWalletVestingOverview } from '@contexts/vesting'
     import { localize } from '@core/i18n'
-    import { getManaBalance } from '@core/network'
-    import { checkActiveProfileAuth } from '@core/profile'
+    import { getImplicitAccountsMana, getManaBalance } from '@core/network'
     import { selectedWallet } from '@core/wallet'
-    import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { getStorageDepositFromOutput } from '@core/wallet/utils/generateActivity/helper'
     import features from '@features/features'
     import { CommonOutput, OutputType, UnlockCondition, UnlockConditionType } from '@iota/sdk/out/types'
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from '@ui'
-    import { TextHintVariant } from '@ui/enums'
 
     interface BalanceBreakdown {
         amount: number
@@ -53,13 +50,15 @@
 
     function getManaBreakdown(): BalanceBreakdown {
         const totalPasiveMana = getManaBalance(walletBalance?.mana?.total)
-        const availablePasiveBalance = getManaBalance(walletBalance?.mana?.available)
+        const availableManaBalance = walletBalance?.availableManaToUse
         const totalMana = totalPasiveMana + (walletBalance?.totalWalletBic ?? 0)
         const manaRewards = Number(walletBalance?.mana?.rewards ?? 0)
+        const implicitAccountsMana = getImplicitAccountsMana($selectedWallet?.implicitAccountOutputs, [])
 
         const subBreakdown = {
-            availableMana: { amount: availablePasiveBalance },
-            lockedMana: { amount: totalPasiveMana - availablePasiveBalance },
+            availableMana: { amount: availableManaBalance },
+            lockedMana: { amount: totalPasiveMana - availableManaBalance },
+            implicitAccountsMana: { amount: implicitAccountsMana },
             bicMana: { amount: walletBalance?.totalWalletBic },
             manaRewards: { amount: manaRewards },
         }
@@ -137,6 +136,7 @@
             nftOutputs: { amount: Number(storageDeposits?.nft ?? 0) },
             accountOutputs: { amount: Number(storageDeposits?.account ?? 0) },
             foundryOutputs: { amount: Number(storageDeposits?.foundry ?? 0) },
+            delegationOutputs: { amount: Number(storageDeposits?.delegation ?? 0) },
         }
 
         return { amount: totalStorageDeposit, subBreakdown }
@@ -152,22 +152,7 @@
 
     function onConsolidationClick(): void {
         openPopup({
-            id: PopupId.Confirmation,
-            props: {
-                title: localize('popups.minimizeStorageDeposit.title'),
-                description: localize('popups.minimizeStorageDeposit.description'),
-                confirmText: localize('popups.minimizeStorageDeposit.confirmButton'),
-                variant: TextHintVariant.Info,
-                onConfirm: async () => {
-                    await checkActiveProfileAuth(
-                        async () => {
-                            await consolidateOutputs()
-                            closePopup()
-                        },
-                        { stronghold: true }
-                    )
-                },
-            },
+            id: PopupId.ConsolidateOutputs,
         })
     }
 </script>

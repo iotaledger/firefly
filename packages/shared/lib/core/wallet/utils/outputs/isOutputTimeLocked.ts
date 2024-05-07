@@ -12,6 +12,6 @@ export function isOutputTimeLocked(outputData: OutputData): boolean {
         return false
     } else {
         const currentSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
-        return currentSlotIndex + nodeProtocolParameters.minCommittableAge < timelockUnlockCondition.slotIndex
+        return currentSlotIndex + nodeProtocolParameters.minCommittableAge < timelockUnlockCondition.slot
     }
 }

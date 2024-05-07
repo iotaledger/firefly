@@ -8,7 +8,7 @@ interface NonceResponse {
 
 export async function getNonceForWithdrawRequest(address: string): Promise<string> {
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[get(activeProfile)?.network?.id]
-    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.aliasAddress}/core/accounts/account/${address}/nonce`
+    const URL = `${defaultChainConfig?.archiveEndpoint}/v1/chains/${defaultChainConfig?.anchorAddress}/core/accounts/account/${address}/nonce`
 
     try {
         const nonceResponse: NonceResponse = await fetch(URL).then((response) => {

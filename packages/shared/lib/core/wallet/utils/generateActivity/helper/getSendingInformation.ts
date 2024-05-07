@@ -17,7 +17,7 @@ export function getSendingInformation(
 
     const recipient = getRecipientFromOutput(output)
     const sender = wrappedInputs?.length
-        ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs))
+        ? getSubjectFromAddress(getSenderAddressFromInputs(wrappedInputs, processedTransaction.creationSlot))
         : getSenderFromTransaction(direction === ActivityDirection.Incoming, wallet.depositAddress, output)
 
     const subject = direction === ActivityDirection.Incoming ? sender : recipient

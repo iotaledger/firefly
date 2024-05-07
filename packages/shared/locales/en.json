@@ -645,25 +645,25 @@
                     "view": {
                         "title": "One-time deposit",
                         "subtitle": "3$ - 15$ recommended",
-                        "body": "Send enough funds to using your one-time address so the account can be generated with low waiting times. The funds are your to use after the account has been created.",
+                        "body": "Send enough funds to your one-time address so the account can be generated with low waiting times. The funds are yours to use after the account has been created.",
                         "hiddenAddress": {
-                            "description": "Do not send funds to the address more than once",
+                            "description": "Do not send funds to this address more than once",
                             "action": "Show Address"
                         },
                         "oneTimeAddress": {
                             "title": "One-time Address",
                             "action": "Copy",
-                            "tip": "Do not sent fund to this address more than once"
+                            "tip": "Do not send funds to this address more than once"
                         }
                     }
                 },
                 "step2": {
                     "title": "Step 2",
-                    "body": "Fund confirmation",
+                    "body": "Funds confirmation",
                     "view": {
-                        "eyebrow": "Wallet available balance:",
-                        "generatedMana": "Generated Mana:",
-                        "title": "Funds arrived:",
+                        "eyebrow": "Wallet available balance",
+                        "generatedMana": "Generated Mana",
+                        "title": "Funds arrived",
                         "action": "Activate account",
                         "walletAddress": {
                             "description": "Send funds to your wallet address to speed up the Mana generation",
@@ -693,7 +693,8 @@
                         "main" : "Main",
                         "pending" : "Pending"
                     }
-                }
+                },
+                "newAccount": "Create Account"
             },
             "details": {
                 "balance": "Balance",
@@ -715,8 +716,7 @@
                 "accountNegativeBICHint": "This account has a negative Block Issuance Credit (BIC)."
             },
             "notification": "Activate one account to access the dashboard.",
-            "emptyAccounts": "There are no accounts to show, activate one first.",
-            "hasMainAccountNegativeBIC": "There is a problem with the BIC of your account."
+            "emptyAccounts": "There are no accounts to show, activate one first."
         },
         "delegation": {
             "title": "Delegation",
@@ -743,6 +743,10 @@
                     "epochs": "{epochs} epochs"
                 },
                 "emptyData": "There is no delegation info, press the Delegate button to create your first delegation"
+            },
+            "infoTooltip": {
+                "title": "Delegate Funds",
+                "body":"Earn Mana rewards by delegating your funds to a validator."
             }
         }
     },
@@ -815,6 +819,10 @@
                 "title": "Foundries",
                 "subtitle": "Reserved for Native Token Foundry storage"
             },
+            "delegationOutputs": {
+                "title": "Delegations",
+                "subtitle": "Reserved for Delegation storage"
+            },
             "unclaimed": {
                 "title": "Unclaimed transaction",
                 "subtitle": "Temporarily locked in unclaimed transactions"
@@ -854,6 +862,10 @@
             "manaRewards": {
                 "title": "Mana Rewards",
                 "subtitle": "Mana Rewards (Delegation & Staking)"
+            },
+            "implicitAccountsMana": {
+                "title": "Pending Accounts Mana",
+                "subtitle": "Pending Account mana is locked until the account is activated"
             },
             "availableMana": {
                 "title": "Available Mana",
@@ -1007,7 +1019,7 @@
             "selectRecipient": "Send {assetName} to",
             "transactionSummary": "Transaction to {recipient}",
             "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
-            "negativeBIC": "Unable to send transaction. Your account has a negative Block Issuance Credit (BIC)."
+            "negativeBIC": "Unable to issue a block. Your account has a negative Block Issuance Credit (BIC)."
         },
         "balanceFinder": {
             "title": "Balance finder",
@@ -1219,6 +1231,10 @@
             "title": "Faucet request",
             "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
         },
+        "allotMana": {
+            "title": "Allot Mana",
+            "body": "Select the account address to allot mana."
+        },
         "manageVotingPower": {
             "title": "Manage voting power",
             "body": "Define your voting power to vote on proposals.",
@@ -1287,6 +1303,10 @@
             "confirmButton": "Claim",
             "rewards": "Rewards",
             "delegationId": "Delegation ID"
+        },
+        "implicitAccountAddress": {
+            "title": "Create Account",
+            "subtitle": "Send funds to this address to start the acount creation process. We recommend sending 3$ - 15$."
         }
     },
     "actions": {
@@ -1467,6 +1487,7 @@
         "burnToken": "Burn token",
         "faucetRequest": "Get {token} tokens",
         "refreshTokenMetadata": "Refresh token metadata",
+        "allotMana": "Allot mana",
         "test": "Test",
         "testDeepLink": "Test deep link",
         "initialize": "Initialize",
@@ -1532,10 +1553,14 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
+        "claimed": "Claimed",
+        "claiming": "Claiming",
         "consolidated": "Outputs consolidated",
         "consolidating": "Consolidating outputs",
         "accountCreated": "Account created",
         "creatingAnAccount": "Creating Account",
+        "nftCreated": "NFT created",
+        "creatingNft": "Creating NFT",
         "sendPayment": "Send Payment",
         "moveFunds": "Internal Transfer",
         "sendTo": "Send To",
@@ -1695,6 +1720,7 @@
         "mintNativeTokenDescription": "Mint native token following IRC30 standard",
         "mintNftDescription": "Mint NFT following IRC27 standard",
         "faucetRequestDescription": "Request tokens from the {network} faucet",
+        "allotManaDescription": "Allot mana to an account",
         "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
         "refreshTokenMetadataHint" : "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
         "giftStorageDeposit": "Gift storage deposit",
@@ -1741,9 +1767,17 @@
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available Mana",
-        "insufficientMana": "Generating mana... {timeRemaining}.",
+        "insufficientMana": "Generating Mana... Deficit: {mana}. Waiting time: {time}.",
+        "insufficientManaGeneration": "Your funds do not generate enough mana. Send funds to your wallet for faster mana generation.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
-        "mana": "Mana"
+        "mana": "Mana",
+        "delegationCreated": "Delegation created",
+        "delegationClaimed": "Delegation claimed",
+        "delegation": "Delegation",
+        "delegationId": "Delegation ID",
+        "validatorAddress": "Validator Address",
+        "delegatedAmount": "Delegated amount",
+        "startEpoch": "Start epoch"
     },
     "filters":{
         "title": "Filters",
@@ -2210,6 +2244,15 @@
                 "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
                 "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
             },
+            "selfTransaction": {
+                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
+                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
+                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
+                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
+                "metadata": "An optional data field for storing data persistently on the Tangle.",
+                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
+                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+            },
             "outgoing": {
                 "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
                 "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
@@ -2310,6 +2353,11 @@
                 "Pending": "sending to",
                 "Confirmed": "sent to",
                 "Conflicting": "failed to send"
+            },
+            "selfTransaction": {
+                "Pending": "receiving from",
+                "Confirmed": "received from",
+                "Conflicting": "failed to receive"
             }
         },
         "internal": {
@@ -2338,6 +2386,16 @@
             "Pending": "burning",
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
+        },
+        "claim": {
+            "Pending": "claiming",
+            "Confirmed": "claimed",
+            "Conflicting": "failed to claim"
+        },
+        "create": {
+            "Pending": "creating",
+            "Confirmed": "created",
+            "Conflicting": "failed to create"
         },
         "consolidation": {
             "Pending": "Consolidating outputs",
@@ -2396,9 +2454,16 @@
         },
         "account": {
             "creation": {
-                "Pending": "creating account",
-                "Confirmed": "account created",
-                "Failed": "Failed to create account"
+                "Pending": "Creating account",
+                "Confirmed": "Account created",
+                "Conflicting": "Failed to create account"
+            }
+        },
+        "delegation": {
+            "creation": {
+                "Pending": "Creating delegation",
+                "Confirmed": "Delegation created",
+                "Failed": "Failed to create delegation"
             }
         },
         "networkHealth": {

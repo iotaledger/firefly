@@ -12,6 +12,7 @@ export function getActivityTileTitle(activity: Activity): string {
     if (activity.type === ActivityType.Vesting) {
         return 'general.vestingReward'
     }
+
     if (activity.type === ActivityType.Governance) {
         if (activity.governanceAction === GovernanceAction.IncreaseVotingPower) {
             return isConfirmed ? 'general.increased' : 'general.increasing'
@@ -28,13 +29,26 @@ export function getActivityTileTitle(activity: Activity): string {
         }
     } else if (activity.type === ActivityType.Consolidation) {
         return isConfirmed ? 'general.consolidated' : 'general.consolidating'
-    } else if (type === ActivityType.Account) {
-        if (action === ActivityAction.Mint) {
+    } else if (action === ActivityAction.Mint) {
+        if (type === ActivityType.Account) {
             return isConfirmed ? 'general.accountCreated' : 'general.creatingAnAccount'
+        } else if (type === ActivityType.Nft) {
+            return isConfirmed ? 'general.nftCreated' : 'general.creatingNft'
+        } else if (type === ActivityType.Delegation) {
+            return 'general.delegationCreated'
         }
         return isConfirmed ? 'general.minted' : 'general.minting'
+    } else if (action === ActivityAction.Create) {
+        if (type === ActivityType.Delegation) {
+            return 'general.delegationCreated'
+        }
     } else if (action === ActivityAction.Burn) {
         return isConfirmed ? 'general.burned' : 'general.burning'
+    } else if (action === ActivityAction.Claim) {
+        if (type === ActivityType.Delegation) {
+            return 'general.delegationClaimed'
+        }
+        return isConfirmed ? 'general.claimed' : 'general.claiming'
     } else if (action === ActivityAction.Send) {
         if (isInternal) {
             return isConfirmed ? 'general.transfer' : 'general.transferring'

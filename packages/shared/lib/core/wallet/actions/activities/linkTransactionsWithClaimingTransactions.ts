@@ -1,9 +1,15 @@
 import { IWalletState } from '@core/wallet/interfaces'
 import { activeProfileId } from '@core/profile'
-import { ActivityDirection, IProcessedTransaction } from '@core/wallet'
+import { ActivityDirection, AddressConverter, IClaimedActivities, IProcessedTransaction } from '@core/wallet'
 import { isOutputAsync } from '@core/wallet/utils/outputs/isOutputAsync'
 import { get } from 'svelte/store'
 import { addClaimedActivity, claimedActivities } from '../../stores'
+import {
+    AddressUnlockCondition,
+    CommonOutput,
+    StorageDepositReturnUnlockCondition,
+    UnlockConditionType,
+} from '@iota/sdk/out/types'
 
 /**
  * It takes a list of transactions and links the transactions that are claiming async transactions
@@ -17,9 +23,11 @@ export function linkTransactionsWithClaimingTransactions(
     wallet: IWalletState
 ): IProcessedTransaction[] {
     const resultingTransactions = []
-    const transactionsIncludedAsClaimingTransactions = []
+    const transactionsIncludedAsClaimingTransactions: string[] = []
 
-    const claimedWalletActivities = get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
+    const claimedWalletActivities: { [transactionId: string]: IClaimedActivities } =
+        get(claimedActivities)?.[get(activeProfileId)]?.[wallet.id]
+
     const sortedTransactions = transactions.sort((t1, t2) => (t1.time > t2.time ? 1 : -1))
     const incomingAsyncTransactions: IProcessedTransaction[] = []
     for (const transaction of sortedTransactions) {
@@ -28,13 +36,14 @@ export function linkTransactionsWithClaimingTransactions(
             transaction.outputs.some((_output) => isOutputAsync(_output.output)) &&
             (transaction.direction === ActivityDirection.Incoming ||
                 transaction.direction === ActivityDirection.SelfTransaction)
+        const _isReturnStorageDepositBack = isReturnStorageDepositBack(transaction)
 
-        if (isClaimingTransaction) {
+        if (isClaimingTransaction || _isReturnStorageDepositBack) {
             continue
         } else if (isIncomingAsyncTransaction) {
             // If we have the corresponding claiming transaction cached in local storage, we get that data and update the async transaction
             const claimedActivity = claimedWalletActivities?.[transaction?.transactionId]
-            if (claimedActivity && claimedActivity.claimingTransactionId === transaction?.transactionId) {
+            if (claimedActivity) {
                 const claimingData = {
                     claimedDate: new Date(claimedActivity.claimedTimestamp),
                     claimingTransactionId: claimedActivity.claimingTransactionId,
@@ -72,15 +81,46 @@ export function linkTransactionsWithClaimingTransactions(
             }
         }
     }
-
     return resultingTransactions
 }
 
 function searchClaimedTransactionInIncomingAsyncTransactions(
     allAsyncTransaction: IProcessedTransaction[],
     transaction: IProcessedTransaction
-): IProcessedTransaction {
+): IProcessedTransaction | undefined {
     return allAsyncTransaction.find((candidate) =>
         transaction.utxoInputs?.some((input) => input?.transactionId === candidate?.transactionId)
+    )
+}
+
+function isReturnStorageDepositBack(transaction: IProcessedTransaction): boolean {
+    const returnStorageDepositInputs = transaction.wrappedInputs?.filter((input) =>
+        (input?.output as CommonOutput)?.unlockConditions.find(
+            (uc) => uc.type === UnlockConditionType.StorageDepositReturn
+        )
+    )
+    if (!returnStorageDepositInputs.length) return false
+
+    return returnStorageDepositInputs.some((input) =>
+        transaction.outputs.find((output) => {
+            const hasSameAmount = Number(input.output.amount) === Number(output.output.amount)
+            const returnStorageDepositAddressInput = AddressConverter.addressToBech32(
+                (
+                    (input.output as CommonOutput)?.unlockConditions.find(
+                        (uc) => uc.type === UnlockConditionType.StorageDepositReturn
+                    ) as StorageDepositReturnUnlockCondition
+                )?.returnAddress
+            )
+            const addressUnlockConditionOutput = AddressConverter.addressToBech32(
+                (
+                    (output.output as CommonOutput)?.unlockConditions.find(
+                        (uc) => uc.type === UnlockConditionType.Address
+                    ) as AddressUnlockCondition
+                )?.address
+            )
+            return (
+                hasSameAmount && returnStorageDepositAddressInput === addressUnlockConditionOutput && output.remainder
+            )
+        })
     )
 }

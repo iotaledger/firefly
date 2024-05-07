@@ -2,21 +2,16 @@ import { addNftsToDownloadQueue, addOrUpdateNftInAllWalletNfts, buildNftFromNftO
 import { activeWallets, updateActiveWallet } from '@core/profile'
 import { checkAndRemoveProfilePicture, updateActiveWalletPersistedData } from '@core/profile/actions'
 import {
-    ActivityType,
     IWrappedOutput,
     WalletApiEventHandler,
-    addActivitiesToWalletActivitiesInAllWalletActivities,
-    addPersistedAsset,
-    generateActivities,
     AddressConverter,
-    getOrRequestAssetFromPersistedAssets,
     hasBlockIssuerFeature,
     isAccountOutput,
     isDelegationOutput,
     isImplicitAccountOutput,
-    preprocessGroupedOutputs,
     syncBalance,
     validateWalletApiEvent,
+    generateAndStoreActivitiesForWallet,
 } from '@core/wallet'
 import {
     AccountAddress,
@@ -48,36 +43,18 @@ export async function handleNewOutputEventInternal(walletId: string, payload: Ne
     const isNftOutput = output.type === OutputType.Nft
     const _isDelegationOutput = isDelegationOutput(outputData)
 
-    const address = outputData.address ? AddressConverter.addressToBech32(outputData.address) : undefined
-
     // The basic outputs of the faucet dont have an address
     const isBasicOutput = output.type === OutputType.Basic
-    if (
-        (address && wallet?.depositAddress === address && !outputData?.remainder) ||
-        isAccountOutput(outputData) ||
-        isDelegationOutput(outputData) ||
-        isBasicOutput
-    ) {
+    if (!outputData?.remainder || isAccountOutput(outputData) || isDelegationOutput(outputData) || isBasicOutput) {
         await syncBalance(wallet.id, true)
         const walletOutputs = await wallet.outputs()
         const walletUnspentOutputs = await wallet.unspentOutputs()
         const accountOutputs = await wallet.accounts()
         updateActiveWallet(wallet.id, { walletOutputs, accountOutputs, walletUnspentOutputs })
 
-        const processedOutput = preprocessGroupedOutputs([outputData], payload?.transactionInputs ?? [], wallet)
-
-        const activities = await generateActivities(processedOutput, wallet)
-        for (const activity of activities) {
-            if (activity.type === ActivityType.Basic || activity.type === ActivityType.Foundry) {
-                const asset = await getOrRequestAssetFromPersistedAssets(activity.assetId)
-                if (asset) {
-                    addPersistedAsset(asset)
-                }
-            }
-        }
-        addActivitiesToWalletActivitiesInAllWalletActivities(wallet.id, activities)
+        await generateAndStoreActivitiesForWallet(wallet)
     }
-    if (isImplicitAccountOutput(outputData)) {
+    if (isImplicitAccountOutput(outputData.output)) {
         await syncBalance(wallet.id, true)
         const implicitAccountOutputs = await wallet.implicitAccounts()
         updateActiveWallet(wallet.id, { implicitAccountOutputs })

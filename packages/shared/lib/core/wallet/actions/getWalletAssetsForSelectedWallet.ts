@@ -26,7 +26,7 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
     const wallet = getSelectedWallet()
 
     const marketCoinId = getMarketCoinIdByNetworkId(networkId)
-    const shouldCalculateFiatPrice = networkId !== NetworkId.Custom && marketCoinId
+    const shouldCalculateFiatPrice = networkId !== NetworkId.Custom && networkId !== NetworkId.Testnet && marketCoinId
     const persistedBaseCoin = getAssetFromPersistedAssets(getCoinType())
     const baseCoin: IAsset = {
         ...persistedBaseCoin,
@@ -41,7 +41,7 @@ function getWalletAssetForNetwork(marketCoinPrices: MarketCoinPrices, networkId:
         ...PERSISTED_MANA_ASSET,
         balance: {
             total: getManaBalance(wallet?.balances?.mana?.total),
-            available: getManaBalance(wallet?.balances?.mana?.available),
+            available: wallet?.balances?.availableManaToUse,
         },
     }
 

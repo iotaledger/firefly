@@ -1,4 +1,5 @@
 export enum PopupId {
+    AllotMana = 'allotMana',
     WalletSwitcher = 'WalletSwitcher',
     ActivityDetails = 'activityDetails',
     AddNode = 'addNode',
@@ -54,4 +55,7 @@ export enum PopupId {
     CreateDelegation = 'createDelegation',
     ActivateAccount = 'activateAccount',
     ClaimDelegationRewards = 'claimDelegationRewardsPopup',
+    ImplicitAccountAddress = 'implicitAccountAddressPopup',
+    BurnNft = 'burnNft',
+    ConsolidateOutputs = 'consolidateOutputs',
 }

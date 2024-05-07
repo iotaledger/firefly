@@ -8,29 +8,21 @@ import {
     UnlockConditionType,
     AccountAddress,
 } from '@iota/sdk/out/types'
-import { getUnixTimestampFromNodeInfoAndSlotIndex, nodeInfoProtocolParameters } from '@core/network'
-import { get } from 'svelte/store'
 
-export function getSenderAddressFromInputs(inputs: IWrappedOutput[]): string | undefined {
+export function getSenderAddressFromInputs(inputs: IWrappedOutput[], txSlot: number): string | undefined {
     for (const input of inputs) {
-        const { output, metadata } = input
+        const { output } = input
         const unlockConditions = (output as CommonOutput)?.unlockConditions
 
-        const nodeParamenters = get(nodeInfoProtocolParameters)
-        if (nodeParamenters && metadata?.spent?.slot) {
-            const spentDate = getUnixTimestampFromNodeInfoAndSlotIndex(nodeParamenters, metadata?.spent?.slot)
-            if (spentDate) {
-                // A transaction with an expiration unlock condition is included if the transaction expired
-                const expirationUnlockCondition = unlockConditions.find(
-                    (unlockCondition) =>
-                        unlockCondition.type === UnlockConditionType.Expiration &&
-                        (unlockCondition as ExpirationUnlockCondition).slotIndex < spentDate
-                ) as ExpirationUnlockCondition
+        // A transaction with an expiration unlock condition is included if the transaction expired
+        const expiredExpirationUnlockCondition = unlockConditions.find(
+            (unlockCondition) =>
+                unlockCondition.type === UnlockConditionType.Expiration &&
+                (unlockCondition as ExpirationUnlockCondition).slot < txSlot
+        ) as ExpirationUnlockCondition
 
-                if (expirationUnlockCondition) {
-                    return AddressConverter.addressToBech32(expirationUnlockCondition.returnAddress)
-                }
-            }
+        if (expiredExpirationUnlockCondition) {
+            return AddressConverter.addressToBech32(expiredExpirationUnlockCondition.returnAddress)
         }
 
         const addressUnlockCondition = unlockConditions.find(

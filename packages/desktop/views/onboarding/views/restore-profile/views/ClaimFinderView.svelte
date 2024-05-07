@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { closePopup } from '@auxiliary/popup'
     import { OnboardingLayout } from '@components'
     import {
@@ -9,21 +9,12 @@
         ShimmerClaimingWalletState,
         canUserClaimRewards,
         canUserRecoverFromShimmerClaiming,
-        claimShimmerRewards,
-        createShimmerClaimingProfileManager,
-        findShimmerRewards,
         hasUserClaimedRewards,
-        initialiseAccountRecoveryConfigurationForShimmerClaiming,
         initialiseFirstShimmerClaimingAccount,
-        isOnboardingLedgerProfile,
-        onboardingProfile,
         shimmerClaimingProfileManager,
-        subscribeToWalletApiEventsForShimmerClaiming,
-        syncShimmerClaimingAccount,
     } from '@contexts/onboarding'
     import {
         copyStrongholdFileToProfileDirectory,
-        getTemporaryProfileManagerStorageDirectory,
     } from '@contexts/onboarding/helpers'
     import { localize } from '@core/i18n'
     import {
@@ -32,7 +23,7 @@
         pollLedgerNanoStatus,
         stopPollingLedgerNanoStatus,
     } from '@core/ledger'
-    import { Animation, Button, ShimmerClaimingAccountTile, Text } from '@ui'
+    import { Animation, Button, ShimmerClaimingAccountTile, Text, TextHint, TextHintVariant } from '@ui'
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '@core/router'
     import { AnimationEnum } from '@auxiliary/animation'
@@ -46,6 +37,7 @@
         SubjectType,
         getDefaultTransactionOptions,
         getOutputParameters,
+        hasWalletMainAccountNegativeBIC,
         selectedWallet,
     } from '@core/wallet'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
@@ -72,6 +64,8 @@
     $: shouldShowContinueButton =
         hasUserClaimedRewards(shimmerClaimingAccounts) ||
         (hasSearchedForRewardsBefore && canUserRecoverFromShimmerClaiming(shimmerClaimingAccounts))
+
+    $: hasMainAccountNegativeBIC = hasWalletMainAccountNegativeBIC($selectedWallet)
 
     function onContinueClick(): void {
         $restoreProfileRouter.next()
@@ -159,7 +153,6 @@
 
                 await createShimmerClaimingProfileManager()
 
-                subscribeToWalletApiEventsForShimmerClaiming()
                 await $shimmerClaimingProfileManager.startBackgroundSync({
                     syncOnlyMostBasicOutputs: true,
                     syncIncomingTransactions: true,
@@ -285,7 +278,7 @@
         {:else}
             <Button
                 classes="w-full"
-                disabled={!shouldClaimRewardsButtonBeEnabled || !hasEnoughMana}
+                disabled={!shouldClaimRewardsButtonBeEnabled || !hasEnoughMana || hasMainAccountNegativeBIC}
                 onClick={onClaimRewardsClick}
                 isBusy={isClaimingRewards}
                 busyMessage={localize('actions.claiming')}
@@ -294,8 +287,11 @@
             </Button>
         {/if}
         <ManaBox {transactionInfo} bind:hasEnoughMana />
+        {#if hasMainAccountNegativeBIC}
+            <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
+        {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
         <Animation animation={AnimationEnum.ImportDesktop} />
     </div>
-</OnboardingLayout>
+</OnboardingLayout> -->

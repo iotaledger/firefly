@@ -7,7 +7,7 @@ export function isOutputExpired(output: CommonOutput): boolean | null {
         (unlockCondition) => unlockCondition.type === UnlockConditionType.Expiration
     ) as ExpirationUnlockCondition
     const nodeProtocolParameters = get(nodeInfoProtocolParameters)
-    const outputSlotIndex = expirationUnlockCondition?.slotIndex
+    const outputSlotIndex = expirationUnlockCondition?.slot
     if (!nodeProtocolParameters || !outputSlotIndex) return null
 
     const currentSlotIndex = getSlotIndexFromNodeInfo(nodeProtocolParameters)
