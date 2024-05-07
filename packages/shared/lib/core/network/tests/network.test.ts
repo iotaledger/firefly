@@ -22,16 +22,18 @@ describe('File: network.ts', () => {
 
     const EXPECTED_NODE_URLS: Readonly<{ [key in NetworkId]?: string[] }> = {
         [NetworkId.Iota]: ['https://api.stardust-mainnet.iotaledger.net', 'https://iota-node.tanglebay.com'],
+        [NetworkId.IotaTestnet]: ['https://api.testnet.iotaledger.net'],
         [NetworkId.IotaAlphanet]: ['https://api.iota-alphanet.iotaledger.net'],
         [NetworkId.Shimmer]: ['https://api.shimmer.network', 'https://shimmer-node.tanglebay.com'],
-        [NetworkId.Testnet]: ['https://api.testnet.shimmer.network'],
+        [NetworkId.ShimmerTestnet]: ['https://api.testnet.shimmer.network'],
     }
 
     const EXPECTED_NODES: Readonly<{ [key in NetworkId]: (INode | undefined)[] }> = {
         [NetworkId.Iota]: _buildNodes(NetworkId.Iota),
+        [NetworkId.IotaTestnet]: _buildNodes(NetworkId.IotaTestnet),
         [NetworkId.IotaAlphanet]: _buildNodes(NetworkId.IotaAlphanet),
         [NetworkId.Shimmer]: _buildNodes(NetworkId.Shimmer),
-        [NetworkId.Testnet]: _buildNodes(NetworkId.Testnet),
+        [NetworkId.ShimmerTestnet]: _buildNodes(NetworkId.ShimmerTestnet),
         [NetworkId.Custom]: _buildNodes(NetworkId.Custom),
     }
 
