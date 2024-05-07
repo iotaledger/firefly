@@ -3,7 +3,8 @@
     import { formatTokenAmountBestMatch, IAsset } from '@core/wallet'
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
-    import { DEFAULT_MANA } from '@core/network'
+    import { DEFAULT_MANA, NetworkId } from '@core/network'
+    import { activeProfile } from 'shared/lib/core/profile'
 
     export let asset: IAsset
     export let mana: IAsset
@@ -22,16 +23,21 @@
     <button on:click={toggle} type="button" {disabled}>
         <div class="flex flex-col flex-wrap items-start space-y-1">
             <Text type={TextType.h1} fontWeight={FontWeight.semibold}>
-                {isToggled
+                {isToggled &&
+                $activeProfile?.network?.id !== NetworkId.Testnet &&
+                $activeProfile?.network?.id !== NetworkId.Custom
                     ? formatCurrency(totalMarketValue)
                     : formatTokenAmountBestMatch(asset?.balance?.total, asset?.metadata)}
             </Text>
             <Text type={TextType.p} fontWeight={FontWeight.medium} color="gray-600" darkColor="gray-500">
                 {localize('general.availableBalanceWithValue', {
                     values: {
-                        balance: isToggled
-                            ? formatCurrency(availableMarketValue)
-                            : formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
+                        balance:
+                            isToggled &&
+                            $activeProfile?.network?.id !== NetworkId.Testnet &&
+                            $activeProfile?.network?.id !== NetworkId.Custom
+                                ? formatCurrency(availableMarketValue)
+                                : formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
                     },
                 })}
             </Text>
