@@ -13,6 +13,7 @@ import type {
     ProtocolParameters,
     DecayedMana,
     DelegationId,
+    SlotIndex,
 } from '@iota/sdk/out/types'
 import { IWallet } from '@core/profile/interfaces'
 
@@ -48,4 +49,5 @@ export interface IApi {
     computeOutputId(id: TransactionId, index: number): OutputId
     computeDelegationId(outputId: OutputId): DelegationId
     outputHexBytes(output: Output): HexEncodedString
+    computeSlotIndex(requestId: HexEncodedString): SlotIndex
 }

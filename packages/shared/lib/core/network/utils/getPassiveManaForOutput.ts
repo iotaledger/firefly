@@ -20,9 +20,11 @@ export function getPassiveManaForOutput(output: OutputData, slotIndex?: number):
             : _nodeInfo.status?.latestConfirmedBlockSlot ?? undefined
     }
     if (slotIndex === undefined) return
+
+    const includedSlot = api.computeSlotIndex(output.metadata.included.transactionId)
     const decayedMana = api.outputManaWithDecay(
         output.output,
-        output.metadata.included.slot,
+        includedSlot,
         slotIndex,
         _nodeInfo.protocolParameters[0].parameters
     )
