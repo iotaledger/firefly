@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Átmeneti hálózat az IOTA számára"
                     },
-                    "testnet": {
-                        "title": "Teszt hálózat",
-                        "body": "Publikus béta hálózat a Shimmer számára"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA éles hálózat"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1245,14 +1249,16 @@
             "iota": "IOTA-profil helyreállítása",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Shimmer-profil helyreállítása",
-            "testnet": "Teszt hálózati profil helyreállítása",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "Egyéni hálózati profil helyreállítása"
         },
         "restoreWalletDescription": {
             "iota": "Meglévő IOTA-profil helyreállítása",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Egy meglévő Shimmer-profil helyreállítása",
-            "testnet": "Meglévő teszt hálózati profil helyreállítása",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "Meglévő egyéni hálózati profil helyreállítása"
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "Szeretné törölni és újra letölteni a jelen fiókhoz tartozó összes NFT-médiát?"
         },
         "createWallet": "Hozzon létre egy új {network}-profilt",
-        "createWalletDescription": "Hozzon létre egy új profilt {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {teszt hálózat} custom {egyéni hálózat} other {ismeretlen}} protokollon",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Shimmer jutalom igénylése",
         "claimShimmerDescription": "IOTA profil importálása és Shimmer jutalom igénylése",
         "migrateFromLegacy": "Költözés korábbi verzióból",
