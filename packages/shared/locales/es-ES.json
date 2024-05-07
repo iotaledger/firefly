@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Red de pruebas para IOTA"
                     },
-                    "testnet": {
-                        "title": "Red de pruebas",
-                        "body": "Red beta pública para Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Red de prueba de Shimmer",
+                        "body": "Red de prueba pública para Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "Red principal IOTA"
+                    },
+                    "iotaTestnet": {
+                        "title": "Red de prueba de IOTA",
+                        "body": "Red de prueba pública para la Red Principal"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1245,14 +1249,16 @@
             "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar perfil de Shimmer",
-            "testnet": "Restore Testnet profile",
+            "iotaTestnet": "Restaurar perfil de red de prueba de IOTA",
+            "shimmerTestnet": "Restaurar perfil de red de prueba Shimmer",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restaurar perfil de IOTA Alphanet",
             "shimmer": "Restaurar un perfil de Shimmer existente",
-            "testnet": "Restore an existing Testnet profile",
+            "iotaTestnet": "Restaurar un perfil existente de la red de prueba de IOTA",
+            "shimmerTestnet": "Restaurar un perfil existente de la red de prueba Shimmer",
             "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
         "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
+        "createWalletDescription": "Crear un perfil nuevo corriendo en {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Red personalizada} other {Desconocida}}",
         "claimShimmer": "Reclamar recompensas de staking de Shimmer",
         "claimShimmerDescription": "Importar perfil IOTA y reclamar recompensas de staking",
         "migrateFromLegacy": "Migrar desde Legacy",
