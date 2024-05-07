@@ -13,6 +13,17 @@ const ElectronApi = {
     updateAppSettings(settings) {
         return ipcRenderer.invoke('update-app-settings', settings)
     },
+    async renameProfileFolder(oldPath, newPath) {
+        return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
+            if (oldPath.startsWith(userDataPath)) {
+                try {
+                    fs.renameSync(oldPath, newPath)
+                } catch (err) {
+                    console.error(err)
+                }
+            }
+        })
+    },
     async removeProfileFolder(profilePath) {
         return ipcRenderer.invoke('get-path', 'userData').then((userDataPath) => {
             // Check that the removing profile path matches the user data path

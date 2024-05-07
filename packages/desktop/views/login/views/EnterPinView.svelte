@@ -15,7 +15,7 @@
     import { loginRouter } from '@core/router'
     import { isValidPin } from '@core/utils'
     import features from '@features/features'
-    import { Icon, PinInput, Profile, Text, TextHint } from '@ui'
+    import { Icon, InitProfileActionsModal, MeatballMenuButton, Modal, PinInput, Profile, Text, TextHint } from '@ui'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
 
@@ -35,6 +35,7 @@
     let buttonText: string = getButtonText(timeRemainingBeforeNextAttempt)
     let maxAttemptsTimer: ReturnType<typeof setTimeout> = null
     let shakeTimeout: ReturnType<typeof setTimeout> = null
+    let modal: Modal
 
     $: if (needsToAcceptLatestPrivacyPolicy() || needsToAcceptLatestTermsOfService()) {
         openPopup({
@@ -150,6 +151,12 @@
 <enter-pin-view class="block w-full h-full bg-white dark:bg-gray-900">
     <div class="flex w-full h-full justify-center items-center">
         <div class="w-96 flex flex-col flex-wrap items-center mb-20">
+            <div class="flex justify-end w-full">
+                <div class="max-h-7 max-w-9 overflow-visible relative">
+                    <MeatballMenuButton onClick={modal?.toggle} />
+                    <InitProfileActionsModal bind:modal />
+                </div>
+            </div>
             <div class="flex flex-col gap-8 w-full items-center">
                 <Profile profile={$activeProfile} {updateRequired} />
                 {#if updateRequired}
