@@ -8,14 +8,11 @@ import { AppTheme } from '../enums'
 
 export interface IPlatform {
     getStrongholdBackupDestination(defaultPath: string): Promise<string | null>
-    saveStrongholdBackup({ allowAccess }: { allowAccess: boolean }): Promise<void>
-    exportTransactionHistory(defaultPath: string, contents: string): Promise<string | null>
     getUserDataPath(): Promise<string>
     getDiagnostics(): Promise<{ label: string; value: string }[]>
     getOS(): Promise<string>
     getMachineId(): Promise<string>
     updateAppSettings(settings: Partial<IAppSettings>): Promise<void>
-    getActiveProfile(): string
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
     renameProfileFolder(oldPath: string, newPath: string): Promise<void>
@@ -55,7 +52,4 @@ export interface IPlatform {
 
     getLanguageCode(): Promise<string>
     updateTheme(theme: AppTheme): void
-
-    startLedgerProcess(): Promise<void>
-    killLedgerProcess(): Promise<void>
 }

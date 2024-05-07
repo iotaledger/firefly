@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Sieć etapowa dla IOTA"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Publiczna sieć beta dla Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Publiczna sieć testowa dla Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Publiczna sieć testowa dla głównej sieci IOTA"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1190,6 +1194,12 @@
             "errorNoChronicle": "Serwer Chronicle nie jest skonfigurowany",
             "errorFailedFetch": "Nie można pobrać historii adresu",
             "errorFailedGenerate": "Nie można wygenerować nowego adresu"
+        },
+        "withdrawFromL2": {
+            "title": "Wypłać z L2",
+            "body": "Lista adresów z wypłacalnymi środkami",
+            "withdraw": "Wypłać",
+            "withdrawing": "Wypłacanie..."
         }
     },
     "charts": {
@@ -1239,14 +1249,16 @@
             "iota": "Przywróć profil IOTA",
             "iotaAlphanet": "Przywróć profil IOTA Alphanet",
             "shimmer": "Przywróć profil Shimmer",
-            "testnet": "Przywróć profil Testnet",
+            "iotaTestnet": "Przywróć profil IOTA Testnet",
+            "shimmerTestnet": "Przywróć profil Shimmer Testnet",
             "custom": "Przywróć profil niestandardowej sieci"
         },
         "restoreWalletDescription": {
             "iota": "Przywróć istniejący profil IOTA",
             "iotaAlphanet": "Przywróć istniejący profil IOTA Alphanet",
             "shimmer": "Przywróć istniejący profil Shimmer",
-            "testnet": "Przywróć istniejący profil Testnet",
+            "iotaTestnet": "Przywróć istniejący profil IOTA Testnet",
+            "shimmerTestnet": "Przywróć istniejący profil Shimmer Testnet",
             "custom": "Przywróć istniejący profil niestandardowej sieci"
         },
         "refreshNftMedia": {
@@ -1254,9 +1266,11 @@
             "description": "Czy chcesz usunąć i ponownie pobrać wszystkie media NFT dla tego konta?"
         },
         "createWallet": "Utwórz nowy profil {network}",
-        "createWalletDescription": "Stwórz nowy profil działający w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {niestandardowej} other {nieznanej}}",
+        "createWalletDescription": "Stwórz nowy profil w sieci {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {niestandardowej} other {nieznanej}}",
         "claimShimmer": "Odbierz nagrody Shimmer ze stakingu",
         "claimShimmerDescription": "Importuj profil IOTA i odbierz nagrody ze stakingu",
+        "migrateFromLegacy": "Migruj ze starej sieci",
+        "migrateFromLegacyDescription": "Migruj do Stardust",
         "createAlias": "Utwórz alias",
         "createAliasDescription": "Utwórz wyjście aliasu",
         "savePassword": "Zapisz hasło",
@@ -1297,7 +1311,7 @@
         "localProofOfWork": "Lokalny tryb proof of work",
         "unlock": "Odblokuj",
         "updateFirefly": "Zaktualizuj Firefly",
-        "restartNow": "Uruchom ponownie teraz",
+        "restartNow": "Uruchom ponownie",
         "refresh": "Odśwież",
         "saveBackup": "Zapisz kopię Stronghold",
         "customizeAcount": "Dostosuj portfel",
@@ -1342,6 +1356,7 @@
         "viewStatus": "Pokaż status",
         "viewAddressHistory": "Pokaż historię adresów",
         "viewBalanceBreakdown": "Zestawienie środków",
+        "withdrawFromL2": "Wypłać z L2",
         "verifyDepositAddress": "Zweryfikuj adres odbiorcy",
         "showHiddenAccounts": "Pokaż ukryte portfele",
         "confirm": "Potwierdź",
@@ -1399,7 +1414,8 @@
         "revote": "Odnów głosy",
         "skipAndKeep": "Pomiń i zachowaj stare hasło",
         "addChain": "Dodaj łańcuch",
-        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu"
+        "viewVestingRewardsFinder": "Wyszukaj nagrody z vestingu",
+        "copyProfileSystemLocation": "Skopiuj lokalizację systemową profilu"
     },
     "general": {
         "recipient": "Odbiorca",
@@ -2117,6 +2133,9 @@
         },
         "participation": {
             "noFunds": "Nie posiadasz żadnych tokenów IOTA."
+        },
+        "nft": {
+            "flagged": "Zachowaj ostrożność wchodząc w nieznane linki. Nigdy nie udostępniaj swoich kluczy prywatnych ani nie wpisuj ich do żadnych witryn czy usług."
         }
     },
     "tooltips": {
