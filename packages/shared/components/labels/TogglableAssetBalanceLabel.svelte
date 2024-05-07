@@ -12,6 +12,8 @@
     $: availableMarketValue = getMarketAmountFromAssetValue(asset?.balance?.available, asset)
     $: totalMarketValue = getMarketAmountFromAssetValue(asset?.balance?.total, asset)
     $: disabled = Number.isNaN(totalMarketValue) || Number.isNaN(availableMarketValue)
+    $: isNotTestnetOrCustomNetwork =
+        $activeProfile?.network?.id !== NetworkId.Testnet && $activeProfile?.network?.id !== NetworkId.Custom
 
     let isToggled = false
     function toggle(): void {
@@ -23,9 +25,7 @@
     <button on:click={toggle} type="button" {disabled}>
         <div class="flex flex-col flex-wrap items-start space-y-1">
             <Text type={TextType.h1} fontWeight={FontWeight.semibold}>
-                {isToggled &&
-                $activeProfile?.network?.id !== NetworkId.Testnet &&
-                $activeProfile?.network?.id !== NetworkId.Custom
+                {isToggled && isNotTestnetOrCustomNetwork
                     ? formatCurrency(totalMarketValue)
                     : formatTokenAmountBestMatch(asset?.balance?.total, asset?.metadata)}
             </Text>
@@ -33,9 +33,7 @@
                 {localize('general.availableBalanceWithValue', {
                     values: {
                         balance:
-                            isToggled &&
-                            $activeProfile?.network?.id !== NetworkId.Testnet &&
-                            $activeProfile?.network?.id !== NetworkId.Custom
+                            isToggled && isNotTestnetOrCustomNetwork
                                 ? formatCurrency(availableMarketValue)
                                 : formatTokenAmountBestMatch(asset?.balance?.available, asset?.metadata),
                     },
