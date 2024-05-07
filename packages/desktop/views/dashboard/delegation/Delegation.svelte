@@ -81,7 +81,12 @@
                 if (delegationId === EMPTY_HEX_ID) {
                     delegationId = api.computeDelegationId(output.outputId)
                 }
-                const rewards = await getOutputRewards(output.outputId)
+                let rewards = 0
+                try {
+                    rewards = await getOutputRewards(output.outputId)
+                } catch (error) {
+                    console.error('Error getting delegation', error)
+                }
                 return {
                     [Header.DelegationId]: delegationId,
                     [Header.DelegatedFunds]: Number(delegationOutput.delegatedAmount),
