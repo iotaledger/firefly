@@ -712,10 +712,10 @@
     "@iota/util.js" "^1.8.6"
     big-integer "^1.6.51"
 
-"@iota/sdk@2.0.0-alpha.8":
-  version "2.0.0-alpha.8"
-  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-2.0.0-alpha.8.tgz#f93504179a170b6c13a1e188a73087514e3a4160"
-  integrity sha512-slvpu3l/r4SllE+c0EQOZwNEX4LkxKS/mihNtVVeV8vK8ppetAx0gOKjInrZoDBAQk4uZgHgD7+PhTnOBg1reQ==
+"@iota/sdk@2.0.0-alpha.9":
+  version "2.0.0-alpha.9"
+  resolved "https://registry.yarnpkg.com/@iota/sdk/-/sdk-2.0.0-alpha.9.tgz#79d44f851b25d43fddf33fdffe634e8e434a8827"
+  integrity sha512-0ovOJ3q6EQ12ZhEVsNKng7bWCA66+qsat3Y+mH4RnoQYnHQQ65DsOvkgJkpiMxorsn9IjrQGCSrk0/tHRhFvEA==
   dependencies:
     class-transformer "^0.5.1"
     prebuild-install "^7.1.1"

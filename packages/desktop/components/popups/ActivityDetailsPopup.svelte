@@ -11,6 +11,7 @@
         ActivityDirection,
         ActivityType,
         claimActivity,
+        getAccountTransactionOptions,
         hasWalletMainAccountNegativeBIC,
         ignoreActivity,
         selectedWallet,
@@ -81,8 +82,12 @@
 
     async function prepareClaimOutput(): Promise<void> {
         try {
-            transactionInfo.preparedTransaction = await $selectedWallet?.prepareClaimOutputs([activity.outputId])
+            transactionInfo.preparedTransaction = await $selectedWallet?.prepareClaimOutputs(
+                [activity.outputId],
+                getAccountTransactionOptions()
+            )
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
     }

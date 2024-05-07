@@ -42,6 +42,7 @@ export * from './isVisibleActivity'
 export * from './isOutputUnlockedByAddress'
 export * from './hasWalletMainAccountNegativeBIC'
 export * from './getInvolvedAddresses'
+export * from './getAccountTransactionOptions'
 
 // Folders
 export * from './generateActivity'

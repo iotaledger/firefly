@@ -1553,6 +1553,8 @@
         "minting": "Minting",
         "burned": "Burned",
         "burning": "Burning",
+        "claimed": "Claimed",
+        "claiming": "Claiming",
         "consolidated": "Outputs consolidated",
         "consolidating": "Consolidating outputs",
         "accountCreated": "Account created",
@@ -1765,7 +1767,8 @@
         "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device",
         "manaCost": "Estimated Mana cost",
         "availableMana": "Available Mana",
-        "insufficientMana": "Generating mana... {timeRemaining}.",
+        "insufficientMana": "Generating Mana... Deficit: {mana}. Waiting time: {time}.",
+        "insufficientManaGeneration": "Your funds do not generate enough mana. Send funds to your wallet for faster mana generation.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
         "delegationCreated": "Delegation created",
@@ -2383,6 +2386,16 @@
             "Pending": "burning",
             "Confirmed": "burned",
             "Conflicting": "failed to burn"
+        },
+        "claim": {
+            "Pending": "claiming",
+            "Confirmed": "claimed",
+            "Conflicting": "failed to claim"
+        },
+        "create": {
+            "Pending": "creating",
+            "Confirmed": "created",
+            "Conflicting": "failed to create"
         },
         "consolidation": {
             "Pending": "Consolidating outputs",

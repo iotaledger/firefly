@@ -96,6 +96,7 @@
                 getDefaultTransactionOptions()
             )
         } catch (error) {
+            console.error(error)
             transactionInfo.preparedTransactionError = error
         }
 
@@ -147,6 +148,7 @@
                 )
             }
         } catch (err) {
+            console.error(err)
             transactionInfo.preparedTransactionError = err
         } finally {
             isPreparingOutput = false
