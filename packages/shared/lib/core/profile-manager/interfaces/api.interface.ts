@@ -1,5 +1,5 @@
 import { WalletOptions, CreateAccountPayload, TransactionId, OutputId } from '@iota/sdk/out/types'
-import { AliasId, Client, FoundryId, HexEncodedString, NftId, Output } from '@iota/sdk'
+import { AliasId, Client, FoundryId, HexEncodedString, NftId, Output, SecretManager } from '@iota/sdk'
 import { IAuth } from '@core/network'
 import { INodeInfoResponse } from '@core/network/interfaces'
 
@@ -16,6 +16,7 @@ export interface IApi {
     getAccount(profileManagerId: string, index: number): Promise<IAccount>
     getAccounts(profileManagerId: string): Promise<IAccount[]>
     getClient(profileManagerId: string): Promise<Client>
+    getSecretManager(profileManagerId: string): Promise<SecretManager>
     recoverAccounts(profileManagerId: string, payload: RecoverAccountsPayload): Promise<IAccount[]>
     migrateStrongholdSnapshotV2ToV3(
         currentPath: string,

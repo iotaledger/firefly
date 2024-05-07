@@ -2,9 +2,9 @@
     import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, NetworkId } from '@core/network'
+    import { COIN_TYPE, DEFAULT_BASE_TOKEN, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
-    import { ANIMATED_TOKEN_IDS, getAssetInitials, IPersistedAsset, TokenStandard } from '@core/wallet'
+    import { ANIMATED_TOKEN_IDS, IPersistedAsset, TokenStandard, getAssetInitials } from '@core/wallet'
     import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
 
     export let asset: IPersistedAsset
@@ -22,25 +22,51 @@
     $: assetIconColor = isBright(assetIconBackgroundColor) ? 'text-gray-800' : 'text-white'
 
     function updateAssetIcon(): void {
-        switch (asset.id) {
-            case String(COIN_TYPE[NetworkId.Iota]):
-            case String(COIN_TYPE[NetworkId.IotaAlphanet]):
-                assetIconBackgroundColor = '#6E82A4'
-                icon = NETWORK_ICON_SVG[NetworkId.Iota]
-                break
-            case String(COIN_TYPE[NetworkId.Shimmer]):
-            case String(COIN_TYPE[NetworkId.Testnet]):
+        const assetName = asset?.metadata?.name?.toLowerCase() ?? ''
+        const assetId = asset?.id
+        if (
+            [
+                String(COIN_TYPE[NetworkId.Iota]),
+                String(COIN_TYPE[NetworkId.IotaTestnet]),
+                String(COIN_TYPE[NetworkId.IotaAlphanet]),
+                String(COIN_TYPE[NetworkId.Shimmer]),
+                String(COIN_TYPE[NetworkId.ShimmerTestnet]),
+            ].includes(assetId)
+        ) {
+            // if not a production network, use gray icon
+            if (
+                [
+                    String(COIN_TYPE[NetworkId.IotaTestnet]),
+                    String(COIN_TYPE[NetworkId.IotaAlphanet]),
+                    String(COIN_TYPE[NetworkId.ShimmerTestnet]),
+                ].includes(assetId)
+            ) {
+                assetIconBackgroundColor = '#C4D1E8'
+            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()) === assetName) {
+                assetIconBackgroundColor = '#000000'
+            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Shimmer]?.name?.toLowerCase()) === assetName) {
                 assetIconBackgroundColor = '#25DFCA'
+            }
+
+            if (
+                [
+                    String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()),
+                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet]?.name?.toLowerCase()),
+                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaAlphanet]?.name?.toLowerCase()),
+                ].includes(assetName)
+            ) {
+                icon = NETWORK_ICON_SVG[NetworkId.Iota]
+            } else {
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]
-                break
-            default:
-                assetInitials = getAssetInitials(asset)
-                assetIconBackgroundColor = getIconColorFromString(asset.metadata?.name, {
-                    shades: ['500', '600', '700', '800'],
-                    colorsToExclude: ['gray'],
-                })
-                assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
-                icon = null
+            }
+        } else {
+            assetInitials = getAssetInitials(asset)
+            assetIconBackgroundColor = getIconColorFromString(asset.metadata?.name, {
+                shades: ['500', '600', '700', '800'],
+                colorsToExclude: ['gray'],
+            })
+            assetLogoUrl = asset.metadata?.standard === TokenStandard.Irc30 ? asset.metadata?.logoUrl ?? '' : ''
+            icon = null
         }
     }
 
@@ -70,7 +96,7 @@
                 renderer={AnimationRenderer.Canvas}
             />
         {:else if icon}
-            <Icon {icon} width="80%" height="80%" classes="{assetIconColor} text-center" />
+            <Icon {icon} width="90%" height="90%" classes="{assetIconColor} text-center" />
         {:else if assetLogoUrl}
             <img src={assetLogoUrl} on:error={handleOnError} alt={assetLogoUrl} class="w-full h-full" />
         {:else}

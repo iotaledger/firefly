@@ -3,10 +3,11 @@
     import { selectedAccountIndex } from '@core/account/stores'
     import { time } from '@core/app'
     import { localize } from '@core/i18n'
-    import { getNftByIdFromAllAccountNfts, ownedNfts, selectedNftId } from '@core/nfts'
-    import { CollectiblesRoute, collectiblesRouter, DashboardRoute, dashboardRouter } from '@core/router'
+    import { getNftByIdFromAllAccountNfts, isFlaggedNft, ownedNfts, selectedNftId } from '@core/nfts'
+    import { CollectiblesRoute, DashboardRoute, collectiblesRouter, dashboardRouter } from '@core/router'
     import { ActivityAsyncStatus, NftActivity } from '@core/wallet'
     import { getSubjectFromActivity } from '@core/wallet/utils/generateActivity/helper'
+    import { Alert } from '@ui'
     import {
         ActivityAsyncStatusPill,
         FontWeight,
@@ -26,6 +27,7 @@
     $: nftIsOwned = $ownedNfts.some((nft) => nft.id === activity.nftId)
     $: isTimelocked = activity?.asyncData?.timelockDate > $time
     $: subject = getSubjectFromActivity(activity)
+    $: flaggedNftWarning = nft && isFlaggedNft(nft)
 
     async function onClick(): Promise<void> {
         closePopup()
@@ -73,6 +75,9 @@
         </transaction-status>
         {#if activity?.subject}
             <SubjectBox {subject} />
+        {/if}
+        {#if flaggedNftWarning}
+            <Alert type="warning" message={flaggedNftWarning} />
         {/if}
     </main-content>
 </nft-transaction-details>
