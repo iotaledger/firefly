@@ -65,7 +65,7 @@ jest.mock('../../profile-manager/api', () => ({
 jest.mock('../actions/getAccountAssetsForSelectedAccount', () => ({
     getAccountAssetsForSelectedAccount: jest.fn((_) => {
         return {
-            [NetworkId.Testnet]: {
+            [NetworkId.ShimmerTestnet]: {
                 baseCoin: PERSISTED_ASSET_SHIMMER,
                 nativeTokens: [nativeTokenAsset],
             },

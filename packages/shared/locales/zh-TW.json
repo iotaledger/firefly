@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "IOTA 的測試網路"
                     },
-                    "testnet": {
-                        "title": "測試網",
-                        "body": "Shimmer 的公開 beta 版網路"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA 主網"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alpha 先行網",
@@ -1190,6 +1194,12 @@
             "errorNoChronicle": "Chronicle 尚未設定",
             "errorFailedFetch": "無法取得位址的歷史紀錄",
             "errorFailedGenerate": "無法產生新位址"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1239,14 +1249,16 @@
             "iota": "回復 IOTA 設定檔",
             "iotaAlphanet": "回復 IOTA Alpha 先行網設定檔",
             "shimmer": "復原Shimmer設定檔",
-            "testnet": "恢復測試網設定檔",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "恢復自訂網路設定檔"
         },
         "restoreWalletDescription": {
             "iota": "恢復既有的 IOTA 設定檔",
             "iotaAlphanet": "回復既有的 IOTA Alpha 先行網設定檔",
             "shimmer": "復原既有的Shimmer檔",
-            "testnet": "恢復既有的測試網設定檔",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "恢復既有的自訂網路設定檔"
         },
         "refreshNftMedia": {
@@ -1254,9 +1266,11 @@
             "description": "您想要為此帳戶刪除並重新下載全部的 NFT 媒體嗎？"
         },
         "createWallet": "建立一個新的 {network} 設定檔",
-        "createWalletDescription": "創建一個在 {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}} 上運行的新設定檔",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "領取Shimmer質押獎勵",
         "claimShimmerDescription": "導入 IOTA 資料並索取質押獎勵",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "建立別名",
         "createAliasDescription": "建立別名輸出",
         "savePassword": "儲存密碼",
@@ -1342,6 +1356,7 @@
         "viewStatus": "查看狀態",
         "viewAddressHistory": "檢視地址歷史紀錄",
         "viewBalanceBreakdown": "檢視餘額明細",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "驗證存款位址",
         "showHiddenAccounts": "顯示隱藏錢包",
         "confirm": "確認",
@@ -1399,7 +1414,8 @@
         "revote": "重新投票",
         "skipAndKeep": "跳過並保留舊密碼",
         "addChain": "新增鏈",
-        "viewVestingRewardsFinder": "搜尋鎖倉獎勵"
+        "viewVestingRewardsFinder": "搜尋鎖倉獎勵",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "接收方",
@@ -2117,6 +2133,9 @@
         },
         "participation": {
             "noFunds": "您沒有任何IOTA。"
+        },
+        "nft": {
+            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
         }
     },
     "tooltips": {

@@ -1,15 +1,21 @@
 <script lang="ts">
     import { OnboardingLayout } from '@components'
-    import { OnboardingType, onboardingProfile, updateOnboardingProfile } from '@contexts/onboarding'
+    import {
+        MIGRATE_FROM_LEGACY_LINK,
+        OnboardingType,
+        onboardingProfile,
+        updateOnboardingProfile,
+    } from '@contexts/onboarding'
     import { localize } from '@core/i18n'
-    import { getNetworkNameFromNetworkId } from '@core/network'
+    import { NetworkId, getNetworkNameFromNetworkId } from '@core/network'
     import { profiles } from '@core/profile'
     import features from '@features/features'
-    import { Animation, OnboardingButton, Text } from '@ui'
+    import { Animation, OnboardingButton, Text, TextType } from '@ui'
     import { onMount } from 'svelte'
     import { onboardingRouter } from '../onboarding-router'
     import { Icon as IconEnum } from '@auxiliary/icon'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { openUrlInBrowser } from '@core/app'
 
     const networkId = $onboardingProfile?.network?.id
 
@@ -22,6 +28,10 @@
         $onboardingRouter.previous()
     }
 
+    function onLegacyMigrationClick(): void {
+        openUrlInBrowser(MIGRATE_FROM_LEGACY_LINK)
+    }
+
     onMount(() => {
         // Clean up if user has navigated back to this view
         updateOnboardingProfile({ onboardingType: undefined })
@@ -30,7 +40,7 @@
 
 <OnboardingLayout allowBack={$profiles.length > 0 || $onboardingProfile?.isDeveloperProfile} {onBackClick}>
     <div slot="title">
-        <Text type="h2"
+        <Text type={TextType.h2}
             >{localize('views.onboarding.profileSetup.setup.title', {
                 values: {
                     network: getNetworkNameFromNetworkId(networkId),
@@ -39,7 +49,7 @@
         >
     </div>
     <div slot="leftpane__content">
-        <Text type="p" secondary classes="mb-8"
+        <Text type={TextType.p} secondary classes="mb-8"
             >{localize('views.onboarding.profileSetup.setup.body', {
                 values: {
                     network: getNetworkNameFromNetworkId(networkId),
@@ -82,6 +92,15 @@
             disabled={!features?.onboarding?.[networkId]?.claimRewards?.enabled}
             onClick={() => onProfileSetupSelectionClick(OnboardingType.Claim)}
         />
+        {#if networkId === NetworkId.Iota}
+            <OnboardingButton
+                primaryText={localize('actions.migrateFromLegacy')}
+                secondaryText={localize('actions.migrateFromLegacyDescription')}
+                icon={IconEnum.Sync}
+                hidden={features?.onboarding?.[networkId]?.[networkId]?.migrateFromLegacy?.enabled}
+                onClick={onLegacyMigrationClick}
+            />
+        {/if}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-green dark:bg-gray-900">
         <Animation animation={AnimationEnum.SetupDesktop} />
