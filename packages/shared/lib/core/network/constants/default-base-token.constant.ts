@@ -22,6 +22,16 @@ const DEFAULT_IOTA_ALPHANET_BASE_TOKEN: IBaseToken = {
     useMetricPrefix: false,
 }
 
+const DEFAULT_IOTA_TESTNET_BASE_TOKEN: IBaseToken = {
+    standard: TokenStandard.BaseToken,
+    name: 'TST',
+    tickerSymbol: 'TST',
+    unit: 'TST',
+    decimals: 6,
+    subunit: 'testies',
+    useMetricPrefix: false,
+}
+
 const DEFAULT_SHIMMER_BASE_TOKEN: IBaseToken = {
     standard: TokenStandard.BaseToken,
     name: 'Shimmer',
@@ -32,7 +42,7 @@ const DEFAULT_SHIMMER_BASE_TOKEN: IBaseToken = {
     useMetricPrefix: false,
 }
 
-const DEFAULT_TESTNET_BASE_TOKEN: IBaseToken = {
+const DEFAULT_SHIMMER_TESTNET_BASE_TOKEN: IBaseToken = {
     standard: TokenStandard.BaseToken,
     name: 'Shimmer',
     tickerSymbol: 'SMR',
@@ -44,7 +54,8 @@ const DEFAULT_TESTNET_BASE_TOKEN: IBaseToken = {
 
 export const DEFAULT_BASE_TOKEN: Readonly<{ [key in NetworkId]?: IBaseToken }> = {
     [NetworkId.Iota]: DEFAULT_IOTA_BASE_TOKEN,
+    [NetworkId.IotaTestnet]: DEFAULT_IOTA_TESTNET_BASE_TOKEN,
     [NetworkId.IotaAlphanet]: DEFAULT_IOTA_ALPHANET_BASE_TOKEN,
     [NetworkId.Shimmer]: DEFAULT_SHIMMER_BASE_TOKEN,
-    [NetworkId.Testnet]: DEFAULT_TESTNET_BASE_TOKEN,
+    [NetworkId.ShimmerTestnet]: DEFAULT_SHIMMER_TESTNET_BASE_TOKEN,
 }

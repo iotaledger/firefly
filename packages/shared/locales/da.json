@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Offentligt testnetværk til Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Offentligt testnetværk til Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1245,14 +1249,16 @@
             "iota": "Gendan IOTA-profil",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
-            "testnet": "Restore Testnet profile",
+            "iotaTestnet": "Gendan IOTA Testnet-profil",
+            "shimmerTestnet": "Gendan Shimmer Testnet-profil",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Gendan en eksisterende IOTA-profil",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
-            "testnet": "Restore an existing Testnet profile",
+            "iotaTestnet": "Gendan en eksisterende IOTA Testnet-profil",
+            "shimmerTestnet": "Gendan en eksisterende Shimmer Testnet-profil",
             "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "Slet og gendownload alle NFT-medier for denne konto?"
         },
         "createWallet": "Opret en ny {network}-profil",
-        "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Tilpasset netværk} other {Unknown}}",
+        "createWalletDescription": "Opret en ny profil, der kører på {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Tilpasset netværk} other {Ukendt}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Importér IOTA-profilen og indløs staking-belønninger",
         "migrateFromLegacy": "Migrér fra Legacy",
@@ -1409,7 +1415,7 @@
         "skipAndKeep": "Overspring og behold gammel adgangskode",
         "addChain": "Tilføj kæde",
         "viewVestingRewardsFinder": "Find vesting rewards",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "copyProfileSystemLocation": "Kopiér profilsystemsplacering"
     },
     "general": {
         "recipient": "Recipient",
@@ -2129,7 +2135,7 @@
             "noFunds": "You do not have any IOTA."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Vær forsigtig, når ukendte link følges. Del eller indtast aldrig private nøgler via nogen websteder eller tjenester."
         }
     },
     "tooltips": {
