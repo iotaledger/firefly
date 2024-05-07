@@ -4,7 +4,7 @@
     import { formatCurrency, localize } from '@core/i18n'
     import { getMarketAmountFromAssetValue } from '@core/market/utils'
     import { DEFAULT_MANA, NetworkId } from '@core/network'
-    import { activeProfile } from 'shared/lib/core/profile'
+    import { activeProfile } from '@core/profile'
 
     export let asset: IAsset
     export let mana: IAsset
