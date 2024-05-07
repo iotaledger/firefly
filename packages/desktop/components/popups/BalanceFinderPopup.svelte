@@ -64,7 +64,7 @@
     $: searchInCurrentWallet, (shouldInitSearch = true)
     $: searchAlgorithm = searchInCurrentWallet
         ? SearchAlgorithmType.DFS
-        : network.id === NetworkId.Iota || NetworkId.IotaAlphanet
+        : network.id === NetworkId.Iota || network.id === NetworkId.IotaAlphanet || network.id === NetworkId.IotaTestnet
         ? SearchAlgorithmType.IDS
         : SearchAlgorithmType.BFS
 

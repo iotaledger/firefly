@@ -15,6 +15,7 @@ export interface IPlatform {
     updateAppSettings(settings: Partial<IAppSettings>): Promise<void>
     updateActiveProfile(id: string): void
     removeProfileFolder(profilePath: string): Promise<void>
+    renameProfileFolder(oldPath: string, newPath: string): Promise<void>
     listProfileFolders(profileStoragePath: string): Promise<string[]>
     updateMenu(attribute: string, value: unknown): void
     popupMenu(): void
