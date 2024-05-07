@@ -36,7 +36,7 @@
     } from '@contexts/governance/utils'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
-    import { TextHintVariant } from 'shared/components/enums'
+    import { FontWeight, TextHintVariant } from '@ui'
 
     const { metadata } = $visibleSelectedAccountAssets?.[$activeProfile?.network?.id]?.baseCoin ?? {}
 
@@ -219,7 +219,7 @@
                     <ProposalDetailsButton proposal={$selectedProposal} />
                 </header-container>
                 <div class="flex flex-1 flex-col space-y-4 justify-between scrollable-y">
-                    <Text type={TextType.h2}>{$selectedProposal?.title}</Text>
+                    <Text type={TextType.h4}>{$selectedProposal?.title}</Text>
                     {#if $selectedProposal?.additionalInfo}
                         <MarkdownBlock text={$selectedProposal?.additionalInfo} />
                     {/if}
@@ -228,7 +228,7 @@
         </Pane>
         <Pane height={Height.Fit}>
             <div class="shrink-0">
-                <Text smaller classes="mb-5">
+                <Text fontWeight={FontWeight.medium} fontSize="12" classes="mb-4">
                     {localize('views.governance.details.yourVote.title')}
                 </Text>
                 <ul class="space-y-2">
@@ -254,7 +254,7 @@
     </div>
     <div class="w-3/5">
         <Pane height={Height.Full}>
-            <div class="flex flex-col justify-between">
+            <div class="flex flex-col justify-between flex-1 space-y-4 scrollable-y h-full max-h-full">
                 <proposal-questions
                     class="relative flex flex-1 flex-col space-y-5 overflow-y-scroll"
                     bind:this={proposalQuestions}

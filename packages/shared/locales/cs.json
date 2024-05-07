@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1190,6 +1194,12 @@
             "errorNoChronicle": "Chronicle not configured",
             "errorFailedFetch": "Couldn't fetch address history",
             "errorFailedGenerate": "Couldn't generate a new address"
+        },
+        "withdrawFromL2": {
+            "title": "Withdraw from L2",
+            "body": "List of addresses with withdrawable funds",
+            "withdraw": "Withdraw",
+            "withdrawing": "Withdrawing..."
         }
     },
     "charts": {
@@ -1239,14 +1249,16 @@
             "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Restore Shimmer profile",
-            "testnet": "Restore Testnet profile",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Restore an existing Shimmer profile",
-            "testnet": "Restore an existing Testnet profile",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
@@ -1254,9 +1266,11 @@
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
         "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Claim Shimmer staking rewards",
         "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
+        "migrateFromLegacy": "Migrate from Legacy",
+        "migrateFromLegacyDescription": "Migrate to Stardust",
         "createAlias": "Create alias",
         "createAliasDescription": "Create alias output",
         "savePassword": "Uložit heslo",
@@ -1342,6 +1356,7 @@
         "viewStatus": "Zobrazit status",
         "viewAddressHistory": "Zobrazit historii adresy",
         "viewBalanceBreakdown": "View balance breakdown",
+        "withdrawFromL2": "Withdraw from L2",
         "verifyDepositAddress": "Verify deposit address",
         "showHiddenAccounts": "Zobrazit skryté peněženky",
         "confirm": "Potvrdit",
@@ -1399,7 +1414,8 @@
         "revote": "Revote",
         "skipAndKeep": "Skip and keep old password",
         "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards"
+        "viewVestingRewardsFinder": "Find vesting rewards",
+        "copyProfileSystemLocation": "Copy profile system location"
     },
     "general": {
         "recipient": "Recipient",
@@ -2117,6 +2133,9 @@
         },
         "participation": {
             "noFunds": "Nemáte žádné IOTA tokeny."
+        },
+        "nft": {
+            "flagged": "Buďte opatrní při otevírání neznámých odkazů. Nikdy nesdílejte své soukromé klíče, ani je nezadávejte do žádných webových stránek nebo služeb."
         }
     },
     "tooltips": {
