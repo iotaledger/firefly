@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Staging network for IOTA"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -1245,14 +1249,16 @@
             "iota": "Restore IOTA profile",
             "iotaAlphanet": "Restore IOTA Alphanet profile",
             "shimmer": "Återställ Shimmer-profil",
-            "testnet": "Restore Testnet profile",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "Restore Custom Network profile"
         },
         "restoreWalletDescription": {
             "iota": "Restore an existing IOTA profile",
             "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
             "shimmer": "Återställ en befintlig Shimmer-profil",
-            "testnet": "Restore an existing Testnet profile",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "Restore an existing Custom Network profile"
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "Do you want to delete and re-download all NFT media for this account?"
         },
         "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Hämta Shimmer staking-belöningar",
         "claimShimmerDescription": "Importera IOTA-profil och hämta dina Shimmer staking-belöningar",
         "migrateFromLegacy": "Migrate from Legacy",
