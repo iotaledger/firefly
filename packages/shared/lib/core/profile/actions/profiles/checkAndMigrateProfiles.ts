@@ -3,6 +3,7 @@ import {
     COIN_TYPE,
     DEFAULT_CHAIN_CONFIGURATIONS,
     DEFAULT_MAX_PARALLEL_API_REQUESTS,
+    DEFAULT_NETWORK_METADATA,
     getDefaultPersistedNetwork,
     IIscpChainMetadata,
     NetworkId,
@@ -74,6 +75,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     15: persistedProfileMigrationToV16,
     16: persistedProfileMigrationToV17,
     17: persistedProfileMigrationToV18,
+    18: persistedProfileMigrationToV19,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -344,4 +346,33 @@ function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): voi
         existingProfile.network.name = 'Shimmer Testnet'
     }
     saveProfile(existingProfile)
+}
+
+/*
+ * Migration 19
+ * Remove hardcoded base token and protocol network dependencies.
+ */
+function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): void {
+    if (existingProfile.network) {
+        interface IOldPersistedNetwork {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            protocol: any // protocol with 'any' instead of 'unknown' to get the value of bech32Hrp later
+            baseToken: unknown
+        }
+
+        const oldNetwork = existingProfile.network as unknown as IOldPersistedNetwork
+
+        // If the networkId is Custom the default hrp is not known, and is obtained from the previous network protocol
+        const defaultBech32Hrp =
+            DEFAULT_NETWORK_METADATA[existingProfile.network.id]?.bech32Hrp || oldNetwork?.protocol?.bech32Hrp || ''
+
+        delete oldNetwork.protocol
+        delete oldNetwork.baseToken
+
+        const newNetwork = oldNetwork as unknown as IPersistedNetwork
+        newNetwork.bech32Hrp = defaultBech32Hrp
+
+        existingProfile.network = newNetwork
+        saveProfile(existingProfile)
+    }
 }

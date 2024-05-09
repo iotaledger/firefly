@@ -2,7 +2,7 @@
     import { AnimationRenderer } from '@auxiliary/animation'
     import { Icon as IconEnum, NETWORK_ICON_SVG } from '@auxiliary/icon'
     import { getIconColorFromString } from '@core/account'
-    import { COIN_TYPE, DEFAULT_BASE_TOKEN, NetworkId } from '@core/network'
+    import { COIN_TYPE, NetworkId } from '@core/network'
     import { isBright } from '@core/utils'
     import { ANIMATED_TOKEN_IDS, IPersistedAsset, TokenStandard, getAssetInitials } from '@core/wallet'
     import { Animation, AssetIconSize, Icon, VerificationBadge } from 'shared/components'
@@ -16,6 +16,8 @@
     let assetInitials: string
     let assetIconWrapperWidth: number
     let assetLogoUrl: string
+
+    const IOTA_NAMES = [NetworkId.Iota, 'tst']
 
     $: isAnimation = asset.id in ANIMATED_TOKEN_IDS
     $: asset, updateAssetIcon()
@@ -42,19 +44,13 @@
                 ].includes(assetId)
             ) {
                 assetIconBackgroundColor = '#C4D1E8'
-            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()) === assetName) {
+            } else if (String(NetworkId.Iota) === assetName) {
                 assetIconBackgroundColor = '#000000'
-            } else if (String(DEFAULT_BASE_TOKEN[NetworkId.Shimmer]?.name?.toLowerCase()) === assetName) {
+            } else if (String(NetworkId.Shimmer) === assetName) {
                 assetIconBackgroundColor = '#25DFCA'
             }
 
-            if (
-                [
-                    String(DEFAULT_BASE_TOKEN[NetworkId.Iota]?.name?.toLowerCase()),
-                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaTestnet]?.name?.toLowerCase()),
-                    String(DEFAULT_BASE_TOKEN[NetworkId.IotaAlphanet]?.name?.toLowerCase()),
-                ].includes(assetName)
-            ) {
+            if (IOTA_NAMES.includes(assetName)) {
                 icon = NETWORK_ICON_SVG[NetworkId.Iota]
             } else {
                 icon = NETWORK_ICON_SVG[NetworkId.Shimmer]

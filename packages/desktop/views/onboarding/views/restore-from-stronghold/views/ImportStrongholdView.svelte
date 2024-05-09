@@ -79,7 +79,7 @@
 
     async function shouldMigrate(): Promise<boolean> {
         try {
-            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
+            await restoreBackup(importFilePath, '', $onboardingProfile.network.bech32Hrp)
         } catch (err) {
             const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
             return isMigrationRequired

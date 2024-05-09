@@ -36,6 +36,8 @@
     import { onDestroy, onMount } from 'svelte'
     import { restoreProfileRouter } from '../restore-profile-router'
     import { AnimationEnum } from '@auxiliary/animation'
+    import { getBaseToken } from '@core/profile'
+    import { getAndUpdateNodeInfo } from '@core/network'
 
     $: shimmerClaimingAccounts = $onboardingProfile?.shimmerClaimingAccounts ?? []
 
@@ -172,7 +174,8 @@
         }
     }
 
-    onMount(() => {
+    onMount(async () => {
+        await getAndUpdateNodeInfo()
         void ledgerRaceConditionProtectionWrapper(setupShimmerClaiming)
     })
 
@@ -199,10 +202,7 @@
         {#if shimmerClaimingAccounts && shimmerClaimingAccounts?.length > 0}
             <div class="flex-auto overflow-y-auto h-1 space-y-3 w-full scrollable-y">
                 {#each shimmerClaimingAccounts as shimmerClaimingAccount}
-                    <ShimmerClaimingAccountTile
-                        {shimmerClaimingAccount}
-                        baseToken={$onboardingProfile?.network?.baseToken}
-                    />
+                    <ShimmerClaimingAccountTile {shimmerClaimingAccount} baseToken={getBaseToken()} />
                 {/each}
             </div>
         {/if}
