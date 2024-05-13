@@ -1,9 +1,6 @@
 import { NetworkId } from '../enums'
 
 export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
-    if (networkName.startsWith('iota2-alphanet')) {
-        return NetworkId.Testnet
-    }
     switch (networkName) {
         case 'iota-mainnet':
         case 'stardust-mainnet-pre1':
@@ -16,6 +13,7 @@ export function getNetworkIdFromNetworkName(networkName: string): NetworkId {
         case 'testnet':
         case 'testnet-1':
         case 'testnet-2':
+        case 'nova-testnet':
             return NetworkId.Testnet
         default:
             return NetworkId.Custom
