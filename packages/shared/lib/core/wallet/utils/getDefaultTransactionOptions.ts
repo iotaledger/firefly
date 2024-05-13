@@ -1,6 +1,10 @@
 import { TransactionOptions } from '@iota/sdk/out/types'
+import { getSelectedWallet } from '../stores'
 
-export function getDefaultTransactionOptions(): TransactionOptions {
+export function getDefaultTransactionOptions(
+    accountId: string | undefined = getSelectedWallet()?.mainAccountId
+): TransactionOptions | undefined {
+    if (!accountId) return
     return {
         remainderValueStrategy: {
             /** The name of the strategy. */
@@ -9,5 +13,6 @@ export function getDefaultTransactionOptions(): TransactionOptions {
             value: null,
         },
         allowMicroAmount: true,
+        issuerId: accountId,
     }
 }
