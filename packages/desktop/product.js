@@ -1,6 +1,6 @@
 /* eslint-disable */
-const PRODUCT_NAME = 'Firefly Shimmer'
-const NETWORK = 'shimmer'
+const PRODUCT_NAME = 'Firefly Canary'
+const NETWORK = 'canary'
 
 const STAGE = process.env.STAGE || 'alpha'
 const APP_ID = getAppId()
@@ -47,15 +47,15 @@ function getAppName(isPackaged = true) {
  * If network = 'shimmer' -> 'firefly'
  */
 function getAppProtocol() {
-    return STAGE === 'prod' ? 'firefly' : `firefly-${STAGE.toLowerCase()}`
+    return STAGE === 'prod' ? 'canary' : `canary-${STAGE.toLowerCase()}`
 }
 
 /**
- * If stage = 'prod' -> 'org.iota.firefly-shimmer'
- * If stage = 'alpha' -> 'org.iota.firefly-shimmer.alpha'
+ * If stage = 'prod' -> 'org.iota.firefly-canary'
+ * If stage = 'alpha' -> 'org.iota.firefly-canary.alpha'
  */
 function getAppId() {
-    const defaultAppId = 'org.iota.firefly-shimmer'
+    const defaultAppId = 'org.iota.firefly-canary'
     if (STAGE === 'prod') {
         return defaultAppId
     }
@@ -65,11 +65,11 @@ function getAppId() {
 function getChannelName() {
     switch (STAGE) {
         case 'alpha':
-            return 'shimmer-alpha'
+            return 'canary-alpha'
         case 'beta':
-            return 'shimmer-beta'
+            return 'canary-beta'
         default:
-            return 'shimmer'
+            return 'canary'
     }
 }
 
