@@ -13,5 +13,6 @@ export function getAccountTransactionOptions(
             value: new AccountAddress(accountId),
         },
         allowMicroAmount: true,
+        issuerId: accountId,
     }
 }
