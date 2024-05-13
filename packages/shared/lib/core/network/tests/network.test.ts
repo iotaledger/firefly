@@ -24,7 +24,7 @@ describe('File: network.ts', () => {
         [NetworkId.Iota]: ['https://api.stardust-mainnet.iotaledger.net', 'https://iota-node.tanglebay.com'],
         [NetworkId.IotaAlphanet]: ['https://api.iota-alphanet.iotaledger.net'],
         [NetworkId.Shimmer]: ['https://api.shimmer.network', 'https://shimmer-node.tanglebay.com'],
-        [NetworkId.Testnet]: ['https://api.nova-testnet.iotaledger.net/'],
+        [NetworkId.Testnet]: ['https://api.nova-testnet.iotaledger.net'],
     }
 
     const EXPECTED_NODES: Readonly<{ [key in NetworkId]: (INode | undefined)[] }> = {
