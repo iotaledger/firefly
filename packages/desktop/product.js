@@ -47,7 +47,7 @@ function getAppName(isPackaged = true) {
  * If network = 'shimmer' -> 'firefly'
  */
 function getAppProtocol() {
-    return STAGE === 'prod' ? 'firefly' : `firefly-${STAGE.toLowerCase()}`
+    return STAGE === 'prod' ? 'canary' : `canary-${STAGE.toLowerCase()}`
 }
 
 /**
