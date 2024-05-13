@@ -104,7 +104,7 @@
             const accountId = AddressConverter.parseBech32Address(accountAddress)
             // Send 0 amount transaction to accountAddress with amount in the allotMana
             const prepareOutput = await $selectedWallet.prepareOutput(
-                { recipientAddress: accountAddress, amount: '0' },
+                { recipientAddress: $selectedWallet.depositAddress, amount: '0' },
                 getDefaultTransactionOptions()
             )
             await $selectedWallet.sendOutputs([prepareOutput], {
