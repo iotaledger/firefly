@@ -95,7 +95,6 @@
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
         } catch (err) {
-            error = err
             transactionInfo.preparedTransactionError = err
         }
     }
