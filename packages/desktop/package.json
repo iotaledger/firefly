@@ -1,7 +1,7 @@
 {
     "name": "desktop",
     "productName": "Firefly Canary",
-    "version": "3.0.0-beta-2",
+    "version": "3.0.0",
     "description": "Official wallet application of IOTA Canary",
     "main": "public/build/main.js",
     "repository": "git@github.com:iotaledger/firefly.git",
