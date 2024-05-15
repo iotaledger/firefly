@@ -286,7 +286,7 @@
                 {localize(`actions.${hasTriedClaimingRewards ? 'rerunClaimProcess' : 'claimRewards'}`)}
             </Button>
         {/if}
-        <ManaBox {transactionInfo} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareClaimOutput} />
         {#if hasMainAccountNegativeBIC}
             <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
         {/if}
