@@ -1,13 +1,13 @@
 name: Build and Release Desktop
 
 env:
-    NETWORK: Shimmer
-    NETWORK_CODE: shimmer
+    NETWORK: Canary
+    NETWORK_CODE: canary
 
 on:
     push:
         tags:
-            - desktop-shimmer-*
+            - desktop-canary-*
     workflow_dispatch:
         inputs:
             debugElectronBuilder:
@@ -39,7 +39,7 @@ jobs:
             - id: set_outputs
               name: Set outputs for version, release name, and stage
               run: |
-                  VERSION=${GITHUB_REF#refs/*/desktop-shimmer-}
+                  VERSION=${GITHUB_REF#refs/*/desktop-canary-}
                   RELEASE_NAME=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-(\d*))?$/$1 \u$2 $3/')
                   STAGE=$(echo $VERSION | perl -0777 -pe 's/^([0-9]\d*\.[0-9]\d*\.[0-9]\d*)(?:-([a-z]*)-([0-9]\d*(\.[0-9]\d*)*))?$/$2/')
 
@@ -198,7 +198,7 @@ jobs:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
                       packages/desktop/out/firefly-*
-                      packages/desktop/out/shimmer*
+                      packages/desktop/out/canary*
 
     release:
         runs-on: ubuntu-latest
@@ -315,7 +315,7 @@ jobs:
                   AWS_DEFAULT_REGION: eu-central-1
 
             - name: Invalidate CloudFront cache for auto-update files
-              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/shimmer*"
+              run: aws cloudfront create-invalidation --distribution-id E32G4HRED4PO65 --paths "/canary*"
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
