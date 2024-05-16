@@ -9,6 +9,8 @@
         getDefaultTransactionOptions,
         AddressConverter,
         hasWalletMainAccountNegativeBIC,
+        convertToRawAmount,
+        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth, getNetworkHrp } from '@core/profile'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
@@ -34,7 +36,7 @@
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, void preparedAllotMana()
+    $: accountAddress, validAmount, amount, void preparedAllotMana()
     $: accountAddress, void validateAddress()
 
     $: sendAllowed =
@@ -83,9 +85,14 @@
         }
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
+            const _amount = convertToRawAmount(
+                amount,
+                asset?.metadata,
+                getUnitFromTokenMetadata(asset?.metadata)
+            )?.toString()
             transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([], {
                 ...getDefaultTransactionOptions(),
-                manaAllotments: { [accountId]: Number(rawAmount) },
+                manaAllotments: { [accountId]: Number(_amount) },
             })
         } catch (err) {
             transactionInfo.preparedTransactionError = err
