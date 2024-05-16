@@ -102,9 +102,14 @@
     async function allotMana(): Promise<void> {
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
+            const _amount = convertToRawAmount(
+                amount,
+                asset?.metadata,
+                getUnitFromTokenMetadata(asset?.metadata)
+            )?.toString()
             await $selectedWallet.sendOutputs([], {
                 ...getDefaultTransactionOptions(),
-                manaAllotments: { [accountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
+                manaAllotments: { [accountId]: Number(_amount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
             })
             closePopup()
         } catch (err) {
