@@ -34,7 +34,7 @@
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, void preparedOutput()
+    $: accountAddress, validAmount, void preparedAllotMana()
     $: accountAddress, void validateAddress()
 
     $: sendAllowed =
@@ -75,7 +75,7 @@
         }
     }
 
-    async function preparedOutput() {
+    async function preparedAllotMana() {
         if (!accountAddress || !rawAmount || !validAmount) {
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
@@ -83,14 +83,7 @@
         }
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
-            const prepareOutput = await $selectedWallet.prepareOutput(
-                {
-                    recipientAddress: $selectedWallet.depositAddress,
-                    amount: '0',
-                },
-                getDefaultTransactionOptions()
-            )
-            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput], {
+            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([], {
                 ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(rawAmount) },
             })
@@ -102,12 +95,7 @@
     async function allotMana(): Promise<void> {
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
-            // Send 0 amount transaction to accountAddress with amount in the allotMana
-            const prepareOutput = await $selectedWallet.prepareOutput(
-                { recipientAddress: $selectedWallet.depositAddress, amount: '0' },
-                getDefaultTransactionOptions()
-            )
-            await $selectedWallet.sendOutputs([prepareOutput], {
+            await $selectedWallet.sendOutputs([], {
                 ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
             })
@@ -124,7 +112,7 @@
     onMount(async () => {
         try {
             await _onMount()
-            await preparedOutput()
+            await preparedAllotMana()
         } catch (err) {
             error = err.message
             handleError(err.error)
