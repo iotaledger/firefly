@@ -9,9 +9,11 @@
     import { activeProfile } from '@core/profile'
 
     $: fomattedNetworkName = $nodeInfoNetworkName
-        .split(' ')
-        .map((word) => word[0].toUpperCase() + word.substring(1))
-        .join(' ')
+        ? $nodeInfoNetworkName
+              .split(' ')
+              .map((word) => word[0].toUpperCase() + word.substring(1))
+              .join(' ')
+        : ''
 
     $: ({ baseCoin, mana } = $selectedWalletAssets[$activeProfile?.network.id])
 </script>
