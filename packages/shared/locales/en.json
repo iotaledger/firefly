@@ -1769,6 +1769,7 @@
         "availableMana": "Available Mana",
         "insufficientMana": "Generating Mana... Deficit: {mana}. Waiting time: {time}.",
         "insufficientManaGeneration": "Your funds do not generate enough mana. Send funds to your wallet for faster mana generation.",
+        "cannotMoveManaOffBlockIssuer": "Mana can only be moved from block issuer accounts using manalocks.",
         "secondsToRefreshManaCost": "Mana cost will be refreshed after {time, plural, one {# second} other {# seconds}}",
         "mana": "Mana",
         "delegationCreated": "Delegation created",

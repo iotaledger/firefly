@@ -75,6 +75,11 @@
                 estimatedManaCost = undefined
                 errorMessage = localize('general.insufficientManaGeneration')
             }
+            if (transactionInfo.preparedTransactionError.message?.includes('cannot be moved off block issuer')) {
+                manaToGenerate = undefined
+                estimatedManaCost = undefined
+                errorMessage = localize('general.cannotMoveManaOffBlockIssuer')
+            }
         } else if (transactionInfo?.preparedTransaction) {
             errorMessage = ''
             manaToGenerate = undefined
