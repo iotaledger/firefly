@@ -58,9 +58,11 @@
                     secondsRemainingCountdownInterval = setInterval(() => {
                         secondsRemaining -= 1
                         if (secondsRemaining <= 0) {
-                            refreshTransactionInfo().then(() => {
-                                calculateManaCost()
-                            })
+                            refreshTransactionInfo()
+                                .then(() => {
+                                    calculateManaCost()
+                                })
+                                .catch((err) => console.error(err))
                             clearInterval(secondsRemainingCountdownInterval)
                         }
                     }, MILLISECONDS_PER_SECOND)
@@ -96,9 +98,11 @@
         refreshManaCountdownInterval = setInterval(() => {
             secondsToRefreshManaCost -= 1
             if (secondsToRefreshManaCost <= 0) {
-                refreshTransactionInfo().then(() => {
-                    calculateManaCost()
-                })
+                refreshTransactionInfo()
+                    .then(() => {
+                        calculateManaCost()
+                    })
+                    .catch((err) => console.error(err))
                 secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
             }
         }, MILLISECONDS_PER_SECOND)
