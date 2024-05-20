@@ -158,7 +158,6 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
 
 const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
     enabled: false,
-    hidden: true,
     newProfile: {
         enabled: true,
         softwareProfile: {
