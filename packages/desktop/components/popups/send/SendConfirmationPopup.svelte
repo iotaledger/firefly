@@ -269,7 +269,7 @@
                     />
                 </KeyValueBox>
             {/if}
-            <ManaBox {transactionInfo} bind:hasEnoughMana />
+            <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={rebuildTransactionOutput} />
         {/if}
     </div>
     {#if surplus}

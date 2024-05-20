@@ -117,7 +117,12 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={!$selectedWallet.isTransferring} />
+                    <ManaBox
+                        {transactionInfo}
+                        bind:hasEnoughMana
+                        showCountdown={!$selectedWallet.isTransferring}
+                        refreshTransactionInfo={() => prepareTransaction(selectedOutput?.outputId)}
+                    />
                 </div>
                 <PasswordInput
                     bind:error

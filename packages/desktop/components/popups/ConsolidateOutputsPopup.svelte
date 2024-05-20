@@ -86,7 +86,7 @@
     <div class="space-y-4">
         <TextHint variant={TextHintVariant.Info} text={localize('popups.minimizeStorageDeposit.description')} />
         {#if displayManaBox}
-            <ManaBox {transactionInfo} bind:hasEnoughMana />
+            <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareConsolidateTransaction} />
         {/if}
         {#if hasMainAccountNegativeBIC}
             <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />

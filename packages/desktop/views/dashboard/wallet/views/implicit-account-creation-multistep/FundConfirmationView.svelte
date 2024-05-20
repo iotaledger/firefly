@@ -186,7 +186,13 @@
                         keyText={localize('views.implicit-account-creation.steps.step2.view.generatedMana')}
                         valueText={formattedManaBalance}
                     />
-                    <ManaBox {transactionInfo} bind:hasEnoughMana showCountdown={true} {outputId} />
+                    <ManaBox
+                        {transactionInfo}
+                        bind:hasEnoughMana
+                        showCountdown={true}
+                        {outputId}
+                        refreshTransactionInfo={() => prepareTransaction(selectedOutput.outputId)}
+                    />
                 </div>
             {/if}
         </div>

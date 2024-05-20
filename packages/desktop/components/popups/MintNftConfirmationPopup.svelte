@@ -156,7 +156,7 @@
                         isPreText
                     />
                 {/if}
-                <ManaBox {transactionInfo} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareNftOutput} />
             </activity-details>
         </nft-details>
         {#if hasMainAccountNegativeBIC}

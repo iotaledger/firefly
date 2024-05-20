@@ -84,7 +84,7 @@
         <KeyValueBox keyText={localize('popups.nativeToken.property.assetId')} valueText={asset.id} isCopyable />
         <KeyValueBox keyText={localize('general.amount')} valueText={formattedAmount} />
         <TextHint variant={TextHintVariant.Warning} text={localize('actions.confirmTokenBurn.hint')} />
-        <ManaBox {transactionInfo} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareBurnFoundryTransaction} />
         {#if hasMainAccountNegativeBIC}
             <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
         {/if}

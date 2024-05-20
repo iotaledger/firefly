@@ -168,7 +168,7 @@
                         isCopyable={value.isCopyable}
                     />
                 {/each}
-                <ManaBox {transactionInfo} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareFoundryOutput} />
             </details-list>
         {/if}
     </div>

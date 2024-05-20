@@ -73,7 +73,7 @@
     </Text>
     <div class="space-y-4">
         <Text fontSize="14" classes="text-left break-words">{localize('actions.confirmNftBurn.description')}</Text>
-        <ManaBox {transactionInfo} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareBurnNftTransaction} />
         <TextHint variant={TextHintVariant.Warning} text={localize('actions.confirmNftBurn.hint')} />
     </div>
     <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">

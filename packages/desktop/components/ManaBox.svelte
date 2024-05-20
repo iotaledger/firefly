@@ -9,6 +9,7 @@
 
     export let transactionInfo: ITransactionInfoToCalculateManaCost
     export let hasEnoughMana: boolean
+    export let refreshTransactionInfo: () => Promise<void> = () => Promise.resolve()
     export let showCountdown: boolean = true
     export let outputId: string | undefined = undefined
 
@@ -57,6 +58,11 @@
                     secondsRemainingCountdownInterval = setInterval(() => {
                         secondsRemaining -= 1
                         if (secondsRemaining <= 0) {
+                            refreshTransactionInfo()
+                                .then(() => {
+                                    calculateManaCost()
+                                })
+                                .catch((err) => console.error(err))
                             clearInterval(secondsRemainingCountdownInterval)
                         }
                     }, MILLISECONDS_PER_SECOND)
@@ -92,7 +98,11 @@
         refreshManaCountdownInterval = setInterval(() => {
             secondsToRefreshManaCost -= 1
             if (secondsToRefreshManaCost <= 0) {
-                calculateManaCost()
+                refreshTransactionInfo()
+                    .then(() => {
+                        calculateManaCost()
+                    })
+                    .catch((err) => console.error(err))
                 secondsToRefreshManaCost = NUMBER_OF_EXTRA_SLOTS_MANA * DEFAULT_SECONDS_PER_SLOT
             }
         }, MILLISECONDS_PER_SECOND)
