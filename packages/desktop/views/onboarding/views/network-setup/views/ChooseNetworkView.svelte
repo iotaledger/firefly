@@ -69,17 +69,15 @@
     </div>
     <div slot="leftpane__action" class="flex flex-col space-y-4">
         {#each Object.values(NetworkId) as networkId}
-            {#if features?.onboarding?.[networkId]?.enabled}
-                <OnboardingButton
-                    primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
-                    secondaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)}
-                    icon={NETWORK_ICON[networkId]}
-                    iconColor={getIconColor(networkId)}
-                    hidden={features?.onboarding?.[networkId]?.hidden}
-                    disabled={!features?.onboarding?.[networkId]?.enabled}
-                    onClick={() => onNetworkSelectionClick(networkId)}
-                />
-            {/if}
+            <OnboardingButton
+                primaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.title`)}
+                secondaryText={localize(`views.onboarding.networkSetup.chooseNetwork.${networkId}.body`)}
+                icon={NETWORK_ICON[networkId]}
+                iconColor={getIconColor(networkId)}
+                hidden={features?.onboarding?.[networkId]?.hidden}
+                disabled={!features?.onboarding?.[networkId]?.enabled}
+                onClick={() => onNetworkSelectionClick(networkId)}
+            />
         {/each}
     </div>
     <div slot="rightpane" class="w-full h-full flex justify-center bg-pastel-yellow dark:bg-gray-900">
