@@ -101,6 +101,7 @@
                 ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(_amount) },
             })
+            transactionInfo.preparedTransactionError = undefined
         } catch (error) {
             console.error(error)
             transactionInfo.preparedTransaction = undefined
