@@ -169,7 +169,7 @@
                     <Text error>{error}</Text>
                 {/if}
                 {#if displayManaBox}
-                    <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={preparedOutput} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={updateTransactionInfo} />
                 {/if}
             </div>
             <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
