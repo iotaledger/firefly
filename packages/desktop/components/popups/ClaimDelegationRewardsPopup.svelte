@@ -98,7 +98,7 @@
             keyText={localize('popups.claimDelegationRewards.rewards')}
             valueText={formatTokenAmountBestMatch(Math.round(rewards), DEFAULT_MANA)}
         />
-        <ManaBox {transactionInfo} bind:hasEnoughMana />
+        <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareBurnDelegationOutput} />
         {#if hasMainAccountNegativeBIC}
             <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
         {/if}

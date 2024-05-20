@@ -168,7 +168,7 @@
         </activity-details>
         {#if !isTimelocked && isActivityIncomingAndUnclaimed}
             <div class="flex flex-col space-y-4">
-                <ManaBox {transactionInfo} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={prepareClaimOutput} />
                 {#if hasMainAccountNegativeBIC}
                     <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
                 {/if}
