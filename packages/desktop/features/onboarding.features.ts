@@ -81,6 +81,7 @@ const onboardingFeaturesForIotaAlphanet: IOnboardingFeaturesForNetwork = {
 
 const onboardingFeaturesForShimmer: IOnboardingFeaturesForNetwork = {
     enabled: false,
+    hidden: true,
     newProfile: {
         enabled: true,
         softwareProfile: {
@@ -157,6 +158,7 @@ const onboardingFeaturesForTestnet: IOnboardingFeaturesForNetwork = {
 
 const onboardingFeaturesForCustom: IOnboardingFeaturesForNetwork = {
     enabled: false,
+    hidden: true,
     newProfile: {
         enabled: true,
         softwareProfile: {
