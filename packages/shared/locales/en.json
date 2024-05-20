@@ -31,8 +31,8 @@
                         "body": "Staging network for IOTA"
                     },
                     "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                        "title": "IOTA 2.0 Testnet",
+                        "body": "Public Testnet running the IOTA 2.0 protocol"
                     },
                     "iota": {
                         "title": "IOTA",
