@@ -166,7 +166,7 @@
                 <Text error>{addressError}</Text>
             {/if}
             {#if displayManaBox}
-                <ManaBox {transactionInfo} bind:hasEnoughMana />
+                <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={updateTransactionInfo} />
             {/if}
             {#if hasMainAccountNegativeBIC}
                 <TextHint variant={TextHintVariant.Danger} text={localize('popups.transaction.negativeBIC')} />
