@@ -19,6 +19,7 @@
     import Big from 'big.js'
     import { validateBech32Address } from '@core/utils'
     import { AddressType } from '@iota/sdk/out/types'
+    import { debounce } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = '0'
@@ -29,6 +30,7 @@
     let amount: string
     let assetAmountInput: AssetAmountInput
 
+    const transactionUpdater = debounce(updateTransactionInfo, 500)
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
@@ -77,12 +79,17 @@
         }
     }
 
-    async function preparedAllotMana() {
-        if (!accountAddress || !rawAmount || !validAmount) {
+    let updatingTransactionInfo = false
+    function preparedAllotMana(): void {
+        updatingTransactionInfo = true
+        if (!updatingTransactionInfo) {
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
-            return
         }
+        transactionUpdater()
+    }
+
+    async function updateTransactionInfo(): Promise<void> {
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
             const _amount = convertToRawAmount(
@@ -94,8 +101,12 @@
                 ...getDefaultTransactionOptions(),
                 manaAllotments: { [accountId]: Number(_amount) },
             })
-        } catch (err) {
-            transactionInfo.preparedTransactionError = err
+        } catch (error) {
+            console.error(error)
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
+        } finally {
+            updatingTransactionInfo = false
         }
     }
 
@@ -124,7 +135,6 @@
     onMount(async () => {
         try {
             await _onMount()
-            await preparedAllotMana()
         } catch (err) {
             error = err.message
             handleError(err.error)
