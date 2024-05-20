@@ -9,6 +9,8 @@
         getDefaultTransactionOptions,
         AddressConverter,
         hasWalletMainAccountNegativeBIC,
+        convertToRawAmount,
+        getUnitFromTokenMetadata,
     } from '@core/wallet'
     import { activeProfile, checkActiveProfileAuth, getNetworkHrp } from '@core/profile'
     import { ITransactionInfoToCalculateManaCost } from '@core/network'
@@ -17,6 +19,7 @@
     import Big from 'big.js'
     import { validateBech32Address } from '@core/utils'
     import { AddressType } from '@iota/sdk/out/types'
+    import { debounce } from '@core/utils'
 
     export let _onMount: (..._: any[]) => Promise<void> = async () => {}
     export let rawAmount: string = '0'
@@ -27,6 +30,7 @@
     let amount: string
     let assetAmountInput: AssetAmountInput
 
+    const transactionUpdater = debounce(updateTransactionInfo, 500)
     const transactionInfo: ITransactionInfoToCalculateManaCost = {}
     let hasEnoughMana = false
 
@@ -34,7 +38,7 @@
         $selectedWallet?.hasConsolidatingOutputsTransactionInProgress || $selectedWallet?.isTransferring
     $: asset = $visibleSelectedWalletAssets[$activeProfile?.network?.id].mana
     $: validAmount = Big(rawAmount ?? 0)?.gt(0)
-    $: accountAddress, validAmount, void preparedOutput()
+    $: accountAddress, validAmount, amount, void preparedAllotMana()
     $: accountAddress, void validateAddress()
 
     $: sendAllowed =
@@ -75,41 +79,49 @@
         }
     }
 
-    async function preparedOutput() {
-        if (!accountAddress || !rawAmount || !validAmount) {
+    let updatingTransactionInfo = false
+    function preparedAllotMana(): void {
+        updatingTransactionInfo = true
+        if (!updatingTransactionInfo) {
             transactionInfo.preparedTransaction = undefined
             transactionInfo.preparedTransactionError = undefined
-            return
         }
+        transactionUpdater()
+    }
+
+    async function updateTransactionInfo(): Promise<void> {
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
-            const prepareOutput = await $selectedWallet.prepareOutput(
-                {
-                    recipientAddress: $selectedWallet.depositAddress,
-                    amount: '0',
-                },
-                getDefaultTransactionOptions()
-            )
-            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([prepareOutput], {
+            const _amount = convertToRawAmount(
+                amount,
+                asset?.metadata,
+                getUnitFromTokenMetadata(asset?.metadata)
+            )?.toString()
+            transactionInfo.preparedTransaction = await $selectedWallet.prepareSendOutputs([], {
                 ...getDefaultTransactionOptions(),
-                manaAllotments: { [accountId]: Number(rawAmount) },
+                manaAllotments: { [accountId]: Number(_amount) },
             })
-        } catch (err) {
-            transactionInfo.preparedTransactionError = err
+            transactionInfo.preparedTransactionError = undefined
+        } catch (error) {
+            console.error(error)
+            transactionInfo.preparedTransaction = undefined
+            transactionInfo.preparedTransactionError = error
+        } finally {
+            updatingTransactionInfo = false
         }
     }
 
     async function allotMana(): Promise<void> {
         try {
             const accountId = AddressConverter.parseBech32Address(accountAddress)
-            // Send 0 amount transaction to accountAddress with amount in the allotMana
-            const prepareOutput = await $selectedWallet.prepareOutput(
-                { recipientAddress: accountAddress, amount: '0' },
-                getDefaultTransactionOptions()
-            )
-            await $selectedWallet.sendOutputs([prepareOutput], {
+            const _amount = convertToRawAmount(
+                amount,
+                asset?.metadata,
+                getUnitFromTokenMetadata(asset?.metadata)
+            )?.toString()
+            await $selectedWallet.sendOutputs([], {
                 ...getDefaultTransactionOptions(),
-                manaAllotments: { [accountId]: Number(rawAmount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
+                manaAllotments: { [accountId]: Number(_amount) }, // if manaAllotments amount passed as bigint it is transformed to string in the sdk
             })
             closePopup()
         } catch (err) {
@@ -124,7 +136,6 @@
     onMount(async () => {
         try {
             await _onMount()
-            await preparedOutput()
         } catch (err) {
             error = err.message
             handleError(err.error)
@@ -159,7 +170,7 @@
                     <Text error>{error}</Text>
                 {/if}
                 {#if displayManaBox}
-                    <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={preparedOutput} />
+                    <ManaBox {transactionInfo} bind:hasEnoughMana refreshTransactionInfo={updateTransactionInfo} />
                 {/if}
             </div>
             <popup-buttons class="flex flex-row flex-nowrap w-full space-x-4">
