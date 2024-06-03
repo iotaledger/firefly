@@ -36,7 +36,7 @@
         "jest-environment-jsdom": "^29.5.0",
         "postcss": "^8.4.31",
         "postcss-cli": "^11.0.0",
-        "prettier": "3.2.5",
+        "prettier": "3.3.0",
         "prettier-plugin-svelte": "^3.0.3",
         "sass": "^1.76.0",
         "svelte-check": "^3.4.5",
