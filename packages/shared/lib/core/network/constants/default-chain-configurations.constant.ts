@@ -13,7 +13,7 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
             'https://api.evm.shimmer.network/v1/chains/smr1prxvwqvwf7nru5q5xvh5thwg54zsm2y4wfnk6yk56hj3exxkg92mx20wl3s',
         archiveEndpoint: 'https://archive.evm.shimmer.network',
     },
-    [NetworkId.Testnet]: {
+    [NetworkId.ShimmerTestnet]: {
         type: ChainType.Iscp,
         name: DestinationNetwork.ShimmerEvmTestnet,
         chainId: ChainId.ShimmerEVMTestnet,
@@ -24,11 +24,20 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
     },
     [NetworkId.Iota]: {
         type: ChainType.Iscp,
-        name: DestinationNetwork.IOTAEvm,
-        chainId: ChainId.IOTAEvm,
+        name: DestinationNetwork.IOTAEVM,
+        chainId: ChainId.IOTAEVM,
         aliasAddress: 'iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
         iscpEndpoint:
             'https://api.evm.iotaledger.net/v1/chains/iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
         archiveEndpoint: 'https://archive.evm.iotaledger.net',
+    },
+    [NetworkId.IotaTestnet]: {
+        type: ChainType.Iscp,
+        name: DestinationNetwork.IotaEvmTestnet,
+        chainId: ChainId.IotaEVMTestnet,
+        aliasAddress: 'tst1pzxsrr7apqkdzz633dyntmvxwtyvk029p39te5j0m33q6946h7akzv663zu',
+        iscpEndpoint:
+            'https://api.evm.testnet.iotaledger.net/v1/chains/tst1pzxsrr7apqkdzz633dyntmvxwtyvk029p39te5j0m33q6946h7akzv663zu',
+        archiveEndpoint: 'https://archive.evm.testnet.iotaledger.net',
     },
 }

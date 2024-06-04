@@ -84,7 +84,7 @@
                 onClick={onViewAddressHistoryClick}
             />
         {/if}
-        {#if $activeProfile?.network?.id !== NetworkId.IotaAlphanet}
+        {#if $activeProfile?.network?.id === NetworkId.Shimmer || $activeProfile?.network?.id === NetworkId.ShimmerTestnet || $activeProfile?.network?.id === NetworkId.IotaTestnet || $activeProfile?.network?.id === NetworkId.Iota}
             <MenuItem icon={Icon.Transfer} title={localize('actions.withdrawFromL2')} onClick={onWithdrawFromL2Click} />
         {/if}
         <MenuItem icon={Icon.Customize} title={localize('actions.customizeAcount')} onClick={onCustomiseAccountClick} />
