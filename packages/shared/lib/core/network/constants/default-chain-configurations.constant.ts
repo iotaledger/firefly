@@ -22,6 +22,15 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
             'https://api.evm.testnet.shimmer.network/v1/chains/rms1ppp00k5mmd2m8my8ukkp58nd3rskw6rx8l09aj35984k74uuc5u2cywn3ex',
         archiveEndpoint: 'https://archive.evm.testnet.shimmer.network',
     },
+    [NetworkId.Iota]: {
+        type: ChainType.Iscp,
+        name: DestinationNetwork.IOTAEVM,
+        chainId: ChainId.IOTAEVM,
+        aliasAddress: 'iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
+        iscpEndpoint:
+            'https://api.evm.iotaledger.net/v1/chains/iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
+        archiveEndpoint: 'https://archive.evm.iotaledger.net',
+    },
     [NetworkId.IotaTestnet]: {
         type: ChainType.Iscp,
         name: DestinationNetwork.IotaEvmTestnet,
