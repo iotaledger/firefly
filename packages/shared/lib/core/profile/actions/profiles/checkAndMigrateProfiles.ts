@@ -80,6 +80,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     15: persistedProfileMigrationToV16,
     16: persistedProfileMigrationToV17,
     17: persistedProfileMigrationToV18,
+    18: persistedProfileMigrationToV19,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -351,7 +352,6 @@ function persistedProfileMigrationToV17(existingProfile: IPersistedProfile): voi
     existingProfile.network.chains = newChains
     saveProfile(existingProfile)
 }
-
 /*
  * Migration 18
  * Change from 1 testnet to 2: Shimmer Testnet (what we knew as Testnet) & IOTA Testnet.
@@ -362,5 +362,12 @@ function persistedProfileMigrationToV18(existingProfile: IPersistedProfile): voi
         existingProfile.network.id = NetworkId.ShimmerTestnet
         existingProfile.network.name = 'Shimmer Testnet'
     }
+    saveProfile(existingProfile)
+}
+
+function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): void {
+    const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
+    const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
+    existingProfile.network.chains = newChains
     saveProfile(existingProfile)
 }
