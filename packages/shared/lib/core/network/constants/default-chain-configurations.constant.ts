@@ -26,10 +26,9 @@ export const DEFAULT_CHAIN_CONFIGURATIONS: Readonly<{ [id in NetworkId]?: ChainM
         type: ChainType.Iscp,
         name: DestinationNetwork.IOTAEvm,
         chainId: ChainId.IOTAEvm,
-        // TODO: update with final values
-        aliasAddress: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        iscpEndpoint: 'https://api.evm.example.org/v1/chains/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        archiveEndpoint: 'https://archive.evm.example.org',
-        // --
+        aliasAddress: 'iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
+        iscpEndpoint:
+            'https://api.evm.iotaledger.net/v1/chains/iota1pzt3mstq6khgc3tl0mwuzk3eqddkryqnpdxmk4nr25re2466uxwm28qqxu5',
+        archiveEndpoint: 'https://archive.evm.iotaledger.net',
     },
 }
