@@ -74,6 +74,7 @@
     {disabled}
     options={accountOptions}
     pickerHeight="max-h-48"
+    on:blur={() => validate()?.catch((err) => console.error(err))}
     {...$$restProps}
     let:option
 >
