@@ -8,7 +8,7 @@
         "@babel/eslint-parser": "^7.22.15",
         "@types/node": "^18.15.11",
         "@typescript-eslint/eslint-plugin": "^5.58.0",
-        "@typescript-eslint/parser": "^5.57.1",
+        "@typescript-eslint/parser": "^5.62.0",
         "eslint": "^8.42.0",
         "eslint-plugin-security": "^1.4.0",
         "eslint-plugin-svelte3": "^4.0.0",
