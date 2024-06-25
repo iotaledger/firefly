@@ -360,10 +360,17 @@ function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): voi
  * Remove Tanglebay SMR node from the list of nodes.
  */
 function persistedProfileMigrationToV20(existingProfile: IPersistedProfile): void {
+    const DEPRECATED_NODE_URL = 'https://shimmer-node.tanglebay.com'
+    const OFFICIAL_NODES = getOfficialNodes(existingProfile.network.id)
+
     const nodes = existingProfile.clientOptions.nodes ?? []
-    existingProfile.clientOptions.nodes = nodes.filter((node) => node.url !== 'https://shimmer-node.tanglebay.com')
+    existingProfile.clientOptions.nodes = nodes.filter((node) => node.url !== DEPRECATED_NODE_URL)
     if (!existingProfile.clientOptions.nodes?.length) {
-        existingProfile.clientOptions.nodes = getOfficialNodes(existingProfile.network.id)
+        existingProfile.clientOptions.nodes = OFFICIAL_NODES
+    }
+    const primaryNode = existingProfile.clientOptions.primaryNode
+    if (primaryNode?.url === DEPRECATED_NODE_URL) {
+        existingProfile.clientOptions.primaryNode = undefined
     }
     saveProfile(existingProfile)
 }
