@@ -11,7 +11,7 @@ on:
                 required: true
                 type: choice
                 options:
-                    - macos-11
+                    - macos-12
                     - ubuntu-20.04
                     - windows-2019
             stage:
@@ -68,7 +68,7 @@ jobs:
 
             - name: Set deployment target (macOS)
               run: echo "MACOSX_DEPLOYMENT_TARGET=10.14" >> $GITHUB_ENV # TODO: set this to 10.12 once rocksDB issue is fixed
-              if: matrix.os == 'macos-11'
+              if: matrix.os == 'macos-12'
 
             - name: Install required packages (Linux)
               run: |
@@ -118,7 +118,7 @@ jobs:
                   APPLE_ID: ${{ secrets.APPLE_ID }}
                   APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
               working-directory: packages/desktop
-              if: matrix.os == 'macos-11'
+              if: matrix.os == 'macos-12'
 
             - name: Build Electron app (Windows)
               run: yarn compile:${env:STAGE}:win
@@ -157,7 +157,7 @@ jobs:
             - name: Compute checksums (macOS)
               run: for i in `ls | grep 'firefly-*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'macos-11'
+              if: matrix.os == 'macos-12'
 
             - name: Compute checksums (Windows)
               run: Get-ChildItem "." -Filter firefly-* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
