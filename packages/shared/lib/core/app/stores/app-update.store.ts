@@ -21,6 +21,6 @@ export const appUpdateBusy = writable<boolean>(false)
 export const appUpdateComplete = writable<boolean>(false)
 
 /**
- * The store containing a boolean value for if an error has occured during an application update download.
+ * The store containing a boolean value for if an error has occurred during an application update download.
  */
 export const appUpdateError = writable<boolean>(false)
