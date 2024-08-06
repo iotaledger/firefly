@@ -32,7 +32,7 @@
         "@sentry/electron": "^4.10.0",
         "@types/webpack-dev-server": "^4.7.2",
         "dotenv": "^16.0.3",
-        "electron-dl": "^3.5.1",
+        "electron-dl": "^4.0.0",
         "electron-log": "^4.4.8",
         "electron-updater": "6.1.4",
         "https-browserify": "^1.0.0",
