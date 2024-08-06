@@ -4,6 +4,7 @@ import {
     DEFAULT_CHAIN_CONFIGURATIONS,
     DEFAULT_MAX_PARALLEL_API_REQUESTS,
     getDefaultPersistedNetwork,
+    getOfficialNodes,
     IIscpChainMetadata,
     NetworkId,
 } from '@core/network'
@@ -81,6 +82,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     16: persistedProfileMigrationToV17,
     17: persistedProfileMigrationToV18,
     18: persistedProfileMigrationToV19,
+    19: persistedProfileMigrationToV20,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -369,5 +371,25 @@ function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): voi
     const defaultChainConfig = DEFAULT_CHAIN_CONFIGURATIONS[existingProfile.network.id]
     const newChains: IIscpChainMetadata[] = defaultChainConfig ? [defaultChainConfig] : []
     existingProfile.network.chains = newChains
+    saveProfile(existingProfile)
+}
+
+/*
+ * Migration 20
+ * Remove Tanglebay SMR node from the list of nodes.
+ */
+function persistedProfileMigrationToV20(existingProfile: IPersistedProfile): void {
+    const DEPRECATED_NODE_URL = 'https://shimmer-node.tanglebay.com'
+    const OFFICIAL_NODES = getOfficialNodes(existingProfile.network.id)
+
+    const nodes = existingProfile.clientOptions.nodes ?? []
+    existingProfile.clientOptions.nodes = nodes.filter((node) => node.url !== DEPRECATED_NODE_URL)
+    if (!existingProfile.clientOptions.nodes?.length) {
+        existingProfile.clientOptions.nodes = OFFICIAL_NODES
+    }
+    const primaryNode = existingProfile.clientOptions.primaryNode
+    if (primaryNode?.url === DEPRECATED_NODE_URL) {
+        existingProfile.clientOptions.primaryNode = undefined
+    }
     saveProfile(existingProfile)
 }

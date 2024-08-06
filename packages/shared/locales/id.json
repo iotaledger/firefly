@@ -30,13 +30,17 @@
                         "title": "Shimmer",
                         "body": "Jaringan pementasan untuk IOTA"
                     },
-                    "testnet": {
-                        "title": "jaringan uji",
-                        "body": "Jaringan beta publik untuk Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Testnet",
+                        "body": "Public testnet network for Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "Jaringan Utama IOTA"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Testnet",
+                        "body": "Public testnet network for Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "Alfanet IOTA",
@@ -1245,14 +1249,16 @@
             "iota": "Pulihkan profil IOTA",
             "iotaAlphanet": "Pulihkan profil IOTA Alphanet",
             "shimmer": "Pulihkan profil Shimmer",
-            "testnet": "Pulihkan profil Testnet",
+            "iotaTestnet": "Restore IOTA Testnet profile",
+            "shimmerTestnet": "Restore Shimmer Testnet profile",
             "custom": "Pulihkan profil Jaringan Khusus"
         },
         "restoreWalletDescription": {
             "iota": "Pulihkan profil IOTA yang ada",
             "iotaAlphanet": "Pulihkan profil IOTA Alphanet yang ada",
             "shimmer": "Pulihkan profil Shimmer yang ada",
-            "testnet": "Pulihkan profil Testnet yang ada",
+            "iotaTestnet": "Restore an existing IOTA Testnet profile",
+            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
             "custom": "Pulihkan profil Jaringan Kustom yang ada"
         },
         "refreshNftMedia": {
@@ -1260,7 +1266,7 @@
             "description": "Apakah Anda ingin menghapus dan mengunduh ulang semua media NFT untuk akun ini?"
         },
         "createWallet": "Buat profil {network} baru",
-        "createWalletDescription": "Buat profil baru yang berjalan di {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown} }",
+        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Klaim hadiah staking Shimmer",
         "claimShimmerDescription": "Impor profil IOTA dan klaim hadiah staking",
         "migrateFromLegacy": "Bermigrasi dari Legacy",

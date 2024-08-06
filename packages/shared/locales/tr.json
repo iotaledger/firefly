@@ -3,183 +3,187 @@
         "onboarding": {
             "appSetup": {
                 "welcome": {
-                    "title": "Send, Receive & Manage your {network} tokens",
-                    "body": "Firefly is the official wallet software for {network}."
+                    "title": "IOTA tokenlerinizi Gönderin, Alın ve Yönetin",
+                    "body": "Firefly, {network} için resmi cüzdan yazılımıdır."
                 },
                 "legal": {
-                    "title": "Privacy Policy & Terms of Service",
-                    "body": "Please review the Privacy Policy and Terms of Service.",
-                    "checkbox": "I've read and I accept the Privacy Policy and Terms of Service"
+                    "title": "Gizlilik Politikası ve Hizmet Şartları",
+                    "body": "Lütfen Gizlilik Politikası ve Hizmet Şartları'nı gözden geçirin.",
+                    "checkbox": "Gizlilik Politikası ve Hizmet Şartları'nı okudum ve kabul ediyorum"
                 },
                 "languageAndAppearance": {
-                    "title": "Language & appearance",
-                    "body": "Choose your language and theme."
+                    "title": "Dil & Görünüm",
+                    "body": "Lütfen dil ve tema seçiminizi belirtin."
                 }
             },
             "networkSetup": {
                 "chooseProtocol": {
-                    "title": "Choose protocol",
-                    "body": "Set the protocol for your profile.",
-                    "iota": "Default IOTA network",
-                    "shimmer": "Experimental IOTA staging network"
+                    "title": "Protokol seçiniz",
+                    "body": "Profiliniz için protokolü ayarlayın.",
+                    "iota": "Varsayılan IOTA Ağı",
+                    "shimmer": "Deneysel IOTA evreleme ağı"
                 },
                 "chooseNetwork": {
-                    "title": "Choose network",
-                    "body": "Set the network for your profile.",
+                    "title": "Ağ'ı seçin",
+                    "body": "Ağı profiliniz için ayarlayın.",
                     "shimmer": {
                         "title": "Shimmer",
-                        "body": "Staging network for IOTA"
+                        "body": "IOTA için Evreleme Ağı"
                     },
-                    "testnet": {
-                        "title": "Testnet",
-                        "body": "Public beta network for Shimmer"
+                    "shimmerTestnet": {
+                        "title": "Shimmer Test ağı",
+                        "body": "Shimmer için Public TestNet Ağı"
                     },
                     "iota": {
                         "title": "IOTA",
-                        "body": "IOTA Mainnet"
+                        "body": "IOTA Ana Ağı"
+                    },
+                    "iotaTestnet": {
+                        "title": "IOTA Test ağı",
+                        "body": "Mainnet için Public TestNet Ağı"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
                         "body": "IOTA Alphanet"
                     },
                     "custom": {
-                        "title": "Custom network",
-                        "body": "Support for custom networks and/or nodes"
+                        "title": "Özel Ağ",
+                        "body": "Özel ağlar ve/veya düğümler için destek"
                     }
                 },
                 "setupCustomNetwork": {
-                    "title": "Connect to a custom network or node",
-                    "body": "Fill the form with the node information and connect to a custom network or node."
+                    "title": "Özel bir ağa veya düğüme bağlan",
+                    "body": "Formu düğüm bilgileriyle doldurun ve özel bir ağa veya düğüme bağlanın."
                 }
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
-                    "body": "Select the appropriate method to set up your {network} profile."
+                    "title": "{network, select,IOTA {bir} Shimmer {bir} Testnet {bir} other {bir}} {network} ağ profilini kurun",
+                    "body": "{network} profilinizi kurmak için uygun yöntemi seçin."
                 },
                 "setupNew": {
-                    "title": "Create a profile",
-                    "body": "You can choose a regular software wallet, or if you have a Ledger device, you can set up a hardware wallet.",
+                    "title": "Bir profil oluştur",
+                    "body": "Düzenli bir yazılım cüzdanını seçebilir veya bir Ledger cihazınız varsa donanım cüzdanı kurabilirsiniz.",
                     "softwareAccount": {
-                        "title": "Create a software profile",
-                        "description": "Provides a Stronghold file and recovery phrase"
+                        "title": "Bir yazılım profil oluşturun",
+                        "description": "Güvenli depolama dosyası ve kurtarma ifadesi sağlar"
                     },
                     "ledgerAccount": {
-                        "title": "Create a hardware profile",
-                        "description": "Ledger Nano S, Nano S Plus or Nano X required"
+                        "title": "Bir donanım profili oluşturun",
+                        "description": "Ledger Nano S, Nano S Plus veya Nano X gereklidir"
                     }
                 },
                 "setupRecovered": {
-                    "title": "Recover {network} profile",
-                    "body": "If you have an existing mnemonic or Stronghold backup file, you can import it here.",
-                    "importMnemonic": "Use recovery phrase",
-                    "importMnemonicDescription": "Enter your 24-word mnemonic phrase",
-                    "importFile": "Use Stronghold backup",
-                    "importFileDescription": "Import your Stronghold backup file",
-                    "importLedger": "Use Ledger device",
-                    "importLedgerDescription": "Restore from your Ledger Nano S, Nano S Plus or X device"
+                    "title": "{network} profilini kurtar",
+                    "body": "Mevcut bir kurtarma kelimesi veya Stronghold yedek dosyanız varsa, buraya aktarabilirsiniz.",
+                    "importMnemonic": "Kurtarma ifadesini kullan",
+                    "importMnemonicDescription": "24 kelimelik kurtarma ifadesini girin",
+                    "importFile": "Stronghold yedek dosyasını kullanın",
+                    "importFileDescription": "Stronghold yedek dosyanızı içe aktarın",
+                    "importLedger": "Ledger cihazını kullanın",
+                    "importLedgerDescription": "Ledger Nano S, Nano S Plus veya X cihazınızdan geri yükleyin"
                 },
                 "setupClaimed": {
-                    "title": "Claim Shimmer staking rewards",
-                    "body": "Import your IOTA profile and claim your Shimmer staking rewards."
+                    "title": "Shimmer staking ödüllerini talep edin",
+                    "body": "IOTA profilinizi içe aktarın ve Shimmer staking ödüllerinizi talep edin."
                 },
                 "enterName": {
-                    "title": "Create your {network} profile",
-                    "profileName": "Profile name",
-                    "body1": "You can create multiple user profiles to organise your wallets and improve privacy.",
+                    "title": "{network} profilinizi oluşturun",
+                    "profileName": "Profil adı",
+                    "body1": "Cüzdanlarınızı düzenlemek ve gizliliği artırmak için birden fazla kullanıcı profil oluşturabilirsiniz.",
                     "body2": {
-                        "first": "For now, let's start with your first profile name.",
-                        "nonFirst": "For now, let's start with your profile name."
+                        "first": "Şimdilik, ilk profil adınızla başlayalım.",
+                        "nonFirst": "Şimdilik, profil adınızla başlayalım."
                     },
-                    "addMore": "You can add more profiles later."
+                    "addMore": "Daha sonra daha fazla profil ekleyebilirsiniz."
                 }
             },
             "strongholdSetup": {
                 "setupStrongholdPassword": {
-                    "title": "Create a password",
-                    "body1": "You need a strong password to protect your funds. Use a combination of words, and avoid common phrases, names or dates.",
-                    "body2": "It is recommended that you write down your password in your Recovery Kit."
+                    "title": "Bir şifre oluşturun",
+                    "body1": "Fonlarınızı korumak için güçlü bir şifre gereklidir. Kelime kombinasyonları kullanın ve yaygın ifadelerden, isimlerden veya tarihlerden kaçının.",
+                    "body2": "Şifrenizi Kurtarma Kitinize yazmanız önerilir."
                 }
             },
             "storageProtectionSetup": {
                 "setupPinProtection": {
-                    "title": "Set up PIN code",
-                    "body1": "Enter a 6-digit PIN below. You will be asked for your PIN to access your profile.",
-                    "body2": "Use numbers only"
+                    "title": "PIN kodunu ayarlayın",
+                    "body1": "Aşağıya 6 haneli bir PIN girin. Profilinize erişmek için PIN'iniz istenecektir.",
+                    "body2": "Sadece sayıları kullanın"
                 }
             },
             "profileBackup": {
                 "backupMnemonic": {
-                    "title": "Back up your recovery phrase",
-                    "body1": "You will now be shown a recovery phrase. Write it down in your Recovery Kit.",
-                    "body2": "Do not share your recovery phrase with anyone. It can be used to access your tokens from anywhere.",
-                    "body3": "If you lose your recovery phrase, you may lose your funds."
+                    "title": "Kurtarma ifadenizi yedekleyin",
+                    "body1": "Şimdi size bir kurtarma ifadesi gösterilecek. Bu ifadeyi Kurtarma Kiti'nize yazın.",
+                    "body2": "Kurtarma ifadenizi kimseyle paylaşmayın. Bu ifade, tokenlerinize herhangi bir yerden erişim sağlamak için kullanılabilir.",
+                    "body3": "Kurtarma ifadenizi kaybederseniz, fonlarınızı kaybedebilirsiniz."
                 },
                 "viewMnemonic": {
-                    "title": "Recovery phrase",
-                    "body1": "In your Recovery Kit, write down the words in the exact order shown.",
-                    "body2": "Keep this private and safely stored.",
-                    "body3": "It is important to have a written backup. Computers often fail and files can corrupt.",
-                    "revealRecoveryPhrase": "Reveal recovery phrase",
-                    "hideRecoveryPhrase": "Hide recovery phrase"
+                    "title": "Kurtarma ifadesi",
+                    "body1": "Kurtarma Kitinizde, kelimeleri tam olarak gösterildiği sırayla yazın.",
+                    "body2": "Bunu gizli tutun ve güvenli bir şekilde saklayın.",
+                    "body3": "Yazılı bir yedeklemenin olması önemlidir. Bilgisayarlar sık sık arızalanır ve dosyalar bozulabilir.",
+                    "revealRecoveryPhrase": "Kurtarma ifadesini göster",
+                    "hideRecoveryPhrase": "Kurtarma ifadesini gizle"
                 },
                 "verifyMnemonic": {
-                    "title": "Verify recovery phrase",
-                    "body": "Let's check you wrote down the phrase correctly. Please select each word in numbered order. Tip: You can press the number next to the word in your keyboard to select it.",
-                    "word": "Word",
-                    "verified": "Recovery phrase verified",
-                    "verifiedBody": "Remember to keep it private and safely stored."
+                    "title": "Kurtarma ifadenizi doğrulayın",
+                    "body": "Kurtarma ifadesini doğru yazıp yazmadığınızı kontrol edelim. Lütfen her kelimeyi numaralandırılmış sırayla seçin. İpucu: Klavyenizdeki sayıya basarak kelimeyi seçebilirsiniz.",
+                    "word": "Kelime",
+                    "verified": "Kurtarma ifadesi doğrulandı",
+                    "verifiedBody": "Gizli ve güvenli bir şekilde saklamayı unutmayın."
                 },
                 "backupStronghold": {
-                    "title": "Back up to a Stronghold file",
-                    "body1": "Enter your password to create a Stronghold backup of your profile. Your password is used to encrypt the backup file.",
-                    "body2": "Reasons why digital backups are important:",
-                    "reason1": "Easily recover your wallets without typing in your recovery phrase",
-                    "reason2": "Import your wallets on other devices",
-                    "reason3": "Recover your full transaction history"
+                    "title": "Stronghold dosyasına yedekle",
+                    "body1": "Profilinizin Stronghold yedeğini oluşturmak için şifrenizi girin. Şifreniz yedek dosyasını şifrelemek için kullanılacaktır.",
+                    "body2": "Dijital yedeklemelerin önemli olmasının nedenleri:",
+                    "reason1": "Kurtarma ifadenizi yazmanıza gerek kalmadan cüzdanlarınızı kolayca kurtarın",
+                    "reason2": "Cüzdanlarınızı diğer cihazlara aktarın",
+                    "reason3": "Tüm işlem geçmişinizi kurtarın"
                 }
             },
             "profileRecovery": {
                 "importMnemonicPhrase": {
-                    "title": "Enter your recovery phrase",
-                    "body": "A recovery phrase is 24 words long, all lower case, with spaces between. This is used to recover existing Firefly profiles.",
-                    "enter": "Enter your secret recovery phrase",
-                    "phraseDetected": "24 word recovery phrase detected"
+                    "title": "Kurtarma ifadenizi girin",
+                    "body": "Kurtarma cümlesi 24 kelime uzunluğundadır, hepsi küçük harfle ve aralarında boşluklarla yazılır. Bu, mevcut Firefly profillerini kurtarmak için kullanılır.",
+                    "enter": "Gizli kurtarma ifadenizi girin",
+                    "phraseDetected": "24 kelime kurtarma cümlesi tespit edildi"
                 },
                 "importStrongholdBackup": {
-                    "title": "Import your Stronghold backup",
-                    "body": "Import a Stronghold backup file to restore your profile."
+                    "title": "Yedek Stronghold dosyanızı içe aktarın",
+                    "body": "Profilinizi geri yüklemek için bir Stronghold yedek dosyası içe aktarın."
                 },
                 "backupPassword": {
-                    "body1": "Please enter your backup password.",
-                    "body2": "This is the password you set when you first created your backup."
+                    "body1": "Lütfen yedekleme şifrenizi girin.",
+                    "body2": "Bu, yedeklemenizi ilk oluşturduğunuzda belirlediğiniz şifredir."
                 },
                 "success": {
-                    "title": "You have successfully recovered your backup",
-                    "body": "You can now set up your new profile."
+                    "title": "Yedeklemenizi başarıyla geri yüklediniz",
+                    "body": "Artık yeni profilinizi oluşturabilirsiniz."
                 }
             },
             "shimmerClaiming": {
                 "claimRewards": {
-                    "title": "Your Shimmer staking rewards",
-                    "body": "Check that your Shimmer staking rewards are correct. You may need to search multiple times to find your full balance."
+                    "title": "Shimmer stake etme ödülleriniz",
+                    "body": "Shimmer staking ödüllerinizin doğru olduğundan emin olun. Tam bakiyenizi bulmak için birkaç kez arama yapmanız gerekebilir."
                 },
                 "success": {
-                    "title": "Shimmer claimed",
-                    "body": "You have successfully claimed your Shimmer tokens.",
-                    "totalRewards": "Total rewards",
-                    "successfullyFound": "Successfully found {amount}"
+                    "title": "Shimmer talep edildi",
+                    "body": "Shimmer token'larını başarıyla talep ettiniz.",
+                    "totalRewards": "Toplam ödüller",
+                    "successfullyFound": "Başarıyla {amount} bulundu"
                 }
             },
             "congratulations": {
-                "title": "Profile setup almost complete...",
-                "fundsMigrated": "Funds migrated",
-                "body": "Your new profile will be ready once the dashboard has successfully loaded.",
-                "ledgerHint": "Do not disconnect your Ledger device until the dashboard has finished loading.",
-                "softwareMigratedBody": "You have successfully migrated your funds to the new network",
-                "fireflyLedgerBody": "Your Ledger profile was successfully recovered and you can now continue.",
-                "trinityLedgerBody": "You have successfully migrated your Ledger to the new network.",
-                "exportMigration": "Export migration log and finish setup"
+                "title": "Profil kurulumu neredeyse tamamlandı...",
+                "fundsMigrated": "Bakiye taşındı",
+                "body": "Yeni profiliniz, gösterge paneli başarıyla yüklendikten sonra hazır olacaktır.",
+                "ledgerHint": "Gösterge paneli yükleme işlemi tamamlanana kadar Ledger cihazınızı çıkarmayın.",
+                "softwareMigratedBody": "Bakiyenizi başarılı bir şekilde yeni ağa aktardınız",
+                "fireflyLedgerBody": "Ledger profiliniz başarıyla kurtarıldı ve şimdi devam edebilirsiniz.",
+                "trinityLedgerBody": "Ledger'ınızı yeni ağa başarıyla taşıdınız.",
+                "exportMigration": "Taşıma kaydını dışa aktar ve yüklemeyi bitir"
             }
         },
         "setupLedger": {
@@ -191,10 +195,10 @@
             "videoGuide": "Ledger geçişi video kılavuzu"
         },
         "ledgerInstallationGuide": {
-            "title": "Have you installed the {network} app on your Ledger device?",
-            "body1": "Before you proceed, you must use Ledger Live to find and install the {network} app.",
+            "title": "Ledger cihazınıza {network} uygulamasını yüklediniz mi?",
+            "body1": "Devam etmeden önce, Ledger Live kullanarak {network} uygulamasını bulup yüklemeniz gerekmektedir.",
             "body2": "Ledger yazılımının güncel olduğundan emin olun. Önceden yüklenmiş tüm uygulamalar en son sürümlerine güncellenmelidir.",
-            "action": "Yes, I've installed the {network} app"
+            "action": "Evet, {network} uygulamasını yükledim"
         },
         "importFromLedger": {
             "title": "Ledger'ınızı Geri Yükleyin veya Taşıyın",
@@ -207,9 +211,9 @@
         "connectLedger": {
             "title": "Ledger'ınızı Firefly'a bağlayın",
             "body": "Ledger cihazınızın Firefly tarafından bulunabilmesi için lütfen resmi Ledger Live uygulamasının kapalı olduğundan emin olunuz.",
-            "connect": "Connect your Ledger device",
-            "unlock": "Unlock your Ledger with its pin",
-            "openApp": "Open the {network} app on your Ledger",
+            "connect": "Ledger cihazınızı bağlayın",
+            "unlock": "Ledger'ınızın kilidini pin ile açın",
+            "openApp": "Ledger cihazınızda {network} uygulamasını açın",
             "tips": "Ledger'ınız bağlanmadığı durumlar için ipuçları"
         },
         "restoreFromFireflyLedger": {
@@ -224,7 +228,7 @@
             "readMore": "Geçiş süreci nasıl olacak"
         },
         "generateNewLedgerAddress": {
-            "title": "Generate new address",
+            "title": "Yeni adres oluştur",
             "body": "Firefly ile tokenlarınızı taşımak için yeni bir adres oluşturmanız gerekir. Devam etmek için aşağıdaki butona tıklayın.",
             "confirmTitle": "Yeni adresi onaylayın",
             "confirmBody": "Güvenlik için lütfen Ledger cihazınızda oluşturulan adresi aşağıda gösterilen adresle karşılaştırın. Eğer eşleşirlerse, gösterildiği gibi Ledger'ınızdaki her iki düğmeye de basın.",
@@ -250,26 +254,26 @@
         "settings": {
             "settings": "Ayarlar",
             "general": {
-                "title": "General",
-                "description": "Configure your app's appearance and other general settings"
+                "title": "Genel",
+                "description": "Uygulamanızın görünümünü ve diğer genel ayarları düzenleyin"
             },
             "profile": {
                 "title": "Profil",
                 "description": "Profil isminizi değiştirin veya bir avatar ayarlayın"
             },
             "network": {
-                "title": "Network"
+                "title": "Ağ"
             },
             "collectibles": {
-                "title": "Collectibles"
+                "title": "Koleksiyonlar"
             },
             "security": {
                 "title": "Güvenlik",
                 "description": "Parolanızı değiştirin ve güvenlikle ilgili ayarları yapın"
             },
             "advanced": {
-                "title": "Advanced",
-                "description": "Tools and manual settings for technical users"
+                "title": "Gelişmiş",
+                "description": "Teknik kullanıcılar için araçlar ve manuel ayarlar"
             },
             "helpAndInfo": {
                 "title": "Yardım ve Bilgiler",
@@ -289,7 +293,7 @@
                 "description": ""
             },
             "appName": {
-                "title": "App Name"
+                "title": "Uygulama Adı"
             },
             "currency": {
                 "title": "Para Birimi",
@@ -308,24 +312,24 @@
                 "description": "Bir Stronghold dosyasına aktarın - cüzdanlarınızın ve en son işlem geçmişinizin şifrelenmiş tam yedeği"
             },
             "appLock": {
-                "title": "Automatic logout",
+                "title": "Otomatik oturum kapatma",
                 "description": "Cüzdanlarınız kilitlenmeden ve çıkış yapılmadan önce hareketsizlik süresi"
             },
             "strongholdPasswordTimeout": {
-                "title": "Stronghold Timeout",
-                "description": "Length of time before your Stronghold password is required again"
+                "title": "Stronghold zaman aşımı",
+                "description": "Stronghold şifrenizin tekrar gerektiği zaman aralığı"
             },
             "maxMediaSize": {
-                "title": "Maximum media size",
-                "description": "NFT media with sizes greater than this limit will not be downloaded and a placeholder representing the media type will be displayed instead"
+                "title": "Maksimum medya boyutu",
+                "description": "Bu limitin üstünde olan boyuttaki NFT medyaları indirilmeyecek ve bunun yerine medya türünü temsil eden bir yer tutucu gösterilecektir"
             },
             "maxMediaDownloadTime": {
-                "title": "Maximum download time",
-                "description": "NFT media which take longer than this limit to download will be canceled and a placeholder representing the media type will be displayed instead"
+                "title": "Maksimum indirme süresi",
+                "description": "Bu süreden daha uzun süren NFT medyaları indirme işlemi iptal edilecek ve yerine medya türünü temsil eden bir yer tutucu gösterilecektir"
             },
             "refreshNftMedia": {
-                "title": "Refresh NFT media",
-                "description": "NFT media cached for this account will be deleted and then downloaded again"
+                "title": "NFT medyasını yenileyin",
+                "description": "Bu hesap için önbelleğe alınan NFT medyası silinecek ve daha sonra tekrar indirilecektir"
             },
             "changePassword": {
                 "title": "Şifre Değiştir",
@@ -346,7 +350,7 @@
             },
             "balanceFinder": {
                 "title": "Bakiye bulucu",
-                "description": "Perform an extended search of your balance"
+                "description": "Bakiyenizin genişletilmiş bir aramasını yapın"
             },
             "hiddenAccounts": {
                 "title": "Gizli cüzdanlar",
@@ -357,12 +361,12 @@
                 "description": "Tüm profilinizi, cüzdanlarınızı ve işlem geçmişinizi siler. Bir yedeğiniz olduğundan emin olun"
             },
             "deepLinks": {
-                "title": "Deep links",
-                "description": "Automatically fill transaction data in Firefly upon clicking a deep link starting with {appProtocol}://"
+                "title": "Derin Bağlantılar",
+                "description": "{appProtocol}:// ile başlayan bir derin bağlantıya tıkladığınızda, Firefly'da işlem verilerini otomatik olarak doldurun"
             },
             "networkInformation": {
-                "title": "Network information",
-                "connectedTo": "Connected to"
+                "title": "Ağ Bilgisi",
+                "connectedTo": "Bağlantı yapıldı"
             },
             "configureNodeList": {
                 "title": "Düğüm yapılandırması",
@@ -372,16 +376,16 @@
                 "includeNode": "Düğümü dahil et",
                 "editDetails": "Ayrıntıları düzenle",
                 "viewInfo": "Bilgileri görüntüle",
-                "setAsPrimary": "Set primary node",
-                "unsetAsPrimary": "Clear primary node",
-                "removeNode": "Remove node",
+                "setAsPrimary": "Birincil düğümü ayarlayın",
+                "unsetAsPrimary": "Birincil düğümü temizleyin",
+                "removeNode": "Düğümü kaldır",
                 "includeOfficialNodeList": "Resmi düğüm listesini dahil et",
                 "noNodes": "Düğüm yok, ağa bağlanamıyor",
                 "noNodesAuto": "Düğüm yok, bunun yerine otomatik seçim kullanılacak"
             },
             "localProofOfWork": {
-                "title": "Proof of work",
-                "description": "Complete proof of work locally on your device or outsource to the node"
+                "title": "PoW (İş kanıtı)",
+                "description": "Proof of work'u cihazınızda yerel olarak tamamlayın veya düğüme dış kaynak kullanarak işletin"
             },
             "errorLog": {
                 "title": "Hata Kaydı",
@@ -427,41 +431,41 @@
                 "description": "Geliştiricilere bir hata bildirin. Daha önce rapor edilmediğinden emin olmak için kontrol edin"
             },
             "developerToggle": {
-                "title": "Developer Mode",
-                "description": "Switch developer mode on to enable more features in experimental state"
+                "title": "Geliştirici Modu",
+                "description": "Deneysel durumda daha fazla özellik etkinleştirmek için geliştirici modunu açın"
             }
         },
         "login": {
             "pleaseWait": "Lütfen bekleyin {time, plural, one {# second} other {# seconds}}",
             "incorrectAttempts": "{attempts, plural, one {# yanlış deneme} other {# yanlış denemeler}}",
-            "hintStronghold": "Your Stronghold's version is out of date. Please log in to update your Stronghold."
+            "hintStronghold": "Stronghold versiyonun güncel değil. Stronghold versiyonu güncellemek için lütfen giriş yapın."
         },
         "loadProfile": {
             "loginSteps": {
-                "buildProfileManager": "Initialising profile manager",
-                "updateNodeInfo": "Checking node health",
-                "recoverAccounts": "Generating accounts",
-                "loadAccounts": "Syncing accounts",
-                "loadAssets": "Loading native assets",
-                "loadActivities": "Building activity history",
-                "setStrongholdStatus": "Securing stronghold",
-                "startBackgroundSync": "Starting background sync",
-                "loggingIn": "Loading dashboard"
+                "buildProfileManager": "Profil yöneticisi başlatılıyor",
+                "updateNodeInfo": "Düğüm sağlığı kontrol ediliyor",
+                "recoverAccounts": "Hesaplar oluşturma",
+                "loadAccounts": "Hesapları senkronize etme",
+                "loadAssets": "Yerel varlıklar yükleniyor",
+                "loadActivities": "İnşa faaliyet geçmişi",
+                "setStrongholdStatus": "Stronghold güvenliğini sağlamak",
+                "startBackgroundSync": "Arka planda senkronizasyon başlatılıyor",
+                "loggingIn": "Kontrol paneli yükleniyor"
             }
         },
         "dashboard": {
             "network": {
-                "operational": "Network operational",
-                "degraded": "Network degraded",
-                "down": "Network down",
-                "disconnected": "Disconnected from node",
+                "operational": "Ağ çalışır durumda",
+                "degraded": "Ağ bozuldu",
+                "down": "Ağ düşük",
+                "disconnected": "Düğüm bağlantısı kesildi",
                 "status": "Durum",
                 "messagesPerSecond": "Saniye başına mesaj sayısı",
                 "referencedRate": "Referans alınan oran"
             },
             "profileModal": {
-                "allSettings": "All settings",
-                "profileApplication": "Profile, application, security",
+                "allSettings": "Tüm ayarlar",
+                "profileApplication": "Profil, uygulama, güvenlik",
                 "logout": "Çıkış yap",
                 "stronghold": {
                     "title": "Profil kilidi",
@@ -471,18 +475,18 @@
                 "hardware": {
                     "title": "Donanım Aygıtı",
                     "statuses": {
-                        "appNotOpen": "Ledger unlocked but app not open",
-                        "correctAppOpen": "Ledger unlocked and app open ",
-                        "locked": "Ledger securely locked",
+                        "appNotOpen": "Ledger'in kilidi açıldı ancak uygulama açık değil",
+                        "correctAppOpen": "Ledger'in kilidi açıldı ve uygulama açıldı ",
+                        "locked": "Ledger güvenli bir şekilde kilitlendi",
                         "mnemonicMismatch": "Yanlış Defter veya anımsatıcı",
-                        "notConnected": "Ledger not connected",
+                        "notConnected": "Ledger bağlı değil",
                         "otherConnected": "Uygulama açık"
                     }
                 },
                 "backup": {
                     "title": "Cüzdanlarınızı yedekleyin",
-                    "lastBackup": "You last backed up {date}",
-                    "notBackedUp": "Not backed up",
+                    "lastBackup": "Aldığınız son yedek {date}",
+                    "notBackedUp": "Yedeklenmedi",
                     "button": "Yedekleme"
                 },
                 "version": {
@@ -515,7 +519,7 @@
                 },
                 "bodies": {
                     "upcoming": "{date} tarihinde bahis başladıktan sonra her 10 saniyede bir ödülleri otomatik olarak almak için {token} jetonlarınızı kullanın.",
-                    "commencing": "Stake your {token} tokens to automatically receive rewards every 10 seconds once staking starts on {date}.",
+                    "commencing": "{date} tarihinde staking başladığında her 10 saniyede bir otomatik olarak ödül almak için {token} jetonlarınızı stake edin.",
                     "holdingAndStaking": "Her 10 saniyede bir otomatik olarak ödül alırsınız.",
                     "holdingAndNotStaking": "Her 10 saniyede bir ödül almak için IOTA jetonlarınızı kullanın.",
                     "endedAndDidStake": "{token} ödülleri, ağ başlatıldığında cüzdanınıza dağıtılacaktır.",
@@ -531,7 +535,7 @@
                 "totalWalletRewards": "Toplam cüzdan ödülleri",
                 "assembly": {
                     "name": "Assembly",
-                    "description": "Assembly is a permissionless, highly scalable multi-chain network to build and deploy composable smart contracts. Assembly is the future of web3. "
+                    "description": "Assembly, şekillendirilebilir akıllı sözleşmeler oluşturmak ve dağıtmak için izin gerektirmeyen, yüksek düzeyde ölçeklenebilir, çok zincirli bir ağdır. Assembly Web3'ün geleceğidir."
                 },
                 "shimmer": {
                     "name": "Shimmer",
@@ -551,261 +555,261 @@
         },
         "collectibles": {
             "gallery": {
-                "title": "Collectibles",
-                "emptyTitle": "No collectibles",
-                "noResults": "No results",
-                "emptyDescription": "Deposit or Receive your first collectible now!"
+                "title": "Koleksiyonlar",
+                "emptyTitle": "Koleksiyon yok",
+                "noResults": "Sonuç yok",
+                "emptyDescription": "İlk koleksiyonunuzu şimdi yatırın veya alın!"
             },
             "details": {
-                "storageDepositDescription": "A refundable deposit required to store your NFT on the Tangle.",
-                "attributes": "Attributes",
+                "storageDepositDescription": "NFT'nizi Tangle'da saklamak için iade edilebilir bir depozito gereklidir.",
+                "attributes": "Öznitelikler",
                 "menu": {
-                    "download": "Download",
-                    "setPfp": "Set NFT profile pic",
-                    "unsetPfp": "Unset NFT profile pic",
-                    "view": "View media in browser",
-                    "burn": "Burn NFT"
+                    "download": "İndirmek",
+                    "setPfp": "NFT profil resmini ayarla",
+                    "unsetPfp": "NFT profil resmini ayarlanmamış",
+                    "view": "Medyayı tarayıcıda görüntüle",
+                    "burn": "NFT'yi Yak"
                 }
             }
         },
         "governance": {
             "votingPower": {
-                "title": "Voting power",
-                "maximal": "Maximal voting power: {value}",
-                "manage": "Manage voting power"
+                "title": "Oylama güçü",
+                "maximal": "Maksimum oylama gücü:{value}",
+                "manage": "Oy gücünü yönetin"
             },
             "proposalsDetails": {
-                "title": "Details",
-                "totalProposals": "Total proposals",
-                "activeProposals": "Active proposals",
-                "votingProposals": "Proposals you are voting on",
-                "votedProposals": "Total proposals you voted on"
+                "title": "Ayrıntılar",
+                "totalProposals": "Toplam teklifler",
+                "activeProposals": "Aktif teklifler",
+                "votingProposals": "Oy vereceğiniz teklifler",
+                "votedProposals": "Oy verdiğiniz toplam teklifler"
             },
             "proposals": {
-                "title": "Proposals",
-                "voted": "Voted",
-                "successEdit": "Proposal successfully edited",
-                "successAdd": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added",
-                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} successfully added to all accounts",
-                "successRemove": "Proposal successfully removed",
-                "emptyTitle": "No proposals"
+                "title": "Teklifler",
+                "voted": "Oy verildi",
+                "successEdit": "Teklif başarıyla düzenlendi",
+                "successAdd": "{numberOfProposals, select, one {Teklifler} other {Teklifler}} başarıyla eklendi",
+                "successAddAll": "{numberOfProposals, select, one {Proposal} other {Proposals}} tüm hesaplara başarıyla eklendi",
+                "successRemove": "Teklif başarıyla kaldırıldı",
+                "emptyTitle": "Teklif yok"
             },
             "statusTimeline": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting starts",
-                "ended": "Counting stops"
+                "upcoming": "Duyuru",
+                "commencing": "Oylama açıldı",
+                "holding": "Sayım başlıyor",
+                "ended": "Sayım duruyor"
             },
             "details": {
                 "yourVote": {
-                    "title": "Your vote",
-                    "total": "Total votes counted",
-                    "power": "Voting power"
+                    "title": "Oyunuz",
+                    "total": "Sayılan toplam oylar",
+                    "power": "Oylama güçü"
                 },
                 "proposalInformation": {
-                    "title": "Proposal information",
-                    "votingOpens": "Voting opens on",
-                    "countingStarts": "Counting starts on",
-                    "countingEnds": "Counting ends on",
-                    "countingEnded": "Counting ended on",
-                    "eventId": "Event ID",
-                    "nodeUrl": "Node URL"
+                    "title": "Teklif bilgileri",
+                    "votingOpens": "Oylama açılıyor",
+                    "countingStarts": "Sayım başlıyor",
+                    "countingEnds": "Sayım bitiyor",
+                    "countingEnded": "Sayım sona erdi",
+                    "eventId": "Etkinlik ID",
+                    "nodeUrl": "Node URL'si"
                 },
-                "fetching": "Fetching proposal data",
-                "hintVote": "You can not vote on a proposal that is in the announcement phase, voting will open in {time}."
+                "fetching": "Teklif verileri getiriliyor",
+                "hintVote": "Duyuru aşamasında olan bir teklife oy veremezsiniz, oylama {time} içinde açılacaktır."
             }
         },
         "updateStronghold": {
             "update": {
-                "title": "Update Stronghold",
-                "loginBody": "Your Stronghold's version is out of date. Provide your password to update Stronghold.",
-                "recoveryBody": "The imported Stronghold’s version is out of date, to continue we will need to update the stronghold to the latest version."
+                "title": "Stronghold'ı güncelle",
+                "loginBody": "Stronghold'unuzun sürümü güncel değil. Stronghold'u güncellemek için şifrenizi girin.",
+                "recoveryBody": "İçe aktarılan Stronghold sürümü güncel değil, devam etmek için kaleyi en son sürüme güncellememiz gerekiyor."
             },
             "updateBackup": {
-                "loginTitle": "Stronghold updated",
-                "loginBody": "It's all good now - you're running the latest Stronghold version",
-                "recoveryTitle": "Stronghold is successfully recovered and updated",
-                "recoveryBody": "You can now continue setting up your wallet",
-                "hint": "We highly recommend to delete all previous Stronghold backup files and save a new one"
+                "loginTitle": "Stronghold güncellendi",
+                "loginBody": "Artık her şey yolunda - Stronghold'un en son sürümünü çalıştırıyorsunuz",
+                "recoveryTitle": "Stronghold başarıyla kurtarıldı ve güncellendi",
+                "recoveryBody": "Şimdi cüzdanınızı kurmaya devam edebilirsiniz",
+                "hint": "Önceki tüm Stronghold yedekleme dosyalarını silmenizi ve yenisini kaydetmenizi önemle tavsiye ederiz"
             },
             "changePassword": {
-                "hint": "Your Stronghold was out of date and has been updated. We recommend that you change your Stronghold password."
+                "hint": "Stronghold'unuz güncel olmadığı için güncellendi. Stronghold şifrenizi değiştirmenizi öneririz."
             }
         },
         "vesting": {
-            "title": "Vesting",
+            "title": "Hakediş",
             "overview": {
-                "unlocked": "Unlocked",
-                "locked": "Locked",
-                "total": "Total"
+                "unlocked": "Kilitli değil",
+                "locked": "Kilitli",
+                "total": "Toplam"
             },
-            "timeUntilNextUnlock": "Time until next unlock",
-            "collect": "Collect",
-            "search": "Find vesting rewards",
+            "timeUntilNextUnlock": "Bir sonraki kilidin açılmasına kadar geçen süre",
+            "collect": "Toplamak",
+            "search": "Kazanılan ödülleri bulun",
             "payouts": {
-                "title": "Biweekly Unlock Schedule",
-                "information": "Payout Information",
+                "title": "İki Haftalık Kilit Açma Programı",
+                "information": "Ödeme Bilgileri",
                 "tooltip": {
-                    "title": "Payout",
-                    "amount": "Amount",
-                    "unlockDate": "Unlock Date"
+                    "title": "Ödeme",
+                    "amount": "Tutar",
+                    "unlockDate": "Kilit açma tarihi"
                 }
             },
             "infoTooltip": {
-                "title": "Vesting of tokens",
-                "body": "From the tokens users received through an IOTA token airdrop, 10% are being available to users immediately at the genesis of the IOTA Stardust network. The rest is gradually unlocked over the course of two years in equal proportion happening every two weeks."
+                "title": "Jetonları kazanılması",
+                "body": "Kullanıcıların bir IOTA token airdrop'u yoluyla aldıkları tokenlerin %10'u, IOTA Stardust ağının oluşumunda anında kullanıcılara sunuluyor. Geri kalanının kilidi, iki haftada bir eşit oranda olmak üzere iki yıl boyunca kademeli olarak açılır."
             }
         }
     },
     "popups": {
         "payoutDetails": {
-            "title": "Payout Details",
-            "amount": "Total amount",
-            "unlockDate": "Unlock date",
-            "status": "Status"
+            "title": "Ödeme Detayları",
+            "amount": "Toplam tutar",
+            "unlockDate": "Kilit açma tarihi",
+            "status": "Durum"
         },
         "vestingCollect": {
-            "title": "Collect",
-            "body": "Don't miss out on your unclaimed funds! Click the button below to check and claim your funds now.",
-            "unclaimedFunds": "Unclaimed funds",
-            "button": "Collect"
+            "title": "Toplamak",
+            "body": "Talep edilmeyen fonlarınızı kaçırmayın! Paranızı şimdi kontrol etmek ve talep etmek için aşağıdaki düğmeyi tıklayın.",
+            "unclaimedFunds": "Talep edilmemiş fonlar",
+            "button": "Toplamak"
         },
         "metricSystemInfo": {
-            "title": "Transitioning from metric prefixes",
-            "body1": "At the inception of IOTA, we intended to adhere to standards by using metric system prefixes. However, indicating a multiple or submultiple of the unit has been proven impractical.",
-            "body2": "Instead of kilo (KIOTA), mega (MIOTA), etc, the new smallest unit in IOTA is called 'micro', or 'micros' for multiple units. What was previously 1 MIOTA will now simply be called one IOTA. 1,000,000 micros equal 1 IOTA.",
-            "body3": "Please be assured that this change will not affect the value of your assets - it's a linguistic refinement, not a functional change. You can find more information in the blog post announcing the change.",
-            "link": "New IOTA token denomination: moving away from metric unit prefixes"
+            "title": "Metrik ön eklerden geçiş",
+            "body1": "IOTA'nın başlangıcında, metrik sistem ön eklerini kullanarak standartlara uygun olmayı amaçladık. Ancak birimin bir katı veya alt katını belirtmek pratikte mümkün olmadığı kanıtlandı.",
+            "body2": "KIOTA, MIOTA vb. yerine, IOTA'daki yeni en küçük birim 'mikro' olarak adlandırılır, birden fazla birim için 'mikro'lar kullanılır. Daha önce 1 MIOTA olarak adlandırılan şimdi sadece bir IOTA olarak adlandırılacaktır. 1.000.000 mikro, 1 IOTA'ya eşittir.",
+            "body3": "Bu değişikliğin varlıklarınızın değerini etkilemeyeceğinden emin olabilirsiniz - bu, dilbilgisel bir iyileştirme, işlevsel bir değişiklik değil. Değişikliği duyuran blog gönderisinde daha fazla bilgi bulabilirsiniz.",
+            "link": "Yeni IOTA token birimi: metrik ön eklerden uzaklaşma"
         },
         "enableLedgerBlindSigning": {
-            "title": "Enable Blind Signing",
-            "info": "In order to confirm this transaction you need to enable Blind Signing on your ledger device.",
-            "step_1": "Connect and unlock your Ledger Device",
-            "step_2": "Open {network} Application",
-            "step_3": "Press the right button to navigate to Settings. Then press both buttons to validate. Your Ledger device displays Blind Signing.",
-            "step_4": "Press both buttons to enable transaction blind signing. The device displays Enabled. You're done."
+            "title": "Kör İmzalamayı Etkinleştir",
+            "info": "Bu işlemi onaylamak için Ledger cihazınızda Blind Signing'i etkinleştirmeniz gerekmektedir.",
+            "step_1": "Ledger'ınızı bağlayın ve kilidini açın",
+            "step_2": "{network} Uygulamasını açın",
+            "step_3": "Ayarlar'a gitmek için sağ düğmeye basın. Ardından doğrulamak için her iki düğmeye de basın. Ledger cihazınız Blind Signing'i gösterir.",
+            "step_4": "Blind signing'i etkinleştirmek için her iki düğmeye de basın. Cihaz Etkin'i görüntüler. İşlem tamam."
         },
         "balanceBreakdown": {
-            "title": "Balance breakdown",
+            "title": "Bakiye dökümü",
             "available": {
-                "title": "Available",
-                "subtitle": "Funds fully available for spending"
+                "title": "Mevcut",
+                "subtitle": "Tamamen harcamaya hazır fonlar"
             },
             "pending": {
-                "title": "Pending",
-                "subtitle": "Temporarily locked in transactions (excluding vesting)"
+                "title": "Bekleniyor",
+                "subtitle": "İşlemlerde geçici olarak kilitlendi (hakedilen hariç)"
             },
             "locked": {
-                "title": "Locked",
-                "subtitle": "Temporarily locked for governance"
+                "title": "Kilitli",
+                "subtitle": "Yönetim için geçici olarak kilitlendi"
             },
             "storageDeposit": {
-                "title": "Storage deposit",
-                "subtitle": "These funds are reserved for storing native assets."
+                "title": "Depolama depozitosu",
+                "subtitle": "Bu fonlar yerel varlıkların depolanması için ayrılmıştır."
             },
             "totalBalance": {
-                "title": "Total balance",
+                "title": "Toplam bakiye",
                 "subtitle": ""
             },
             "basicOutputs": {
-                "title": "Native Tokens",
-                "subtitle": "Reserved for Native Token storage"
+                "title": "Yerel Tokenlar",
+                "subtitle": "Yerel Token depolaması için ayrılmıştır"
             },
             "nftOutputs": {
-                "title": "NFTs",
-                "subtitle": "Reserved for NFT storage"
+                "title": "NFT'ler",
+                "subtitle": "NFT depolama için ayrılmıştır"
             },
             "aliasOutputs": {
-                "title": "Aliases",
-                "subtitle": "Reserved for Alias storage"
+                "title": "Takma adlar",
+                "subtitle": "Takma ad depolaması için ayrılmıştır"
             },
             "foundryOutputs": {
-                "title": "Foundries",
-                "subtitle": "Reserved for Native Token Foundry storage"
+                "title": "Dökümhaneler",
+                "subtitle": "Yerel Token Dökümhanesi depolaması için ayrılmıştır"
             },
             "unclaimed": {
-                "title": "Unclaimed transaction",
-                "subtitle": "Temporarily locked in unclaimed transactions"
+                "title": "Talep edilmemiş işlem",
+                "subtitle": "Talep edilmeyen işlemlerde geçici olarak kilitlendi"
             },
             "timelock": {
-                "title": "Time lock",
-                "subtitle": "Temporarily locked in timelocked transactions"
+                "title": "Zamanlı kilidi",
+                "subtitle": "Geçici olarak zaman kilidindeki işlemler kilitlenmiş"
             },
             "storageDepositReturn": {
-                "title": "SDRUC",
-                "subtitle": "Temporarily locked in Storage Deposit Return"
+                "title": "Depozito geri ödemeleri",
+                "subtitle": "Depolama Depozito İadesinde Geçici Olarak Kilitlendi"
             },
             "governance": {
-                "title": "Governance",
-                "subtitle": "Reserved for voting power"
+                "title": "Yönetim",
+                "subtitle": "Oy kullanma gücü için ayrılmış"
             },
             "vesting": {
-                "title": "Vesting",
-                "subtitle": "Locked funds awaiting unlock based on the vesting schedule"
+                "title": "Hakediş",
+                "subtitle": "Hak kazanma planına göre kilidi açılmayı bekleyen kilitli fonlar"
             },
-            "minimizeStorageDepositButton": "Minimize storage deposit"
+            "minimizeStorageDepositButton": "Depolama depozitosunu en aza indirin"
         },
         "minimizeStorageDeposit": {
-            "title": "Minimize storage deposit",
-            "description": "Consolidate outputs to minimize your required storage deposit and increase your available balance.",
-            "confirmButton": "Consolidate"
+            "title": "Depolama depozitosunu en aza indirin",
+            "description": "Gerekli depolama depozitonuzu en aza indirmek ve mevcut bakiyenizi artırmak için çıktıları birleştirin.",
+            "confirmButton": "Birleştir"
         },
         "alias": {
-            "title": "Confirm alias creation"
+            "title": "Takma ad oluşturmayı onaylayın"
         },
         "password": {
             "title": "Parola gerekli",
-            "subtitle": "Please provide your password to unlock your wallets",
+            "subtitle": "Cüzdanlarınızın kilidini açmak için lütfen şifrenizi girin",
             "backup": "Bir yedeği dışa aktarmak için lütfen şifrenizi girin"
         },
         "qr": {
             "title": "QR Kodunuz"
         },
         "appUpdate": {
-            "title": "Check for updates",
-            "installedVersion": "Installed version",
-            "newVerion": "New version",
-            "stage": "Stage",
-            "prod": "Production",
-            "alpha": "Alpha",
+            "title": "Güncellemeleri kontrol et",
+            "installedVersion": "Yüklü sürüm",
+            "newVerion": "Yeni versiyon ",
+            "stage": "Aşama",
+            "prod": "Üretim",
+            "alpha": "Alfa",
             "beta": "Beta",
-            "releasedAt": "Released at",
-            "updateAvailable": "Update is available",
-            "updatesDisabled": "There are updates available, but in-app upgrade is disabled for your operating system.",
-            "latestInstalled": "You are running the latest and safest version"
+            "releasedAt": "Yayınlanma",
+            "updateAvailable": "Güncelleme mevcut",
+            "updatesDisabled": "Güncellemeler mevcuttur, ancak işletim sisteminiz için uygulama içi yükseltme devre dışı bırakılmıştır.",
+            "latestInstalled": "En son ve en güvenli sürümü çalıştırıyorsunuz"
         },
         "backupStronghold": {
-            "title": "Backup your stronghold file",
-            "body": "It is important to back up your wallet regularly to ensure you have a copy of your wallets and transaction history. If you lose your backup and recovery phrase you will lose access to your funds."
+            "title": "Stronghold dosyanızı yedekleyin",
+            "body": "Cüzdanlarınızın ve işlem geçmişinizin bir kopyasına sahip olduğunuzdan emin olmak için cüzdanınızı düzenli olarak yedeklemeniz önemlidir. Yedekleme ve kurtarma ifadenizi kaybederseniz fonlarınıza erişiminizi kaybedersiniz."
         },
         "deeplinkAccountSwitch": {
-            "title": "Select a wallet",
-            "body": "You just followed a deep link. Please select the wallet with which you want to continue."
+            "title": "Bir cüzdan seçin",
+            "body": "Az önce derin bir bağlantıyı takip ettiniz. Lütfen devam etmek istediğiniz cüzdanı seçin."
         },
         "deeplinkError": {
-            "title": "Failed link",
-            "body": "This link failed or is invalid. Please try again or double check the source of the link."
+            "title": "Başarısız bağlantı",
+            "body": "Bu bağlantı başarısız oldu veya geçersiz. Lütfen tekrar deneyin veya bağlantının kaynağını tekrar kontrol edin."
         },
         "deleteAccount": {
             "title": "Sil {name}?",
-            "body": "Are you sure you want to delete this wallet?",
-            "hint": "Note: once deleted, you can restore this wallet by using the \"Wallet Finder\" in the settings.",
+            "body": "Bu cüzdanı silmek istediğinizden emin misiniz?",
+            "hint": "Not: Silindikten sonra bu cüzdanı ayarlardaki \"Cüzdan Bulucu\"yu kullanarak geri yükleyebilirsiniz.",
             "typePassword": "Doğrulama için lütfen cüzdan parolanızı giriniz.",
             "hideAccount": "Cüzdanı sil",
             "errorTitle": "Silinemedi: {name}",
             "errorBody1": "Bu cüzdanı silemezsiniz, en az bir cüzdana sahip olmanız gerekmektedir."
         },
         "externalUrl": {
-            "title": "Open URL in Browser",
-            "body": "Are you sure you want to open \"{url}\" in the browser?",
-            "hint": "This URL is unknown to Firefly. Please double check the URL before opening it.",
-            "action": "Open URL",
-            "invalidProtocol": "Cannot open URL with invalid protocol"
+            "title": "Tarayıcıda URL aç",
+            "body": "\"{url}\" adresini tarayıcıda açmak istediğinizden emin misiniz?",
+            "hint": "Bu URL Firefly tarafından bilinmiyor. Lütfen açmadan önce URL'yi tekrar kontrol edin.",
+            "action": "URL'yi aç",
+            "invalidProtocol": "URL geçersiz protokolle açılamıyor"
         },
         "hideAccount": {
             "title": "Gizle {name}?",
             "body": "Bu cüzdanı daha sonra Gelişmiş Ayarlar'da \"Gizli cüzdanları göster\" seçeneğini etkinleştirerek bulabilirsiniz.",
-            "typePassword": "Type your wallet password to confirm.",
+            "typePassword": "Onaylamak için cüzdan şifrenizi girin.",
             "hideAccount": "Cüzdanı gizle",
             "errorTitle": "Gizlenemedi: {name}",
             "errorBody1": "Bir cüzdanı gizlemek için bakiyesi olmamalıdır.",
@@ -813,12 +817,12 @@
             "errorBody3": "Bu cüzdanı gizleyemezsiniz, en az bir cüzdanınız bulunmalıdır."
         },
         "excludeNode": {
-            "title": "Exclude node",
-            "body": "Are you sure you want to exclude {url} from the available node pool?"
+            "title": "Düğümü hariç tut",
+            "body": "{url}'yi mevcut düğüm havuzundan hariç tutmak istediğinizden emin misiniz?"
         },
         "unsetAsPrimaryNode": {
-            "title": "Clear primary node",
-            "body": "Are you sure you want to clear {url} as the primary node?"
+            "title": "Birincil düğümü temizleyin",
+            "body": "{url}'yi birincil düğüm olarak temizlemek istediğinizden emin misiniz?"
         },
         "node": {
             "titleAdd": "Bir node ekle",
@@ -826,7 +830,7 @@
             "titleRemove": "Düğüm kaldır",
             "titleRemoveAll": "Tüm düğümleri kaldır",
             "titleDetails": "Node detayları",
-            "titleInfo": "Node information",
+            "titleInfo": "Düğüm bilgisi",
             "addingNode": "Düğüm ekle",
             "updatingNode": "Düğümü güncelle",
             "loadingNodeInfo": "Düğüm bilgisi yükleniyor",
@@ -838,39 +842,39 @@
             "removeConfirmation": "Bu klasörü kaldırmak istediğinize emin misiniz?",
             "info": {
                 "general": {
-                    "tab": "General",
-                    "name": "Name",
+                    "tab": "Genel",
+                    "name": "İsim",
                     "url": "URL",
-                    "version": "Version",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone",
-                    "pruningIndex": "Pruning index",
-                    "features": "Features"
+                    "version": "Versiyon",
+                    "latestMilestone": "Son kilometre taşı",
+                    "confirmedMilestone": "Onaylanmış kilometre taşı",
+                    "pruningIndex": "Budama indeksi",
+                    "features": "Özellikler"
                 },
                 "metrics": {
-                    "tab": "Metrics",
-                    "blocksPerSecond": "Blocks per second",
-                    "referencedBlocksPerSecond": "Referenced blocks per second",
-                    "referencedRate": "Referenced rate",
-                    "latestMilestone": "Latest milestone",
-                    "confirmedMilestone": "Confirmed milestone"
+                    "tab": "Metrikler",
+                    "blocksPerSecond": "Saniye başına bloklar",
+                    "referencedBlocksPerSecond": "Saniye başına başvurulan bloklar",
+                    "referencedRate": "Referans alınan oran",
+                    "latestMilestone": "Son kilometre taşı",
+                    "confirmedMilestone": "Onaylanmış kilometre taşı"
                 },
                 "protocol": {
-                    "tab": "Protocol",
-                    "network": "Network",
+                    "tab": "Protokol",
+                    "network": "Ağ",
                     "bech32Hrp": "Bech32 HRP",
-                    "tokenSupply": "Token supply",
-                    "version": "Version",
-                    "minPowScore": "Min PoW Score"
+                    "tokenSupply": "Token arzı",
+                    "version": "Versiyon",
+                    "minPowScore": "Minimum PoW Puanı"
                 },
                 "baseToken": {
-                    "tab": "Base token",
-                    "token": "Token",
+                    "tab": "Temel token",
+                    "token": "Token (Jeton)",
                     "tickerSymbol": "Ticker",
-                    "unit": "Unit",
-                    "subunit": "Sub-unit",
-                    "decimals": "Decimals",
-                    "useMetricPrefix": "Use metric prefix"
+                    "unit": "Birim",
+                    "subunit": "Alt birim",
+                    "decimals": "Ondalık sayılar",
+                    "useMetricPrefix": "Metrik önekini kullan"
                 }
             }
         },
@@ -886,7 +890,7 @@
             "empty": "Hata geçmişi boş."
         },
         "deleteProfile": {
-            "title": "Delete profile",
+            "title": "Profili sil",
             "confirmation": "Bu dosyayı silmek istiyor musunuz? Bu işlem geri alınamaz.",
             "typePassword": "Onaylamak için parolanızı girin."
         },
@@ -902,34 +906,34 @@
             "userPath": "Kullanıcı yolu"
         },
         "transaction": {
-            "title": "Send asset",
+            "title": "Varlıkları gönder",
             "body": "Bu kadar miktar göndermek üzeresiniz {amount}",
-            "selectToken": "Select a token",
-            "selectAmount": "Send {tokenName}",
-            "selectRecipient": "Send {assetName} to",
-            "transactionSummary": "Transaction to {recipient}",
-            "surplusIncluded": "This transaction contains a surplus amount. Please double check this is the amount you want to send.",
+            "selectToken": "Bir token seçin",
+            "selectAmount": "Gönder {tokenName}",
+            "selectRecipient": "{assetName}'i şuraya gönder",
+            "transactionSummary": "{recipient} yapılan işlem",
+            "surplusIncluded": "Bu işlem fazla tutar içermektedir. Lütfen göndermek istediğiniz tutarın bu olup olmadığını bir kez daha kontrol edin.",
             "sendingFromStakedAccount": "Şu anda stake edilen bir cüzdandan transfer gönderiyorsunuz. Bu, tokenlarınızın stake durumunu iptal edebilir. Transferi göndermekten çekinmeyin, ancak daha sonra kalan tokenlarınızı yeniden stake etmeniz gerekebilir.",
             "sendingFromStakedAccountBelowMinReward": "Henüz minimum stake ödüllerine ulaşmamış bir cüzdandan transfer gönderiyorsunuz.\nBu jetonlarınızı geri alabilir ve bu cüzdandaki stake ödüllerinizi kaybedebilirsiniz."
         },
         "balanceFinder": {
-            "title": "Balance finder",
-            "body": "Perform a more exhaustive search of balances.",
-            "addressesSearched": "Addresses searched",
-            "addressesFound": "Addresses found",
-            "totalAddressBalance": "Total balance",
-            "searchAgainHint": "Is your balance or number of wallets incorrect? Search again until your full balance is shown.",
-            "currentWallet": "Search only in the current wallet"
+            "title": "Bakiye bulucu",
+            "body": "Bakiyeleri daha kapsamlı bir şekilde araştırın.",
+            "addressesSearched": "Aranan adresler",
+            "addressesFound": "Bulunan adresler",
+            "totalAddressBalance": "Toplam bakiye",
+            "searchAgainHint": "Bakiyeniz veya cüzdan sayınız yanlış mı? Bakiyenizin tamamı gösterilene kadar arama yapın.",
+            "currentWallet": "Yalnızca mevcut cüzdanda ara"
         },
         "balanceOverview": {
-            "title": "Balance overview",
-            "body": "Find information about all your wallets and the balance of each."
+            "title": "Bakiyeye genel bakış",
+            "body": "Tüm cüzdanlarınız ve her birinin bakiyesi hakkında bilgi edinin."
         },
         "vestingRewards": {
-            "title": "Find vesting rewards",
-            "body": "Perform a more exhaustive search of your rewards.",
-            "totalAddressBalance": "Total rewards",
-            "searchAgainHint": "Are your vesting rewards incorrect? Search again until all your rewards are shown."
+            "title": "Kazanılan ödülleri bulun",
+            "body": "Ödülleriniz üzerinde daha kapsamlı bir arama yapın.",
+            "totalAddressBalance": "Toplam ödüller",
+            "searchAgainHint": "Hakediş ödülleriniz yanlış mı? Tüm ödülleriniz gösterilene kadar tekrar arayın."
         },
         "riskFunds": {
             "title": "Uyarı: taşıma sırasında bakiye risk altında",
@@ -949,31 +953,31 @@
             "bodyFirefly": "İşlem tamamlanana kadar Firefly devre dışı bırakıldı. Token taşıma daha sonra hala mümkün olacak."
         },
         "ledgerNotConnected": {
-            "title": "Connect your Ledger",
-            "notConnected": "Connect your Ledger device to continue.",
-            "locked": "Unlock your Ledger device to continue.",
-            "appNotOpen": "Open the {legacy} app on your Ledger device to continue.",
-            "correctAppOpen": "Ledger successfully connected, please continue."
+            "title": "Ledger'inizi bağlayın",
+            "notConnected": "Devam etmek için Ledger cihazınızı bağlayın.",
+            "locked": "Devam etmek için Ledger cihazınızın kilidini açın.",
+            "appNotOpen": "Devam etmek için Ledger cihazınızdaki {legacy} uygulamasını açın.",
+            "correctAppOpen": "Ledger başarıyla bağlandı, lütfen devam edin."
         },
         "ledgerConfirmation": {
             "confirm": "Devam etmek için Ledger cihazınızda görüntülenen istemi onaylayın"
         },
         "ledgerAppGuide": {
-            "title": "Guide to installing the {legacy} app",
+            "title": "{legacy} uygulamasını yükleme rehberi",
             "steps": {
                 "0": "Ledger Live uygulamasını kurun ve açın",
                 "1": "Ledger'ınızın bağlı olduğundan emin olun",
-                "2": "Search for the {legacy} app. You may need to enable Ledger Live developer mode.",
-                "3": "Install the {legacy} app",
+                "2": "{legacy} uygulamasını arayın. Ledger Live geliştirici modunu etkinleştirmeniz gerekebilir.",
+                "3": "{legacy} uygulamasını kurun",
                 "4": "Firefly'a dönmeden önce Ledger Live'ı kapatmanın önemli olduğunu unutmayın"
             }
         },
         "ledgerConnectionGuide": {
-            "title": "Tips if your Ledger isn’t connecting",
+            "title": "Ledger'ınız bağlanmadığı durumlar için ipuçları",
             "steps": {
                 "0": "Bilgisayarınızda Ledger Live'ın açık olmadığından emin olun",
                 "1": "PIN'inizle Ledger cihazınızın kilidini açtığınızdan emin olun",
-                "2": "Open the new {network} app on your Ledger device",
+                "2": "Ledger cihazınızda yeni {network} uygulamasını açın",
                 "3": {
                     "text": "Hala olmadı mı?",
                     "link": "Resmi Ledger destek sayfasını deneyin"
@@ -981,13 +985,13 @@
             }
         },
         "verifyLedgerTransaction": {
-            "title": "Verify transaction",
-            "info": "Compare and confirm the transaction information displayed on your ledger device against the information below."
+            "title": "İşlemi doğrula",
+            "info": "Ledger cihazınızda görüntülenen işlem bilgilerini aşağıdaki bilgilerle karşılaştırın ve onaylayın."
         },
         "verifyInternalLedgerTransaction": {
-            "title": "Verify internal transaction",
-            "info": "Please confirm the internal transaction on your ledger.",
-            "hint": "All assets will remain on your wallet when sending an internal transaction."
+            "title": "Dahili işlemi doğrula",
+            "info": "Lütfen Ledger'ınızda ki dahili işlemi onaylayın.",
+            "hint": "Dahili bir işlem gönderirken tüm varlıklar cüzdanınızda kalacaktır."
         },
         "ledgerAddress": {
             "title": "Alma adresini onayla",
@@ -1010,7 +1014,7 @@
             "totalFundsStaked": "Stake edilen toplam fon",
             "stakedSuccessfully": "Fonlarınız {account} için stake edildi.",
             "unstakedSuccessfully": "Fonlarınızın {account} için stake'i iptal edildi.",
-            "singleAccountHint": "Looking for your wallets? Firefly has changed. Toggle between your wallets in the top menu bar."
+            "singleAccountHint": "Cüzdanlarınızı mı arıyorsunuz? Firefly değişti. Üst menü çubuğunda cüzdanlarınız arasında geçiş yapın."
         },
         "stakingConfirmation": {
             "title": "Katılımı onaylayın",
@@ -1060,142 +1064,142 @@
             "hint": "Cüzdanı bulamıyor musunuz? Daha önce kullanılmış cüzdanları bulmak için ayarlardaki bakiye bulma aracını kullanın."
         },
         "transactionDetails": {
-            "title": "Transaction details",
+            "title": "İşlem detayları",
             "giftedStorageDeposit": {
-                "tooltipTitle": "Gift storage deposit",
-                "tooltipDescription": "Amount kept by the recipient"
+                "tooltipTitle": "Hediye depolama depozitosu",
+                "tooltipDescription": "Alıcının elinde tuttuğu miktar"
             }
         },
         "sendForm": {
-            "title": "Send funds"
+            "title": "Fonları gönder"
         },
         "tokenInformation": {
-            "newTokenTitle": "New token",
-            "verificationWarning": "This token is unverified. Compare the token metadata against the relevant team’s official website. Only verify tokens that you trust.",
+            "newTokenTitle": "Yeni token",
+            "verificationWarning": "Bu token doğrulanmadı. Belirteç meta verilerini ilgili ekibin resmi web sitesiyle karşılaştırın. Yalnızca güvendiğiniz belirteçleri doğrulayın.",
             "tokenMetadata": {
-                "standard": "Standard",
-                "name": "Name",
+                "standard": "Standart",
+                "name": "İsim",
                 "tokenId": "Token ID",
                 "url": "URL"
             },
             "buttons": {
-                "verifyToken": "I verify this token"
+                "verifyToken": "Bu tokeni doğruluyorum"
             }
         },
         "sendNft": {
-            "formTitle": "Send NFT",
-            "confirmationTitle": "Confirm sending NFT",
+            "formTitle": "NFT Gönder",
+            "confirmationTitle": "NFT gönderimini onaylayın",
             "property": {
                 "nft": "NFT"
             }
         },
         "nativeToken": {
-            "formTitle": "Mint native tokens",
-            "confirmationTitle": "Mint native tokens",
+            "formTitle": "Yerel tokenleri (jetonları) oluşturmak",
+            "confirmationTitle": "Yerel tokenleri (jetonları) oluşturmak",
             "property": {
-                "totalSupply": "Total supply",
-                "maximumSupply": "Maximum supply",
-                "mintedTokens": "Minted tokens",
-                "meltedTokens": "Melted tokens",
-                "circulatingSupply": "Circulating supply",
-                "aliasAddress": "Alias controller address",
-                "standard": "Standard",
-                "tokenName": "Name",
-                "unit": "Unit",
-                "subunit": "Subunit",
-                "storageDeposit": "Storage Deposit",
-                "description": "Description",
-                "symbol": "Symbol",
-                "decimals": "Decimals",
+                "totalSupply": "Toplam arz",
+                "maximumSupply": "Maksimum arz",
+                "mintedTokens": "Basılmış jetonlar (Tokenler)",
+                "meltedTokens": "Erimiş jetonlar (Tokenler)",
+                "circulatingSupply": "Dolaşımdaki arz",
+                "aliasAddress": "Takma ad denetleyici adresi",
+                "standard": "Standart",
+                "tokenName": "İsim",
+                "unit": "Birim",
+                "subunit": "Alt birim",
+                "storageDeposit": "Depolama Depozitosu",
+                "description": "Açıklama",
+                "symbol": "Sembol",
+                "decimals": "Ondalık sayılar",
                 "url": "URL",
                 "logoUrl": "Logo URL",
                 "logo": "Logo",
-                "alias": "Alias",
-                "assetId": "Asset Id"
+                "alias": "Takma ad",
+                "assetId": "Varlık ID"
             }
         },
         "noAlias": {
-            "title": "Unable to mint",
-            "description": "You must own an alias output to mint native tokens. To continue, please create an alias first"
+            "title": "Basılamıyor",
+            "description": "Yerel belirteçleri basmak için bir takma ad çıktısına sahip olmanız gerekir. Devam etmek için lütfen önce bir takma ad oluşturun"
         },
         "mintNftForm": {
-            "title": "Mint simple NFT",
+            "title": "Basit bir NFT oluştur",
             "errors": {
-                "invalidMimetype": "Invalid MimeType, check if the file type is supported",
-                "quantityTooSmall": "Quantity needs to be greater than 0",
-                "quantityTooLarge": "Quantity needs to be smaller than 64",
-                "emptyName": "Name is a required field",
-                "invalidURI": "Invalid URI, please provide a valid URI",
-                "notReachable": "URI not reachable, unable to check NFT type",
-                "royaltiesMustBeObject": "Royalties must be an object",
-                "royaltiesMustBeJSON": "Royalties must be a valid JSON",
-                "invalidAddress": "Invalid address, must be a valid {networkHrp} address where royalties will be sent to",
-                "invalidRoyaltyValue": "Invalid value, it must be a numeric decimal representative of the percentage required ie. 0.05",
-                "invalidRoyaltyValueSum": "Invalid value, the sum of all royalties must be less than or equal to 1'",
-                "attributesMustBeJSON": "Attributes must be a valid JSON",
-                "attributesMustBeArrayOfObjects": "Attributes must be an array of objects",
-                "attributesInvalidKeys": "Invalid key, attributes must have the keys \"trait_type\" and \"value\"",
-                "attributesInvalidValues": "Invalid value, \"trait_type\" must be a non empty string and \"value\" must be a non empty string or a number"
+                "invalidMimetype": "Geçersiz MimeType, dosya türünün desteklenip desteklenmediğini kontrol edin",
+                "quantityTooSmall": "Miktarın 0'dan büyük olması gerekiyor",
+                "quantityTooLarge": "Miktarın 64'den küçük olması gerekiyor",
+                "emptyName": "Ad zorunlu bir alandır",
+                "invalidURI": "Geçersiz URI, lütfen geçerli bir URI sağlayın",
+                "notReachable": "URI'ye ulaşılamıyor, NFT türü kontrol edilemiyor",
+                "royaltiesMustBeObject": "Telif hakları bir nesne olmalıdır",
+                "royaltiesMustBeJSON": "Telif hakları geçerli bir JSON olmalıdır",
+                "invalidAddress": "Geçersiz adres, telif ücretlerinin gönderileceği geçerli bir {networkHrp} adresi olmalıdır",
+                "invalidRoyaltyValue": "Geçersiz değer; gerekli yüzdeyi temsil eden sayısal bir ondalık sayı olmalıdır; 0.05",
+                "invalidRoyaltyValueSum": "Geçersiz değer; tüm telif ücretlerinin toplamı 1'den az veya ona eşit olmalıdır",
+                "attributesMustBeJSON": "Öznitelikler geçerli bir JSON olmalıdır",
+                "attributesMustBeArrayOfObjects": "Nitelikler bir nesne dizisi olmalıdır",
+                "attributesInvalidKeys": "Geçersiz anahtar; özenitelikler \"trait_type\" ve \"value\" anahtarlarına sahip olmalıdır",
+                "attributesInvalidValues": "Geçersiz değer; \"trait_type\" boş olmayan bir dize olmalı ve \"value\" boş olmayan bir dize veya sayı olmalıdır"
             }
         },
         "faucetRequest": {
-            "title": "Faucet request",
-            "body": "Are you sure you want to request {token} tokens from the {network} faucet?"
+            "title": "Musluk talebi",
+            "body": "{network} musluğundan {token} token istemek istediğinizden emin misiniz?"
         },
         "manageVotingPower": {
-            "title": "Manage voting power",
-            "body": "Define your voting power to vote on proposals.",
-            "hint": "All funds that you allocate to voting are locked. In order to make them spendable again, you need to decrease your voting power. This affects all proposals with an active vote.",
-            "amountZero": "Please be aware that setting your voting power to zero will stop all your votes for all proposals you are currently voting on."
+            "title": "Oy gücünü yönetin",
+            "body": "Tekliflere oy vermek için oylama gücünüzü tanımlayın.",
+            "hint": "Oylamaya ayırdığınız tüm fonlar kilitlenir. Bunları tekrar harcanabilir hale getirmek için oy gücünüzü azaltmanız gerekir. Bu, aktif oylamaya sahip tüm teklifleri etkiler.",
+            "amountZero": "Oylama gücünüzü sıfıra ayarlamanın, halihazırda oy vermekte olduğunuz tüm tekliflere ilişkin tüm oylarınızı durduracağını lütfen unutmayın."
         },
         "addProposal": {
-            "title": "Add proposal",
-            "body": "Please provide the information listed below to add a proposal.",
-            "addToAllAccounts": "Add the proposal to all accounts"
+            "title": "Teklif ekle",
+            "body": "Teklif eklemek için lütfen aşağıda listelenen bilgileri sağlayın.",
+            "addToAllAccounts": "Teklifi tüm hesaplara ekleyin"
         },
         "editProposal": {
-            "title": "Edit proposal",
-            "body": "Please provide the new url for the node that contains this proposal."
+            "title": "Teklifi düzenle",
+            "body": "Lütfen bu teklifi içeren düğümün yeni URL'sini sağlayın."
         },
         "voteForProposal": {
-            "title": "Vote for proposal",
-            "body": "You're about to vote for {proposal} proposal.",
-            "key": "Your voting power",
-            "hasAbstained": "You are abstaining from answering {numberOfQuestions, plural, one {# question} other {# questions}}.",
-            "noVotingPower": "You do not have any voting power. Please increase your voting power from the Governance dashboard."
+            "title": "Teklife oy verin",
+            "body": "{proposal} teklifine oy vermek üzeresiniz.",
+            "key": "Oy verme gücünüz",
+            "hasAbstained": "{numberOfQuestions, plural, one{# question} other{# questions}} yanıt vermekten kaçınıyorsunuz.",
+            "noVotingPower": "Oy kullanma hakkınız yok. Lütfen Yönetim kontrol panelinden oylama gücünüzü artırın."
         },
         "revote": {
-            "title": "Revote on proposals",
-            "body": "Changing your voting power temporarily stops your votes for all proposals from being counted. Simply click \"Revote\" to resume voting.",
-            "hint": "Firefly remembers all of the proposals and answer options you previously voted for."
+            "title": "Teklifleri yeniden oylayın",
+            "body": "Oylama gücünüzü değiştirmek, tüm tekliflere verdiğiniz oyların sayılmasını geçici olarak durdurur. Oylamaya devam etmek için \"Yeniden oyla\"ya tıklamanız yeterlidir.",
+            "hint": "Firefly, daha önce oy verdiğiniz tüm teklifleri ve yanıt seçeneklerini hatırlar."
         },
         "removeProposal": {
-            "title": "Remove proposal",
-            "body": "Are you sure you want to remove this proposal?",
-            "hint": "Please note that removing a proposal during the counting period will stop your votes but won't impact any votes that have already been counted."
+            "title": "Teklifi kaldır",
+            "body": "Bu teklifi kaldırmak istediğinizden emin misiniz?",
+            "hint": "Sayım döneminde bir teklifin kaldırılmasının oylarınızı durduracağını ancak halihazırda sayılmış olan oyları etkilemeyeceğini lütfen unutmayın."
         },
         "stopVoting": {
-            "title": "Stop voting",
-            "body": "You're about to stop voting for the {proposalName} proposal.",
-            "hint": "Please note that stopping voting during the counting period won't impact any votes that have already been counted."
+            "title": "Oylamayı durdur",
+            "body": "{proposalName} teklifine oy vermeyi bırakmak üzeresiniz.",
+            "hint": "Sayım döneminde oylamayı durdurmanın, halihazırda sayılmış olan oyları etkilemeyeceğini lütfen unutmayın."
         },
         "nodeAuthRequired": {
-            "title": "Authentication required",
-            "body": "This node requires additional authentication. Please fill in the appropriate information."
+            "title": "Kimlik doğrulaması gerekli",
+            "body": "Bu düğüm ek kimlik doğrulama gerektiriyor. Lütfen uygun bilgileri doldurun."
         },
         "addressHistory": {
-            "title": "Address history",
-            "indexAndType": "{internal, select, true {Internal address} other {Deposit address}} {index}",
-            "internal": "Internal",
-            "errorNoChronicle": "Chronicle not configured",
-            "errorFailedFetch": "Couldn't fetch address history",
-            "errorFailedGenerate": "Couldn't generate a new address"
+            "title": "Adres geçmişi",
+            "indexAndType": "{internal, select, true {Dahili adres} other {Depozito adres}} {index}",
+            "internal": "Dahili",
+            "errorNoChronicle": "Chronicle yapılandırılmamış",
+            "errorFailedFetch": "Adres geçmişi alınamadı",
+            "errorFailedGenerate": "Yeni bir adres oluşturulamadı"
         },
         "withdrawFromL2": {
-            "title": "Withdraw from L2",
-            "body": "List of addresses with withdrawable funds",
-            "withdraw": "Withdraw",
-            "withdrawing": "Withdrawing..."
+            "title": "Katman 2'den çekilme",
+            "body": "Çekilebilir fonlara sahip adreslerin listesi",
+            "withdraw": "Geri çek",
+            "withdrawing": "Çekiliyor..."
         }
     },
     "charts": {
@@ -1212,7 +1216,7 @@
         "timeframe1Month": "1 ay"
     },
     "actions": {
-        "apply": "Apply",
+        "apply": "Uygula",
         "continue": "Devam Et",
         "back": "Geri",
         "previous": "Önceki",
@@ -1220,60 +1224,62 @@
         "cancel": "İptal",
         "close": "Çıkış",
         "dismiss": "Vazgeç",
-        "claim": "Claim",
-        "claiming": "Claiming",
-        "claimingRewards": "Claiming rewards",
-        "reject": "Reject",
+        "claim": "Talep et",
+        "claiming": "Talet ediliyor",
+        "claimingRewards": "Ödülleri talep edin",
+        "reject": "Reddet",
         "confirmRejection": {
-            "title": "Reject transaction",
-            "description": "Are you sure you want to reject this transaction?",
-            "node": "Please note that rejecting a transaction only hides it from your Activity feed"
+            "title": "İşlemi reddet",
+            "description": "Bu işlemi reddetmek istediğinizden emin misiniz?",
+            "node": "Bir işlemi reddetmenin sadece Etkinlik akışınızdan gizlediğini unutmayın"
         },
         "confirmTokenBurn": {
-            "title": "Burn {assetName}",
-            "hint": "Please note that burning a token may free storage deposit attached to it and is not reversible"
+            "title": "{assetName} öğesini yak",
+            "hint": "Bir tokenı yakmanın, ona bağlı depolama depozitosunu serbest bırakabileceğini ve bu işlemin geri alınamaz olduğunu unutmayın"
         },
         "confirmNftBurn": {
-            "title": "Burn {nftName}",
-            "description": "Are you sure you want to burn this NFT?",
-            "hint": "Please note that burning an NFT frees the storage deposit attached to it and is not reversible."
+            "title": "{nftName} öğesini yak",
+            "description": "Bu NFT'yi yakmak istediğinizden emin misiniz?",
+            "hint": "Bir NFT'nin yakılmasının, kendisine bağlı depolama depozitosunu serbest bıraktığını ve bunun geri alınamayacağını lütfen unutmayın."
         },
         "proceedAnyway": "Yine de devam et",
         "save": "Kaydet",
         "importSeed": "Mevcut bir Seed'i içe aktarın",
         "restoreWallet": {
-            "iota": "Restore IOTA profile",
-            "iotaAlphanet": "Restore IOTA Alphanet profile",
-            "shimmer": "Restore Shimmer profile",
-            "testnet": "Restore Testnet profile",
-            "custom": "Restore Custom Network profile"
+            "iota": "IOTA profilini geri yükle",
+            "iotaAlphanet": "IOTA Alphanet profilini geri yükle",
+            "shimmer": "Shimmer profilini geri yükle",
+            "iotaTestnet": "IOTA Testnet profilini geri yükle",
+            "shimmerTestnet": "Shimmer Testnet profilini geri yükle",
+            "custom": "Özel Ağ profilini geri yükle"
         },
         "restoreWalletDescription": {
-            "iota": "Restore an existing IOTA profile",
-            "iotaAlphanet": "Restore an existing IOTA Alphanet profile",
-            "shimmer": "Restore an existing Shimmer profile",
-            "testnet": "Restore an existing Testnet profile",
-            "custom": "Restore an existing Custom Network profile"
+            "iota": "Mevcut bir IOTA profilini geri yükle",
+            "iotaAlphanet": "Mevcut bir IOTA Alphanet profilini geri yükle",
+            "shimmer": "Mevcut bir Shimmer profilini geri yükle",
+            "iotaTestnet": "Mevcut bir IOTA Testnet profilini geri yükle",
+            "shimmerTestnet": "Mevcut bir Shimmer Testnet profilini geri yükle",
+            "custom": "Mevcut bir Özel Ağ profilini geri yükle"
         },
         "refreshNftMedia": {
-            "title": "Refresh NFT media",
-            "description": "Do you want to delete and re-download all NFT media for this account?"
+            "title": "NFT medyasını yenileyin",
+            "description": "Bu hesap için tüm NFT medyasını silip yeniden indirmek istiyor musunuz?"
         },
-        "createWallet": "Create a new {network} profile",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} testnet {Testnet} custom {Custom Network} other {Unknown}}",
-        "claimShimmer": "Claim Shimmer staking rewards",
-        "claimShimmerDescription": "Import IOTA profile and claim staking rewards",
-        "migrateFromLegacy": "Migrate from Legacy",
-        "migrateFromLegacyDescription": "Migrate to Stardust",
-        "createAlias": "Create alias",
-        "createAliasDescription": "Create alias output",
+        "createWallet": "Yeni bir {network} profili oluşturun",
+        "createWalletDescription": " {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}} üzerinde çalışan yeni bir profil oluşturun",
+        "claimShimmer": "Shimmer stake ödüllerini talep edin",
+        "claimShimmerDescription": "IOTA profilinizi içe aktarın ve Shimmer stake ödüllerinizi talep edin",
+        "migrateFromLegacy": "Eski versiyondan geçiş yap",
+        "migrateFromLegacyDescription": "Stardust'a geçiş yap",
+        "createAlias": "Takma ad oluştur",
+        "createAliasDescription": "Takma ad çıktısı oluştur",
         "savePassword": "Parolayı kaydet",
         "useBiometric": "Biyometrik güvenlik kullanın",
-        "setupPinCode": "Setup PIN code",
-        "setPin": "Set PIN",
-        "setPinCode": "Set PIN code",
-        "confirmPin": "Confirm PIN",
-        "confirmPinCode": "Confirm PIN code",
+        "setupPinCode": "PIN kodunu ayarla",
+        "setPin": "PIN Ayarla",
+        "setPinCode": "PIN kodunu belirle",
+        "confirmPin": "PIN'i onayla",
+        "confirmPinCode": "PIN kodunu onayla",
         "enterYourPin": "Pin'inizi girin",
         "saveBackupFile": "Yedek dosyasını kaydet",
         "iveWrittenRecoveryPhrase": "Kurtarma sözcüklerini not aldım",
@@ -1284,7 +1290,7 @@
         "send": "Gönder",
         "receive": "Al",
         "create": "Oluştur",
-        "updateAndContinue": "Update and continue",
+        "updateAndContinue": "Güncelle ve devam et",
         "beginTransfer": "Transfere başla",
         "tryAgain": "Tekrar deneyin",
         "visitDiscord": "Discord'a uğra",
@@ -1293,12 +1299,12 @@
         "chooseFile": "Bir dosya seçin",
         "dropHere": "Dosyanızı buraya bırakın",
         "syncAll": "Tümünü eşitle",
-        "import": "Import",
-        "importing": "Importing",
+        "import": "İçe aktar",
+        "importing": "İçe aktarılıyor",
         "export": "Dışarı Aktar",
         "exporting": "Dışa aktarılıyor",
         "exportNewStronghold": "Yeni bir Stronghold dışa aktarın",
-        "enableDeepLinks": "Enable deep links",
+        "enableDeepLinks": "Derin bağlantıları etkinleştir",
         "enableDeveloperMode": "Geliştirici modunu etkinleştir",
         "enableSystemNotifications": "Bildirimleri etkinleştir",
         "exportTransactionHistory": "İşlem geçmişini dışa aktar",
@@ -1306,29 +1312,29 @@
         "unlock": "Kilidi Aç",
         "updateFirefly": "Firefly'ı güncelle",
         "restartNow": "Şimdi yeniden başlat",
-        "refresh": "Refresh",
+        "refresh": "Yenile",
         "saveBackup": "Stronghold yedeklemeyi kaydet",
         "customizeAcount": "Cüzdanı özelleştir",
-        "hideAccount": "Hide wallet",
+        "hideAccount": "Cüzdanı gizle",
         "showAccount": "Cüzdanı göster",
-        "deleteAccount": "Delete wallet",
+        "deleteAccount": "Cüzdanı sil",
         "max": "En yüksek",
         "addNode": "Düğüm ekle",
-        "addingNode": "Adding node",
-        "addOfficialNodes": "Add official nodes",
+        "addingNode": "Düğüm (Node) ekleniyor",
+        "addOfficialNodes": "Resmi düğümleri (Node) ekle",
         "updateNode": "Düğümü güncelle",
         "removeNode": "Düğüm kaldır",
         "hide": "Sakla",
         "hideOthers": "Diğerlerini sakla",
         "showAll": "Hepsini göster",
-        "useMax": "Use Max",
+        "useMax": "Maksimum Kullan",
         "quit": "Çıkış",
         "edit": "Düzenle",
         "undo": "Geri al",
         "redo": "Tekrarla",
         "cut": "Kes",
         "copy": "Kopyala",
-        "copyAllInformation": "Copy all information",
+        "copyAllInformation": "Tüm bilgileri kopyala",
         "paste": "Yapıştır",
         "selectAll": "Hepsini seç",
         "addAccount": "Cüzdan Ekle",
@@ -1342,27 +1348,27 @@
         "skip": "Atla",
         "reset": "Sıfırla",
         "downloadRecoveryKit": "Kurtarma kit taslağını kaydet",
-        "skipBackup": "Skip wallet backup",
+        "skipBackup": "Cüzdan yedeklemesini atla",
         "finishSetup": "Kurulumu Bitir",
         "readDocumentation": "Dokümantasyonu oku",
         "visitFaq": "FAQ ziyaret et",
-        "viewDownloads": "View downloads",
+        "viewDownloads": "İndirilenleri göster",
         "viewStatus": "Durumu görüntüle",
         "viewAddressHistory": "Adres geçmişini göster",
-        "viewBalanceBreakdown": "View balance breakdown",
-        "withdrawFromL2": "Withdraw from L2",
-        "verifyDepositAddress": "Verify deposit address",
+        "viewBalanceBreakdown": "Bakiye dökümünü görüntüle",
+        "withdrawFromL2": "L2'den çekilme",
+        "verifyDepositAddress": "Para yatırma adresini doğrulayın",
         "showHiddenAccounts": "Gizli cüzdanları göster",
         "confirm": "Onayla",
         "hideNetworkStatistics": "Ağ istatistiklerini gizle",
-        "findWallets": "Find wallets",
+        "findWallets": "Cüzdanları bulun",
         "findBalances": "Bakiyeleri bul",
-        "useBalanceFinder": "Use balance finder",
-        "search": "Search",
-        "searching": "Searching",
+        "useBalanceFinder": "Bakiye bulucuyu kullan",
+        "search": "Ara",
+        "searching": "Aranıyor",
         "searchAgain": "Tekrar ara",
         "closeFirefly": "Firefly'ı Kapat",
-        "generateAddress": "Generate address",
+        "generateAddress": "Adres oluştur",
         "migrateAgain": "Başka bir indeks taşı",
         "visitWebsite": "Web sitesini ziyaret et",
         "howItWorks": "Nasıl çalışır",
@@ -1376,43 +1382,43 @@
         "done": "Tamamlandı",
         "okIUnderstand": "Tamam, anladım",
         "readMore": "Devamını oku",
-        "searchForRewards": "Search for rewards",
-        "claimRewards": "Claim rewards",
-        "rerunClaimProcess": "Rerun claim process",
-        "addPublicNote": "Add public note",
-        "backup": "Backup",
-        "mint": "Mint",
-        "mintNativeToken": "Mint native token",
-        "mintNft": "Mint NFT",
-        "verifyToken": "Verify token",
-        "unverifyToken": "Unverify token",
-        "hideToken": "Hide token",
-        "unhideToken": "Unhide token",
-        "burn": "Burn",
-        "burnToken": "Burn token",
-        "faucetRequest": "Get {token} tokens",
-        "refreshTokenMetadata": "Refresh token metadata",
+        "searchForRewards": "Ödülleri ara",
+        "claimRewards": "Ödülleri talep edin",
+        "rerunClaimProcess": "Talep sürecini yeniden çalıştırın",
+        "addPublicNote": "Genel not ekle",
+        "backup": "Yedekleme",
+        "mint": "Basım",
+        "mintNativeToken": "Yerel token oluştur",
+        "mintNft": "NFT basımı",
+        "verifyToken": "Token'i doğrula",
+        "unverifyToken": "Token'in doğrulamayı iptal et",
+        "hideToken": "Token'ı gizle",
+        "unhideToken": "Token'i göster",
+        "burn": "Yak",
+        "burnToken": "Token'i yak",
+        "faucetRequest": "{token} jeton alın",
+        "refreshTokenMetadata": "Token meta verilerini yenile",
         "test": "Test",
-        "testDeepLink": "Test deep link",
-        "initialize": "Initialize",
-        "initializing": "Initializing",
-        "delete": "Delete",
-        "remove": "Remove",
-        "addReference": "Add reference",
-        "depositNft": "Deposit NFTs",
-        "vote": "Vote",
-        "addProposal": "Add proposal",
-        "removeProposal": "Remove proposal",
-        "changeNode": "Change node",
-        "stopVoting": "Stop voting",
-        "revote": "Revote",
-        "skipAndKeep": "Skip and keep old password",
-        "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "testDeepLink": "Derin bağlantıyı test edin",
+        "initialize": "Başlat",
+        "initializing": "Başlatılıyor",
+        "delete": "Sil",
+        "remove": "Kaldır",
+        "addReference": "Referans ekle",
+        "depositNft": "NFT'leri yatırın",
+        "vote": "Oy",
+        "addProposal": "Teklif ekle",
+        "removeProposal": "Teklifi kaldır",
+        "changeNode": "Düğümü değiştir",
+        "stopVoting": "Oylamayı durdur",
+        "revote": "Yeniden oyla",
+        "skipAndKeep": "Atla ve eski şifreyi koru",
+        "addChain": "Zincir ekle",
+        "viewVestingRewardsFinder": "Kazanılan ödülleri bulun",
+        "copyProfileSystemLocation": "Profil sistemi konumunu kopyala"
     },
     "general": {
-        "recipient": "Recipient",
+        "recipient": "Alıcı",
         "password": "Parola",
         "confirmPassword": "Parolayı doğrula",
         "currentPassword": "Geçerli parola",
@@ -1425,76 +1431,76 @@
         "sending": "Gönderiliyor",
         "received": "Alındı",
         "receiving": "Alınıyor",
-        "newVotingPower": "New voting power",
-        "votingPower": "Voting power",
-        "increased": "Voting power increased",
-        "increasing": "Increasing voting power",
-        "decreased": "Voting power decreased",
-        "decreasing": "Decreasing voting power",
+        "newVotingPower": "Yeni oy gücü",
+        "votingPower": "Oylama güçü",
+        "increased": "Oy kullanma gücü arttı",
+        "increasing": "Oy kullanma gücünün artırılması",
+        "decreased": "Oy kullanma gücü azaldı",
+        "decreasing": "Oy kullanma gücünün azaltılması",
         "voted": "Oylandı",
         "voting": "Oylama",
-        "changedVote": "Changed vote",
-        "changingVote": "Changing vote",
-        "revoted": "Revoted",
-        "revoting": "Revoting",
+        "changedVote": "Oy değiştirildi",
+        "changingVote": "Oy değiştiriliyor",
+        "revoted": "Yeniden oy kullanıldı",
+        "revoting": "Yeniden oy kullanılıyor",
         "unvoted": "Oy geri alındı",
         "unvoting": "Oylama iptali",
-        "sentNft": "NFT sent",
-        "sendingNft": "Sending NFT",
-        "receivedNft": "NFT received",
-        "receivingNft": "Receiving NFT",
+        "sentNft": "NFT Gönderildi",
+        "sendingNft": "NFT Gönderiliyor",
+        "receivedNft": "NFT alındı",
+        "receivingNft": "NFT alınıyor",
         "transfer": "Transfer",
-        "transferring": "Transferring",
-        "transferNft": "Transfer NFT",
-        "transferringNft": "Transferring NFT",
-        "mintedNft": "Minted NFT",
-        "mintingNft": "Minting NFT",
-        "shimmerClaimed": "Claimed",
-        "shimmerClaiming": "Claiming",
+        "transferring": "Transfer işleniyor",
+        "transferNft": "NFT Transfer",
+        "transferringNft": "NFT Transfer ediliyor",
+        "mintedNft": "Basılmış NFT",
+        "mintingNft": "NFT basılıyor",
+        "shimmerClaimed": "Hak talebinde bulunuldu",
+        "shimmerClaiming": "Talep ediliyor",
         "shimmerGenesis": "Shimmer Genesis",
-        "vestingReward": "Vesting Reward Airdrop",
+        "vestingReward": "Hakediş Ödül Airdrop'u",
         "stardustGenesis": "Stardust Genesis",
-        "minted": "Minted",
-        "minting": "Minting",
-        "burned": "Burned",
-        "burning": "Burning",
-        "consolidated": "Outputs consolidated",
-        "consolidating": "Consolidating outputs",
-        "aliasCreated": "Alias created",
-        "creatingAlias": "Creating Alias",
+        "minted": "Basılmış",
+        "minting": "Basılıyor",
+        "burned": "Yanmış",
+        "burning": "Yakılıyor",
+        "consolidated": "Çıktılar konsolide edildi",
+        "consolidating": "Çıktıları konsolide etme",
+        "aliasCreated": "Takma ad oluşturuldu",
+        "creatingAlias": "Takma ad oluşturuluyor",
         "sendPayment": "Ödemeyi Gönder",
         "moveFunds": "Dahili Aktarım",
         "sendTo": "Gönder",
-        "sendAssets": "Send assets",
-        "sendAssetToAddress": "Send asset to an address",
+        "sendAssets": "Varlıkları gönder",
+        "sendAssetToAddress": "Varlıkları bir adrese gönder",
         "sendToAddress": "Adresini Gönder",
-        "sendToken": "Send token",
-        "sendNft": "Send NFT",
-        "sendNftToAddress": "Send NFT to an address",
+        "sendToken": "Token gönder",
+        "sendNft": "NFT gönder",
+        "sendNftToAddress": "NFT'yi bir adrese gönder",
         "scanQrOrPaste": "Bir QR kodunu tarayın veya bir Adres yapıştırın",
         "moveFundsBetweenAccounts": "Cüzdanlarınız arasında bakiye aktarın",
         "manageAccount": "Cüzdanı Yönet",
         "customizeAcount": "Cüzdanınızı özelleştirin",
-        "account": "Wallet",
+        "account": "Cüzdan",
         "sendingToAddress": "Adrese gönderiliyor",
         "amount": "Tutar",
         "addAddress": "Adres Ekle",
         "reference": "Referans",
         "from": "Gönderen",
         "to": "Kime",
-        "and": "and",
-        "receiveFunds": "Receive funds",
+        "and": "ve",
+        "receiveFunds": "Gelen varlıklar",
         "address": "Adres",
-        "myAddress": "My address",
-        "myNetworkAddress": "My {networkName} address",
+        "myAddress": "Adresim",
+        "myNetworkAddress": "{networkName} adresim",
         "shareAddress": "Bir adres paylaşın",
         "yourAddress": "Adresiniz",
         "newRemainder": "Yeni Kalan",
         "remainder": "Kalan",
         "generateNewAddress": "Yeni adres oluştur",
-        "copyToClipboard": "Copy to clipboard",
+        "copyToClipboard": "Panoya kopyala",
         "copyAddress": "Adresi Kopyala",
-        "viewOnExplorer": "View on Explorer",
+        "viewOnExplorer": "Tarayıcıda görüntüle",
         "import": "İçe aktar",
         "stronghold": "Stronghold",
         "language": "Dil",
@@ -1503,8 +1509,8 @@
         "darkTheme": "Koyu",
         "systemTheme": "Sistem",
         "balance": "Bakiye",
-        "balanceWithValue": "Balance: {balance}",
-        "balanceWithNetwork": "{network} Balance",
+        "balanceWithValue": "Bakiye {balance}",
+        "balanceWithNetwork": "{network} Bakiye",
         "all": "Genel -> hepsi",
         "incoming": "Gelen",
         "outgoing": "Giden",
@@ -1519,11 +1525,11 @@
         "accountName": "Cüzdan adı",
         "latestTransactions": "Son transferler",
         "transactions": "Transferler",
-        "activity": "Activity",
+        "activity": "Aktivite",
         "security": "Güvenlik",
         "accountAddress": "Cüzdan Adresi",
         "network": "Ağ",
-        "destinationNetwork": "Destination network",
+        "destinationNetwork": "Hedef ağ",
         "nodes": "Düğümler",
         "wallet": "Cüzdan",
         "help": "Yardım",
@@ -1533,18 +1539,18 @@
         "receiveAddress": "Alım Adresi",
         "newAddress": "Yeni Adres",
         "date": "Tarih",
-        "status": "Status",
+        "status": "Durum",
         "confirmed": "Onaylandı",
         "pending": "Bekleniyor",
         "noAccounts": "Cüzdanınız yok, lütfen bir tane oluşturun.",
         "loadingAccounts": "Yükleniyor, lütfen bekleyin...",
         "addProfile": "Profil Ekle",
         "noRecentHistory": "Geçmiş bulunamadı",
-        "noFilteredActivity": "No matching activities",
-        "noAssets": "No assets",
-        "noFilteredAsset": "No matching assets",
-        "thisMonth": "This month",
-        "search": "Search",
+        "noFilteredActivity": "Eşleşen etkinlik yok",
+        "noAssets": "Varlık yok",
+        "noFilteredAsset": "Eşleşen varlık yok",
+        "thisMonth": "Bu ay",
+        "search": "Ara",
         "firstSync": "Geçmiş senkronize ediliyor, bu biraz zaman alabilir...",
         "transferSyncing": "Cüzdan senkronize ediliyor",
         "transferSelectingInputs": "Girişlerin seçimi",
@@ -1581,12 +1587,12 @@
         "creatingProfile": "Yeni bir hesap oluşturuluyor, lütfen bekleyin...",
         "fundMigration": "Bakiye taşıma",
         "accountRemoved": "Bu cüzdan gizlidir. Havale işlemlerini gerçekleştirmek için görünür hale getirin.",
-        "fromAddress": "from {account}",
-        "toAddress": "to {account}",
-        "stakedFor": "Staked for {account}",
-        "unstakedFor": "Unstaked for {account}",
-        "votedFor": "Voted for {account}",
-        "unvotedFor": "Unvoted for {account}",
+        "fromAddress": "{account} dan",
+        "toAddress": "{account} ına",
+        "stakedFor": "{account} için stake edildi",
+        "unstakedFor": "{account} için stake iptal edildi",
+        "votedFor": "{account} için oy verildi",
+        "unvotedFor": "{account} için oy verilmedi",
         "stakingTransaction": "Genel -> stake İşlemi",
         "unstakingTransaction": "Genel -> unstaking İşlemi",
         "legacyNetwork": "Eski Ağ",
@@ -1594,194 +1600,194 @@
         "version": "Sürüm {version}",
         "yourWallets": "Genel -> Cüzdanlarınız",
         "unknown": "Bilinmeyen",
-        "unknownAddress": "Unknown address",
+        "unknownAddress": "Bilinmeyen adres",
         "none": "Hiçbiri",
         "staked": "Stake edildi",
         "unstaked": "Stake edilmemiş",
         "staking": "Staking",
         "unstaking": "Stake geri alınıyor",
         "notStaked": "Stake edilmemiş",
-        "stakedFunds": "Staked funds",
+        "stakedFunds": "Stake edilen fonlar",
         "unstakedFunds": "Tahsis edilmemiş fonlar",
         "accountColor": "Genel -> hesap rengi",
-        "transactionTime": "Transaction time",
-        "surplus": "Surplus",
-        "storageDeposit": "Storage deposit",
-        "giftedStorageDeposit": "Gifted storage deposit",
-        "storageDepositPerNft": "Storage deposit per NFT",
-        "totalStorageDeposit": "Total storage deposit",
-        "expirationTime": "Expiration time",
-        "timelockDate": "Timelock",
-        "claimedTime": "Claimed at",
-        "nftAddress": "NFT Address",
+        "transactionTime": "İşlem süresi",
+        "surplus": "Fazlalık",
+        "storageDeposit": "Depolama depozitosu",
+        "giftedStorageDeposit": "Hediye depolama depozitosu",
+        "storageDepositPerNft": "NFT başına depolama depozitosu",
+        "totalStorageDeposit": "Toplam depolama depozitosu",
+        "expirationTime": "Bitiş süresi",
+        "timelockDate": "Zaman kilidi",
+        "claimedTime": "Talep edilen tarih",
+        "nftAddress": "NFT Adres",
         "nftId": "NFT ID",
-        "nftMetadata": "NFT Metadata",
-        "aliasId": "Alias ID",
-        "governorAddress": "Governor Address",
-        "stateControllerAddress": "State Controller Address",
-        "copiedToClipboard": "Copied to clipboard",
+        "nftMetadata": "NFT Meta Verileri",
+        "aliasId": "Takma Ad ID (Kimliği)",
+        "governorAddress": "Yönetici Adresi",
+        "stateControllerAddress": "Durum Denetleyicisinin Adresi",
+        "copiedToClipboard": "Panoya kopyalandı",
         "total": "Toplam: {balance}",
-        "availableBalanceWithValue": "Available balance: {balance}",
-        "availableBalance": "Available balance",
-        "availableBalanceTooltip": "An asset's total balance minus any funds that are required to cover the storage deposit (i.e. funds that are locked in pending transactions, reserved for Native Tokens, or reserved for NFTs).",
-        "amountClaimed": "{amount} claimed",
-        "metadata": "Metadata",
-        "amountConsolidatedInputs": "Consolidated outputs",
-        "name": "Name",
-        "tag": "Tag",
-        "nodeList": "Node list",
-        "claimedIn": "Claimed in",
-        "claimingIn": "Claiming in",
-        "assets": "Assets",
-        "nativeTokens": "Native tokens",
-        "mintNativeTokenDescription": "Mint native token following IRC30 standard",
-        "mintNftDescription": "Mint NFT following IRC27 standard",
-        "faucetRequestDescription": "Request tokens from the {network} faucet",
-        "refreshTokenMetadataDescription": "Reset and refresh all token metadata",
-        "refreshTokenMetadataHint": "This will reset all your tokens' metadata including the verification status and unhide any hidden assets.",
-        "giftStorageDeposit": "Gift storage deposit",
-        "excluded": "Excluded",
-        "developerTools": "Developer tools",
-        "testDeepLinkDescription": "Simulate a deep link request sent to firefly",
+        "availableBalanceWithValue": "Mevcut bakiye: {balance}",
+        "availableBalance": "Kullanılabilir bakiye",
+        "availableBalanceTooltip": "Bir varlığın toplam bakiyesi, depolama depozitosunu karşılamak için gereken fonlar (yani, bekleyen işlemlerde kilitli olan fonlar, Native Token'lar için ayrılanlar veya NFT'ler için ayrılanlar) hariçtir.",
+        "amountClaimed": "{amount} talep edildi",
+        "metadata": "Meta veriler",
+        "amountConsolidatedInputs": "Konsolide çıktılar",
+        "name": "İsim",
+        "tag": "Etiket",
+        "nodeList": "Düğüm listesi",
+        "claimedIn": "Talep edildiği tarih",
+        "claimingIn": "Talet ediliyor",
+        "assets": "Varlıklar",
+        "nativeTokens": "Yerel tokenler",
+        "mintNativeTokenDescription": "IRC30 standardını takip ederek yerel token oluşturun",
+        "mintNftDescription": "IRC27 standardını takip ederek NFT oluşturma",
+        "faucetRequestDescription": "{network} musluğundan jeton isteyin",
+        "refreshTokenMetadataDescription": "Tüm token metadata'sını sıfırla ve yenile",
+        "refreshTokenMetadataHint": "Bu, tüm tokenlerinizin meta verilerini sıfırlayacak, doğrulama durumunu da içeren ve gizlenmiş varlıkları ortaya çıkaracak.",
+        "giftStorageDeposit": "Hediye depolama depozitosu",
+        "excluded": "Hariç tutulan",
+        "developerTools": "Geliştirici araçları",
+        "testDeepLinkDescription": "Firefly'a gönderilen derin bağlantı isteğini simüle edin",
         "url": "URL",
-        "hash": "Hash",
-        "creating": "Creating",
-        "updating": "Updating",
-        "enterAddress": "Enter address",
-        "transaction": "Transaction",
-        "alias": "Alias",
-        "foundry": "Foundry",
-        "token": "Token",
+        "hash": "Doğrulama verisi",
+        "creating": "Oluşturuluyor",
+        "updating": "Güncelleniyor",
+        "enterAddress": "Adresi girin",
+        "transaction": "İşlem",
+        "alias": "Takma ad",
+        "foundry": "Dökümhane",
+        "token": "Token (Jeton)",
         "nft": "NFT",
-        "type": "Type",
-        "immutableIssuer": "Immutable Issuer",
-        "smartContract": "Smart Contract",
-        "targetContract": "Target contract",
-        "contractFunction": "Contract function",
-        "gasFee": "Gas fee",
-        "standard": "Standard",
-        "uri": "URI",
-        "issuer": "Issuer",
-        "issuerAddress": "Issuer Address",
-        "issuerName": "Issuer Name",
-        "quantity": "Quantity",
-        "collection": "Collection",
-        "collectionId": "Collection ID",
-        "collectionName": "Collection Name",
-        "royalties": "Royalties",
-        "description": "Description",
-        "attributes": "Attributes",
-        "details": "Details",
-        "availableAmount": "{amount} available",
-        "properties": "Properties",
-        "statistics": "Statistics",
-        "username": "Username",
-        "jwt": "JSON web token",
-        "internalTransaction": "Internal transaction",
-        "coinType": "Coin type",
-        "custom": "Custom",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "type": "Tip",
+        "immutableIssuer": "Değişmez İhraççı",
+        "smartContract": "Akıllı Sözleşme",
+        "targetContract": "Hedef sözleşme",
+        "contractFunction": "Sözleşme işlevi",
+        "gasFee": "İşlem ücreti",
+        "standard": "Standart",
+        "uri": "URl",
+        "issuer": "İhraççı",
+        "issuerAddress": "İhraççı Adresi",
+        "issuerName": "İhraççı Adı",
+        "quantity": "Miktar",
+        "collection": "Koleksiyon",
+        "collectionId": "Koleksiyon ID (Kimliği)",
+        "collectionName": "Koleksiyon Adı",
+        "royalties": "Telif Hakları",
+        "description": "Açıklama",
+        "attributes": "Öznitelikler",
+        "details": "Ayrıntılar",
+        "availableAmount": "{amount} mevcut",
+        "properties": "Özellikler",
+        "statistics": "İstatistikler",
+        "username": "Kullanıcı Adı",
+        "jwt": "JSON web belirteci",
+        "internalTransaction": "Dahili işlem",
+        "coinType": "Coin tipi",
+        "custom": "Genel",
+        "verifyLedgerDepositAddress": "Lütfen Ledger cihazını kontrol edin ve yatırma adresinin Ledger cihazında görüntülenen adresle eşleştiğinden emin olun"
     },
     "filters": {
-        "title": "Filters",
+        "title": "Filtreler",
         "showHidden": {
-            "label": "Show hidden",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Gizlenenleri göster",
+            "yes": "Evet",
+            "no": "Hayır"
         },
         "showRejected": {
-            "label": "Show rejected",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Reddedilenleri göster",
+            "yes": "Evet",
+            "no": "Hayır"
         },
         "showValueless": {
-            "label": "Show valueless",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Değersiz olanı göster",
+            "yes": "Evet",
+            "no": "Hayır"
         },
         "ascDesc": {
-            "Asc": "Ascending",
-            "Desc": "Descending"
+            "Asc": "Artan",
+            "Desc": "Azalan"
         },
         "assetOrder": {
-            "label": "Order",
-            "Name": "Name",
-            "Amount": "Amount"
+            "label": "Emir",
+            "Name": "İsim",
+            "Amount": "Tutar"
         },
         "internalExternal": {
-            "label": "Internal / External",
-            "internal": "Internal",
-            "external": "External"
+            "label": "Dahili / Harici",
+            "internal": "Dahili",
+            "external": "Harici"
         },
         "verificationStatus": {
-            "label": "Verification status",
-            "new": "New",
-            "skipped": "Skipped verification",
-            "selfVerified": "Self-verified",
-            "official": "Official"
+            "label": "Doğrulama durumu",
+            "new": "Yeni",
+            "skipped": "Doğrulamayı atla",
+            "selfVerified": "Kendinden doğrulanmış",
+            "official": "Resmi"
         },
         "asset": {
-            "label": "Assets"
+            "label": "Varlıklar"
         },
         "amount": {
-            "label": "Amount",
-            "equal": "is equal to",
-            "range": "is between",
-            "greater": "is greater than",
-            "less": "is less than"
+            "label": "Tutar",
+            "equal": "eşittir",
+            "range": "arasında",
+            "greater": "daha büyüktür",
+            "less": "daha küçüktür"
         },
         "date": {
-            "label": "Date",
-            "equals": "is equal to",
-            "last": "in the last",
-            "range": "is between",
-            "after": "is after",
-            "afterOrEquals": "is on or after",
-            "before": "is before",
-            "Days": "days",
-            "Months": "months",
-            "Years": "years"
+            "label": "Tarih",
+            "equals": "eşittir",
+            "last": "sonunda",
+            "range": "arasında",
+            "after": "sonrasında",
+            "afterOrEquals": "şimdi ya da sonrasında",
+            "before": "öncesinde",
+            "Days": "günler",
+            "Months": "aylar",
+            "Years": "yıllar"
         },
         "status": {
-            "label": "Status",
-            "confirmed": "confirmed",
-            "pending": "pending",
-            "claimed": "claimed",
-            "unclaimed": "unclaimed"
+            "label": "Durum",
+            "confirmed": "onaylandı",
+            "pending": "bekleniyor",
+            "claimed": "alındı",
+            "unclaimed": "alınmadı"
         },
         "type": {
-            "label": "Type",
-            "basic": "Basic",
+            "label": "Tip",
+            "basic": "Temel",
             "nft": "NFT",
-            "alias": "Alias",
-            "foundry": "Foundry",
-            "governance": "Governance",
-            "consolidation": "Consolidation",
-            "vesting": "Vesting"
+            "alias": "Takma ad",
+            "foundry": "Dökümhane",
+            "governance": "Yönetim",
+            "consolidation": "Konsolidasyon",
+            "vesting": "Hakediş"
         },
         "direction": {
-            "label": "Direction",
-            "incoming": "Incoming",
-            "outgoing": "Outgoing",
-            "selfTransaction": "Self transaction"
+            "label": "Yön",
+            "incoming": "Gelen",
+            "outgoing": "Giden",
+            "selfTransaction": "Kendi kendine işlem"
         },
         "proposalType": {
-            "label": "Type",
-            "official": "Official",
-            "custom": "Custom"
+            "label": "Tip",
+            "official": "Resmi",
+            "custom": "Genel"
         },
         "phase": {
-            "label": "Phase"
+            "label": "Aşama"
         },
         "participated": {
-            "label": "Participated",
-            "yes": "Yes",
-            "no": "No"
+            "label": "Katıldı",
+            "yes": "Evet",
+            "no": "Hayır"
         },
         "proposalOrder": {
-            "label": "Order",
-            "name": "Name",
-            "phase": "Phase"
+            "label": "Emir",
+            "name": "İsim",
+            "phase": "Aşama"
         }
     },
     "dates": {
@@ -1821,68 +1827,68 @@
             "error": "{accountAlias} için işlem geçmişi dışa aktarılamıyor"
         },
         "deepLinkingRequest": {
-            "receivedWhileLoggedOut": "Please login to initiate the deep link",
-            "notEnabled": "Deep links are not enabled",
-            "invalidFormat": "The deep link you followed is invalid",
-            "invalidAmount": "The amount in deep link is not an integer number {amount}",
-            "invalidSurplus": "The surplus in deep link is not a number {surplus}",
-            "surplusNotSupported": "The surplus is only supported for native tokens",
+            "receivedWhileLoggedOut": "Derin bağlantıyı başlatmak için lütfen giriş yapın",
+            "notEnabled": "Derin bağlantılar etkin değil",
+            "invalidFormat": "Takip ettiğiniz derin bağlantı geçersiz",
+            "invalidAmount": "Derin bağlantıdaki miktar bir tam sayı değil {amount}",
+            "invalidSurplus": "Derin bağlantıdaki fazlalık bir sayı değil{surplus}",
+            "surplusNotSupported": "Fazlalık yalnızca yerel tokenlar için desteklenir",
             "governance": {
-                "unrecognizedOperation": "Unrecognized Governance operation: {operation}"
+                "unrecognizedOperation": "Tanınmayan Yönetişim işlemi: {operation}"
             },
             "wallet": {
                 "send": {
-                    "success": "Payment details added from deep link"
+                    "success": "Ödeme detayları derin bağlantıdan eklendi"
                 },
-                "unrecognizedOperation": "Unrecognized wallet operation: {operation}"
+                "unrecognizedOperation": "Tanınmayan cüzdan işlemi: {operation}"
             }
         },
         "syncing": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
-        "transferring": "Please wait until all transactions are completed.",
-        "participating": "Please wait until all staking/voting transactions are completed to change wallets.",
+        "transferring": "Lütfen tüm işlemler tamamlanana kadar bekleyin.",
+        "participating": "Cüzdanları değiştirmek için lütfen senkronizasyon bitene kadar bekleyin.",
         "claimed": {
-            "success": "Transaction claimed",
-            "error": "Claiming transaction failed"
+            "success": "İşlem talep edildi",
+            "error": "İşlem talep etme başarısız oldu"
         },
         "hideActivity": {
-            "success": "Activity was hidden",
-            "error": "Failed to hide activity"
+            "success": "Etkinlik gizlendi",
+            "error": "Etkinlik gizlenemedi"
         },
         "faucetRequest": {
-            "success": "Request for tokens sent to the faucet"
+            "success": "Token isteği faucet'e gönderildi"
         },
         "mintNativeToken": {
-            "success": "Native token minting transaction sent"
+            "success": "Yerel token basım işlemi gönderildi"
         },
         "burnNativeToken": {
-            "success": "Native token burning transaction sent"
+            "success": "Yerel token yakma işlemi gönderildi"
         },
         "mintNft": {
-            "success": "NFT minting transaction sent"
+            "success": "NFT basım işlemi gönderildi"
         },
         "burnNft": {
-            "success": "NFT burning transaction sent"
+            "success": "NFT yakma işlemi gönderildi"
         },
         "refreshTokenMetadata": {
-            "success": "All token metadata has been reset and refreshed"
+            "success": "Tüm token meta verileri sıfırlandı ve yenilendi"
         },
         "restoreFromStrongholdBackup": {
-            "wrongProtocol": "Protocol doesn't match coin type found in Stronghold backup",
-            "wrongProtocolForClaiming": "You must use an IOTA-based Stronghold backup to claim Shimmer rewards"
+            "wrongProtocol": "Protokol, Stronghold yedeklemesinde bulunan para birimi tipiyle eşleşmiyor",
+            "wrongProtocolForClaiming": "Shimmer ödüllerini talep etmek için IOTA tabanlı bir Stronghold yedeği kullanmalısınız"
         },
         "findShimmerRewards": {
-            "success": "Successfully found Shimmer rewards",
-            "error": "An error occurred while searching for rewards"
+            "success": "Shimmer ödülleri başarıyla bulundu",
+            "error": "Ödüller aranırken bir hata oluştu"
         },
         "claimShimmerRewards": {
-            "success": "Shimmer rewards claimed for {accountAlias}",
-            "error": "An error occurred while claiming. Try again."
+            "success": "{accountAlias} için Shimmer ödülleri talep edildi",
+            "error": "Talepte bulunurken bir hata oluştu. Tekrar deneyin."
         },
         "vote": {
-            "success": "Votes successfully cast"
+            "success": "Oylar başarıyla kullanıldı"
         },
         "stopVoting": {
-            "success": "Voting successfully stopped"
+            "success": "Oylama başarıyla durduruldu"
         }
     },
     "error": {
@@ -1892,9 +1898,9 @@
             "delete": {
                 "nonEmptyAccounts": "Profilinizi silmeden önce tüm bakiyeleri transfer etmelisiniz."
             },
-            "type": "Unable to determine the profile type",
-            "setupType": "Unable to determine the profile setup type",
-            "chrysalisDevnetStardustError": "You can't access this profile because Chrysalis Devnet is not supported in this version of Firefly. Please use a Chrysalis compatible Firefly version."
+            "type": "Profil tipi belirlenemiyor",
+            "setupType": "Profil kurulum tipi belirlenemiyor",
+            "chrysalisDevnetStardustError": "Bu profile erişemezsiniz çünkü Chrysalis Devnet bu Firefly sürümünde desteklenmiyor. Lütfen Chrysalis uyumlu bir Firefly sürümü kullanın."
         },
         "password": {
             "doNotMatch": "Parolalar eşleşmiyor.",
@@ -1912,19 +1918,19 @@
             "word": "Tek bir kelimenin tahmin edilmesi kolaydır.",
             "incorrect": "Şifreniz doğru değil.",
             "length": "Şifreniz şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n",
-            "sameAsOld": "Your new password must be different from your old password."
+            "sameAsOld": "Yeni parolanız eski parolanızdan farklı olmalıdır."
         },
         "pincode": {
             "length": "PIN'iniz {length, plural, one {# rakam} other {# rakamlar}} uzunluğunda olmalıdır.",
             "match": "PIN'ler eşleşmiyor.",
             "incorrect": "Mevcut şifreniz yanlış.",
-            "invalid": "Invalid PIN code."
+            "invalid": "Geçersiz PIN kodu."
         },
         "address": {
-            "wrongAddressType": "Wrong address type"
+            "wrongAddressType": "Yanlış adres türü"
         },
         "account": {
-            "addressNotFound": "The address cannot be found in your account.",
+            "addressNotFound": "Adres hesabınızda bulunamadı.",
             "length": "Cüzdan adınız şundan uzun olamaz {length, plural, one {# karakter} other {# karakterler}}.\n",
             "emptyName": "hata -> hesap -> boş ad",
             "notEmpty": "Bu cüzdanı silmeden önce bakiyenizi transfer etmelisiniz.",
@@ -1936,70 +1942,70 @@
             "index": "Hesap indeksiniz 0 ile 2.147.483.647 arasında bir sayı olmalıdır.",
             "page": "Hesap sayfanız 0 ile 2.147.483.647 arasında bir sayı olmalıdır.",
             "syncing": "Cüzdanlarınız senkronize edilirken bir hata oluştu.",
-            "cannotRemove": "Unable to remove wallet.",
-            "withBalance": "You must transfer all balances before you can delete this wallet.",
-            "notLast": "You can only delete your last wallet.",
-            "notFound": "Unable to find account",
-            "cannotGetBoundAccount": "Unable to get bound account"
+            "cannotRemove": "Cüzdan kaldırılamıyor.",
+            "withBalance": "Bu cüzdanı silmeden önce tüm bakiyeleri aktarmanız gerekir.",
+            "notLast": "Yalnızca son cüzdanınızı silebilirsiniz.",
+            "notFound": "Hesap bulunamıyor",
+            "cannotGetBoundAccount": "Bağlı hesap alınamıyor"
         },
         "send": {
             "addressLength": "Adresler şu şekilde olmalıdır {length, plural, one {# karakter} other {# karakterler}} long.",
             "amountTooHigh": "Bu, mevcut bakiyenizden daha büyüktür.",
-            "amountNoFloat": "Cannot use decimal places with the smallest unit selected",
+            "amountNoFloat": "En küçük birim seçiliyken ondalık basamaklar kullanılamaz",
             "amountInvalidFormat": "Miktar geçersiz görünüyor.",
-            "amountSmallerThanSubunit": "The amount must be greater than the smallest subunit.",
-            "tagTooLong": "The tag cannot be longer than 64 bytes.",
-            "metadataTooLong": "The metadata cannot be longer than 8192 bytes.",
+            "amountSmallerThanSubunit": "Miktar en küçük alt birimden daha büyük olmalıdır.",
+            "tagTooLong": "Etiket 64 byte'tan uzun olamaz.",
+            "metadataTooLong": "Meta veri 8192 byte'tan uzun olamaz.",
             "amountZero": "Miktar 0'dan büyük olmalıdır.",
             "wrongAddressPrefix": "Adresler {prefix} ön eki ile başlar.",
             "wrongAddressFormat": "Adres doğru şekilde biçimlendirilmemiş.",
             "invalidAddress": "Adres geçerli değil.",
-            "invalidExpirationDate": "The expiration date is not valid.",
-            "pastExpirationDate": "The expiration date is in the past.",
-            "invalidAssetId": "The asset id is not valid.",
-            "unknownAsset": "The asset is not known to this account.",
+            "invalidExpirationDate": "Son kullanma tarihi geçerli değil.",
+            "pastExpirationDate": "Son kullanma tarihi geçmişe ait.",
+            "invalidAssetId": "Varlık kimliği geçerli değil.",
+            "unknownAsset": "Varlık bu hesap tarafından bilinmiyor.",
             "insufficientFunds": "Cüzdan bakiyesi yetersiz.",
-            "insufficientFundsStorageDeposit": "Insufficient funds to cover the storage deposit.",
-            "ongoingTransaction": "If you have ongoing transactions, please wait for their confirmation.",
-            "cannotClaimTwice": "Output has been already claimed",
+            "insufficientFundsStorageDeposit": "Depolama depozitosunu karşılamak için yeterli fon yok.",
+            "ongoingTransaction": "Devam eden işlemleriniz varsa, lütfen onaylanmasını bekleyin.",
+            "cannotClaimTwice": "Çıktı zaten talep edildi",
             "noToAccount": "Bakiyeyi göndermek için bir cüzdan seçmediniz.",
             "sendingDust": "1 Mi den daha az gönderim yapamazsınız.",
-            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
+            "leavingDust": "Adresinizde minimum gereken depolama depozitosundan ({minRequiredStorageDeposit}) daha az bırakamazsınız.",
             "cancelled": "İşlem iptal edildi.",
             "transaction": "İşleminiz gönderilirken bir hata oluştu. Lütfen tekrar deneyin.",
-            "invalidExpirationDateTime": "The chosen expiration date/time is invalid.",
-            "noInputs": "No inputs found.",
-            "notEnoughBalance": "Not enough balance.",
-            "missingTransactionId": "The transaction ID is missing",
-            "missingTransactionProgressEventPayload": "The transaction progress event payload is missing",
-            "recipientRequired": "Recipient is required",
-            "nftRequired": "NFT is required",
-            "nftNotInHex": "NFT address has to be in HEX format",
-            "nftNotInPossession": "NFT not in possession",
-            "reservedTagKeyword": "Unable to use reserved tag keyword"
+            "invalidExpirationDateTime": "Seçilen son kullanma tarihi/saati geçersiz.",
+            "noInputs": "Giriş bulunamadı.",
+            "notEnoughBalance": "Yetersiz bakiye.",
+            "missingTransactionId": "İşlem Kimliği (Transaction ID) eksik",
+            "missingTransactionProgressEventPayload": "İşlem ilerleme olayı verisi eksik",
+            "recipientRequired": "Alıcı gerekli",
+            "nftRequired": "NFT gerekli",
+            "nftNotInHex": "NFT adresi HEX formatında olmalıdır",
+            "nftNotInPossession": "NFT elde edilmedi",
+            "reservedTagKeyword": "Ayrılmış etiket anahtar sözcüğü kullanılamıyor"
         },
         "layer2": {
-            "layer1Recipient": "A layer 2 transaction cannot be sent to a layer 1 account.",
-            "estimatedGas": "Failed to estimate gas."
+            "layer1Recipient": "Katman 2 işlemi, katman 1 hesabına gönderilemez.",
+            "estimatedGas": "Gas (gönderi ücreti) tahmin edilemedi"
         },
         "node": {
             "invalid": "Lütfen geçerli bir URL giriniz.",
-            "dns": "Unable to find DNS resolution for node",
+            "dns": "Düğüm için DNS çözümlemesi bulunamıyor",
             "timedOut": "Bağlantı zaman aşımına uğradı.",
             "refused": "Bağlantı reddedildi.",
             "handshake": "Node ile anlaşma tamamlanamadı.",
             "invalidCertificate": "Geçersiz sertifika ile bağlanılamadı.",
-            "https": "External connections must use HTTPS; localhost connections can be made using HTTP. Insecure external HTTP connections are not supported.",
+            "https": "Harici bağlantılar HTTPS kullanmalıdır; localhost bağlantıları HTTP kullanılarak yapılabilir. Güvensiz harici HTTP bağlantıları desteklenmez.",
             "duplicate": "Bu sunucu zaten eklenmiş.",
-            "noSyncedNode": "No synced node is available.",
-            "timeNotSynced": "Device time is incorrect, unable to sync node.",
+            "noSyncedNode": "Senkronize edilmiş düğüm mevcut değil.",
+            "timeNotSynced": "Cihaz saati yanlış, düğüm senkronize edilemiyor.",
             "answer": "Tüm nodelardan yanıt alınamadı.",
             "forbidden": "Bu node bağlantısı yasaktır.",
             "pluginNotAvailable": "\"{nodePlugin}\" eklentisi bu node'da mevcut değil.",
-            "unabledToConnect": "Unable to connect to the node",
-            "differentNetwork": "The node is located on a different network",
-            "duplicateNodes": "Unable to add duplicate node",
-            "noCoinType": "No coin type specified"
+            "unabledToConnect": "Düğüme bağlanılamıyor",
+            "differentNetwork": "Düğüm farklı bir ağda bulunuyor",
+            "duplicateNodes": "Yinelenen düğüm eklenemiyor",
+            "noCoinType": "Belirtilen coin türü yok"
         },
         "network": {
             "mismatch": "Bu düğümün ağ kimliği \"{networkId}\", mevcut ağla eşleşmeyen.",
@@ -2014,24 +2020,24 @@
             "invalid": "Yedek dosyası okunamaz.",
             "destination": "Yedekleme noktası geçerli değil.",
             "mnemonic": "Hatırlatıcı geçerli değil.",
-            "migrationRequired": "Stronghold migration is required.",
+            "migrationRequired": "Stronghold geçişi gereklidir.",
             "seedTooShort": "Tohum 81 karakter uzunluğunda olmalıdır, o {length, plural, one {is #} other {is #}}",
             "seedCharacters": "Seed sadece A-Z veya 9 karakterlerini içeriyor olmalıdır",
             "phraseWordCount": "Kurtarma ifadenizde 24 kelime olmalıdır, şuan {length, plural, one {is #} other {are #}}.",
             "phraseUnrecognizedWord": "Kurtarma cümlenizde \"{word}\" bilinmeyen kelime",
             "phraseCaseWord": "Bu kelime \"{word}\" küçük harflerden oluşmalıdır",
-            "unableToCopyFile": "Unable to copy Stronghold backup file",
-            "unableToRestoreForProfileManager": "Unable to restore Stronghold backup for profile manager"
+            "unableToCopyFile": "Stronghold yedekleme dosyası kopyalanamıyor",
+            "unableToRestoreForProfileManager": "Profil yöneticisi için Stronghold yedeği geri yüklenemiyor"
         },
         "ledger": {
-            "appNotOpen": "You must open the {network} app on your Ledger device.",
+            "appNotOpen": "Ledger cihazınızda {network} uygulamasını açmalısınız.",
             "generic": "Ledger cihazınıza bağlanırken bir hata oluştu.",
             "legacyConnected": "Ledger cihazınızda yanlış uygulama açık.",
             "locked": "Lütfen PIN'i girerek Ledger cihazınızın kilidini açın.",
             "mnemonicMismatch": "Yanlış Ledger cihazını bağladınız veya anımsatıcı değişti.",
-            "notConnected": "No Ledger device detected.",
+            "notConnected": "Ledger cihazı algılanamadı.",
             "notFound": "Ledger cihazı bulunamadı.",
-            "otherConnected": "The wrong app is open on your Ledger device.",
+            "otherConnected": "Ledger cihazınızda yanlış uygulama açık.",
             "generateAddress": "Adres oluşturulurken bir hata oluştu.",
             "timeout": "Ledger cihazınız zaman aşımına uğradı.",
             "disconnected": "Ledger cihazınızın bağlantısı kesildi.",
@@ -2055,72 +2061,72 @@
         "invalidDate": "GEÇERSİZ TARİH",
         "invalidTime": "GEÇERSİZ ZAMAN",
         "shimmerClaiming": {
-            "missingProfileManager": "Unable to find Shimmer claiming profile manager",
-            "cannotInitialiseAccount": "Unable to initialize Shimmer claiming account",
-            "missingAccount": "Unable to find Shimmer claiming account"
+            "missingProfileManager": "Profil yöneticisini talep eden Shimmer bulunamıyor",
+            "cannotInitialiseAccount": "Shimmer talep eden hesap başlatılamıyor",
+            "missingAccount": "Shimmer'ın talep ettiği hesap bulunamıyor"
         },
         "walletApiEvent": {
-            "invalidAccountIndex": "Invalid account index for {eventName} event",
-            "invalidPayload": "Invalid payload for {eventName} event"
+            "invalidAccountIndex": "{eventName} etkinliği için geçersiz hesap dizini",
+            "invalidPayload": "{eventName} etkinliği için geçersiz veri"
         },
         "aliasMinting": {
-            "aliasRequired": "Alias is required",
-            "aliasNotInPossession": "Alias not in possession"
+            "aliasRequired": "Takma ad gereklidir",
+            "aliasNotInPossession": "Takma ad elde edilmedi"
         },
-        "noOutputsToConsolidate": "Not enough outputs to consolidate",
+        "noOutputsToConsolidate": "Konsolide etmek için yeterli çıkış yok",
         "eventId": {
-            "doesNotStartWith0x": "Event ID should start with '0x'",
-            "insufficientLength": "Event ID should be 66 characters long",
-            "alreadyRegistered": "Event ID already registered"
+            "doesNotStartWith0x": "Etkinlik Kimliği '0x' ile başlamalıdır",
+            "insufficientLength": "Etkinlik ID (Kimliği) 66 karakter uzunluğunda olmalıdır",
+            "alreadyRegistered": "Etkinlik ID (Kimliği) zaten kayıtlı"
         },
         "nft": {
             "unsupportedUrl": {
-                "short": "Url not supported",
-                "long": "Url schema not supported"
+                "short": "URL desteklenmiyor",
+                "long": "URL şeması desteklenmiyor"
             },
             "unsupportedFileType": {
-                "short": "Unsupported media type",
-                "long": "The media type is not currently supported"
+                "short": "Desteklenmeyen medya türü",
+                "long": "Medya türü şu anda desteklenmiyor"
             },
             "notMatchingFileTypes": {
-                "short": "Loading blocked",
-                "long": "NFT file type does not match the expected media type"
+                "short": "Yükleme engellendi",
+                "long": "NFT dosya türü beklenen ortam türüyle eşleşmiyor"
             },
             "notReachable": {
-                "short": "Not reachable",
-                "long": "NFT file is not reachable"
+                "short": "Ulaşılamaz",
+                "long": "NFT dosyasına ulaşılamıyor"
             },
             "tooLargeFile": {
-                "short": "File is too large",
-                "long": "Loading NFT blocked because the file is too large"
+                "short": "Dosya çok büyük",
+                "long": "Dosya çok büyük olduğundan NFT'nin yüklenmesi engellendi"
             },
             "downloadTooLong": {
-                "short": "File took too long to download",
-                "long": "Loading NFT blocked because the file took too long to download"
+                "short": "Dosyanın indirilmesi çok uzun sürdü",
+                "long": "NFT yüklemesi engellendi çünkü dosyanın indirilmesi çok uzun sürdü"
             },
             "corsError": {
-                "short": "Loading blocked",
-                "long": "Loading NFT blocked by CORS policy"
+                "short": "Yükleme engellendi",
+                "long": "CORS politikası tarafından engellenen NFT yükleniyor"
             },
             "unsafeToLoad": {
-                "short": "Unsafe to load",
-                "long": "An error occurred while checking if the NFT was safe to load"
+                "short": "Yüklemek güvenli değil",
+                "long": "NFT'nin yüklenmesinin güvenli olup olmadığı kontrol edilirken bir hata oluştu"
             },
             "loadingError": {
-                "short": "Unable to load",
-                "long": "An error occurred while loading the NFT"
+                "short": "Yüklenemedi",
+                "long": "NFT yüklenirken bir hata oluştu"
             }
         },
         "governance": {
             "unableToAddProposal": {
-                "short": "Unable to add proposal",
-                "long": "Unable to find proposal {proposalId} on the specified node"
+                "short": "Teklif eklenemiyor",
+                "long": "Belirtilen düğümde {proposalId} teklifi bulunamıyor"
             }
         }
     },
     "warning": {
         "transaction": {
-            "invalidExpirationDateTime": "The chosen expiration date is invalid."
+            "invalidExpirationDateTime": "Seçilen son kullanma tarihi geçersiz."
         },
         "node": {
             "http": "HTTP üzerinden düğümlerin kullanılması trafiği şifrelenmemiş halde bırakır ve bir güvenlik riski oluşturabilir."
@@ -2129,7 +2135,7 @@
             "noFunds": "Hiç IOTA nız yok."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Bilinmeyen bağlantıları takip etmekte dikkatli olun. Özel anahtarlarınızı asla paylaşmayın veya bunları herhangi bir web sitesine veya hizmete girmeyin."
         }
     },
     "tooltips": {
@@ -2158,81 +2164,81 @@
             "bodyDidNotReachMin": "{airdrop} için minimum ödül değerine ({airdropRewardMin}) ulaşmak için yeterli IOTA stake etmediniz.",
             "bodyMinBalanceAirdrop": "Bu cüzdanda {airdrop} minimum airdrop ödülüne ulaşmak için yeterli IOTA jetonu yok."
         },
-        "optionalInput": "This optional data will be public on the explorer and viewable by everyone.",
+        "optionalInput": "Bu isteğe bağlı veriler gezginde herkese açık olacak ve herkes tarafından görülebilecektir.",
         "transactionDetails": {
             "minting": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for."
+                "storageDeposit": "İşleminizi Tangle'da saklamak için iade edilebilir bir token depozitosu gerekiyor.",
+                "giftedStorageDeposit": "Bu işleme ait depo depozitosu size hediye edildi. Depozitoyu iade etmenize gerek yoktur.",
+                "expirationTime": "Bu fonları son kullanma süresinden önce talep edin, aksi takdirde gönderene iade edilecektir.",
+                "timelockDate": "Gönderen, bu fonlara bir zaman aşımı belirledi. Zaman kilidi sona erdiğinde bunları harcayabileceksiniz.",
+                "metadata": "Verileri Tangle'da kalıcı olarak depolamak için isteğe bağlı bir veri alanı.",
+                "tag": "Kısa isteğe bağlı veri alanı. İşlem gruplarını etiketlemek, onları daha kolay bulunabilir hale getirebilir."
             },
             "incoming": {
-                "storageDeposit": "A refundable token deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The storage deposit for this transaction was gifted to you. You do not need to refund the deposit.",
-                "expirationTime": "Claim these funds before the expiration time or they will be returned to the sender.",
-                "timelockDate": "The sender set a timelock on these funds. You will be able to spend them once the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "storageDeposit": "İşleminizi Tangle'da saklamak için iade edilebilir bir token depozitosu gerekiyor.",
+                "giftedStorageDeposit": "Bu işleme ait depo depozitosu size hediye edildi. Depozitoyu iade etmenize gerek yoktur.",
+                "expirationTime": "Bu fonları son kullanma süresinden önce talep edin, aksi takdirde gönderene iade edilecektir.",
+                "timelockDate": "Gönderen, bu fonlara bir zaman aşımı belirledi. Zaman kilidi sona erdiğinde bunları harcayabileceksiniz.",
+                "metadata": "Verileri Tangle'da kalıcı olarak depolamak için isteğe bağlı bir veri alanı.",
+                "tag": "Kısa isteğe bağlı veri alanı. İşlem gruplarını etiketlemek, onları daha kolay bulunabilir hale getirebilir.",
+                "gasFee": "Shimmer EVM üzerinde bir işlem yapmak veya akıllı bir kontrat işlevini çalıştırmak için bir gaz ücreti gereklidir."
             },
             "outgoing": {
-                "storageDeposit": "A storage deposit is a refundable deposit needed to store your transaction on the Tangle.",
-                "giftedStorageDeposit": "The recipient does not need to refund the deposit.",
-                "expirationTime": "If the recipient does not claim in time your tokens will be returned to you.",
-                "timelockDate": "You added a timelock to this transaction. The recipient will not be able to spend these funds until the timelock expires.",
-                "metadata": "An optional data field for storing data persistently on the Tangle.",
-                "tag": "A short optional data field. Tagging groups of transactions can make them easier to search for.",
-                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "storageDeposit": "Depolama depozitosu, işleminizi Tangle'da saklamak için gereken iade edilebilir bir depozitodur.",
+                "giftedStorageDeposit": "Alıcının depozitoyu iade etmesine gerek yoktur.",
+                "expirationTime": "Alıcının zamanında talepte bulunmaması halinde tokenleriniz size iade edilecektir.",
+                "timelockDate": "Bu işleme bir zaman kilidi eklediniz. Alıcı, zaman kilidi sona erene kadar bu fonları harcayamayacak.",
+                "metadata": "Verileri Tangle'da kalıcı olarak depolamak için isteğe bağlı bir veri alanı.",
+                "tag": "Kısa isteğe bağlı bir veri alanı. İşlem gruplarını etiketlemek, onları aramayı daha kolay hale getirebilir.",
+                "gasFee": "Shimmer EVM üzerinde bir işlem yapmak veya akıllı bir kontrat işlevini çalıştırmak için bir gaz ücreti gereklidir."
             },
             "nftMetadata": {
-                "standard": "The NFT standard e.g. IRC27.",
-                "type": "The MimeType of the NFT. e.g. image/png.",
-                "collectionId": "UTXO string of the collection NFT that minted this NFT",
-                "royalties": "An object containing key-value pairs of addresses that map to payout percentages",
-                "issuerName": "The name of the creator",
-                "attributes": "An array of traits and values that define attributes of the NFT"
+                "standard": "NFT standardı örneğin IRC27.",
+                "type": "NFT'nin MimeType'ı. Örneğin. image/png.",
+                "collectionId": "Bu NFT'yi oluşturan koleksiyon NFT'nin UTXO dizisi",
+                "royalties": "Ödeme yüzdelerine karşılık gelen adreslerin anahtar-değer çiftlerini içeren bir nesne",
+                "issuerName": "Oluşturucunun adı",
+                "attributes": "NFT'nin özelliklerini ve değerlerini tanımlayan özelliklerin bir dizisi"
             }
         },
         "mintNativeToken": {
-            "decimals": "IRC30 optional parameter: Number of decimals the token uses (divide the token amount by 10^decimals to get its user representation).",
-            "description": "IRC30 optional parameter: The human-readable description of the token.",
-            "url": "IRC30 optional parameter: URL pointing to more resources about the token like a website or social media page.",
-            "logoUrl": "IRC30 optional parameter: URL pointing to an image resource of the token logo."
+            "decimals": "IRC30 isteğe bağlı parametre: Tokenın kullandığı ondalık sayı sayısı (kullanıcı temsilini elde etmek için token miktarını 10^ondalık sayıya bölün).",
+            "description": "IRC30 isteğe bağlı parametre: Tokenin insan tarafından okunabilen açıklaması.",
+            "url": "IRC30 isteğe bağlı parametre: Bir web sitesi veya sosyal medya sayfası gibi token hakkında daha fazla kaynağa işaret eden URL.",
+            "logoUrl": "IRC30 isteğe bağlı parametre: Token logosunun resim kaynağına işaret eden URL."
         },
         "mintNftForm": {
-            "collectionId": "Optional parameter: UTXO string of the collection NFT that minted this NFT",
-            "collectionName": "Optional parameter: The collection's name",
-            "royalties": "Optional parameter: An object containing key-value pairs of addresses that map to payout percentages",
-            "issuerName": "Optional parameter: The name of the creator",
-            "description": "Optional parameter: A description of the NFT",
-            "attributes": "Optional parameter: An array of traits and values that define attributes of the NFT",
-            "uri": "To create a URI using custom media, first upload your file to IPFS via a storage service (e.g. https://nft.storage/)",
-            "quantity": "Optional parameter: The quantity of copies minted with this metadata."
+            "collectionId": "İsteğe bağlı parametre: Bu NFT'yi oluşturan koleksiyon NFT'nin UTXO dizisi",
+            "collectionName": "İsteğe bağlı parametre: Koleksiyonun adı",
+            "royalties": "İsteğe bağlı parametre: Ödeme yüzdeleriyle eşleşen adreslerin anahtar/değer çiftlerini içeren bir nesne",
+            "issuerName": "İsteğe bağlı parametre: Oluşturucunun adı",
+            "description": "İsteğe bağlı parametre: NFT'nin açıklaması",
+            "attributes": "İsteğe bağlı parametre: NFT'nin niteliklerini tanımlayan bir dizi özellik ve değer",
+            "uri": "Özel medya kullanarak bir URI oluşturmak için öncelikle dosyanızı bir depolama hizmeti aracılığıyla IPFS'ye yükleyin (ör. https://nft.storage/)",
+            "quantity": "Özel medya kullanarak bir Uri oluşturmak için önce dosyanızı bir depolama hizmeti aracılığıyla Ipfs'e yükleyin (ör. https://nft. storage/)"
         },
         "governance": {
-            "removeProposalWarning": "You must stop voting for this proposal before removing it.",
+            "removeProposalWarning": "Özel medya kullanarak bir URI oluşturmak için önce dosyanızı bir depolama hizmeti aracılığıyla IPFS'e yükleyin (ör. https://nft.storage/)",
             "outdatedNode": {
-                "title": "Outdated node URL",
-                "body": "The node URL for this proposal is outdated. Please update it to access the latest voting results."
+                "title": "Özel medya kullanarak bir URI oluşturmak için önce dosyanızı bir depolama hizmeti aracılığıyla IPFS'e yükleyin (ör. https://nft.storage/)",
+                "body": "Bu teklifin düğüm URL'si güncel değil. En son oylama sonuçlarına erişmek için lütfen güncelleyin."
             },
             "resultsNotAvailable": {
-                "title": "Results not available",
-                "body": "The results are no longer available on this proposal's corresponding node. Please update it to access the results."
+                "title": "Sonuçlar mevcut değil",
+                "body": "Sonuçlar artık bu teklifin ilgili düğümünde mevcut değil. Sonuçlara erişmek için lütfen güncelleyin."
             }
         },
         "updateStronghold": {
-            "profileBadge": "Your Stronghold is out of date. Log in to update Stronghold."
+            "profileBadge": "Stronghold güncel değil. Stronghold'u güncellemek için lütfen giriş yapın."
         }
     },
     "exports": {
         "transactionHistoryCsv": {
-            "messageId": "Message ID",
+            "messageId": "Mesaj ID",
             "internal": "Dahili",
             "rawValue": "Ham Değer",
             "formattedValue": "Biçimlenmiş Değer",
-            "date": "Date",
+            "date": "Tarih",
             "time": "Zaman"
         }
     },
@@ -2241,7 +2247,7 @@
             "warningText": "Şu anda bir geliştirici profili kullanıyorsunuz ve şuraya bağlısınız {networkName}"
         },
         "networkIndicator": {
-            "warningText": "Network performance degraded. Message confirmation may take a bit longer than usual."
+            "warningText": "Ağ performansı düştü. Mesaj onayı normalden biraz daha uzun sürebilir."
         }
     },
     "permissions": {
@@ -2251,143 +2257,143 @@
         }
     },
     "tabs": {
-        "wallet": "Wallet",
-        "collectibles": "Collectibles",
+        "wallet": "Cüzdan",
+        "collectibles": "Koleksiyonlar",
         "governance": "Yönetim",
-        "developer": "Developer",
+        "developer": "Geliştirici",
         "tokens": "Tokenler",
         "activity": "Aktivite",
-        "vesting": "Vesting"
+        "vesting": "Hakediş"
     },
     "pills": {
         "stake": {
-            "Pending": "staking for",
-            "Confirmed": "staked for",
-            "Conflicting": "failed to stake"
+            "Pending": "için stake etme",
+            "Confirmed": "için stake edildi",
+            "Conflicting": "stake başarısız oldu"
         },
         "external": {
             "incoming": {
-                "Pending": "receiving from",
-                "Confirmed": "received from",
-                "Conflicting": "failed to receive"
+                "Pending": "'ten alınıyor",
+                "Confirmed": "'ten alınan",
+                "Conflicting": "alınamadı"
             },
             "outgoing": {
-                "Pending": "sending to",
-                "Confirmed": "sent to",
-                "Conflicting": "failed to send"
+                "Pending": "gönderiliyor",
+                "Confirmed": "gönderildi",
+                "Conflicting": "gönderme başarısız"
             }
         },
         "internal": {
             "incoming": {
-                "Pending": "transferring from",
-                "Confirmed": "transferred from",
-                "Conflicting": "failed to transfer"
+                "Pending": "'ten transfer ediliyor",
+                "Confirmed": "'ten transfer edildi",
+                "Conflicting": "transfer başarısız"
             },
             "outgoing": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "'a transfer ediliyor",
+                "Confirmed": "'a transfer edildi",
+                "Conflicting": "transfer başarısız"
             },
             "selfTransaction": {
-                "Pending": "transferring to",
-                "Confirmed": "transferred to",
-                "Conflicting": "failed to transfer"
+                "Pending": "'a transfer ediliyor",
+                "Confirmed": "'a transfer edildi",
+                "Conflicting": "transfer başarısız"
             }
         },
         "mint": {
-            "Pending": "minting",
-            "Confirmed": "minted",
-            "Conflicting": "failed to mint"
+            "Pending": "basılıyor",
+            "Confirmed": "basılmış",
+            "Conflicting": "basılma başarısız"
         },
         "burn": {
-            "Pending": "burning",
-            "Confirmed": "burned",
-            "Conflicting": "failed to burn"
+            "Pending": "yakılıyor",
+            "Confirmed": "yanmış",
+            "Conflicting": "yakılamadı"
         },
         "consolidation": {
-            "Pending": "Consolidating outputs",
-            "Confirmed": "Outputs consolidated",
-            "Conflicting": "failed to consolidate outputs"
+            "Pending": "Çıktıları konsolide etme",
+            "Confirmed": "Çıktılar konsolide edildi",
+            "Conflicting": "çıktılar birleştirilemedi"
         },
         "migrate": {
-            "Pending": "migrating for",
-            "Confirmed": "migrated for",
-            "Conflicting": "failed to migrate"
+            "Pending": "için aktarılıyor",
+            "Confirmed": "için aktarıldı",
+            "Conflicting": "aktarılma başarısız oldu"
         },
         "asyncStatus": {
-            "unclaimed": "unclaimed",
-            "claimed": "claimed",
-            "expired": "expired"
+            "unclaimed": "sahipsiz",
+            "claimed": "talep edildi",
+            "expired": "süresi dolmuş"
         },
         "governance": {
             "increaseVotingPower": {
-                "Pending": "increasing voting power",
-                "Confirmed": "increased voting power",
-                "Conflicting": "failed to increased voting power"
+                "Pending": "oy kullanma gücünün artırılması",
+                "Confirmed": "artan oy gücü",
+                "Conflicting": "oy verme gücünü artırmada başarısız oldu"
             },
             "decreaseVotingPower": {
-                "Pending": "decreasing voting power",
-                "Confirmed": "decreased voting power",
-                "Conflicting": "failed to decreased voting power"
+                "Pending": "oy kullanma gücünün azaltılması",
+                "Confirmed": "oy kullanma gücünün azalması",
+                "Conflicting": "oy verme gücünü azaltmada başarısız oldu"
             },
             "startVoting": {
-                "Pending": "voting for",
-                "Confirmed": "voted for",
-                "Conflicting": "failed to vote for"
+                "Pending": "oylama için",
+                "Confirmed": "oy için",
+                "Conflicting": "oy verme başarısız"
             },
             "stopVoting": {
-                "Pending": "stopping voting for",
-                "Confirmed": "stopped voting for",
-                "Conflicting": "failed to stopped voting for"
+                "Pending": "oy verme durduruluyor",
+                "Confirmed": "oy verme durduruldu",
+                "Conflicting": "oy verme işlemi durdurulamadı"
             },
             "changedVote": {
-                "Pending": "changing vote for",
-                "Confirmed": "changed vote for",
-                "Conflicting": "failed to change vote for"
+                "Pending": "oy değiştiriliyor",
+                "Confirmed": "için oy değiştirildi",
+                "Conflicting": "için oy değiştirme başarısız oldu"
             },
             "revote": {
-                "Pending": "revoting",
-                "Confirmed": "revote",
-                "Conflicting": "failed to revote"
+                "Pending": "yeniden oy kullanılıyor",
+                "Confirmed": "yeniden oyla",
+                "Conflicting": "yeniden oylanamadı"
             },
             "proposalStatus": {
-                "upcoming": "Announcement",
-                "commencing": "Voting open",
-                "holding": "Counting",
-                "ended": "Closed",
-                "nodeOutdated": "Outdated node URL",
-                "resultsNotAvailable": "Results not available"
+                "upcoming": "Duyuru",
+                "commencing": "Oylama açıldı",
+                "holding": "Sayma",
+                "ended": "Kapalı",
+                "nodeOutdated": "Güncellenmemiş node URL'si",
+                "resultsNotAvailable": "Sonuçlar mevcut değil"
             }
         },
         "alias": {
             "creation": {
-                "Pending": "creating alias",
-                "Confirmed": "alias created",
-                "Failed": "Failed to create alias"
+                "Pending": "takma ad oluşturma",
+                "Confirmed": "takma ad oluşturuldu",
+                "Failed": "Takma ad oluşturulamadı"
             }
         },
         "networkHealth": {
-            "down": "Down",
-            "degraded": "Degraded",
-            "operational": "Operational",
-            "disconnected": "Disconnected"
+            "down": "Aşağı",
+            "degraded": "Bozulmuş",
+            "operational": "Operasyonel",
+            "disconnected": "Bağlantı kesildi"
         },
-        "locked": "locked",
-        "smartContract": "smart contract",
+        "locked": "kilitli",
+        "smartContract": "akıllı sözleşme",
         "vesting": {
-            "unlocked": "Unlocked",
-            "locked": "Locked"
+            "unlocked": "Kilitli değil",
+            "locked": "Kilitli"
         }
     },
     "menus": {
         "expirationTimePicker": {
-            "none": "No expiration time",
-            "1hour": "In 1 hour",
-            "1day": "In 1 day",
-            "1week": "In 1 week",
+            "none": "Son kullanma süresi yok",
+            "1hour": "1 saat içinde",
+            "1day": "1 gün içinde",
+            "1week": "1 hafta içinde",
             "customDate": {
-                "title": "Custom date",
-                "subtitle": "Set custom expiry date"
+                "title": "Özel tarih",
+                "subtitle": "Özel bir son kullanma tarihi belirle"
             }
         }
     }
