@@ -34,7 +34,7 @@ The public repository for the IOTA Ledger app lives [here](https://github.com/io
 - Running a Ledger Nano S or X hardware simulator
 - Compiling and loading the app onto a Ledger Nano S
 
-Additionaly, there is a legacy app, which is useful to test migrations. It lives [here](https://github.com/shufps/app-iota-legacy/tree/tmp_backport_docker).
+Additionally, there is a legacy app, which is useful to test migrations. It lives [here](https://github.com/shufps/app-iota-legacy/tree/tmp_backport_docker).
 
 ### Installing
 

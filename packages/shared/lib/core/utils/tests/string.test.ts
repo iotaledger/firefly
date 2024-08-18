@@ -59,7 +59,7 @@ describe('File: string.ts', () => {
     })
 
     describe('Function: truncateString', () => {
-        it('should truncate the string correclty if "start" and "end" are greater than 0', () => {
+        it('should truncate the string correctly if "start" and "end" are greater than 0', () => {
             expect(truncateString('Lorem ipsum', 3, 3)).toBe('Lor...sum')
         })
         it('should show no letters at the end if "end" is 0', () => {
