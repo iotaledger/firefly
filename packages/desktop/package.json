@@ -49,7 +49,7 @@
         "cross-env": "^7.0.2",
         "css-loader": "^7.1.1",
         "electron": "27.0.2",
-        "electron-builder": "^24.6.4",
+        "electron-builder": "^25.0.5",
         "esbuild-loader": "^4.0.2",
         "lodash.merge": "^4.6.2",
         "mini-css-extract-plugin": "^2.7.6",
