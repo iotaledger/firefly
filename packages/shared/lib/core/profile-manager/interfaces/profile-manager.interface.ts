@@ -12,6 +12,7 @@ import { IAccount } from '@core/account/interfaces'
 import { IAuth } from '@core/network/interfaces'
 
 import { WalletApiEventHandler } from '../types'
+import { SecretManager } from '@iota/sdk'
 
 export interface IProfileManager {
     id: string
@@ -34,6 +35,7 @@ export interface IProfileManager {
     getLedgerNanoStatus(): Promise<LedgerNanoStatus>
     hexToBech32(hex: string, bech32Hrp?: string): Promise<string>
     isStrongholdPasswordAvailable(): Promise<boolean>
+    getSecretManager(): Promise<SecretManager>
     listen(eventTypes: WalletEventType[], callback: WalletApiEventHandler): Promise<void>
     clearListeners(eventTypes: WalletEventType[]): Promise<void>
     removeLatestAccount(): Promise<void>

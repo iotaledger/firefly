@@ -1,10 +1,13 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
+    import { ProfileType } from '@core/profile'
+    import { api, initialiseProfileManager } from '@core/profile-manager'
+    import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { Icon } from '@lib/auxiliary/icon'
-    import { MenuItem, Modal } from 'shared/components'
     import { showAppNotification } from '@lib/auxiliary/notification'
-    import { setClipboard } from '@lib/core/utils'
     import { activeProfile, getStorageDirectoryOfProfile } from '@lib/core/profile'
+    import { setClipboard } from '@lib/core/utils'
+    import { MenuItem, Modal } from 'shared/components'
 
     export let modal: Modal | undefined
 
@@ -17,6 +20,23 @@
         })
         modal?.close()
     }
+
+    async function backupSeed(): Promise<void> {
+        const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
+        const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
+        const manager = await initialiseProfileManager(
+            storagePath,
+            coinType,
+            clientOptions,
+            secretManagerType,
+            $activeProfile?.id
+        )
+        await manager.clearStrongholdPassword()
+        await manager.setStrongholdPassword('passwordhere')
+        const secretManager = await api.getSecretManager(manager.id)
+        const seed = await secretManager?.getSeed()
+        console.log('seed', seed)
+    }
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
@@ -26,5 +46,8 @@
             title={localize('actions.copyProfileSystemLocation')}
             onClick={handleCopyProfileSystemLocation}
         />
+        {#if $activeProfile?.type === ProfileType.Software}
+            <MenuItem icon={Icon.Copy} title="Backup seed" onClick={backupSeed} />
+        {/if}
     </div>
 </Modal>
