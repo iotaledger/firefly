@@ -1,15 +1,18 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ProfileType } from '@core/profile'
-    import { api, initialiseProfileManager } from '@core/profile-manager'
+    import { ProfileType, isSoftwareProfile } from '@core/profile'
+    import { api, initialiseProfileManager, getProfileManager } from '@core/profile-manager'
     import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { Icon } from '@lib/auxiliary/icon'
     import { showAppNotification } from '@lib/auxiliary/notification'
     import { activeProfile, getStorageDirectoryOfProfile } from '@lib/core/profile'
     import { setClipboard } from '@lib/core/utils'
     import { MenuItem, Modal } from 'shared/components'
+    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { profileManager } from '@core/profile-manager/stores'
 
     export let modal: Modal | undefined
+    const { isStrongholdLocked } = $activeProfile
 
     async function handleCopyProfileSystemLocation(): Promise<void> {
         const profileDirectory = await getStorageDirectoryOfProfile($activeProfile?.id)
@@ -21,6 +24,28 @@
         modal?.close()
     }
 
+    function openUnlockStrongholdPopup(): void {
+        openPopup({
+            id: PopupId.UnlockStronghold,
+            props: {
+                onSuccess: () => {
+                    openGetSeedPopup()
+                },
+                onCancelled: () => {},
+            },
+        })
+    }
+    async function openGetSeedPopup(): Promise<void> {
+        const managerId = await getProfileManager().id
+        const secretManager = await api.getSecretManager(managerId)
+        const seed = await secretManager?.getSeed()
+        openPopup({
+            id: PopupId.GetSeedPopup,
+            props: {
+                seed,
+            },
+        })
+    }
     async function backupSeed(): Promise<void> {
         const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
         const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
@@ -31,11 +56,12 @@
             secretManagerType,
             $activeProfile?.id
         )
-        await manager.clearStrongholdPassword()
-        await manager.setStrongholdPassword('passwordhere')
-        const secretManager = await api.getSecretManager(manager.id)
-        const seed = await secretManager?.getSeed()
-        console.log('seed', seed)
+        profileManager.set(manager)
+        if ($isSoftwareProfile && $isStrongholdLocked) {
+            openUnlockStrongholdPopup()
+        } else {
+            openGetSeedPopup()
+        }
     }
 </script>
 
