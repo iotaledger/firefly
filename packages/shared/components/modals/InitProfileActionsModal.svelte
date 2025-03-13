@@ -1,7 +1,7 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
-    import { ProfileType, isSoftwareProfile } from '@core/profile'
-    import { api, initialiseProfileManager, getProfileManager } from '@core/profile-manager'
+    import { ProfileType } from '@core/profile'
+    import { initialiseProfileManager } from '@core/profile-manager'
     import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { Icon } from '@lib/auxiliary/icon'
     import { showAppNotification } from '@lib/auxiliary/notification'
@@ -12,7 +12,6 @@
     import { profileManager } from '@core/profile-manager/stores'
 
     export let modal: Modal | undefined
-    const { isStrongholdLocked } = $activeProfile
 
     async function handleCopyProfileSystemLocation(): Promise<void> {
         const profileDirectory = await getStorageDirectoryOfProfile($activeProfile?.id)
@@ -29,39 +28,29 @@
             id: PopupId.UnlockStronghold,
             props: {
                 onSuccess: () => {
-                    openGetSeedPopup()
+                    openPopup({
+                        id: PopupId.GetSeedPopup,
+                    })
                 },
                 onCancelled: () => {},
             },
         })
     }
-    async function openGetSeedPopup(): Promise<void> {
-        const managerId = await getProfileManager().id
-        const secretManager = await api.getSecretManager(managerId)
-        const seed = await secretManager?.getSeed()
-        openPopup({
-            id: PopupId.GetSeedPopup,
-            props: {
-                seed,
-            },
-        })
-    }
+
     async function backupSeed(): Promise<void> {
-        const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
-        const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
-        const manager = await initialiseProfileManager(
-            storagePath,
-            coinType,
-            clientOptions,
-            secretManagerType,
-            $activeProfile?.id
-        )
-        profileManager.set(manager)
-        if ($isSoftwareProfile && $isStrongholdLocked) {
-            openUnlockStrongholdPopup()
-        } else {
-            openGetSeedPopup()
+        if (!$profileManager) {
+            const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
+            const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
+            const manager = await initialiseProfileManager(
+                storagePath,
+                coinType,
+                clientOptions,
+                secretManagerType,
+                $activeProfile?.id
+            )
+            profileManager.set(manager)
         }
+        openUnlockStrongholdPopup()
     }
 </script>
 

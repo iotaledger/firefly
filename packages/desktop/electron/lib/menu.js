@@ -91,6 +91,10 @@ const buildTemplate = () => {
                     click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
+                    label: 'Backup seed',
+                    click: () => getOrInitWindow('main').webContents.send('menu-get-seed'),
+                },
+                {
                     type: 'separator',
                 },
                 {
