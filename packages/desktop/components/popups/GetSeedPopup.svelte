@@ -140,7 +140,7 @@
                 </Text>
                 <TextHint
                     variant={TextHintVariant.Warning}
-                    text="You can import this seed into the new IOTA rebased wallet to access your funds."
+                    text="If you lost your mnemonic, you can import this seed into the new IOTA Wallet browser extension to access your funds."
                 />
                 <KeyValueBox keyText="Seed" valueText={seed} isCopyable />
             </div>
