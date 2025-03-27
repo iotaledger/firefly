@@ -136,8 +136,7 @@
         <div class="flex flex-col space-y-4">
             <div class="w-full space-y-3">
                 <Text type={TextType.p} color="gray-700">
-                    It is important to back up your seed to ensure you have a copy of your wallets and transaction
-                    history. If you lose your seed and recovery phrase you will lose access to your funds.
+                    If you have lost your mnemonic it is important to back up your seed be able to access your funds. If you lose your mnemonic and seed you will lose access to your funds.
                 </Text>
                 <TextHint
                     variant={TextHintVariant.Warning}
