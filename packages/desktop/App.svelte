@@ -143,9 +143,6 @@
         Platform.onEvent('menu-get-seed', () => {
             openPopup({
                 id: PopupId.GetSeedPopup,
-                props: {
-                    readFromFile: true,
-                },
             })
         })
 

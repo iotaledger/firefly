@@ -14,7 +14,6 @@ import type {
 import { IAccount } from '@core/account'
 import { IAuth, INodeInfoResponse } from '@core/network'
 import { IProfileManager, WalletApiEventHandler } from '@core/profile-manager'
-import { SecretManager } from '@iota/sdk'
 
 export class ProfileManagerMock implements IProfileManager {
     id: string
@@ -145,10 +144,6 @@ export class ProfileManagerMock implements IProfileManager {
 
     isStrongholdPasswordAvailable(): Promise<boolean> {
         return Promise.resolve(true)
-    }
-
-    getSecretManager(): Promise<SecretManager> {
-        throw new Error('Method not implemented.')
     }
 
     async listen(_eventTypes: WalletEventType[], _callback: WalletApiEventHandler): Promise<void> {

@@ -30,9 +30,11 @@
                 onSuccess: () => {
                     openPopup({
                         id: PopupId.GetSeedPopup,
+                        props: {
+                            readFromFile: false,
+                        },
                     })
                 },
-                onCancelled: () => {},
             },
         })
     }

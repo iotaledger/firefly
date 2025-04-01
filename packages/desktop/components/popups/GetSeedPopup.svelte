@@ -10,7 +10,7 @@
         validateBackupFile,
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
-        restoreBackupFromStrongholdFile,
+        resetOnboardingProfile,
     } from '@contexts/onboarding'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { api, getProfileManager } from '@core/profile-manager'
@@ -21,8 +21,8 @@
         path?: string
     }
 
-    export let password: string
-    export let readFromFile: boolean
+    export let shouldResetOnboardingProfile: boolean = false
+    export let readFromFile: boolean = true
     const allowedExtensions = ['stronghold']
 
     let seed: string
@@ -34,6 +34,9 @@
 
     function onCancelClick(): void {
         closePopup()
+        if (shouldResetOnboardingProfile) {
+            resetOnboardingProfile()
+        }
     }
     function onCopyClick(): void {
         setClipboard(seed)
@@ -44,15 +47,22 @@
             id: PopupId.UnlockStronghold,
             props: {
                 returnPassword: true,
-                onSuccess: (password) => {
+                restoreBackupFromStronghold: true,
+                onSuccess: () => {
                     openPopup({
                         id: PopupId.GetSeedPopup,
                         props: {
-                            password,
+                            readFromFile: false,
+                            shouldResetOnboardingProfile: true,
+                            onCancelled: () => {
+                                resetOnboardingProfile()
+                            },
                         },
                     })
                 },
-                onCancelled: () => {},
+                onCancelled: () => {
+                    resetOnboardingProfile()
+                },
             },
         })
     }
@@ -114,9 +124,6 @@
     }
 
     async function getSeedFromSecretManager(): Promise<void> {
-        if (password) {
-            await restoreBackupFromStrongholdFile(password)
-        }
         const managerId = await getProfileManager().id
         const secretManager = await api.getSecretManager(managerId)
         seed = await secretManager?.getSeed()
@@ -136,7 +143,8 @@
         <div class="flex flex-col space-y-4">
             <div class="w-full space-y-3">
                 <Text type={TextType.p} color="gray-700">
-                    If you have lost your mnemonic it is important to back up your seed be able to access your funds. If you lose your mnemonic and seed you will lose access to your funds.
+                    If you have lost your mnemonic it is important to back up your seed be able to access your funds. If
+                    you lose your mnemonic and seed you will lose access to your funds.
                 </Text>
                 <TextHint
                     variant={TextHintVariant.Warning}

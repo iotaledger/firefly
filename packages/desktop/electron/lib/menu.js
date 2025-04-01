@@ -91,10 +91,6 @@ const buildTemplate = () => {
                     click: () => getOrInitWindow('main').webContents.send('menu-navigate-settings'),
                 },
                 {
-                    label: 'Backup seed',
-                    click: () => getOrInitWindow('main').webContents.send('menu-get-seed'),
-                },
-                {
                     type: 'separator',
                 },
                 {
@@ -104,6 +100,13 @@ const buildTemplate = () => {
             ],
         },
     ]
+
+    if (!state.loggedIn) {
+        template[0].submenu.push({
+            label: 'Backup seed',
+            click: () => getOrInitWindow('main').webContents.send('menu-get-seed'),
+        })
+    }
 
     if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
         template[0].submenu.push({
