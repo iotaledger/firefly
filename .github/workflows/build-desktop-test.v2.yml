@@ -11,7 +11,7 @@ jobs:
     if: ${{ always() }}
     strategy:
       matrix:
-        os: [ ubuntu-20.04, macos-12, windows-2019 ]
+        os: [ ubuntu-22.04, macos-12, windows-2019 ]
       fail-fast: true
     env:
       VERSION: '2.1.3-test'
@@ -58,7 +58,7 @@ jobs:
           sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
             software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
             llvm-dev libclang-dev clang
-        if: matrix.os == 'ubuntu-20.04'
+        if: matrix.os == 'ubuntu-22.04'
 
       - name: Enable verbose output for electron-builder (macOS/Linux)
         run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
@@ -113,4 +113,4 @@ jobs:
       - name: Build Electron app (Linux)
         run: yarn compile:${STAGE}:linux
         working-directory: packages/desktop
-        if: matrix.os == 'ubuntu-20.04'
+        if: matrix.os == 'ubuntu-22.04'
