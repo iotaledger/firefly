@@ -140,6 +140,11 @@
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
         })
+        Platform.onEvent('menu-get-seed', () => {
+            openPopup({
+                id: PopupId.GetSeedPopup,
+            })
+        })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)
 

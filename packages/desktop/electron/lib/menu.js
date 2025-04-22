@@ -101,6 +101,13 @@ const buildTemplate = () => {
         },
     ]
 
+    if (!state.loggedIn) {
+        template[0].submenu.push({
+            label: 'Backup seed',
+            click: () => getOrInitWindow('main').webContents.send('menu-get-seed'),
+        })
+    }
+
     if (!app.isPackaged || features?.electron?.developerTools?.enabled) {
         template[0].submenu.push({
             label: 'Developer Tools',
