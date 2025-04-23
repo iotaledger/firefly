@@ -59,6 +59,7 @@
     import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
     import WithdrawFromL2Popup from './WithdrawFromL2Popup.svelte'
     import SwitchToWalletExtensionPopup from './SwitchToWalletExtensionPopup.svelte'
+    import GetSeedPopup from './GetSeedPopup.svelte'
 
     export let id: PopupId
     export let props: any
@@ -148,6 +149,7 @@
         [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
         [PopupId.WithdrawFromL2]: WithdrawFromL2Popup,
         [PopupId.SwitchToWalletExtension]: SwitchToWalletExtensionPopup,
+        [PopupId.GetSeedPopup]: GetSeedPopup,
     }
 
     function onKey(event: KeyboardEvent): void {

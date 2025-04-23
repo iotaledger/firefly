@@ -51,4 +51,5 @@ export enum PopupId {
     VestingRewardsFinder = 'vestingRewardsFinder',
     WithdrawFromL2 = 'withdrawFromL2',
     SwitchToWalletExtension = 'switchToWalletExtension',
+    GetSeedPopup = 'getseed',
 }
