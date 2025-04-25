@@ -154,7 +154,6 @@ jobs:
               if: matrix.os == 'windows-2019'
 
             - name: Restore client certificates for signing
-              if: matrix.os == 'windows-2019'
               shell: bash
               env:
                 SIGNING_CLIENT_CERT: ${{ secrets.SIGNING_CLIENT_CERT }}
@@ -166,9 +165,13 @@ jobs:
                 echo "${SIGNING_CA_CERT}"     | base64 -d > ca.crt
                 chmod 600 client.key                      # curl/OpenSSL insists
 
-            - name: Code-sign Windows binary
-              working-directory: packages/desktop/out
+                openssl pkcs12 -export -out client.pfx \
+                               -inkey client.key -in client.crt \
+                               -passout pass:
+              working-directory: packages/desktop
               if: matrix.os == 'windows-2019'
+
+            - name: Code-sign Windows binary
               shell: bash
               env:
                 SIGNING_API_URL: ${{ secrets.SIGNING_API_URL }}
@@ -176,11 +179,7 @@ jobs:
                 NETWORK_CODE:    ${{ env.NETWORK_CODE }}
                 VERSION:         ${{ env.VERSION }}
               run: |
-                openssl pkcs12 -export -out client.pfx \
-                               -inkey client.key -in client.crt \
-                               -passout pass:
-
-                unsigned="firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
+                unsigned="./out/firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
                 signed="$unsigned"   # overwrite so downstream steps see the signed file
 
                 find . -ls
@@ -194,6 +193,8 @@ jobs:
                      -o "$signed" \
                      "${SIGNING_API_URL}/sign"
                 echo "✅  Signing complete"
+              working-directory: packages/desktop
+              if: matrix.os == 'windows-2019'
 
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
