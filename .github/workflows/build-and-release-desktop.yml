@@ -150,11 +150,43 @@ jobs:
 
             - name: Build Electron app (Windows)
               run: yarn compile:${env:STAGE}:win
-              env:
-                  CSC_LINK: ${{ secrets.WIN_CERT_BASE64 }}
-                  CSC_KEY_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
               working-directory: packages/desktop
               if: matrix.os == 'windows-2019'
+
+            - name: Restore client certificates for signing
+              if: matrix.os == 'windows-2019'
+              shell: bash
+              env:
+                SIGNING_CLIENT_CERT: ${{ secrets.SIGNING_CLIENT_CERT }}
+                SIGNING_CLIENT_KEY:  ${{ secrets.SIGNING_CLIENT_KEY }}
+                SIGNING_CA_CERT:     ${{ secrets.SIGNING_CA_CERT }}
+              run: |
+                echo "${SIGNING_CLIENT_CERT}" | base64 -d > client.crt
+                echo "${SIGNING_CLIENT_KEY}"  | base64 -d > client.key
+                echo "${SIGNING_CA_CERT}"     | base64 -d > ca.crt
+                chmod 600 client.key                      # curl/OpenSSL insists
+
+            - name: Code-sign Windows binary
+              if: matrix.os == 'windows-2019'
+              shell: bash
+              env:
+                SIGNING_API_URL: ${{ secrets.SIGNING_API_URL }}
+                SIGNING_API_KEY: ${{ secrets.SIGNING_API_KEY }}
+                NETWORK_CODE:    ${{ env.NETWORK_CODE }}
+                VERSION:         ${{ env.VERSION }}
+              run: |
+                unsigned=packages/desktop/out/firefly-${NETWORK_CODE}-desktop-${VERSION}.exe
+                signed=$unsigned   # overwrite in place so later steps see the signed file
+
+                echo "🖊️  Signing $unsigned ..."
+                curl --fail --show-error --silent \
+                     --cert client.crt --key client.key \
+                     --cacert ca.crt \
+                     -H "X-API-Key: ${SIGNING_API_KEY}" \
+                     --data-binary @$unsigned \
+                     -o $signed \
+                     "${SIGNING_API_URL}/sign"
+                echo "✅  Signing complete"
 
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
