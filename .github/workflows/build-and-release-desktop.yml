@@ -167,6 +167,7 @@ jobs:
                 chmod 600 client.key                      # curl/OpenSSL insists
 
             - name: Code-sign Windows binary
+              working-directory: packages/desktop/out
               if: matrix.os == 'windows-2019'
               shell: bash
               env:
@@ -179,10 +180,10 @@ jobs:
                                -inkey client.key -in client.crt \
                                -passout pass:
 
-                unsigned="packages/desktop/out/firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
+                unsigned="firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
                 signed="$unsigned"   # overwrite so downstream steps see the signed file
 
-                find . -iname 'firefly*.exe'
+                find . -ls
 
                 echo "🖊️  Signing $unsigned ..."
                 curl --fail --show-error --silent \
