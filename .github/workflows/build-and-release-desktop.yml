@@ -255,19 +255,19 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: firefly-desktop-windows-2019
                   path: assets
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: firefly-desktop-macos-12
                   path: assets
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: firefly-desktop-ubuntu-22.04
                   path: assets
