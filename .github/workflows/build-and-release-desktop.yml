@@ -187,7 +187,7 @@ jobs:
                 echo "🖊️  Signing $unsigned ..."
                 curl --fail --show-error --silent \
                      --cert client.pfx --cert-type P12 \
-                     --cacert ca.crt \
+                     --cacert ca.crt --ssl-no-revoke \
                      -H "X-API-Key: ${SIGNING_API_KEY}" \
                      --data-binary @"$unsigned" \
                      -o "$signed" \
