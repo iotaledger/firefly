@@ -182,6 +182,8 @@ jobs:
                 unsigned="packages/desktop/out/firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
                 signed="$unsigned"   # overwrite so downstream steps see the signed file
 
+                find . -iname 'firefly*.exe'
+
                 echo "🖊️  Signing $unsigned ..."
                 curl --fail --show-error --silent \
                      --cert client.pfx --cert-type P12 \
