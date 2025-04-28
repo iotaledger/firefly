@@ -141,19 +141,21 @@
 
 <Idle />
 <div class="dashboard-wrapper flex flex-col w-full h-full">
-    <div
-        class=" bg-blue-100 dark:bg-gray-800 flex flex-row gap-1 items-center justify-center py-2 font-400 text-13 leading-160 text-center"
-    >
-        <span class=" text-gray-800 dark:text-white max-w-lg"
-            >Please switch to the new IOTA Wallet for continued support and updates.
-        </span>
-        <a
-            href="https://chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-blue-500 underline">Download here</a
+    {#if $activeProfile?.network?.id !== NetworkId.Shimmer || $activeProfile?.network?.id !== NetworkId.ShimmerTestnet}
+        <div
+            class=" bg-blue-100 dark:bg-gray-800 flex flex-row gap-1 items-center justify-center py-2 font-400 text-13 leading-160 text-center"
         >
-    </div>
+            <span class=" text-gray-800 dark:text-white max-w-lg"
+                >Please switch to the new IOTA Wallet for continued support and updates.
+            </span>
+            <a
+                href="https://chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-500 underline">Download here</a
+            >
+        </div>
+    {/if}
     <TopNavigation />
     <div class="flex flex-row flex-auto h-1">
         <Sidebar />
