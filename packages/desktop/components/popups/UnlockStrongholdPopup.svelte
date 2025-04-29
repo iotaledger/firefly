@@ -2,13 +2,19 @@
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { unlockStronghold } from '@core/profile'
-    import { restoreBackupFromStrongholdFile } from '@contexts/onboarding'
+    import { activeProfile, migrateStrongholdFromActiveProfile, unlockStronghold } from '@core/profile'
+    import {
+        migrateStrongholdFromOnboardingProfile,
+        restoreBackupFromStrongholdFile,
+        StrongholdMigrationRequiredError,
+    } from '@contexts/onboarding'
     import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
+    import { isLatestStrongholdVersion } from '@core/app'
 
     export let subtitle: string = ''
     export let returnPassword = false
     export let restoreBackupFromStronghold = false
+    export let shouldMigrateStrongholdFromOnboardingProfile: boolean = false
 
     export let onSuccess: (..._: any[]) => void = () => {}
     export let onCancelled: (..._: any[]) => void = () => {}
@@ -20,6 +26,14 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
+            if (isLatestStrongholdVersion($activeProfile?.strongholdVersion)) {
+                await migrateStrongholdFromActiveProfile(password)
+            }
+
+            if (shouldMigrateStrongholdFromOnboardingProfile) {
+                await migrateStrongholdFromOnboardingProfile(password)
+            }
+
             const response = restoreBackupFromStronghold
                 ? await restoreBackupFromStrongholdFile(password)
                 : await unlockStronghold(password)
@@ -27,9 +41,14 @@
             onSuccess(returnPassword ? password : response)
         } catch (err) {
             if (err.message) {
-                error = localize(err.message)
+                const migrationError = JSON.parse(err?.message)?.payload?.error
+                if (migrationError && CLIENT_ERROR_REGEXES[ClientError.StrongholdMigration].test(migrationError)) {
+                    error = localize('error.password.incorrect')
+                } else error = localize(err.message)
             } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
                 error = localize('error.password.incorrect')
+            } else if (CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)) {
+                throw new StrongholdMigrationRequiredError()
             } else {
                 error = localize(err)
             }

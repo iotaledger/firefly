@@ -11,12 +11,17 @@
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
         resetOnboardingProfile,
+        onboardingProfile,
+        UnableToRestoreBackupForProfileManagerError,
     } from '@contexts/onboarding'
-    import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { api, getProfileManager } from '@core/profile-manager'
     import { ProfileType } from '@core/profile'
-    import { getDefaultPersistedNetwork, NetworkId } from '@core/network'
-
+    import { getDefaultClientOptions, getDefaultPersistedNetwork, NetworkId } from '@core/network'
+    import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
+    import { ClientError } from '@core/error/enums'
+    import { restoreBackup } from '@core/profile-manager/api'
+    import { StrongholdVersion } from '@core/stronghold/enums'
+    import { STRONGHOLD_VERSION } from '@core/stronghold'
     interface FileWithPath extends File {
         path?: string
     }
@@ -42,12 +47,13 @@
         setClipboard(seed)
     }
 
-    function openUnlockStrongholdPopup(): void {
+    function openUnlockStrongholdPopup(shouldMigrateStronghold: boolean): void {
         openPopup({
             id: PopupId.UnlockStronghold,
             props: {
                 returnPassword: true,
                 restoreBackupFromStronghold: true,
+                shouldMigrateStrongholdFromOnboardingProfile: shouldMigrateStronghold,
                 onSuccess: () => {
                     openPopup({
                         id: PopupId.GetSeedPopup,
@@ -110,23 +116,45 @@
 
     async function extractSeedFromStrongholdFile(): Promise<void> {
         await initialiseOnboardingProfile(false, true)
+        const network = getDefaultPersistedNetwork(NetworkId.Iota)
+        const clientOptions = getDefaultClientOptions(NetworkId.Iota)
         validateBackupFile(importFileName)
         updateOnboardingProfile({
-            network: getDefaultPersistedNetwork(NetworkId.Iota),
+            network,
+            clientOptions,
             importFile,
             importFilePath,
             // TODO: we don't have a way to know the stronghold version of the backup file yet
             strongholdVersion: STRONGHOLD_VERSION,
             type: ProfileType.Software,
         })
+
         await initialiseProfileManagerFromOnboardingProfile()
-        openUnlockStrongholdPopup()
+
+        const _shouldMigrate = await shouldMigrate()
+        if (_shouldMigrate) {
+            updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V2 })
+        }
+        openUnlockStrongholdPopup(_shouldMigrate)
     }
 
     async function getSeedFromSecretManager(): Promise<void> {
-        const managerId = await getProfileManager().id
-        const secretManager = await api.getSecretManager(managerId)
-        seed = await secretManager?.getSeed()
+        try {
+            const managerId = await getProfileManager().id
+            const secretManager = await api.getSecretManager(managerId)
+            seed = await secretManager?.getSeed()
+        } catch {
+            throw new UnableToRestoreBackupForProfileManagerError()
+        }
+    }
+
+    async function shouldMigrate(): Promise<boolean> {
+        try {
+            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
+        } catch (err) {
+            const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
+            return isMigrationRequired
+        }
     }
 
     if (!readFromFile) {

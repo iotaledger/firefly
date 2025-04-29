@@ -2,6 +2,7 @@ import { get } from 'svelte/store'
 
 import {
     buildProfileManagerOptionsFromProfileData,
+    getSecretManagerFromProfileType,
     initialiseProfileManager,
     profileManager,
 } from '@core/profile-manager'
@@ -21,8 +22,9 @@ export async function initialiseProfileManagerFromOnboardingProfile(checkForExis
     }
 
     const profileManagerOptions = await buildProfileManagerOptionsFromProfileData(get(onboardingProfile))
-    const { storagePath, coinType, clientOptions, secretManager } = profileManagerOptions
-    const { id } = get(onboardingProfile)
+    const { storagePath, coinType, clientOptions } = profileManagerOptions
+    const { id, strongholdPassword, type } = get(onboardingProfile)
+    const secretManager = getSecretManagerFromProfileType(type, storagePath, strongholdPassword)
     const manager = await initialiseProfileManager(storagePath, coinType, clientOptions, secretManager, id)
     profileManager.set(manager)
     updateOnboardingProfile({ hasInitialisedProfileManager: true })
