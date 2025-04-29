@@ -81,7 +81,7 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
-        openPopup({ id: PopupId.SwitchToWalletExtension })
+        openPopup({ id: PopupId.AppDeprecation })
         features.analytics.appStart.enabled && Platform.trackEvent('app-start')
         await cleanupEmptyProfiles()
         checkAndMigrateProfiles()

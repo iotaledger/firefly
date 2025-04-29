@@ -58,7 +58,7 @@
     import PayoutDetailsPopup from './PayoutDetailsPopup.svelte'
     import VestingRewardsFinderPopup from './VestingRewardsFinderPopup.svelte'
     import WithdrawFromL2Popup from './WithdrawFromL2Popup.svelte'
-    import SwitchToWalletExtensionPopup from './SwitchToWalletExtensionPopup.svelte'
+    import AppDeprecationPopup from './AppDeprecationPopup.svelte'
     import GetSeedPopup from './GetSeedPopup.svelte'
 
     export let id: PopupId
@@ -148,7 +148,7 @@
         [PopupId.PayoutDetails]: PayoutDetailsPopup,
         [PopupId.VestingRewardsFinder]: VestingRewardsFinderPopup,
         [PopupId.WithdrawFromL2]: WithdrawFromL2Popup,
-        [PopupId.SwitchToWalletExtension]: SwitchToWalletExtensionPopup,
+        [PopupId.AppDeprecation]: AppDeprecationPopup,
         [PopupId.GetSeedPopup]: GetSeedPopup,
     }
 
