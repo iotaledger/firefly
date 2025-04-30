@@ -41,10 +41,7 @@
             onSuccess(returnPassword ? password : response)
         } catch (err) {
             if (err.message) {
-                const migrationError = JSON.parse(err?.message)?.payload?.error
-                if (migrationError && CLIENT_ERROR_REGEXES[ClientError.StrongholdMigration].test(migrationError)) {
-                    error = localize('error.password.incorrect')
-                } else error = localize(err.message)
+                handleErrorMessage(err.message)
             } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
                 error = localize('error.password.incorrect')
             } else if (CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)) {
@@ -54,6 +51,16 @@
             }
         } finally {
             isBusy = false
+        }
+    }
+    function handleErrorMessage(message): void {
+        try {
+            const migrationError = JSON.parse(message).payload?.error
+            if (migrationError && CLIENT_ERROR_REGEXES[ClientError.StrongholdMigration].test(migrationError)) {
+                error = localize('error.password.incorrect')
+            } else error = localize(migrationError ?? message)
+        } catch {
+            error = localize(message)
         }
     }
 
