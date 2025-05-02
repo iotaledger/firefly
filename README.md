@@ -5,6 +5,11 @@
 
 <h2 align="center">Firefly Shimmer</h2>
 
+<div>
+<h3>⚠️ Deprecated Repository</h3>
+<p>The IOTA Foundation will no longer actively maintain this repository. While ongoing development is not planned, we welcome community contributions.</p>
+<hr />
+
 <p align="center">
   <a href="https://discord.iota.org/" style="text-decoration:none;"><img src="https://img.shields.io/badge/Discord-9cf.svg?logo=discord" alt="Discord"></a>
   <a href="https://iota.stackexchange.com/" style="text-decoration:none;"><img src="https://img.shields.io/badge/StackExchange-9cf.svg?logo=stackexchange" alt="StackExchange"></a>
