@@ -53,7 +53,7 @@
             props: {
                 returnPassword: true,
                 restoreBackupFromStronghold: true,
-                shouldMigrateStrongholdFromOnboardingProfile: shouldMigrateStronghold,
+                shouldMigrateStronghold,
                 onSuccess: () => {
                     openPopup({
                         id: PopupId.GetSeedPopup,

@@ -14,7 +14,7 @@
     export let subtitle: string = ''
     export let returnPassword = false
     export let restoreBackupFromStronghold = false
-    export let shouldMigrateStrongholdFromOnboardingProfile: boolean = false
+    export let shouldMigrateStronghold: boolean = false
 
     export let onSuccess: (..._: any[]) => void = () => {}
     export let onCancelled: (..._: any[]) => void = () => {}
@@ -30,7 +30,7 @@
                 await migrateStrongholdFromActiveProfile(password)
             }
 
-            if (shouldMigrateStrongholdFromOnboardingProfile) {
+            if (shouldMigrateStronghold) {
                 await migrateStrongholdFromOnboardingProfile(password)
             }
 
