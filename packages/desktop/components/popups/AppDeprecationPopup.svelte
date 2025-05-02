@@ -3,11 +3,12 @@
     import { TextHintVariant } from 'shared/components/enums'
     import { getEnabledNetworkFromFeatureFlags } from '@core/network'
     import { NetworkId } from '@core/network/enums'
+    import { openUrlInBrowser } from '@core/app'
 
     const NETWORK_ID = getEnabledNetworkFromFeatureFlags()
 
     function onLinkClick(): void {
-        window.open('https://chrome.google.com/webstore/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija', '_blank')
+        openUrlInBrowser('chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija')
     }
 </script>
 

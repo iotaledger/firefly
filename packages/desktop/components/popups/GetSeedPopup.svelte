@@ -11,12 +11,17 @@
         initialiseOnboardingProfile,
         initialiseProfileManagerFromOnboardingProfile,
         resetOnboardingProfile,
+        onboardingProfile,
     } from '@contexts/onboarding'
-    import { STRONGHOLD_VERSION } from '@core/stronghold'
     import { api, getProfileManager } from '@core/profile-manager'
     import { ProfileType } from '@core/profile'
-    import { getDefaultPersistedNetwork, NetworkId } from '@core/network'
-
+    import { getDefaultClientOptions, getDefaultPersistedNetwork, NetworkId } from '@core/network'
+    import { CLIENT_ERROR_REGEXES } from '@core/error/constants'
+    import { ClientError } from '@core/error/enums'
+    import { restoreBackup } from '@core/profile-manager/api'
+    import { StrongholdVersion } from '@core/stronghold/enums'
+    import { STRONGHOLD_VERSION } from '@core/stronghold'
+    import { showAppNotification } from '@auxiliary/notification'
     interface FileWithPath extends File {
         path?: string
     }
@@ -42,13 +47,19 @@
         setClipboard(seed)
     }
 
-    function openUnlockStrongholdPopup(): void {
+    function openUnlockStrongholdPopup(shouldMigrateStronghold: boolean): void {
         openPopup({
             id: PopupId.UnlockStronghold,
             props: {
                 returnPassword: true,
                 restoreBackupFromStronghold: true,
-                onSuccess: () => {
+                shouldMigrateStronghold,
+                onSuccess: async (password) => {
+                    if (!shouldMigrateStronghold) {
+                        updateOnboardingProfile({ strongholdPassword: password })
+                        await initialiseProfileManagerFromOnboardingProfile()
+                    }
+
                     openPopup({
                         id: PopupId.GetSeedPopup,
                         props: {
@@ -110,23 +121,54 @@
 
     async function extractSeedFromStrongholdFile(): Promise<void> {
         await initialiseOnboardingProfile(false, true)
+        const network = getDefaultPersistedNetwork(NetworkId.Iota)
+        const clientOptions = getDefaultClientOptions(NetworkId.Iota)
         validateBackupFile(importFileName)
         updateOnboardingProfile({
-            network: getDefaultPersistedNetwork(NetworkId.Iota),
+            network,
+            clientOptions,
             importFile,
             importFilePath,
             // TODO: we don't have a way to know the stronghold version of the backup file yet
             strongholdVersion: STRONGHOLD_VERSION,
             type: ProfileType.Software,
         })
+
         await initialiseProfileManagerFromOnboardingProfile()
-        openUnlockStrongholdPopup()
+
+        const _shouldMigrate = await shouldMigrate()
+        if (_shouldMigrate) {
+            updateOnboardingProfile({ strongholdVersion: StrongholdVersion.V2 })
+        }
+        openUnlockStrongholdPopup(_shouldMigrate)
     }
 
     async function getSeedFromSecretManager(): Promise<void> {
-        const managerId = await getProfileManager().id
-        const secretManager = await api.getSecretManager(managerId)
-        seed = await secretManager?.getSeed()
+        try {
+            const managerId = await getProfileManager().id
+            const secretManager = await api.getSecretManager(managerId)
+            seed = await secretManager?.getSeed()
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: 'Seed backup was unsuccessful.',
+                subMessage: 'Please ensure your Stronghold file is valid and the password is correct.',
+            })
+            closePopup()
+            if (shouldResetOnboardingProfile) {
+                resetOnboardingProfile()
+            }
+            console.error(err)
+        }
+    }
+
+    async function shouldMigrate(): Promise<boolean> {
+        try {
+            await restoreBackup(importFilePath, '', $onboardingProfile.network.protocol.bech32Hrp)
+        } catch (err) {
+            const isMigrationRequired = CLIENT_ERROR_REGEXES[ClientError.MigrationRequired].test(err?.error)
+            return isMigrationRequired
+        }
     }
 
     if (!readFromFile) {
