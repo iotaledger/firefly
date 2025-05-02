@@ -10,6 +10,7 @@
     import { MenuItem, Modal } from 'shared/components'
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { profileManager } from '@core/profile-manager/stores'
+    import { isLatestStrongholdVersion } from '@core/app'
 
     export let modal: Modal | undefined
 
@@ -40,6 +41,14 @@
     }
 
     async function backupSeed(): Promise<void> {
+        if (!isLatestStrongholdVersion($activeProfile?.strongholdVersion)) {
+            showAppNotification({
+                type: 'error',
+                message:
+                    'The selected profile needs migration. Please locate your stronghold file and use the drag-and-drop flow located in the Electron menu > Backup Seed.',
+            })
+            return
+        }
         if (!$profileManager) {
             const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
             const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
