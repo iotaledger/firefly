@@ -154,6 +154,10 @@
                 message: 'Seed backup was unsuccessful.',
                 subMessage: 'Please ensure your Stronghold file is valid and the password is correct.',
             })
+            closePopup()
+            if (shouldResetOnboardingProfile) {
+                resetOnboardingProfile()
+            }
             console.error(err)
         }
     }
