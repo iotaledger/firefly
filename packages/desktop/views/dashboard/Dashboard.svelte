@@ -10,10 +10,10 @@
         reflectLockedStronghold,
     } from '@core/profile'
     import { appRouter, dashboardRoute } from '@core/router'
-    import { Idle } from 'shared/components'
+    import { Idle, Link } from 'shared/components'
     import { stopPollingLedgerNanoStatus } from '@core/ledger'
     import { removeDisplayNotification, showAppNotification } from '@auxiliary/notification'
-    import { Platform } from '@core/app'
+    import { Platform, openUrlInBrowser } from '@core/app'
     import { Developer, Settings, Vesting, Collectibles, Governance, Wallet } from './'
     import { onDestroy, onMount } from 'svelte'
     import Sidebar from './Sidebar.svelte'
@@ -148,12 +148,14 @@
             <span class=" text-gray-800 dark:text-white max-w-lg"
                 >Please switch to the new IOTA Wallet for continued support and updates.
             </span>
-            <a
-                href="https://chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-blue-500 underline">Download here</a
+            <Link
+                on:click={() =>
+                    openUrlInBrowser(
+                        'https://chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija'
+                    )}
             >
+                Download here
+            </Link>
         </div>
     {/if}
     <TopNavigation />
