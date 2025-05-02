@@ -12,7 +12,6 @@
         initialiseProfileManagerFromOnboardingProfile,
         resetOnboardingProfile,
         onboardingProfile,
-        UnableToRestoreBackupForProfileManagerError,
     } from '@contexts/onboarding'
     import { api, getProfileManager } from '@core/profile-manager'
     import { ProfileType } from '@core/profile'
@@ -22,6 +21,7 @@
     import { restoreBackup } from '@core/profile-manager/api'
     import { StrongholdVersion } from '@core/stronghold/enums'
     import { STRONGHOLD_VERSION } from '@core/stronghold'
+    import { showAppNotification } from '@auxiliary/notification'
     interface FileWithPath extends File {
         path?: string
     }
@@ -54,7 +54,12 @@
                 returnPassword: true,
                 restoreBackupFromStronghold: true,
                 shouldMigrateStronghold,
-                onSuccess: () => {
+                onSuccess: async (password) => {
+                    if (!shouldMigrateStronghold) {
+                        updateOnboardingProfile({ strongholdPassword: password })
+                        await initialiseProfileManagerFromOnboardingProfile()
+                    }
+
                     openPopup({
                         id: PopupId.GetSeedPopup,
                         props: {
@@ -143,8 +148,13 @@
             const managerId = await getProfileManager().id
             const secretManager = await api.getSecretManager(managerId)
             seed = await secretManager?.getSeed()
-        } catch {
-            throw new UnableToRestoreBackupForProfileManagerError()
+        } catch (err) {
+            showAppNotification({
+                type: 'error',
+                message: 'Seed backup was unsuccessful.',
+                subMessage: 'Please ensure your Stronghold file is valid and the password is correct.',
+            })
+            console.error(err)
         }
     }
 

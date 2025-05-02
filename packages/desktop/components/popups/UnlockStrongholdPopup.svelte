@@ -2,14 +2,13 @@
     import { Button, PasswordInput, Text, HTMLButtonType } from 'shared/components'
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
-    import { activeProfile, migrateStrongholdFromActiveProfile, unlockStronghold } from '@core/profile'
+    import { unlockStronghold } from '@core/profile'
     import {
         migrateStrongholdFromOnboardingProfile,
         restoreBackupFromStrongholdFile,
         StrongholdMigrationRequiredError,
     } from '@contexts/onboarding'
     import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
-    import { isLatestStrongholdVersion } from '@core/app'
 
     export let subtitle: string = ''
     export let returnPassword = false
@@ -26,10 +25,6 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            if (isLatestStrongholdVersion($activeProfile?.strongholdVersion)) {
-                await migrateStrongholdFromActiveProfile(password)
-            }
-
             if (shouldMigrateStronghold) {
                 await migrateStrongholdFromOnboardingProfile(password)
             }
