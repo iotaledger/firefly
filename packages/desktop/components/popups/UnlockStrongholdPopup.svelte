@@ -3,9 +3,12 @@
     import { closePopup } from '@auxiliary/popup'
     import { localize } from '@core/i18n'
     import { unlockStronghold } from '@core/profile'
+    import { restoreBackupFromStrongholdFile } from '@contexts/onboarding'
+    import { CLIENT_ERROR_REGEXES, ClientError } from '@core/error'
 
     export let subtitle: string = ''
     export let returnPassword = false
+    export let restoreBackupFromStronghold = false
 
     export let onSuccess: (..._: any[]) => void = () => {}
     export let onCancelled: (..._: any[]) => void = () => {}
@@ -17,12 +20,19 @@
     async function onSubmit(): Promise<void> {
         try {
             isBusy = true
-            const response = await unlockStronghold(password)
+            const response = restoreBackupFromStronghold
+                ? await restoreBackupFromStrongholdFile(password)
+                : await unlockStronghold(password)
             closePopup()
             onSuccess(returnPassword ? password : response)
         } catch (err) {
-            console.error(err)
-            error = localize(err?.message ?? err)
+            if (err.message) {
+                error = localize(err.message)
+            } else if (CLIENT_ERROR_REGEXES[ClientError.InvalidStrongholdPassword].test(err?.error)) {
+                error = localize('error.password.incorrect')
+            } else {
+                error = localize(err)
+            }
         } finally {
             isBusy = false
         }

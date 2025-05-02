@@ -87,6 +87,7 @@
     void setupI18n({ fallbackLocale: 'en', initialLocale: $appSettings.language })
 
     onMount(async () => {
+        openPopup({ id: PopupId.AppDeprecation })
         features.analytics.appStart.enabled && Platform.trackEvent('app-start')
 
         // needed for profiles that come from very old firefly chrysalis
@@ -149,6 +150,11 @@
         })
         Platform.onEvent('menu-diagnostics', () => {
             openPopup({ id: PopupId.Diagnostics })
+        })
+        Platform.onEvent('menu-get-seed', () => {
+            openPopup({
+                id: PopupId.GetSeedPopup,
+            })
         })
 
         Platform.onEvent('deep-link-request', showDeepLinkNotification)

@@ -57,7 +57,7 @@ jobs:
         needs: [setup]
         strategy:
             matrix:
-                os: [ubuntu-20.04, macos-12, windows-2019]
+                os: [ubuntu-22.04, macos-13, windows-2019]
             fail-fast: true
         env:
             VERSION: ${{ needs.setup.outputs.version }}
@@ -96,7 +96,7 @@ jobs:
 
             - name: Set deployment target (macOS)
               run: echo "MACOSX_DEPLOYMENT_TARGET=10.14" >> $GITHUB_ENV # TODO: set this to 10.12 once rocksDB issue is fixed
-              if: matrix.os == 'macos-12'
+              if: matrix.os == 'macos-13'
 
             - name: Install required packages (Linux)
               run: |
@@ -104,7 +104,7 @@ jobs:
                   sudo apt install -y gcc-multilib g++-multilib build-essential libssl-dev rpm libsecret-1-dev \
                     software-properties-common apt-transport-https libudev-dev libusb-1.0-0-dev \
                     llvm-dev libclang-dev clang
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-22.04'
 
             - name: Enable verbose output for electron-builder (macOS/Linux)
               run: echo "DEBUG=electron-builder" >> $GITHUB_ENV
@@ -146,20 +146,58 @@ jobs:
                   APPLE_ID: ${{ secrets.APPLE_ID }}
                   APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
               working-directory: packages/desktop
-              if: matrix.os == 'macos-12'
+              if: matrix.os == 'macos-13'
 
             - name: Build Electron app (Windows)
               run: yarn compile:${env:STAGE}:win
+              working-directory: packages/desktop
+              if: matrix.os == 'windows-2019'
+
+            - name: Restore client certificates for signing
+              shell: bash
               env:
-                  CSC_LINK: ${{ secrets.WIN_CERT_BASE64 }}
-                  CSC_KEY_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
+                SIGNING_CLIENT_CERT: ${{ secrets.SIGNING_CLIENT_CERT }}
+                SIGNING_CLIENT_KEY:  ${{ secrets.SIGNING_CLIENT_KEY }}
+                SIGNING_CA_CERT:     ${{ secrets.SIGNING_CA_CERT }}
+              run: |
+                echo "${SIGNING_CLIENT_CERT}" | base64 -d > client.crt
+                echo "${SIGNING_CLIENT_KEY}"  | base64 -d > client.key
+                echo "${SIGNING_CA_CERT}"     | base64 -d > ca.crt
+                chmod 600 client.key                      # curl/OpenSSL insists
+
+                openssl pkcs12 -export -out client.pfx \
+                               -inkey client.key -in client.crt \
+                               -passout pass:
+              working-directory: packages/desktop
+              if: matrix.os == 'windows-2019'
+
+            - name: Code-sign Windows binary
+              shell: bash
+              env:
+                SIGNING_API_URL: ${{ secrets.SIGNING_API_URL }}
+                SIGNING_API_KEY: ${{ secrets.SIGNING_API_KEY }}
+                NETWORK_CODE:    ${{ env.NETWORK_CODE }}
+                VERSION:         ${{ env.VERSION }}
+              run: |
+                unsigned="./out/firefly-${NETWORK_CODE}-desktop-${VERSION}.exe"
+                signed="$unsigned"   # overwrite so downstream steps see the signed file
+
+                echo "🖊️  Signing $unsigned ..."
+                curl --fail --show-error --silent \
+                     --cert client.pfx --cert-type P12 \
+                     --cacert ca.crt -k --ssl-no-revoke \
+                     -H "X-API-Key: ${SIGNING_API_KEY}" \
+                     --data-binary @"$unsigned" \
+                     -o "$signed" \
+                     "${SIGNING_API_URL}/sign"
+                echo "✅  Signing complete"
               working-directory: packages/desktop
               if: matrix.os == 'windows-2019'
 
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
               working-directory: packages/desktop
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-22.04'
 
             - name: Import GPG key (Linux)
               run: |
@@ -168,24 +206,24 @@ jobs:
               env:
                   GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-22.04'
 
             - name: Sign AppImage (Linux)
               run: echo $GPG_PASSPHRASE | gpg --pinentry-mode loopback --batch --passphrase-fd 0 --armor --detach-sign --default-key contact@iota.org firefly-*.AppImage
               working-directory: packages/desktop/out
               env:
                   GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-22.04'
 
             - name: Compute checksums (Linux)
               run: for i in `ls | grep 'firefly-*'` ; do sha256sum $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'ubuntu-20.04'
+              if: matrix.os == 'ubuntu-22.04'
 
             - name: Compute checksums (macOS)
               run: for i in `ls | grep 'firefly-*'` ; do shasum -a 256 $i | awk {'print $1'} > $i.sha256 ; done
               working-directory: packages/desktop/out
-              if: matrix.os == 'macos-12'
+              if: matrix.os == 'macos-13'
 
             - name: Compute checksums (Windows)
               run: Get-ChildItem "." -Filter firefly-* | Foreach-Object { $(Get-FileHash -Path $_.FullName -Algorithm SHA256).Hash | Set-Content ($_.FullName + '.sha256') }
@@ -193,7 +231,8 @@ jobs:
               if: matrix.os == 'windows-2019'
 
             - name: Upload artifacts
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+
               with:
                   name: firefly-desktop-${{ matrix.os }}
                   path: |
@@ -216,21 +255,21 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: firefly-desktop-windows-2019
                   path: assets
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
-                  name: firefly-desktop-macos-12
+                  name: firefly-desktop-macos-13
                   path: assets
 
             - name: Downloading artifacts
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
-                  name: firefly-desktop-ubuntu-20.04
+                  name: firefly-desktop-ubuntu-22.04
                   path: assets
 
             - name: Preparing release body

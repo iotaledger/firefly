@@ -1,10 +1,15 @@
 <script lang="ts">
     import { localize } from '@core/i18n'
+    import { ProfileType } from '@core/profile'
+    import { initialiseProfileManager } from '@core/profile-manager'
+    import { buildProfileManagerOptionsFromProfileData } from '@core/profile-manager/utils'
     import { Icon } from '@lib/auxiliary/icon'
-    import { MenuItem, Modal } from 'shared/components'
     import { showAppNotification } from '@lib/auxiliary/notification'
-    import { setClipboard } from '@lib/core/utils'
     import { activeProfile, getStorageDirectoryOfProfile } from '@lib/core/profile'
+    import { setClipboard } from '@lib/core/utils'
+    import { MenuItem, Modal } from 'shared/components'
+    import { PopupId, openPopup } from '@auxiliary/popup'
+    import { profileManager } from '@core/profile-manager/stores'
 
     export let modal: Modal | undefined
 
@@ -17,6 +22,38 @@
         })
         modal?.close()
     }
+
+    function openUnlockStrongholdPopup(): void {
+        openPopup({
+            id: PopupId.UnlockStronghold,
+            props: {
+                onSuccess: () => {
+                    openPopup({
+                        id: PopupId.GetSeedPopup,
+                        props: {
+                            readFromFile: false,
+                        },
+                    })
+                },
+            },
+        })
+    }
+
+    async function backupSeed(): Promise<void> {
+        if (!$profileManager) {
+            const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
+            const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
+            const manager = await initialiseProfileManager(
+                storagePath,
+                coinType,
+                clientOptions,
+                secretManagerType,
+                $activeProfile?.id
+            )
+            profileManager.set(manager)
+        }
+        openUnlockStrongholdPopup()
+    }
 </script>
 
 <Modal bind:this={modal} {...$$restProps}>
@@ -26,5 +63,8 @@
             title={localize('actions.copyProfileSystemLocation')}
             onClick={handleCopyProfileSystemLocation}
         />
+        {#if $activeProfile?.type === ProfileType.Software}
+            <MenuItem icon={Icon.Copy} title="Backup seed" onClick={backupSeed} />
+        {/if}
     </div>
 </Modal>
