@@ -23,4 +23,6 @@ export const externalAllowedLinks = [
 
     // Other
     'support.ledger.com',
+    // New extension wallet
+    'chromewebstore.google.com/detail/iota-wallet/iidjkmdceolghepehaaddojmnjnkkija',
 ]
