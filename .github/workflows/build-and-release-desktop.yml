@@ -195,6 +195,7 @@ jobs:
               if: matrix.os == 'windows-2019'
 
             - name: Update latest.yml with signed file details
+              shell: bash
               run: |
                 FILE="packages/desktop/out/firefly-${{ env.NETWORK_CODE }}-desktop-${{ env.VERSION }}.exe"
 
@@ -210,8 +211,8 @@ jobs:
                 # Get the file size in bytes
                 SIZE=$(stat -c%s "$FILE")
 
-                # Calculate Base64-encoded SHA-512 hash
-                HASH=$(shasum -a 512 "$FILE" | awk '{print $1}' | xxd -r -p | base64)
+                # Calculate Base64-encoded SHA-512 hash using CertUtil
+                HASH=$(certutil -hashfile "$FILE" SHA512 | tail -n +2 | head -n -1 | tr -d '\r\n' | xxd -r -p | base64)
 
                 # Update the `sha512` and `size` fields in the `files` section
                 sed -i "s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
@@ -221,7 +222,6 @@ jobs:
                 sed -i "0,/sha512:/s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
 
                 echo "Updated $LATEST_YML with size=$SIZE and sha512=$HASH"
-              shell: bash
               if: matrix.os == 'windows-2019'
 
             - name: Build Electron app (Linux)
