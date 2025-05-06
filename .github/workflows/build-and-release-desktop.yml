@@ -194,6 +194,36 @@ jobs:
               working-directory: packages/desktop
               if: matrix.os == 'windows-2019'
 
+            - name: Update latest.yml with signed file details
+              run: |
+                FILE="packages/desktop/out/firefly-${{ env.NETWORK_CODE }}-desktop-${{ env.VERSION }}.exe"
+
+                # Dynamically determine the correct latest.yml file name
+                if [[ "${{ env.STAGE }}" == "alpha" ]]; then
+                    LATEST_YML="packages/desktop/out/latest-alpha.yml"
+                elif [[ "${{ env.STAGE }}" == "beta" ]]; then
+                    LATEST_YML="packages/desktop/out/latest-beta.yml"
+                else
+                    LATEST_YML="packages/desktop/out/latest.yml"
+                fi
+
+                # Get the file size in bytes
+                SIZE=$(stat -c%s "$FILE")
+
+                # Calculate Base64-encoded SHA-512 hash
+                HASH=$(shasum -a 512 "$FILE" | awk '{print $1}' | xxd -r -p | base64)
+
+                # Update the `sha512` and `size` fields in the `files` section
+                sed -i "s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
+                sed -i "s|size: .*|size: $SIZE|" "$LATEST_YML"
+
+                # Update the global `sha512` field
+                sed -i "0,/sha512:/s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
+
+                echo "Updated $LATEST_YML with size=$SIZE and sha512=$HASH"
+              shell: bash
+              if: matrix.os == 'windows-2019'
+
             - name: Build Electron app (Linux)
               run: yarn compile:${STAGE}:linux
               working-directory: packages/desktop
