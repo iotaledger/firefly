@@ -11,6 +11,13 @@
     import { PopupId, openPopup } from '@auxiliary/popup'
     import { profileManager } from '@core/profile-manager/stores'
     import { isLatestStrongholdVersion } from '@core/app'
+    import {
+        CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL,
+        CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT,
+    } from '@core/profile/constants'
+    import { get } from 'svelte/store'
+    import { sleep } from '@core/utils/os'
+    import { isDestroyingManager } from '@core/profile/stores'
 
     export let modal: Modal | undefined
 
@@ -49,7 +56,8 @@
             })
             return
         }
-        if (!$profileManager) {
+        await waitForPreviousManagerToBeDestroyed()
+        if (!$profileManager || $profileManager?.id !== $activeProfile?.id) {
             const profileManagerOptions = await buildProfileManagerOptionsFromProfileData($activeProfile)
             const { storagePath, coinType, clientOptions, secretManager: secretManagerType } = profileManagerOptions
             const manager = await initialiseProfileManager(
@@ -61,7 +69,27 @@
             )
             profileManager.set(manager)
         }
-        openUnlockStrongholdPopup()
+        const { isStrongholdLocked } = $activeProfile
+        if (!get(isStrongholdLocked)) {
+            openPopup({
+                id: PopupId.GetSeedPopup,
+                props: {
+                    readFromFile: false,
+                },
+            })
+        } else {
+            openUnlockStrongholdPopup()
+        }
+    }
+
+    async function waitForPreviousManagerToBeDestroyed(): Promise<void> {
+        for (let count = 0; count < CHECK_PREVIOUS_MANAGER_IS_DESTROYED_MAX_COUNT; count++) {
+            if (!get(isDestroyingManager)) {
+                return Promise.resolve()
+            }
+            await sleep(CHECK_PREVIOUS_MANAGER_IS_DESTROYED_INTERVAL)
+        }
+        return Promise.reject()
     }
 </script>
 
