@@ -219,11 +219,16 @@ jobs:
                 echo "File size (bytes): $SIZE"
 
                 # Install Chocolatey and yq (for Windows)
-                if [[ "$RUNNER_OS" == "Windows" ]]; then
-                  Set-ExecutionPolicy Bypass -Scope Process -Force
-                  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
-                  iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-                  choco install yq -y
+                if ! command -v yq &> /dev/null; then
+                    echo "yq not found. Installing yq..."
+                    powershell -Command "
+                        Set-ExecutionPolicy Bypass -Scope Process -Force;
+                        [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+                        iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
+                        choco install yq -y
+                    "
+                else
+                    echo "yq is already installed."
                 fi
 
                 # Update the YAML file using yq
