@@ -218,12 +218,18 @@ jobs:
                 echo "Calculated SHA-512 hash (Base64): $HASH"
                 echo "File size (bytes): $SIZE"
 
-                # Update the `sha512` and `size` fields in the `files` section using '!' as delimiter
-                sed -i "s!sha512: .*!sha512: $HASH!" "$LATEST_YML"
-                sed -i "s!size: .*!size: $SIZE!" "$LATEST_YML"
+                # Install Chocolatey and yq (for Windows)
+                if [[ "$RUNNER_OS" == "Windows" ]]; then
+                  Set-ExecutionPolicy Bypass -Scope Process -Force
+                  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+                  iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+                  choco install yq -y
+                fi
 
-                # Update the global `sha512` field using '!' as delimiter
-                sed -i "0,/sha512:/s!sha512: .*!sha512: $HASH!" "$LATEST_YML"
+                # Update the YAML file using yq
+                yq e ".files[0].sha512 = \"$HASH\"" -i "$LATEST_YML"
+                yq e ".files[0].size = $SIZE" -i "$LATEST_YML"
+                yq e ".sha512 = \"$HASH\"" -i "$LATEST_YML"
 
                 echo "Updated $LATEST_YML with size=$SIZE and sha512=$HASH"
               if: matrix.os == 'windows-2019'
