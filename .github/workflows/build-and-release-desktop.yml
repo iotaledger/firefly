@@ -213,13 +213,13 @@ jobs:
 
                 # Calculate Base64-encoded SHA-512 hash using CertUtil
                 HASH=$(certutil -hashfile "$FILE" SHA512 | tail -n +2 | head -n -1 | tr -d '\r\n' | xxd -r -p | base64)
-                
+
                 # Log the calculated hash and file size
                 echo "Calculated SHA-512 hash (Base64): $HASH"
                 echo "File size (bytes): $SIZE"
                 
                 # Escape special characters in HASH for sed
-                ESCAPED_HASH=$(printf '%s\n' "$HASH" | sed 's/[&/\]/\\&/g')
+                ESCAPED_HASH=$(printf '%s\n' "$HASH" | sed -e 's/[\/&]/\\&/g')
 
                 # Update the `sha512` and `size` fields in the `files` section
                 sed -i "s#sha512: .*#sha512: $ESCAPED_HASH#" "$LATEST_YML"
