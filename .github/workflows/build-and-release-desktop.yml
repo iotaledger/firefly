@@ -213,15 +213,22 @@ jobs:
 
                 # Calculate Base64-encoded SHA-512 hash using CertUtil
                 HASH=$(certutil -hashfile "$FILE" SHA512 | tail -n +2 | head -n -1 | tr -d '\r\n' | xxd -r -p | base64)
+                
+                # Log the calculated hash and file size
+                echo "Calculated SHA-512 hash (Base64): $HASH"
+                echo "File size (bytes): $SIZE"
+                
+                # Escape special characters in HASH for sed
+                ESCAPED_HASH=$(printf '%s\n' "$HASH" | sed 's/[&/\]/\\&/g')
 
                 # Update the `sha512` and `size` fields in the `files` section
-                sed -i "s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
-                sed -i "s|size: .*|size: $SIZE|" "$LATEST_YML"
+                sed -i "s#sha512: .*#sha512: $ESCAPED_HASH#" "$LATEST_YML"
+                sed -i "s#size: .*#size: $SIZE#" "$LATEST_YML"
 
                 # Update the global `sha512` field
-                sed -i "0,/sha512:/s|sha512: .*|sha512: $HASH|" "$LATEST_YML"
+                sed -i "0,/sha512:/s#sha512: .*#sha512: $ESCAPED_HASH#" "$LATEST_YML"
 
-                echo "Updated $LATEST_YML with size=$SIZE and sha512=$HASH"
+                echo "Updated $LATEST_YML with size=$SIZE and sha512=$ESCAPED_HASH"
               if: matrix.os == 'windows-2019'
 
             - name: Build Electron app (Linux)
