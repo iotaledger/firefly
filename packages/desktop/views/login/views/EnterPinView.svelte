@@ -18,6 +18,8 @@
     import { Icon, InitProfileActionsModal, MeatballMenuButton, Modal, PinInput, Profile, Text, TextHint } from '@ui'
     import { TextHintVariant } from 'shared/components/enums'
     import { onDestroy } from 'svelte'
+    import { destroyProfileManager } from '@core/profile-manager/actions'
+    import { isDestroyingManager } from '@core/profile/stores'
 
     let attempts: number = 0
     let pinCode: string = ''
@@ -135,11 +137,20 @@
         }
     }
 
-    function onBackClick(): void {
+    async function onBackClick(): Promise<void> {
         if (!hasReachedMaxAttempts) {
+            await resetProfileManager()
+            const { isStrongholdLocked } = $activeProfile
+            isStrongholdLocked.set(true)
             resetActiveProfile()
             $loginRouter.previous()
         }
+    }
+
+    async function resetProfileManager(): Promise<void> {
+        isDestroyingManager.set(true)
+        await destroyProfileManager()
+        isDestroyingManager.set(false)
     }
 
     onDestroy(() => {
