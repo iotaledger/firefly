@@ -213,6 +213,8 @@ jobs:
 
                 # Calculate Base64-encoded SHA-512 hash using CertUtil
                 HASH=$(certutil -hashfile "$FILE" SHA512 | tail -n +2 | head -n -1 | tr -d '\r\n' | xxd -r -p | base64)
+                # Remove any newlines from the HASH
+                HASH=$(echo "$HASH" | tr -d '\n')
 
                 # Log the calculated hash and file size
                 echo "Calculated SHA-512 hash (Base64): $HASH"
@@ -235,7 +237,7 @@ jobs:
                 yq e ".files[0].sha512 = \"$HASH\"" -i "$LATEST_YML"
                 yq e ".files[0].size = $SIZE" -i "$LATEST_YML"
                 yq e ".sha512 = \"$HASH\"" -i "$LATEST_YML"
-
+                yq e -i ".files[0].sha512 |= . | .sha512 |= ." "$LATEST_YML"
                 echo "Updated $LATEST_YML with size=$SIZE and sha512=$HASH"
               if: matrix.os == 'windows-2019'
 
