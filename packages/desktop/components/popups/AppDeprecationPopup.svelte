@@ -12,7 +12,7 @@
     }
 </script>
 
-{#if NETWORK_ID === [NetworkId.Shimmer] || NETWORK_ID === [NetworkId.ShimmerTestnet]}
+{#if NETWORK_ID === NetworkId.Shimmer || NETWORK_ID === NetworkId.ShimmerTestnet}
     <Text type={TextType.h5} classes="mb-5">Firefly Shimmer is no longer maintained</Text>
     <div class="flex w-full flex-col space-y-6">
         <div class="flex w-full flex-col space-y-4">
