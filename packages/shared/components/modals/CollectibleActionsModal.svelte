@@ -5,7 +5,7 @@
     import { INft, rewriteIpfsUri } from '@core/nfts'
     import { checkActiveProfileAuth } from '@core/profile/actions'
     import { CollectiblesRoute, collectiblesRouter } from '@core/router'
-    import { burnNft } from '@core/wallet'
+    import { burnNft, isIotaNetwork } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile, updateActiveProfile } from '@core/profile/stores'
     import { TextHintVariant } from 'shared/components/enums'
@@ -40,7 +40,7 @@
             icon: IconEnum.Delete,
             title: localize('views.collectibles.details.menu.burn'),
             onClick: openBurnNft,
-            disabled: isLocked,
+            disabled: isLocked || isIotaNetwork(),
         },
     ]
 

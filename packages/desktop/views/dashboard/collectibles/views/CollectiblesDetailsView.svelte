@@ -26,6 +26,7 @@
         getBech32AddressFromAddressTypes,
         getHexAddressFromAddressTypes,
         getTimeDifference,
+        isIotaNetwork,
     } from '@core/wallet'
     import { NewTransactionType, setNewTransactionDetails } from '@core/wallet/stores'
     import {
@@ -249,7 +250,7 @@
                     <Button outline classes="flex-1" onClick={onExplorerClick} disabled={!explorerUrl}>
                         {localize('general.viewOnExplorer')}
                     </Button>
-                    <Button classes="flex-1" onClick={onSendClick} disabled={!!timeDiff}>
+                    <Button classes="flex-1" onClick={onSendClick} disabled={!!timeDiff || isIotaNetwork()}>
                         {timeDiff
                             ? localize('popups.balanceBreakdown.locked.title') + ' ' + String(timeDiff)
                             : localize('actions.send')}

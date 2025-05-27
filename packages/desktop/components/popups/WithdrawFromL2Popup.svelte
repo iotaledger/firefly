@@ -5,7 +5,11 @@
     import { getArchivedBaseTokens } from '@core/layer-2/helpers/getArchivedBaseTokens'
     import { getBaseToken, getCoinType, activeProfile, isActiveLedgerProfile, isSoftwareProfile } from '@core/profile'
     import { truncateString } from '@core/utils'
-    import { formatTokenAmountPrecise, getRequiredStorageDepositForMinimalBasicOutput } from '@core/wallet'
+    import {
+        formatTokenAmountPrecise,
+        getRequiredStorageDepositForMinimalBasicOutput,
+        isIotaNetwork,
+    } from '@core/wallet'
     import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
     import { WithdrawRequest, getLayer2WithdrawRequest } from '@core/layer-2/utils'
@@ -209,7 +213,7 @@
         <Button
             classes="w-full"
             onClick={onWithdrawFromL2Click}
-            disabled={!withdrawableAmount || Number(withdrawableAmount) === 0 || isWithdrawing}
+            disabled={!withdrawableAmount || Number(withdrawableAmount) === 0 || isWithdrawing || isIotaNetwork()}
             isBusy={isWithdrawing}
             busyMessage={localize('popups.withdrawFromL2.withdrawing')}
         >
