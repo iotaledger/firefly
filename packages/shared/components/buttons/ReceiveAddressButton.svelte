@@ -14,15 +14,10 @@
     }
 </script>
 
-<button
-    type="button"
-    class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
-    class:darkmode={darkModeEnabled}
-    on:click={onReceiveClick}
->
+<receive-funds class="flex flex-col px-4 py-4 rounded-xl gap-3" class:darkmode={darkModeEnabled}>
     <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
-    <inner-box class="w-full flex flex-col items-center space-y-6 py-4">
-        <QR data={receiveAddress} />
+    <inner-box class="w-full flex flex-col items-center space-y-4">
+        <QR data={receiveAddress} on:click={onReceiveClick} />
         <AddressBox
             bind:this={addressBoxElement}
             clearBackground
@@ -30,12 +25,13 @@
             address={receiveAddress}
             fontSize="sm"
             isCopyable
+            showHexAddress
         />
     </inner-box>
-</button>
+</receive-funds>
 
 <style lang="scss">
-    button {
+    receive-funds {
         @apply border;
         @apply border-solid;
         @apply border-gray-300;

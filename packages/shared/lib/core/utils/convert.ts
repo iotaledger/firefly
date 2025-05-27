@@ -1,9 +1,18 @@
 /* eslint-disable no-bitwise */
 
 import { HEXADECIMAL_PREFIX, MILLISECONDS_PER_SECOND } from './constants'
+import { Bech32Helper } from './crypto'
 import { isValidDate } from './date'
 import { Base64 } from './encode'
 import { clamp } from './math'
+
+/**
+ * Converts a Bech32 address to a hexadecimal string.
+ */
+export function convertBech32ToHex(bech32Address: string, hrp: string): string {
+    const { addressBytes } = Bech32Helper.fromBech32(bech32Address, hrp)
+    return convertBytesToHexString(Array.from(addressBytes), true)
+}
 
 /**
  * Returns a UNIX timestamp from a given Date object.

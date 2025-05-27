@@ -11,7 +11,7 @@
         <AccountLabel account={subject?.account} />
     </Box>
 {:else if subject?.type === SubjectType.Address}
-    <AddressBox clearBackground clearPadding isCopyable address={subject?.address} />
+    <AddressBox clearBackground clearPadding isCopyable address={subject?.address} showHexAddress />
 {:else}
     <Box row clearBackground clearPadding classes="justify-center">
         <Text type={TextType.pre} fontSize="base" fontWeight={FontWeight.medium}>
