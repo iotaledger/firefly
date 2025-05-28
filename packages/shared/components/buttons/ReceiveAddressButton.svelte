@@ -3,21 +3,23 @@
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { QR, Text, FontWeight, AddressBox } from 'shared/components'
-
     let addressBoxElement: AddressBox
-
     $: receiveAddress = $selectedAccount.depositAddress
     $: darkModeEnabled = $appSettings.darkMode
-
     function onReceiveClick(): void {
         addressBoxElement.copyAddress()
     }
 </script>
 
-<receive-funds class="flex flex-col px-4 py-4 rounded-xl gap-3" class:darkmode={darkModeEnabled}>
+<button
+    type="button"
+    class="flex flex-col px-4 py-4 space-y-2 rounded-xl cursor-pointer"
+    class:darkmode={darkModeEnabled}
+    on:click={onReceiveClick}
+>
     <Text type="h5" fontWeight={FontWeight.semibold} classes="text-left">{localize('general.receiveFunds')}</Text>
-    <inner-box class="w-full flex flex-col items-center space-y-4">
-        <QR data={receiveAddress} on:click={onReceiveClick} />
+    <inner-box class="w-full flex flex-col items-center space-y-6 py-4">
+        <QR data={receiveAddress} />
         <AddressBox
             bind:this={addressBoxElement}
             clearBackground
@@ -25,17 +27,15 @@
             address={receiveAddress}
             fontSize="sm"
             isCopyable
-            showHexAddress
         />
     </inner-box>
-</receive-funds>
+</button>
 
 <style lang="scss">
-    receive-funds {
+    button {
         @apply border;
         @apply border-solid;
         @apply border-gray-300;
-
         &:hover {
             @apply bg-blue-50;
             @apply border-gray-500;
