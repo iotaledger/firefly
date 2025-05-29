@@ -1,10 +1,10 @@
 /* eslint-disable no-bitwise */
 
 import { HEXADECIMAL_PREFIX, MILLISECONDS_PER_SECOND } from './constants'
-import { Bech32Helper } from './crypto'
 import { isValidDate } from './date'
 import { Base64 } from './encode'
 import { clamp } from './math'
+import { Bech32Helper } from './crypto'
 
 /**
  * Converts a Bech32 address to a hexadecimal string.
