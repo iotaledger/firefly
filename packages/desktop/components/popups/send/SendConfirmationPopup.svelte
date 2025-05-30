@@ -15,6 +15,7 @@
         getOutputParameters,
         getStorageDepositFromOutput,
         validateSendConfirmation,
+        isIotaNetwork,
     } from '@core/wallet/utils'
     import { getInitialExpirationDate, rebuildActivity } from '@core/wallet/utils/send/sendUtils'
     import { CommonOutput, Output } from '@iota/sdk/out/types'
@@ -265,7 +266,8 @@
         <Button
             classes="w-full"
             onClick={onConfirmClick}
-            disabled={isTransferring ||
+            disabled={isIotaNetwork() ||
+                isTransferring ||
                 isPreparingOutput ||
                 (layer2Parameters?.networkAddress && !$newTransactionDetails?.layer2Parameters?.gasBudget)}
             isBusy={isTransferring ||

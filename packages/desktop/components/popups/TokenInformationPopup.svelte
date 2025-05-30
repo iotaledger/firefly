@@ -10,6 +10,7 @@
         NotVerifiedStatus,
         VerifiedStatus,
         NewTransactionType,
+        isIotaNetwork,
     } from '@core/wallet'
     import { openPopup, PopupId, updatePopupProps } from '@auxiliary/popup'
     import {
@@ -138,7 +139,7 @@
                     {localize('popups.tokenInformation.buttons.verifyToken')}
                 </Button>
             {:else}
-                <Button classes="w-full" onClick={onSendClick}>
+                <Button classes="w-full" onClick={onSendClick} disabled={isIotaNetwork()}>
                     {localize('actions.send')}
                 </Button>
             {/if}

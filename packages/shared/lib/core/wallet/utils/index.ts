@@ -25,6 +25,7 @@ export * from './parseGovernanceMetadata'
 export * from './processAndAddToActivities'
 export * from './validateIrc30Metadata'
 export * from './validateTokenAmount'
+export * from './isIotaNetwork'
 
 // Folders
 export * from './generateActivity'

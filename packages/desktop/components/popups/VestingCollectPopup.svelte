@@ -3,7 +3,7 @@
     import { localize } from '@core/i18n'
     import { PopupId, closePopup, openPopup } from '@auxiliary/popup'
     import { selectedAccountVestingUnclaimedFunds } from '@contexts/vesting'
-    import { formatTokenAmountBestMatch, selectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, selectedAccountAssets, isIotaNetwork } from '@core/wallet'
     import { activeProfile, isSoftwareProfile } from '@core/profile'
     import { consolidateOutputs } from '@core/wallet/actions/consolidateOutputs'
     import { handleError } from '@core/error/handlers'
@@ -59,7 +59,7 @@
         </Text>
         <KeyValueBox keyText={localize('popups.vestingCollect.unclaimedFunds')} valueText={unclaimedFunds} />
     </div>
-    <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy} {isBusy}>
+    <Button classes="w-full" onClick={onConfirmClick} disabled={isBusy || isIotaNetwork()} {isBusy}>
         {localize('popups.vestingCollect.button')}
     </Button>
 </div>

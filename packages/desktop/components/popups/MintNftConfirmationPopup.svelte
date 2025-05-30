@@ -4,7 +4,7 @@
     import { localize } from '@core/i18n'
     import { getClient } from '@core/profile-manager'
     import { selectedAccount } from '@core/account'
-    import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails } from '@core/wallet'
+    import { buildNftOutputData, formatTokenAmountPrecise, mintNft, mintNftDetails, isIotaNetwork } from '@core/wallet'
     import { getBaseToken, checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers/handleError'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
@@ -143,7 +143,7 @@
         </Button>
         <Button
             classes="w-full"
-            disabled={$selectedAccount.isTransferring}
+            disabled={$selectedAccount.isTransferring || isIotaNetwork()}
             onClick={onConfirmClick}
             isBusy={$selectedAccount.isTransferring}
         >

@@ -21,6 +21,7 @@
         formatTokenAmountBestMatch,
         getRequiredStorageDepositForMinimalBasicOutput,
         selectedAccountAssets,
+        isIotaNetwork,
     } from '@core/wallet'
     import {
         Button,
@@ -176,7 +177,7 @@
                                 <Button
                                     onClick={onCollectClick}
                                     classes="w-full"
-                                    disabled={!canCollect}
+                                    disabled={!canCollect || isIotaNetwork()}
                                     isBusy={hasTransactionInProgress}
                                 >
                                     {localize('views.vesting.collect')}

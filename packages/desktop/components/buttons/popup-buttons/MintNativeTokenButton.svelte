@@ -1,10 +1,8 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
-
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { resetMintTokenDetails } from '@core/wallet'
-
+    import { resetMintTokenDetails, isIotaNetwork } from '@core/wallet'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { TextHintVariant } from 'shared/components/enums'
 
@@ -40,4 +38,5 @@
     primaryText={localize('actions.mintNativeToken')}
     secondaryText={localize('general.mintNativeTokenDescription')}
     onClick={onMintNativeTokenClick}
+    disabled={isIotaNetwork()}
 />
