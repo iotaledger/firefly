@@ -176,9 +176,9 @@
     }
 </script>
 
-<div class="flex w-full flex-col space-y-6">
-    <Text type="h2">{title}</Text>
-    <div class="w-full p-10 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
+<div class="flex w-full flex-col space-y-4">
+    <Text type="h3">{title}</Text>
+    <div class="w-full p-6 bg-gray-50 dark:bg-gray-800 flex justify-center content-center">
         <Logo width="50%" logo={LogoEnum.Stronghold} />
     </div>
     {#if seed}
@@ -204,6 +204,10 @@
             </Button>
         </div>
     {:else}
+        <TextHint
+            variant={TextHintVariant.Info}
+            text="This process might take some time. Temporary freezing may occur — this is expected behavior. Please be patient."
+        />
         <div class="flex flex-col space-y-4">
             <Text type="p" secondary>Import a Stronghold backup file to extract the seed.</Text>
             <Dropzone
