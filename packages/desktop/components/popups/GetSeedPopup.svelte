@@ -206,7 +206,7 @@
     {:else}
         <TextHint
             variant={TextHintVariant.Info}
-            text="This process might take some time. Temporary freezing may occur — this is expected behavior. Please be patient."
+            text="This process may take a few moments. Please wait while the operation completes."
         />
         <div class="flex flex-col space-y-4">
             <Text type="p" secondary>Import a Stronghold backup file to extract the seed.</Text>
