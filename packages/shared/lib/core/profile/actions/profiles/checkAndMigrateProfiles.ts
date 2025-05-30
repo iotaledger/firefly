@@ -77,6 +77,7 @@ const persistedProfileMigrationsMap: Record<number, (existingProfile: unknown) =
     17: persistedProfileMigrationToV18,
     18: persistedProfileMigrationToV19,
     19: persistedProfileMigrationToV20,
+    20: persistedProfileMigrationToV21,
 }
 
 function persistedProfileMigrationToV4(existingProfile: unknown): void {
@@ -361,6 +362,26 @@ function persistedProfileMigrationToV19(existingProfile: IPersistedProfile): voi
  */
 function persistedProfileMigrationToV20(existingProfile: IPersistedProfile): void {
     const DEPRECATED_NODE_URL = 'https://shimmer-node.tanglebay.com'
+    const OFFICIAL_NODES = getOfficialNodes(existingProfile.network.id)
+
+    const nodes = existingProfile.clientOptions.nodes ?? []
+    existingProfile.clientOptions.nodes = nodes.filter((node) => node.url !== DEPRECATED_NODE_URL)
+    if (!existingProfile.clientOptions.nodes?.length) {
+        existingProfile.clientOptions.nodes = OFFICIAL_NODES
+    }
+    const primaryNode = existingProfile.clientOptions.primaryNode
+    if (primaryNode?.url === DEPRECATED_NODE_URL) {
+        existingProfile.clientOptions.primaryNode = undefined
+    }
+    saveProfile(existingProfile)
+}
+
+/*
+ * Migration 21
+ * Remove Tanglebay IOTA node from the list of nodes.
+ */
+function persistedProfileMigrationToV21(existingProfile: IPersistedProfile): void {
+    const DEPRECATED_NODE_URL = 'https://iota-node.tanglebay.com'
     const OFFICIAL_NODES = getOfficialNodes(existingProfile.network.id)
 
     const nodes = existingProfile.clientOptions.nodes ?? []
