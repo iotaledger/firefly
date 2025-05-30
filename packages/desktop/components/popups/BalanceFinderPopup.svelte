@@ -20,6 +20,7 @@
         formatTokenAmountBestMatch,
         generateAndStoreActivitiesForAllAccounts,
         refreshAccountAssetsForActiveProfile,
+        isIotaNetwork,
     } from '@core/wallet'
     import {
         Button,
@@ -253,7 +254,7 @@
         <Button
             classes="w-full"
             onClick={onConsolidateAccountsClick}
-            disabled={isBusy || isTransferring}
+            disabled={isBusy || isTransferring || isIotaNetwork()}
             isBusy={isTransferring}
             busyMessage={localize('popups.minimizeStorageDeposit.title')}
         >

@@ -1,9 +1,7 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
-
     import { localize } from '@core/i18n'
-    import { refreshAccountAssetsForActiveProfile } from '@core/wallet'
-
+    import { refreshAccountAssetsForActiveProfile, isIotaNetwork } from '@core/wallet'
     import { showAppNotification } from '@auxiliary/notification'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
     import { TextHintVariant } from 'shared/components/enums'
@@ -36,4 +34,5 @@
     primaryText={localize('actions.refreshTokenMetadata')}
     secondaryText={localize('general.refreshTokenMetadataDescription')}
     onClick={onRefreshTokenMetadataClick}
+    disabled={isIotaNetwork()}
 />

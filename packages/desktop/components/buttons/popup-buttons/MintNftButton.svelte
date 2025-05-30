@@ -1,8 +1,7 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
-
     import { localize } from '@core/i18n'
-    import { resetMintNftDetails } from '@core/wallet'
+    import { resetMintNftDetails, isIotaNetwork } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     function onMintNftClick(): void {
@@ -17,4 +16,5 @@
     primaryText={localize('actions.mintNft')}
     secondaryText={localize('general.mintNftDescription')}
     onClick={onMintNftClick}
+    disabled={isIotaNetwork()}
 />

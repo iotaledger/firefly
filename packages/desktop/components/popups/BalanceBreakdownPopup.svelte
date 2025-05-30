@@ -10,6 +10,7 @@
     import { BalanceSummarySection, Button, FontWeight, Text, TextType } from 'shared/components'
     import { TextHintVariant } from 'shared/components/enums'
     import features from '@features/features'
+    import { isIotaNetwork } from '@core/wallet/utils'
 
     interface BalanceBreakdown {
         amount: number
@@ -163,7 +164,7 @@
         {/each}
         <BalanceSummarySection titleKey="totalBalance" amount={Number(accountBalance?.baseCoin?.total ?? 0)} bold />
     </div>
-    <Button onClick={onConsolidationClick}>
+    <Button onClick={onConsolidationClick} disabled={isIotaNetwork()}>
         {localize('popups.balanceBreakdown.minimizeStorageDepositButton')}
     </Button>
 </div>

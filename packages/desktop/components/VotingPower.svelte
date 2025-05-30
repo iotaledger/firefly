@@ -4,7 +4,7 @@
 
     import { selectedAccount } from '@core/account'
     import { localize } from '@core/i18n'
-    import { formatTokenAmountBestMatch, visibleSelectedAccountAssets } from '@core/wallet'
+    import { formatTokenAmountBestMatch, visibleSelectedAccountAssets, isIotaNetwork } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
     import { activeProfile } from '@core/profile'
 
@@ -39,7 +39,7 @@
         size={ButtonSize.Medium}
         onClick={onManageVotingPowerClick}
         classes="w-full"
-        disabled={hasTransactionInProgress}
+        disabled={hasTransactionInProgress || isIotaNetwork()}
         isBusy={hasTransactionInProgress}
     >
         {localize('views.governance.votingPower.manage')}
