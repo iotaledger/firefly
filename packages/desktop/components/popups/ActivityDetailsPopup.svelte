@@ -13,6 +13,7 @@
         claimActivity,
         rejectActivity,
         selectedAccountActivities,
+        isIotaNetwork,
     } from '@core/wallet'
     import {
         ActivityInformation,
@@ -149,7 +150,7 @@
             </Button>
             <Button
                 classes="w-full"
-                disabled={activity.asyncData?.isClaiming}
+                disabled={activity.asyncData?.isClaiming || isIotaNetwork()}
                 onClick={onClaimClick}
                 isBusy={activity.asyncData?.isClaiming}
             >

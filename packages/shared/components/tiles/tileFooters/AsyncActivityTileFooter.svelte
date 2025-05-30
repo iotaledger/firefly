@@ -6,6 +6,7 @@
         rejectActivity,
         getTimeDifference,
         Activity,
+        isIotaNetwork,
     } from '@core/wallet'
     import {
         ActivityAsyncStatusPill,
@@ -102,7 +103,7 @@
             </Button>
             <Button
                 onClick={onClaimClick}
-                disabled={activity.asyncData?.isClaiming}
+                disabled={activity.asyncData?.isClaiming || isIotaNetwork()}
                 isBusy={activity.asyncData?.isClaiming}
                 inlineStyle="min-width: 4rem;"
                 size={ButtonSize.Small}

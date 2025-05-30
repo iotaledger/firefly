@@ -2,7 +2,7 @@
     import { Button, Text, TextHint, FontWeight, TextType, ButtonVariant, KeyValueBox } from 'shared/components'
     import { localize } from '@core/i18n'
     import { closePopup, openPopup, PopupId } from '@auxiliary/popup'
-    import { burnAsset, formatTokenAmountBestMatch, IAsset } from '@core/wallet'
+    import { burnAsset, formatTokenAmountBestMatch, IAsset, isIotaNetwork } from '@core/wallet'
     import { checkActiveProfileAuth } from '@core/profile'
     import { handleError } from '@core/error/handlers'
     import { onMount } from 'svelte'
@@ -64,7 +64,7 @@
             classes="w-full"
             variant={ButtonVariant.Warning}
             isBusy={$selectedAccount.isTransferring}
-            disabled={$selectedAccount.isTransferring}
+            disabled={$selectedAccount.isTransferring || isIotaNetwork()}
             onClick={onBurnTokenClick}
         >
             {localize('actions.burnToken')}

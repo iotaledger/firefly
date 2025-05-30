@@ -1,10 +1,9 @@
 <script lang="ts">
     import { OnboardingButton } from '@ui'
-
     import { localize } from '@core/i18n'
     import { FAUCET_URLS, nodeInfo } from '@core/network'
     import { activeProfile } from '@core/profile'
-
+    import { isIotaNetwork } from '@core/wallet'
     import { openPopup, PopupId } from '@auxiliary/popup'
 
     function onGetTokensClick(): void {
@@ -23,5 +22,6 @@
             values: { network: $nodeInfo.protocol.networkName },
         })}
         onClick={onGetTokensClick}
+        disabled={isIotaNetwork()}
     />
 {/if}
