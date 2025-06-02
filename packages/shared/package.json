@@ -10,7 +10,7 @@
         "@iota/util.js": "^2.0.0-rc.1",
         "@sveltejs/svelte-virtual-list": "^3.0.1",
         "big-integer": "^1.6.51",
-        "big.js": "^6.0.3",
+        "big.js": "^7.0.1",
         "lottie-web": "^5.7.8",
         "qrious": "^4.0.2",
         "sha3": "^2.1.4",
