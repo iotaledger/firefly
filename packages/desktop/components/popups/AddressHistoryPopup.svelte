@@ -6,10 +6,16 @@
     import { fetchWithTimeout } from '@core/nfts'
     import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
     import { getProfileManager } from '@core/profile-manager/stores'
-    import { setClipboard, truncateString, isValidBech32AddressAndPrefix, BECH32_DEFAULT_HRP } from '@core/utils'
+    import {
+        setClipboard,
+        truncateString,
+        isValidBech32AddressAndPrefix,
+        BECH32_DEFAULT_HRP,
+        convertBech32ToHex,
+    } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
     import { HexAddressBox } from '@ui'
 
@@ -41,6 +47,13 @@
     function onCopyClick(): void {
         const addresses = knownAddresses.map((address) => address.address).join(',')
         setClipboard(addresses)
+    }
+
+    function onCopyAllHexAdressesClick(): void {
+        const hexList = knownAddresses
+            .map((address) => convertBech32ToHex(address.address, BECH32_DEFAULT_HRP))
+            .join(',')
+        setClipboard(hexList)
     }
 
     onMount(() => {
@@ -180,13 +193,18 @@
     {/if}
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <div class="flex w-full justify-center pt-3 space-x-4">
-        <Button outline classes="w-1/2" onClick={onCopyClick}>{localize('actions.copy')}</Button>
+    <div class="flex flex-col w-full justify-center pt-3 space-y-2">
+        <div class="flex w-full justify-center space-x-4">
+            <Button outline classes="w-1/2" onClick={onCopyClick} size={ButtonSize.Small}>Copy Addresses</Button>
+            <Button outline classes="w-1/2" onClick={onCopyAllHexAdressesClick} size={ButtonSize.Small}
+                >Copy Hex Addresses</Button
+            >
+        </div>
         <Button
-            classes="w-1/2"
             onClick={handleSearchClick}
             disabled={isBusy}
             {isBusy}
+            size={ButtonSize.Medium}
             busyMessage={localize('actions.searching')}>{localize('actions.search')}</Button
         >
     </div>
