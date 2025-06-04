@@ -3,12 +3,9 @@
     import { appSettings } from '@core/app'
     import { localize } from '@core/i18n'
     import { QR, Text, FontWeight, AddressBox } from 'shared/components'
-
     let addressBoxElement: AddressBox
-
     $: receiveAddress = $selectedAccount.depositAddress
     $: darkModeEnabled = $appSettings.darkMode
-
     function onReceiveClick(): void {
         addressBoxElement.copyAddress()
     }
@@ -39,7 +36,6 @@
         @apply border;
         @apply border-solid;
         @apply border-gray-300;
-
         &:hover {
             @apply bg-blue-50;
             @apply border-gray-500;
