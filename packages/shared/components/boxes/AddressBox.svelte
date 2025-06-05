@@ -1,12 +1,9 @@
 <script lang="ts">
     import { Text, CopyableBox, FontWeight, TextType } from 'shared/components'
-
     export let address: string = ''
     export let isCopyable: boolean = false
     export let fontSize: string = 'base'
-
     let copyableBoxElement: CopyableBox
-
     export function copyAddress(): void {
         copyableBoxElement.onClick()
     }

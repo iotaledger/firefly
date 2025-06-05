@@ -1,9 +1,16 @@
 <script lang="ts">
     import { AssetList, Overflow, Pane, ReceiveAddressButton } from '@ui'
     import { AccountSummary, AccountActivity, SendButton } from '@components'
+    import { isValidBech32AddressAndPrefix, BECH32_DEFAULT_HRP } from '@core/utils'
     import { selectedAccountAssets } from '@core/wallet'
     import { selectedAccount } from '@core/account/stores'
     import features from '@features/features'
+    import { HexAddressBox } from 'shared/components'
+
+    let hasHexAddressToShow = false
+    $: if (isValidBech32AddressAndPrefix($selectedAccount?.depositAddress, BECH32_DEFAULT_HRP)) {
+        hasHexAddressToShow = true
+    }
 </script>
 
 {#if $selectedAccount}
@@ -20,10 +27,15 @@
                         {/if}
                     </Pane>
                     <Pane>
-                        <div class="flex flex-col space-y-6">
+                        <div class={`flex flex-col ${hasHexAddressToShow ? 'space-y-2' : 'space-y-6'}`}>
                             {#if features?.wallet?.sendAndReceive?.enabled}
-                                <SendButton />
+                                {#if !hasHexAddressToShow}
+                                    <SendButton />
+                                {/if}
                                 <ReceiveAddressButton />
+                                {#if hasHexAddressToShow}
+                                    <HexAddressBox address={$selectedAccount?.depositAddress} isCopyable />
+                                {/if}
                             {/if}
                         </div>
                     </Pane>
@@ -42,3 +54,36 @@
         {/key}
     </wallet-container>
 {/if}
+
+<style lang="scss">
+    hex-address-box {
+        @apply border;
+        @apply border-solid;
+        @apply border-gray-300;
+        &:hover {
+            @apply bg-blue-50;
+            @apply border-gray-500;
+        }
+        &:active,
+        &:focus {
+            @apply bg-blue-100;
+            @apply border-blue-400;
+        }
+        &.darkmode {
+            @apply border-gray-700;
+            &:hover,
+            &:focus,
+            &:active {
+                @apply bg-gray-700;
+                @apply bg-opacity-20;
+                @apply border-opacity-50;
+            }
+            &:disabled {
+                @apply bg-gray-700;
+                @apply bg-opacity-10;
+                @apply border-gray-700;
+                @apply border-opacity-10;
+            }
+        }
+    }
+</style>

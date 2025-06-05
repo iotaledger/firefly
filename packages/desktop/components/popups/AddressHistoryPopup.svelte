@@ -6,11 +6,18 @@
     import { fetchWithTimeout } from '@core/nfts'
     import { checkActiveProfileAuth, getActiveProfile, updateAccountPersistedDataOnActiveProfile } from '@core/profile'
     import { getProfileManager } from '@core/profile-manager/stores'
-    import { setClipboard, truncateString } from '@core/utils'
+    import {
+        setClipboard,
+        truncateString,
+        isValidBech32AddressAndPrefix,
+        BECH32_DEFAULT_HRP,
+        convertBech32ToHex,
+    } from '@core/utils'
     import { AccountAddress } from '@iota/sdk/out/types'
     import VirtualList from '@sveltejs/svelte-virtual-list'
-    import { Button, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
+    import { Button, ButtonSize, FontWeight, KeyValueBox, Spinner, Text, TextType } from 'shared/components'
     import { onMount } from 'svelte'
+    import { HexAddressBox } from '@ui'
 
     interface AddressHistory {
         address: string
@@ -40,6 +47,13 @@
     function onCopyClick(): void {
         const addresses = knownAddresses.map((address) => address.address).join(',')
         setClipboard(addresses)
+    }
+
+    function onCopyAllHexAdressesClick(): void {
+        const hexList = knownAddresses
+            .map((address) => convertBech32ToHex(address.address, BECH32_DEFAULT_HRP))
+            .join(',')
+        setClipboard(hexList)
     }
 
     onMount(() => {
@@ -146,7 +160,7 @@
         {#if knownAddresses.length > 0}
             <div class="w-full flex-col space-y-2 virtual-list-wrapper">
                 <VirtualList items={knownAddresses} let:item>
-                    <div class="mb-1">
+                    <div class="flex flex-col space-y-1">
                         <KeyValueBox
                             isCopyable
                             classes="flex items-center w-full py-4"
@@ -161,6 +175,11 @@
                             backgroundColor="gray-50"
                             darkBackgroundColor="gray-900"
                         />
+
+                        {#if isValidBech32AddressAndPrefix(item.address, BECH32_DEFAULT_HRP)}
+                            <HexAddressBox address={item.address} isCopyable clearBackground clearBorder />
+                            <hr class="border-gray-300 dark:border-gray-700 py-2" />
+                        {/if}
                     </div>
                 </VirtualList>
             </div>
@@ -174,13 +193,18 @@
     {/if}
 </div>
 <div class="flex flex-row flex-nowrap w-full space-x-4 mt-6">
-    <div class="flex w-full justify-center pt-8 space-x-4">
-        <Button outline classes="w-1/2" onClick={onCopyClick}>{localize('actions.copy')}</Button>
+    <div class="flex flex-col w-full justify-center pt-3 space-y-2">
+        <div class="flex w-full justify-center space-x-4">
+            <Button outline classes="w-1/2" onClick={onCopyClick} size={ButtonSize.Small}>Copy Addresses</Button>
+            <Button outline classes="w-1/2" onClick={onCopyAllHexAdressesClick} size={ButtonSize.Small}
+                >Copy Hex Addresses</Button
+            >
+        </div>
         <Button
-            classes="w-1/2"
             onClick={handleSearchClick}
             disabled={isBusy}
             {isBusy}
+            size={ButtonSize.Medium}
             busyMessage={localize('actions.searching')}>{localize('actions.search')}</Button
         >
     </div>
@@ -198,5 +222,8 @@
 
     .virtual-list-wrapper :global(svelte-virtual-list-contents) {
         margin-right: -1rem !important;
+    }
+    .virtual-list-wrapper :global(svelte-virtual-list-row:last-of-type hr) {
+        display: none !important;
     }
 </style>
