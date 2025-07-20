@@ -254,7 +254,7 @@ To release a hotfix we will aim to follow the below sub processes.
 
 ### 1. Internal Testing
 
-Once the the PR is deemed ready for a review, as a team we can all build the hotfix branch locally, and test all the core functionality of the application, as well as hotfix functionality.
+Once the PR is deemed ready for a review, as a team we can all build the hotfix branch locally, and test all the core functionality of the application, as well as hotfix functionality.
 
 This will usually last between half a day and 1 full day. Any updates can be commited directly to the hotfix branch. When we are happy that the application passes our testings criteria we can move on to the next steps.
 
