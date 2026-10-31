@@ -31,16 +31,16 @@
                         "body": "Staging Netzwerk für das IOTA Mainnet"
                     },
                     "shimmerTestnet": {
-                        "title": "Shimmer Testnet",
-                        "body": "Public testnet network for Shimmer"
+                        "title": "Shimmer-Testnetz",
+                        "body": "Öffentliches Testnetz-Netzwerk für Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "IOTA Mainnet"
                     },
                     "iotaTestnet": {
-                        "title": "IOTA Testnet",
-                        "body": "Public testnet network for Mainnet"
+                        "title": "IOTA-Testnetz",
+                        "body": "Öffentliches Testnetz-Netzwerk für Shimmer"
                     },
                     "iotaAlphanet": {
                         "title": "IOTA Alphanet",
@@ -58,7 +58,7 @@
             },
             "profileSetup": {
                 "setup": {
-                    "title": "Set up {network, select, IOTA {an} Shimmer {a} Testnet {a} other {a}} {network} profile",
+                    "title": "Richte {network, select, IOTA {ein} Shimmer {ein} Testnet {ein} other {ein}} {network} Profil",
                     "body": "Wähle die geeignete Methode um dein {network} Profil einzurichten."
                 },
                 "setupNew": {
@@ -565,8 +565,8 @@
                 "attributes": "Attribute",
                 "menu": {
                     "download": "Herunterladen",
-                    "setPfp": "Set NFT profile pic",
-                    "unsetPfp": "Unset NFT profile pic",
+                    "setPfp": "NFT-Profilbild festlegen",
+                    "unsetPfp": "Als NFT-Profilbild zurückziehen",
                     "view": "Medien im Browser anzeigen",
                     "burn": "Lösche das NFT"
                 }
@@ -1066,8 +1066,8 @@
         "transactionDetails": {
             "title": "Transaktionsdetails",
             "giftedStorageDeposit": {
-                "tooltipTitle": "Gift storage deposit",
-                "tooltipDescription": "Amount kept by the recipient"
+                "tooltipTitle": "Storage Deposit spenden",
+                "tooltipDescription": "Vom Empfänger einbehaltener Betrag"
             }
         },
         "sendForm": {
@@ -1191,15 +1191,15 @@
             "title": "Adressverlauf",
             "indexAndType": "{internal, select, true {Interne Adresse} other {Einzahlungsadresse}} {index}",
             "internal": "Intern",
-            "errorNoChronicle": "Chronicle not configured",
-            "errorFailedFetch": "Couldn't fetch address history",
-            "errorFailedGenerate": "Couldn't generate a new address"
+            "errorNoChronicle": "Chronik nicht konfiguriert",
+            "errorFailedFetch": "Adressverlauf konnte nicht abgerufen werden",
+            "errorFailedGenerate": "Konnte keine neue Adresse generieren"
         },
         "withdrawFromL2": {
-            "title": "Withdraw from L2",
-            "body": "List of addresses with withdrawable funds",
-            "withdraw": "Withdraw",
-            "withdrawing": "Withdrawing..."
+            "title": "Abheben von L2",
+            "body": "Liste der Adressen mit auszahlbaren Beträgen",
+            "withdraw": "Auszahlung",
+            "withdrawing": "Auszahlung..."
         }
     },
     "charts": {
@@ -1249,16 +1249,16 @@
             "iota": "IOTA-Profil wiederherstellen",
             "iotaAlphanet": "IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Shimmer Profil wiederherstellen",
-            "iotaTestnet": "Restore IOTA Testnet profile",
-            "shimmerTestnet": "Restore Shimmer Testnet profile",
+            "iotaTestnet": "IOTA-Testnetzprofil wiederherstellen",
+            "shimmerTestnet": "Shimmer-Testnetprofil wiederherstellen",
             "custom": "Benutzerdefiniertes Netzwerkprofil wiederherstellen"
         },
         "restoreWalletDescription": {
             "iota": "Bestehendes IOTA-Profil wiederherstellen",
             "iotaAlphanet": "Ein bestehendes IOTA Alphanet Profil wiederherstellen",
             "shimmer": "Ein bestehendes Shimmer Profil wiederherstellen",
-            "iotaTestnet": "Restore an existing IOTA Testnet profile",
-            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
+            "iotaTestnet": "Bestehendes IOTA-Testnetzprofil wiederherstellen",
+            "shimmerTestnet": "Bestehendes Shimmer-Testnetzprofil wiederherstellen",
             "custom": "Ein bestehendes benutzerdefiniertes Profil wiederherstellen"
         },
         "refreshNftMedia": {
@@ -1266,7 +1266,7 @@
             "description": "Möchtest Du alle NFT Medien für dieses Konto löschen und erneut herunterladen?"
         },
         "createWallet": "Erstelle ein neues {network} Profil",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
+        "createWalletDescription": "Erstelle ein neues Profil auf {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Benutzerdefiniertes Netzwerk} other {Unbekannt}}",
         "claimShimmer": "Shimmer Staking-Rewards beanspruchen",
         "claimShimmerDescription": "Importiere dein IOTA-Profil und beanspruche deine Shimmer Staking-Rewards",
         "migrateFromLegacy": "Vom Legacy Netzwerk migrieren",
@@ -1356,8 +1356,8 @@
         "viewStatus": "Status ansehen",
         "viewAddressHistory": "Adressverlauf anzeigen",
         "viewBalanceBreakdown": "Saldenaufteilung anzeigen",
-        "withdrawFromL2": "Withdraw from L2",
-        "verifyDepositAddress": "Verify deposit address",
+        "withdrawFromL2": "Abheben von L2",
+        "verifyDepositAddress": "Einzahlungsadresse verifizieren",
         "showHiddenAccounts": "Ausgeblendete Wallets anzeigen",
         "confirm": "Bestätigen",
         "hideNetworkStatistics": "Netzwerk Statistiken verbergen",
@@ -1413,9 +1413,9 @@
         "stopVoting": "Abstimmen beenden",
         "revote": "Wiederabstimmen",
         "skipAndKeep": "Überspringen und altes Passwort behalten",
-        "addChain": "Add chain",
-        "viewVestingRewardsFinder": "Find vesting rewards",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "addChain": "Chain hinzufügen",
+        "viewVestingRewardsFinder": "Finde Vesting Rewards",
+        "copyProfileSystemLocation": "Standort des Profilsystems kopieren"
     },
     "general": {
         "recipient": "Empfänger",
@@ -1664,7 +1664,7 @@
         "smartContract": "Smart Contract",
         "targetContract": "Zielvertrag",
         "contractFunction": "Vertragsfunktion",
-        "gasFee": "Gas fee",
+        "gasFee": "Gasgebühr",
         "standard": "Standard",
         "uri": "URI",
         "issuer": "Aussteller",
@@ -1686,7 +1686,7 @@
         "internalTransaction": "Interne Transaktion",
         "coinType": "Cointyp",
         "custom": "Benutzerdefiniert",
-        "verifyLedgerDepositAddress": "Please check the ledger device and verify that the deposit address matches the one displayed on the ledger device"
+        "verifyLedgerDepositAddress": "Bitte überprüfe den Ledger und stelle sicher, dass die Einzahlungsadresse mit der Adresse übereinstimmt, die auf dem Ledger angezeigt wird"
     },
     "filters": {
         "title": "Filter",
@@ -1844,7 +1844,7 @@
             }
         },
         "syncing": "Bitte warte, bis die Synchronisation beendet ist, bevor du die Wallets änderst.",
-        "transferring": "Please wait until all transactions are completed.",
+        "transferring": "Bitte warte, bis alle Transaktionen abgeschlossen sind.",
         "participating": "Bitte warte mit dem Wechseln der Wallet, bis alle Staking/Voting Transaktionen abgeschlossen sind.",
         "claimed": {
             "success": "Transaktion beansprucht",
@@ -1970,7 +1970,7 @@
             "cannotClaimTwice": "UTXO Output wurde bereits beansprucht",
             "noToAccount": "Du hast keine Wallet ausgewählt, auf welche das Guthaben gesendet werden soll.",
             "sendingDust": "Du kannst nicht weniger als 1 Mi senden.",
-            "leavingDust": "You cannot leave less than the minimum required storage deposit ({minRequiredStorageDeposit}) on your address.",
+            "leavingDust": "Du kannst nicht weniger als das Minimum der erforderlichen Storage Deposit ({minRequiredStorageDeposit}) auf der Adresse hinterlassen.",
             "cancelled": "Die Transaktion wurde abgebrochen.",
             "transaction": "Beim Senden deiner Transaktion ist ein Fehler aufgetreten. Bitte versuche es erneut.",
             "invalidExpirationDateTime": "Das gewählte Ablaufdatum bzw. die gewählte Ablaufzeit ist ungültig.",
@@ -2135,7 +2135,7 @@
             "noFunds": "Du besitzt momentan keine IOTA-Token."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Sei vorsichtig, wenn du unbekannten Links folgst. Teile niemals deine privaten Schlüssel oder geben die auf Websites oder Diensten ein."
         }
     },
     "tooltips": {
@@ -2181,7 +2181,7 @@
                 "timelockDate": "Der Absender hat eine Zeitsperre für diese Guthaben definiert. Du kannst sie ausgeben sobald die Sperre verfällt.",
                 "metadata": "Ein optionales Datenfeld zur dauerhaften Speicherung von Daten auf dem Tangle.",
                 "tag": "Ein kurzes optionales Datenfeld. Tag Gruppen von Transaktionen können die Suche erleichtern.",
-                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Für die Ausführung einer Transaktion oder eines Smart-Contracts auf Shimmer EVM ist eine Gasgebühr erforderlich."
             },
             "outgoing": {
                 "storageDeposit": "Ein Storage Deposit ist eine rückerstattbare Token Einzahlung, die benötigt wird, um Ihre Transaktion auf dem Tangle zu speichern.",
@@ -2190,7 +2190,7 @@
                 "timelockDate": "Du hast eine Zeitsperre definiert. Der Empfänger ist nicht in der Lage die Guthaben auszugeben, bevor die Zeitsperre verfällt.",
                 "metadata": "Ein optionales Datenfeld zur dauerhaften Speicherung von Daten auf dem Tangle.",
                 "tag": "Ein kurzes optionales Datenfeld. Tag Gruppen von Transaktionen können die Suche erleichtern.",
-                "gasFee": "Gas fee is required to conduct a transaction or execute a smart contract function on Shimmer EVM."
+                "gasFee": "Für die Ausführung einer Transaktion oder eines Smart-Contracts auf Shimmer EVM ist eine Gasgebühr erforderlich."
             },
             "nftMetadata": {
                 "standard": "Der NFT-Standard z.B. IRC27.",
