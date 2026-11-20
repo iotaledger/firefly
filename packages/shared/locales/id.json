@@ -31,16 +31,16 @@
                         "body": "Jaringan pementasan untuk IOTA"
                     },
                     "shimmerTestnet": {
-                        "title": "Shimmer Testnet",
-                        "body": "Public testnet network for Shimmer"
+                        "title": "Testnet Shimmer",
+                        "body": "Jaringan testnet publik untuk Shimmer"
                     },
                     "iota": {
                         "title": "IOTA",
                         "body": "Jaringan Utama IOTA"
                     },
                     "iotaTestnet": {
-                        "title": "IOTA Testnet",
-                        "body": "Public testnet network for Mainnet"
+                        "title": "Testnet IOTA",
+                        "body": "Jaringan testnet publik untuk Mainnet"
                     },
                     "iotaAlphanet": {
                         "title": "Alfanet IOTA",
@@ -1249,16 +1249,16 @@
             "iota": "Pulihkan profil IOTA",
             "iotaAlphanet": "Pulihkan profil IOTA Alphanet",
             "shimmer": "Pulihkan profil Shimmer",
-            "iotaTestnet": "Restore IOTA Testnet profile",
-            "shimmerTestnet": "Restore Shimmer Testnet profile",
+            "iotaTestnet": "Pulihkan profil IOTA Testnet",
+            "shimmerTestnet": "Pulihkan profil Shimmer Testnet",
             "custom": "Pulihkan profil Jaringan Khusus"
         },
         "restoreWalletDescription": {
             "iota": "Pulihkan profil IOTA yang ada",
             "iotaAlphanet": "Pulihkan profil IOTA Alphanet yang ada",
             "shimmer": "Pulihkan profil Shimmer yang ada",
-            "iotaTestnet": "Restore an existing IOTA Testnet profile",
-            "shimmerTestnet": "Restore an existing Shimmer Testnet profile",
+            "iotaTestnet": "Pulihkan profil IOTA Testnet yang ada",
+            "shimmerTestnet": "Pulihkan profil Shimmer Testnet yang ada",
             "custom": "Pulihkan profil Jaringan Kustom yang ada"
         },
         "refreshNftMedia": {
@@ -1266,7 +1266,7 @@
             "description": "Apakah Anda ingin menghapus dan mengunduh ulang semua media NFT untuk akun ini?"
         },
         "createWallet": "Buat profil {network} baru",
-        "createWalletDescription": "Create a fresh profile running on {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
+        "createWalletDescription": "Buat profil baru yang berjalan di {network, select, iota {Chrysalis} shimmer {Shimmer} shimmerTestnet {Shimmer Testnet} iotaTestnet {IOTA Testnet} custom {Custom Network} other {Unknown}}",
         "claimShimmer": "Klaim hadiah staking Shimmer",
         "claimShimmerDescription": "Impor profil IOTA dan klaim hadiah staking",
         "migrateFromLegacy": "Bermigrasi dari Legacy",
@@ -1415,7 +1415,7 @@
         "skipAndKeep": "Lewati dan simpan kata sandi lama",
         "addChain": "Tambahkan rantai",
         "viewVestingRewardsFinder": "Temukan imbalan vesting",
-        "copyProfileSystemLocation": "Copy profile system location"
+        "copyProfileSystemLocation": "Salin lokasi sistem profil"
     },
     "general": {
         "recipient": "Penerima",
@@ -2135,7 +2135,7 @@
             "noFunds": "Anda tidak memiliki IOTA."
         },
         "nft": {
-            "flagged": "Be careful when following unknown links. Never share your private keys, nor enter them into any websites or services."
+            "flagged": "Berhati-hatilah saat mengikuti tautan yang tidak dikenal. Jangan pernah membagikan kunci pribadi Anda, atau memasukkannya ke situs web atau layanan apa pun."
         }
     },
     "tooltips": {
